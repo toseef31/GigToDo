@@ -416,7 +416,7 @@ $ip = get_real_user_ip();
               </div>
               <div class="Login-button">
                 <a href="login.php">Login</a>
-                <a href="javascript:void(0);">Join Now</a>
+                <a href="register.php">Join Now</a>
               </div>
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">

@@ -52,6 +52,9 @@ $site_title = $row_general_settings->site_title;
 	<link href="<?php echo $site_url; ?>/assets/css/style.css" rel="stylesheet">
 	<!--====== Responsive css ======-->
 	<link href="<?php echo $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+	
+	<link href="styles/sweat_alert.css" rel="stylesheet">
+	<link href="styles/animate.css" rel="stylesheet">
   <?php if($row_general_settings->knowledge_bank == 'yes'): ?>
 	<link href="styles/knowledge_bank.css" rel="stylesheet">
 	<?php endif ?>
@@ -61,9 +64,9 @@ $site_title = $row_general_settings->site_title;
 	<link rel="shortcut icon" href="<?php echo $site_url; ?>/assets/img/favicon.ico" type="image/png">
 	<?php } ?>
 	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-	<!-- <script src="js/ie.js"></script>
+	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
-	<script type="text/javascript" src="js/jquery.min.js"></script> -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}</style>
 </head>
 <body class="home-content">
