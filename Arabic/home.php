@@ -67,6 +67,7 @@ $slide_image = $row_slides->slide_image;
       $card_title = $row_cards->card_title;
       $arabic_title = $row_cards->arabic_title;
       $card_desc = $row_cards->card_desc;
+      $arabic_desc = $row_cards->arabic_desc;
       $card_image = $row_cards->card_image;
       $card_link = $row_cards->card_link;
       $card_icon = $row_cards->card_icon;
@@ -89,7 +90,7 @@ $slide_image = $row_slides->slide_image;
           <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
             <div class="content text-center">
               <h6 class="sub-title"><a href="<?= $card_link ?>"><?= $arabic_title; ?></a></h6>
-              <p><?= $card_desc; ?> </p>
+              <p><?= $arabic_desc; ?> </p>
             </div>
           </div>
         </div>

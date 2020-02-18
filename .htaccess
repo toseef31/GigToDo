@@ -17,3 +17,4 @@ RewriteRule ^ %1 [R,L]
 
 RewriteRule ^([0-9a-zA-Z-_-]+)$ user.php?seller_user_name=$1
 
+

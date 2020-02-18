@@ -22,45 +22,230 @@ if(isset($_SESSION['seller_user_name'])){
 	<title><?php echo $site_name; ?> - <?php echo $lang['titles']['login']; ?></title>
 
 	<meta charset="utf-8">
-	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Login or register for an account on <?php echo $site_name; ?>, a fast growing freelance marketplace, where sellers provide their services at extremely affordable prices.">
 	<meta name="keywords" content="<?php echo $site_keywords; ?>">
 	<meta name="author" content="<?php echo $site_author; ?>">
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
+	<!--====== Favicon Icon ======-->
+	<link rel="shortcut icon" href="assets/img/favicon.ico" type="image/png">
 
-	<link href="styles/bootstrap.css" rel="stylesheet">
-	
-    <link href="styles/custom.css" rel="stylesheet"> <!-- Custom css code from modified in admin panel --->
-	
-		<link href="styles/styles.css" rel="stylesheet">
-	
-	<link href="styles/categories_nav_styles.css" rel="stylesheet">
-	
-	<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
-    
-	<link href="styles/sweat_alert.css" rel="stylesheet">
-    
-	<link href="styles/animate.css" rel="stylesheet">
-    
-    <script type="text/javascript" src="js/ie.js"></script>
+	<!-- ==============Google Fonts============= -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
-    <script type="text/javascript" src="js/sweat_alert.js"></script>
-	
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<!--====== Bootstrap css ======-->
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
-	<?php if(!empty($site_favicon)){ ?>
-   
-    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon">
-       
-    <?php } ?>
+	<!--====== PreLoader css ======-->
+	<link href="assets/css/preloader.css" rel="stylesheet">
+
+	<!--====== Animate css ======-->
+	<link href="assets/css/animate.min.css" rel="stylesheet">
+
+	<!--====== Fontawesome css ======-->
+	<link href="assets/css/fontawesome.min.css" rel="stylesheet">
+
+	<!--====== Owl carousel css ======-->
+	<link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+
+	<!--====== Nice select css ======-->
+	<link href="assets/css/nice-select.css" rel="stylesheet">
+
+	<!--====== Default css ======-->
+	<link href="assets/css/default.css" rel="stylesheet">
+
+	<!--====== Style css ======-->
+	<link href="assets/css/style.css" rel="stylesheet">
+
+	<!--====== Responsive css ======-->
+	<link href="assets/css/responsive.css" rel="stylesheet">
 
 </head>
 
-<body class="is-responsive">
+<body class="home-content">
 
-<?php require_once("includes/header.php"); ?>
+
+<?php //require_once("includes/header.php"); ?>
+	<!-- Preloader Start -->
+	<div class="proloader">
+		<div class="loader">
+			<img src="assets/img/emongez_cube.png" />
+		</div>
+	</div>
+	<!-- Preloader End -->
+	<!-- Header -->
+	<header>
+		<div class="header-top">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-6 col-md-3 d-flex flex-row">
+						<div class="logo">
+							<a class="home-logo" href="index.html"><img src="assets/img/signin-logo.png" alt=""></a>
+						</div>
+					</div>
+					<div class="col-6 col-md-9">
+						<div class="header-right d-flex align-items-center justify-content-end">
+							<div class="menu-inner">
+								<ul>
+									<li><a href="javascript:void(0);">Post a Request</a></li>
+									<li><a href="javascript:void(0);">How it Works</a></li>
+								</ul>
+							</div>
+							<div class="language-inner">
+								<select name="" id="">
+									<option value="">EN</option>
+									<option value="">AR</option>
+								</select>
+							</div>
+							<div class="usd-inner">
+								<select name="" id="">
+									<option value="">USD</option>
+									<option value="">EGP</option>
+								</select>
+							</div>
+							<div class="Login-button d-none d-lg-flex">
+								<a href="javascript:void(0);">Login</a>
+								<a href="javascript:void(0);">Join Now</a>
+							</div>
+							<div class="menubar d-lg-none">
+								<div class="d-flex flex-row align-items-center">
+									<div class="image">
+										<img src="assets/img/menu-left-logo.png" alt="">
+									</div>
+									<div class="icon">
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Header END-->
+
+	<!-- Offcanvas-menu -->
+	<div class="ofcanvas-menu pre-login">
+		<div class="close-icon">
+			<i class="fal fa-times"></i>
+		</div>
+		<div class="canvs-menu">
+			<ul class="d-flex flex-column">
+				<li>
+					<a href="javascript:void(0);">Post A Request</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">How it Works</a>
+				</li>
+				<li class="d-flex flex-row">
+					<div class="menu-action">
+						<select name="" id="">
+							<option value="">EN</option>
+							<option value="">AR</option>
+						</select>
+					</div>
+					<div class="menu-action">
+						<select name="" id="">
+							<option value="">USD</option>
+							<option value="">EGP</option>
+						</select>
+					</div>
+				</li>
+				<li class="mb-20">
+					<a class="button login-button" href="javascript:void(0);">Login</a>
+				</li>
+				<li>
+					<a class="button join-button" href="javascript:void(0);">Join Now</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- Close-overlay -->
+	<div class="overlay-bg"></div>
+	<!-- Offcanvas-menu END-->
+	<!-- Main content -->
+	<main>
+		<section class="container-fluid login-signup">
+			<div class="row">
+				<div class="container">
+					<div class="login-signup-wrapper login-wrapper">
+						<div class="login-signup-header">
+							<h3 class="text-center">Welcome Back, Sign-In to your Account</h3>
+							<p class="text-center">Don't have an account? <a href="javascript:void(0);">Sign Up</a></p>
+						</div>
+						<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
+							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location='<?php echo $fLoginURL ?>';">
+								<span>
+									<i class="fab fa-facebook-f"></i>
+								</span>
+								<span>Login with Facebook</span>
+							</a>
+							<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
+								<span>
+									<i class="fab fa-linkedin-in"></i>
+								</span>
+								<span>Login with Linkedin</span>
+							</a>
+							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $gLoginURL ?>';">
+								<span>
+									<i class="fab fa-google"></i>
+								</span>
+								<span>Login with Google</span>
+							</a>
+						</div>
+						<div class="login-with-credentials">
+							<?php 
+
+							$form_errors = Flash::render("login2_errors");
+							$form_data = Flash::render("form_data");
+							if(is_array($form_errors)){
+
+							?>
+
+							<div class="alert alert-danger"><!--- alert alert-danger Starts --->
+
+							<ul class="list-unstyled mb-0">
+							<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+							<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
+							<?php } ?>
+							</ul>
+
+							</div><!--- alert alert-danger Ends --->
+							<?php } ?>
+							<form action="" method="POST">
+								<div class="form-group">
+									<label class="control-label">Username</label>
+									<input class="form-control" type="text" placeholder="Enter Username"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>" required=""/>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Password</label>
+									<input class="form-control" type="password" name="seller_pass" placeholder="Enter Password" required=""/>
+								</div>
+								<div class="form-group d-flex flex-row align-items-center justify-content-between">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck1">
+										<label class="custom-control-label" for="customCheck1">Remember me</label>
+									</div>
+									<a class="fogot-password" href="javascript:void(0);">Forgot password?</a>
+								</div>
+								<div class="form-group">
+									<button class="login-button" role="button" type="submit" name="access">Sign in</button>
+								</div>
+								<div class="form-group">
+									<p class="text-center">By clicking Log In, Facebook or LinkedIn<br />you agree to our new <a href="javascript:void(0);">T&C's</a></p>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- Main content end -->
 
 <div class="container mt-5">
 
