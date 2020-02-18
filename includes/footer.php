@@ -142,7 +142,7 @@
               <!-- <option data-image="<?= $site_url; ?>/languages/images/<?= $image; ?>" data-url="<?= "$site_url/change_language?id=$id"; ?>" <?php if($id == $_SESSION["siteLanguage"]){ echo "selected"; } ?>><?= $title; ?></option> -->
               <?php } ?>
               <option value="" selected="">EN</option>
-              <option value="<?= $site_url?>/Arabic/">AR</option>
+              <option value="<?= $site_url?>/ar/">AR</option>
               <!-- <option value="">AR</option> -->
             </select>
           </div>

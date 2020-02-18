@@ -17,19 +17,19 @@ if(isset($_SESSION['seller_user_name'])){
 <script type="text/javascript" src="<?= $site_url; ?>/js/summernote.js"></script>
 <!-- New Design -->
 <!--====== jquery js ======-->
-  <script src="<?= $site_url; ?>/Arabic/assets/js/jquery.min.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/jquery.min.js"></script>
 
   <!--====== Popper js ======-->
-  <script src="<?= $site_url; ?>/Arabic/assets/js/Popper.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/Popper.js"></script>
 
   <!--====== Bootstrap js ======-->
-  <script src="<?= $site_url; ?>/Arabic/assets/js/bootstrap.min.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/bootstrap.min.js"></script>
 
   <!--====== Owl carousel js ======-->
-  <script src="<?= $site_url; ?>/Arabic/assets/js/owl.carousel.min.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/owl.carousel.min.js"></script>
 
   <!--====== Nicescroll js ======-->
-  <script src="<?= $site_url; ?>/Arabic/assets/js/jquery.nicescroll.min.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/jquery.nicescroll.min.js"></script>
   <script>
     $(function() {
       $(".mesagee-item-box").niceScroll({
@@ -39,10 +39,10 @@ if(isset($_SESSION['seller_user_name'])){
 
   </script>
 
-  <script src="<?= $site_url; ?>/Arabic/assets/js/jquery.nice-select.min.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/jquery.nice-select.min.js"></script>
 
   <!--====== Main js ======-->
-  <script src="<?= $site_url; ?>/Arabic/assets/js/main.js"></script>
+  <script src="<?= $site_url; ?>/ar/assets/js/main.js"></script>
 <!-- End New Design -->
 <script>
 $(document).ready(function(){
