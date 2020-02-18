@@ -415,8 +415,8 @@ $ip = get_real_user_ip();
                 </select>
               </div>
               <div class="Login-button">
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#login-modal">Login</a>
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#register-modal">Join Now</a>
+                <a href="login.php">Login</a>
+                <a href="javascript:void(0);">Join Now</a>
               </div>
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
