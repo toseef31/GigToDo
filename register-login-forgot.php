@@ -15,15 +15,16 @@ $signup_email = $row_general_settings->signup_email;
 $referral_money = $row_general_settings->referral_money;
 
 if(isset($_POST['register'])){
-
+	
 	$rules = array(
 	"name" => "required",
 	"u_name" => "required",
 	"email" => "email|required",
 	"pass" => "required",
-	"con_pass" => "required");
+	"con_pass" => "required",
+	"accountType" = "required");
 
-	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.");
+	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account Tyoe Is Required.");
 	$val = new Validator($_POST,$rules,$messages);
 
 	if($val->run() == false){
@@ -45,6 +46,7 @@ if(isset($_POST['register'])){
 		$_SESSION['email']=$email;
 		$pass = strip_tags($input->post('pass'));
 		$con_pass = strip_tags($input->post('con_pass'));
+		$accountType = strip_tags($input->post('accountType'));
 		$referral = strip_tags($input->post('referral'));
 		// $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
 		// $country = $xml->geoplugin_countryName;
@@ -80,7 +82,7 @@ if(isset($_POST['register'])){
 
 			$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
 			
-			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
 					
 			$regsiter_seller_id = $db->lastInsertId();
 			

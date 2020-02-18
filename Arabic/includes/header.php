@@ -415,8 +415,8 @@ $ip = get_real_user_ip();
                 </select>
               </div>
               <div class="Login-button">
-                <a href="javascript:void(0);">تسجيل الدخول</a>
-                <a href="javascript:void(0);">نضم الان</a>
+                <a href="login.php">تسجيل الدخول</a>
+                <a href="register.php">نضم الان</a>
               </div>
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
@@ -466,12 +466,12 @@ $ip = get_real_user_ip();
           </div>
         </li>
         <li class="mb-20">
-          <a class="button login-button" href="javascript:void(0);">
+          <a class="button login-button" href="login.php">
             الدخول
           </a>
         </li>
         <li>
-          <a class="button join-button" href="javascript:void(0);">
+          <a class="button join-button" href="register.php">
             انضم دلوقتي
           </a>
         </li>

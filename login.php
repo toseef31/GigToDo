@@ -61,6 +61,13 @@ if(isset($_SESSION['seller_user_name'])){
 	<!--====== Responsive css ======-->
 	<link href="assets/css/responsive.css" rel="stylesheet">
 
+	<link href="styles/sweat_alert.css" rel="stylesheet">
+	<link href="styles/animate.css" rel="stylesheet">
+	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+	<script src="js/ie.js"></script>
+	<script type="text/javascript" src="js/sweat_alert.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
 </head>
 
 <body class="home-content">
@@ -93,10 +100,10 @@ if(isset($_SESSION['seller_user_name'])){
 								</ul>
 							</div>
 							<div class="language-inner">
-								<select name="" id="">
-									<option value="">EN</option>
-									<option value="">AR</option>
-								</select>
+								<select name="" id="" onChange="window.location.href=this.value">
+                  <option value="" selected="">EN</option>
+                  <option value="<?= $site_url?>/Arabic/">AR</option>
+                </select>
 							</div>
 							<div class="usd-inner">
 								<select name="" id="">
@@ -143,10 +150,10 @@ if(isset($_SESSION['seller_user_name'])){
 				</li>
 				<li class="d-flex flex-row">
 					<div class="menu-action">
-						<select name="" id="">
-							<option value="">EN</option>
-							<option value="">AR</option>
-						</select>
+						<select name="" id="" onChange="window.location.href=this.value">
+              <option value="" selected="">EN</option>
+              <option value="<?= $site_url?>/Arabic/">AR</option>
+            </select>
 					</div>
 					<div class="menu-action">
 						<select name="" id="">
@@ -177,6 +184,7 @@ if(isset($_SESSION['seller_user_name'])){
 							<h3 class="text-center">Welcome Back, Sign-In to your Account</h3>
 							<p class="text-center">Don't have an account? <a href="javascript:void(0);">Sign Up</a></p>
 						</div>
+						<?php if($enable_social_login == "yes"){ ?>
 						<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
 							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location='<?php echo $fLoginURL ?>';">
 								<span>
@@ -197,6 +205,7 @@ if(isset($_SESSION['seller_user_name'])){
 								<span>Login with Google</span>
 							</a>
 						</div>
+					<?php } ?>
 						<div class="login-with-credentials">
 							<?php 
 
@@ -233,7 +242,7 @@ if(isset($_SESSION['seller_user_name'])){
 									<a class="fogot-password" href="javascript:void(0);">Forgot password?</a>
 								</div>
 								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="access">Sign in</button>
+									<button class="login-button" role="button" type="submit" name="login">Sign in</button>
 								</div>
 								<div class="form-group">
 									<p class="text-center">By clicking Log In, Facebook or LinkedIn<br />you agree to our new <a href="javascript:void(0);">T&C's</a></p>
@@ -247,7 +256,7 @@ if(isset($_SESSION['seller_user_name'])){
 	</main>
 	<!-- Main content end -->
 
-<div class="container mt-5">
+<!-- <div class="container mt-5">
 
 	<div class="row justify-content-center">
 
@@ -267,18 +276,20 @@ if(isset($_SESSION['seller_user_name'])){
 
 				?>
 
-				<div class="alert alert-danger"><!--- alert alert-danger Starts --->
+				<div class="alert alert-danger"> -->
+					<!--- alert alert-danger Starts --->
 
-				<ul class="list-unstyled mb-0">
+				<!-- <ul class="list-unstyled mb-0">
 				<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
 				<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
 				<?php } ?>
 				</ul>
 
-				</div><!--- alert alert-danger Ends --->
+				</div> -->
+				<!--- alert alert-danger Ends --->
 				<?php } ?>
 
-				<form action="" method="post">
+				<!-- <form action="" method="post">
 
 					<div class="form-group">
 
@@ -353,7 +364,96 @@ if(isset($_SESSION['seller_user_name'])){
 
 	</div>
 
-</div>
+</div> -->
+<?php 
+	if(isset($_POST['login'])){
+		
+		$rules = array(
+		"seller_user_name" => "required",
+		"seller_pass" => "required"
+		);
+		$messages = array("seller_user_name" => "Username Is Required.","seller_pass" => "Password Is Required.");
+
+		$val = new Validator($_POST,$rules,$messages);
+
+		if($val->run() == false){
+			Flash::add("login_errors",$val->get_all_errors());
+			Flash::add("form_data",$_POST);
+			echo "<script>window.open('index','_self')</script>";
+		}else{
+
+			$seller_user_name = $input->post('seller_user_name');
+			$seller_pass = $input->post('seller_pass');
+			$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
+			$row_seller = $select_seller->fetch();
+			@$hashed_password = $row_seller->seller_pass;
+			@$seller_status = $row_seller->seller_status;
+			$decrypt_password = password_verify($seller_pass, $hashed_password);
+			
+			if($decrypt_password == 0){
+				echo "
+				<script>
+	        swal({
+	          type: 'warning',
+	          html: $('<div>')
+	            .text('Opps! password or username is incorrect. Please try again.'),
+	          animation: false,
+	          customClass: 'animated tada'
+	        })
+		    </script>
+				";
+			}else{
+				if($seller_status == "block-ban"){
+					echo "
+					<script>
+			            swal({
+			              type: 'warning',
+			              html: $('<div>')
+			                .text('You have been blocked by the Admin. Please contact customer support.'),
+			              animation: false,
+			              customClass: 'animated tada'
+			            })
+			    	</script>";
+				}elseif($seller_status == "deactivated"){
+					echo "
+					<script>
+					swal({
+					  type: 'warning',
+					  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
+					  animation: false,
+					  customClass: 'animated tada'
+					})
+					</script>";
+				}else{
+					$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+					if($select_seller){
+				    $_SESSION['seller_user_name'] = $seller_user_name;
+				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
+							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+				      $seller_user_name = ucfirst(strtolower($seller_user_name));
+							$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		          echo "
+		          <script>
+		                swal({
+		                type: 'success',
+		                text: 'Hey $seller_user_name, welcome back!',
+		                timer: 2000,
+		                onOpen: function(){
+		                  swal.showLoading()
+		                }
+		                }).then(function(){
+		                  window.open('$url','_self')
+		              });
+		          </script>";
+		        }
+					}
+				}
+		  }
+				
+		}
+		
+	}
+ ?>
     
 <?php
     
@@ -470,6 +570,7 @@ if(isset($_SESSION['seller_user_name'])){
 ?>
 
 <?php require_once("includes/footer.php"); ?>
+<?php require_once("includes/footerJs.php"); ?>
 
 
 
