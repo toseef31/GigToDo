@@ -1,0 +1,36 @@
+@mixin font-Montserrat-Light {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+@mixin font-Montserrat-Regular {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+@mixin font-Montserrat-Medium {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+@mixin font-Montserrat-Semibold {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+@mixin font-Montserrat-Bold {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+@mixin font-Montserrat-Extrabold {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+@mixin font-Montserrat-Black {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+}
+@mixin font-Hacensaudiarabia-Regular {
+    font-family: 'Hacen Saudi Arabia', sans-serif;
+    font-weight: 400;
+}
+@mixin font-Hacensaudiarabia-Bold {
+    font-family: 'Hacen Saudi Arabia', sans-serif;
+    font-weight: bold;
+}

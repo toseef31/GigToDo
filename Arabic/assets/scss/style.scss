@@ -1,0 +1,46 @@
+/* Base CSS */
+@import 'include/mixin';
+@font-face {
+    font-family: 'Hacen Saudi Arabia';
+    src: url('../fonts/HacenSaudiArabia.eot');
+    src: url('../fonts/HacenSaudiArabia.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/HacenSaudiArabia.woff2') format('woff2'),
+         url('../fonts/HacenSaudiArabia.woff') format('woff'),
+         url('../fonts/HacenSaudiArabia.ttf') format('truetype'),
+         url('../fonts/HacenSaudiArabia.svg#HacenSaudiArabia') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*GOGOLE FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900&display=swap');
+/*end*/
+@import 'include/countdown-timer';
+@import 'include/common';
+@import 'include/header';
+@import 'include/footer';
+@import 'include/frontpage';
+@import 'include/all-gigs';
+@import 'include/profile';
+@import 'include/sidebar';
+@import 'include/product';
+@import 'include/checkout';
+@import 'include/dashboard';
+@import 'include/how-it-work';
+@import 'include/post-a-request';
+@import 'include/purchases';
+@import 'include/seller-profile';
+@import 'include/subcategories';
+@import 'include/popup';
+@import 'include/postagig';
+@import 'include/buyer';
+@import 'include/editprofile';
+@import 'include/setting';
+@import 'include/messages';
+@import 'include/resolution';
+@import 'include/invite';
+@import 'include/order';
+@import 'include/signup-login';
+@import 'include/list-page';
+@import 'include/portfolio';
+@import 'include/offers';
