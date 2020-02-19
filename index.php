@@ -88,7 +88,7 @@ if(!isset($_SESSION['seller_user_name'])){
 require_once("includes/footer.php"); 
 
 ?>
-<!-- <?php if($row_general_settings->knowledge_bank == 'yes'): ?>
+<?php if($row_general_settings->knowledge_bank == 'yes'): ?>
 <div class="sm popup-support-wrap">
 	<div class="popup-support">
 		<header class="hero-container" style="background-color: rgb(29, 191, 115); color: rgb(255, 255, 255);">
@@ -126,6 +126,6 @@ require_once("includes/footer.php");
 </a>
 <script>var site_url='<?php echo $site_url; ?>';</script>
 <script type="text/javascript" src="js/knowledge-bank.js"></script>
-<?php endif; ?> -->
+<?php endif; ?>
 </body>
 </html>

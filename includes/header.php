@@ -399,7 +399,7 @@ $ip = get_real_user_ip();
               <div class="menu-inner">
                 <ul>
                   <li><a href="javascript:void(0);"><?= $lang['post_request'];?></a></li>
-                  <li><a href="javascript:void(0);">How it Works</a></li>
+                  <li><a href="how-it-works.php">How it Works</a></li>
                 </ul>
               </div>
               <div class="language-inner">
@@ -449,7 +449,7 @@ $ip = get_real_user_ip();
           <a href="javascript:void(0);">Post A Request</a>
         </li>
         <li>
-          <a href="javascript:void(0);">How it Works</a>
+          <a href="how-it-works.php">How it Works</a>
         </li>
         <li class="d-flex flex-row">
           <div class="menu-action">

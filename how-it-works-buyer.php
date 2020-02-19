@@ -45,13 +45,14 @@
   </head>
   <body class="all-content" data-spy="scroll" data-target=".howitwork-cat-menu" data-offset="110">
     <!-- Preloader Start -->
-      <div class="proloader">
-        <div class="loader">
-          <img src="assets/img/emongez_cube.png" />
-        </div>
+  <div class="proloader">
+    <div class="loader">
+        <img src="assets/img/emongez_cube.png" />
       </div>
-      <!-- Preloader End -->
-    <?php require_once("includes/header-top.php"); ?>
+    </div>
+    <!-- Preloader End -->
+    <!-- Headeer Include -->
+    <?php require_once('includes/buyer-header.php'); ?>
     <!-- How it work banner Start-->
     <div class="how-it-work-banner">
       <div class="container">
@@ -60,7 +61,7 @@
             <div class="how-it-work-banner-content d-flex flex-column justify-content-center align-items-center">
               <h3 class="how-title">How It Works</h3>
               <div class="d-flex flex-row justify-content-between">
-                <a href="register.php" class="how-btn">Get started</a>
+                <a href="javascript:void(0);" class="how-btn">Post a Request</a>
               </div>
             </div>
           </div>
@@ -177,7 +178,7 @@
                   <div class="row align-items-center" id="client_pay">
                     <div class="col-md-6 order-md-last">
                       <div class="how-it-content mt-50">
-                        <h3 class="how-it-title">Pay easily, with peace of mind</h3>
+                        <h3 class="how-it-title">Pay easily, with peace of mind </h3>
                         <p class="text">
                           <ul>
                             <li>Enjoy peace of mind with a 100% secure payment portal that protects your personal information at all times.</li>

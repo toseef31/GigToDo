@@ -27,8 +27,11 @@ $get_meta = $db->select("cats_meta",array("cat_id" => $edit_id, "language_id" =>
 $row_meta = $get_meta->fetch();
 $c_title = $row_meta->cat_title;
 $c_desc = $row_meta->cat_desc;
+$arabic_title = $row_meta->arabic_title;
+$arabic_desc = $row_meta->arabic_desc;
 
 $c_image = $row_edit->cat_image;
+$c_icon = $row_edit->cat_icon;
 $c_featured = $row_edit->cat_featured;
 	
 }
@@ -112,6 +115,17 @@ if(is_array($form_errors)){
 </div>
 
 </div><!--- form-group row Ends --->
+<div class="form-group row"><!--- form-group row Starts --->
+
+<label class="col-md-4 control-label"> Category Title : </label>
+
+<div class="col-md-6">
+
+<input type="text" name="arabic_title" class="form-control" value="<?php echo $arabic_title; ?>" required>
+
+</div>
+
+</div><!--- form-group row Ends --->
 
 <div class="form-group row"><!--- form-group row Starts --->
 
@@ -120,6 +134,17 @@ if(is_array($form_errors)){
 <div class="col-md-6">
 
 <textarea name="cat_desc" class="form-control" required=""><?php echo $c_desc; ?></textarea>
+
+</div>
+
+</div><!--- form-group row Ends --->
+<div class="form-group row"><!--- form-group row Starts --->
+
+<label class="col-md-4 control-label"> Category Description : </label>
+
+<div class="col-md-6">
+
+<textarea name="arabic_desc" class="form-control" required=""><?php echo $arabic_desc; ?></textarea>
 
 </div>
 
@@ -194,6 +219,31 @@ echo "checked='checked'";
 
 </div><!--- form-group row Ends --->
 
+
+<div class="form-group row"><!--- form-group row Starts --->
+
+<label class="col-md-4 control-label"> Category Icon : </label>
+
+<div class="col-md-6">
+
+<input type="file" name="cat_icon" class="form-control">
+
+<br>
+
+<?php if(!empty($c_icon)){ ?>
+
+<img src="../cat_icons/<?php echo $c_icon; ?>" width="70" height="55">
+
+<?php }else{ ?>
+
+<img src="../cat_icons/default.png" width="70" height="55">
+
+<?php } ?>
+
+</div>
+
+</div><!--- form-group row Ends --->
+
 <?php 
 if($videoPlugin == 1){ 
   include("../plugins/videoPlugin/admin/edit_cat.php");
@@ -253,22 +303,28 @@ if(isset($_POST['update_cat'])){
 
 		$cat_title = $input->post('cat_title');
 		$cat_desc = $input->post('cat_desc');
+		$arabic_title = $input->post('arabic_title');
+		$arabic_desc = $input->post('arabic_desc');
 		$cat_featured = $input->post('cat_featured');
+		$cat_icon = $_FILES['cat_icon']['name'];
+    $tmp_cat_icon = $_FILES['cat_icon']['tmp_name'];
 		$cat_image = $_FILES['cat_image']['name'];
 		$tmp_cat_image = $_FILES['cat_image']['tmp_name'];
 
 		$allowed = array('jpeg','jpg','gif','png','tif','ico','webp');
 		  
 		$file_extension = pathinfo($cat_image, PATHINFO_EXTENSION);
+		$file_extension = pathinfo($cat_icon, PATHINFO_EXTENSION);
 
-		if(!in_array($file_extension,$allowed) & !empty($cat_image)){
+
+		if(!in_array($file_extension,$allowed) & !empty($cat_image) & !empty($cat_icon)){
 		  
 			echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
 		  
 		}else{
 
-			move_uploaded_file($tmp_cat_image,"../cat_images/$cat_image");
-				
+			move_uploaded_file($tmp_cat_image,"../assets/img/category/$cat_image");
+			move_uploaded_file($tmp_cat_icon,"../assets/img/category/$cat_icon");
 			if(empty($cat_image)){
 				$cat_image = $c_image;
 			}
@@ -278,14 +334,14 @@ if(isset($_POST['update_cat'])){
 				$reminder_emails = $input->post('reminder_emails');
 				$missed_session_emails = $input->post('missed_session_emails');
 				$warning_message = $input->post('warning_message');
-				$update_cat = $db->update("categories",array("cat_image"=>$cat_image,"cat_featured"=>$cat_featured,"video"=>$video,"reminder_emails"=>$reminder_emails,"missed_session_emails"=>$missed_session_emails,"warning_message"=>$warning_message),array("cat_id"=>$edit_id));
+				$update_cat = $db->update("categories",array("cat_image"=>$cat_image,"cat_icon"=>$cat_icon,"cat_featured"=>$cat_featured,"video"=>$video,"reminder_emails"=>$reminder_emails,"missed_session_emails"=>$missed_session_emails,"warning_message"=>$warning_message),array("cat_id"=>$edit_id));
 			}else{
-				$update_cat = $db->update("categories",array("cat_image"=>$cat_image,"cat_featured"=>$cat_featured),array("cat_id"=>$edit_id));
+				$update_cat = $db->update("categories",array("cat_image"=>$cat_image,"cat_icon"=>$cat_icon,"cat_featured"=>$cat_featured),array("cat_id"=>$edit_id));
 			}
 
 			if($update_cat){
 
-				$update_meta = $db->update("cats_meta",array("cat_title" => $cat_title,"cat_desc" => $cat_desc),array("cat_id" => $edit_id, "language_id" => $adminLanguage));
+				$update_meta = $db->update("cats_meta",array("cat_title" => $cat_title,"arabic_title" => $arabic_title,"arabic_desc" => $arabic_desc,"cat_desc" => $cat_desc),array("cat_id" => $edit_id, "language_id" => $adminLanguage));
 
 				$insert_log = $db->insert_log($admin_id,"cat",$edit_id,"updated");
 

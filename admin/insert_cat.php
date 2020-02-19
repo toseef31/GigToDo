@@ -3,11 +3,11 @@
 @session_start();
 
 if(!isset($_SESSION['admin_email'])){
-	
+  
     echo "<script>window.open('login','_self');</script>";
-	
+  
 }else{
-	
+  
 ?>
 
 
@@ -85,6 +85,19 @@ if(!isset($_SESSION['admin_email'])){
 
                         </div><!--- form-group row Ends --->
 
+                        <div class="form-group row">
+                            <!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Category Title Arabic : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="text" name="arabic_title" class="form-control" required="">
+
+                            </div>
+
+                        </div><!--- form-group row Ends --->
+
 
                         <div class="form-group row"><!--- form-group row Starts --->
 
@@ -93,6 +106,19 @@ if(!isset($_SESSION['admin_email'])){
                             <div class="col-md-6">
 
                                 <textarea name="cat_desc" class="form-control" required=""></textarea>
+
+                            </div>
+
+                        </div><!--- form-group row Ends --->
+
+
+                        <div class="form-group row"><!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Category Description Arabic : </label>
+
+                            <div class="col-md-6">
+
+                                <textarea name="arabic_desc" class="form-control" required=""></textarea>
 
                             </div>
 
@@ -125,6 +151,18 @@ if(!isset($_SESSION['admin_email'])){
                             <div class="col-md-6">
 
                                 <input type="file" name="cat_image" class="form-control">
+
+                            </div>
+
+                        </div><!--- form-group row Ends --->
+
+                        <div class="form-group row"><!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Category Icon : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="file" name="cat_icon" class="form-control">
 
                             </div>
 
@@ -197,6 +235,8 @@ if(isset($_POST['submit'])){
     $rules = array(
     "cat_title" => "required",
     "cat_desc" => "required",
+    "arabic_title" => "required",
+    "arabic_desc" => "required",
     "cat_featured" => "required");
 
     if(isset($_POST['video'])){
@@ -205,7 +245,7 @@ if(isset($_POST['submit'])){
         $rules['warning_message'] = "number|required";
     }
 
-    $messages = array("cat_title" => "Category Title Is Required.","cat_desc" => "Category Description Is Required.","cat_featured" => "Your Must Need To Chose Category Featured As Yes Or No");
+    $messages = array("cat_title" => "Category Title Is Required.","cat_desc" => "Category Description Is Required.","arabic_title" => "Arabic Title Is Required.","arabic_desc" => "Arabic Description Is Required.","cat_featured" => "Your Must Need To Chose Category Featured As Yes Or No");
 
     $val = new Validator($_POST,$rules,$messages);
 
@@ -218,27 +258,33 @@ if(isset($_POST['submit'])){
     }else{
 
         $cat_title = $input->post('cat_title');
+        $arabic_title = $input->post('arabic_title');
         $cat_url = slug($cat_title);
         $cat_desc = $input->post('cat_desc');
+        $arabic_desc = $input->post('arabic_desc');
         $cat_featured = $input->post('cat_featured');
+        $cat_icon = $_FILES['cat_icon']['name'];
+        $tmp_cat_icon = $_FILES['cat_icon']['tmp_name'];
         $cat_image = $_FILES['cat_image']['name'];
         $tmp_cat_image = $_FILES['cat_image']['tmp_name'];
 
         $allowed = array('jpeg','jpg','gif','png','tif','ico','webp');
         $file_extension = pathinfo($cat_image, PATHINFO_EXTENSION);
-        if(!in_array($file_extension,$allowed) & !empty($cat_image)){
+        $file_extension = pathinfo($cat_icon, PATHINFO_EXTENSION);
+        if(!in_array($file_extension,$allowed) & !empty($cat_image) & !empty($cat_icon)){
             echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
         }else{
-            move_uploaded_file($tmp_cat_image,"../cat_images/$cat_image");
-            	
+            move_uploaded_file($tmp_cat_image,"../assets/img/category/$cat_image");
+            move_uploaded_file($tmp_cat_icon,"../assets/img/category/$cat_icon");
+              
             if($videoPlugin == 1){
                 $video = $input->post('video');
                 $reminder_emails = $input->post('reminder_emails');
                 $missed_session_emails = $input->post('missed_session_emails');
                 $warning_message = $input->post('warning_message');
-                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_featured"=>$cat_featured,"video"=>$video,"reminder_emails"=>$reminder_emails,"missed_session_emails"=>$missed_session_emails,"warning_message"=>$warning_message]);
+                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_icon"=>$cat_icon,"cat_featured"=>$cat_featured,"video"=>$video,"reminder_emails"=>$reminder_emails,"missed_session_emails"=>$missed_session_emails,"warning_message"=>$warning_message]);
             }else{
-                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_featured"=>$cat_featured]);
+                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_icon"=>$cat_icon,"cat_featured"=>$cat_featured]);
             }
 
             if($insert_cat){
@@ -251,16 +297,16 @@ if(isset($_POST['submit'])){
                     $insert = $db->insert("cats_meta",array("cat_id"=>$insert_id,"language_id"=>$adminLanguage));
                 }
 
-                $update_meta = $db->update("cats_meta",array("cat_title" => $cat_title,"cat_desc" => $cat_desc),array("cat_id" => $insert_id, "language_id" => $adminLanguage));
+                $update_meta = $db->update("cats_meta",array("cat_title" => $cat_title,"arabic_title" => $arabic_title,"arabic_desc" => $arabic_desc,"cat_desc" => $cat_desc),array("cat_id" => $insert_id, "language_id" => $adminLanguage));
                 $insert_log = $db->insert_log($admin_id,"cat",$insert_id,"inserted");
 
                 echo "<script>alert('One Category Has Been Inserted.');</script>";
-                echo "<script>window.open('index?view_cats','_self');</script>";	
+                echo "<script>window.open('index?view_cats','_self');</script>";  
 
             }
 
         }
-        	
+          
     }
 
 }

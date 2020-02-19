@@ -51,7 +51,246 @@
         </div>
       </div>
       <!-- Preloader End -->
-    <?php require_once("includes/header-top.php"); ?>
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-6 col-lg-2">
+              <div class="logo">
+                <a href="index.html"><img src="assets/img/logo.svg" alt=""></a>
+              </div>
+            </div>
+            <div class="col-6 d-block d-lg-none">
+              <div class="header-right d-flex align-items-center justify-content-end">
+                <div class="message-inner">
+                  <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+                </div>
+                <div class="menubar d-flex flex-row align-items-center">
+                  <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+                  <div class="icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-10 d-none d-lg-block">
+              <div class="header-right d-flex align-items-center justify-content-end">
+                <div class="menu-inner">
+                  <ul>
+                    <li><a href="javascript:void(0);">Buyer Request</a></li>
+                    <li><a href="javascript:void(0);">Gigs</a></li>
+                    <li><a href="javascript:void(0);">Dashboard</a></li>
+                  </ul>
+                </div>
+                <div class="language-inner">
+                  <select name="" id="" onChange="window.location.href=this.value">
+                    <option value="" selected="">EN</option>
+                    <option value="<?= $site_url?>/Arabic/">AR</option>
+                  </select>
+                </div>
+                <div class="usd-inner">
+                  <select name="" id="">
+                    <option value="">USD</option>
+                    <option value="">EGP</option>
+                  </select>
+                </div>
+                <div class="message-inner">
+                  <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+                </div>
+                <div class="menubar d-flex flex-row align-items-center">
+                  <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+                  <div class="icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Message Box -->
+          <div class="message-box">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                  <div class="m-item">
+                    <i class="fal fa-bell"></i>
+                    Notification
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                  <div class="m-item">
+                    <i class="far fa-comment-alt-dots"></i>
+                    Inbox
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="mesagee-item-box">
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="mesagee-item-box">
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                  <div class="mesagee-single-item">
+                    <div class="notifiction-user-img">
+                      <img src="assets/img/user3.png" alt="">
+                    </div>
+                    <h5><span>snazzydegreat delivered</span> your order</h5>
+                    <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                    <div class="notifiction-right">
+                      <img src="assets/img/message-img.png" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="notification-setting">
+              <div class="row align-items-center">
+                <div class="col-6">
+                  <div class="noti-option-icon">
+                    <button><i class="fal fa-cog"></i></button>
+                    <button><i class="fal fa-volume-up"></i></button>
+                  </div>
+                </div>
+                <div class="col-6 text-right">
+                  <a href="javascript:void(0);" class="see-all-noti">See All In Notification ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Message box end -->
+        </div>
+      </div>
+    </header>
+    <!-- Header END-->
+    <!-- Offcanvas-menu -->
+    <div class="ofcanvas-menu">
+      <div class="close-icon">
+        <i class="fal fa-times"></i>
+      </div>
+      <div class="profile-inner">
+        <img src="assets/img/user2.png" alt="">
+        <h4>Welcome back, <span>Morad11214</span></h4>
+      </div>
+      <div class="canvs-menu">
+        <ul>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/16.png" alt=""> Portfolio</a></li>
+          <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/indox.png" alt=""> Inbox</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
+          <li><a href="javascript:void(0);"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Close-overlay -->
+    <div class="overlay-bg"></div>
+    <!-- Offcanvas-menu END-->
     <!-- How it work banner Start-->
     <div class="how-it-work-banner">
       <div class="container">
@@ -60,7 +299,7 @@
             <div class="how-it-work-banner-content d-flex flex-column justify-content-center align-items-center">
               <h3 class="how-title">How It Works</h3>
               <div class="d-flex flex-row justify-content-between">
-                <a href="register.php" class="how-btn">Get started</a>
+                <a href="javascript:void(0);" class="how-btn">Post a Gig</a>
               </div>
             </div>
           </div>
@@ -76,7 +315,7 @@
             <div class="how-it-work-menu pb-20">
               <ul class="nav nav-tabs" id="how_it_work_menu" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#client" id="client-tab" data-toggle="tab" role="tab" aria-controls="client" aria-selected="true">
+                  <a class="nav-link" href="#client" id="client-tab" data-toggle="tab" role="tab" aria-controls="client" aria-selected="true">
                     <span>
                       <img src="assets/img/how-it-work/client-white.png" alt="">
                       <img src="assets/img/how-it-work/client-red.png" alt="">
@@ -85,7 +324,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#freelancer" id="freelancer-tab" data-toggle="tab" role="tab" aria-controls="freelancer" aria-selected="false">
+                  <a class="nav-link active" href="#freelancer" id="freelancer-tab" data-toggle="tab" role="tab" aria-controls="freelancer" aria-selected="false">
                     <span>
                       <img src="assets/img/how-it-work/freelancer-white.png" alt="">
                       <img src="assets/img/how-it-work/freelancer-red.png" alt="">
@@ -98,7 +337,7 @@
           </div>
         </div>
         <div class="tab-content" id="howitworkTabContent">
-          <div class="tab-pane fade show active" id="client" role="tabpanel" aria-labelledby="client-tab">
+          <div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-tab">
             <div class="row">
               <div class="col-lg-3">
                 <div class="how-it-work-category mt-50">
@@ -199,7 +438,7 @@
               </div>
               <!-- Row -->
             </div>
-            <div class="tab-pane fade" id="freelancer" role="tabpanel" aria-labelledby="freelancer-tab">
+            <div class="tab-pane fade show active" id="freelancer" role="tabpanel" aria-labelledby="freelancer-tab">
               <div class="row">
                 <div class="col-lg-3">
                   <div class="how-it-work-category mt-50">

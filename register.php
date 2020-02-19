@@ -12,20 +12,6 @@ if(isset($_SESSION['seller_user_name'])){
 	
 }
 
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require_once("$dir/functions/email.php");
-
-$get_general_settings = $db->select("general_settings");   
-$row_general_settings = $get_general_settings->fetch();
-$site_email_address = $row_general_settings->site_email_address;
-$site_logo = $row_general_settings->site_logo;
-$site_name = $row_general_settings->site_name;
-$signup_email = $row_general_settings->signup_email;
-$referral_money = $row_general_settings->referral_money;
 ?>
 <!DOCTYPE html>
 
@@ -81,13 +67,12 @@ $referral_money = $row_general_settings->referral_money;
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
 </head>
 
 <body class="home-content">
 
-
-<?php //require_once("includes/header.php"); ?>
+<?php require_once("includes/header-top.php"); ?>
 	<!-- Preloader Start -->
 	<div class="proloader">
 		<div class="loader">
@@ -95,99 +80,6 @@ $referral_money = $row_general_settings->referral_money;
 		</div>
 	</div>
 	<!-- Preloader End -->
-	<!-- Header -->
-	<header>
-		<div class="header-top">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-6 col-md-3 d-flex flex-row">
-						<div class="logo">
-							<a class="home-logo" href="index.html"><img src="assets/img/signin-logo.png" alt=""></a>
-						</div>
-					</div>
-					<div class="col-6 col-md-9">
-						<div class="header-right d-flex align-items-center justify-content-end">
-							<div class="menu-inner">
-								<ul>
-									<li><a href="javascript:void(0);">Post a Request</a></li>
-									<li><a href="javascript:void(0);">How it Works</a></li>
-								</ul>
-							</div>
-							<div class="language-inner">
-								<select name="" id="" onChange="window.location.href=this.value">
-                  <option value="" selected="">EN</option>
-                  <option value="<?= $site_url?>/ar/">AR</option>
-                </select>
-							</div>
-							<div class="usd-inner">
-								<select name="" id="">
-									<option value="">USD</option>
-									<option value="">EGP</option>
-								</select>
-							</div>
-							<div class="Login-button d-none d-lg-flex">
-								<a href="login.php">Login</a>
-								<a href="register.php">Join Now</a>
-							</div>
-							<div class="menubar d-lg-none">
-								<div class="d-flex flex-row align-items-center">
-									<div class="image">
-										<img src="assets/img/menu-left-logo.png" alt="">
-									</div>
-									<div class="icon">
-										<span></span>
-										<span></span>
-										<span></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header END-->
-
-	<!-- Offcanvas-menu -->
-	<div class="ofcanvas-menu pre-login">
-		<div class="close-icon">
-			<i class="fal fa-times"></i>
-		</div>
-		<div class="canvs-menu">
-			<ul class="d-flex flex-column">
-				<li>
-					<a href="javascript:void(0);">Post A Request</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">How it Works</a>
-				</li>
-				<li class="d-flex flex-row">
-					<div class="menu-action">
-						<select name="" id="" onChange="window.location.href=this.value">
-						  <option value="" selected="">EN</option>
-						  <option value="<?= $site_url?>/ar/">AR</option>
-						</select>
-					</div>
-					<div class="menu-action">
-						<select name="" id="">
-							<option value="">USD</option>
-							<option value="">EGP</option>
-						</select>
-					</div>
-				</li>
-				<li class="mb-20">
-					<a class="button login-button" href="login.php">Login</a>
-				</li>
-				<li>
-					<a class="button join-button" href="register.php">Join Now</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- Close-overlay -->
-	<div class="overlay-bg"></div>
-	<!-- Offcanvas-menu END-->
 	<!-- Main content -->
 	<main>
 		<section class="container-fluid login-signup">
@@ -196,11 +88,12 @@ $referral_money = $row_general_settings->referral_money;
 					<div class="login-signup-wrapper signup-wrapper">
 						<div class="login-signup-header">
 							<h3 class="text-center">Sign Up</h3>
-							<p class="text-center">Already have an account? <a href="javascript:void(0);">Log In</a></p>
+							<p class="text-center">Already have an account? <a href="login.php">Log In</a></p>
 						</div>
 						<?php if($enable_social_login == "yes"){ ?>
 						<div class="login-by-social d-flex flex-column flex-lg-row align-items-center justify-content-center">
-							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);">
+
+							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?= $fLoginURL ?>';">
 								<span>
 									<i class="fab fa-facebook-f"></i>
 								</span>
@@ -212,7 +105,7 @@ $referral_money = $row_general_settings->referral_money;
 								</span>
 								<span>Sign up with Linkedin</span>
 							</a>
-							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);">
+							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?= $gLoginURL ?>';">
 								<span>
 									<i class="fab fa-google"></i>
 								</span>
@@ -318,6 +211,20 @@ $referral_money = $row_general_settings->referral_money;
 
 
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require_once("$dir/functions/email.php");
+
+$get_general_settings = $db->select("general_settings");   
+$row_general_settings = $get_general_settings->fetch();
+$site_email_address = $row_general_settings->site_email_address;
+$site_logo = $row_general_settings->site_logo;
+$site_name = $row_general_settings->site_name;
+$signup_email = $row_general_settings->signup_email;
+$referral_money = $row_general_settings->referral_money;
+
 if(isset($_POST['register'])){
 	
 	$rules = array(

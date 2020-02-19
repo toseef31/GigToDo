@@ -63,34 +63,36 @@ $slide_image = $row_slides->slide_image;
     </div>
     <div class="started-section-wrapper">
       <?php
-      $get_cards = $db->select("home_cards",array("language_id" => $siteLanguage));
-      while($row_cards = $get_cards->fetch()){
-      $card_id = $row_cards->card_id;
-      $card_title = $row_cards->card_title;
-      $card_desc = $row_cards->card_desc;
-      $card_image = $row_cards->card_image;
-      $card_link = $row_cards->card_link;
-      $card_icon = $row_cards->card_icon;
+        $get_categories = $db->query("select * from categories where cat_featured='yes' ".($lang_dir == "right" ? 'order by 1 DESC LIMIT 6,6':' LIMIT 0,6')."");
+        while($row_categories = $get_categories->fetch()){
+        $cat_id = $row_categories->cat_id;
+        $cat_image = $row_categories->cat_image;
+        $cat_icon = $row_categories->cat_icon;
+        $cat_url = $row_categories->cat_url;
+        $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
+        $row_meta = $get_meta->fetch();
+        $cat_title = $row_meta->cat_title;
+        $cat_desc = $row_meta->cat_desc;
       ?>
       <div class="started-item">
         <div class="started-inner">
           <div class="started-thumb">
-            <img src="assets/img/category/<?= $card_image; ?>" alt="category">
+            <img src="assets/img/category/<?= $cat_image; ?>" alt="category">
           </div>
           <div class="started-content d-flex align-items-center justify-content-center">
             <div class="content">
               <div class="thumb">
-                <img src="assets/img/category/<?= $card_icon; ?>" alt="category">
+                <img src="assets/img/category/<?= $cat_icon; ?>" alt="category">
               </div>
               <h6 class="sub-title">
-              <?= $card_title; ?>
+              <?= $cat_title; ?>
               </h6>
             </div>
           </div>
           <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
             <div class="content text-center">
-              <h6 class="sub-title"><a href="<?= $card_link ?>"><?= $card_title; ?></a></h6>
-              <p><?= $card_desc; ?> </p>
+              <h6 class="sub-title"><a href="<?= $cat_url ?>"><?= $cat_title; ?></a></h6>
+              <p><?= $cat_desc; ?> </p>
             </div>
           </div>
         </div>

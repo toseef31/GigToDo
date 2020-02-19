@@ -7,7 +7,10 @@ $login_seller_name = $row_login_seller->seller_name;
 $login_user_name = $row_login_seller->seller_user_name;
 $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
+
+
 ?>
+
 <div class="container mt-3">
   <!-- Container starts -->
   <div class="row">

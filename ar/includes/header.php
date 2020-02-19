@@ -399,7 +399,7 @@ $ip = get_real_user_ip();
               <div class="menu-inner">
                 <ul>
                   <li><a href="javascript:void(0);">نشر طلب</a></li>
-                  <li><a href="javascript:void(0);">كيف تعمل</a></li>
+                  <li><a href="how-it-works.php">كيف تعمل</a></li>
                 </ul>
               </div>
               <div class="language-inner">
@@ -449,7 +449,7 @@ $ip = get_real_user_ip();
           <a href="javascript:void(0);">نشر طلب</a>
         </li>
         <li>
-          <a href="javascript:void(0);">كيف تعمل</a>
+          <a href="how-it-works.php">كيف تعمل</a>
         </li>
         <li class="d-flex flex-row">
           <div class="menu-action">
