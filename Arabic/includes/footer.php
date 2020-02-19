@@ -153,7 +153,7 @@
             </select>
           </div>
           <div>
-            <p>© 2019 eMongez</p>
+            <p><?= $db->select("general_settings")->fetch()->site_copyright; ?></p>
           </div>
         </div>
       </div>

@@ -9,9 +9,7 @@ require_once("social-config.php");
 if(isset($_SESSION['seller_user_name'])){
 	
 	echo "<script> window.open('index.php','_self'); </script>";
-	
 }
-
 ?>
 <!DOCTYPE html>
 
@@ -72,8 +70,7 @@ if(isset($_SESSION['seller_user_name'])){
 
 <body class="all-content">
 
-
-<?php //require_once("includes/header.php"); ?>
+<?php require_once("includes/header-top.php"); ?>
 	<!-- Preloader Start -->
 	<div class="proloader">
 		<div class="loader">
@@ -81,104 +78,6 @@ if(isset($_SESSION['seller_user_name'])){
 		</div>
 	</div>
 	<!-- Preloader End -->
-	<!-- Header -->
-	<!-- Header -->
-	<header>
-		<div class="header-top">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-6 col-md-3 d-flex flex-row">
-						<div class="logo">
-							<a class="home-logo" href="index.html"><img src="assets/img/signin-logo.png" alt=""></a>
-						</div>
-					</div>
-					<div class="col-6 col-md-9">
-						<div class="header-right d-flex align-items-center justify-content-end">
-							<div class="menu-inner">
-								<ul>
-                  <li><a href="javascript:void(0);">نشر طلب</a></li>
-                  <li><a href="javascript:void(0);">كيف تعمل</a></li>
-                </ul>
-							</div>
-							<div class="language-inner">
-                <select name="" id="" onChange="window.location.href=this.value">
-                  <option value="<?= $site_url?>">EN</option>
-                  <option value="" selected="">AR</option>
-                </select>
-              </div>
-							<div class="usd-inner">
-								<select name="" id="">
-									<option value="">USD</option>
-									<option value="">EGP</option>
-								</select>
-							</div>
-							<div class="Login-button">
-                <a href="login.php">تسجيل الدخول</a>
-                <a href="register.php">نضم الان</a>
-              </div>
-							<div class="menubar d-lg-none">
-								<div class="d-flex flex-row align-items-center">
-									<div class="image">
-										<img src="assets/img/menu-left-logo.png" alt="">
-									</div>
-									<div class="icon">
-										<span></span>
-										<span></span>
-										<span></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header END-->
-
-	<!-- Offcanvas-menu -->
-	<div class="ofcanvas-menu pre-login">
-		<div class="close-icon">
-			<i class="fal fa-times"></i>
-		</div>
-		<div class="canvs-menu">
-			<ul class="d-flex flex-column">
-				<li>
-          <a href="javascript:void(0);">نشر طلب</a>
-        </li>
-        <li>
-          <a href="javascript:void(0);">كيف تعمل</a>
-        </li>
-				<li class="d-flex flex-row">
-					<div class="menu-action">
-            <select name="" id="" onChange="window.location.href=this.value">
-              <option value="<?= $site_url?>">EN</option>
-              <option value="" selected="">AR</option>
-            </select>
-					</div>
-					<div class="menu-action">
-						<select name="" id="">
-							<option value="">USD</option>
-							<option value="">EGP</option>
-						</select>
-					</div>
-				</li>
-				<li class="mb-20">
-          <a class="button login-button" href="login.php">
-            الدخول
-          </a>
-        </li>
-        <li>
-          <a class="button join-button" href="register.php">
-            انضم دلوقتي
-          </a>
-        </li>
-			</ul>
-		</div>
-	</div>
-	<!-- Close-overlay -->
-	<div class="overlay-bg"></div>
-	<!-- Offcanvas-menu END-->
 
 <!-- <div class="container mt-5">
 
@@ -299,7 +198,7 @@ if(isset($_SESSION['seller_user_name'])){
     						<h3 class="text-center">
 								أهلا بيك من تاني، سجل الدخوللحسابك
 								</h3>
-    						<p class="text-center">ماعندكش حساب؟ <a href="Arabic/register.php">سجل</a></p>
+    						<p class="text-center">ماعندكش حساب؟ <a href="register.php">سجل</a></p>
     					</div>
     					<?php if($enable_social_login == "yes"){ ?>
     					<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
@@ -356,7 +255,7 @@ if(isset($_SESSION['seller_user_name'])){
     									<input type="checkbox" class="custom-control-input" id="customCheck1">
     									<label class="custom-control-label" for="customCheck1">افتكرني</label>
     								</div>
-    								<a class="fogot-password" href="javascript:void(0);">نسيت الباسوورد ؟</a>
+    								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">نسيت الباسوورد ؟</a>
     							</div>
     							<div class="form-group">
     								<button class="login-button" role="button" type="submit" name="login">تسجيل الدخول</button>
@@ -371,97 +270,46 @@ if(isset($_SESSION['seller_user_name'])){
     		</div>
     	</section>
     </main>
+    <!-- Forgot password starts -->
+	<div class="modal fade login" id="forgot-modal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <!-- Modal header starts -->
+	        <i class="fa fa-meh-o fa-log"></i>
+	        <h5 class="modal-title"> <?= $lang['modals']['forgot']['title']; ?> </h5>
+	        <button type="button" class="close" data-dismiss="modal">
+	        <span>&times;</span>
+	        </button>
+	      </div>
+	      <!-- Modal header ends -->
+	      <div class="modal-body">
+	        <!-- Modal body starts -->
+	        <p class="text-muted text-center mb-2">
+	          <?= $lang['modals']['forgot']['desc']; ?>
+	        </p>
+	        <form action="" method="post">
+	          <div class="form-group">
+	            <input type="text" name="forgot_email" class="form-control" placeholder="Enter Email" required>
+	          </div>
+	          <input type="submit" class="btn btn-success btn-block" value="submit" name="forgot">
+	          <p class="text-muted text-center mt-4">
+	            <?= $lang['modals']['forgot']['not_member_yer']; ?>
+	            <a href="#"class="text-success" data-toggle="modal" data-target="#register-modal" data-dismiss="modal">Join Now.</a>
+	          </p>
+	        </form>
+	      </div>
+	      <!-- Modal body ends -->
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Forgot password ends -->
+	<?php
+	require('register-login-forgot.php');
+	?>
     <!-- Main content end -->
 
-    <?php 
-    	if(isset($_POST['login'])){
-    		
-    		$rules = array(
-    		"seller_user_name" => "required",
-    		"seller_pass" => "required"
-    		);
-    		$messages = array("seller_user_name" => "Username Is Required.","seller_pass" => "Password Is Required.");
-
-    		$val = new Validator($_POST,$rules,$messages);
-
-    		if($val->run() == false){
-    			Flash::add("login_errors",$val->get_all_errors());
-    			Flash::add("form_data",$_POST);
-    			echo "<script>window.open('index','_self')</script>";
-    		}else{
-
-    			$seller_user_name = $input->post('seller_user_name');
-    			$seller_pass = $input->post('seller_pass');
-    			$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
-    			$row_seller = $select_seller->fetch();
-    			@$hashed_password = $row_seller->seller_pass;
-    			@$seller_status = $row_seller->seller_status;
-    			$decrypt_password = password_verify($seller_pass, $hashed_password);
-    			
-    			if($decrypt_password == 0){
-    				echo "
-    				<script>
-    	        swal({
-    	          type: 'warning',
-    	          html: $('<div>')
-    	            .text('Opps! password or username is incorrect. Please try again.'),
-    	          animation: false,
-    	          customClass: 'animated tada'
-    	        })
-    		    </script>
-    				";
-    			}else{
-    				if($seller_status == "block-ban"){
-    					echo "
-    					<script>
-    			            swal({
-    			              type: 'warning',
-    			              html: $('<div>')
-    			                .text('You have been blocked by the Admin. Please contact customer support.'),
-    			              animation: false,
-    			              customClass: 'animated tada'
-    			            })
-    			    	</script>";
-    				}elseif($seller_status == "deactivated"){
-    					echo "
-    					<script>
-    					swal({
-    					  type: 'warning',
-    					  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
-    					  animation: false,
-    					  customClass: 'animated tada'
-    					})
-    					</script>";
-    				}else{
-    					$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
-    					if($select_seller){
-    				    $_SESSION['seller_user_name'] = $seller_user_name;
-    				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
-    							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
-    				      $seller_user_name = ucfirst(strtolower($seller_user_name));
-    							$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    		          echo "
-    		          <script>
-    		                swal({
-    		                type: 'success',
-    		                text: 'Hey $seller_user_name, welcome back!',
-    		                timer: 2000,
-    		                onOpen: function(){
-    		                  swal.showLoading()
-    		                }
-    		                }).then(function(){
-    		                  window.open('$url','_self')
-    		              });
-    		          </script>";
-    		        }
-    					}
-    				}
-    		  }
-    				
-    		}
-    		
-    	}
-     ?>
 <?php
     
     if(isset($_POST['access'])){

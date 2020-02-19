@@ -130,6 +130,18 @@ if(!isset($_SESSION['admin_email'])){
 
                         </div><!--- form-group row Ends --->
 
+                        <div class="form-group row"><!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Category Icon : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="file" name="cat_icon" class="form-control">
+
+                            </div>
+
+                        </div><!--- form-group row Ends --->
+
                         <?php 
                             if($videoPlugin == 1){ 
                                 include("../plugins/videoPlugin/admin/insert_cat.php");
@@ -221,24 +233,28 @@ if(isset($_POST['submit'])){
         $cat_url = slug($cat_title);
         $cat_desc = $input->post('cat_desc');
         $cat_featured = $input->post('cat_featured');
+        $cat_icon = $_FILES['cat_icon']['name'];
+        $tmp_cat_icon = $_FILES['cat_icon']['tmp_name'];
         $cat_image = $_FILES['cat_image']['name'];
         $tmp_cat_image = $_FILES['cat_image']['tmp_name'];
 
         $allowed = array('jpeg','jpg','gif','png','tif','ico','webp');
         $file_extension = pathinfo($cat_image, PATHINFO_EXTENSION);
-        if(!in_array($file_extension,$allowed) & !empty($cat_image)){
+        $file_extension = pathinfo($cat_icon, PATHINFO_EXTENSION);
+        if(!in_array($file_extension,$allowed) & !empty($cat_image) & !empty($cat_icon)){
             echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
         }else{
             move_uploaded_file($tmp_cat_image,"../cat_images/$cat_image");
+            move_uploaded_file($tmp_cat_icon,"../cat_images/$cat_image");
             	
             if($videoPlugin == 1){
                 $video = $input->post('video');
                 $reminder_emails = $input->post('reminder_emails');
                 $missed_session_emails = $input->post('missed_session_emails');
                 $warning_message = $input->post('warning_message');
-                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_featured"=>$cat_featured,"video"=>$video,"reminder_emails"=>$reminder_emails,"missed_session_emails"=>$missed_session_emails,"warning_message"=>$warning_message]);
+                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_icon"=>$cat_icon,"cat_featured"=>$cat_featured,"video"=>$video,"reminder_emails"=>$reminder_emails,"missed_session_emails"=>$missed_session_emails,"warning_message"=>$warning_message]);
             }else{
-                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_featured"=>$cat_featured]);
+                $insert_cat = $db->insert("categories",["cat_url"=>$cat_url,"cat_image"=>$cat_image,"cat_icon"=>$cat_icon,"cat_featured"=>$cat_featured]);
             }
 
             if($insert_cat){

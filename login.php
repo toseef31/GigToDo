@@ -6,6 +6,7 @@ require_once("includes/db.php");
 
 require_once("social-config.php");
 
+
 if(isset($_SESSION['seller_user_name'])){
 	
 	echo "<script> window.open('index.php','_self'); </script>";
@@ -73,7 +74,7 @@ if(isset($_SESSION['seller_user_name'])){
 <body class="home-content">
 
 
-<?php //require_once("includes/header.php"); ?>
+<?php require_once("includes/header-top.php"); ?>
 	<!-- Preloader Start -->
 	<div class="proloader">
 		<div class="loader">
@@ -81,180 +82,6 @@ if(isset($_SESSION['seller_user_name'])){
 		</div>
 	</div>
 	<!-- Preloader End -->
-	<!-- Header -->
-	<header>
-		<div class="header-top">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-6 col-md-3 d-flex flex-row">
-						<div class="logo">
-							<a class="home-logo" href="index.html"><img src="assets/img/signin-logo.png" alt=""></a>
-						</div>
-					</div>
-					<div class="col-6 col-md-9">
-						<div class="header-right d-flex align-items-center justify-content-end">
-							<div class="menu-inner">
-								<ul>
-									<li><a href="javascript:void(0);">Post a Request</a></li>
-									<li><a href="javascript:void(0);">How it Works</a></li>
-								</ul>
-							</div>
-							<div class="language-inner">
-								<select name="" id="" onChange="window.location.href=this.value">
-                  <option value="" selected="">EN</option>
-                  <option value="<?= $site_url?>/Arabic/">AR</option>
-                </select>
-							</div>
-							<div class="usd-inner">
-								<select name="" id="">
-									<option value="">USD</option>
-									<option value="">EGP</option>
-								</select>
-							</div>
-							<div class="Login-button d-none d-lg-flex">
-								<a href="javascript:void(0);">Login</a>
-								<a href="javascript:void(0);">Join Now</a>
-							</div>
-							<div class="menubar d-lg-none">
-								<div class="d-flex flex-row align-items-center">
-									<div class="image">
-										<img src="assets/img/menu-left-logo.png" alt="">
-									</div>
-									<div class="icon">
-										<span></span>
-										<span></span>
-										<span></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header END-->
-
-	<!-- Offcanvas-menu -->
-	<div class="ofcanvas-menu pre-login">
-		<div class="close-icon">
-			<i class="fal fa-times"></i>
-		</div>
-		<div class="canvs-menu">
-			<ul class="d-flex flex-column">
-				<li>
-					<a href="javascript:void(0);">Post A Request</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">How it Works</a>
-				</li>
-				<li class="d-flex flex-row">
-					<div class="menu-action">
-						<select name="" id="" onChange="window.location.href=this.value">
-              <option value="" selected="">EN</option>
-              <option value="<?= $site_url?>/Arabic/">AR</option>
-            </select>
-					</div>
-					<div class="menu-action">
-						<select name="" id="">
-							<option value="">USD</option>
-							<option value="">EGP</option>
-						</select>
-					</div>
-				</li>
-				<li class="mb-20">
-					<a class="button login-button" href="javascript:void(0);">Login</a>
-				</li>
-				<li>
-					<a class="button join-button" href="javascript:void(0);">Join Now</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- Close-overlay -->
-	<div class="overlay-bg"></div>
-	<!-- Offcanvas-menu END-->
-	<!-- Main content -->
-	<main>
-		<section class="container-fluid login-signup">
-			<div class="row">
-				<div class="container">
-					<div class="login-signup-wrapper login-wrapper">
-						<div class="login-signup-header">
-							<h3 class="text-center">Welcome Back, Sign-In to your Account</h3>
-							<p class="text-center">Don't have an account? <a href="javascript:void(0);">Sign Up</a></p>
-						</div>
-						<?php if($enable_social_login == "yes"){ ?>
-						<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
-							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location='<?php echo $fLoginURL ?>';">
-								<span>
-									<i class="fab fa-facebook-f"></i>
-								</span>
-								<span>Login with Facebook</span>
-							</a>
-							<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
-								<span>
-									<i class="fab fa-linkedin-in"></i>
-								</span>
-								<span>Login with Linkedin</span>
-							</a>
-							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $gLoginURL ?>';">
-								<span>
-									<i class="fab fa-google"></i>
-								</span>
-								<span>Login with Google</span>
-							</a>
-						</div>
-					<?php } ?>
-						<div class="login-with-credentials">
-							<?php 
-
-							$form_errors = Flash::render("login2_errors");
-							$form_data = Flash::render("form_data");
-							if(is_array($form_errors)){
-
-							?>
-
-							<div class="alert alert-danger"><!--- alert alert-danger Starts --->
-
-							<ul class="list-unstyled mb-0">
-							<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-							<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
-							<?php } ?>
-							</ul>
-
-							</div><!--- alert alert-danger Ends --->
-							<?php } ?>
-							<form action="" method="POST">
-								<div class="form-group">
-									<label class="control-label">Username</label>
-									<input class="form-control" type="text" placeholder="Enter Username"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>" required=""/>
-								</div>
-								<div class="form-group">
-									<label class="control-label">Password</label>
-									<input class="form-control" type="password" name="seller_pass" placeholder="Enter Password" required=""/>
-								</div>
-								<div class="form-group d-flex flex-row align-items-center justify-content-between">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1">
-										<label class="custom-control-label" for="customCheck1">Remember me</label>
-									</div>
-									<a class="fogot-password" href="javascript:void(0);">Forgot password?</a>
-								</div>
-								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="login">Sign in</button>
-								</div>
-								<div class="form-group">
-									<p class="text-center">By clicking Log In, Facebook or LinkedIn<br />you agree to our new <a href="javascript:void(0);">T&C's</a></p>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
-	<!-- Main content end -->
 
 <!-- <div class="container mt-5">
 
@@ -365,9 +192,128 @@ if(isset($_SESSION['seller_user_name'])){
 	</div>
 
 </div> -->
+
+<!-- Main content -->
+<main>
+	<section class="container-fluid login-signup">
+		<div class="row">
+			<div class="container">
+				<div class="login-signup-wrapper login-wrapper">
+					<div class="login-signup-header">
+						<h3 class="text-center">Welcome Back, Sign-In to your Account</h3>
+						<p class="text-center">Don't have an account? <a href="register.php">Sign Up</a></p>
+					</div>
+					<?php if($enable_social_login == "yes"){ ?>
+					<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
+						<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location='<?php echo $fLoginURL ?>';">
+							<span>
+								<i class="fab fa-facebook-f"></i>
+							</span>
+							<span>Login with Facebook</span>
+						</a>
+						<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
+							<span>
+								<i class="fab fa-linkedin-in"></i>
+							</span>
+							<span>Login with Linkedin</span>
+						</a>
+						<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $gLoginURL ?>';">
+							<span>
+								<i class="fab fa-google"></i>
+							</span>
+							<span>Login with Google</span>
+						</a>
+					</div>
+				<?php } ?>
+					<div class="login-with-credentials">
+						<?php 
+
+						$form_errors = Flash::render("login2_errors");
+						$form_data = Flash::render("form_data");
+						if(is_array($form_errors)){
+
+						?>
+
+						<div class="alert alert-danger"><!--- alert alert-danger Starts --->
+
+						<ul class="list-unstyled mb-0">
+						<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+						<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
+						<?php } ?>
+						</ul>
+
+						</div><!--- alert alert-danger Ends --->
+						<?php } ?>
+						<form action="" method="POST">
+							<div class="form-group">
+								<label class="control-label">Username</label>
+								<input class="form-control" type="text" placeholder="Enter Username"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>" required=""/>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Password</label>
+								<input class="form-control" type="password" name="seller_pass" placeholder="Enter Password" required=""/>
+							</div>
+							<div class="form-group d-flex flex-row align-items-center justify-content-between">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1">
+									<label class="custom-control-label" for="customCheck1">Remember me</label>
+								</div>
+								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">Forgot password?</a>
+							</div>
+							<div class="form-group">
+								<button class="login-button" role="button" type="submit" name="login">Sign in</button>
+							</div>
+							<div class="form-group">
+								<p class="text-center">By clicking Log In, Facebook or LinkedIn<br />you agree to our new <a href="javascript:void(0);">T&C's</a></p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+<!-- Forgot password starts -->
+<div class="modal fade login" id="forgot-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- Modal header starts -->
+        <i class="fa fa-meh-o fa-log"></i>
+        <h5 class="modal-title"> <?= $lang['modals']['forgot']['title']; ?> </h5>
+        <button type="button" class="close" data-dismiss="modal">
+        <span>&times;</span>
+        </button>
+      </div>
+      <!-- Modal header ends -->
+      <div class="modal-body">
+        <!-- Modal body starts -->
+        <p class="text-muted text-center mb-2">
+          <?= $lang['modals']['forgot']['desc']; ?>
+        </p>
+        <form action="" method="post">
+          <div class="form-group">
+            <input type="text" name="forgot_email" class="form-control" placeholder="Enter Email" required>
+          </div>
+          <input type="submit" class="btn btn-success btn-block" value="submit" name="forgot">
+          <p class="text-muted text-center mt-4">
+            <?= $lang['modals']['forgot']['not_member_yer']; ?>
+            <a href="register.php"class="text-success">Join Now.</a>
+          </p>
+        </form>
+      </div>
+      <!-- Modal body ends -->
+    </div>
+  </div>
+</div>
+
+<!-- Forgot password ends -->
+
+<!-- Main content end -->
+
 <?php 
 	if(isset($_POST['login'])){
-		
+	
 		$rules = array(
 		"seller_user_name" => "required",
 		"seller_pass" => "required"
@@ -426,11 +372,30 @@ if(isset($_SESSION['seller_user_name'])){
 					</script>";
 				}else{
 					$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+			
 					if($select_seller){
 				    $_SESSION['seller_user_name'] = $seller_user_name;
 				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
 							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 				      $seller_user_name = ucfirst(strtolower($seller_user_name));
+				      if($row_seller->account_type == 'buyer'){
+
+             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
+             
+		          echo "
+		          <script>
+		                swal({
+		                type: 'success',
+		                text: 'Hey $seller_user_name, welcome back!',
+		                timer: 2000,
+		                onOpen: function(){
+		                  swal.showLoading()
+		                }
+		                }).then(function(){
+		                  window.open('$url','_self')
+		              });
+		          </script>";
+				      }else{
 							$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		          echo "
 		          <script>
@@ -446,6 +411,7 @@ if(isset($_SESSION['seller_user_name'])){
 		              });
 		          </script>";
 		        }
+		        }
 					}
 				}
 		  }
@@ -453,6 +419,163 @@ if(isset($_SESSION['seller_user_name'])){
 		}
 		
 	}
+
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\SMTP;
+	use PHPMailer\PHPMailer\Exception;
+
+	require_once("$dir/functions/email.php");
+
+	$get_general_settings = $db->select("general_settings");   
+	$row_general_settings = $get_general_settings->fetch();
+	$site_email_address = $row_general_settings->site_email_address;
+	$site_logo = $row_general_settings->site_logo;
+	$site_name = $row_general_settings->site_name;
+	$signup_email = $row_general_settings->signup_email;
+	$referral_money = $row_general_settings->referral_money;
+
+
+	if(isset($_POST['forgot'])){
+	
+	$forgot_email = $input->post('forgot_email');
+	
+	$select_seller_email = $db->select("sellers",array("seller_email" => $forgot_email));
+		
+	$count_seller_email = $select_seller_email->rowCount();
+	
+	if($count_seller_email == 0){
+		echo "
+		<script>
+		swal({
+		type: 'warning',
+		text: 'Hmm! We don\'t seem to have this email in our system.',
+		})
+		</script>";
+	}else{
+		$row_seller_email = $select_seller_email->fetch();
+		$seller_user_name = $row_seller_email->seller_user_name;
+		$seller_pass = $row_seller_email->seller_pass;
+		require "$dir/mailer/PHPMailerAutoload.php";
+
+		$mail = new PHPMailer(true);
+  	try{
+			if($enable_smtp == "yes"){
+			$mail->isSMTP();
+			$mail->Host = $s_host;
+			$mail->Port = $s_port;
+			$mail->SMTPAuth = true;
+			$mail->SMTPSecure = $s_secure;
+			$mail->Username = $s_username;
+			$mail->Password = $s_password;
+			}
+			$mail->setFrom($site_email_address,$site_name);
+			$mail->addAddress($forgot_email);
+			$mail->addReplyTo($site_email_address,$site_name);
+			$mail->isHTML(true);
+			$mail->Subject = "$site_name: Password Reset";
+			$mail->Body = "
+			<html>
+			<head>
+			<style>
+	    .container {
+			background: rgb(238, 238, 238);
+			padding: 80px;
+			}
+			.box {
+			background: #fff;
+			margin: 0px 0px 30px;
+			padding: 8px 20px 20px 20px;
+			border:1px solid #e6e6e6;
+			box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
+			}
+			h2{
+			margin-top: 0px;
+			margin-bottom: 0px;
+			}
+			.lead {
+			margin-top: 10px;
+			margin-bottom: 0px;
+			font-size:16px;
+			}
+			.btn{
+			background:green;
+			margin-top:20px;
+			color:white !important;
+			text-decoration:none;
+			padding:10px 16px;
+			font-size:18px;
+			border-radius:3px;
+			}
+			hr{
+			margin-top:20px;
+			margin-bottom:20px;
+			border:1px solid #eee;
+			}
+			@media only screen and (max-device-width: 690px) {
+				.container {
+				background: rgb(238, 238, 238);
+				width:100%;
+				padding:1px;
+				}
+				.btn{
+				background:green;
+				margin-top:15px;
+				color:white !important;
+				text-decoration:none;
+				padding:10px;
+				font-size:14px;
+				border-radius:3px;
+				}
+				.lead {
+				font-size:14px;
+				}
+			}
+			</style>
+			</head>
+			<body>
+			<div class='container'>
+			<div class='box'>
+			<center>
+			<img class='logo' src='$site_url/images/$site_logo' width='100' >
+			<h2> Dear $seller_user_name </h2>
+			<p class='lead'> Are You Ready To Change Your Password. </p>
+			<br>
+			<a href='$site_url/change_password?code=$seller_pass".""."&username=$seller_user_name' class='btn'>
+			 Click Here To Change Your Password
+			</a>
+			<hr>
+			<p class='lead'>
+			If clicking the button above does not work, copy and paste the following url in a new browser window: $site_url/change_password?code=$seller_pass".""."&username=$seller_user_name
+			</p>
+			</center>
+			</div>
+			</div>
+			</body>
+			</html>
+			";
+	    $mail->send();
+			echo "
+	    <script>
+	      swal({
+	      type: 'success',
+	      text: 'An email has been sent to your email address with instructions on how to change your password.',
+	      });
+	    </script>
+			";
+	  }catch(Exception $e){
+	    echo "
+	    <script>
+	      swal({
+	      type: 'success',
+	      text: 'An email has been sent to your email address with instructions on how to change your password.',
+	      });
+	    </script>
+			";
+		}
+		
+	}
+	
+}
  ?>
     
 <?php
@@ -542,6 +665,7 @@ if(isset($_SESSION['seller_user_name'])){
 			if($select_seller){
 				$update_seller = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 				$_SESSION['sessionStart'] = $seller_user_name;
+				
 				echo "
 				<script>
 				swal({

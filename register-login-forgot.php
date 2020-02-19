@@ -229,6 +229,9 @@ if(isset($_POST['login'])){
 						$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 			      $seller_user_name = ucfirst(strtolower($seller_user_name));
 						$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+						
+
 	          echo "
 	          <script>
 	                swal({

@@ -81,13 +81,13 @@ $referral_money = $row_general_settings->referral_money;
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
 </head>
 
 <body class="home-content">
 
 
-<?php //require_once("includes/header.php"); ?>
+<?php require_once("includes/header-top.php"); ?>
 	<!-- Preloader Start -->
 	<div class="proloader">
 		<div class="loader">
@@ -95,103 +95,6 @@ $referral_money = $row_general_settings->referral_money;
 		</div>
 	</div>
 	<!-- Preloader End -->
-	<!-- Header -->
-	<header>
-		<div class="header-top">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-6 col-md-3 d-flex flex-row">
-						<div class="logo">
-							<a class="home-logo" href="index.html"><img src="assets/img/signin-logo.png" alt=""></a>
-						</div>
-					</div>
-					<div class="col-6 col-md-9">
-						<div class="header-right d-flex align-items-center justify-content-end">
-							<div class="menu-inner">
-								<ul>
-                  <li><a href="javascript:void(0);">نشر طلب</a></li>
-                  <li><a href="javascript:void(0);">كيف تعمل</a></li>
-                </ul>
-							</div>
-							<div class="language-inner">
-                <select name="" id="" onChange="window.location.href=this.value">
-                  <option value="<?= $site_url?>">EN</option>
-                  <option value="" selected="">AR</option>
-                </select>
-              </div>
-							<div class="usd-inner">
-								<select name="" id="">
-									<option value="">USD</option>
-									<option value="">EGP</option>
-								</select>
-							</div>
-							<div class="Login-button">
-                <a href="login.php">تسجيل الدخول</a>
-                <a href="register.php">نضم الان</a>
-              </div>
-							<div class="menubar d-lg-none">
-								<div class="d-flex flex-row align-items-center">
-									<div class="image">
-										<img src="assets/img/menu-left-logo.png" alt="">
-									</div>
-									<div class="icon">
-										<span></span>
-										<span></span>
-										<span></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header END-->
-
-	<!-- Offcanvas-menu -->
-	<div class="ofcanvas-menu pre-login">
-		<div class="close-icon">
-			<i class="fal fa-times"></i>
-		</div>
-		<div class="canvs-menu">
-			<ul class="d-flex flex-column">
-				<li>
-          <a href="javascript:void(0);">نشر طلب</a>
-        </li>
-        <li>
-          <a href="javascript:void(0);">كيف تعمل</a>
-        </li>
-				<li class="d-flex flex-row">
-					<div class="menu-action">
-            <select name="" id="" onChange="window.location.href=this.value">
-              <option value="<?= $site_url?>">EN</option>
-              <option value="" selected="">AR</option>
-            </select>
-					</div>
-					<div class="menu-action">
-						<select name="" id="">
-							<option value="">USD</option>
-							<option value="">EGP</option>
-						</select>
-					</div>
-				</li>
-				<li class="mb-20">
-          <a class="button login-button" href="login.php">
-            الدخول
-          </a>
-        </li>
-        <li>
-          <a class="button join-button" href="register.php">
-            انضم دلوقتي
-          </a>
-        </li>
-			</ul>
-		</div>
-	</div>
-	<!-- Close-overlay -->
-	<div class="overlay-bg"></div>
-	<!-- Offcanvas-menu END-->
 	<!-- Main content -->
 	<main>
 		<section class="container-fluid login-signup">
@@ -204,7 +107,7 @@ $referral_money = $row_general_settings->referral_money;
 						</div>
 						<?php if($enable_social_login == "yes"){ ?>
 						<div class="login-by-social d-flex flex-column flex-lg-row align-items-center justify-content-center">
-							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);">
+							<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?= $fLoginURL ?>';">
 								<span>
 									<i class="fab fa-facebook-f"></i>
 								</span>
@@ -216,7 +119,7 @@ $referral_money = $row_general_settings->referral_money;
 								</span>
 								<span>التسجيل عن طريقlinkedin</span>
 							</a>
-							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);">
+							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?= $gLoginURL ?>';">
 								<span>
 									<i class="fab fa-google"></i>
 								</span>
@@ -320,157 +223,7 @@ $referral_money = $row_general_settings->referral_money;
 	</main>
 	<!-- Main content end -->
 
-
-<?php
-if(isset($_POST['register'])){
-	
-	$rules = array(
-	"name" => "required",
-	"u_name" => "required",
-	"email" => "email|required",
-	"pass" => "required",
-	"con_pass" => "required",
-	"accountType" => "required");
-
-	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account Tyoe Is Required.");
-	$val = new Validator($_POST,$rules,$messages);
-
-	if($val->run() == false){
-		$_SESSION['error_array'] = array();
-		Flash::add("register_errors",$val->get_all_errors());
-		Flash::add("form_data",$_POST);
-		echo "<script>window.open('index','_self')</script>";
-	}else{
-		$error_array = array();
-		$name = strip_tags($input->post('name'));
-		$name = strip_tags($name);
-		$name = ucfirst(strtolower($name));
-		$_SESSION['name']= $name;
-		$u_name = strip_tags($input->post('u_name'));
-		$u_name = strip_tags($u_name);
-		$_SESSION['u_name']= $u_name;
-		$email = strip_tags($input->post('email'));
-		$email = strip_tags($email);
-		$_SESSION['email']=$email;
-		$pass = strip_tags($input->post('pass'));
-		$con_pass = strip_tags($input->post('con_pass'));
-		$accountType = strip_tags($input->post('accountType'));
-		$referral = strip_tags($input->post('referral'));
-		// $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
-		// $country = $xml->geoplugin_countryName;
-		$country = '';
-		$regsiter_date = date("F d, Y");
-		$date = date("F d, Y");
-
-	
-		$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
-		$check_seller_email = $db->count("sellers",array("seller_email" => $email));
-		if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-		  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
-		}
-		if($check_seller_username > 0 ){
-		  array_push($error_array, "Opps! This username has already been taken. Please try another one");
-		}
-		if($check_seller_email > 0){
-		  array_push($error_array, "Email has already been taken. Try logging in instead.");
-		}
-		if($pass != $con_pass){
-      array_push($error_array, "Passwords don't match. Please try again.");
-		}
-    
-		if(empty($error_array)){
-
-			$referral_code = mt_rand();
-
-			if($signup_email == "yes"){
-				$verification_code = mt_rand();
-			}else{
-				$verification_code = "ok";
-			}
-
-			$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
-			
-			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
-					
-			$regsiter_seller_id = $db->lastInsertId();
-			if($insert_seller){
-				
-		    $_SESSION['seller_user_name'] = $u_name;
-				$insert_seller_account = $db->insert("seller_accounts",array("seller_id" => $regsiter_seller_id));
-
-				if($insert_seller_account){
-
-					if(!empty($referral)){
-				    $sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
-						$row_seller = $sel_seller->fetch();
-						$seller_id = $row_seller->seller_id;	
-						$seller_ip = $row_seller->seller_ip;
-						if($seller_ip == $ip){
-							echo "<script>alert('You Cannot Referral Yourself To Make Money.');</script>";
-						}else{
-							$count_referrals = $db->count("referrals",array("ip" => $ip));	
-							if($count_referrals == 1){
-						    echo "<script>alert('You are trying to referral yourself more then one time.');</script>";
-							}else{
-								$insert_referral = $db->insert("referrals",array("seller_id" => $seller_id,"referred_id" => $regsiter_seller_id,"comission" => $referral_money,"date" => $date,"ip" => $ip,"status" => 'pending'));
-							}
-						}	
-					}
-
-					if($signup_email == "yes"){
-						userSignupEmail($email);
-				  }
-
-					echo "
-					<script>
-					swal({
-					type: 'success',
-					text: 'Successfully Registered! Welcome onboard, $name. ',
-					timer: 6000,
-					onOpen: function(){
-					swal.showLoading()
-					}
-					}).then(function(){
-					if (
-					// Read more about handling dismissals
-					window.open('$site_url','_self')
-					) {
-					console.log('Successful Registration')
-					}
-					})
-					</script>
-					";
-					$_SESSION['name'] = "";
-					$_SESSION['u_name']="";
-					$_SESSION['email']= "";
-					$_SESSION['error_array'] = array();
-						
-				}
-					
-			}
-					
-		}
-			
-		if(!empty($error_array)){
-			$_SESSION['error_array'] = $error_array;
-			echo "
-			<script>
-			swal({
-			type: 'warning',
-			html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
-			animation: false,
-			customClass: 'animated tada'
-			}).then(function(){
-			window.open('index','_self')
-			});
-			</script>";
-		}
-
-	}
-	
-}
-    
-?>
+<?php require_once('register-login-forgot.php'); ?>
 
 <?php require_once("includes/footer.php"); ?>
 <?php require_once("includes/footerJs.php"); ?>
