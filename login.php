@@ -102,7 +102,7 @@ if(isset($_SESSION['seller_user_name'])){
 							<div class="language-inner">
 								<select name="" id="" onChange="window.location.href=this.value">
                   <option value="" selected="">EN</option>
-                  <option value="<?= $site_url?>/Arabic/">AR</option>
+                  <option value="<?= $site_url?>/ar/">AR</option>
                 </select>
 							</div>
 							<div class="usd-inner">
@@ -112,8 +112,8 @@ if(isset($_SESSION['seller_user_name'])){
 								</select>
 							</div>
 							<div class="Login-button d-none d-lg-flex">
-								<a href="javascript:void(0);">Login</a>
-								<a href="javascript:void(0);">Join Now</a>
+								<a href="login.php">Login</a>
+								<a href="register.php">Join Now</a>
 							</div>
 							<div class="menubar d-lg-none">
 								<div class="d-flex flex-row align-items-center">
@@ -152,7 +152,7 @@ if(isset($_SESSION['seller_user_name'])){
 					<div class="menu-action">
 						<select name="" id="" onChange="window.location.href=this.value">
               <option value="" selected="">EN</option>
-              <option value="<?= $site_url?>/Arabic/">AR</option>
+              <option value="<?= $site_url?>/ar/">AR</option>
             </select>
 					</div>
 					<div class="menu-action">
@@ -163,10 +163,10 @@ if(isset($_SESSION['seller_user_name'])){
 					</div>
 				</li>
 				<li class="mb-20">
-					<a class="button login-button" href="javascript:void(0);">Login</a>
+					<a class="button login-button" href="login.php">Login</a>
 				</li>
 				<li>
-					<a class="button join-button" href="javascript:void(0);">Join Now</a>
+					<a class="button join-button" href="register.php">Join Now</a>
 				</li>
 			</ul>
 		</div>
@@ -182,7 +182,7 @@ if(isset($_SESSION['seller_user_name'])){
 					<div class="login-signup-wrapper login-wrapper">
 						<div class="login-signup-header">
 							<h3 class="text-center">Welcome Back, Sign-In to your Account</h3>
-							<p class="text-center">Don't have an account? <a href="javascript:void(0);">Sign Up</a></p>
+							<p class="text-center">Don't have an account? <a href="register.php">Sign Up</a></p>
 						</div>
 						<?php if($enable_social_login == "yes"){ ?>
 						<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
