@@ -380,7 +380,7 @@ if(isset($_SESSION['seller_user_name'])){
 				      $seller_user_name = ucfirst(strtolower($seller_user_name));
 				      if($row_seller->account_type == 'buyer'){
 
-             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
+             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/demos/gigtodo/buyer";
              
 		          echo "
 		          <script>

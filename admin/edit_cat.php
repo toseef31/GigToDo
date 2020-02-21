@@ -207,7 +207,7 @@ echo "checked='checked'";
 
 <?php if(!empty($c_image)){ ?>
 
-<img src="../cat_images/<?php echo $c_image; ?>" width="70" height="55">
+<img src="../assets/img/category/<?php echo $c_image; ?>" width="70" height="55">
 
 <?php }else{ ?>
 
@@ -232,7 +232,7 @@ echo "checked='checked'";
 
 <?php if(!empty($c_icon)){ ?>
 
-<img src="../cat_icons/<?php echo $c_icon; ?>" width="70" height="55">
+<img src="../assets/img/category/<?php echo $c_icon; ?>" width="70" height="55">
 
 <?php }else{ ?>
 
