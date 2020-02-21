@@ -91,7 +91,7 @@ $slide_image = $row_slides->slide_image;
           </div>
           <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
             <div class="content text-center">
-              <h6 class="sub-title"><a href="<?= $card_link ?>"><?= $arabic_title; ?></a></h6>
+              <h6 class="sub-title"><a href="categories/<?= $cat_url ?>"><?= $arabic_title; ?></a></h6>
               <p><?= $arabic_desc; ?> </p>
             </div>
           </div>

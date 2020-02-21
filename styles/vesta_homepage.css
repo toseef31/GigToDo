@@ -23,7 +23,7 @@
 }
 
 .cat-nav .top-nav-item.active {
-    border-bottom: 3px solid #28a745;
+    border-bottom: 3px solid #ff0000;
 }
 
 .cat-nav .top-nav-item.main {

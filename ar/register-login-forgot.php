@@ -230,6 +230,7 @@ if(isset($_POST['login'])){
 				      if($row_seller->account_type == 'buyer'){
 
              $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/demos/gigtodo/ar/buyer";
+
              
 		          echo "
 		          <script>

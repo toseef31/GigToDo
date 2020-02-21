@@ -355,7 +355,7 @@ border-radius: 0px 3px 3px 0px;
 
 .search-bar-panel {
     position: absolute;
-    top: 72%;
+    top: 100%;
     /*margin-top: 58px;*/
     z-index: 99;
     width: 100%;

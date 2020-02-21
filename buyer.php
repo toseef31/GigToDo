@@ -1,12 +1,28 @@
 <?php
-  session_start();
+  session_start([
+    'cookie_lifetime' => 86400,
+  ]);
+  if(!isset($_SESSION['seller_user_name'])){
+  echo "<script>window.open('login','_self')</script>";
+  }
   require_once("includes/db.php");
   require_once("social-config.php");
+
+  $login_seller_user_name = $_SESSION['seller_user_name'];
+  $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+  $row_login_seller = $select_login_seller->fetch();
+  $login_seller_id = $row_login_seller->seller_id;
+  $login_seller_name = $row_login_seller->seller_name;
+  $login_user_name = $row_login_seller->seller_user_name;
+  $login_seller_offers = $row_login_seller->seller_offers;
+  $relevant_requests = $row_general_settings->relevant_requests;
+
+  //print_r($row_login_seller);
   ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
   <head>
-    <title> <?php echo $site_name; ?> - <?php echo $lang['titles']['how_it_works']; ?> </title>
+    <title> <?php echo $site_name; ?> - Buyer </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +30,7 @@
     <meta name="keywords" content="<?php echo $site_keywords; ?>">
     <meta name="author" content="<?php echo $site_author; ?>">
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/png">
+    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
     <!-- ==============Google Fonts============= -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <!--====== Bootstrap css ======-->
@@ -37,13 +53,24 @@
     <link href="assets/css/responsive.css" rel="stylesheet">
     <link href="styles/sweat_alert.css" rel="stylesheet">
     <link href="styles/animate.css" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/categories_nav_styles.css" rel="stylesheet">
+    <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="styles/owl.carousel.css" rel="stylesheet">
+    <link href="styles/owl.theme.default.css" rel="stylesheet">
+    <link href="styles/sweat_alert.css" rel="stylesheet">
+    <link href="styles/animate.css" rel="stylesheet">  
     <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
     <script src="js/ie.js"></script>
     <script type="text/javascript" src="js/sweat_alert.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
+    
+    <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
+    <link href="<?= $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
+    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.cat-nav .top-nav-item{margin-top: 0;}.header-menu .mainmenu ul li a{padding: 18px 0;}.cat-nav .top-nav-item.active {border-bottom: 3px solid #ff0000;}</style>
   </head>
-  <body class="all-content" data-spy="scroll" data-target=".howitwork-cat-menu" data-offset="110">
+  <body class="all-content">
     <!-- Preloader Start -->
   <div class="proloader">
     <div class="loader">
@@ -60,8 +87,12 @@
           <div class="col-12 col-lg-4">
             <div class="user-profile mt-40">
               <div class="user-image">
-                <img src="assets/img/user1.png" alt="">
-                <h5>Welcome back, <span>Morad11214</span></h5>
+                <?php if(!empty($seller_image)){ ?>
+                <img src="user_images/<?= $seller_image; ?>" alt="">
+                <?php }else{ ?>
+                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+                <?php } ?>
+                <h5><?= $lang['welcome']; ?> back, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h5>
               </div>
               <div class="setup-accunt-progressbar">
                 <p>Set up your account</p>
@@ -69,7 +100,7 @@
                   <div class="progress-bar" role="progressbar" style="width: 19%;" aria-valuenow="19" aria-valuemin="0" aria-valuemax="100">19%</div>
                 </div>
               </div>
-              <a href="javascript:void(0);" class="request-btn">Post a request</a>
+              <a href="requests/post-request.php" class="request-btn">Post a request</a>
             </div>
           </div>
           <div class="col-12 col-lg-8">
@@ -887,5 +918,6 @@
       </div>
     </div>
     <?php require_once("includes/footer.php"); ?>
+    <?php require_once("includes/footerJs.php"); ?>
   </body>
 </html>

@@ -18,14 +18,19 @@ if(isset($_GET['edit_child_cat'])){
     }
         
     $row_edit = $edit_child_cat->fetch();
+    
     $child_id = $row_edit->child_id;
     $child_parent_id = $row_edit->child_parent_id;
+    $child_image = $row_edit->child_image;
+
     $video = $row_edit->video;
 
     $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id,"language_id" => $adminLanguage));
     $row_meta = $get_meta->fetch();
     $child_title = $row_meta->child_title;
     $child_desc = $row_meta->child_desc;
+    $child_arabic_title = $row_meta->child_arabic_title;
+    $child_arabic_desc = $row_meta->child_arabic_desc;
 
 
     $get_meta = $db->select("cats_meta",array("cat_id" => $child_parent_id, "language_id" => $adminLanguage));
@@ -96,7 +101,7 @@ if(isset($_GET['edit_child_cat'])){
                 <div class="card-body">
                     <!--- card-body Starts --->
 
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <!--- form Starts --->
 
                         <div class="form-group row">
@@ -113,6 +118,20 @@ if(isset($_GET['edit_child_cat'])){
                         </div>
                         <!--- form-group row Ends --->
 
+                        <div class="form-group row">
+                            <!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Sub Category Arabic Title : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="text" name="child_arabic_title" class="form-control" required value="<?php echo $child_arabic_title; ?>">
+
+                            </div>
+
+                        </div>
+                        <!--- form-group row Ends --->
+
 
                         <div class="form-group row"><!--- form-group row Starts --->
 
@@ -121,6 +140,44 @@ if(isset($_GET['edit_child_cat'])){
                             <div class="col-md-6">
 
                                 <textarea name="child_desc" class="form-control" required><?php echo $child_desc; ?></textarea>
+
+                            </div>
+
+                        </div><!--- form-group row Ends --->
+
+
+                        <div class="form-group row"><!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Sub Category Arabic Description : </label>
+
+                            <div class="col-md-6">
+
+                                <textarea name="child_arabic_desc" class="form-control" required><?php echo $child_arabic_desc; ?></textarea>
+
+                            </div>
+
+                        </div><!--- form-group row Ends --->
+
+
+                        <div class="form-group row"><!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Sub Category Image : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="file" name="child_image" class="form-control">
+
+                                <br>
+
+                                <?php if(!empty($child_image)){ ?>
+
+                                <img src="../assets/img/subcategories/<?php echo $child_image; ?>" width="70" height="55">
+
+                                <?php }else{ ?>
+
+                                <img src="../cat_images/empty-image.jpg" width="70" height="55">
+
+                                <?php } ?>
 
                             </div>
 
@@ -200,7 +257,7 @@ if(isset($_GET['edit_child_cat'])){
 <?php
 
 if(isset($_POST['update_child_cat'])){
-
+    
     $rules = array(
     "child_title" => "required",
     "child_desc" => "required",
@@ -221,28 +278,46 @@ if(isset($_POST['update_child_cat'])){
         $child_title = $input->post('child_title');
         $child_desc = $input->post('child_desc');
         $parent_cat = $input->post('parent_cat');
+        $child_arabic_title = $input->post('child_arabic_title');
+        $child_arabic_desc = $input->post('child_arabic_desc');
+        $child_image = $_FILES['child_image']['name'];
+        $tmp_child_image = $_FILES['child_image']['tmp_name'];
+
+        $allowed = array('jpeg','jpg','gif','png','tif','ico','webp');
+          
+        $file_extension = pathinfo($child_image, PATHINFO_EXTENSION);
         
-        if($videoPlugin == 1){
-            $video = $input->post('video');
-            if(empty($video)){
-              $video = 0;
-            }
-            $update_child_cat = $db->update("categories_children",["child_parent_id" => $parent_cat,"video" => $video],["child_id" => $child_id]);
+
+        if(!in_array($file_extension,$allowed) & !empty($child_image)){
+          
+          echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+          
         }else{
-            $update_child_cat = $db->update("categories_children",["child_parent_id" => $parent_cat],["child_id" => $child_id]);
-        }
-        		
-        if($update_child_cat){
+          move_uploaded_file($tmp_child_image,"../assets/img/subcategories/$child_image");
 
-            $update_meta = $db->update("child_cats_meta",["child_title" => $child_title,"child_desc" => $child_desc],["child_id" => $child_id, "language_id" => $adminLanguage]);
+        
+          if($videoPlugin == 1){
+              $video = $input->post('video');
+              if(empty($video)){
+                $video = 0;
+              }
+              $update_child_cat = $db->update("categories_children",["child_parent_id" => $parent_cat,"child_image" => $child_image,"video" => $video],["child_id" => $child_id]);
+          }else{
+              $update_child_cat = $db->update("categories_children",["child_parent_id" => $parent_cat,"child_image" => $child_image],["child_id" => $child_id]);
+          }
+          		
+          if($update_child_cat){
 
-            $update_parent = $db->update("child_cats_meta",array("child_parent_id" => $parent_cat),array("child_id" => $child_id));
+              $update_meta = $db->update("child_cats_meta",["child_title" => $child_title,"child_desc" => $child_desc,"child_arabic_title" => $child_arabic_title,"child_arabic_desc" => $child_arabic_desc],["child_id" => $child_id, "language_id" => $adminLanguage]);
 
-            $insert_log = $db->insert_log($admin_id,"child_cat",$edit_id,"updated");
+              $update_parent = $db->update("child_cats_meta",array("child_parent_id" => $parent_cat),array("child_id" => $child_id));
 
-            echo "<script>alert('One Sub Category Has Been Updated.');</script>";
-            echo "<script>window.open('index?view_child_cats','_self');</script>";
+              $insert_log = $db->insert_log($admin_id,"child_cat",$edit_id,"updated");
 
+              echo "<script>alert('One Sub Category Has Been Updated.');</script>";
+              echo "<script>window.open('index?view_child_cats','_self');</script>";
+
+          }
         }
 
     }
