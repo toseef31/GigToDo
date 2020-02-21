@@ -61,7 +61,7 @@ $site_title = $row_general_settings->site_title;
 	<?php if(!empty($site_favicon)){ ?>
 	<!-- <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon" /> -->
 	<!--====== Favicon Icon ======-->
-	<link rel="shortcut icon" href="<?php echo $site_url; ?>/assets/img/favicon.ico" type="image/png">
+	<link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
 	<?php } ?>
 	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 	<script src="js/ie.js"></script>

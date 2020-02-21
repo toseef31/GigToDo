@@ -69,7 +69,7 @@ echo "<script>window.open('login','_self');</script>";
                 <div class="card-body">
                     <!--- card-body Starts --->
 
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <!--- form Starts --->
 
 
@@ -91,11 +91,56 @@ echo "<script>window.open('login','_self');</script>";
                         <div class="form-group row">
                             <!--- form-group row Starts --->
 
+                            <label class="col-md-4 control-label"> Sub Category Arabic Title : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="text" name="child_arabic_title" class="form-control" required="">
+
+                            </div>
+
+                        </div>
+                        <!--- form-group row Ends --->
+
+
+                        <div class="form-group row">
+                            <!--- form-group row Starts --->
+
                             <label class="col-md-4 control-label"> Sub Category Description : </label>
 
                             <div class="col-md-6">
 
                                 <textarea name="child_desc" class="form-control" required=""></textarea>
+
+                            </div>
+
+                        </div>
+                        <!--- form-group row Ends --->
+
+
+                        <div class="form-group row">
+                            <!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Sub Category Arabic Description : </label>
+
+                            <div class="col-md-6">
+
+                                <textarea name="child_arabic_desc" class="form-control" required=""></textarea>
+
+                            </div>
+
+                        </div>
+                        <!--- form-group row Ends --->
+
+
+                        <div class="form-group row">
+                            <!--- form-group row Starts --->
+
+                            <label class="col-md-4 control-label"> Sub Category Image : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="file" name="child_image" class="form-control">
 
                             </div>
 
@@ -225,35 +270,49 @@ if(isset($_POST['submit'])){
         $child_title = $input->post('child_title');
         $child_desc = $input->post('child_desc');
         $parent_cat = $input->post('parent_cat');
+        $child_arabic_title = $input->post('child_arabic_title');
+        $child_arabic_desc = $input->post('child_arabic_desc');
 
         $child_url = slug($child_title);
-                	
-        if($videoPlugin == 1){
-            $video = $input->post('video');
-            if(empty($video)){
-              $video = 0;
-            }
-            $insert_child_cat = $db->insert("categories_children",["child_url"=>$child_url,"child_parent_id" => $parent_cat,"video" => $video]);
+        $child_image = $_FILES['child_image']['name'];
+        $tmp_child_image = $_FILES['child_image']['tmp_name'];
+
+        $allowed = array('jpeg','jpg','gif','png','tif','ico','webp');
+        $file_extension = pathinfo($child_image, PATHINFO_EXTENSION);
+        $file_extension = pathinfo($cat_icon, PATHINFO_EXTENSION);
+        if(!in_array($file_extension,$allowed) & !empty($child_image) & !empty($cat_icon)){
+            echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
         }else{
-            $insert_child_cat = $db->insert("categories_children",["child_url"=>$child_url,"child_parent_id" => $parent_cat]);
-        }
-
-        if($insert_child_cat){
-        	
-            $insert_id = $db->lastInsertId();
-
-            $get_languages = $db->select("languages");
-            while($row_languages = $get_languages->fetch()){
-                $id = $row_languages->id;
-                $insert = $db->insert("child_cats_meta",array("child_id" => $insert_id,"language_id" => $adminLanguage));
+            move_uploaded_file($tmp_child_image,"../assets/img/subcategories/$child_image");
+                	
+            if($videoPlugin == 1){
+                $video = $input->post('video');
+                if(empty($video)){
+                  $video = 0;
+                }
+                $insert_child_cat = $db->insert("categories_children",["child_url"=>$child_url,"child_parent_id" => $parent_cat,"child_image"=>$child_image,"video" => $video]);
+            }else{
+                $insert_child_cat = $db->insert("categories_children",["child_url"=>$child_url,"child_parent_id" => $parent_cat,"child_image"=>$child_image]);
             }
 
-            $update_meta = $db->update("child_cats_meta",array("child_title" => $child_title,"child_desc" => $child_desc),array("child_id" => $insert_id, "language_id" => $adminLanguage));
-            $insert_log = $db->insert_log($admin_id,"child_cat",$insert_id,"inserted");
+            if($insert_child_cat){
+            	
+                $insert_id = $db->lastInsertId();
+                //print_r($insert_id); die();
 
-            echo "<script>alert('One Sub Category Has Been Inserted.');</script>";
-            echo "<script>window.open('index?view_child_cats','_self');</script>";
+                $get_languages = $db->select("languages");
+                while($row_languages = $get_languages->fetch()){
+                    $id = $row_languages->id;
+                    $insert = $db->insert("child_cats_meta",array("child_id" => $insert_id,"language_id" => $adminLanguage));
+                }
 
+                $update_meta = $db->update("child_cats_meta",array("child_title" => $child_title,"child_desc" => $child_desc,"child_arabic_title" => $child_arabic_title,"child_arabic_desc" => $child_arabic_desc),array("child_id" => $insert_id, "language_id" => $adminLanguage));
+                $insert_log = $db->insert_log($admin_id,"child_cat",$insert_id,"inserted");
+
+                echo "<script>alert('One Sub Category Has Been Inserted.');</script>";
+                echo "<script>window.open('index?view_child_cats','_self');</script>";
+
+            }
         }
 
     }

@@ -2,10 +2,19 @@
   session_start();
   require_once("../includes/db.php");
   require_once("../functions/functions.php");
+  $seller_user_name = $_SESSION['seller_user_name'];
+  $select_login_seller = $db->select("sellers",array("seller_user_name" => $seller_user_name));
+  $row_login_seller = $select_login_seller->fetch();
+  $login_seller_id = $row_login_seller->seller_id;
+  $login_seller_name = $row_login_seller->seller_name;
+  $login_user_name = $row_login_seller->seller_user_name;
+  
   if(isset($_GET['cat_url'])){
     unset($_SESSION['cat_child_id']);
     $get_cat = $db->select("categories",array('cat_url' => $input->get('cat_url')));
     $cat_id = $get_cat->fetch()->cat_id;
+    $cat_url = $input->get('cat_url');
+
     $_SESSION['cat_id']=$cat_id;
   }
   if(isset($_GET['cat_child_url'])){
@@ -41,12 +50,33 @@
   <title><?php echo $site_name; ?> - <?php echo $child_title; ?></title>
   <meta name="description" content="<?php echo $child_desc; ?>" >
   <?php } ?>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="<?php echo $site_author; ?>">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-  <link href="<?= $site_url; ?>/styles/bootstrap.css" rel="stylesheet">
-  <link href="<?= $site_url; ?>/styles/custom.css" rel="stylesheet">
+  <!--====== Favicon Icon ======-->
+  <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
+  <!-- ==============Google Fonts============= -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <!--====== Bootstrap css ======-->
+  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+  <!-- <link href="<?= $site_url; ?>/styles/bootstrap.css" rel="stylesheet"> -->
+  <!-- <link href="<?= $site_url; ?>/styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
   <link href="<?= $site_url; ?>/styles/styles.css" rel="stylesheet">
   <link href="<?= $site_url; ?>/styles/categories_nav_styles.css" rel="stylesheet">
@@ -59,66 +89,109 @@
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="<?= $site_url; ?>/images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+  <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.cat-nav .top-nav-item{margin-top: 0;}.header-menu .mainmenu ul li a{font-size: 15px;}.cat-nav .top-nav-item.active {border-bottom: 3px solid #ff0000;}.ui-toolkit h1, .ui-toolkit .h1, .ui-toolkit h2, .ui-toolkit .h2, .ui-toolkit h3, .ui-toolkit .h3 {font-weight: 600 !important;}</style>
 </head>
-<body class="bg-white is-responsive">
-<?php require_once("../includes/header.php"); ?>
-<div class="container-fluid mt-5">
-  <!-- Container start -->
-  <div class="row">
-    <div class="col-md-12">
-      <center>
-        <?php
-          if(isset($_SESSION['cat_id'])){
-          $cat_id = $_SESSION['cat_id'];
-          $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
-          $row_meta = $get_meta->fetch();
-          $cat_title = $row_meta->cat_title;
-          $cat_desc = $row_meta->cat_desc;
-          ?>
-        <h1> <?php echo $cat_title; ?> </h1>
-        <p class="lead"><?php echo $cat_desc; ?></p>
-        <?php } ?>
-        <?php
-          if(isset($_SESSION['cat_child_id'])){
-          $cat_child_id = $_SESSION['cat_child_id'];
-          $get_meta = $db->select("child_cats_meta",array("child_id" => $cat_child_id,"language_id" => $siteLanguage));
-          $row_meta = $get_meta->fetch();
-          $child_title = $row_meta->child_title;
-          $child_desc = $row_meta->child_desc;
-          ?>
-        <h1> <?php echo $child_title; ?> </h1>
-        <p class="lead"><?php echo $child_desc; ?></p>
-        <?php } ?>
-      </center>
-      <hr class="mt-5 pt-2">
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col-lg-3 col-md-4 col-sm-12 <?=($lang_dir == "right" ? 'order-2 order-sm-1':'')?>">
-      <?php require_once("../includes/category_sidebar.php"); ?>
-    </div>
-    <div class="col-lg-9 col-md-8 col-sm-12 <?=($lang_dir == "right" ? 'order-1 order-sm-2':'')?>">
-      <div class="row flex-wrap <?=($lang_dir == "right" ? 'justify-content':'')?>" id="category_proposals">
-        <?php get_category_proposals(); ?>
+<body class="all-content">
+  <!-- Preloader Start -->
+  <div class="proloader">
+      <div class="loader">
+          <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
       </div>
-      <div id="wait"></div>
-      <br>
-      <div class="row justify-content-center mb-5 mt-0">
-        <!-- row justify-content-center Starts -->
-        <nav>
-          <!-- nav Starts -->
-          <ul class="pagination" id="category_pagination">
-            <?php get_category_pagination(); ?>
-          </ul>
-        </nav>
-        <!-- nav Ends -->
+  </div>
+  <!-- Preloader End -->
+
+<?php
+  if(isset($_SESSION['seller_user_name'])){
+  require_once("../includes/buyer-header.php");
+ }else{
+  require_once("../includes/header-top.php");
+ }
+?>
+
+<!-- Sub Categories view -->
+<div class="subcategories-page">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-6 text-center">
+        <div class="subcategories-title">
+          <?php
+            if(isset($_SESSION['cat_id'])){
+            $cat_id = $_SESSION['cat_id'];
+            $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+            $row_meta = $get_meta->fetch();
+            $cat_title = $row_meta->cat_title;
+            $cat_desc = $row_meta->cat_desc;
+            ?>
+          <h2><?php echo $cat_title; ?></h2>
+          <p><?php echo $cat_desc; ?></p>
+          <?php } ?>
+          <?php
+            if(isset($_SESSION['cat_child_id'])){
+            $cat_child_id = $_SESSION['cat_child_id'];
+            $get_meta = $db->select("child_cats_meta",array("child_id" => $cat_child_id,"language_id" => $siteLanguage));
+            $row_meta = $get_meta->fetch();
+            $child_title = $row_meta->child_title;
+            $child_desc = $row_meta->child_desc;
+            ?>
+          <h2> <?php echo $child_title; ?> </h2>
+          <p><?php echo $child_desc; ?></p>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4">
+        <div class="graphic-design-text">
+          <h3><?php echo $cat_title; ?></h3>
+          <?php
+            $get_child_cat = $db->select("categories_children",array("child_parent_id" => $cat_id));
+            while($row_child_cat = $get_child_cat->fetch()){
+              $cat_url = $input->get('cat_url');
+              $child_id = $row_child_cat->child_id;
+              $child_url = $row_child_cat->child_url;
+              $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+              $row_meta = $get_meta->fetch();
+              $child_title = $row_meta->child_title;
+              if(!empty($child_title)){
+          ?>
+          <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>"><?php echo $child_title; ?></a>
+          <?php }} ?>
+          
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-8">
+        <div class="row">
+          <?php
+            $get_child_cat = $db->select("categories_children",array("child_parent_id" => $cat_id));
+            while($row_child_cat = $get_child_cat->fetch()){
+              
+              $child_id = $row_child_cat->child_id;
+              $child_url = $row_child_cat->child_url;
+              $child_image = $row_child_cat->child_image;
+              $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+              $row_meta = $get_meta->fetch();
+              $child_title = $row_meta->child_title;
+              if(!empty($child_title)){
+          ?>
+          <div class="col-lg-3 col-md-6 ">
+            <div class="subcategories-item">
+              <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
+                <img src="<?= $site_url; ?>/assets/img/subcategories/<?php echo $child_image; ?>" alt="">
+                <p><?php echo $child_title; ?></p>
+              </a>
+            </div>
+          </div>
+          <?php }} ?>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<!-- End Sub Categories view -->
 <!-- Container ends -->
 <div class="append-modal"></div>
 <?php require_once("../includes/footer.php"); ?>
+<?php require_once("../includes/footerJs.php"); ?>
 <script>
   function get_category_proposals(){
   

@@ -2,6 +2,15 @@
   session_start();
   require_once("includes/db.php");
   require_once("social-config.php");
+
+  $login_seller_user_name = $_SESSION['seller_user_name'];
+  $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+  $row_login_seller = $select_login_seller->fetch();
+  $login_seller_id = $row_login_seller->seller_id;
+  $login_seller_name = $row_login_seller->seller_name;
+  $login_user_name = $row_login_seller->seller_user_name;
+  $login_seller_offers = $row_login_seller->seller_offers;
+  $relevant_requests = $row_general_settings->relevant_requests;
   ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -59,8 +68,12 @@
           <div class="col-12 col-lg-4">
             <div class="user-profile mt-40">
               <div class="user-image">
-                <img src="assets/img/user1.png" alt="">
-                <h5>أهلا بيك من تاني, <span>Morad11214</span></h5>
+                <?php if(!empty($seller_image)){ ?>
+                <img src="user_images/<?= $seller_image; ?>" alt="">
+                <?php }else{ ?>
+                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+                <?php } ?>
+                <h5>أهلا بيك من تاني, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h5>
               </div>
               <div class="setup-accunt-progressbar">
                 <p>أسس حسابك</p>

@@ -40,7 +40,7 @@ if(isset($_SESSION['seller_user_name'])){
   </script>
 
   <script src="<?= $site_url; ?>/assets/js/jquery.nice-select.min.js"></script>
-
+  <script src="<?= $site_url; ?>/assets/js/tagsinput.js"></script>
   <!--====== Main js ======-->
   <script src="<?= $site_url; ?>/assets/js/main.js"></script>
 <!-- End New Design -->

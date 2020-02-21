@@ -405,7 +405,7 @@ $ip = get_real_user_ip();
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="" selected="">EN</option>
-                  <option value="<?= $site_url?>/Arabic/">AR</option>
+                  <option value="<?= $site_url?>/ar/">AR</option>
                 </select>
               </div>
               <div class="usd-inner">
@@ -453,9 +453,9 @@ $ip = get_real_user_ip();
         </li>
         <li class="d-flex flex-row">
           <div class="menu-action">
-            <select name="" id="">
-              <option value="">EN</option>
-              <option value="">AR</option>
+            <select name="" id="" onChange="window.location.href=this.value">
+              <option value="" selected="">EN</option>
+              <option value="<?= $site_url?>/ar/">AR</option>
             </select>
           </div>
           <div class="menu-action">

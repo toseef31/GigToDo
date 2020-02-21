@@ -52,7 +52,7 @@ $ip = get_real_user_ip();
         <div class="row align-items-center">
           <div class="col-6 col-md-3 d-flex flex-row">
             <div class="logo">
-              <a class="home-logo" href="<?= $site_url?>"><img src="assets/img/signin-logo.png" alt=""></a>
+              <a class="home-logo" href="<?= $site_url?>"><img src="<?= $site_url; ?>/assets/img/signin-logo.png" alt=""></a>
             </div>
           </div>
           <div class="col-6 col-md-9">
@@ -66,7 +66,7 @@ $ip = get_real_user_ip();
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="" selected="">EN</option>
-                  <option value="<?= $site_url?>/Arabic/">AR</option>
+                  <option value="<?= $site_url?>/ar/">AR</option>
                 </select>
               </div>
               <div class="usd-inner">
@@ -76,13 +76,13 @@ $ip = get_real_user_ip();
                 </select>
               </div>
               <div class="Login-button d-none d-lg-flex">
-                <a href="javascript:void(0);">Login</a>
-                <a href="javascript:void(0);">Join Now</a>
+                <a href="<?= $site_url; ?>/login.php">Login</a>
+                <a href="<?= $site_url; ?>/register.php">Join Now</a>
               </div>
               <div class="menubar d-lg-none">
                 <div class="d-flex flex-row align-items-center">
                   <div class="image">
-                    <img src="assets/img/menu-left-logo.png" alt="">
+                    <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png" alt="">
                   </div>
                   <div class="icon">
                     <span></span>
@@ -116,7 +116,7 @@ $ip = get_real_user_ip();
           <div class="menu-action">
             <select name="" id="" onChange="window.location.href=this.value">
               <option value="" selected="">EN</option>
-              <option value="<?= $site_url?>/Arabic/">AR</option>
+              <option value="<?= $site_url?>/ar/">AR</option>
             </select>
           </div>
           <div class="menu-action">

@@ -25,6 +25,8 @@ if(isset($_SESSION['seller_user_name'])){
   $row_general_settings = $get_general_settings->fetch();
   $enable_referrals = $row_general_settings->enable_referrals;
   $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$seller_id,"proposal_status"=>'active'));
+
+  
 }
 
 function get_real_user_ip(){
@@ -50,16 +52,16 @@ $ip = get_real_user_ip();
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo">
-            <a href="index.html"><img src="assets/img/logo.svg" alt=""></a>
+            <a href="<?php echo $site_url; ?>"><img src="<?php echo $site_url; ?>/assets/img/logo.svg" alt=""></a>
           </div>
         </div>
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
-              <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+              <div class="image"><img src="<?= $site_url; ?>/assets/img/menu-left-logo.png" alt=""></div>
               <div class="icon">
                 <span></span>
                 <span></span>
@@ -70,10 +72,21 @@ $ip = get_real_user_ip();
         </div>
         <div class="col-12 col-lg-6 col-xl-4">
           <div class="header-search-box">
-            <form action="" class="d-flex flex-row" method="POST">
-              <input type="text" placeholder="Find Services">
-              <button type="submit">Search</button>
+            <form action="" class="d-flex flex-row" id="gnav-search" method="POST">
+              <input id="search-query" class="rounded" name="search_query"
+                  placeholder="<?php echo $lang['search']['placeholder']; ?>" value="<?php echo @$_SESSION["search_query"]; ?>"  autocomplete="off">
+              <button name="search" type="submit" value="Search">
+                <?php echo $lang['search']['button']; ?>
+                </button>
+                <ul class="search-bar-panel d-none"></ul>
             </form>
+            <?php
+              if (isset($_POST['search'])) {
+                  $search_query = $input->post('search_query');
+                  $_SESSION['search_query'] = $search_query;
+                  echo "<script>window.open('$site_url/search.php','_self')</script>";
+              }
+            ?>
           </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-6 d-none d-lg-block">
@@ -87,7 +100,7 @@ $ip = get_real_user_ip();
             <div class="language-inner">
               <select name="" id="" onChange="window.location.href=this.value">
                 <option value="" selected="">EN</option>
-                <option value="<?= $site_url?>/Arabic/">AR</option>
+                <option value="<?= $site_url?>/ar/">AR</option>
               </select>
             </div>
             <div class="usd-inner">
@@ -97,10 +110,16 @@ $ip = get_real_user_ip();
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
-              <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+              <div class="image">
+                <?php if(!empty($seller_image)){ ?>
+                <img src="user_images/<?= $seller_image; ?>" alt="">
+                <?php }else{ ?>
+                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle" width="40px" height="40px">
+                <?php } ?>
+              </div>
               <div class="icon">
                 <span></span>
                 <span></span>
@@ -135,12 +154,42 @@ $ip = get_real_user_ip();
             <div class="mesagee-item-box">
               <div class="mesagee-single-item">
                 <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
                 </div>
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
               <div class="mesagee-single-item">
@@ -150,37 +199,7 @@ $ip = get_real_user_ip();
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
             </div>
@@ -189,52 +208,52 @@ $ip = get_real_user_ip();
             <div class="mesagee-item-box">
               <div class="mesagee-single-item">
                 <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
                 </div>
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
               <div class="mesagee-single-item">
                 <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
                 </div>
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
               <div class="mesagee-single-item">
                 <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
                 </div>
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
               <div class="mesagee-single-item">
                 <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
                 </div>
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
               <div class="mesagee-single-item">
                 <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/user3.png" alt="">
                 </div>
                 <h5><span>snazzydegreat delivered</span> your order</h5>
                 <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
                 <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
+                  <img src="<?= $site_url; ?>/assets/img/message-img.png" alt="">
                 </div>
               </div>
             </div>
@@ -259,7 +278,8 @@ $ip = get_real_user_ip();
   </div>
   <!-- Header-menu -->
   <div class="header-menu">
-    <div class="container">
+        <?php include("comp/categories_nav.php"); ?>
+    <!-- <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-12">
           <div class="mainmenu">
@@ -279,17 +299,12 @@ $ip = get_real_user_ip();
                 ?>
                 <li><a href="javascript:void(0);"><?= $cat_title ?></a></li>
                 <?php } ?>
-                <!-- <li><a href="javascript:void(0);">Digital Marketing</a></li>
-                <li><a href="javascript:void(0);">Writing & Translation</a></li>
-                <li><a href="javascript:void(0);">Programming & Tech</a></li>
-                <li><a href="javascript:void(0);">Music & Audio</a></li>
-                <li><a href="javascript:void(0);">Video & Animation</a></li> -->
               </ul>
             </nav>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <!-- Header-menu END-->
 </header>
@@ -300,21 +315,25 @@ $ip = get_real_user_ip();
     <i class="fal fa-times"></i>
   </div>
   <div class="profile-inner">
-    <img src="assets/img/user2.png" alt="">
-    <h4>Welcome back, <span>Morad11214</span></h4>
+    <?php if(!empty($seller_image)){ ?>
+    <img src="user_images/<?= $seller_image; ?>" alt="">
+    <?php }else{ ?>
+    <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+    <?php } ?>
+    <h4><?= $lang['welcome']; ?> back, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h4>
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt=""> Post a Job</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/4.png" alt=""> Manage Requests</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/indox.png" alt=""> Inbox</a></li>
-      <li><a href="how-it-works-buyer.php"> <img src="assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Post a Job</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Requests</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
+      <li><a href="how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
+      <li><a href="<?= $site_url; ?>/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> Logout</a></li>
     </ul>
   </div>
 </div>

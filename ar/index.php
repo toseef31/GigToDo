@@ -35,30 +35,30 @@ $site_title = $row_general_settings->site_title;
 	<!-- ==============Google Fonts============= -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 	<!--====== Bootstrap css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
 	<!--====== PreLoader css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/preloader.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
 	<!--====== Animate css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/animate.min.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
 	<!--====== Fontawesome css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/fontawesome.min.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
 	<!--====== Owl carousel css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/owl.carousel.min.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
 	<!--====== Nice select css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/nice-select.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
 	<!--====== Default css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/default.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
 	<!--====== Style css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/style.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
 	<!--====== Responsive css ======-->
-	<link href="<?php echo $site_url; ?>/Arabic/assets/css/responsive.css" rel="stylesheet">
+	<link href="<?php echo $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
   <?php if($row_general_settings->knowledge_bank == 'yes'): ?>
 	<link href="styles/knowledge_bank.css" rel="stylesheet">
 	<?php endif ?>
 	<?php if(!empty($site_favicon)){ ?>
 	<!-- <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon" /> -->
 	<!--====== Favicon Icon ======-->
-	<link rel="shortcut icon" href="<?php echo $site_url; ?>/Arabic/assets/img/favicon.ico" type="image/png">
+	<link rel="shortcut icon" href="<?php echo $site_url; ?>/ar/assets/img/favicon.ico" type="image/png">
 	<?php } ?>
 	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
 	<!-- <script src="js/ie.js"></script>
