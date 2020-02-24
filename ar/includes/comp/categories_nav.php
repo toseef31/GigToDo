@@ -7,7 +7,7 @@
 
       <div data-ui="cat-nav" id="desktop-category-nav" class="ui-toolkit cat-nav ">
         <div class="bg-white bg-transparent-homepage-experiment bb-xs-1 hide-xs hide-sm hide-md">
-          <div class="col-group body-max-width">
+          <div class="col-group body-max-width mainmenu">
             <ul class="col-xs-12 body-max-width display-flex-xs justify-content-space-between" role="menubar" data-ui="top-nav-category-list" aria-activedescendant="catnav-primary-link-10855">
               <?php
               $get_categories = $db->query("select * from categories where cat_featured='yes'".($lang_dir=="right"?'order by 1 DESC':'')." LIMIT 0,7");
@@ -16,12 +16,15 @@
               $cat_url = $row_categories->cat_url;
               $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
               $row_meta = $get_meta->fetch();
+              
               @$cat_title = $row_meta->cat_title;
+              @$arabic_title = $row_meta->arabic_title;
+
               ?>
               <li class="top-nav-item pt-xs-1 pb-xs-1 pl-xs-2 pr-xs-2 display-flex-xs align-items-center text-center" 
                 data-linkable="true" data-ui="top-nav-category-link" data-node-id="c-<?php echo $cat_id; ?>">
                 <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>">
-                <?php echo @$cat_title; ?>
+                <?php echo @$arabic_title; ?>
                 </a>
               </li>
               <?php } ?>
@@ -38,6 +41,7 @@
             $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
             $row_meta = $get_meta->fetch();
             @$cat_title = $row_meta->cat_title;
+            @$arabic_title = $row_meta->arabic_title;
             $count = $db->count("categories_children",array("child_parent_id" => $cat_id));
             if($count > 0){
             ?>
@@ -52,10 +56,11 @@
                     $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
                     $row_meta = $get_meta->fetch();
                     $child_title = $row_meta->child_title;
+                    $child_arabic_title = $row_meta->child_arabic_title;
                     ?>
                   <li>
                     <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
-                    <?php echo $child_title; ?>
+                    <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
                   <?php } ?>
@@ -69,10 +74,11 @@
                   $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
                   $row_meta = $get_meta->fetch();
                   $child_title = $row_meta->child_title;
+                  $child_arabic_title = $row_meta->child_arabic_title;
                   ?>
                   <li>
                     <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
-                      <?php echo $child_title; ?>
+                      <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
                   <?php } ?>
@@ -86,11 +92,12 @@
                   $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
                   $row_meta = $get_meta->fetch();
                   $child_title = $row_meta->child_title;
+                  $child_arabic_title = $row_meta->child_arabic_title;
 
                   ?>
                   <li>
                     <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
-                      <?php echo $child_title; ?>
+                      <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
                   <?php }?>
@@ -104,10 +111,11 @@
                   $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
                   $row_meta = $get_meta->fetch();
                   $child_title = $row_meta->child_title;
+                  $child_arabic_title = $row_meta->child_arabic_title;
                   ?>
                   <li>
                     <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
-                      <?php echo $child_title; ?>
+                      <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
                   <?php } ?>
