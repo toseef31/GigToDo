@@ -30,6 +30,7 @@ if(isset($_SESSION['seller_user_name'])){
 
   <!--====== Nicescroll js ======-->
   <script src="<?= $site_url; ?>/ar/assets/js/jquery.nicescroll.min.js"></script>
+
   <script>
     $(function() {
       $(".mesagee-item-box").niceScroll({
@@ -41,9 +42,27 @@ if(isset($_SESSION['seller_user_name'])){
 
   <script src="<?= $site_url; ?>/ar/assets/js/jquery.nice-select.min.js"></script>
 
+  <script src="<?= $site_url; ?>/ar/assets/js/ion.rangeSlider.min.js"></script>
   <!--====== Main js ======-->
   <script src="<?= $site_url; ?>/ar/assets/js/main.js"></script>
 <!-- End New Design -->
+<script>
+  $(function(){
+    $("#price").ionRangeSlider({
+      min: 0,
+      max: 50,
+      from: 25,
+      prefix: "$",
+      hide_min_max:true,
+    });
+    $('.filter-results').on('click', function(){
+      $('.gigs-sidebar').addClass('open-mobile');
+    });
+    $('.backtomain').on('click', function(){
+      $(this).parents('.gigs-sidebar').removeClass('open-mobile');
+    });
+  });
+</script>
 <script>
 $(document).ready(function(){
   $("#languageSelect").change(function(){

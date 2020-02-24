@@ -50,7 +50,7 @@ $ip = get_real_user_ip();
       <div class="row align-items-center">
         <div class="col-6 col-md-3 d-flex flex-row">
           <div class="logo">
-            <a class="home-logo" href="index.html"><img src="<?= $site_url; ?>/assets/img/signin-logo.png" alt=""></a>
+            <a class="home-logo" href="index.html"><img src="<?= $site_url; ?>/ar/assets/img/signin-logo.png" alt=""></a>
           </div>
         </div>
         <div class="col-6 col-md-9">
@@ -73,7 +73,7 @@ $ip = get_real_user_ip();
                 <option value="">EGP</option>
               </select>
             </div>
-            <div class="Login-button">
+            <div class="Login-button d-none d-lg-flex">
               <a href="login.php">تسجيل الدخول</a>
               <a href="register.php">نضم الان</a>
             </div>

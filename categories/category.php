@@ -68,6 +68,8 @@
   <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
   <!--====== Nice select css ======-->
   <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
   <!--====== Default css ======-->
   <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
   <!--====== Style css ======-->
@@ -160,135 +162,19 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-3">
-          <button class="filter-results" type="button" role="button">
-            <img src="assets/img/gigs/filter.png" alt="" />Filter by
-          </button>
-          <div class="gigs-sidebar">
-            <h2 class="results-title">
-              <a class="backtomain" href="javascript:void(0);">
-                <i class="fal fa-angle-left"></i>
-              </a>
-              <span>Refine Results</span>
-              <a class="clearfilter" href="javascript:void(0);">Clear All</a>
-            </h2>
-            <div class="gigs-sidebar-filter">
-              <div class="gigs-sidebar-title">
-                <h4 class="title"><img src="assets/img/gigs/filter.png" alt="">Filter by</h4>
-              </div>
-              <div class="gigs-filter-content ">
-                <div class="single-filter clearfix">
-                  <select>
-                    <option value="0">Graphic & Design</option>
-                    <option value="1">Graphic & Design 01</option>
-                    <option value="2">Graphic & Design 02</option>
-                    <option value="3">Graphic & Design 03</option>
-                    <option value="4">Graphic & Design 04</option>
-                  </select>
-                </div>
-                <div class="single-filter clearfix">
-                  <select>
-                    <option value="0">Logo Design</option>
-                    <option value="1">Logo Design 01</option>
-                    <option value="2">Logo Design 02</option>
-                    <option value="3">Logo Design 03</option>
-                    <option value="4">Logo Design 04</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            
-            <div class="gigs-sidebar-price">
-              <div class="gigs-sidebar-title">
-                <h4 class="title"><img src="assets/img/gigs/price.png" alt="">Price</h4>
-              </div>
-              <div class="gigs-price-content ">
-                <input id="price" type="text" name="" value="" class="irs-hidden-input" tabindex="-1" readonly="">
-              </div>
-            </div>
-            
-            <div class="gigs-sidebar-status">
-              <div class="gigs-sidebar-title">
-                <h4 class="title"><img src="assets/img/gigs/status.png" alt="">Status</h4>
-              </div>
-              <div class="gigs-status-content d-flex justify-content-between align-items-center">
-                <div class="status-text pt-20">
-                  <p class="text">Online</p>
-                </div>
-                <div class="status-switch pt-20">
-                  <div class="md_switch">
-                    <input class="switch" id="switch" type="checkbox">
-                    <label for="switch"></label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="gigs-sidebar-titme">
-              <div class="gigs-sidebar-title">
-                <h4 class="title"><img src="assets/img/gigs/time.png" alt="">Delivery Time</h4>
-              </div>
-              <div class="gigs-titme-content pt-20">
-                <ul class="radio_titme radio_style2">
-                  <li>
-                    <input type="radio" checked="" name="radio1" id="radio1">
-                    <label for="radio1"><span></span>Up To 24 Hours (Urgent)</label>
-                  </li>
-                  <li>
-                    <input type="radio" name="radio1" id="radio2">
-                    <label for="radio2"><span></span>Up To 3 Days</label>
-                  </li>
-                  <li>
-                    <input type="radio" name="radio1" id="radio3">
-                    <label for="radio3"><span></span>Up To 1 Week</label>
-                  </li>
-                  <li>
-                    <input type="radio" name="radio1" id="radio4">
-                    <label for="radio4"><span></span>Any</label>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <div class="gigs-sidebar-rating">
-              <div class="gigs-sidebar-title">
-                <h4 class="title"><img src="assets/img/gigs/star.png" alt="">Rating</h4>
-              </div>
-              <div class="gigs-rating-content">
-                <div class="single-rating clearfix">
-                  <select>
-                    <option value="0">Logo Design</option>
-                    <option value="1">Logo Design 01</option>
-                    <option value="2">Logo Design 02</option>
-                    <option value="3">Logo Design 03</option>
-                    <option value="4">Logo Design 04</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            
-            <div class="gigs-sidebar-search">
-              <div class="gigs-sidebar-title">
-                <h4 class="title"><img src="assets/img/gigs/keyword.png" alt="">Keywords</h4>
-              </div>
-              <div class="gigs-search-content mt-20">
-                <input type="search" placeholder="Search by Keywords">
-              </div>
-            </div>
-            
-            <div class="gigs-sidebar-button">
-              <div class="gigs-button-content">
-                <button>Update Search</button>
-              </div>
+          <?php require_once("../includes/category_sidebar.php"); ?>
+        </div>
+        <div class="col-12 col-lg-9">
+          <div class="all-gigs">
+            <div class="row" id="category_proposals">
+              <?php get_category_proposals(); ?>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-lg-9" id="category_proposals">
-          <?php get_category_proposals(); ?>
-          <div class="all-gigs-small hide">
+          <div class="all-gigs-small hide" style="display: none;">
             <div class="row">
               <div class="col-12">
                 <div class="small-gigs-item d-flex flex-column">
-                  <?php get_category_proposals(); ?>
+                  
                   <div class="small-gigs-item-header d-flex justify-content-between">
                     <div class="small-gigs-image">
                       <img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />

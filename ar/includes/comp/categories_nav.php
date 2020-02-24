@@ -23,7 +23,7 @@
               ?>
               <li class="top-nav-item pt-xs-1 pb-xs-1 pl-xs-2 pr-xs-2 display-flex-xs align-items-center text-center" 
                 data-linkable="true" data-ui="top-nav-category-link" data-node-id="c-<?php echo $cat_id; ?>">
-                <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>">
+                <a href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>">
                 <?php echo @$arabic_title; ?>
                 </a>
               </li>
@@ -59,7 +59,7 @@
                     $child_arabic_title = $row_meta->child_arabic_title;
                     ?>
                   <li>
-                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
+                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
                     <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
@@ -77,7 +77,7 @@
                   $child_arabic_title = $row_meta->child_arabic_title;
                   ?>
                   <li>
-                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
+                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
                       <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
@@ -96,7 +96,7 @@
 
                   ?>
                   <li>
-                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
+                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
                       <?php echo $child_arabic_title; ?>
                     </a>
                   </li>
@@ -114,7 +114,7 @@
                   $child_arabic_title = $row_meta->child_arabic_title;
                   ?>
                   <li>
-                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
+                    <a class="display-block text-gray text-body-larger pt-xs-1" href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
                       <?php echo $child_arabic_title; ?>
                     </a>
                   </li>

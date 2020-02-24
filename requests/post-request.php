@@ -63,6 +63,16 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		<script src="../js/ie.js"></script>
 		<script type="text/javascript" src="../js/sweat_alert.js"></script>
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<style>
+			.gig-category .nice-select:nth-Child(2){
+				display: none;
+			}
+			#category{
+				display: block !important;
+				width: 47%;
+				margin-right: 8px;
+			}
+		</style>
 	</head>
 	<body class="is-responsive">
 		<!-- Preloader Start -->
@@ -201,40 +211,35 @@ $relevant_requests = $row_general_settings->relevant_requests;
 															$cat_img2 = '/cat_images/p6.png';
 														}
 													?>
-													<label class="gig-category-item" for="categoryItem-1">
-														<input id="categoryItem-1" type="radio" name="cat_id" value="<?= $cat_id; ?>" hidden />
-														<div class="gig-category-select <?= $cat_class; ?> d-flex flex-column align-items-center justify-content-between" id="category">
-															<span class="icon">
-																<img class="img-fluid white-icon" src="<?= $site_url;?><?= $cat_img1;?>" />
-																<img class="img-fluid color-icon" src="<?= $site_url;?><?= $cat_img2;?>" />
-															</span>
-															<span class="text"><?= $cat_title; ?></span>
-														</div>
-														<div class="gig-category-tags <?= $cat_class;?>">
-															<label></label>
-															<select class="form-control" name="child_id" id="sub-category" required="">
-																<option value="" class="hidden"> Select A Sub Category </option>
+													<!-- <label class="gig-category-item" for="categoryItem-<?= $cat_id; ?>"> -->
+														<select class="form-control" name="cat_id" id="category" required="" style="display: none;">
+															<option value="" class="hidden"> Select A Category </option>
+															<?php
+															$get_cats = $db->select("categories");
+															while($row_cats = $get_cats->fetch()){
+															$cat_id = $row_cats->cat_id;
+															$get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+															$row_meta = $get_meta->fetch();
+															$cat_title = $row_meta->cat_title;
+															?>
+															<option value="<?= $cat_id; ?>">  <?= $cat_title; ?> </option>
+															<?php } ?>
+														</select>
+														<div class="">
+															<!-- <label></label> -->
+															<select class="form-control" name="child_id" id="sub-category" required="" style="display: none;">
+																
 															</select>
-															<!-- <a class="gig-category-tag" href="javascript:void(0);">Logos</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-															<a class="gig-category-tag" href="javascript:void(0);">Tags Item</a> -->
 														</div>
-														<div class="backto-main flex-row">
+														<!-- <div class="backto-main flex-row">
 															<a href="javascript:void(0)" class="d-flex flex-row align-items-center">
 																<span>
 																	<i class="fal fa-angle-left"></i>
 																</span>
 																<span>Go Back</span>
 															</a>
-														</div>
-													</label>
+														</div> -->
+													<!-- </label> -->
 													<?php } ?>
 													<!-- Each item -->
 												</div>
@@ -494,10 +499,13 @@ $(document).ready(function(){
 	$(".descCount").text(textarea.length);	
 	});	
 
-	$("#sub-category").hide();
+	// $("#sub-category").hide();
 	$(".gig-category-tags  .nice-select.form-control").remove();
 
-	$("#categoryItem-1").click(function(){
+	
+	$("#sub-category").hide();
+
+	$("#category").change(function(){
 		$("#sub-category").show();	
 		var category_id = $(this).val();
 		$.ajax({
@@ -511,6 +519,21 @@ $(document).ready(function(){
 	});
 
 });
+// function categoryItem(id){
+// 	$("#sub-category").show();	
+// 	var category_id = id;
+// 	$.ajax({
+// 	url:"fetch_subcategory",
+// 	method:"POST",
+// 	data:{category_id:category_id},
+
+// 	success:function(data){
+// 		console.log(data);
+// 	$("#sub-category").html(data);
+// 	}
+// 	});
+// }
+
 </script>
 <?php
 if(isset($_POST['submit'])){
@@ -518,15 +541,13 @@ if(isset($_POST['submit'])){
 	"request_title" => "required",
 	"request_description" => "required",
 	"cat_id" => "required",
-	"child_id" => "required",
-	"request_budget" => "number|required",
-	"delivery_time" => "required");
+	"request_budget" => "number|required");
 	$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
 	$val = new Validator($_POST,$rules,$messages);
 	if($val->run() == false){
 		Flash::add("form_errors",$val->get_all_errors());
 		Flash::add("form_data",$_POST);
-		echo "<script> window.open('post_request','_self');</script>";
+		echo "<script> window.open('post-request','_self');</script>";
 	}else{
 		$request_title = $input->post('request_title');
 		$request_description = $input->post('request_description');
@@ -534,6 +555,8 @@ if(isset($_POST['submit'])){
 		$child_id = $input->post('child_id');
 		$request_budget = $input->post('request_budget');
 		$delivery_time = $input->post('delivery_time');
+
+		echo "You have selected :" .$delivery_time;
 		$skills_required = $input->post('skills_required');
 		$languages = $input->post('languages');
 		$request_file = $_FILES['request_file']['name'];
