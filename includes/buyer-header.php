@@ -326,7 +326,7 @@ $ip = get_real_user_ip();
     <ul>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Post a Job</a></li>
+      <li><a href="requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Post a Job</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Requests</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>

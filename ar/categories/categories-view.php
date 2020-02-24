@@ -51,23 +51,23 @@
   <!-- ==============Google Fonts============= -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
   <!--====== Bootstrap css ======-->
-  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
   <!--====== PreLoader css ======-->
-  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
   <!--====== Animate css ======-->
-  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
   <!--====== Fontawesome css ======-->
-  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
   <!--====== Owl carousel css ======-->
-  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
   <!--====== Nice select css ======-->
-  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
   <!--====== Default css ======-->
-  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
   <!--====== Style css ======-->
-  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
   <!--====== Responsive css ======-->
-  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
   <!-- <link href="<?= $site_url; ?>/styles/bootstrap.css" rel="stylesheet"> -->
   <!-- <link href="<?= $site_url; ?>/styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
@@ -114,9 +114,11 @@
             $row_meta = $get_meta->fetch();
             $cat_title = $row_meta->cat_title;
             $cat_desc = $row_meta->cat_desc;
+            $arabic_title = $row_meta->arabic_title;
+            $arabic_desc = $row_meta->arabic_desc;
             ?>
-          <h2><?php echo $cat_title; ?></h2>
-          <p><?php echo $cat_desc; ?></p>
+          <h2><?php echo $arabic_title; ?></h2>
+          <p><?php echo $arabic_desc; ?></p>
           <?php } ?>
           <?php
             if(isset($_SESSION['cat_child_id'])){
@@ -125,9 +127,11 @@
             $row_meta = $get_meta->fetch();
             $child_title = $row_meta->child_title;
             $child_desc = $row_meta->child_desc;
+            $child_arabic_title = $get_meta->child_arabic_title;
+            $child_arabic_desc = $get_meta->child_arabic_desc;
             ?>
-          <h2> <?php echo $child_title; ?> </h2>
-          <p><?php echo $child_desc; ?></p>
+          <h2> <?php echo $child_arabic_title; ?> </h2>
+          <p><?php echo $child_arabic_desc; ?></p>
           <?php } ?>
         </div>
       </div>
@@ -135,7 +139,7 @@
     <div class="row">
       <div class="col-lg-3 col-md-4">
         <div class="graphic-design-text">
-          <h3><?php echo $cat_title; ?></h3>
+          <h3><?php echo $arabic_title; ?></h3>
           <?php
             $get_child_cat = $db->select("categories_children",array("child_parent_id" => $cat_id));
             while($row_child_cat = $get_child_cat->fetch()){
@@ -145,9 +149,10 @@
               $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
               $row_meta = $get_meta->fetch();
               $child_title = $row_meta->child_title;
-              if(!empty($child_title)){
+              $child_arabic_title = $row_meta->child_arabic_title;
+              if(!empty($child_arabic_title)){
           ?>
-          <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>"><?php echo $child_title; ?></a>
+          <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>"><?php echo $child_arabic_title; ?></a>
           <?php }} ?>
           
         </div>
@@ -164,13 +169,14 @@
               $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
               $row_meta = $get_meta->fetch();
               $child_title = $row_meta->child_title;
-              if(!empty($child_title)){
+              $child_arabic_title = $row_meta->child_arabic_title;
+              if(!empty($child_arabic_title)){
           ?>
           <div class="col-lg-3 col-md-6 ">
             <div class="subcategories-item">
               <a href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>">
                 <img src="<?= $site_url; ?>/assets/img/subcategories/<?php echo $child_image; ?>" alt="">
-                <p><?php echo $child_title; ?></p>
+                <p><?php echo $child_arabic_title; ?></p>
               </a>
             </div>
           </div>

@@ -8,13 +8,57 @@
 	}
 
 ?>
-<div class="proposal-card-base mp-proposal-card"><!--- proposal-card-base mp-proposal-card Starts --->
-	<a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>">
+<div class="single-gigs mt-30 all-gigs">
+	<div class="gigs-image verified-rebon">
+		<a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>">
+			<img src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1; ?>" class="img-fluid" alt="Gigs Image" height="200px" width="286px">
+		</a>
+	</div>
+	<div class="gigs-content">
+		<div class="gigs-author d-flex align-items-center">
+			<div class="author-image">
+				<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="" height="50px" width="50px">
+				<?php if(check_status($proposal_seller_id) == "Online"){ ?>
+					<span class="active"></span>
+				<?php } ?>
+			</div>
+			<div class="author-name media-body">
+				<?= $seller_user_name; ?>
+			</div>
+		</div>
+		<h4 class="gigs-title"><a href="javascript:void(0);"><?= $proposal_title; ?></a></h4>
+		<ul class="gigs-rating d-flex">
+			<svg class="fit-svg-icon full_star" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path></svg>
+			<span><strong><?php if($proposal_rating == "0"){ echo "0.0"; }else{ printf("%.1f", $average_rating); } ?></strong>
+		(<?= $count_reviews; ?>)</span>
+		</ul>
+	</div>
+	<div class="gigs-meta d-flex justify-content-between align-items-center">
+		<div class="meta-left">
+			<?php if(isset($_SESSION['seller_user_name'])){ ?>
+			<?php if($proposal_seller_id != $login_seller_id){ ?>
+			<a href="javascript:void(0);"><i data-id="<?= $proposal_id; ?>" href="#" class="fa fa-heart <?= $show_favorite_class; ?>" data-toggle="tooltip" data-placement="top" title="Favorite"></i></a>
+			<?php } ?>
+			<?php }else{ ?>
+				<a href="<?= $site_url; ?>/ar/login.php"><i class="fa fa-heart"></i></a>
+			<?php } ?>
+		</div>
+		<div class="meta-right">
+			<span><?= $s_currency; ?><?= $proposal_price; ?></span>
+		</div>
+	</div>
+</div>
+<!-- <div class="single-gigs mt-30"> -->
+	<!--- proposal-card-base mp-proposal-card Starts --->
+	
+	<!-- <a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>">
 		<img src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1; ?>" class="img-fluid">
 	</a>
-	<div class="proposal-card-caption"><!--- proposal-card-caption Starts --->
-		<div class="proposal-seller-info"><!--- gig-seller-info Starts --->
-		<span class="fit-avatar s24">
+	<div class="proposal-card-caption"> -->
+		<!--- proposal-card-caption Starts --->
+		<!-- <div class="proposal-seller-info"> -->
+			<!--- gig-seller-info Starts --->
+		<!-- <span class="fit-avatar s24">
 			<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" class="rounded-circle" width="32" height="32">
 		</span>
 		<div class="seller-info-wrapper">
@@ -23,8 +67,9 @@
 	    	<?= $seller_level; ?>
 	    </div>
 		</div>
-		</div><!--- gig-seller-info Ends --->
-		<a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>" class="proposal-link-main js-proposal-card-imp-data">
+		</div> -->
+		<!--- gig-seller-info Ends --->
+		<!-- <a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>" class="proposal-link-main js-proposal-card-imp-data">
 		<h3><?= $proposal_title; ?></h3>
 		</a>
 		<div class="rating-badges-container">
@@ -41,9 +86,11 @@
 		<i class="fa fa-circle"></i> <?= $lang['proposals']['online']; ?>
 		</div>
 		<?php } ?>
-	</div><!--- proposal-card-caption Ends --->
-	<footer class="proposal-card-footer"><!--- proposal-card-footer Starts --->
-		<div class="proposal-fav">
+	</div> -->
+	<!--- proposal-card-caption Ends --->
+	<!-- <footer class="proposal-card-footer"> -->
+		<!--- proposal-card-footer Starts --->
+		<!-- <div class="proposal-fav">
 			<?php if($proposal_enable_referrals == "yes" & $enable_referrals == "yes"){ ?>
 			<?php if(isset($_SESSION['seller_user_name'])){ ?>
 			<?php if($proposal_seller_id != $login_seller_id){ ?>
@@ -77,5 +124,7 @@
 		<div class="proposal-price">
 			<a><small><?= $lang['proposals']['starting_at']; ?></small><?= $s_currency; ?><?= $proposal_price; ?></a>
 		</div>
-	</footer><!--- proposal-card-footer Ends --->
-</div><!--- proposal-card-base mp-proposal-card Ends --->
+	</footer> -->
+	<!--- proposal-card-footer Ends --->
+<!-- </div> -->
+<!--- proposal-card-base mp-proposal-card Ends --->
