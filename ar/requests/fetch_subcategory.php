@@ -11,7 +11,7 @@ echo "<script>window.open('../login','_self')</script>";
 }
 
 
-echo "<option value=''> Select A Sub Category </option>";
+echo "<option value=''> اختر تصنيف فرعى </option>";
 
 $category_id = $input->post('category_id');
 
@@ -27,9 +27,10 @@ $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id,"languag
 $row_meta = $get_meta->fetch();
 
 $child_title = $row_meta->child_title;
+$child_arabic_title = $row_meta->child_arabic_title;
 
 
-echo "<option value='$child_id'> $child_title </option>";
+echo "<option value='$child_id'> $child_arabic_title </option>";
 	
 }
 

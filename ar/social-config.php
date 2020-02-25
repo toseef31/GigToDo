@@ -11,6 +11,10 @@ if($enable_social_login == "yes"){
 		require_once("g-config.php");
 		$gLoginURL = $gClient->createAuthUrl();
 	}
+	if(!empty($l_client_id) and !empty($l_client_secret)){
+		require_once("l-config.php");
+		$linkLoginURL = $gClient->createAuthUrl();
+	}
 }
 
 ?>
