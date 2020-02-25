@@ -137,7 +137,7 @@ if(is_array($form_errors)){
 
 <input type="file" name="box_image" class="form-control" >
 
-<br><img src="../box_images/<?php if(empty($b_image)){echo "no.jpg"; }else{echo $b_image;} ?>" width="70">
+<br><img src="../assets/img/work/<?php if(empty($b_image)){echo "no.jpg"; }else{echo $b_image;} ?>" width="70">
 
 </div>
 
@@ -199,7 +199,7 @@ $box_image = $_FILES['box_image']['name'];
 
 $tmp_name = $_FILES['box_image']['tmp_name'];
 
-move_uploaded_file($tmp_name,"../box_images/$box_image");
+move_uploaded_file($tmp_name,"../assets/img/work/$box_image");
 
 if(empty($box_image)){
     $box_image = $b_image;
