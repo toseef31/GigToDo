@@ -11,6 +11,8 @@ if($enable_social_login == "yes"){
 		require_once("g-config.php");
 		$gLoginURL = $gClient->createAuthUrl();
 	}
+
+	
 }
 
 ?>

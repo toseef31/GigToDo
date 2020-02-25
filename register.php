@@ -324,30 +324,62 @@ if(isset($_POST['register'])){
 						userSignupEmail($email);
 				  }
 
-					echo "
-					<script>
-					swal({
-					type: 'success',
-					text: 'Successfully Registered! Welcome onboard, $name. ',
-					timer: 6000,
-					onOpen: function(){
-					swal.showLoading()
-					}
-					}).then(function(){
-					if (
-					// Read more about handling dismissals
-					window.open('$site_url','_self')
-					) {
-					console.log('Successful Registration')
-					}
-					})
-					</script>
-					";
-					$_SESSION['name'] = "";
-					$_SESSION['u_name']="";
-					$_SESSION['email']= "";
-					$_SESSION['error_array'] = array();
-						
+			      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+			  		$seller_meta = $get_seller->fetch();
+			  		print_r($seller_meta->account_type);
+			  		if($seller_meta->account_type == 'buyer'){
+
+	           
+	           
+	          echo "
+	          <script>
+	          swal({
+	          type: 'success',
+	          text: 'Successfully Registered! Welcome onboard, $name. ',
+	          timer: 6000,
+	          onOpen: function(){
+	          swal.showLoading()
+	          }
+	          }).then(function(){
+	          if (
+	          // Read more about handling dismissals
+	          window.open('$site_url/buyer','_self')
+	          ) {
+	          console.log('Successful Registration')
+	          }
+	          })
+	          </script>
+	          ";
+	          $_SESSION['name'] = "";
+	          $_SESSION['u_name']="";
+	          $_SESSION['email']= "";
+	          $_SESSION['error_array'] = array();
+			      }else{
+							echo "
+							<script>
+							swal({
+							type: 'success',
+							text: 'Successfully Registered! Welcome onboard, $name. ',
+							timer: 6000,
+							onOpen: function(){
+							swal.showLoading()
+							}
+							}).then(function(){
+							if (
+							// Read more about handling dismissals
+							window.open('$site_url/buyer','_self')
+							) {
+							console.log('Successful Registration')
+							}
+							})
+							</script>
+							";
+							$_SESSION['name'] = "";
+							$_SESSION['u_name']="";
+							$_SESSION['email']= "";
+							$_SESSION['error_array'] = array();
+						}
+							
 				}
 					
 			}

@@ -335,7 +335,7 @@ $ip = get_real_user_ip();
     <ul>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> ضبط </a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
+      <li><a href="requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt="">إدارة الطلبات</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
