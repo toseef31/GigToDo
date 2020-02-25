@@ -184,7 +184,7 @@ echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
   
 }else{
 
-move_uploaded_file($tmp_name,"../box_images/$box_image");
+move_uploaded_file($tmp_name,"../assets/img/work/$box_image");
 	
 $insert_box = $db->insert("section_boxes",array("language_id" => $adminLanguage,"box_title" => $box_title,"box_desc" => $box_desc,"box_image" => $box_image));
 

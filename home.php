@@ -13,10 +13,10 @@ $slide_image = $row_slides->slide_image;
 <div class="banner-section style-two">
   <div class="container">
     <div class="section-wrapper">
-      <h2 class="title">
-      Find the prefect freelance services on Egypt’s #1 Secure Platform
+      <h2 class="title"><?= $section_heading; ?>
+      
       </h2>
-      <p>HIRE QUALITY FREELANCERS AND <br> KICKSTART YOUR PROJECT </p>
+      <p><?= $section_short_heading; ?></p>
     </div>
     <form class="join-form" id="gnav-search" method="post">
       <input type="text" placeholder="<?= $lang['search']['placeholder']; ?>" id="search-query" name="search_query" value="<?= @$_SESSION["search_query"]; ?>"  autocomplete="off">
@@ -110,18 +110,27 @@ $slide_image = $row_slides->slide_image;
       <p>Getting started couldn’t be easier</p>
     </div>
     <div class="row justify-content-center mb-30-none">
+      <?php
+        $get_boxes = $db->query("select * from section_boxes where language_id='$siteLanguage' LIMIT 0,4");
+        while($row_boxes = $get_boxes->fetch()){
+        $box_id = $row_boxes->box_id;
+        $box_title = $row_boxes->box_title;
+        $box_desc = $row_boxes->box_desc;
+        $box_image = $row_boxes->box_image; 
+      ?>
       <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
         <div class="work-item">
           <div class="work-thumb">
-            <img src="assets/img/work/find.png" alt="work">
+            <img src="assets/img/work/<?= $box_image; ?>" alt="work">
           </div>
           <div class="work-content text-center">
-            <h5 class="title">Find</h5>
-            <p>Share your project on our platform to be connected with professional freelancers ready to build something great for you.</p>
+            <h5 class="title"><?= $box_title; ?></h5>
+            <p><?= $box_desc; ?></p>
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
+      <?php } ?>
+      <!-- <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
         <div class="work-item">
           <div class="work-thumb">
             <img src="assets/img/work/hire.png" alt="work">
@@ -131,8 +140,8 @@ $slide_image = $row_slides->slide_image;
             <p>Review expert credentials from dozens of freelancers. Have the power to select the most qualified seller that matches the requirements of your project. </p>
           </div>
         </div>
-      </div>
-      <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
+      </div> -->
+      <!-- <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
         <div class="work-item">
           <div class="work-thumb">
             <img src="assets/img/work/work.png" alt="work">
@@ -153,7 +162,7 @@ $slide_image = $row_slides->slide_image;
             <p>Once you have found the perfect freelancer for your project, send the payment through our safe and secure payment portal. Enjoy peace of mind with a 100% money back guarantee.</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

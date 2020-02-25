@@ -91,33 +91,56 @@
     <div class="row">
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4>Company Info</h4>
-
-          <a href="javascript:void(0);">Our Story</a>
-          <a href="javascript:void(0);">Mission and Vision</a>
-          <a href="javascript:void(0);">Blog</a>
+          <h4><?= $lang['categories']; ?></h4>
+          <?php
+          $get_footer_links = $db->query("select * from footer_links where link_section='categories' AND language_id='$siteLanguage'  LIMIT 0,4");
+          while($row_footer_links = $get_footer_links->fetch()){
+          $link_id = $row_footer_links->link_id;
+          $link_title = $row_footer_links->link_title;
+          $link_url = $row_footer_links->link_url;
+          ?>
+          <a href="<?= $link_url; ?>"><?= $link_title; ?></a>
+          <?php } ?>
+          <!-- <a href="javascript:void(0);">Mission and Vision</a>
+          <a href="javascript:void(0);">Blog</a> -->
         </div>
       </div>
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4>Support</h4>
-
-          <a href="javascript:void(0);">Terms and conditions</a>
-          <a href="javascript:void(0);">Privacy Policy</a>
-          <a href="javascript:void(0);">Contact Us</a>
+          <h4><?= $lang['about']; ?></h4>
+          <?php
+          $get_footer_links = $db->select("footer_links",array("link_section" => "about","language_id" => $siteLanguage));
+          while($row_footer_links = $get_footer_links->fetch()){
+          $link_id = $row_footer_links->link_id;
+          $icon_class = $row_footer_links->icon_class;
+          $link_title = $row_footer_links->link_title;
+          $link_url = $row_footer_links->link_url;
+          ?>
+          <a href="<?= $link_url; ?>"><?= $link_title; ?></a>
+          <?php } ?>
+          <!-- <a href="javascript:void(0);">Privacy Policy</a>
+          <a href="javascript:void(0);">Contact Us</a> -->
         </div>
       </div>
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4>Contact Us</h4>
+          <h4><?= $lang['find_us_on']; ?></h4>
           <p>Email: <a href="javascript:void(0);">emongez@emongez.com</a></p>
 
           <div class="footer-social">
-            <a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
-            <a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
+            <?php
+            $get_footer_links = $db->select("footer_links",array("link_section" => "follow","language_id" => $siteLanguage));
+            while($row_footer_links = $get_footer_links->fetch()){
+            $link_id = $row_footer_links->link_id;
+            $icon_class = $row_footer_links->icon_class;
+            $link_url = $row_footer_links->link_url;
+            ?>
+            <a href="<?= $link_url; ?>"><i class="fab <?= $icon_class; ?>"></i></a>
+            <?php } ?>
+            <!-- <a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
             <a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
             <a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a>
-            <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a> -->
           </div>
         </div>
       </div>
