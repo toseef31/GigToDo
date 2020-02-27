@@ -92,19 +92,30 @@
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
           <h4>معلومات عن الشركة </h4>
-
-          <a href="javascript:void(0);">قصتنا</a>
-          <a href="javascript:void(0);">مهمتنا و رؤيتنا</a>
-          <a href="javascript:void(0);">بلوج</a>
+          <?php
+          $get_footer_links = $db->query("select * from footer_links where link_section='categories' AND language_id='2'  LIMIT 0,4");
+          while($row_footer_links = $get_footer_links->fetch()){
+          $link_id = $row_footer_links->link_id;
+          $link_title = $row_footer_links->link_title;
+          $link_url = $row_footer_links->link_url;
+          ?>
+          <a href="<?= $site_url?>/ar/<?= $link_url; ?>"><?= $link_title; ?></a>
+          <?php } ?>
         </div>
       </div>
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
           <h4>دعم</h4>
-
-          <a href="javascript:void(0);">الشروط والاحكام</a>
-          <a href="javascript:void(0);">سياسه الخصوصية </a>
-          <a href="javascript:void(0);">اتواصل معانا</a>
+          <?php
+          $get_footer_links = $db->select("footer_links",array("link_section" => "about","language_id" => '2'));
+          while($row_footer_links = $get_footer_links->fetch()){
+          $link_id = $row_footer_links->link_id;
+          $icon_class = $row_footer_links->icon_class;
+          $link_title = $row_footer_links->link_title;
+          $link_url = $row_footer_links->link_url;
+          ?>
+          <a href="<?= $link_url; ?>"><?= $link_title; ?></a>
+          <?php } ?>
         </div>
       </div>
       <div class="col-lg-4 col-md-4">
@@ -113,11 +124,19 @@
           <p>اتواصل معانا عن طريق الإيميل : <a href="javascript:void(0);">emongez@emongez.com</a></p>
 
           <div class="footer-social">
-            <a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
-            <a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
+            <?php
+            $get_footer_links = $db->select("footer_links",array("link_section" => "follow","language_id" => '2'));
+            while($row_footer_links = $get_footer_links->fetch()){
+            $link_id = $row_footer_links->link_id;
+            $icon_class = $row_footer_links->icon_class;
+            $link_url = $row_footer_links->link_url;
+            ?>
+            <a href="<?= $link_url; ?>"><i class="fab <?= $icon_class; ?>"></i></a>
+            <?php } ?>
+            <!-- <a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
             <a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
             <a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a>
-            <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a> -->
           </div>
         </div>
       </div>
@@ -161,9 +180,9 @@
         <div class="widget-link">
           <ul>
             <li>
-              <p>Soon On:</p><a href="javascript:void(0);"><img src="assets/img/play.png" alt=""></a>
+              <p>قريبا على:</p><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/play.png" alt=""></a>
             </li>
-            <li><a href="javascript:void(0);"><img src="assets/img/apple.png" alt=""></a></li>
+            <li><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/apple.png" alt=""></a></li>
           </ul>
         </div>
       </div>
@@ -171,9 +190,9 @@
         <div class="widget-link">
           <ul>
             <li>
-              <p>Secured With</p><a href="javascript:void(0);"><img src="assets/img/paypal.png" alt=""></a>
+              <p>المضمون مع</p><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/paypal.png" alt=""></a>
             </li>
-            <li><a href="javascript:void(0);"><img src="assets/img/noth.png" alt=""></a></li>
+            <li><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/noth.png" alt=""></a></li>
           </ul>
         </div>
       </div>

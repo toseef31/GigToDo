@@ -42,7 +42,11 @@ function get_real_user_ip(){
 $ip = get_real_user_ip();
 
 ?>
-
+<style>
+  .ui-toolkit .text-body-larger{
+    text-align: right;
+  }
+</style>
 <!-- New Header Design -->
 <header>
   <div class="header-top">
@@ -50,7 +54,7 @@ $ip = get_real_user_ip();
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo">
-            <a href="<?php echo $site_url; ?>/ar"><img src="<?= $site_url; ?>/assets/img/logo.svg" alt=""></a>
+            <a href="<?php echo $site_url; ?>/ar"><img src="<?= $site_url; ?>/ar/assets/img/logo.svg" alt="" width="150"></a>
           </div>
         </div>
         <div class="col-6 d-block d-lg-none">
@@ -70,10 +74,21 @@ $ip = get_real_user_ip();
         </div>
         <div class="col-12 col-lg-6 col-xl-4">
           <div class="header-search-box">
-            <form action="" class="d-flex flex-row">
-              <input type="text" placeholder="البحث عن الخدمات">
-              <button type="submit">البحث</button>
+            <form action="" class="d-flex flex-row" id="gnav-search" method="POST">
+              <input id="search-query" class="rounded" name="search_query"
+                  placeholder="<?php echo $lang['search']['placeholder']; ?>" value="<?php echo @$_SESSION["search_query"]; ?>"  autocomplete="off">
+              <button name="search" type="submit" value="Search">
+                <?php echo $lang['search']['button']; ?>
+                </button>
+                <ul class="search-bar-panel d-none"></ul>
             </form>
+            <?php
+              if (isset($_POST['search'])) {
+                  $search_query = $input->post('search_query');
+                  $_SESSION['search_query'] = $search_query;
+                  echo "<script>window.open('$site_url/search.php','_self')</script>";
+              }
+            ?>
           </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-6 d-none d-lg-block">
@@ -84,12 +99,14 @@ $ip = get_real_user_ip();
                 <li><a href="javascript:void(0);">الطلبات</a></li>
               </ul>
             </div>
+            <?php if($language_switcher == 1){ ?>
             <div class="language-inner">
               <select name="" id="" onChange="window.location.href=this.value">
                 <option value="<?= $site_url?>">EN</option>
                 <option value="" selected="">AR</option>
               </select>
             </div>
+            <?php } ?>
             <div class="usd-inner">
               <select name="" id="">
                 <option value="">USD</option>
@@ -104,7 +121,7 @@ $ip = get_real_user_ip();
                 <?php if(!empty($seller_image)){ ?>
                 <img src="user_images/<?= $seller_image; ?>" alt="">
                 <?php }else{ ?>
-                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle" width="40px" height="40px">
+                <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png"  class="img-fluid rounded-circle" width="40px" height="40px">
                 <?php } ?>
               </div>
               <div class="icon">
@@ -327,7 +344,7 @@ $ip = get_real_user_ip();
     <?php if(!empty($seller_image)){ ?>
     <img src="user_images/<?= $seller_image; ?>" alt="">
     <?php }else{ ?>
-    <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+    <img src="<?= $site_url; ?>/assets/img/user2.png"  class="img-fluid rounded-circle mb-3">
     <?php } ?>
     <h4>أهلا بيك من تاني<span><?= ucfirst(strtolower($login_user_name)); ?></span></h4>
   </div>
@@ -335,14 +352,14 @@ $ip = get_real_user_ip();
     <ul>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> ضبط </a></li>
-      <li><a href="<?= $site_url; ?>/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
+      <li><a href="<?= $site_url ?>/ar/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt="">إدارة الطلبات</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> صندوق الوارد</a></li>
-      <li><a href="<?= $site_url; ?>/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> كيف تعمل</a></li>
-      <li><a href="logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> الخروج</a></li>
+      <li><a href="<?= $site_url ?>/ar/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> كيف تعمل</a></li>
+      <li><a href="<?= $site_url ?>/ar/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> الخروج</a></li>
     </ul>
   </div>
 </div>

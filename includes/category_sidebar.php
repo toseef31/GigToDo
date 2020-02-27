@@ -66,7 +66,7 @@
               $arabic_title = $row_meta->arabic_title;
               $arabic_desc = $row_meta->arabic_desc;
             ?>
-            <option value="0"><?= $arabic_title; ?></option>
+            <option value="0"><?= $cat_title; ?></option>
             <?php } ?>
           </select>
         </div>
@@ -84,7 +84,7 @@
                 $child_arabic_title = $row_meta->child_arabic_title;
                 if(!empty($child_arabic_title)){
             ?>
-            <option value="0"><?php echo $child_arabic_title; ?></option>
+            <option value="0"><?php echo $child_title; ?></option>
             <?php } } ?>
           </select>
         </div>
@@ -146,7 +146,7 @@
 
     <div class="gigs-sidebar-titme">
       <div class="gigs-sidebar-title">
-        <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">مستوى البائع</h4>
+        <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">Seller Level</h4>
       </div>
       <div class="gigs-titme-content pt-20">
         <ul class="radio_titme radio_style2">
@@ -175,7 +175,7 @@
 
     <div class="gigs-sidebar-titme">
       <div class="gigs-sidebar-title">
-        <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">مالبائع لانج
+        <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">Seller Lang
         </h4>
       </div>
       <div class="gigs-titme-content pt-20">

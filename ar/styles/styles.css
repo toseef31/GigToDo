@@ -1,67 +1,67 @@
 @charset "utf-8";
 @font-face{
   src:url(../fonts/Brandon_reg.otf);
-  font-family:'Brandon_reg';
+  /*font-family:'Brandon_reg';*/
 }
 @font-face{
   src:url(../fonts/Brandon_bld.otf);
-  font-family:'Brandon_bld';
+  /*font-family:'Brandon_bld';*/
 }
 @font-face{
   src:url(../fonts/Montserrat-Regular.otf);
-  font-family: 'Montserrat-Regular';
+  /*font-family: 'Montserrat-Regular';*/
 }
 @font-face{
   src:url(../fonts/Montserrat-SemiBold.otf);
-  font-family:'Montserrat-SemiBold';
+  /*font-family:'Montserrat-SemiBold';*/
 }
 @font-face{
   src:url(../fonts/Montserrat-Light.otf);
-  font-family:'Montserrat-Light';
+  /*font-family:'Montserrat-Light';*/
 }
 @font-face{
   src:url(../fonts/Mosk-Light-300.ttf);
-  font-family:'Mosk-Light-300';
+  /*font-family:'Mosk-Light-300';*/
 }
 @font-face {
-  font-family: "Guardian-EgypTT";
+  /*font-family: "Guardian-EgypTT";*/
   src: url("../fonts/Guardian-EgypTT-Medium.eot?v=2");
   src: url("../fonts/Guardian-EgypTT-Medium.eot?v=2#iefix") format("embedded-opentype"), url("../fonts/Guardian-EgypTT-Medium.woff2?v=2") format("woff2"), url("../fonts/Guardian-EgypTT-Medium.woff?v=2") format("woff"), url("../fonts/Guardian-EgypTT-Medium.ttf?v=2") format("truetype"), url("../fonts/Guardian-EgypTT-Medium.svg?v=2#Guardian EgypTT") format("svg");
   font-style: normal;
-  font-weight: 500;
+  /*font-weight: 500;*/
   font-stretch: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Guardian-EgypTT";
+  /*font-family: "Guardian-EgypTT";*/
   src: url("../fonts/Guardian-EgypTT-Light.eot?v=2");
   src: url("../fonts/Guardian-EgypTT-Light.eot?v=2#iefix") format("embedded-opentype"), url("../fonts/Guardian-EgypTT-Light.woff2?v=2") format("woff2"), url("../fonts/Guardian-EgypTT-Light.woff?v=2") format("woff"), url("../fonts/Guardian-EgypTT-Light.ttf?v=2") format("truetype"), url("../fonts/Guardian-EgypTT-Light.svg?v=2#Guardian-EgypTT") format("svg");
   font-style: normal;
-  font-weight: 300;
+  /*font-weight: 300;*/
   font-stretch: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Graphik Webfont";
+  /*font-family: "Graphik Webfont";*/
   src: url("../fonts/Graphik-Regular-Web.eot");
   src: url("../fonts/Graphik-Regular-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Regular-Web.woff2") format("woff2"), url("../fonts/Graphik-Regular-Web.woff") format("woff"), url("../fonts/Graphik-Regular-Web.svg#Graphik-Regular-Web") format("svg"), url("../fonts/Graphik-Regular-Web.ttf") format("opentype");
-  font-weight: 400;
+  /*font-weight: 400;*/
   font-style: normal;
   font-stretch: normal;
 }
 @font-face {
-  font-family: "Graphik Webfont";
+  /*font-family: "Graphik Webfont";*/
   src: url("../fonts/Graphik-Medium-Web.eot");
   src: url("../fonts/Graphik-Medium-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Medium-Web.woff2") format("woff2"), url("../fonts/Graphik-Medium-Web.woff") format("woff"), url("../fonts/Graphik-Medium-Web.svg#Graphik-Medium-Web") format("svg"), url("../fonts/Graphik-Medium-Web.ttf") format("opentype");
-  font-weight: 500;
+  /*font-weight: 500;*/
   font-style: normal;
   font-stretch: normal;
 }
 @font-face {
-  font-family: "Graphik Webfont";
+  /*font-family: "Graphik Webfont";*/
   src: url("../fonts/Graphik-Medium-Web.eot");
   src: url("../fonts/Graphik-Medium-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Medium-Web.woff2") format("woff2"), url("../fonts/Graphik-Medium-Web.woff") format("woff"), url("../fonts/Graphik-Medium-Web.svg#Graphik-Medium-Web") format("svg"), url("../fonts/Graphik-Medium-Web.ttf") format("opentype");
-  font-weight: 700;
+  /*font-weight: 700;*/
   font-style: normal;
   font-stretch: normal;
 }
@@ -72,9 +72,9 @@ body {
 	background: #fff;
 	height: 100%;
 	width: 100%;
-  font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+  /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
 	color: #000;
-	font-weight: 400;
+	/*font-weight: 400;*/
 	overflow-x: hidden;
 }
 
@@ -108,7 +108,7 @@ html {
 	border:1px solid #ccc;
 	position: fixed;
 	font-weight:bold;
-	font-family:'Montserrat-Light';
+	/*font-family:'Montserrat-Light';*/
 	letter-spacing:2px;
 	z-index: 9997;
 	text-decoration: none;
@@ -303,8 +303,8 @@ header .dropdown-menu{
 }
 .logo{
   color: #28a745;
-	font-size: 31.18px;
-   font-family: 'Mosk-Thin-100';
+	/*font-size: 31.18px;*/
+   /*font-family: 'Mosk-Thin-100';*/
 	padding-top: 10px;
 }
 header .input-group .form-control:not(:last-child){
@@ -355,7 +355,7 @@ border-radius: 0px 3px 3px 0px;
 
 .search-bar-panel {
     position: absolute;
-    top: 72%;
+    top: 100%;
     /*margin-top: 58px;*/
     z-index: 99;
     width: 100%;
@@ -791,9 +791,9 @@ header hr {
 
 #demo1 h5 {
 	
-	font-size: 19px;
+	/*font-size: 19px;*/
 	color: #fff;
-	font-family: 'Montserrat-Light';
+	/*font-family: 'Montserrat-Light';*/
 	text-align: center;
 	margin-top: 10px;
 
@@ -927,32 +927,32 @@ font-size:18px;
 	padding: 75px 0;
 }
 .market h2, .top h1{
-	font-size: 29.1px;
+	/*font-size: 29.1px;*/
 	color: #1a1e31;
 	text-align: center;
-	font-family:'Montserrat-SemiBold';
+	/*font-family:'Montserrat-SemiBold';*/
 }
 .market h4 ,.top h4{
-	font-size: 16px;
+	/*font-size: 16px;*/
 	color: #6d6e71;
-	font-family:'Montserrat-Light';
+	/*font-family:'Montserrat-Light';*/
 	text-align: center;
 }
 .market p{
-	font-size: 14px;
+	/*font-size: 14px;*/
 	color: #414042;
-	font-family:'Montserrat-Light';
+	/*font-family:'Montserrat-Light';*/
 	text-align: center;
 	margin-top: 40px;
 }
 
 .timer h5{
 	color: #28a745;
-	font-size: 14px;
+	/*font-size: 14px;*/
 }
 .timer p{
 	color: #929497;
-	font-size: 13px;
+	/*font-size: 13px;*/
 }
 .timer{
 	padding: 70px 0;
@@ -991,7 +991,7 @@ font-size:18px;
 }
 .dil{
 	cursor:pointer;
-	color: #ff0707;
+	color: #ff2b2b;
 	
 }
 .dil1{
@@ -1041,9 +1041,9 @@ font-size:18px;
 	padding: 5px;
 }
 .btn_view{
-	font-size: 10.56px;
+	/*font-size: 10.56px;*/
 	color: #28a745;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
 	text-transform: uppercase;
 	margin: 0 auto;
 	display: block;
@@ -1676,7 +1676,7 @@ right:0;
 
 #demo3 p {
 	font-size: 19px;
-	font-family: 'Montserrat-Light';
+	/*font-family: 'Montserrat-Light';*/
 }
 
 .carousel-indicators {
@@ -1852,7 +1852,7 @@ video.embed-responsive {
 	z-index: 5000;
 	background-image: url(../images/loading.gif);
 	background-color: #666 ;
-	opacity: 0.4;
+	opacity: 1;
 	background-repeat: no-repeat;
 	background-position: center;
 	left: 0;
@@ -3675,8 +3675,8 @@ margin-bottom: 15px;
 }
 .tabs .tab-header{
 padding: 0.8rem 1.2rem;
-font-size: 17px;
-font-family: "Montserrat-Light";
+/*font-size: 17px;*/
+/*font-family: "Montserrat-Light";*/
 }
 .tabs .tab .tab-body {
 font-size: 16px;
@@ -3696,8 +3696,8 @@ position: relative;
 }
 
 .faqs .tabs .tab .tab-header {
-	font-size: 17px;
-	font-family: "Montserrat-Light";
+	/*font-size: 17px;*/
+	/*font-family: "Montserrat-Light";*/
     font-weight: 400;
     display: block;
     padding: 15px 15px;
@@ -3748,7 +3748,7 @@ border-top:1px solid #E1E3DF;
 
 /*** New Styles ***/
 .card_user {
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
 	border: 1px solid #d2d6da;
 	text-align: center;
 }
@@ -3793,8 +3793,8 @@ border-top:1px solid #E1E3DF;
 
 .buy_head{
 
-font-family: 'Montserrat-Regular';
-font-size: 19px;
+/*font-family: 'Montserrat-Regular';*/
+/*font-size: 19px;*/
 color: #1a1e31;
 margin-bottom: 20px;
 font-weight: 500;
@@ -3829,10 +3829,10 @@ font-weight: 500;
 
 
 .table thead th {
-	font-family: 'Montserrat-Light';
+	/*font-family: 'Montserrat-Light';*/
 
 	border-bottom: none;
-	font-size: 14px;
+	/*font-size: 14px;*/
 	color: #a7a9ac;
 	font-weight: 1000;
 }
@@ -4155,22 +4155,22 @@ opacity: 0.8;
 
 footer h3{
   color: #fff;
-  font-size: 14px;
-  font-family: 'Montserrat-Regular';
+  /*font-size: 14px;*/
+  /*font-family: 'Montserrat-Regular';*/
 }
 
 footer ul li a{
   color: #bdbfc4;
-  font-size: 13px;
-  font-family:'Montserrat-Light';
+  /*font-size: 13px;*/
+  /*font-family:'Montserrat-Light';*/
 }
 footer ul li{
   padding: 7px 0;
 }
 footer h5{
   color: #fff;
-  font-size: 14px;
-  font-family: 'Montserrat-Regular';
+  /*font-size: 14px;*/
+  /*font-family: 'Montserrat-Regular';*/
 }
 footer a:hover{
   color: #fff;
@@ -4194,7 +4194,7 @@ footer a:hover{
   bottom: 0%;
   left: -0%;
   margin:20px;
-  font-family:Montserrat-Light;
+  /*font-family:Montserrat-Light;*/
   z-index: 5000;
   width: 35%;
   background: #fff;
@@ -4220,7 +4220,7 @@ footer a:hover{
     margin: 20px;
     margin-top: 0px;
     border-radius: 4px;
-    font-family: Montserrat-Light;
+    /*font-family: Montserrat-Light;*/
     box-shadow: 1px 1px 2px 1px #ccc !important;
     border-bottom: 0px;
 }

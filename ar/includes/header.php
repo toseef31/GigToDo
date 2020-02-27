@@ -387,8 +387,8 @@ $ip = get_real_user_ip();
           <div class="col-6 col-md-3 d-flex flex-row">
             <div class="logo">
               <?php if($site_logo_type == "image"){ ?>
-              <a class="logo-1" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/logo.svg" alt=""></a>
-              <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/home-logo.png" alt=""></a>
+              <a class="logo-1" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/logo.svg" alt="" width="150"></a>
+              <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/home-logo.png" alt="" width="150"></a>
               <?php }else{ ?>
               <?= $site_logo_text; ?>
               <?php } ?>
@@ -398,16 +398,18 @@ $ip = get_real_user_ip();
             <div class="header-right d-flex align-items-center justify-content-end">
               <div class="menu-inner">
                 <ul>
-                  <li><a href="javascript:void(0);">نشر طلب</a></li>
-                  <li><a href="how-it-works.php">كيف تعمل</a></li>
+                  <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a></li>
+                  <li><a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a></li>
                 </ul>
               </div>
+              <?php if($language_switcher == 1){ ?>
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="<?= $site_url?>">EN</option>
                   <option value="" selected="">AR</option>
                 </select>
               </div>
+              <?php } ?>
               <div class="usd-inner">
                 <select name="" id="">
                   <option value="">USD</option>
@@ -415,8 +417,8 @@ $ip = get_real_user_ip();
                 </select>
               </div>
               <div class="Login-button">
-                <a href="login.php">تسجيل الدخول</a>
-                <a href="register.php">نضم الان</a>
+                <a href="<?= $site_url; ?>/ar/login.php">تسجيل الدخول</a>
+                <a href="<?= $site_url; ?>/ar/register.php">نضم الان</a>
               </div>
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
@@ -446,18 +448,20 @@ $ip = get_real_user_ip();
     <div class="canvs-menu">
       <ul class="d-flex flex-column">
         <li>
-          <a href="javascript:void(0);">نشر طلب</a>
+          <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
         </li>
         <li>
-          <a href="how-it-works.php">كيف تعمل</a>
+          <a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a>
         </li>
         <li class="d-flex flex-row">
+          <?php if($language_switcher == 1){ ?>
           <div class="menu-action">
             <select name="" id="" onChange="window.location.href=this.value">
               <option value="<?= $site_url?>">EN</option>
               <option value="" selected="">AR</option>
             </select>
           </div>
+          <?php } ?>
           <div class="menu-action">
             <select name="" id="">
               <option value="">USD</option>
@@ -466,12 +470,12 @@ $ip = get_real_user_ip();
           </div>
         </li>
         <li class="mb-20">
-          <a class="button login-button" href="login.php">
+          <a class="button login-button" href="<?= $site_url; ?>/ar/login.php">
             الدخول
           </a>
         </li>
         <li>
-          <a class="button join-button" href="register.php">
+          <a class="button join-button" href="<?= $site_url; ?>/ar/register.php">
             انضم دلوقتي
           </a>
         </li>

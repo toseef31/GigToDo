@@ -1,47 +1,47 @@
 @charset "utf-8";
 @font-face {
-    font-family: "Guardian-EgypTT";
+    /*font-family: "Guardian-EgypTT";*/
     src: url("../fonts/Guardian-EgypTT-Medium.eot?v=2");
     src: url("../fonts/Guardian-EgypTT-Medium.eot?v=2#iefix") format("embedded-opentype"), url("../fonts/Guardian-EgypTT-Medium.woff2?v=2") format("woff2"), url("../fonts/Guardian-EgypTT-Medium.woff?v=2") format("woff"), url("../fonts/Guardian-EgypTT-Medium.ttf?v=2") format("truetype"), url("../fonts/Guardian-EgypTT-Medium.svg?v=2#Guardian EgypTT") format("svg");
-    font-style: normal;
-    font-weight: 500;
+    /*font-style: normal;*/
+    /*font-weight: 500;*/
     font-stretch: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Guardian-EgypTT";
+    /*font-family: "Guardian-EgypTT";*/
     src: url("../fonts/Guardian-EgypTT-Light.eot?v=2");
     src: url("../fonts/Guardian-EgypTT-Light.eot?v=2#iefix") format("embedded-opentype"), url("../fonts/Guardian-EgypTT-Light.woff2?v=2") format("woff2"), url("../fonts/Guardian-EgypTT-Light.woff?v=2") format("woff"), url("../fonts/Guardian-EgypTT-Light.ttf?v=2") format("truetype"), url("../fonts/Guardian-EgypTT-Light.svg?v=2#Guardian-EgypTT") format("svg");
     font-style: normal;
-    font-weight: 300;
+    /*font-weight: 300;*/
     font-stretch: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Graphik Webfont";
+    /*font-family: "Graphik Webfont";*/
     src: url("../fonts/Graphik-Regular-Web.eot");
     src: url("../fonts/Graphik-Regular-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Regular-Web.woff2") format("woff2"), url("../fonts/Graphik-Regular-Web.woff") format("woff"), url("../fonts/Graphik-Regular-Web.svg#Graphik-Regular-Web") format("svg"), url("../fonts/Graphik-Regular-Web.ttf") format("opentype");
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-style: normal;
     font-stretch: normal;
 }
 
 @font-face {
-    font-family: "Graphik Webfont";
+    /*font-family: "Graphik Webfont";*/
     src: url("../fonts/Graphik-Medium-Web.eot");
     src: url("../fonts/Graphik-Medium-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Medium-Web.woff2") format("woff2"), url("../fonts/Graphik-Medium-Web.woff") format("woff"), url("../fonts/Graphik-Medium-Web.svg#Graphik-Medium-Web") format("svg"), url("../fonts/Graphik-Medium-Web.ttf") format("opentype");
-    font-weight: 500;
+    /*font-weight: 500;*/
     font-style: normal;
     font-stretch: normal;
 }
 
 @font-face {
-    font-family: "Graphik Webfont";
+    /*font-family: "Graphik Webfont";*/
     src: url("../fonts/Graphik-Medium-Web.eot");
     src: url("../fonts/Graphik-Medium-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Medium-Web.woff2") format("woff2"), url("../fonts/Graphik-Medium-Web.woff") format("woff"), url("../fonts/Graphik-Medium-Web.svg#Graphik-Medium-Web") format("svg"), url("../fonts/Graphik-Medium-Web.ttf") format("opentype");
-    font-weight: 700;
+    /*font-weight: 700;*/
     font-style: normal;
     font-stretch: normal;
 }
@@ -110,22 +110,22 @@
 
 
 .ui-toolkit body {
-    color: #222;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    line-height: 1.4;
+    /*color: #222;*/
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*line-height: 1.4;*/
     -webkit-font-smoothing: antialiased;
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit body {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-hero {
     font-size: 84px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -135,14 +135,14 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-hero {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-headline-larger,
 .ui-toolkit .text-editorial-nova h1 {
     font-size: 68px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 600;
     font-weight: 300;
     line-height: 1.2;
@@ -152,13 +152,13 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-headline-larger,
     .ui-toolkit .text-editorial-nova h1 {
-        font-family: "Guardian-EgypTT", serif;
+        /*font-family: "Guardian-EgypTT", serif;*/
     }
 }
 
 .ui-toolkit .text-headline {
     font-size: 52px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 600;
     font-weight: 300;
     line-height: 1.2;
@@ -167,7 +167,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-headline {
-        font-family: "Guardian-EgypTT", serif;
+        /*font-family: "Guardian-EgypTT", serif;*/
     }
 }
 
@@ -175,7 +175,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 .ui-toolkit .text-editorial-nova h2,
 .ui-toolkit .text-editorial-nova blockquote {
     font-size: 42px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 600;
     font-weight: 300;
     line-height: 1.2;
@@ -186,7 +186,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-headline-smaller,
     .ui-toolkit .text-editorial-nova h2,
     .ui-toolkit .text-editorial-nova blockquote {
-        font-family: "Guardian-EgypTT", serif;
+        /*font-family: "Guardian-EgypTT", serif;*/
     }
 }
 
@@ -200,7 +200,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 .ui-toolkit .text-title-larger,
 .ui-toolkit .text-editorial-nova h3 {
     font-size: 32px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 500;
     line-height: 1.4;
 }
@@ -209,14 +209,14 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-title-larger,
     .ui-toolkit .text-editorial-nova h3 {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-title,
 .ui-toolkit .text-editorial-nova h4 {
     font-size: 26px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 500;
     line-height: 1.4;
 }
@@ -225,14 +225,14 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-title,
     .ui-toolkit .text-editorial-nova h4 {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-title-smaller,
 .ui-toolkit .text-editorial-nova h5 {
     font-size: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-weight: 500;
     line-height: 1.2;
     text-transform: none;
@@ -242,7 +242,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-title-smaller,
     .ui-toolkit .text-editorial-nova h5 {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
@@ -252,189 +252,189 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit .text-body-largest,
 .ui-toolkit .text-editorial-nova h6 {
-    font-size: 18px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
+    /*font-size: 18px;*/
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*font-weight: 300;*/
+    /*line-height: 1.6;*/
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-body-largest,
     .ui-toolkit .text-editorial-nova h6 {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-editorial-nova h6 {
-    font-weight: 500;
+    /*font-weight: 500;*/
     text-transform: none;
-    line-height: 1.6;
+    /*line-height: 1.6;*/
 }
 
 .ui-toolkit .text-body-larger {
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
+    /*font-size: 16px;*/
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*font-weight: 300;*/
+    /*line-height: 1.6;*/
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-body-larger {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-body {
-    font-size: 14px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
+    /*font-size: 14px;*/
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*font-weight: 300;*/
+    /*line-height: 1.6;*/
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-body {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-body-smaller {
-    font-size: 12px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
+    /*font-size: 12px;*/
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*font-weight: 300;*/
+    /*line-height: 1.6;*/
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-body-smaller {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 .ui-toolkit .text-category-label {
-    font-size: 12px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    line-height: 1.4;
+    /*font-size: 12px;*/
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*font-weight: 500;*/
+    /*text-transform: uppercase;*/
+    /*letter-spacing: 1px;*/
+    /*line-height: 1.4;*/
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit .text-category-label {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
 @media only screen and (min-width: 0) and (max-width: 899px) {
     .ui-toolkit .text-hero {
-        font-size: 68px;
-        font-weight: bold;
+        /*font-size: 68px;*/
+        /*font-weight: bold;*/
     }
     .ui-toolkit .text-headline-larger,
     .ui-toolkit .text-editorial-nova h1 {
-        font-size: 52px;
-        font-weight: 300;
+        /*font-size: 52px;*/
+        /*font-weight: 300;*/
     }
     .ui-toolkit .text-headline {
-        font-size: 42px;
-        font-weight: 300;
+        /*font-size: 42px;
+        font-weight: 300;*/
     }
     .ui-toolkit .text-headline-smaller,
     .ui-toolkit .text-editorial-nova h2,
     .ui-toolkit .text-editorial-nova blockquote {
-        font-size: 32px;
-        font-weight: 300;
+        /*font-size: 32px;
+        font-weight: 300;*/
     }
     .ui-toolkit .text-title-larger,
     .ui-toolkit .text-editorial-nova h3 {
-        font-size: 26px;
-        font-weight: bold;
+        /*font-size: 26px;
+        font-weight: bold;*/
     }
     .ui-toolkit .text-title,
     .ui-toolkit .text-editorial-nova h4 {
-        font-size: 20px;
-        font-weight: bold;
+        /*font-size: 20px;*/
+        /*font-weight: bold;*/
     }
     .ui-toolkit .text-title-smaller,
     .ui-toolkit .text-editorial-nova h5 {
-        font-size: 18px;
-        font-weight: bold;
+        /*font-size: 18px;*/
+        /*font-weight: bold;*/
     }
     .ui-toolkit .text-body-largest,
     .ui-toolkit .text-editorial-nova h6 {
-        font-size: 16px;
-        font-weight: normal;
+        /*font-size: 16px;*/
+        /*font-weight: normal;*/
     }
     .ui-toolkit .text-editorial-nova h6 {
-        font-weight: bold;
+        /*font-weight: bold;*/
     }
 }
 
 @media only screen and (min-width: 0) and (max-width: 639px) {
     .ui-toolkit .text-hero {
-        font-size: 52px;
+        /*font-size: 52px;*/
     }
     .ui-toolkit .text-headline-larger,
     .ui-toolkit .text-editorial-nova h1 {
-        font-size: 42px;
+        /*font-size: 42px;*/
     }
     .ui-toolkit .text-headline {
-        font-size: 32px;
+        /*font-size: 32px;*/
     }
     .ui-toolkit .text-headline-smaller,
     .ui-toolkit .text-editorial-nova h2,
     .ui-toolkit .text-editorial-nova blockquote {
-        font-size: 26px;
+        /*font-size: 26px;*/
     }
     .ui-toolkit .text-title-larger,
     .ui-toolkit .text-editorial-nova h3 {
-        font-size: 20px;
+        /*font-size: 20px;*/
     }
     .ui-toolkit .text-title,
     .ui-toolkit .text-editorial-nova h4 {
-        font-size: 20px;
+        /*font-size: 20px;*/
     }
     .ui-toolkit .text-title-smaller,
     .ui-toolkit .text-editorial-nova h5 {
-        font-size: 18px;
+        /*font-size: 18px;*/
     }
     .ui-toolkit .text-body-largest,
     .ui-toolkit .text-editorial-nova h6 {
-        font-size: 16px;
+        /*font-size: 16px;*/
     }
     .ui-toolkit .text-editorial-nova h6 {
-        font-weight: bold;
+        /*font-weight: bold;*/
     }
 }
 
 .ui-toolkit h1,
 .ui-toolkit .h1 {
-    line-height: 1.2;
+    /*line-height: 1.2;*/
     -webkit-font-smoothing: antialiased;
 }
 
 @media only screen and (min-width: 0) {
     .ui-toolkit h1,
     .ui-toolkit .h1 {
-        font-size: 20px;
+        /*font-size: 20px;*/
     }
 }
 
 @media only screen and (min-width: 640px) {
     .ui-toolkit h1,
     .ui-toolkit .h1 {
-        font-size: 26px;
+        /*font-size: 26px;*/
     }
 }
 
 .ui-toolkit h2,
 .ui-toolkit .h2 {
-    line-height: 1.2;
+    /*line-height: 1.2;*/
     -webkit-font-smoothing: antialiased;
 }
 
@@ -451,7 +451,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 .ui-toolkit .h2,
 .ui-toolkit h3,
 .ui-toolkit .h3 {
-    font-weight: 500;
+    /*font-weight: 500;*/
 }
 
 .ui-toolkit h1.normalize,
@@ -460,7 +460,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 .ui-toolkit h4.normalize,
 .ui-toolkit h5.normalize,
 .ui-toolkit h6.normalize {
-    font-size: inherit;
+    /*font-size: inherit;*/
     line-height: inherit;
     margin: inherit;
     padding: inherit;
@@ -468,7 +468,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit blockquote {
     border-left: 1px solid #E1E3DF;
-    font-style: italic;
+    /*font-style: italic;*/
     padding: 12px 0 12px 12px;
 }
 
@@ -1546,7 +1546,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit .btn-small {
     font-size: 12px;
-    font-weight: normal;
+    /*font-weight: normal;*/
     height: 28px;
     padding: 4px 12px;
 }
@@ -1643,7 +1643,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
     height: inherit;
     text-align: left;
     color: #222;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-size: 14px;
     line-height: 1.4;
 }
@@ -1896,12 +1896,12 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit .card-title {
     font-size: 14px;
-    font-weight: normal;
+    /*font-weight: normal;*/
 }
 
 .ui-toolkit .card-price {
     color: #000;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .ui-toolkit .card-price.float-right {
@@ -2025,7 +2025,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit .listing-card .discount-note {
     color: #2E8539;
-    font-weight: normal;
+    /*font-weight: normal;*/
 }
 
 .ui-toolkit .listing-card .free-shipping {
@@ -2254,7 +2254,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
     border-top-left-radius: 3px;
     background-color: #FBFBFA;
     border-bottom: 1px solid #E1E3DF;
-    font-weight: bold;
+    /*font-weight: bold;*/
     position: relative;
 }
 
@@ -2340,7 +2340,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit .overlay-body .list-nav-item {
     border-radius: 0;
-    font-weight: normal;
+    /*font-weight: normal;*/
     margin: 0;
     padding-left: 18px;
     padding-right: 18px;
@@ -2521,14 +2521,14 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 
 .ui-toolkit #gnav-header #search-query,
 .ui-toolkit #gnav-header .btn-primary {
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
 }
 
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit #gnav-header #search-query,
     .ui-toolkit #gnav-header .btn-primary {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
@@ -4086,14 +4086,14 @@ width: 24px;
 }
 
 .ui-toolkit .normal {
-    font-weight: normal;
+    /*font-weight: normal;*/
 }
 
 .ui-toolkit b,
 .ui-toolkit .b,
 .ui-toolkit strong,
 .ui-toolkit .strong {
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .ui-toolkit .text-transform-none {
@@ -4106,7 +4106,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
     .ui-toolkit .b,
     .ui-toolkit strong,
     .ui-toolkit .strong {
-        font-weight: 500;
+        /*font-weight: 500;*/
     }
 }
 
@@ -6855,7 +6855,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
 }
 
 .ui-toolkit .login-registration-form .message-container-connections.msg h3 {
-    font-weight: normal;
+    /*font-weight: normal;*/
     font-size: 12px;
     margin: 0;
     padding: 8px 14px;
@@ -6865,11 +6865,11 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
 
 .ui-toolkit .login-registration-form .message-container-connections.msg strong {
     color: #333;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .ui-toolkit .login-registration-form .message-container-connections.msg h3 a {
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .ui-toolkit #valid-email-disclaimer {
@@ -6965,7 +6965,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
 .ui-toolkit .login-registration-form .or span {
     background-color: #FFFFFF;
     font-size: 11px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     left: 41px;
     letter-spacing: 0.1em;
     padding: 0 12px;
@@ -7074,7 +7074,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
 }
 
 .ui-toolkit .external-acct-name {
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #999;
     display: block;
 }
@@ -7145,8 +7145,8 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
 }
 
 .ui-toolkit #inline-overlay.collect-email h1 {
-    font-family: "Guardian-EgypTT";
-    font-weight: 500;
+    /*font-family: "Guardian-EgypTT";*/
+    /*font-weight: 500;*/
     font-size: 24px;
     margin-bottom: 8px;
 }
@@ -7307,7 +7307,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
 .ui-toolkit #custom-order-overlay .overlay-header h2,
 .ui-toolkit #notification-overlay .overlay-header h2 {
     font-size: 21px;
-    font-weight: normal;
+    /*font-weight: normal;*/
     line-height: 26px;
     text-shadow: 0 1px 0 #FFF;
 }
@@ -7422,7 +7422,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
     margin: 0 0 -1px;
     text-align: center;
     color: #222;
-    font-weight: bold;
+    /*font-weight: bold;*/
     position: relative;
     cursor: pointer;
 }
@@ -7503,7 +7503,7 @@ screen and (orientation: landscape) and (min-device-height: 680px) {
     padding: 8px 12px;
     margin: 0 0 -1px;
     text-align: center;
-    font-weight: bold;
+    /*font-weight: bold;*/
     position: relative;
 }
 
@@ -7792,9 +7792,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
     border-radius: 3px;
     color: #FFF;
     text-decoration: none;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
+    /*font-size: 15px;*/
+    /*font-weight: bold;*/
     cursor: pointer;
     line-height: normal;
     margin: 0;
@@ -7843,7 +7843,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit #notification-overlay .btn-fb,
     .ui-toolkit #notification-overlay .btn-google,
     .ui-toolkit #notification-overlay .btn-link {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
@@ -7862,7 +7862,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 .ui-toolkit #notification-overlay .btn-link {
     color: #F56400;
     font-size: 14px;
-    font-weight: normal;
+    /*font-weight: normal;*/
     cursor: pointer;
     background-image: none;
     background-color: transparent;
@@ -8043,9 +8043,9 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
     background-color: #F56400;
     border-color: rgba(0, 0, 0, 0.1);
     text-decoration: none;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-size: 15px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     cursor: pointer;
     line-height: normal;
     margin: 0;
@@ -8055,7 +8055,7 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit #conversation-overlay.overlay .canned-response-new-form .canned-response-new-save {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
@@ -8107,8 +8107,8 @@ screen and (orientation: landscape) and (min-device-height: 740px) {
 }
 
 .ui-toolkit #local-select-overlay.overlay h3 {
-    font-size: 16px;
-    font-weight: normal;
+    /*font-size: 16px;*/
+    /*font-weight: normal;*/
     line-height: 22px;
 }
 
@@ -8156,7 +8156,7 @@ html.ui-toolkit {
 
 .ui-toolkit {
     color: #222;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     font-size: 14px;
     line-height: 1.4;
     text-align: left;
@@ -8165,7 +8165,7 @@ html.ui-toolkit {
 @media screen and (orientation: portrait) and (min-device-width: 740px),
 screen and (orientation: landscape) and (min-device-height: 740px) {
     .ui-toolkit {
-        font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+        /*font-family: "Graphik Webfont", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;*/
     }
 }
 
@@ -8387,8 +8387,8 @@ html:hover [class^="gnav-"] {
 .smart-banner p {
     text-align: left;
     padding-left: 8px;
-    font-weight: 400;
-    font-size: 14px;
+    /*font-weight: 400;*/
+    /*font-size: 14px;*/
     line-height: 1.3em;
     color: #fff;
 }
@@ -8420,8 +8420,8 @@ html:hover [class^="gnav-"] {
 }
 
 .invite-traffic .copy-col {
-    font-weight: 400;
-    font-size: 14px;
+    /*font-weight: 400;*/
+    /*font-size: 14px;*/
     color: #fff;
 }
 
@@ -8451,8 +8451,8 @@ html:hover [class^="gnav-"] {
     right: 8px;
     min-width: 85px;
     background: white;
-    font-size: 14px;
-    font-weight: 500;
+    /*font-size: 14px;*/
+    /*font-weight: 500;*/
     color: #F45800;
     border: 2px solid white;
     padding: 7px;
@@ -8469,7 +8469,7 @@ html:hover [class^="gnav-"] {
 }
 
 .grey-banner.smart-banner p {
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #222;
     padding: 0;
 }
@@ -8563,7 +8563,7 @@ html:hover [class^="gnav-"] {
 }
 
 .smart-interstitial-msg-tablet {
-    font-family: "Guardian-Medium", Georgia, serif;
+    /*font-family: "Guardian-Medium", Georgia, serif;*/
 }
 
 .smart-interstitial-msg {
@@ -8573,7 +8573,7 @@ html:hover [class^="gnav-"] {
 .smart-interstitial-btn {
     float: center;
     background: white;
-    font-weight: 500;
+    /*font-weight: 500;*/
     color: #F45800;
     border: 2px solid white;
     padding: 7px;
@@ -8684,13 +8684,13 @@ html:hover [class^="gnav-"] {
     .smart-interstitial-msg {
         padding-top: 10px;
         padding-bottom: 20px;
-        font-size: 1.7em;
+        /*font-size: 1.7em;*/
         line-height: 30px;
         max-width: 250px;
     }
     .smart-interstitial-btn {
-        font-size: 1.2em;
-        font-weight: 500;
+        /*font-size: 1.2em;*/
+        /*font-weight: 500;*/
         border: 2px solid white;
         padding: 7px;
         border-radius: 3px;
@@ -8717,8 +8717,8 @@ html:hover [class^="gnav-"] {
         max-width: 300px;
     }
     .smart-interstitial-btn {
-        font-size: 1.2em;
-        font-weight: 500;
+        /*font-size: 1.2em;*/
+        /*font-weight: 500;*/
         border: 2px solid white;
         padding: 7px;
         border-radius: 3px;
@@ -8745,8 +8745,8 @@ html:hover [class^="gnav-"] {
         max-width: 400px;
     }
     .smart-interstitial-btn {
-        font-size: 1.9em;
-        font-weight: 500;
+        /*font-size: 1.9em;
+        font-weight: 500;*/
         border: 2px solid white;
         padding: 7px;
         border-radius: 6px;
@@ -8756,7 +8756,7 @@ html:hover [class^="gnav-"] {
     }
     .smart-interstitial-mweb-btn {
         margin-top: 40px;
-        font-size: 1.8em;
+        /*font-size: 1.8em;*/
     }
 }
 
@@ -8767,12 +8767,12 @@ html:hover [class^="gnav-"] {
     .smart-interstitial-msg {
         padding-top: 8px;
         padding-bottom: 15px;
-        font-size: 1.6em;
+        /*font-size: 1.6em;*/
         line-height: 30px;
     }
     .smart-interstitial-btn {
-        font-size: 1.1em;
-        font-weight: 500;
+        /*font-size: 1.1em;
+        font-weight: 500;*/
         border: 2px solid white;
         padding: 7px;
         border-radius: 3px;
@@ -9804,8 +9804,8 @@ a.arrow-up::after {
 screen and (min-device-height: 680px) and (orientation: landscape) {
     .gnav-user-card .name,
     .gnav-shop-card .name {
-        font-family: "Guardian-EgypTT", Arial, Helvetica, sans-serif;
-        font-weight: 500;
+        /*font-family: "Guardian-EgypTT", Arial, Helvetica, sans-serif;*/
+        /*font-weight: 500;*/
     }
 }
 
@@ -10108,8 +10108,8 @@ body.is-global-nav #buyer-invite-credit-notice {
     border: #ffe4da;
     background-color: #FFF3EE;
     text-align: left;
-    font-size: 14px;
-    font-weight: bold;
+    /*font-size: 14px;
+    font-weight: bold;*/
 }
 
 body.is-global-nav #buyer-invite-credit-notice .msg-inner {
@@ -10118,8 +10118,8 @@ body.is-global-nav #buyer-invite-credit-notice .msg-inner {
 
 body.is-global-nav #buyer-invite-credit-notice .msg-inner h2 {
     color: #333;
-    font-weight: bold;
-    font-size: inherit;
+    /*font-weight: bold;*/
+    /*font-size: inherit;*/
     padding: 0px;
     text-transform: none;
 }
@@ -10196,8 +10196,8 @@ body.is-global-nav #new-seller-header {
     margin-left: 12px;
     padding: 8px;
     line-height: 16px;
-    font-size: 14px;
-    font-weight: normal;
+   /* font-size: 14px;
+    font-weight: normal;*/
     text-decoration: none;
     color: #0192B5;
     outline: 1px dotted #F56400;
@@ -10756,10 +10756,10 @@ body.is-global-nav #new-seller-header {
     }
     .is-responsive .gnav-footer .column-section ul li h4,
     .is-responsive .gnav-footer .column-section ul li a {
-        font-weight: bold;
+        /*font-weight: bold;*/
         padding: 10px;
-        font-size: 13px;
-        font-weight: normal;
+        /*font-size: 13px;*/
+        /*font-weight: normal;*/
         cursor: pointer;
     }
     .is-responsive .gnav-footer .column-section h4 .gnav-ss-icon {
@@ -10817,7 +10817,7 @@ body.is-global-nav #new-seller-header {
     }
     .gnav-user-card .name,
     .gnav-shop-card .name {
-        font-weight: bold;
+        /*font-weight: bold;*/
     }
 }
 
@@ -10857,7 +10857,7 @@ body.is-global-nav #new-seller-header {
         color: #fff;
     }
     .is-responsive .signup-message h3 {
-        font-family: "Arial", "Helvetica", sans-serif;
+        /*font-family: "Arial", "Helvetica", sans-serif;*/
         font-size: 13px;
         line-height: 18px;
         padding-bottom: 10px;
@@ -10866,7 +10866,7 @@ body.is-global-nav #new-seller-header {
     .is-responsive.is-signed-in .gnav-header #gigtodo-logo a:before {
         font-family: "SSEtsy";
         font-style: normal;
-        font-weight: 400;
+        /*font-weight: 400;*/
         text-decoration: none;
         white-space: nowrap;
         -moz-font-feature-settings: "liga=1";
@@ -11676,7 +11676,7 @@ a.close.ss-delete:hover {
 .ui-toolkit .badge.badge-primary {
     background-color: #28a745 !important;
     color: #fff !important;
-    font-weight: bold !important;
+    /*font-weight: bold !important;*/
     border-radius: 100px !important;
 }
 

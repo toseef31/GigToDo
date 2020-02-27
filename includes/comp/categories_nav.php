@@ -7,7 +7,7 @@
     <div class="col-xs-12">
       <div data-ui="cat-nav" id="desktop-category-nav" class="ui-toolkit cat-nav">
         <div class="bg-white bg-transparent-homepage-experiment hide-xs hide-sm hide-md">
-          <div class="col-group body-max-width mainmenu">
+          <div class="body-max-width mainmenu">
             <ul class="body-max-width display-flex-xs justify-content-space-between" role="menubar" data-ui="top-nav-category-list" aria-activedescendant="catnav-primary-link-10855">
               <?php
               $get_categories = $db->query("select * from categories where cat_featured='yes'".($lang_dir=="right"?'order by 1 DESC':'')." LIMIT 0,7");
@@ -18,7 +18,7 @@
               $row_meta = $get_meta->fetch();
               @$cat_title = $row_meta->cat_title;
               ?>
-              <li class="top-nav-item pl-xs-2 pr-xs-2 display-flex-xs align-items-center text-center" 
+              <li class="top-nav-item align-items-center text-center" 
                 data-linkable="true" data-ui="top-nav-category-link" data-node-id="c-<?php echo $cat_id; ?>">
                 <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>">
                 <?php echo @$cat_title; ?>

@@ -66,7 +66,7 @@ $slide_image = $row_slides->slide_image;
     </div>
     <div class="started-section-wrapper">
       <?php
-        $get_categories = $db->query("select * from categories where cat_featured='yes' ".($lang_dir == "right" ? 'order by 1 DESC LIMIT 6,6':' LIMIT 0,6')."");
+        $get_categories = $db->query("select * from categories where cat_featured='yes' ".($lang_dir == "right" ? 'order by 1 DESC LIMIT 12,12':' LIMIT 0,12')."");
         while($row_categories = $get_categories->fetch()){
         $cat_id = $row_categories->cat_id;
         $cat_image = $row_categories->cat_image;
