@@ -43,7 +43,7 @@ $referral_money = $row_general_settings->referral_money;
 	<meta name="author" content="<?php echo $site_author; ?>">
 
 	<!--====== Favicon Icon ======-->
-	<link rel="shortcut icon" href="assets/img/favicon.ico" type="image/png">
+	<link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
 
 	<!-- ==============Google Fonts============= -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
@@ -150,7 +150,7 @@ $referral_money = $row_general_settings->referral_money;
 							<form action="" method="POST">
 								<div class="form-group">
 									<label class="control-label">الاسم الأول</label>
-									<input class="form-control" type="text" name="name" placeholder="Enter Your Full Name" value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name']; ?>" required="" />
+									<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name']; ?>" required="" />
 								</div>
 								<!-- <div class="form-group">
 									<label class="control-label">Last Name</label>
@@ -158,7 +158,7 @@ $referral_money = $row_general_settings->referral_money;
 								</div> -->
 								<div class="form-group">
 									<label class="control-label">الاسم الأخير</label>
-									<input class="form-control" type="text" name="u_name" placeholder="Enter Your Username" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" required="" />
+									<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" required="" />
 									<small class="form-text text-muted">Note: You will not be able to change username once your account has been created.</small>
 									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
@@ -166,16 +166,16 @@ $referral_money = $row_general_settings->referral_money;
 								</div>
 								<div class="form-group">
 									<label class="control-label">الإيميل</label>
-									<input class="form-control" type="email" name="email" placeholder="Enter Email" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" required="">
+									<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" required="">
             			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
 								</div>
 								<div class="form-group">
 									<label class="control-label">الباسوورد</label>
-									<input class="form-control" type="password" name="pass" placeholder="Enter Password" required="" />
+									<input class="form-control" type="password" name="pass" placeholder="أدخل كلمة المرور" required="" />
 								</div>
 								<div class="form-group">
 								  <label class="control-label"> Confirm Password: </label>
-								  <input type="password" class="form-control" name="con_pass" placeholder="Confirm Password" required="">
+								  <input type="password" class="form-control" name="con_pass" placeholder="تأكيد كلمة المرور" required="">
 								  <?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
 								</div>
 								<?php if(isset($_GET['referral'])){ ?>

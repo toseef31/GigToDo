@@ -52,7 +52,7 @@ $ip = get_real_user_ip();
         <div class="row align-items-center">
           <div class="col-6 col-md-3 d-flex flex-row">
             <div class="logo">
-              <a class="home-logo" href="<?= $site_url?>"><img src="<?= $site_url; ?>/assets/img/signin-logo.png" alt=""></a>
+              <a class="home-logo" href="<?= $site_url?>"><img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt=""></a>
             </div>
           </div>
           <div class="col-6 col-md-9">
@@ -60,15 +60,17 @@ $ip = get_real_user_ip();
               <div class="menu-inner">
                 <ul>
                   <li><a href="javascript:void(0);">Post a Request</a></li>
-                  <li><a href="how-it-works.php">How it Works</a></li>
+                  <li><a href="<?= $site_url ?>/how-it-works.php">How it Works</a></li>
                 </ul>
               </div>
+              <?php if($language_switcher == 1){ ?>
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="" selected="">EN</option>
                   <option value="<?= $site_url?>/ar/">AR</option>
                 </select>
               </div>
+              <?php } ?>
               <div class="usd-inner">
                 <select name="" id="">
                   <option value="">USD</option>
@@ -110,15 +112,17 @@ $ip = get_real_user_ip();
           <a href="javascript:void(0);">Post A Request</a>
         </li>
         <li>
-          <a href="how-it-works.php">How it Works</a>
+          <a href="<?= $site_url ?>/how-it-works.php">How it Works</a>
         </li>
         <li class="d-flex flex-row">
+          <?php if($language_switcher == 1){ ?>
           <div class="menu-action">
             <select name="" id="" onChange="window.location.href=this.value">
               <option value="" selected="">EN</option>
               <option value="<?= $site_url?>/ar/">AR</option>
             </select>
           </div>
+          <?php } ?>
           <div class="menu-action">
             <select name="" id="">
               <option value="">USD</option>
@@ -127,10 +131,10 @@ $ip = get_real_user_ip();
           </div>
         </li>
         <li class="mb-20">
-          <a class="button login-button" href="login.php">Login</a>
+          <a class="button login-button" href="<?= $site_url ?>/login.php">Login</a>
         </li>
         <li>
-          <a class="button join-button" href="register.php">Join Now</a>
+          <a class="button join-button" href="<?= $site_url ?>/register.php">Join Now</a>
         </li>
       </ul>
     </div>

@@ -99,7 +99,7 @@
           $link_title = $row_footer_links->link_title;
           $link_url = $row_footer_links->link_url;
           ?>
-          <a href="<?= $link_url; ?>"><?= $link_title; ?></a>
+          <a href="<?= $site_url?><?= $link_url; ?>"><?= $link_title; ?></a>
           <?php } ?>
           <!-- <a href="javascript:void(0);">Mission and Vision</a>
           <a href="javascript:void(0);">Blog</a> -->
@@ -185,9 +185,9 @@
         <div class="widget-link">
           <ul>
             <li>
-              <p>Soon On:</p><a href="javascript:void(0);"><img src="assets/img/play.png" alt=""></a>
+              <p>Soon On:</p><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/play.png" alt=""></a>
             </li>
-            <li><a href="javascript:void(0);"><img src="assets/img/apple.png" alt=""></a></li>
+            <li><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/apple.png" alt=""></a></li>
           </ul>
         </div>
       </div>
@@ -195,9 +195,9 @@
         <div class="widget-link">
           <ul>
             <li>
-              <p>Secured With</p><a href="javascript:void(0);"><img src="assets/img/paypal.png" alt=""></a>
+              <p>Secured With</p><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/paypal.png" alt=""></a>
             </li>
-            <li><a href="javascript:void(0);"><img src="assets/img/noth.png" alt=""></a></li>
+            <li><a href="javascript:void(0);"><img src="<?= $site_url ?>/assets/img/noth.png" alt=""></a></li>
           </ul>
         </div>
       </div>

@@ -42,18 +42,53 @@ function get_real_user_ip(){
 $ip = get_real_user_ip();
 
 ?>
-
+<style>
+  .ui-toolkit .text-body-larger{
+    text-align: right;
+  }
+</style>
 <!-- New Header Design -->
+<!-- Header -->
 <header>
   <div class="header-top">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-6 col-md-3 d-flex flex-row">
+        <div class="col-6 col-lg-2">
           <div class="logo">
-            <a class="home-logo" href="index.html"><img src="<?= $site_url; ?>/ar/assets/img/signin-logo.png" alt="" width="150"></a>
+            <a href="index.html"><img src="assets/img/logo.svg" alt=""></a>
           </div>
         </div>
-        <div class="col-6 col-md-9">
+        <div class="col-6 d-block d-lg-none">
+          <div class="header-right d-flex flex-row align-items-center justify-content-end">
+            <div class="menubar d-flex flex-row align-items-center">
+              <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+              <div class="icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 col-xl-4">
+          <div class="header-search-box">
+            <form action="" class="d-flex flex-row" id="gnav-search" method="POST">
+              <input id="search-query" class="rounded" name="search_query" value="<?php echo @$_SESSION["search_query"]; ?>"  autocomplete="off" placeholder="البحث عن الخدمات">
+              <button name="search" type="submit" value="Search">
+                <?php echo $lang['search']['button']; ?>
+                </button>
+                <ul class="search-bar-panel d-none"></ul>
+            </form>
+            <?php
+              if (isset($_POST['search'])) {
+                  $search_query = $input->post('search_query');
+                  $_SESSION['search_query'] = $search_query;
+                  echo "<script>window.open('$site_url/search.php','_self')</script>";
+              }
+            ?>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 col-xl-6 d-none d-lg-block">
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
@@ -75,27 +110,42 @@ $ip = get_real_user_ip();
                 <option value="">EGP</option>
               </select>
             </div>
-            <div class="Login-button d-none d-lg-flex">
-              <a href="login.php">تسجيل الدخول</a>
-              <a href="register.php">نضم الان</a>
-            </div>
-            <div class="menubar d-lg-none">
-              <div class="d-flex flex-row align-items-center">
-                <div class="image">
-                  <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png" alt="">
-                </div>
-                <div class="icon">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              </div>
+            <div class="Login-button">
+              <a href="<?= $site_url; ?>/ar/login.php">
+                الدخول
+              </a>
+              <a href="<?= $site_url; ?>/ar/register.php">
+                انضم دلوقتي
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- Header-menu -->
+  <div class="header-menu">
+    <?php include("comp/categories_nav.php"); ?>
+    <!-- <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <div class="mainmenu">
+            <nav>
+              <ul>
+                <li><a href="javascript:void(0);">الجرافيكس والتصميم</a></li>
+                <li><a href="javascript:void(0);">التسويق الرقمي</a></li>
+                <li><a href="javascript:void(0);">الكتابة والترجمة</a></li>
+                <li><a href="javascript:void(0);">البرمجة و تكنولوجيا المعلومات</a></li>
+                <li><a href="javascript:void(0);">الموسيقى والصوتيات </a></li>
+                <li><a href="javascript:void(0);">فيديو والرسوم المتحركة </a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <!-- Header-menu END-->
 </header>
 <!-- Header END-->
 <!-- Offcanvas-menu -->
@@ -128,12 +178,12 @@ $ip = get_real_user_ip();
         </div>
       </li>
       <li class="mb-20">
-        <a class="button login-button" href="login.php">
+        <a class="button login-button" href="<?= $site_url; ?>/ar/login.php">
           الدخول
         </a>
       </li>
       <li>
-        <a class="button join-button" href="register.php">
+        <a class="button join-button" href="<?= $site_url; ?>/ar/register.php">
           انضم دلوقتي
         </a>
       </li>

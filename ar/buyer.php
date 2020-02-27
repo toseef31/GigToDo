@@ -23,7 +23,7 @@
     <meta name="keywords" content="<?php echo $site_keywords; ?>">
     <meta name="author" content="<?php echo $site_author; ?>">
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/png">
+    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
     <!-- ==============Google Fonts============= -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <!--====== Bootstrap css ======-->
@@ -42,10 +42,13 @@
     <link href="assets/css/default.css" rel="stylesheet">
     <!--====== Style css ======-->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="<?= $site_url; ?>/styles/styles.css" rel="stylesheet">
     <!--====== Responsive css ======-->
     <link href="assets/css/responsive.css" rel="stylesheet">
     <link href="styles/sweat_alert.css" rel="stylesheet">
     <link href="styles/animate.css" rel="stylesheet">
+    <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
+    <link href="<?= $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
     <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
     <script src="js/ie.js"></script>
     <script type="text/javascript" src="js/sweat_alert.js"></script>
@@ -71,7 +74,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="user_images/<?= $seller_image; ?>" alt="">
                 <?php }else{ ?>
-                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+                <img src="<?= $site_url; ?>/assets/img/user1.png"  class="img-fluid rounded-circle mb-3">
                 <?php } ?>
                 <h5>أهلا بيك من تاني, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h5>
               </div>

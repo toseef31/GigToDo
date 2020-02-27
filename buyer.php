@@ -90,7 +90,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="user_images/<?= $seller_image; ?>" alt="">
                 <?php }else{ ?>
-                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+                <img src="<?= $site_url; ?>/assets/img/user1.png"  class="img-fluid rounded-circle mb-3">
                 <?php } ?>
                 <h5><?= $lang['welcome']; ?> back, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h5>
               </div>

@@ -2,6 +2,13 @@
   session_start();
   require_once("../includes/db.php");
   require_once("../functions/functions.php");
+  $seller_user_name = $_SESSION['seller_user_name'];
+  $select_login_seller = $db->select("sellers",array("seller_user_name" => $seller_user_name));
+  $row_login_seller = $select_login_seller->fetch();
+  $login_seller_id = $row_login_seller->seller_id;
+  $login_seller_name = $row_login_seller->seller_name;
+  $login_user_name = $row_login_seller->seller_user_name;
+
   if(isset($_GET['cat_url'])){
     unset($_SESSION['cat_child_id']);
     $get_cat = $db->select("categories",array('cat_url' => $input->get('cat_url')));
@@ -152,7 +159,7 @@
               $child_arabic_title = $row_meta->child_arabic_title;
               if(!empty($child_arabic_title)){
           ?>
-          <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>"><?php echo $child_arabic_title; ?></a>
+          <a href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>"><?php echo $child_arabic_title; ?></a>
           <?php }} ?>
           
         </div>

@@ -52,7 +52,7 @@ $ip = get_real_user_ip();
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo">
-            <a href="<?php echo $site_url; ?>"><img src="<?php echo $site_url; ?>/assets/img/logo.svg" alt=""></a>
+            <a href="<?php echo $site_url; ?>"><img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt=""></a>
           </div>
         </div>
         <div class="col-6 d-block d-lg-none">
@@ -97,12 +97,14 @@ $ip = get_real_user_ip();
                 <li><a href="javascript:void(0);">Orders</a></li>
               </ul>
             </div>
+            <?php if($language_switcher == 1){ ?>
             <div class="language-inner">
               <select name="" id="" onChange="window.location.href=this.value">
                 <option value="" selected="">EN</option>
                 <option value="<?= $site_url?>/ar/">AR</option>
               </select>
             </div>
+            <?php } ?>
             <div class="usd-inner">
               <select name="" id="">
                 <option value="">USD</option>
@@ -332,7 +334,7 @@ $ip = get_real_user_ip();
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
-      <li><a href="how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
+      <li><a href="<?= $site_url ?>/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
       <li><a href="<?= $site_url; ?>/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> Logout</a></li>
     </ul>
   </div>

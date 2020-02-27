@@ -827,7 +827,7 @@ if(isset($_POST['general_settings_update'])){
 	$favicon_extension = pathinfo($site_favicon, PATHINFO_EXTENSION);
 	$logo_extension = pathinfo($site_logo, PATHINFO_EXTENSION);
 	$logo_image_extension = pathinfo($site_logo_image, PATHINFO_EXTENSION);
-	$allowed = array('jpeg','jpg','gif','png','tif','ico','webp');
+	$allowed = array('jpeg','jpg','gif','png','tif','ico','webp', 'svg');
 
 	if(!in_array($favicon_extension,$allowed) & !empty($site_favicon) or !in_array($logo_extension,$allowed) & !empty($site_logo) or !in_array($logo_image_extension,$allowed) & !empty($site_logo_image)){
 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
