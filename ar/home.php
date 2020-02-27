@@ -9,7 +9,12 @@ $row_slides = $get_slides->fetch();
 $slide_id = $row_slides->slide_id; 
 $slide_image = $row_slides->slide_image; 
 ?>
-
+<style>
+  .get-started .started-section-wrapper .started-item .started-inner .started-thumb img {
+      width: 100%;
+      height: 245px;
+  }
+</style>
 <div class="banner-section style-two">
   <div class="container">
     <div class="section-wrapper">
