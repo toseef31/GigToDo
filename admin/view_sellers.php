@@ -164,6 +164,8 @@ echo "<script>window.open('login','_self');</script>";
 
                     <th>User's Email</th>
 
+                    <th>User's Type</th>
+
                     <th>Seller Level</th>
 
                     <th>Email Verified</th>
@@ -211,9 +213,11 @@ echo "<script>window.open('login','_self');</script>";
                 $seller_user_name = $row_sellers->seller_user_name;
                 $seller_email = $row_sellers->seller_email;
                 $seller_level = $row_sellers->seller_level;
+                $seller_type = $row_sellers->account_type;
                 $seller_register_date = $row_sellers->seller_register_date;
                 $seller_status = $row_sellers->seller_status;
                 $seller_verification = $row_sellers->seller_verification;
+                
 
                 if($seller_verification == "ok"){
                     $email_verification = "Yes";
@@ -239,6 +243,10 @@ echo "<script>window.open('login','_self');</script>";
 
                         <td>
                             <?= $seller_email; ?>
+                        </td>
+
+                        <td>
+                            <?= $seller_type; ?>
                         </td>
 
                         <td>

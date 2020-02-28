@@ -117,7 +117,7 @@ if(is_array($form_errors)){
 </div><!--- form-group row Ends --->
 <div class="form-group row"><!--- form-group row Starts --->
 
-<label class="col-md-4 control-label"> Category Title : </label>
+<label class="col-md-4 control-label"> Category Title Arabic : </label>
 
 <div class="col-md-6">
 
@@ -140,7 +140,7 @@ if(is_array($form_errors)){
 </div><!--- form-group row Ends --->
 <div class="form-group row"><!--- form-group row Starts --->
 
-<label class="col-md-4 control-label"> Category Description : </label>
+<label class="col-md-4 control-label"> Category Description Arabic: </label>
 
 <div class="col-md-6">
 

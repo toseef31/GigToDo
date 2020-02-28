@@ -175,7 +175,7 @@
             </div>
           </div>
             
-          <div class="all-gigs-small hide" style="display: none;">
+          <div class="all-gigs-small">
             <div class="row">
               <div class="col-12">
                 <div class="small-gigs-item d-flex flex-column">

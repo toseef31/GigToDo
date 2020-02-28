@@ -145,7 +145,7 @@
       </div>
     </div>
     
-    <div class="gigs-sidebar-titme">
+    <!-- <div class="gigs-sidebar-titme">
       <div class="gigs-sidebar-title">
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">مستوى البائع</h4>
       </div>
@@ -172,9 +172,9 @@
           <?php }} ?>
         </ul>
       </div>
-    </div>
+    </div> -->
     
-    <div class="gigs-sidebar-titme">
+    <!-- <div class="gigs-sidebar-titme">
       <div class="gigs-sidebar-title">
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">مالبائع لانج
         </h4>
@@ -203,7 +203,7 @@
           <?php }} ?>
         </ul>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="gigs-sidebar-rating">

@@ -120,7 +120,7 @@ require_once("includes/footer.php");
 		</div>
 	</div>
 </div>
-<a class="support-que close pull-right">
+<a class="support-que close pull-right d-none">
 	<i class="open-popup fa fa-question"></i>
 	<i class="close-popup fa fa-remove"></i>
 </a>

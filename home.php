@@ -11,11 +11,11 @@ $slide_image = $row_slides->slide_image;
 ?>
 <style>
   .get-started .started-section-wrapper .started-item .started-inner .started-thumb img {
-      width: 100%;
-      height: 245px;
+    width: 100%;
+    height: 280px;
   }
 </style>
-<div class="banner-section style-two">
+<div class="banner-section style-two" style="background-image: url(home_slider_images/<?= $slide_image; ?>);">
   <div class="container">
     <div class="section-wrapper">
       <h2 class="title"><?= $section_heading; ?>
@@ -81,25 +81,29 @@ $slide_image = $row_slides->slide_image;
       ?>
       <div class="started-item">
         <div class="started-inner">
-          <div class="started-thumb">
-            <img src="assets/img/category/<?= $cat_image; ?>" alt="category">
-          </div>
-          <div class="started-content d-flex align-items-center justify-content-center">
-            <div class="content">
-              <div class="thumb">
-                <img src="assets/img/category/<?= $cat_icon; ?>" alt="category">
+          <a href="categories/<?= $cat_url ?>">
+            <div class="started-thumb">
+              <img src="assets/img/category/<?= $cat_image; ?>" alt="category">
+            </div>
+            <div class="started-content d-flex align-items-center justify-content-center">
+              <div class="content">
+                <div class="thumb">
+                  <img src="assets/img/category/<?= $cat_icon; ?>" alt="category">
+                </div>
+                <h6 class="sub-title">
+                <?= $cat_title; ?>
+                </h6>
               </div>
-              <h6 class="sub-title">
-              <?= $cat_title; ?>
-              </h6>
             </div>
-          </div>
-          <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
-            <div class="content text-center">
-              <h6 class="sub-title"><a href="categories/<?= $cat_url ?>"><?= $cat_title; ?></a></h6>
-              <p><?= $cat_desc; ?> </p>
+          </a>
+          <a href="categories/<?= $cat_url ?>">
+            <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
+              <div class="content text-center">
+                <h6 class="sub-title text-white"><?= $cat_title; ?></h6>
+                <p><?= $cat_desc; ?> </p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <?php } ?>

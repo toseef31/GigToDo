@@ -12,8 +12,39 @@
     <meta name="description" content="<?= $site_desc; ?>">
     <meta name="keywords" content="<?= $site_keywords; ?>">
     <meta name="author" content="<?= $site_author; ?>">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-    <link href="styles/bootstrap.css" rel="stylesheet">
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
+
+    <!-- ==============Google Fonts============= -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <!--====== Bootstrap css ======-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--====== PreLoader css ======-->
+    <link href="assets/css/preloader.css" rel="stylesheet">
+
+    <!--====== Animate css ======-->
+    <link href="assets/css/animate.min.css" rel="stylesheet">
+
+    <!--====== Fontawesome css ======-->
+    <link href="assets/css/fontawesome.min.css" rel="stylesheet">
+
+    <!--====== Owl carousel css ======-->
+    <link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+
+    <!--====== Nice select css ======-->
+    <link href="assets/css/nice-select.css" rel="stylesheet">
+
+    <!--====== Default css ======-->
+    <link href="assets/css/default.css" rel="stylesheet">
+
+    <!--====== Style css ======-->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!--====== Responsive css ======-->
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
     <link href="styles/styles.css" rel="stylesheet">
     <link href="styles/categories_nav_styles.css" rel="stylesheet">
     <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
@@ -28,8 +59,8 @@
     <script type="text/javascript" src="js/sweat_alert.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
   </head>
-  <body class="is-responsive">
-    <?php require_once("includes/header.php"); ?>
+  <body class="all-content">
+    <?php require_once("includes/header-top.php"); ?>
     <div class="container-fluid mt-5 mb-5">
       <div class="row mb-4">
         <div class="col-md-12 text-center">

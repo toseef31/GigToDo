@@ -68,7 +68,7 @@ if(isset($_SESSION['seller_user_name'])){
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #FF0707;}.swal2-popup .swal2-select{display: none;}</style>
 </head>
 
 <body class="home-content">
@@ -340,7 +340,7 @@ if(isset($_SESSION['seller_user_name'])){
 				echo "
 				<script>
 	        swal({
-	          type: 'warning',
+	          type: 'error',
 	          html: $('<div>')
 	            .text('Opps! password or username is incorrect. Please try again.'),
 	          animation: false,
@@ -380,7 +380,7 @@ if(isset($_SESSION['seller_user_name'])){
 				      $seller_user_name = ucfirst(strtolower($seller_user_name));
 				      if($row_seller->account_type == 'buyer'){
 
-             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/demos/gigtodo/buyer";
+             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
              
 		          echo "
 		          <script>

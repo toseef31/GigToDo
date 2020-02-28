@@ -12,10 +12,10 @@ $slide_image = $row_slides->slide_image;
 <style>
   .get-started .started-section-wrapper .started-item .started-inner .started-thumb img {
       width: 100%;
-      height: 245px;
+      height: 280px;
   }
 </style>
-<div class="banner-section style-two">
+<div class="banner-section style-two" style="background-image: url(<?= $site_url; ?>/home_slider_images/<?= $slide_image; ?>);">
   <div class="container">
     <div class="section-wrapper">
       <h2 class="title">
@@ -81,25 +81,29 @@ $slide_image = $row_slides->slide_image;
       ?>
       <div class="started-item">
         <div class="started-inner">
-          <div class="started-thumb">
-            <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_image; ?>" alt="category">
-          </div>
-          <div class="started-content d-flex align-items-center justify-content-center">
-            <div class="content">
-              <div class="thumb">
-                <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" alt="category">
+          <a href="categories/<?= $cat_url ?>">
+            <div class="started-thumb">
+              <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_image; ?>" alt="category">
+            </div>
+            <div class="started-content d-flex align-items-center justify-content-center">
+              <div class="content">
+                <div class="thumb">
+                  <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" alt="category">
+                </div>
+                <h6 class="sub-title">
+                <?= $arabic_title; ?>
+                </h6>
               </div>
-              <h6 class="sub-title">
-              <?= $arabic_title; ?>
-              </h6>
             </div>
-          </div>
-          <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
-            <div class="content text-center">
-              <h6 class="sub-title"><a href="categories/<?= $cat_url ?>"><?= $arabic_title; ?></a></h6>
-              <p><?= $arabic_desc; ?> </p>
+          </a>
+          <a href="categories/<?= $cat_url ?>">
+            <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
+              <div class="content text-center">
+                <h6 class="sub-title text-white"><?= $arabic_title; ?></h6>
+                <p><?= $arabic_desc; ?> </p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <?php } ?>
@@ -115,50 +119,26 @@ $slide_image = $row_slides->slide_image;
       <p>مفيش أسهل من كدة عشان تبدأ</p>
     </div>
     <div class="row justify-content-center mb-30-none">
+      <?php
+        $get_boxes = $db->query("select * from section_boxes where language_id='2' LIMIT 0,4");
+        while($row_boxes = $get_boxes->fetch()){
+        $box_id = $row_boxes->box_id;
+        $box_title = $row_boxes->box_title;
+        $box_desc = $row_boxes->box_desc;
+        $box_image = $row_boxes->box_image; 
+      ?>
       <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
         <div class="work-item">
           <div class="work-thumb">
-            <img src="assets/img/work/find.png" alt="work">
+            <img src="assets/img/work/<?= $box_image; ?>" alt="work">
           </div>
           <div class="work-content text-center">
-            <h5 class="title">استكشف</h5>
-            <p>شارك مشروعك دلوقتي على منصتنا عشان تقدر تتواصل مع المحترفين من الموظفين المستقلين اللي مستعدين يقدموا حاجات رائعة ليك</p>
+            <h5 class="title"><?= $box_title; ?></h5>
+            <p><?= $box_desc; ?></p>
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-        <div class="work-item">
-          <div class="work-thumb">
-            <img src="assets/img/work/hire.png" alt="work">
-          </div>
-          <div class="work-content text-center">
-            <h5 class="title">التوظيف</h5>
-            <p>راجع اعتمادات عشرات الفريلانسرز عشان تقدر تحدد الشخص المناسب اللي عنده المؤهلات المطلوبة لمشروعك</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-        <div class="work-item">
-          <div class="work-thumb">
-            <img src="assets/img/work/work.png" alt="work">
-          </div>
-          <div class="work-content text-center">
-            <h5 class="title">الشغل</h5>
-            <p>اتواصل و حدد الأساس عشان تحقق التعاون الناجح، شارك أفكارك، طور الخطوط العريضة، ابعت ملفات، و كمان تقدر تدير المشروع بالكامل من خلال منصتنا سهلة الاستخدام</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-        <div class="work-item">
-          <div class="work-thumb">
-            <img src="assets/img/work/pay.png" alt="work">
-          </div>
-          <div class="work-content text-center">
-            <h5 class="title">الدفع</h5>
-            <p>بمجرد إنك تلاقي الموظف المثالي لمشروعك، عليك إنك تبعت المبلغ المطلوب من خلال بوابتنا الآمنة للدفع و تستمتع براحة البال لأن معاك ضمان باستعادة أموالك كاملة</p>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
     </div>
   </div>
 </div>

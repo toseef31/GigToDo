@@ -55,7 +55,7 @@ $ip = get_real_user_ip();
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo">
-            <a href="index.html"><img src="assets/img/logo.svg" alt=""></a>
+            <a href="index.html"><img src="<?= $site_url; ?>/ar/assets/img/logo.svg" alt=""></a>
           </div>
         </div>
         <div class="col-6 d-block d-lg-none">
