@@ -104,7 +104,7 @@
   if(isset($_SESSION['seller_user_name'])){
   require_once("../includes/buyer-header.php");
  }else{
-  require_once("../includes/header-top.php");
+  require_once("../includes/header_with_categories.php");
  }
 ?>
 

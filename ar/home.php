@@ -82,12 +82,12 @@ $slide_image = $row_slides->slide_image;
       <div class="started-item">
         <div class="started-inner">
           <div class="started-thumb">
-            <img src="assets/img/category/<?= $cat_image; ?>" alt="category">
+            <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_image; ?>" alt="category">
           </div>
           <div class="started-content d-flex align-items-center justify-content-center">
             <div class="content">
               <div class="thumb">
-                <img src="assets/img/category/<?= $cat_icon; ?>" alt="category">
+                <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" alt="category">
               </div>
               <h6 class="sub-title">
               <?= $arabic_title; ?>

@@ -116,7 +116,7 @@
           $link_title = $row_footer_links->link_title;
           $link_url = $row_footer_links->link_url;
           ?>
-          <a href="<?= $link_url; ?>"><?= $link_title; ?></a>
+          <a href="<?= $site_url?><?= $link_url; ?>"><?= $link_title; ?></a>
           <?php } ?>
           <!-- <a href="javascript:void(0);">Privacy Policy</a>
           <a href="javascript:void(0);">Contact Us</a> -->

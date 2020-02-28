@@ -119,7 +119,7 @@ $ip = get_real_user_ip();
                 <?php if(!empty($seller_image)){ ?>
                 <img src="user_images/<?= $seller_image; ?>" alt="">
                 <?php }else{ ?>
-                <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle" width="40px" height="40px">
+                <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png"  class="img-fluid rounded-circle" width="40px" height="40px">
                 <?php } ?>
               </div>
               <div class="icon">
@@ -320,7 +320,7 @@ $ip = get_real_user_ip();
     <?php if(!empty($seller_image)){ ?>
     <img src="user_images/<?= $seller_image; ?>" alt="">
     <?php }else{ ?>
-    <img src="<?= $site_url; ?>/user_images/empty-image.png"  class="img-fluid rounded-circle mb-3">
+    <img src="<?= $site_url; ?>/assets/img/user2.png"  class="img-fluid rounded-circle mb-3">
     <?php } ?>
     <h4><?= $lang['welcome']; ?> back, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h4>
   </div>
