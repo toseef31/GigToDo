@@ -89,7 +89,7 @@ $ip = get_real_user_ip();
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="javascript:void(0);">Post a Request</a></li>
+                <li><a href="<?= $site_url ?>/requests/post-request.php">Post a Request</a></li>
                 <li><a href="<?= $site_url ?>/how-it-works.php">How it Works</a></li>
               </ul>
             </div>

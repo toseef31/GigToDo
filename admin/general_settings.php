@@ -17,6 +17,7 @@ $s_favicon = $row_general_settings->site_favicon;
 $site_logo_type = $row_general_settings->site_logo_type;
 $site_logo_text = $row_general_settings->site_logo_text;
 $site_logo_image = $row_general_settings->site_logo_image;
+$site_sticky_logo = $row_general_settings->site_sticky_logo;
 $s_logo_image = $row_general_settings->site_logo_image;
 $site_name = $row_general_settings->site_name;
 $site_logo = $row_general_settings->site_logo;
@@ -33,6 +34,8 @@ $fb_app_id = $row_general_settings->fb_app_id;
 $fb_app_secret = $row_general_settings->fb_app_secret;
 $g_client_id = $row_general_settings->g_client_id;
 $g_client_secret = $row_general_settings->g_client_secret;
+$l_client_id = $row_general_settings->l_client_id;
+$l_client_secret = $row_general_settings->l_client_secret;
 $jwplayer_code = $row_general_settings->jwplayer_code;
 $level_one_rating = $row_general_settings->level_one_rating;
 $level_one_orders = $row_general_settings->level_one_orders;
@@ -217,17 +220,31 @@ require 'timezones.php';
 
 
 <div class="form-group row site_logo_image">
-<!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Site Logo Image : </label>
-<div class="col-md-6">
-<div class="input-group">
-<span class="input-group-addon">
-<b><i class="fa fa-paper-plane"></i></b>
-</span>
-<input type="file" name="site_logo_image" class="form-control">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Site Logo Image : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-paper-plane"></i></b>
+      </span>
+      <input type="file" name="site_logo_image" class="form-control">
+    </div>
+    <img style="margin-top:7px;" src="../images/<?php echo $site_logo_image; ?>" width="90" height="30">
+  </div>
 </div>
-<img style="margin-top:7px;" src="../images/<?php echo $site_logo_image; ?>" width="90" height="30">
-</div>
+<!--- form-group row Ends --->
+<div class="form-group row site_logo_image">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Site Sticky Logo Image : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-paper-plane"></i></b>
+      </span>
+      <input type="file" name="site_sticky_logo" class="form-control">
+    </div>
+    <img style="margin-top:7px;" src="../images/<?php echo $site_sticky_logo; ?>" width="90" height="30">
+  </div>
 </div>
 <!--- form-group row Ends --->
 
@@ -667,7 +684,7 @@ No. of orders required to be completed to become top rated seller.
 <!--- card mb-5 Starts --->
 <div class="card-header">
 <!--- card-header Starts --->
-<h4 class="h4"><i class="fa fa-facebook-square" style="color:blue" aria-hidden="true"></i> <i  style="color:red" class="fa fa-google-plus-square" aria-hidden="true"></i> Social Media Login Settings </h4>
+<h4 class="h4"><i class="fa fa-facebook-square" style="color:blue" aria-hidden="true"></i> <i  style="color:red" class="fa fa-google-plus-square" aria-hidden="true"></i> <i class="fa fa-linkedin" aria-hidden="true" style="color: #0077B5;"></i> Social Media Login Settings </h4>
 </div>
 <!--- card-header Ends --->
 <div class="card-body">
@@ -694,66 +711,92 @@ Enable or disable social media on the website.
 </div>
 <!--- form-group row Ends --->
 <div class="form-group row">
-<!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Facebook App Id :
-<small><a target="_blank" href="http://help.gigtodoscript.com/knowledge/details/6/.html" class="text-success">How To?</a></small>
-</label>
-<div class="col-md-6">
-<div class="input-group">
-<span class="input-group-addon">
-<b><i class="fa fa-facebook"></i></b>
-</span>
-<input type="text" name="fb_app_id" class="form-control" value="<?php echo $fb_app_id; ?>">
-</div>
-</div>
-</div>
-<!--- form-group row Ends --->
-<div class="form-group row">
-<!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Facebook App Secret : </label>
-<div class="col-md-6">
-<div class="input-group">
-<span class="input-group-addon">
-<b><i class="fa fa-facebook"></i></b>
-</span>
-<input type="text" name="fb_app_secret" class="form-control" value="<?php echo $fb_app_secret; ?>">
-</div>
-</div>
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Facebook App Id :
+    <small><a target="_blank" href="http://help.gigtodoscript.com/knowledge/details/6/.html" class="text-success">How To?</a></small>
+  </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-facebook"></i></b>
+      </span>
+      <input type="text" name="fb_app_id" class="form-control" value="<?php echo $fb_app_id; ?>">
+    </div>
+  </div>
 </div>
 <!--- form-group row Ends --->
 <div class="form-group row">
-<!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Google Client Id : 
-<small><a target="_blank" href="http://help.gigtodoscript.com/knowledge/details/7/.html" class="text-success">How To?</a></small>
-</label>
-<div class="col-md-6">
-<div class="input-group">
-<span class="input-group-addon">
-<b><i class="fa fa-google"></i></b>
-</span>
-<input type="text" name="g_client_id" class="form-control" value="<?php echo $g_client_id; ?>">
-</div>
-</div>
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Facebook App Secret : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-facebook"></i></b>
+      </span>
+      <input type="text" name="fb_app_secret" class="form-control" value="<?php echo $fb_app_secret; ?>">
+    </div>
+  </div>
 </div>
 <!--- form-group row Ends --->
 <div class="form-group row">
-<!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Google Client Secret : </label>
-<div class="col-md-6">
-<div class="input-group">
-<span class="input-group-addon">
-<b><i class="fa fa-google"></i></b>
-</span>
-<input type="text" name="g_client_secret" class="form-control" value="<?php echo $g_client_secret; ?>">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Google Client Id :
+    <small><a target="_blank" href="http://help.gigtodoscript.com/knowledge/details/7/.html" class="text-success">How To?</a></small>
+  </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-google"></i></b>
+      </span>
+      <input type="text" name="g_client_id" class="form-control" value="<?php echo $g_client_id; ?>">
+    </div>
+  </div>
 </div>
+<!--- form-group row Ends --->
+<div class="form-group row">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Google Client Secret : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-google"></i></b>
+      </span>
+      <input type="text" name="g_client_secret" class="form-control" value="<?php echo $g_client_secret; ?>">
+    </div>
+  </div>
 </div>
+<!--- form-group row Ends --->
+<div class="form-group row">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Linkedin Client Id :</label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-linkedin"></i></b>
+      </span>
+      <input type="text" name="l_client_id" class="form-control" value="<?php echo $l_client_id; ?>">
+    </div>
+  </div>
+</div>
+<!--- form-group row Ends --->
+<div class="form-group row">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Linkedin Client Secret : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-linkedin"></i></b>
+      </span>
+      <input type="text" name="l_client_secret" class="form-control" value="<?php echo $l_client_secret; ?>">
+    </div>
+  </div>
 </div>
 <!--- form-group row Ends --->
 <div class="form-group row"><!--- form-group row Starts --->
-<label class="col-md-3 control-label"></label>
-<div class="col-md-6">
-<input type="submit" name="social_settings_update" class="form-control btn btn-success" value="Update Social Login Settings">
-</div>
+  <label class="col-md-3 control-label"></label>
+  <div class="col-md-6">
+    <input type="submit" name="social_settings_update" class="form-control btn btn-success" value="Update Social Login Settings">
+  </div>
 </div><!--- form-group row Ends --->
 </form>
 <!--- form Ends --->
@@ -824,12 +867,15 @@ if(isset($_POST['general_settings_update'])){
 	$site_logo_tmp = $_FILES['site_logo']['tmp_name'];
 	$site_logo_image = $_FILES['site_logo_image']['name'];
 	$site_logo_image_tmp = $_FILES['site_logo_image']['tmp_name'];
+  $site_sticky_logo = $_FILES['site_sticky_logo']['name'];
+  $site_sticky_logo_tmp = $_FILES['site_sticky_logo']['tmp_name'];
 	$favicon_extension = pathinfo($site_favicon, PATHINFO_EXTENSION);
 	$logo_extension = pathinfo($site_logo, PATHINFO_EXTENSION);
 	$logo_image_extension = pathinfo($site_logo_image, PATHINFO_EXTENSION);
+  $site_sticky_logo_extension = pathinfo($site_sticky_logo, PATHINFO_EXTENSION);
 	$allowed = array('jpeg','jpg','gif','png','tif','ico','webp', 'svg');
 
-	if(!in_array($favicon_extension,$allowed) & !empty($site_favicon) or !in_array($logo_extension,$allowed) & !empty($site_logo) or !in_array($logo_image_extension,$allowed) & !empty($site_logo_image)){
+	if(!in_array($favicon_extension,$allowed) & !empty($site_favicon) or !in_array($logo_extension,$allowed) & !empty($site_logo) or !in_array($logo_image_extension,$allowed) & !empty($site_logo_image) or !in_array($site_sticky_logo_extension,$allowed) & !empty($site_sticky_logo)){
 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
 	}else{
 		if(empty($site_favicon)){
@@ -841,11 +887,15 @@ if(isset($_POST['general_settings_update'])){
 		if(empty($site_logo_image)){
 			$site_logo_image = $s_logo_image;
 		}
+    if(empty($site_sticky_logo)){
+      $site_sticky_logo = $site_sticky_logo;
+    }
 		move_uploaded_file($site_favicon_tmp,"../images/$site_favicon");
 		move_uploaded_file($site_logo_tmp,"../images/$site_logo");
 		move_uploaded_file($site_logo_image_tmp,"../images/$site_logo_image");
+    move_uploaded_file($site_sticky_logo_tmp,"../images/$site_sticky_logo");
 
-		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
+		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_sticky_logo" => $site_sticky_logo,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
 
 		if($update_general_settings){
 			$insert_log = $db->insert_log($admin_id,"general_settings","","updated");
@@ -872,7 +922,9 @@ if(isset($_POST['social_settings_update'])){
 	$fb_app_secret = $input->post('fb_app_secret');
 	$g_client_id = $input->post('g_client_id');
 	$g_client_secret = $input->post('g_client_secret');
-	$update_social_settings = $db->update("general_settings",array("enable_social_login" => $enable_social_login, "fb_app_id" => $fb_app_id, "fb_app_secret" => $fb_app_secret, "g_client_id" => $g_client_id, "g_client_secret" => $g_client_secret));
+  $l_client_id = $input->post('l_client_id');
+  $l_client_secret = $input->post('l_client_secret');
+	$update_social_settings = $db->update("general_settings",array("enable_social_login" => $enable_social_login, "fb_app_id" => $fb_app_id, "fb_app_secret" => $fb_app_secret, "g_client_id" => $g_client_id, "g_client_secret" => $g_client_secret, "l_client_id" => $l_client_id, "l_client_secret" => $l_client_secret));
 	if($update_social_settings){
 	$insert_log = $db->insert_log($admin_id,"social_login_settings","","updated");
 	echo "<script>alert_success('Social Login Settings has been updated successfully.','index?general_settings');</script>";

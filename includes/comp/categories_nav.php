@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row align-items-center">
-    <div class="col-xs-12">
+    <div class="col-lg-12">
       <div data-ui="cat-nav" id="desktop-category-nav" class="ui-toolkit cat-nav">
         <div class="bg-white bg-transparent-homepage-experiment hide-xs hide-sm hide-md">
           <div class="body-max-width mainmenu">

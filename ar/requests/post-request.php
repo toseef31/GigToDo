@@ -3,9 +3,9 @@ session_start([
     'cookie_lifetime' => 86400,
   ]);
 require_once("../includes/db.php");
-if(!isset($_SESSION['seller_user_name'])){
-echo "<script>window.open('../login','_self')</script>";
-}
+// if(!isset($_SESSION['seller_user_name'])){
+// echo "<script>window.open('../login','_self')</script>";
+// }
 $seller_user_name = $_SESSION['seller_user_name'];
 
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $seller_user_name));
@@ -73,6 +73,19 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				width: 47%;
 				margin-left: 8px;
 			}
+			.post-register-form h4, .post-register-form p{
+				padding-right: 30px;
+			}
+			.post-register-form span{
+				padding-right: 0 !important;
+			}
+			.post-register-form .form-group{
+				border-bottom: 0 !important;
+				margin-bottom: 0 !important;
+			}
+			.nice-select.swal2-select{
+				display: none;
+			}
 		</style>
 	</head>
 	<body class="is-responsive">
@@ -84,8 +97,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
     </div>
     <!-- Preloader End -->
 		<?php
-		require_once("../includes/buyer-header.php");
-		if($seller_verification != "ok"){
+		if(!isset($_SESSION['seller_user_name'])){
+			require_once("../includes/header_with_categories.php");
+		}else{
+			require_once("../includes/buyer-header.php");
+		}
+		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
 		echo "
 		<div class='alert alert-danger rounded-0 mt-0 text-center'>
 			Please confirm your email to use this feature.
@@ -360,6 +377,65 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													</p>
 												</div>
 											</div>
+											<!-- Registration Process -->
+											<?php if(!isset($_SESSION['seller_user_name'])){ ?>
+											<!-- Register Form -->
+											<div class="post-register-form register-form" style="display: none;">
+												<?php 
+												  $form_errors = Flash::render("register_errors");
+												  $form_data = Flash::render("form_data");
+												  if(is_array($form_errors)){
+												  ?>
+												<div class="alert alert-danger">
+												  <!--- alert alert-danger Starts --->
+												  <ul class="list-unstyled mb-0">
+												    <?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+												    <li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
+												    <?php } ?>
+												  </ul>
+												</div>
+								        <?php } ?>
+
+												<h4>الاشتراك كمشتري</h4>
+												<div class="form-group">
+													<label class="control-label"><span>الاسم الكامل</span></label>
+													<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="" />
+												</div>
+												<div class="form-group">
+													<label class="control-label"><span>اسم المستخدم</span></label>
+													<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="" />
+													<small class="form-text text-muted">ملاحظة: لن تتمكن من تغيير اسم المستخدم بمجرد إنشاء حسابك.</small>
+													<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
+													<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
+													<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+												</div>
+												<div class="form-group">
+													<label class="control-label"><span>عنوان بريدك الإلكتروني</span></label>
+													<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="">
+				            			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+												</div>
+												<div class="form-group">
+													<label class="control-label"><span>الباسوورد</span></label>
+													<input class="form-control" type="password" name="pass" placeholder="Enter Password"/>
+												</div>
+												<p>عندك حساب أصلا ؟ <a href="javascript:void(0);" id="showLogin">الدخول</a></p>
+											</div>
+											<!-- Login Form -->
+											<div class="post-register-form login-form">
+												<h4>تسجيل الدخول كمشتري</h4>
+												<div class="form-group">
+													<label class="control-label"><span>اسم المستخدم</span></label>
+													<input class="form-control" type="text" placeholder="ادخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
+												</div>
+												<div class="form-group">
+													<label class="control-label"><span>الباسوورد</span></label>
+													<input class="form-control" type="password" name="seller_pass" placeholder="الباسوورد"/>
+												</div>
+												<p>ماعندكش حساب؟ <a href="javascript:void(0);" id="showRegister">سجل</a></p>
+											</div>
+											<!-- End Login Form -->
+											<?php } ?>
+											<!-- End Registration Process -->
 											<div class="form-group mb-0">
 												<button class="button" role="button" type="submit" name="submit">انشر</button>
 											</div>
@@ -536,61 +612,377 @@ $(document).ready(function(){
 // 	}
 // 	});
 // }
-
+$('#showLogin').click(function(){
+	$('.register-form').hide();
+	$('.login-form').show();
+});
+$('#showRegister').click(function(){
+	$('.register-form').show();
+	$('.login-form').hide();
+});
 </script>
 <?php
 if(isset($_POST['submit'])){
-	$rules = array(
-	"request_title" => "required",
-	"request_description" => "required",
-	"cat_id" => "required",
-	"request_budget" => "number|required");
-	$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
-	$val = new Validator($_POST,$rules,$messages);
-	if($val->run() == false){
-		Flash::add("form_errors",$val->get_all_errors());
-		Flash::add("form_data",$_POST);
-		echo "<script> window.open('post-request','_self');</script>";
-	}else{
-		$request_title = $input->post('request_title');
-		$request_description = $input->post('request_description');
-		$cat_id = $input->post('cat_id');
-		$child_id = $input->post('child_id');
-		$request_budget = $input->post('request_budget');
-		$delivery_time = $input->post('delivery_time');
 
-		echo "You have selected :" .$delivery_time;
-		$skills_required = $input->post('skills_required');
-		$languages = $input->post('languages');
-		$request_file = $_FILES['request_file']['name'];
-		$request_file_tmp = $_FILES['request_file']['tmp_name'];
-		$request_date = date("F d, Y");
-		$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-		$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-		if(!empty($request_file)){
-			if(!in_array($file_extension,$allowed)){
-				echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-				echo "<script>window.open('post-request','_self')</script>";
-				exit();
+	if(!isset($_SESSION['seller_user_name'])){
+
+		$seller_user_name = $input->post('seller_user_name');
+		$seller_pass = $input->post('seller_pass');
+
+		$count_seller = $db->count("sellers", array("seller_user_name"=>$seller_user_name));
+
+		if($count_seller == 1){
+
+				$rules = array(
+				"seller_user_name" => "required",
+				"seller_pass" => "required"
+				);
+				$messages = array("seller_user_name" => "Username Is Required.","seller_pass" => "Password Is Required.");
+
+				$val = new Validator($_POST,$rules,$messages);
+
+				if($val->run() == false){
+					Flash::add("login_errors",$val->get_all_errors());
+					Flash::add("form_data",$_POST);
+					echo "<script>window.open('index','_self')</script>";
+				}else{
+
+					$seller_user_name = $input->post('seller_user_name');
+					$seller_pass = $input->post('seller_pass');
+					$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
+					$row_seller = $select_seller->fetch();
+					@$hashed_password = $row_seller->seller_pass;
+					@$seller_status = $row_seller->seller_status;
+					$decrypt_password = password_verify($seller_pass, $hashed_password);
+					
+					if($decrypt_password == 0){
+						echo "
+						<script>
+			        swal({
+			          type: 'warning',
+			          html: $('<div>')
+			            .text('Opps! password or username is incorrect. Please try again.'),
+			          animation: false,
+			          customClass: 'animated tada'
+			        })
+				    </script>
+						";
+					}else{
+						if($seller_status == "block-ban"){
+							echo "
+							<script>
+					            swal({
+					              type: 'warning',
+					              html: $('<div>')
+					                .text('You have been blocked by the Admin. Please contact customer support.'),
+					              animation: false,
+					              customClass: 'animated tada'
+					            })
+					    	</script>";
+						}elseif($seller_status == "deactivated"){
+							echo "
+							<script>
+							swal({
+							  type: 'warning',
+							  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
+							  animation: false,
+							  customClass: 'animated tada'
+							})
+							</script>";
+						}else{
+							$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+							if($select_seller){
+								$row_seller = $select_seller->fetch();
+						    $_SESSION['seller_user_name'] = $seller_user_name;
+						    $login_seller_id = $row_seller->seller_id;
+
+
+						    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
+									$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+						      $seller_user_name = ucfirst(strtolower($seller_user_name));
+									$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+									
+				          $rules = array(
+				          "request_title" => "required",
+				          "request_description" => "required",
+				          "cat_id" => "required",
+				          "request_budget" => "number|required");
+				          $messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+				          $val = new Validator($_POST,$rules,$messages);
+				          if($val->run() == false){
+				          	Flash::add("form_errors",$val->get_all_errors());
+				          	Flash::add("form_data",$_POST);
+				          	echo "<script> window.open('post-request','_self');</script>";
+				          }else{
+				          	$request_title = $input->post('request_title');
+				          	$request_description = $input->post('request_description');
+				          	$cat_id = $input->post('cat_id');
+				          	$child_id = $input->post('child_id');
+				          	$request_budget = $input->post('request_budget');
+				          	$delivery_time = $input->post('delivery_time');
+
+				          	echo "You have selected :" .$delivery_time;
+				          	$skills_required = $input->post('skills_required');
+				          	$languages = $input->post('languages');
+				          	$request_file = $_FILES['request_file']['name'];
+				          	$request_file_tmp = $_FILES['request_file']['tmp_name'];
+				          	$request_date = date("F d, Y");
+				          	$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+				          	$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+				          	if(!empty($request_file)){
+				          		if(!in_array($file_extension,$allowed)){
+				          			echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+				          			echo "<script>window.open('post-request','_self')</script>";
+				          			exit();
+				          		}
+				          		$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				          		$request_file = $request_file."_".time().".$file_extension";
+				          		move_uploaded_file($request_file_tmp,"request_files/$request_file");
+				          	}
+				          	$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
+				          	if($insert_request){
+				          		echo "<script>
+				          		    swal({
+				          		      type: 'success',
+				          		      text: 'Your request has been submitted successfully!',
+				          		      timer: 3000,
+				          		      onOpen: function(){
+				          		      	swal.showLoading()
+				          		      }
+				          		    }).then(function(){
+				          		      	window.open('manage_requests.php','_self');
+				          		    });
+				          		</script>";
+				          	}
+				          }
+				        }
+							}
+						}
+				  }
+						
+				}
+
+		}else{
+				$rules = array(
+				"name" => "required",
+				"u_name" => "required",
+				"email" => "email|required",
+				"pass" => "required");
+
+				$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.");
+				$val = new Validator($_POST,$rules,$messages);
+
+				if($val->run() == false){
+					$_SESSION['error_array'] = array();
+					Flash::add("register_errors",$val->get_all_errors());
+					Flash::add("form_data",$_POST);
+					echo "<script>window.open('post-request','_self')</script>";
+				}else{
+					$error_array = array();
+					$name = strip_tags($input->post('name'));
+					$name = strip_tags($name);
+					$name = ucfirst(strtolower($name));
+					$_SESSION['name']= $name;
+					$u_name = strip_tags($input->post('u_name'));
+					$u_name = strip_tags($u_name);
+					$_SESSION['u_name']= $u_name;
+					$email = strip_tags($input->post('email'));
+					$email = strip_tags($email);
+					$_SESSION['email']=$email;
+					$pass = strip_tags($input->post('pass'));
+					$accountType = 'buyer';
+
+					$country = '';
+					$regsiter_date = date("F d, Y");
+					$date = date("F d, Y");
+
+					
+					$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
+					$check_seller_email = $db->count("sellers",array("seller_email" => $email));
+					if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
+					  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+					}
+					if($check_seller_username > 0 ){
+					  array_push($error_array, "Opps! This username has already been taken. Please try another one");
+					}
+					if($check_seller_email > 0){
+					  array_push($error_array, "Email has already been taken. Try logging in instead.");
+					}
+
+					if(empty($error_array)){
+						$referral_code = mt_rand();
+
+						if($signup_email == "yes"){
+							$verification_code = mt_rand();
+						}else{
+							$verification_code = "ok";
+						}
+
+						$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
+						
+						$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+								
+						$regsiter_seller_id = $db->lastInsertId();
+						
+						if($insert_seller){
+							
+					    $_SESSION['seller_user_name'] = $u_name;
+							$insert_seller_account = $db->insert("seller_accounts",array("seller_id" => $regsiter_seller_id));
+
+							if($insert_seller_account){
+
+								if(!empty($referral)){
+							    $sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
+									$row_seller = $sel_seller->fetch();
+									$seller_id = $row_seller->seller_id;	
+									$seller_ip = $row_seller->seller_ip;
+									if($seller_ip == $ip){
+										echo "<script>alert('You Cannot Referral Yourself To Make Money.');</script>";
+									}else{
+										$count_referrals = $db->count("referrals",array("ip" => $ip));	
+										if($count_referrals == 1){
+									    echo "<script>alert('You are trying to referral yourself more then one time.');</script>";
+										}else{
+											$insert_referral = $db->insert("referrals",array("seller_id" => $seller_id,"referred_id" => $regsiter_seller_id,"comission" => $referral_money,"date" => $date,"ip" => $ip,"status" => 'pending'));
+										}
+									}	
+								}
+
+								if($signup_email == "yes"){
+									userSignupEmail($email);
+							  }
+
+								$rules = array(
+								"request_title" => "required",
+								"request_description" => "required",
+								"cat_id" => "required",
+								"request_budget" => "number|required");
+								$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+								$val = new Validator($_POST,$rules,$messages);
+								if($val->run() == false){
+									Flash::add("form_errors",$val->get_all_errors());
+									Flash::add("form_data",$_POST);
+									echo "<script> window.open('post-request','_self');</script>";
+								}else{
+									$request_title = $input->post('request_title');
+									$request_description = $input->post('request_description');
+									$cat_id = $input->post('cat_id');
+									$child_id = $input->post('child_id');
+									$request_budget = $input->post('request_budget');
+									$delivery_time = $input->post('delivery_time');
+
+									echo "You have selected :" .$delivery_time;
+									$skills_required = $input->post('skills_required');
+									$languages = $input->post('languages');
+									$request_file = $_FILES['request_file']['name'];
+									$request_file_tmp = $_FILES['request_file']['tmp_name'];
+									$request_date = date("F d, Y");
+									$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+									$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+									if(!empty($request_file)){
+										if(!in_array($file_extension,$allowed)){
+											echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+											echo "<script>window.open('post-request','_self')</script>";
+											exit();
+										}
+										$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+										$request_file = $request_file."_".time().".$file_extension";
+										move_uploaded_file($request_file_tmp,"request_files/$request_file");
+									}
+									$insert_request = $db->insert("buyer_requests",array("seller_id"=>$regsiter_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
+									if($insert_request){
+										echo "<script>
+										    swal({
+										      type: 'success',
+										      text: 'Your request has been submitted successfully!',
+										      timer: 3000,
+										      onOpen: function(){
+										      	swal.showLoading()
+										      }
+										    }).then(function(){
+										      	window.open('manage_requests.php','_self');
+										    });
+										</script>";
+									}
+								}
+									
+							}
+								
+						}
+					}
+					if(!empty($error_array)){
+						$_SESSION['error_array'] = $error_array;
+						echo "
+						<script>
+						swal({
+						type: 'error',
+						html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+						animation: false,
+						customClass: 'animated tada'
+						}).then(function(){
+						window.open('index','_self')
+						});
+						</script>";
+					}
+				}
 			}
-			$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-			$request_file = $request_file."_".time().".$file_extension";
-			move_uploaded_file($request_file_tmp,"request_files/$request_file");
-		}
-		$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
-		if($insert_request){
-			echo "<script>
-			    swal({
-			      type: 'success',
-			      text: 'Your request has been submitted successfully!',
-			      timer: 3000,
-			      onOpen: function(){
-			      	swal.showLoading()
-			      }
-			    }).then(function(){
-			      	window.open('manage_requests.php','_self');
-			    });
-			</script>";
+
+
+	}else{
+
+		$rules = array(
+		"request_title" => "required",
+		"request_description" => "required",
+		"cat_id" => "required",
+		"request_budget" => "number|required");
+		$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+		$val = new Validator($_POST,$rules,$messages);
+		if($val->run() == false){
+			Flash::add("form_errors",$val->get_all_errors());
+			Flash::add("form_data",$_POST);
+			echo "<script> window.open('post-request','_self');</script>";
+		}else{
+			$request_title = $input->post('request_title');
+			$request_description = $input->post('request_description');
+			$cat_id = $input->post('cat_id');
+			$child_id = $input->post('child_id');
+			$request_budget = $input->post('request_budget');
+			$delivery_time = $input->post('delivery_time');
+
+			echo "You have selected :" .$delivery_time;
+			$skills_required = $input->post('skills_required');
+			$languages = $input->post('languages');
+			$request_file = $_FILES['request_file']['name'];
+			$request_file_tmp = $_FILES['request_file']['tmp_name'];
+			$request_date = date("F d, Y");
+			$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+			$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+			if(!empty($request_file)){
+				if(!in_array($file_extension,$allowed)){
+					echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+					echo "<script>window.open('post-request','_self')</script>";
+					exit();
+				}
+				$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				$request_file = $request_file."_".time().".$file_extension";
+				move_uploaded_file($request_file_tmp,"request_files/$request_file");
+			}
+			$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
+			if($insert_request){
+				echo "<script>
+				    swal({
+				      type: 'success',
+				      text: 'Your request has been submitted successfully!',
+				      timer: 3000,
+				      onOpen: function(){
+				      	swal.showLoading()
+				      }
+				    }).then(function(){
+				      	window.open('manage_requests.php','_self');
+				    });
+				</script>";
+			}
 		}
 	}
 }

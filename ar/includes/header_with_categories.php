@@ -75,7 +75,7 @@ $ip = get_real_user_ip();
             <form action="" class="d-flex flex-row" id="gnav-search" method="POST">
               <input id="search-query" class="rounded" name="search_query" value="<?php echo @$_SESSION["search_query"]; ?>"  autocomplete="off" placeholder="البحث عن الخدمات">
               <button name="search" type="submit" value="Search">
-                <?php echo $lang['search']['button']; ?>
+                البحث
                 </button>
                 <ul class="search-bar-panel d-none"></ul>
             </form>
@@ -92,7 +92,7 @@ $ip = get_real_user_ip();
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="javascript:void(0);">نشر طلب</a></li>
+                <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a></li>
                 <li><a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a></li>
               </ul>
             </div>
