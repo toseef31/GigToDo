@@ -6,7 +6,7 @@
     <div class="col-xs-12">
 
       <div data-ui="cat-nav" id="desktop-category-nav" class="ui-toolkit cat-nav ">
-        <div class="bg-white bg-transparent-homepage-experiment bb-xs-1 hide-xs hide-sm hide-md">
+        <div class="bg-white bg-transparent-homepage-experiment hide-xs hide-sm hide-md">
           <div class="body-max-width mainmenu">
             <ul class="col-xs-12 body-max-width display-flex-xs justify-content-space-between" role="menubar" data-ui="top-nav-category-list" aria-activedescendant="catnav-primary-link-10855">
               <?php

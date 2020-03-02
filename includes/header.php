@@ -389,7 +389,7 @@ $ip = get_real_user_ip();
               <?php if($site_logo_type == "image"){ ?>
               <!-- <a class="logo-1" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/logo.svg" alt=""></a> -->
               <a class="logo-1" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" width="150"></a>
-              <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/home-logo.png" alt=""></a>
+              <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/assets/img/<?= $site_sticky_logo; ?>" alt=""></a>
               <!-- <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" width="150"></a> -->
               <?php }else{ ?>
               <?= $site_logo_text; ?>
