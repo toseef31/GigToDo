@@ -55,6 +55,7 @@ $site_title = $row_general_settings->site_title;
 	
 	<link href="styles/sweat_alert.css" rel="stylesheet">
 	<link href="styles/animate.css" rel="stylesheet">
+	<!-- <link href="styles/styles.css" rel="stylesheet"> -->
   <?php if($row_general_settings->knowledge_bank == 'yes'): ?>
 	<link href="styles/knowledge_bank.css" rel="stylesheet">
 	<?php endif ?>
@@ -67,7 +68,7 @@ $site_title = $row_general_settings->site_title;
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}.header-menu .mainmenu ul li a {font-size: 15px;}</style>
 </head>
 <body class="home-content">
 	<!-- Preloader Start -->
@@ -78,8 +79,11 @@ $site_title = $row_general_settings->site_title;
 	</div>
 	<!-- Preloader End -->
 <?php
-
-require_once("includes/header.php");
+if(!isset($_SESSION['seller_user_name'])){
+	require_once("includes/header.php");
+}else{
+	require_once("includes/buyer-header.php");
+}
 if(!isset($_SESSION['seller_user_name'])){
 	require_once("home.php");
 }else{  

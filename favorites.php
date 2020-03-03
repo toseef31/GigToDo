@@ -24,28 +24,52 @@ $login_seller_image = $row_login_seller->seller_image;
 	<meta name="description" content="<?php echo $site_desc; ?>">
 	<meta name="keywords" content="<?php echo $site_keywords; ?>">
 	<meta name="author" content="<?php echo $site_author; ?>">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-	<link href="styles/bootstrap.css" rel="stylesheet">
-  <link href="styles/custom.css" rel="stylesheet"> <!-- Custom css code from modified in admin panel --->
-	<link href="styles/styles.css" rel="stylesheet">
-	<link href="styles/categories_nav_styles.css" rel="stylesheet">
-	<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="styles/owl.carousel.css" rel="stylesheet">
-	<link href="styles/owl.theme.default.css" rel="stylesheet">
-	<link href="styles/sweat_alert.css" rel="stylesheet">
-	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-	<script src="js/ie.js"></script>
-	<script type="text/javascript" src="js/sweat_alert.js"></script>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<!-- Go to www.addthis.com/dashboard to customize your tools -->
-	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a39d50ac9681a6c"></script>
-	<?php if(!empty($site_favicon)){ ?>
-	<link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon">
-	<?php } ?>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <!--====== Bootstrap css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!--====== PreLoader css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+    <!--====== Animate css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+    <!--====== Fontawesome css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+    <!--====== Owl carousel css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+    <!--====== Nice select css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+    <!--====== Default css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/default.css" rel="stylesheet">
+    <!--====== Style css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/style.css" rel="stylesheet">
+    <!--====== Responsive css ======-->
+    <link href="<?php echo $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+    
+    <link href="styles/sweat_alert.css" rel="stylesheet">
+    <link href="styles/animate.css" rel="stylesheet">
+    <!-- <link href="styles/styles.css" rel="stylesheet"> -->
+    <?php if($row_general_settings->knowledge_bank == 'yes'): ?>
+    <link href="styles/knowledge_bank.css" rel="stylesheet">
+    <?php endif ?>
+    <?php if(!empty($site_favicon)){ ?>
+    <!-- <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon" /> -->
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
+    <?php } ?>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script src="js/ie.js"></script>
+    <script type="text/javascript" src="js/sweat_alert.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}.header-menu .mainmenu ul li a {font-size: 15px;}</style>
 </head>
 
-<body class="is-responsive">
-<?php require_once("includes/header.php"); ?>
+<body class="all-content">
+<?php 
+  if(!isset($_SESSION['seller_user_name'])){
+    require_once("includes/header.php");
+  }else{
+    require_once("includes/buyer-header.php");
+  }
+?>
 
 <div class="container mt-5">
   <?php
