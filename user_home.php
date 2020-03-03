@@ -8,19 +8,34 @@ $login_user_name = $row_login_seller->seller_user_name;
 $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
 
-
 ?>
 
-<div class="container mt-3">
-  <!-- Container starts -->
-  <div class="row">
-    <div class="col-md-3 <?=($lang_dir == "right" ? 'order-2 order-sm-1':'')?>">
-      <?php require_once("includes/user_home_sidebar.php"); ?>
-    </div>
-    <div class="col-md-9 <?=($lang_dir == "right" ? 'order-1 order-sm-2':'')?>">
-      <div id="demo3" class="carousel slide" data-ride="carousel">
-        <ul class="carousel-indicators">
-          <li data-target="#demo3" data-slide-to="0" class="active"></li>
+<!-- New Design -->
+<div class="main-box">
+  <div class="container">
+    <div class="row flex-lg-row-reverse">
+      <div class="col-12 col-lg-4">
+        <div class="user-profile mt-40">
+          <div class="user-image">
+            <?php if(!empty($seller_image)){ ?>
+            <img src="user_images/<?= $seller_image; ?>" alt="">
+            <?php }else{ ?>
+            <img src="<?= $site_url; ?>/assets/img/user1.png"  class="img-fluid rounded-circle mb-3">
+            <?php } ?>
+            <h5><?= $lang['welcome']; ?> back, <span><?= ucfirst(strtolower($login_user_name)); ?></span></h5>
+          </div>
+          <div class="setup-accunt-progressbar">
+            <p>Set up your account</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 19%;" aria-valuenow="19" aria-valuemin="0" aria-valuemax="100">19%</div>
+            </div>
+          </div>
+          <a href="requests/post-request.php" class="request-btn">Post a request</a>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8">
+        <!-- Home-slider -->
+        <div class="home-slide-active pt-40 owl-carousel">
           <?php
             $count_slides = $db->count("slider",array("language_id" => $siteLanguage));
             $i = 0;
@@ -28,415 +43,651 @@ $relevant_requests = $row_general_settings->relevant_requests;
             while($row_slides = $get_slides->fetch()){
             $i++;
             ?>
-          <li data-target="#demo3" data-slide-to="<?= $i; ?>"></li>
           <?php } ?>
-        </ul>
-        <div class="carousel-inner">
           <?php
-            $get_slides = $db->query("select * from slider where language_id='$siteLanguage' LIMIT 0,1");
+            $get_slides = $db->query("select * from slider where language_id='$siteLanguage' LIMIT 0,$count_slides");
             while($row_slides = $get_slides->fetch()){
             $slide_image = $row_slides->slide_image;
             $slide_name = $row_slides->slide_name;
             $slide_desc = $row_slides->slide_desc;
             $slide_url = $row_slides->slide_url;
             ?>
-          <div class="carousel-item active">
-            <a href="<?= $slide_url; ?>">
-              <img src="slides_images/<?= $slide_image; ?>" alt="Los Angeles" class="img-fluid">
-              <div class="carousel-caption d-lg-block d-md-block d-none <?=($lang_dir == "right" ? 'text-right':'')?>">
-                <h3><?= $slide_name; ?></h3>
-                <p><?= $slide_desc; ?></p>
-              </div>
-            </a>
-          </div>
-          <?php } ?>
-          <?php
-            $get_slides = $db->query("select * from slider where language_id='$siteLanguage' LIMIT 1,$count_slides");
-            while($row_slides = $get_slides->fetch()){
-            $slide_image = $row_slides->slide_image;
-            $slide_name = $row_slides->slide_name;
-            $slide_desc = $row_slides->slide_desc;
-            $slide_url = $row_slides->slide_url;
-            ?>
-          <div class="carousel-item ">
-            <a href="<?= $slide_url; ?>">
-              <img src="slides_images/<?= $slide_image; ?>" alt="Los Angeles" class="img-fluid">
-              <div class="carousel-caption d-lg-block d-md-block d-none <?=($lang_dir == "right" ? 'text-right':'')?>">
-                <h3><?= $slide_name; ?></h3>
-                <p><?= $slide_desc; ?></p>
-              </div>
-            </a>
-          </div>
+          <div class="single-slide-item" style="background-image: url('slides_images/<?= $slide_image; ?>');"></div>
           <?php } ?>
         </div>
+        <!-- Home-slider  END-->
       </div>
-      <div class="row mt-4 mb-3">
-        <div class="col-md-12">
-          <h2 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?>"><?= $lang['user_home']['featured_proposals']; ?></h2>
-          <button onclick="location.href='featured_proposals'" class="<?=($lang_dir == "right" ? 'float-left':'float-right')?> btn btn-success"><?= $lang['view_all']; ?></button>
-        </div>
-      </div>
-      <div class="row">
-        <?php
-          $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
-          $count_proposals = $get_proposals->rowCount();
-          if($count_proposals == 0){
-              echo "
-              <div class='col-md-12 text-center'>
-              <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
-              </div>";
-          }
-          while($row_proposals = $get_proposals->fetch()){
-          $proposal_id = $row_proposals->proposal_id;
-          $proposal_title = $row_proposals->proposal_title;
-          $proposal_price = $row_proposals->proposal_price;
-          if($proposal_price == 0){
-          $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
-          $proposal_price = $get_p_1->fetch()->price;
-          }
-          $proposal_img1 = $row_proposals->proposal_img1;
-          $proposal_video = $row_proposals->proposal_video;
-          $proposal_seller_id = $row_proposals->proposal_seller_id;
-          $proposal_rating = $row_proposals->proposal_rating;
-          $proposal_url = $row_proposals->proposal_url;
-          $proposal_featured = $row_proposals->proposal_featured;
-          $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
-          $proposal_referral_money = $row_proposals->proposal_referral_money;
-          if(empty($proposal_video)){
-              $video_class = "";
-          }else{
-              $video_class = "video-img";
-          }
-          $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
-          $row_seller = $get_seller->fetch();
-          $seller_user_name = $row_seller->seller_user_name;
-          $seller_image = $row_seller->seller_image;
-          $seller_level = $row_seller->seller_level;
-          $seller_status = $row_seller->seller_status;
-          if(empty($seller_image)){
-          $seller_image = "empty-image.png";
-          }
-          // Select Proposal Seller Level
-          @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
-          $proposal_reviews = array();
-          $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
-          $count_reviews = $select_buyer_reviews->rowCount();
-          while($row_buyer_reviews = $select_buyer_reviews->fetch()){
-              $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
-              array_push($proposal_reviews,$proposal_buyer_rating);
-          }
-          $total = array_sum($proposal_reviews);
-          @$average_rating = $total/count($proposal_reviews);
-          $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
-          if($count_favorites == 0){
-          $show_favorite_class = "proposal-favorite dil1";
-          }else{
-          $show_favorite_class = "proposal-unfavorite dil";
-          }
-          ?>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3 pr-lg-1">
-          <?php require("includes/proposals.php"); ?>
-        </div>
-        <?php } ?>
-      </div>
-      <!-- If You have no gigs, show random gigs on homepage -->
-      <div class="row mb-3">
-        <div class="col-md-12">
-          <h2 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?>"><?= $lang['user_home']['top_proposals']; ?></h2>
-          <button onclick="location.href='top_proposals'" class="<?=($lang_dir == "right" ? 'float-left':'float-right')?> btn btn-success"><?= $lang['view_all']; ?></button>
-        </div>
-      </div>
-      <div class="row">
-        <?php
-          $topProposals = array();
-          $select = $db->query("select * from top_proposals");
-          while($row = $select->fetch()){
-            array_push($topProposals,  $row->proposal_id);
-          }
-          if(empty($topProposals)){
-          $query_where2 = "where level_id='4' and proposal_status='active' ";
-          }else{
-          $topProposals = implode(",", $topProposals);
-          $topRatedWhere = "level_id='4' and proposal_status='active'";
-          $query_where2 = "where proposal_id in ($topProposals) or ($topRatedWhere) ";
-          }
-          $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,8");
-          $count_proposals = $get_proposals->rowCount();
-          if($count_proposals == 0){
-            echo "
-            <div class='col-md-12 text-center'>
-            <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_top_proposals']} </p>
-            </div>";
-          }
-          while($row_proposals = $get_proposals->fetch()){
-          $proposal_id = $row_proposals->proposal_id;
-          $proposal_title = $row_proposals->proposal_title;
-          $proposal_price = $row_proposals->proposal_price;
-          if($proposal_price == 0){
-          $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
-          $proposal_price = $get_p_1->fetch()->price;
-          }
-          $proposal_img1 = $row_proposals->proposal_img1;
-          $proposal_video = $row_proposals->proposal_video;
-          $proposal_seller_id = $row_proposals->proposal_seller_id;
-          $proposal_rating = $row_proposals->proposal_rating;
-          $proposal_url = $row_proposals->proposal_url;
-          $proposal_featured = $row_proposals->proposal_featured;
-          $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
-          $proposal_referral_money = $row_proposals->proposal_referral_money;
-          if(empty($proposal_video)){
-              $video_class = "";
-          }else{
-              $video_class = "video-img";
-          }
-          $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
-          $row_seller = $get_seller->fetch();
-          $seller_user_name = $row_seller->seller_user_name;
-          $seller_image = $row_seller->seller_image;
-          $seller_level = $row_seller->seller_level;
-          $seller_status = $row_seller->seller_status;
-          if(empty($seller_image)){
-          $seller_image = "empty-image.png";
-          }
-          // Select Proposal Seller Level
-          @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
-          $proposal_reviews = array();
-          $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
-          $count_reviews = $select_buyer_reviews->rowCount();
-          while($row_buyer_reviews = $select_buyer_reviews->fetch()){
-              $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
-              array_push($proposal_reviews,$proposal_buyer_rating);
-          }
-          $total = array_sum($proposal_reviews);
-          @$average_rating = $total/count($proposal_reviews);
-          $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
-          if($count_favorites == 0){
-          $show_favorite_class = "proposal-favorite dil1";
-          }else{
-          $show_favorite_class = "proposal-unfavorite dil";
-          }
-          ?>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3 pr-lg-1">
-          <?php require("includes/proposals.php"); ?>
-        </div>
-        <?php } ?>
-      </div>
-      <!-- If You have no gigs, show random gigs on homepage -->
-      <div class="row mb-3">
-        <div class="col-md-12">
-          <h2 class="pl-0 pr-0 ml-0 mr-0 <?=($lang_dir == "right" ? 'float-right':'float-left')?>"><?= $lang['user_home']['random_proposals']; ?></h2>
-          <button onclick="location.href='random_proposals'" class="<?=($lang_dir == "right" ? 'float-left':'float-right')?> btn btn-success"><?= $lang['view_all']; ?></button>
-        </div>
-      </div>
-      <div class="row">
-        <?php
-          $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
-          $count_proposals = $get_proposals->rowCount();
-          if($count_proposals == 0){
-              echo "
-              <div class='col-md-12 text-center'>
-              <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_random_proposals']} </p>
-              </div>";
-          }
-          while($row_proposals = $get_proposals->fetch()){
-          $proposal_id = $row_proposals->proposal_id;
-          $proposal_title = $row_proposals->proposal_title;
-          $proposal_price = $row_proposals->proposal_price;
-          if($proposal_price == 0){
-          $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
-          $proposal_price = $get_p_1->fetch()->price;
-          }
-          $proposal_img1 = $row_proposals->proposal_img1;
-          $proposal_video = $row_proposals->proposal_video;
-          $proposal_seller_id = $row_proposals->proposal_seller_id;
-          $proposal_rating = $row_proposals->proposal_rating;
-          $proposal_url = $row_proposals->proposal_url;
-          $proposal_featured = $row_proposals->proposal_featured;
-          $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
-          $proposal_referral_money = $row_proposals->proposal_referral_money;
-          if(empty($proposal_video)){
-              $video_class = "";
-          }else{
-              $video_class = "video-img";
-          }
-          $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
-          $row_seller = $get_seller->fetch();
-          $seller_user_name = $row_seller->seller_user_name;
-          $seller_image = $row_seller->seller_image;
-          $seller_level = $row_seller->seller_level;
-          $seller_status = $row_seller->seller_status;
-          if(empty($seller_image)){
-          $seller_image = "empty-image.png";
-          }
-          // Select Proposal Seller Level
-          @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
-          $proposal_reviews = array();
-          $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
-          $count_reviews = $select_buyer_reviews->rowCount();
-          while($row_buyer_reviews = $select_buyer_reviews->fetch()){
-              $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
-              array_push($proposal_reviews,$proposal_buyer_rating);
-          }
-          $total = array_sum($proposal_reviews);
-          @$average_rating = $total/count($proposal_reviews);
-          $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
-          if($count_favorites == 0){
-          $show_favorite_class = "proposal-favorite dil1";
-          }else{
-          $show_favorite_class = "proposal-unfavorite dil";
-          }
-          ?>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3 pr-lg-1">
-          <?php require("includes/proposals.php"); ?>
-        </div>
-        <?php } ?>
-      </div>
-      <br>
-      <!-- If You have no gigs, show random gigs on homepage Ends -->
-      <?php
-        $request_child_ids = array();
-        $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
-        while($row_proposals = $select_proposals->fetch()){
-        $proposal_child_id = $row_proposals->proposal_child_id;
-        array_push($request_child_ids, $proposal_child_id);
-        }
-        $where_child_id = array();
-        foreach($request_child_ids as $child_id){
-            $where_child_id[] = "child_id=" . $child_id;
-        }
-        if(count($where_child_id) > 0){
-            $query_where = " and (" . implode(" or ", $where_child_id) . ")";
-        }
-        
-        if($relevant_requests == "no"){ $query_where = ""; }
-
-        if(!empty($query_where) or $relevant_requests == "no"){
-        
-        $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
-        $requests_count = 0;
-        while($row_requests = $select_requests->fetch()){
-            $request_id = $row_requests->request_id;
-            $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
-            if($count_offers == 0){
-                $requests_count++;
-            }
-        }
-        
-        $count_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
-        
-        if($requests_count !=0 and !empty($count_proposals)){
-
-        ?>
-      <div class="row mt-2 mb-3">
-        <div class="col-md-12">
-          <h2 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?>"><?= $lang['user_home']['recent_requests']; ?></h2>
-          <button type="button" onclick="location.href='requests/buyer_requests'" class="<?=($lang_dir == "right" ? 'float-left':'float-right')?> btn btn-success"><?= $lang['view_all']; ?></button>
-        </div>
-      </div>
-      <div class="row buyer-requests">
-        <div class="col-md-12">
-          <div class="table-responsive box-table">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Request Message</th>
-                  <th>Offers</th>
-                  <th>Duration</th>
-                  <th>Budget</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                  $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
-                  while($row_requests = $select_requests->fetch()){
-                  $request_id = $row_requests->request_id;
-                  $seller_id = $row_requests->seller_id;
-                  $request_title = $row_requests->request_title;
-                  $request_description = $row_requests->request_description;
-                  $delivery_time = $row_requests->delivery_time;
-                  $request_budget = $row_requests->request_budget;
-                  $request_file = $row_requests->request_file;
-                  $select_request_seller = $db->select("sellers",array("seller_id"=>$seller_id));
-                  $row_request_seller = $select_request_seller->fetch();
-                  $request_seller_user_name = $row_request_seller->seller_user_name;
-                  $request_seller_image = $row_request_seller->seller_image;
-                  $count_send_offers = $db->count("send_offers",array("request_id" => $request_id));
-                  $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
-                  if($count_offers == 0){
-                  ?>
-                <tr id="request_tr_<?= $request_id; ?>">
-                  <td>
-                    <?php if(!empty($request_seller_image)){ ?>
-                    <img src="user_images/<?= $request_seller_image; ?>" class="request-img rounded-circle">
-                    <?php }else{ ?>
-                    <img src="user_images/empty-image.png" class="request-img rounded-circle">
-                    <?php } ?>
-                    <div class="request-description">
-                      <h6><?= ucfirst($request_seller_user_name); ?></h6>
-                      <h6 class="text-success"><?= $request_title; ?></h6>
-                      <p class="lead"><?= $request_description; ?> </p>
-                      <?php if(!empty($request_file)){ ?>
-                      <a href="requests/request_files/<?= $request_file; ?>" download>
-                      <i class="fa fa-arrow-circle-down"> </i> <?= $request_file; ?>
-                      </a>
-                      <?php } ?>
-                    </div>
-                  </td>
-                  <td><?= $count_send_offers; ?></td>
-                  <td><?= $delivery_time; ?></td>
-                  <td class="text-success">
-                    <?php if(!empty($request_budget)){ ?>
-                    <?= $s_currency; ?><?= $request_budget; ?>
-                    <?php }else{ ?> ----- <?php } ?>
-                    <br>
-                    <?php if($login_seller_offers == "0"){ ?>
-                    <button class="btn btn-success btn-sm mt-4 send_button_<?= $request_id; ?>" data-toggle="modal" data-target="#quota-finish">
-                    Send An Offer
-                    </button>
-                    <?php }else{ ?>
-                    <button class="btn btn-success btn-sm mt-4 send_button_<?= $request_id; ?>">
-                    Send Offer
-                    </button>
-                    <?php } ?>
-                  </td>
-                  <?php if($login_seller_offers == "0"){ ?>
-                  <?php }else{ ?>
-                  <script type="text/javascript">
-                    $(".send_button_<?= $request_id; ?>").click(function(){
-                     request_id = "<?= $request_id; ?>";
-                      $.ajax({
-                       method: "POST",
-                         url: "requests/send_offer_modal",
-                           data: {request_id: request_id }
-                        })
-                           .done(function(data){
-                           $(".append-modal").html(data);
-                            });
-                      });
-                     <?php } ?>
-                  </script>
-                </tr>
-                <?php } } ?>
-              </tbody>
-            </table>
+    </div>
+    <!-- Gigs -->
+    <div class="row">
+      <!-- Left-sidebar START -->
+      <div class="col-12 col-lg-8">
+        <!-- Featured-gig-area -->
+        <div class="featured-gig-area pt-40">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title">
+                <h2>Featured gigs</h2>
+              </div>
+            </div>
+          </div>
+          <div class="all-gigs-small mt-30">
+            <div class="row">
+              <?php
+                $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
+                $count_proposals = $get_proposals->rowCount();
+                if($count_proposals == 0){
+                    echo "
+                    <div class='col-md-12 text-center'>
+                    <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+                    </div>";
+                }
+                while($row_proposals = $get_proposals->fetch()){
+                $proposal_id = $row_proposals->proposal_id;
+                $proposal_title = $row_proposals->proposal_title;
+                $proposal_price = $row_proposals->proposal_price;
+                if($proposal_price == 0){
+                $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+                $proposal_price = $get_p_1->fetch()->price;
+                }
+                $proposal_img1 = $row_proposals->proposal_img1;
+                $proposal_video = $row_proposals->proposal_video;
+                $proposal_seller_id = $row_proposals->proposal_seller_id;
+                $proposal_rating = $row_proposals->proposal_rating;
+                $proposal_url = $row_proposals->proposal_url;
+                $proposal_featured = $row_proposals->proposal_featured;
+                $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+                $proposal_referral_money = $row_proposals->proposal_referral_money;
+                if(empty($proposal_video)){
+                    $video_class = "";
+                }else{
+                    $video_class = "video-img";
+                }
+                $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+                $row_seller = $get_seller->fetch();
+                $seller_user_name = $row_seller->seller_user_name;
+                $seller_image = $row_seller->seller_image;
+                $seller_level = $row_seller->seller_level;
+                $seller_status = $row_seller->seller_status;
+                if(empty($seller_image)){
+                $seller_image = "empty-image.png";
+                }
+                // Select Proposal Seller Level
+                @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+                $proposal_reviews = array();
+                $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+                $count_reviews = $select_buyer_reviews->rowCount();
+                while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                    $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                    array_push($proposal_reviews,$proposal_buyer_rating);
+                }
+                $total = array_sum($proposal_reviews);
+                @$average_rating = $total/count($proposal_reviews);
+                $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+                if($count_favorites == 0){
+                $show_favorite_class = "proposal-favorite dil1";
+                }else{
+                $show_favorite_class = "proposal-unfavorite dil";
+                }
+                ?>
+              <!-- Each Item -->
+              <?php require("includes/proposals_mobile.php"); ?>
+              <!-- Each item -->
+              <?php } ?>
+            </div>
+          </div>
+          <!-- Small gigs item for mobile -->
+          <!-- Gigs for Desktop -->
+          <div class="row d-none d-lg-flex">
             <?php
-              if($requests_count == 0){
-                  echo "<center><h4 class='pb-2 pt-2'>{$lang['user_home']['no_recent_requests']}</h4></center>";
-              } else {
-            ?>
-            <center>
-              <a href="requests/buyer_requests.php" class="btn btn-success btn-lg mb-3">
-              <i class="fa fa-spinner"></i> Load More
-              </a>
-            </center>
+              $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
+              $count_proposals = $get_proposals->rowCount();
+              if($count_proposals == 0){
+                  echo "
+                  <div class='col-md-12 text-center'>
+                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+                  </div>";
+              }
+              while($row_proposals = $get_proposals->fetch()){
+              $proposal_id = $row_proposals->proposal_id;
+              $proposal_title = $row_proposals->proposal_title;
+              $proposal_price = $row_proposals->proposal_price;
+              if($proposal_price == 0){
+              $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+              $proposal_price = $get_p_1->fetch()->price;
+              }
+              $proposal_img1 = $row_proposals->proposal_img1;
+              $proposal_video = $row_proposals->proposal_video;
+              $proposal_seller_id = $row_proposals->proposal_seller_id;
+              $proposal_rating = $row_proposals->proposal_rating;
+              $proposal_url = $row_proposals->proposal_url;
+              $proposal_featured = $row_proposals->proposal_featured;
+              $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+              $proposal_referral_money = $row_proposals->proposal_referral_money;
+              if(empty($proposal_video)){
+                  $video_class = "";
+              }else{
+                  $video_class = "video-img";
+              }
+              $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+              $row_seller = $get_seller->fetch();
+              $seller_user_name = $row_seller->seller_user_name;
+              $seller_image = $row_seller->seller_image;
+              $seller_level = $row_seller->seller_level;
+              $seller_status = $row_seller->seller_status;
+              if(empty($seller_image)){
+              $seller_image = "empty-image.png";
+              }
+              // Select Proposal Seller Level
+              @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+              $proposal_reviews = array();
+              $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+              $count_reviews = $select_buyer_reviews->rowCount();
+              while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                  $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                  array_push($proposal_reviews,$proposal_buyer_rating);
+              }
+              $total = array_sum($proposal_reviews);
+              @$average_rating = $total/count($proposal_reviews);
+              $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+              if($count_favorites == 0){
+              $show_favorite_class = "proposal-favorite dil1";
+              }else{
+              $show_favorite_class = "proposal-unfavorite dil";
+              }
+              ?>
+            <div class="col-12 col-md-4 col-lg-6 col-xl-4">
+              <?php require("includes/user_gigs.php"); ?>
+            </div>
             <?php } ?>
           </div>
+          <!-- Gigs for desktop end -->
         </div>
+        <!-- Featured-gig-area  END-->
+        
+        <!-- Similar-to-recent -->
+        <div class="featured-gig-area pt-40 pb-40">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title">
+                <h2>Similar to recently viewed</h2>
+              </div>
+            </div>
+          </div>
+          <div class="all-gigs-small mt-30">
+            <div class="row">
+              <?php
+                $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
+                $count_proposals = $get_proposals->rowCount();
+                if($count_proposals == 0){
+                    echo "
+                    <div class='col-md-12 text-center'>
+                    <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_random_proposals']} </p>
+                    </div>";
+                }
+                while($row_proposals = $get_proposals->fetch()){
+                $proposal_id = $row_proposals->proposal_id;
+                $proposal_title = $row_proposals->proposal_title;
+                $proposal_price = $row_proposals->proposal_price;
+                if($proposal_price == 0){
+                $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+                $proposal_price = $get_p_1->fetch()->price;
+                }
+                $proposal_img1 = $row_proposals->proposal_img1;
+                $proposal_video = $row_proposals->proposal_video;
+                $proposal_seller_id = $row_proposals->proposal_seller_id;
+                $proposal_rating = $row_proposals->proposal_rating;
+                $proposal_url = $row_proposals->proposal_url;
+                $proposal_featured = $row_proposals->proposal_featured;
+                $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+                $proposal_referral_money = $row_proposals->proposal_referral_money;
+                if(empty($proposal_video)){
+                    $video_class = "";
+                }else{
+                    $video_class = "video-img";
+                }
+                $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+                $row_seller = $get_seller->fetch();
+                $seller_user_name = $row_seller->seller_user_name;
+                $seller_image = $row_seller->seller_image;
+                $seller_level = $row_seller->seller_level;
+                $seller_status = $row_seller->seller_status;
+                if(empty($seller_image)){
+                $seller_image = "empty-image.png";
+                }
+                // Select Proposal Seller Level
+                @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+                $proposal_reviews = array();
+                $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+                $count_reviews = $select_buyer_reviews->rowCount();
+                while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                    $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                    array_push($proposal_reviews,$proposal_buyer_rating);
+                }
+                $total = array_sum($proposal_reviews);
+                @$average_rating = $total/count($proposal_reviews);
+                $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+                if($count_favorites == 0){
+                $show_favorite_class = "proposal-favorite dil1";
+                }else{
+                $show_favorite_class = "proposal-unfavorite dil";
+                }
+                ?>
+              <!-- Each Item -->
+              <?php require("includes/proposals_mobile.php"); ?>
+              <!-- Each item -->
+              <?php } ?>
+            </div>
+          </div>
+          <!-- Small gigs item for mobile -->
+          <!-- Gigs for Desktop -->
+          <div class="row d-none d-lg-flex">
+            <?php
+              $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
+              $count_proposals = $get_proposals->rowCount();
+              if($count_proposals == 0){
+                  echo "
+                  <div class='col-md-12 text-center'>
+                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_random_proposals']} </p>
+                  </div>";
+              }
+              while($row_proposals = $get_proposals->fetch()){
+              $proposal_id = $row_proposals->proposal_id;
+              $proposal_title = $row_proposals->proposal_title;
+              $proposal_price = $row_proposals->proposal_price;
+              if($proposal_price == 0){
+              $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+              $proposal_price = $get_p_1->fetch()->price;
+              }
+              $proposal_img1 = $row_proposals->proposal_img1;
+              $proposal_video = $row_proposals->proposal_video;
+              $proposal_seller_id = $row_proposals->proposal_seller_id;
+              $proposal_rating = $row_proposals->proposal_rating;
+              $proposal_url = $row_proposals->proposal_url;
+              $proposal_featured = $row_proposals->proposal_featured;
+              $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+              $proposal_referral_money = $row_proposals->proposal_referral_money;
+              if(empty($proposal_video)){
+                  $video_class = "";
+              }else{
+                  $video_class = "video-img";
+              }
+              $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+              $row_seller = $get_seller->fetch();
+              $seller_user_name = $row_seller->seller_user_name;
+              $seller_image = $row_seller->seller_image;
+              $seller_level = $row_seller->seller_level;
+              $seller_status = $row_seller->seller_status;
+              if(empty($seller_image)){
+              $seller_image = "empty-image.png";
+              }
+              // Select Proposal Seller Level
+              @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+              $proposal_reviews = array();
+              $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+              $count_reviews = $select_buyer_reviews->rowCount();
+              while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                  $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                  array_push($proposal_reviews,$proposal_buyer_rating);
+              }
+              $total = array_sum($proposal_reviews);
+              @$average_rating = $total/count($proposal_reviews);
+              $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+              if($count_favorites == 0){
+              $show_favorite_class = "proposal-favorite dil1";
+              }else{
+              $show_favorite_class = "proposal-unfavorite dil";
+              }
+            ?>
+            <div class="col-12 col-md-4 col-lg-6 col-xl-4">
+              <?php require("includes/user_gigs.php"); ?>
+            </div>
+            <?php } ?>
+          </div>
+          <!-- Gigs for desktop end -->
+        </div>
+        <!-- Similar-to-recent  END-->
+
+        <!-- Shopping-trend-gigs  -->
+        <div class="featured-gig-area pb-40">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title">
+                <h2>Shopping trend gigs</h2>
+              </div>
+            </div>
+          </div>
+          <div class="all-gigs-small mt-30">
+            <div class="row">
+              <?php
+                $topProposals = array();
+                $select = $db->query("select * from top_proposals");
+                while($row = $select->fetch()){
+                  array_push($topProposals,  $row->proposal_id);
+                }
+                if(empty($topProposals)){
+                $query_where2 = "where level_id='4' and proposal_status='active' ";
+                }else{
+                $topProposals = implode(",", $topProposals);
+                $topRatedWhere = "level_id='4' and proposal_status='active'";
+                $query_where2 = "where proposal_id in ($topProposals) or ($topRatedWhere) ";
+                }
+                $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,8");
+                $count_proposals = $get_proposals->rowCount();
+                if($count_proposals == 0){
+                  echo "
+                  <div class='col-md-12 text-center'>
+                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_top_proposals']} </p>
+                  </div>";
+                }
+                while($row_proposals = $get_proposals->fetch()){
+                $proposal_id = $row_proposals->proposal_id;
+                $proposal_title = $row_proposals->proposal_title;
+                $proposal_price = $row_proposals->proposal_price;
+                if($proposal_price == 0){
+                $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+                $proposal_price = $get_p_1->fetch()->price;
+                }
+                $proposal_img1 = $row_proposals->proposal_img1;
+                $proposal_video = $row_proposals->proposal_video;
+                $proposal_seller_id = $row_proposals->proposal_seller_id;
+                $proposal_rating = $row_proposals->proposal_rating;
+                $proposal_url = $row_proposals->proposal_url;
+                $proposal_featured = $row_proposals->proposal_featured;
+                $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+                $proposal_referral_money = $row_proposals->proposal_referral_money;
+                if(empty($proposal_video)){
+                    $video_class = "";
+                }else{
+                    $video_class = "video-img";
+                }
+                $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+                $row_seller = $get_seller->fetch();
+                $seller_user_name = $row_seller->seller_user_name;
+                $seller_image = $row_seller->seller_image;
+                $seller_level = $row_seller->seller_level;
+                $seller_status = $row_seller->seller_status;
+                if(empty($seller_image)){
+                $seller_image = "empty-image.png";
+                }
+                // Select Proposal Seller Level
+                @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+                $proposal_reviews = array();
+                $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+                $count_reviews = $select_buyer_reviews->rowCount();
+                while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                    $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                    array_push($proposal_reviews,$proposal_buyer_rating);
+                }
+                $total = array_sum($proposal_reviews);
+                @$average_rating = $total/count($proposal_reviews);
+                $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+                if($count_favorites == 0){
+                $show_favorite_class = "proposal-favorite dil1";
+                }else{
+                $show_favorite_class = "proposal-unfavorite dil";
+                }
+                ?>
+              <!-- Each Item -->
+              <?php require("includes/proposals_mobile.php"); ?>
+              <!-- Each item -->
+              <?php } ?>
+            </div>
+          </div>
+          <!-- Small gigs item for mobile -->
+          <!-- Gigs for Desktop -->
+          <div class="row d-none d-lg-flex">
+            <?php
+              $topProposals = array();
+              $select = $db->query("select * from top_proposals");
+              while($row = $select->fetch()){
+                array_push($topProposals,  $row->proposal_id);
+              }
+              if(empty($topProposals)){
+              $query_where2 = "where level_id='4' and proposal_status='active' ";
+              }else{
+              $topProposals = implode(",", $topProposals);
+              $topRatedWhere = "level_id='4' and proposal_status='active'";
+              $query_where2 = "where proposal_id in ($topProposals) or ($topRatedWhere) ";
+              }
+              $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,8");
+              $count_proposals = $get_proposals->rowCount();
+              if($count_proposals == 0){
+                echo "
+                <div class='col-md-12 text-center'>
+                <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_top_proposals']} </p>
+                </div>";
+              }
+              while($row_proposals = $get_proposals->fetch()){
+              $proposal_id = $row_proposals->proposal_id;
+              $proposal_title = $row_proposals->proposal_title;
+              $proposal_price = $row_proposals->proposal_price;
+              if($proposal_price == 0){
+              $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+              $proposal_price = $get_p_1->fetch()->price;
+              }
+              $proposal_img1 = $row_proposals->proposal_img1;
+              $proposal_video = $row_proposals->proposal_video;
+              $proposal_seller_id = $row_proposals->proposal_seller_id;
+              $proposal_rating = $row_proposals->proposal_rating;
+              $proposal_url = $row_proposals->proposal_url;
+              $proposal_featured = $row_proposals->proposal_featured;
+              $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+              $proposal_referral_money = $row_proposals->proposal_referral_money;
+              if(empty($proposal_video)){
+                  $video_class = "";
+              }else{
+                  $video_class = "video-img";
+              }
+              $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+              $row_seller = $get_seller->fetch();
+              $seller_user_name = $row_seller->seller_user_name;
+              $seller_image = $row_seller->seller_image;
+              $seller_level = $row_seller->seller_level;
+              $seller_status = $row_seller->seller_status;
+              if(empty($seller_image)){
+              $seller_image = "empty-image.png";
+              }
+              // Select Proposal Seller Level
+              @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+              $proposal_reviews = array();
+              $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+              $count_reviews = $select_buyer_reviews->rowCount();
+              while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                  $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                  array_push($proposal_reviews,$proposal_buyer_rating);
+              }
+              $total = array_sum($proposal_reviews);
+              @$average_rating = $total/count($proposal_reviews);
+              $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+              if($count_favorites == 0){
+              $show_favorite_class = "proposal-favorite dil1";
+              }else{
+              $show_favorite_class = "proposal-unfavorite dil";
+              }
+              ?>
+            <div class="col-12 col-md-4 col-lg-6 col-xl-4">
+              <?php require("includes/user_gigs.php"); ?>
+            </div>
+            <?php } ?>
+          </div>
+          <!-- Gigs for desktop end -->
+        </div>
+        <!-- Shopping-trend-gigs  END-->
       </div>
-      <?php }} ?>
+      <!-- Right-sidebar START -->
+      <div class="col-12 col-lg-4">
+        <!-- .Sidebar-box  START-->
+
+        <div class="sidebar-box">
+          <div class="sidebar-title">
+            <h4>Favourite <a href="<?= $site_url; ?>/favorites.php">See All</a></h4>
+          </div>
+          <?php
+            $get_favorites = $db->select("favorites",array("seller_id" => $login_seller_id));
+            while($row_favorites = $get_favorites->fetch()){
+            $favorite_proposal_id = $row_favorites->proposal_id;
+            $get_proposals = $db->select("proposals",array("proposal_id" => $favorite_proposal_id));
+            $row_proposals = $get_proposals->fetch();
+            $proposal_id = $row_proposals->proposal_id;
+            $proposal_title = $row_proposals->proposal_title;
+            $proposal_price = $row_proposals->proposal_price;
+            if($proposal_price == 0){
+            $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+            $proposal_price = $get_p_1->fetch()->price;
+            }
+            $proposal_img1 = $row_proposals->proposal_img1;
+            $proposal_video = $row_proposals->proposal_video;
+            $proposal_seller_id = $row_proposals->proposal_seller_id;
+            $proposal_rating = $row_proposals->proposal_rating;
+            $proposal_url = $row_proposals->proposal_url;
+            $proposal_featured = $row_proposals->proposal_featured;
+            $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+            $proposal_referral_money = $row_proposals->proposal_referral_money;
+            if(empty($proposal_video)){
+            $video_class = "";
+            }else{
+            $video_class = "video-img";
+            }
+            $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+            $row_seller = $get_seller->fetch();
+            $seller_user_name = $row_seller->seller_user_name;
+            $seller_image = $row_seller->seller_image;
+            $seller_level = $row_seller->seller_level;
+            $seller_status = $row_seller->seller_status;
+            if(empty($seller_image)){
+            $seller_image = "empty-image.png";
+            }
+            // Select Proposal Seller Level
+            @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+            $proposal_reviews = array();
+            $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+            $count_reviews = $select_buyer_reviews->rowCount();
+            while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+              $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+              array_push($proposal_reviews,$proposal_buyer_rating);
+            }
+            $total = array_sum($proposal_reviews);
+            @$average_rating = $total/count($proposal_reviews);
+            $count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+            if($count_favorites == 0){
+            $show_favorite_class = "proposal-favorite dil1";
+            }else{
+            $show_favorite_class = "proposal-unfavorite dil";
+            }
+          ?>
+          <div class="sidebar-single-item">
+            <div class="sidebar-img">
+              <a href="proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>">
+                <img src="proposals/proposal_files/<?= $proposal_img1; ?>" alt="">
+              </a>
+            </div>
+            <div class="sidebar-content">
+              <a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>"><?= $proposal_title; ?></a>
+            </div>
+          </div>
+          <?php } ?>
+          <?php 
+            if($count_favorites == 0){
+              echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> Your favorites page is empty</span></span>";
+            }
+          ?>
+          
+        </div>
+
+        <!-- Recent-view -->
+        <div class="sidebar-box mb-40">
+          <div class="sidebar-title">
+            <h4>Recently viewed <a href="javascript:void(0);">See All</a></h4>
+          </div>
+            <?php
+            $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
+            $count_recent = $select_recent->rowCount();
+            if($count_recent == 0){
+              echo "<p class='text-muted'> <i class='fa fa-frown-o'></i> {$lang['no_recently_viewed']} </p>";
+            }else{ 
+            ?>
+              <?php
+              $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT  0,5");
+              while($row_recent = $select_recent->fetch()){
+              $proposal_id = $row_recent->proposal_id;
+              $get_proposals = $db->query("select * from proposals where proposal_id='$proposal_id' AND proposal_status='active'");
+              $count_proposals = $get_proposals->rowCount();
+              if($count_proposals == 1){
+              $row_proposals = $get_proposals->fetch();
+              $proposal_id = $row_proposals->proposal_id;
+              $proposal_title = $row_proposals->proposal_title;
+              $proposal_price = $row_proposals->proposal_price;
+              if($proposal_price == 0){
+              $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+              $proposal_price = $get_p_1->fetch()->price;
+              }
+              $proposal_img1 = $row_proposals->proposal_img1;
+              $proposal_video = $row_proposals->proposal_video;
+              $proposal_seller_id = $row_proposals->proposal_seller_id;
+              $proposal_rating = $row_proposals->proposal_rating;
+              $proposal_url = $row_proposals->proposal_url;
+              $proposal_featured = $row_proposals->proposal_featured;
+              $proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+              $proposal_referral_money = $row_proposals->proposal_referral_money;
+              if(empty($proposal_video)){
+                $video_class = "";
+              }else{
+                $video_class = "video-img";
+              }
+              $get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+              $row_seller = $get_seller->fetch();
+              $seller_user_name = $row_seller->seller_user_name;
+              $seller_image = $row_seller->seller_image;
+              $seller_level = $row_seller->seller_level;
+              $seller_status = $row_seller->seller_status;
+              if(empty($seller_image)){
+              $seller_image = "empty-image.png";
+              }
+              // Select Proposal Seller Level
+              @$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+              $proposal_reviews = array();
+              $select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+              $count_reviews = $select_buyer_reviews->rowCount();
+              while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+                $proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+                array_push($proposal_reviews,$proposal_buyer_rating);
+              }
+              $total = array_sum($proposal_reviews);
+              @$average_rating = $total/count($proposal_reviews);
+
+              if($videoPlugin == 1){
+                $proposal_videosettings =  $db->select("proposal_videosettings",array('proposal_id'=>$proposal_id))->fetch();
+                $enableVideo = $proposal_videosettings->enable;
+              }else{
+                $enableVideo = 0;
+              }
+
+              ?>
+            <div class="sidebar-single-item">
+              <div class="sidebar-img">
+                <a href="proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>">
+                  <img src="proposals/proposal_files/<?= $proposal_img1; ?>" alt="">
+                </a>
+              </div>
+              <div class="sidebar-content">
+                <a href="<?= $site_url; ?>/proposals/<?= $seller_user_name; ?>/<?= $proposal_url; ?>"><?= $proposal_title; ?></a>
+              </div>
+            </div>
+            <?php } ?>
+          <?php } ?>
+        <?php } ?>
+        </div>
+
+        <!-- .Sidebar-box  END-->
+      </div>
     </div>
+    <!-- End Gigs -->
   </div>
 </div>
+<!-- End New Design -->
+
+
 <!-- Container ends -->
 <br>
 <div class="append-modal"></div>

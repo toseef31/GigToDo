@@ -9,6 +9,7 @@ if(isset($_SESSION['seller_user_name'])){
   $get_seller = $db->select("sellers",array("seller_user_name" => $seller_user_name));
   $row_seller = $get_seller->fetch();
   $seller_id = $row_seller->seller_id;
+  $login_user_name = $row_seller->seller_user_name;
   $seller_email = $row_seller->seller_email;
   $seller_verification = $row_seller->seller_verification;
   $seller_image = $row_seller->seller_image;
@@ -51,7 +52,7 @@ $ip = get_real_user_ip();
     <div class="container">
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
-          <div class="logo">
+          <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
             <a href="<?php echo $site_url; ?>"><img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt=""></a>
           </div>
         </div>

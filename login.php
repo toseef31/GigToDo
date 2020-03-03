@@ -378,24 +378,24 @@ if(isset($_SESSION['seller_user_name'])){
 				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
 							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 				      $seller_user_name = ucfirst(strtolower($seller_user_name));
-				      if($row_seller->account_type == 'buyer'){
+				   //    if($row_seller->account_type == 'buyer'){
 
-             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
+       //       $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
              
-		          echo "
-		          <script>
-		                swal({
-		                type: 'success',
-		                text: 'Hey $seller_user_name, welcome back!',
-		                timer: 2000,
-		                onOpen: function(){
-		                  swal.showLoading()
-		                }
-		                }).then(function(){
-		                  window.open('$url','_self')
-		              });
-		          </script>";
-				      }else{
+		     //      echo "
+		     //      <script>
+		     //            swal({
+		     //            type: 'success',
+		     //            text: 'Hey $seller_user_name, welcome back!',
+		     //            timer: 2000,
+		     //            onOpen: function(){
+		     //              swal.showLoading()
+		     //            }
+		     //            }).then(function(){
+		     //              window.open('$url','_self')
+		     //          });
+		     //      </script>";
+				   //    }else{
 							$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		          echo "
 		          <script>
@@ -410,7 +410,6 @@ if(isset($_SESSION['seller_user_name'])){
 		                  window.open('$url','_self')
 		              });
 		          </script>";
-		        }
 		        }
 					}
 				}

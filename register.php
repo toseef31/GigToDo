@@ -343,7 +343,7 @@ if(isset($_POST['register'])){
 	          }).then(function(){
 	          if (
 	          // Read more about handling dismissals
-	          window.open('$site_url/buyer','_self')
+	          window.open('$site_url','_self')
 	          ) {
 	          console.log('Successful Registration')
 	          }
@@ -367,7 +367,7 @@ if(isset($_POST['register'])){
 							}).then(function(){
 							if (
 							// Read more about handling dismissals
-							window.open('$site_url/buyer','_self')
+							window.open('$site_url','_self')
 							) {
 							console.log('Successful Registration')
 							}
