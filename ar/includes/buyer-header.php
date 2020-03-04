@@ -9,6 +9,7 @@ if(isset($_SESSION['seller_user_name'])){
   $get_seller = $db->select("sellers",array("seller_user_name" => $seller_user_name));
   $row_seller = $get_seller->fetch();
   $seller_id = $row_seller->seller_id;
+  $login_user_name = $row_seller->seller_user_name;
   $seller_email = $row_seller->seller_email;
   $seller_verification = $row_seller->seller_verification;
   $seller_image = $row_seller->seller_image;
@@ -41,6 +42,18 @@ function get_real_user_ip(){
 
 $ip = get_real_user_ip();
 
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+     $url = "https://";   
+else  
+     $url = "http://";   
+// Append the host(domain name, ip) to the URL.   
+$url.= $_SERVER['HTTP_HOST'];   
+
+// Append the requested resource location to the URL   
+$url.= $_SERVER['REQUEST_URI'];    
+$full_url = $_SERVER['REQUEST_URI'];
+
+$page_url = substr("$full_url", 12);
 ?>
 <style>
   .ui-toolkit .text-body-larger{
@@ -76,9 +89,9 @@ $ip = get_real_user_ip();
           <div class="header-search-box">
             <form action="" class="d-flex flex-row" id="gnav-search" method="POST">
               <input id="search-query" class="rounded" name="search_query"
-                  placeholder="<?php echo $lang['search']['placeholder']; ?>" value="<?php echo @$_SESSION["search_query"]; ?>"  autocomplete="off">
+                  placeholder="البحث عن الخدمات" value="<?php echo @$_SESSION["search_query"]; ?>"  autocomplete="off">
               <button name="search" type="submit" value="Search">
-                <?php echo $lang['search']['button']; ?>
+                البحث
                 </button>
                 <ul class="search-bar-panel d-none"></ul>
             </form>
@@ -102,7 +115,7 @@ $ip = get_real_user_ip();
             <?php if($language_switcher == 1){ ?>
             <div class="language-inner">
               <select name="" id="" onChange="window.location.href=this.value">
-                <option value="<?= $site_url?>">EN</option>
+                <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
                 <option value="" selected="">AR</option>
               </select>
             </div>

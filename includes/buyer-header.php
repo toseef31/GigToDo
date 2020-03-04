@@ -44,6 +44,18 @@ function get_real_user_ip(){
 
 $ip = get_real_user_ip();
 
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+     $url = "https://";   
+else  
+     $url = "http://";   
+// Append the host(domain name, ip) to the URL.   
+$url.= $_SERVER['HTTP_HOST'];   
+
+// Append the requested resource location to the URL   
+$url.= $_SERVER['REQUEST_URI'];    
+$full_url = $_SERVER['REQUEST_URI'];
+
+$page_url = substr("$full_url", 9);
 ?>
 
 <!-- Header -->
@@ -94,7 +106,7 @@ $ip = get_real_user_ip();
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="javascript:void(0);">Become a Seller</a></li>
+                <li><a href="<?= $site_url; ?>/dashboard">Become a Seller</a></li>
                 <li><a href="javascript:void(0);">Orders</a></li>
               </ul>
             </div>
@@ -102,7 +114,7 @@ $ip = get_real_user_ip();
             <div class="language-inner">
               <select name="" id="" onChange="window.location.href=this.value">
                 <option value="" selected="">EN</option>
-                <option value="<?= $site_url?>/ar/">AR</option>
+                <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>">AR</option>
               </select>
             </div>
             <?php } ?>
@@ -334,7 +346,7 @@ $ip = get_real_user_ip();
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
+      <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
       <li><a href="<?= $site_url ?>/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
       <li><a href="<?= $site_url; ?>/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> Logout</a></li>
     </ul>

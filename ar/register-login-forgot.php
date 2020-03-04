@@ -130,7 +130,7 @@ if(isset($_POST['register'])){
 		          }).then(function(){
 		          if (
 		          // Read more about handling dismissals
-		          window.open('$site_url/ar/buyer','_self')
+		          window.open('$site_url/ar/','_self')
 		          ) {
 		          console.log('Successful Registration')
 		          }
@@ -155,7 +155,7 @@ if(isset($_POST['register'])){
 						}).then(function(){
 						if (
 						// Read more about handling dismissals
-						window.open('$site_url/ar/buyer','_self')
+						window.open('$site_url/ar/','_self')
 						) {
 						console.log('Successful Registration')
 						}
@@ -260,7 +260,7 @@ if(isset($_POST['login'])){
 						
 				      if($row_seller->account_type == 'buyer'){
 
-             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/demos/gigtodo/ar/buyer";
+             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/ar/";
 
              
 		          echo "

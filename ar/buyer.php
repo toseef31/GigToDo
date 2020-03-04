@@ -13,7 +13,7 @@
   $relevant_requests = $row_general_settings->relevant_requests;
   ?>
 <!DOCTYPE html>
-<html lang="en" class="ui-toolkit">
+<html lang="ar" class="ui-toolkit">
   <head>
     <title> <?php echo $site_name; ?> - <?php echo $lang['titles']['how_it_works']; ?> </title>
     <meta charset="utf-8">

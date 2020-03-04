@@ -61,10 +61,10 @@ $site_title = $row_general_settings->site_title;
 	<link rel="shortcut icon" href="<?php echo $site_url; ?>/ar/assets/img/favicon.ico" type="image/png">
 	<?php } ?>
 	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-	<!-- <script src="js/ie.js"></script>
+	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
-	<script type="text/javascript" src="js/jquery.min.js"></script> -->
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}</style>
 </head>
 <body class="all-content">
 	<!-- Preloader Start -->
@@ -76,7 +76,11 @@ $site_title = $row_general_settings->site_title;
 	<!-- Preloader End -->
 <?php
 
-require_once("includes/header.php");
+if(!isset($_SESSION['seller_user_name'])){
+	require_once("includes/header.php");
+}else{
+	require_once("includes/buyer-header.php");
+}
 if(!isset($_SESSION['seller_user_name'])){
 	require_once("home.php");
 }else{  

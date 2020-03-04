@@ -41,6 +41,20 @@ function get_real_user_ip(){
 
 $ip = get_real_user_ip();
 
+
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+     $url = "https://";   
+else  
+     $url = "http://";   
+// Append the host(domain name, ip) to the URL.   
+$url.= $_SERVER['HTTP_HOST'];   
+
+// Append the requested resource location to the URL   
+$url.= $_SERVER['REQUEST_URI'];    
+$full_url = $_SERVER['REQUEST_URI'];
+
+$page_url = substr("$full_url", 9);
+
 ?>
 <!-- <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?= $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -408,7 +422,7 @@ $ip = get_real_user_ip();
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="" selected="">EN</option>
-                  <option value="<?= $site_url?>/ar/">AR</option>
+                  <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>">AR</option>
                 </select>
               </div>
               <?php } ?>
@@ -460,7 +474,7 @@ $ip = get_real_user_ip();
           <div class="menu-action">
             <select name="" id="" onChange="window.location.href=this.value">
               <option value="" selected="">EN</option>
-              <option value="<?= $site_url?>/ar/">AR</option>
+              <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>">AR</option>
             </select>
           </div>
           <?php } ?>

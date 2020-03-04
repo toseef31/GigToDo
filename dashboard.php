@@ -82,19 +82,41 @@
 <head>
   <title><?= $site_name; ?> - <?= $lang["titles"]["dashboard"]; ?></title>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="<?= $site_desc; ?>">
   <meta name="keywords" content="<?= $site_keywords; ?>">
   <meta name="author" content="<?= $site_author; ?>">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-  <link href="styles/bootstrap.css" rel="stylesheet">
-  <link href="styles/custom.css" rel="stylesheet">
+
+  <!-- New Design -->
+  <!-- ==============Google Fonts============= -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <!--====== Bootstrap css ======-->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="assets/css/responsive.css" rel="stylesheet">
   <!-- Custom css code from modified in admin panel --->
-  <link href="styles/styles.css" rel="stylesheet">
-  <link href="styles/user_nav_styles.css" rel="stylesheet">
+  <!-- <link href="styles/styles.css" rel="stylesheet">
   <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="styles/owl.carousel.css" rel="stylesheet">
-  <link href="styles/owl.theme.default.css" rel="stylesheet">
+  <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
+  <link href="styles/user_nav_styles.css" rel="stylesheet">
   <link href="styles/sweat_alert.css" rel="stylesheet">
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
@@ -104,8 +126,212 @@
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
 </head>
-<body class="is-responsive">
-<?php require_once("includes/user_header.php") ?>
+<body class="all-content ddashborad">
+  <!-- Preloader Start -->
+  <div class="proloader">
+    <div class="loader">
+      <img src="assets/img/emongez_cube.png" />
+    </div>
+  </div>
+  <!-- Preloader End -->
+  <?php require_once("includes/user_header.php") ?>
+
+  <!-- Dashborad-area-start -->
+  <div class="dashborad-day mt-35 mb-15">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="dashborad-box">
+            <div class="day-item">
+              <p>Today <span>0.0 EGP</span></p>
+            </div>
+            <div class="day-item">
+              <p>Yesterday <span>0.0 EGP</span></p>
+            </div>
+            <div class="day-item">
+              <p>last 7 days <span>0.0 EGP</span></p>
+            </div>
+            <div class="day-item">
+              <p>last 30 days <span>0.0 EGP</span></p>
+            </div>
+            <div class="day-item">
+              <p>last 365 days <span>0.0 EGP</span></p>
+            </div>
+            <div class="day-item">
+              <p>All time <span>0.0 EGP</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-chart-area mb-30">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg1.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/user.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>3.432 <span>Profile Views</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg2.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/clip.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>105 <span>Gig Views</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg3.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/filter.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>10% <span>Conversion Rates </span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg4.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/cal.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>4 <span>Average Cost of Gigs </span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="all-project-chart">
+            <h2>All Projects</h2>
+            <img src="assets/img/img/all-chart.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dash-chart-area pb-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-xl-6">
+          <div class="message-notification">
+            <div class="message-title">
+              Messages & Notifications
+            </div>
+            <div class="messge-noti-box">
+              <div class="messge-item">
+                <div class="msg-logo">
+                  <img src="assets/img/img/logoogo.png" alt="">
+                </div>
+                <div class="msg-text">
+                  <h5>Frends Marks <span>posted a message</span></h5>
+                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
+                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
+                </div>
+              </div>
+              <div class="messge-item">
+                <div class="msg-logo">
+                  <img src="assets/img/img/logoogo.png" alt="">
+                </div>
+                <div class="msg-text">
+                  <h5>Frends Marks <span>posted a message</span></h5>
+                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
+                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
+                </div>
+              </div>
+              <div class="messge-item">
+                <div class="msg-logo">
+                  <img src="assets/img/img/logoogo.png" alt="">
+                </div>
+                <div class="msg-text">
+                  <h5>Frends Marks <span>posted a message</span></h5>
+                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
+                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-6">
+          <div class="income-chart">
+            <div class="income-chart-title">
+              <h5>Income by date</h5>
+              <ul class="nav" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#altime" role="tab" aria-controls="home" aria-selected="true">All time</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#lastyear" role="tab" aria-controls="profile" aria-selected="false">Last Year</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#last30day" role="tab" aria-controls="contact" aria-selected="false">Last 30 days </a>
+                </li>
+              </ul>
+            </div>
+            <div class="income-chart-box">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="altime" role="tabpanel" aria-labelledby="home-tab">
+                  <img src="assets/img/img/income-chart1.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
+                  <img src="assets/img/img/income-chart1.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
+                  <img src="assets/img/img/income-chart1.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="income-chart border-top-none border-bottom-1">
+            <div class="income-chart-title">
+              <h5>Projects completed</h5>
+              <ul class="nav" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#altime2" role="tab" aria-controls="home" aria-selected="true">All time</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#lastyear2" role="tab" aria-controls="profile" aria-selected="false">Last Year</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#last30day2" role="tab" aria-controls="contact" aria-selected="false">Last 30 days </a>
+                </li>
+              </ul>
+            </div>
+            <div class="income-chart-box">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="altime2" role="tabpanel" aria-labelledby="home-tab">
+                  <img src="assets/img/img/income-chart2.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="lastyear2" role="tabpanel" aria-labelledby="profile-tab">
+                  <img src="assets/img/img/income-chart2.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="last30day2" role="tabpanel" aria-labelledby="contact-tab">
+                  <img src="assets/img/img/income-chart2.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dashborad-area-start END-->
+  
+
+
+
+
 <div class="container mt-4 mb-5" style="max-width: 1200px !important;">
 <div class="row">
   <div class="col-md-4 <?=($lang_dir == "right" ? 'order-2 order-sm-1':'')?>">

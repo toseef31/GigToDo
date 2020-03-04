@@ -2,6 +2,19 @@
   session_start();
   require_once("includes/db.php");
   require_once("social-config.php");
+
+  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+       $url = "https://";   
+  else  
+       $url = "http://";   
+  // Append the host(domain name, ip) to the URL.   
+  $url.= $_SERVER['HTTP_HOST'];   
+
+  // Append the requested resource location to the URL   
+  $url.= $_SERVER['REQUEST_URI'];    
+  $full_url = $_SERVER['REQUEST_URI'];
+
+  $page_url = substr("$full_url", 9);
   ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -89,7 +102,7 @@
                 <div class="language-inner">
                   <select name="" id="" onChange="window.location.href=this.value">
                     <option value="" selected="">EN</option>
-                    <option value="<?= $site_url?>/Arabic/">AR</option>
+                    <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>">AR</option>
                   </select>
                 </div>
                 <div class="usd-inner">

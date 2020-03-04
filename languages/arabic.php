@@ -45,10 +45,10 @@ $lang["account_settings"] = "Account Settings";
 $lang["logout"] = "Logout";
 
 /// Buttons
-$lang["search"]["placeholder"] = "Find Services";
-$lang["search"]["button"] = "Search";
-$lang["view_all"] = "VIEW ALL";
-$lang["see_all"] = "See All";
+$lang["search"]["placeholder"] = "البحث عن الخدمات";
+$lang["search"]["button"] = "البحث";
+$lang["view_all"] = "عرض الكل";
+$lang["see_all"] = "اظهار الكل";
 
 /// Login & Register Modals
 $lang["modals"]["login"]["title"] = "Login To Your Account";
