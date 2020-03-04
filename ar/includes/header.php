@@ -41,6 +41,18 @@ function get_real_user_ip(){
 
 $ip = get_real_user_ip();
 
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+      $url = "https://";   
+  else  
+       $url = "http://";   
+  // Append the host(domain name, ip) to the URL.   
+  $url.= $_SERVER['HTTP_HOST'];   
+  
+  // Append the requested resource location to the URL   
+  $url.= $_SERVER['REQUEST_URI'];    
+  $full_url = $_SERVER['REQUEST_URI'];
+  
+  $page_url = substr("$full_url", 12);
 ?>
 <!-- <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?= $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -402,10 +414,23 @@ $ip = get_real_user_ip();
                   <li><a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a></li>
                 </ul>
               </div>
-              <?php if($language_switcher == 1){ ?>
+              <?php if($language_switcher == 1){ 
+                if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+                     $url = "https://";   
+                else  
+                     $url = "http://";   
+                // Append the host(domain name, ip) to the URL.   
+                $url.= $_SERVER['HTTP_HOST'];   
+                
+                // Append the requested resource location to the URL   
+                $url.= $_SERVER['REQUEST_URI'];    
+                $full_url = $_SERVER['REQUEST_URI'];
+                
+                $page_url = substr("$full_url", 12);
+              ?>
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
-                  <option value="<?= $site_url?>">EN</option>
+                  <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
                   <option value="" selected="">AR</option>
                 </select>
               </div>
@@ -457,7 +482,7 @@ $ip = get_real_user_ip();
           <?php if($language_switcher == 1){ ?>
           <div class="menu-action">
             <select name="" id="" onChange="window.location.href=this.value">
-              <option value="<?= $site_url?>">EN</option>
+              <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
               <option value="" selected="">AR</option>
             </select>
           </div>

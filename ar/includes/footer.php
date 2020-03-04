@@ -148,7 +148,20 @@
     <div class="row align-items-center">
       <div class="col-lg-4 col-md-4">
         <div class="copyright">
-          <?php if($language_switcher == 1){ ?>
+          <?php if($language_switcher == 1){ 
+            if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+                 $url = "https://";   
+            else  
+                 $url = "http://";   
+            // Append the host(domain name, ip) to the URL.   
+            $url.= $_SERVER['HTTP_HOST'];   
+            
+            // Append the requested resource location to the URL   
+            $url.= $_SERVER['REQUEST_URI'];    
+            $full_url = $_SERVER['REQUEST_URI'];
+            
+            $page_url = substr("$full_url", 12);
+          ?>
           <div>
             <select name=""  id="languageSelect" onChange="window.location.href=this.value">
               <?php 
@@ -160,8 +173,8 @@
               ?>
               <!-- <option data-image="<?= $site_url; ?>/languages/images/<?= $image; ?>" data-url="<?= "$site_url/change_language?id=$id"; ?>" <?php if($id == $_SESSION["siteLanguage"]){ echo "selected"; } ?>><?= $title; ?></option> -->
               <?php } ?>
-              <option value="<?= $site_url?>">EN</option>
-              <option value="<?= $site_url?>/ar/" selected>AR</option>
+              <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
+              <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>" selected>AR</option>
             </select>
           </div>
           <?php } ?>

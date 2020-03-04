@@ -41,6 +41,18 @@ function get_real_user_ip(){
 
 $ip = get_real_user_ip();
 
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+     $url = "https://";   
+else  
+     $url = "http://";   
+// Append the host(domain name, ip) to the URL.   
+$url.= $_SERVER['HTTP_HOST'];   
+
+// Append the requested resource location to the URL   
+$url.= $_SERVER['REQUEST_URI'];    
+$full_url = $_SERVER['REQUEST_URI'];
+
+$page_url = substr("$full_url", 12);
 ?>
 
 <!-- New Header Design -->
@@ -64,7 +76,7 @@ $ip = get_real_user_ip();
             <?php if($language_switcher == 1){ ?>
             <div class="language-inner">
               <select name="" id="" onChange="window.location.href=this.value">
-                <option value="<?= $site_url?>">EN</option>
+                <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
                 <option value="" selected="">AR</option>
               </select>
             </div>
@@ -115,7 +127,7 @@ $ip = get_real_user_ip();
         <?php if($language_switcher == 1){ ?>
         <div class="menu-action">
           <select name="" id="" onChange="window.location.href=this.value">
-            <option value="<?= $site_url?>">EN</option>
+            <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
             <option value="" selected="">AR</option>
           </select>
         </div>

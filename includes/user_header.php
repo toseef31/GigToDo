@@ -35,12 +35,270 @@
   	return $ip;
   }
   $ip = get_real_user_ip();
+
+  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+       $url = "https://";   
+  else  
+       $url = "http://";   
+  // Append the host(domain name, ip) to the URL.   
+  $url.= $_SERVER['HTTP_HOST'];   
+
+  // Append the requested resource location to the URL   
+  $url.= $_SERVER['REQUEST_URI'];    
+  $full_url = $_SERVER['REQUEST_URI'];
+
+  $page_url = substr("$full_url", 12);
 ?>
 
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
-<div id="gnav-header" class="gnav-header global-nav clear gnav-3">
+<!-- Header -->
+<header>
+  <div class="header-top dashboard-page">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-6 col-lg-4 col-md-3">
+          <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
+            <a href="<?php echo $site_url; ?>">
+              
+              <?php if($site_logo_type == "image"){ ?>
+              <img src="<?= $site_url; ?>/assets/img/<?= $site_sticky_logo; ?>">
+              <?php }else{ ?>
+              <?php echo $site_logo_text; ?>
+              <?php } ?>
+            </a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-8 col-md-9">
+          <div class="header-right d-flex flex-row align-items-center justify-content-end">
+            <div class="menu-inner">
+              <ul>
+                <li><a href="<?= $site_url; ?>/dashboard">Dashboard</a></li>
+                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Gigs</a></li>
+                <li><a href="javascript:void(0);">Buyer Request</a></li>
+              </ul>
+            </div>
+            <?php if($language_switcher == 1){ ?>
+            <div class="language-inner">
+              <select name="" id="" onChange="window.location.href=this.value">
+                <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
+                <option value="" selected="">AR</option>
+              </select>
+            </div>
+            <?php } ?>
+            <div class="usd-inner">
+              <select name="" id="">
+                <option value="">USD</option>
+                <option value="">EGP</option>
+              </select>
+            </div>
+            <div class="message-inner">
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message-2.png" alt="">
+                <!-- <span class="total-user-count count c-messages-header"></span>
+                <span class="total-user-count count c-notifications-header"></span> -->
+              </a>
+            </div>
+            <div class="menubar menubar-2 d-flex flex-row align-items-center">
+              <div class="image">
+                <?php if(!empty($seller_image)){ ?>
+                <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
+                <?php }else{ ?>
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32" class="rounded-circle">
+                <?php } ?>
+                <!-- <img src="assets/img/menu-left-logo-2.png" alt=""> -->
+              </div>
+              <div class="icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Message box -->
+      <div class="message-box" style="box-shadow: none;">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+              <div class="m-item">
+                <i class="fal fa-bell"></i>
+                Notification
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+              <div class="m-item">
+                <i class="far fa-comment-alt-dots"></i>
+                Inbox
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="mesagee-item-box notifications-dropdown">
+              <!-- <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div> -->
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="mesagee-item-box messages-dropdown">
+              <!-- <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div>
+              <div class="mesagee-single-item">
+                <div class="notifiction-user-img">
+                  <img src="assets/img/user3.png" alt="">
+                </div>
+                <h5><span>snazzydegreat delivered</span> your order</h5>
+                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
+                <div class="notifiction-right">
+                  <img src="assets/img/message-img.png" alt="">
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="notification-setting">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="noti-option-icon">
+                <button><i class="fal fa-cog"></i></button>
+                <button><i class="fal fa-volume-up"></i></button>
+              </div>
+            </div>
+            <div class="col-6 text-right">
+              <a href="javascript:void(0);" class="see-all-noti">See All In Notification ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Message box end -->
+    </div>
+  </div>
+</header>
+<!-- Header END-->
+<!-- Offcanvas-menu -->
+<div class="ofcanvas-menu">
+  <div class="close-icon">
+    <i class="fal fa-times"></i>
+  </div>
+  <div class="profile-inner">
+    <img src="assets/img/user2.png" alt="">
+    <h4>Welcome back, <span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
+  </div>
+  <div class="canvs-menu">
+    <ul>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
+      <li><a href="<?= $site_url ?>/settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/16.png" alt=""> Portfolio</a></li>
+      <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
+      <li><a href="javascript:void(0);"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
+      <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="assets/img/icon/indox.png" alt=""> Inbox</a></li>
+      <li><a href="<?= $site_url; ?>/how-it-works-seller.php"> <img src="assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
+      <li><a href="<?= $site_url; ?>/logout.php"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>
+    </ul>
+  </div>
+</div>
+<!-- Close-overlay -->
+<div class="overlay-bg"></div>
+<!-- Offcanvas-menu END-->
+
+<!-- <div id="gnav-header" class="gnav-header global-nav clear gnav-3">
   <header id="gnav-header-inner" class="gnav-header-inner clear apply-nav-height col-group has-svg-icons body-max-width">
     <div class="col-xs-12">
       <div id="gigtodo-logo" class="apply-nav-height gigtodo-logo-svg gigtodo-logo-svg-logged-in <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
@@ -92,17 +350,17 @@
       ?>
       <ul class="account-nav apply-nav-height">
         <?php 
-          require_once("comp/UserMenu.php");
+         // require_once("comp/UserMenu.php");
         ?>
       </ul>
     </div>
   </header>
-</div>
+</div> -->
 
 <div class="clearfix"></div>
-<?php require_once("comp/user_nav.php"); ?>
+<?php //require_once("comp/user_nav.php"); ?>
 <div class="clearfix"></div>
-<?php include("comp/mobile_menu.php"); ?>
+<?php //include("comp/mobile_menu.php"); ?>
 
 <?php if(isset($_GET['not_available'])) { ?>
 <div class="alert alert-danger text-center mb-0 h6">
