@@ -14,7 +14,7 @@
     <meta name="keywords" content="<?php echo $site_keywords; ?>">
     <meta name="author" content="<?php echo $site_author; ?>">
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="<?php echo $site_favicon; ?>" type="image/png">
+    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
     <!-- ==============Google Fonts============= -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <!--====== Bootstrap css ======-->
@@ -62,7 +62,7 @@
             <div class="how-it-work-banner-content d-flex flex-column justify-content-center align-items-center">
               <h3 class="how-title">How It Works</h3>
               <div class="d-flex flex-row justify-content-between">
-                <a href="javascript:void(0);" class="how-btn">Post a Request</a>
+                <a href="<?= $site_url; ?>/requests/post-request.php" class="how-btn">Post a Request</a>
               </div>
             </div>
           </div>

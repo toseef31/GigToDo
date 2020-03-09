@@ -32,7 +32,77 @@
     }
   }
 ?>
-<div class="card border-success mb-3">
+<!-- New Design Start -->
+<div class="gigs-sidebar">
+  <div class="gigs-sidebar-status">
+    <div class="gigs-sidebar-title">
+      <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/status.png" alt="">Status</h4>
+    </div>
+    <div class="gigs-status-content d-flex justify-content-between align-items-center">
+      <div class="status-text pt-20">
+        <p class="text">Online</p>
+      </div>
+      <div class="status-switch pt-20">
+        <div class="md_switch">
+          <input class="switch get_online_sellers" id="switch" value="1" type="checkbox" <?php if(isset($online_sellers["1"])){ echo "checked"; } ?> >
+          <label for="switch"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gigs-sidebar-titme">
+    <div class="gigs-sidebar-title">
+      <h4 class="title"><!-- <img src="<?= $site_url;?>/assets/img/gigs/time.png" alt=""> -->Categories</h4>
+    </div>
+    <div class="gigs-titme-content pt-20">
+      <ul class="radio_titme radio_style2">
+        <?php
+          $get_proposals = $db->query("select DISTINCT proposal_cat_id from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
+          while($row_proposals = $get_proposals->fetch()){
+          $proposal_cat_id = $row_proposals->proposal_cat_id;
+          $get_meta = $db->select("cats_meta",array("cat_id"=>$proposal_cat_id,"language_id"=>$siteLanguage));
+          $row_meta = $get_meta->fetch();
+          $category_title = @$get_meta->fetch()->cat_title;
+          $arabic_title = $row_meta->arabic_title;
+          
+          if(!empty($arabic_title)){
+        ?>
+        <li>
+          <input type="radio" name="radio_titme" checked="" id="cate<?php echo $proposal_cat_id; ?>" class="get_delivery_time" value="<?php echo $proposal_cat_id; ?>" <?php if(isset($cat_id[$proposal_cat_id])){ echo "checked"; } ?> >
+          <label for="cate<?php echo $proposal_cat_id; ?>"><span></span><?php echo $arabic_title; ?></label>
+        </li>
+        <?php }} ?>
+      </ul>
+    </div>
+  </div>
+
+  <div class="gigs-sidebar-titme">
+    <div class="gigs-sidebar-title">
+      <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/time.png" alt="">Delivery Time</h4>
+    </div>
+    <div class="gigs-titme-content pt-20">
+      <ul class="radio_titme radio_style2">
+        <?php
+          $get_proposals = $db->query("select DISTINCT delivery_id from proposals where proposal_title like :proposal_title AND proposal_status ='active'",array(":proposal_title"=>$s_value));
+          while($row_proposals = $get_proposals->fetch()){
+          $delivery_id = $row_proposals->delivery_id;
+          $select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
+          $delivery_title = @$select_delivery_time->fetch()->delivery_title;
+          if(!empty($delivery_title)){
+        ?>
+        <li>
+          <input type="radio" name="radio_titme" checked="" id="time<?php echo $delivery_id; ?>" class="get_delivery_time" value="<?php echo $delivery_id; ?>" <?php if(isset($delivery_time[$delivery_id])){ echo "checked"; } ?> >
+          <label for="time<?php echo $delivery_id; ?>"><span></span><?php echo $delivery_title; ?></label>
+        </li>
+        <?php }} ?>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- New Design -->
+
+<!-- <div class="card border-success mb-3">
   <div class="card-body pb-2 pt-3 <?=($lang_dir == "right" ? 'text-right':'')?>">
     <ul class="nav flex-column">
       <li class="nav-item checkbox checkbox-success">
@@ -156,4 +226,4 @@
       <?php }} ?>
     </ul>
   </div>
-</div>
+</div> -->

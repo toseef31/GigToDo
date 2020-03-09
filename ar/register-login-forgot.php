@@ -45,6 +45,7 @@ if(isset($_POST['register'])){
 		$_SESSION['email']=$email;
 		$pass = strip_tags($input->post('pass'));
 		$con_pass = strip_tags($input->post('con_pass'));
+		$accountType = strip_tags($input->post('accountType'));
 		$referral = strip_tags($input->post('referral'));
 		// $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
 		// $country = $xml->geoplugin_countryName;
@@ -80,7 +81,7 @@ if(isset($_POST['register'])){
 
 			$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
 			
-			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
 					
 			$regsiter_seller_id = $db->lastInsertId();
 			
@@ -113,7 +114,7 @@ if(isset($_POST['register'])){
 				  }
 				      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
 				  		$seller_meta = $get_seller->fetch();
-				  		print_r($seller_meta->account_type);
+				  		//print_r($seller_meta); die();
 				  		if($seller_meta->account_type == 'buyer'){
 
              
@@ -155,7 +156,7 @@ if(isset($_POST['register'])){
 						}).then(function(){
 						if (
 						// Read more about handling dismissals
-						window.open('$site_url/ar/','_self')
+						window.open('$site_url/ar/dashboard','_self')
 						) {
 						console.log('Successful Registration')
 						}
@@ -288,7 +289,7 @@ if(isset($_POST['login'])){
 		                  swal.showLoading()
 		                }
 		                }).then(function(){
-		                  window.open('how-it-works-seller','_self')
+		                  window.open('dashboard','_self')
 		              });
 		          </script>";
 		        }

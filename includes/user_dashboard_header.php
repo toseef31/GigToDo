@@ -47,8 +47,7 @@
   $url.= $_SERVER['REQUEST_URI'];    
   $full_url = $_SERVER['REQUEST_URI'];
 
-  $page_url = substr("$full_url", 15);
-
+  $page_url = substr("$full_url", 9);
 ?>
 
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
@@ -56,48 +55,28 @@
 
 <!-- Header -->
 <header>
-  <div class="header-top">
+  <div class="header-top dashboard-page">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-6 col-lg-2">
+        <div class="col-6 col-lg-4 col-md-3">
           <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
             <a href="<?php echo $site_url; ?>">
+              
               <?php if($site_logo_type == "image"){ ?>
-              <img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt="" width="150">
+              <img src="<?= $site_url; ?>/assets/img/<?= $site_sticky_logo; ?>">
               <?php }else{ ?>
               <?php echo $site_logo_text; ?>
               <?php } ?>
             </a>
           </div>
         </div>
-        <div class="col-6 d-block d-lg-none">
-          <div class="header-right d-flex align-items-center justify-content-end">
-            <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
-            </div>
-            <div class="menubar d-flex flex-row align-items-center">
-              <div class="image">
-                <?php if(!empty($seller_image)){ ?>
-                <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
-                <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
-                <?php } ?>
-              </div>
-              <div class="icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-10 d-none d-lg-block">
-          <div class="header-right d-flex align-items-center justify-content-end">
+        <div class="col-6 col-lg-8 col-md-9">
+          <div class="header-right d-flex flex-row align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="javascript:void(0);">Buyer Request</a></li>
-                <li><a href="javascript:void(0);">Gigs</a></li>
                 <li><a href="<?= $site_url; ?>/dashboard">Dashboard</a></li>
+                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Gigs</a></li>
+                <li><a href="javascript:void(0);">Buyer Request</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -115,16 +94,19 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message-2.png" alt="">
+                <!-- <span class="total-user-count count c-messages-header"></span>
+                <span class="total-user-count count c-notifications-header"></span> -->
+              </a>
             </div>
-            <div class="menubar d-flex flex-row align-items-center">
+            <div class="menubar menubar-2 d-flex flex-row align-items-center">
               <div class="image">
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32" class="rounded-circle">
                 <?php } ?>
-                <!-- <img src="assets/img/menu-left-logo.png" alt=""> -->
+                <!-- <img src="assets/img/menu-left-logo-2.png" alt=""> -->
               </div>
               <div class="icon">
                 <span></span>
@@ -135,8 +117,8 @@
           </div>
         </div>
       </div>
-      <!-- Message Box -->
-      <div class="message-box">
+      <!-- Message box -->
+      <div class="message-box" style="box-shadow: none;">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
@@ -290,17 +272,13 @@
     <i class="fal fa-times"></i>
   </div>
   <div class="profile-inner">
-    <?php if(!empty($seller_image)){ ?>
-    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="80" height="80" class="rounded-circle">
-    <?php }else{ ?>
     <img src="assets/img/user2.png" alt="">
-    <?php } ?>
     <h4>Welcome back, <span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
   </div>
   <div class="canvs-menu">
     <ul>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
-      <li><a href="<?= $site_url ?>/settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
+      <li><a href="<?= $site_url; ?>/settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>

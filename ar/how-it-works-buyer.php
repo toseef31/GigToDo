@@ -61,7 +61,7 @@
           ازاي بيشتغل
           </h3>
           <div class="d-flex flex-row justify-content-between">
-            <a href="javascript:void(0);" class="how-btn">
+            <a href="<?= $site_url; ?>/ar/requests/post-request.php" class="how-btn">
               انشر طلبا
             </a>
           </div>

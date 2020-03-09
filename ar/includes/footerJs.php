@@ -7,14 +7,14 @@ if(isset($_SESSION['seller_user_name'])){
   $login_seller_enable_sound = $row_login_seller->enable_sound;
 }
 ?>
-<!-- <script src="<?= $site_url; ?>/js/msdropdown.js"></script>
-<script type="text/javascript" src="<?= $site_url; ?>/js/jquery.sticky.js"></script>
-<script type="text/javascript" id="custom-js" src="<?= $site_url; ?>/js/customjs.js" data-logged-id="<?php if(isset($_SESSION['seller_user_name'])){ echo $login_seller_id; }?>" data-base-url="<?= $site_url; ?>" data-enable-sound="<?php if(isset($_SESSION['seller_user_name'])){ echo $login_seller_enable_sound; }?>"></script> -->
-<script type="text/javascript" src="<?= $site_url; ?>/js/categoriesProposal.js"></script>
-<script type="text/javascript" src="<?= $site_url; ?>/js/popper.min.js"></script>
-<script type="text/javascript" src="<?= $site_url; ?>/js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="<?= $site_url; ?>/js/bootstrap.js"></script>
-<script type="text/javascript" src="<?= $site_url; ?>/js/summernote.js"></script>
+<script src="<?= $site_url; ?>/ar/js/msdropdown.js"></script>
+<script type="text/javascript" src="<?= $site_url; ?>/ar/js/jquery.sticky.js"></script>
+<script type="text/javascript" id="custom-js" src="<?= $site_url; ?>/ar/js/customjs.js" data-logged-id="<?php if(isset($_SESSION['seller_user_name'])){ echo $login_seller_id; }?>" data-base-url="<?= $site_url; ?>" data-enable-sound="<?php if(isset($_SESSION['seller_user_name'])){ echo $login_seller_enable_sound; }?>"></script>
+<script type="text/javascript" src="<?= $site_url; ?>/ar/js/categoriesProposal.js"></script>
+<script type="text/javascript" src="<?= $site_url; ?>/ar/js/popper.min.js"></script>
+<script type="text/javascript" src="<?= $site_url; ?>/ar/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="<?= $site_url; ?>/ar/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?= $site_url; ?>/ar/js/summernote.js"></script>
 <!-- New Design -->
 <!--====== jquery js ======-->
   <script src="<?= $site_url; ?>/ar/assets/js/jquery.min.js"></script>

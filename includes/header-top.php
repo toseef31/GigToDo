@@ -155,3 +155,39 @@ $page_url = substr("$full_url", 15);
   <!-- Close-overlay -->
   <div class="overlay-bg"></div>
   <!-- Offcanvas-menu END-->
+  <!-- Forgot password starts -->
+  <div class="modal fade login" id="forgot-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- Modal header starts -->
+          <i class="fa fa-meh-o fa-log"></i>
+          <h5 class="modal-title"> <?= $lang['modals']['forgot']['title']; ?> </h5>
+          <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+          </button>
+        </div>
+        <!-- Modal header ends -->
+        <div class="modal-body">
+          <!-- Modal body starts -->
+          <p class="text-muted text-center mb-2">
+            <?= $lang['modals']['forgot']['desc']; ?>
+          </p>
+          <form action="" method="post">
+            <div class="form-group">
+              <input type="text" name="forgot_email" class="form-control" placeholder="Enter Email" required>
+            </div>
+            <input type="submit" class="login-button" value="submit" name="forgot">
+            <p class="text-muted text-center mt-4">
+              <?= $lang['modals']['forgot']['not_member_yer']; ?>
+              <a href="register.php"class="text-danger">Join Now.</a>
+            </p>
+          </form>
+        </div>
+        <!-- Modal body ends -->
+      </div>
+    </div>
+  </div>
+  <!-- Forgot password ends -->
+
+  <?php require_once("register_login_forgot.php"); ?>

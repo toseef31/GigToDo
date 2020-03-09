@@ -281,7 +281,7 @@ $show_favorite_class = "proposal-favorite dil1";
 $show_favorite_class = "proposal-unfavorite dil";
 }
 ?>
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3">
+<div class="col-lg-4 col-sm-6">
 <?php require("includes/proposals.php"); ?>
 </div>
 <?php	

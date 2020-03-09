@@ -69,6 +69,49 @@ if(isset($_SESSION['seller_user_name'])){
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #FF0707;}.swal2-popup .swal2-select{display: none;}</style>
+	<style>
+		#forgot-modal .form-group .form-control {
+    background-color: white;
+    border-color: #afafaf;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border: 1px solid #afafaf;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: #424242;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    height: 60px;
+    padding: 12px 15px;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+	}
+	#forgot-modal .login-button {
+	    background-color: #ff0707;
+	    border: 2px solid #ff0707;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	    border-radius: 5px;
+	    color: white;
+	    font-size: 16px;
+	    font-family: 'Montserrat', sans-serif;
+	    font-weight: 600;
+	    height: 60px;
+	    -webkit-transition: all 0.4s ease-in-out 0s;
+	    -o-transition: all 0.4s ease-in-out 0s;
+	    -moz-transition: all 0.4s ease-in-out 0s;
+	    transition: all 0.4s ease-in-out 0s;
+	    text-transform: uppercase;
+	    width: 100%;
+	}
+	</style>
 </head>
 
 <body class="home-content">
@@ -273,311 +316,8 @@ if(isset($_SESSION['seller_user_name'])){
 		</div>
 	</section>
 </main>
-<!-- Forgot password starts -->
-<div class="modal fade login" id="forgot-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <!-- Modal header starts -->
-        <i class="fa fa-meh-o fa-log"></i>
-        <h5 class="modal-title"> <?= $lang['modals']['forgot']['title']; ?> </h5>
-        <button type="button" class="close" data-dismiss="modal">
-        <span>&times;</span>
-        </button>
-      </div>
-      <!-- Modal header ends -->
-      <div class="modal-body">
-        <!-- Modal body starts -->
-        <p class="text-muted text-center mb-2">
-          <?= $lang['modals']['forgot']['desc']; ?>
-        </p>
-        <form action="" method="post">
-          <div class="form-group">
-            <input type="text" name="forgot_email" class="form-control" placeholder="Enter Email" required>
-          </div>
-          <input type="submit" class="btn btn-success btn-block" value="submit" name="forgot">
-          <p class="text-muted text-center mt-4">
-            <?= $lang['modals']['forgot']['not_member_yer']; ?>
-            <a href="register.php"class="text-success">Join Now.</a>
-          </p>
-        </form>
-      </div>
-      <!-- Modal body ends -->
-    </div>
-  </div>
-</div>
-
-<!-- Forgot password ends -->
 
 <!-- Main content end -->
-
-<?php 
-	if(isset($_POST['login'])){
-	
-		$rules = array(
-		"seller_user_name" => "required",
-		"seller_pass" => "required"
-		);
-		$messages = array("seller_user_name" => "Username Is Required.","seller_pass" => "Password Is Required.");
-
-		$val = new Validator($_POST,$rules,$messages);
-
-		if($val->run() == false){
-			Flash::add("login_errors",$val->get_all_errors());
-			Flash::add("form_data",$_POST);
-			echo "<script>window.open('index','_self')</script>";
-		}else{
-
-			$seller_user_name = $input->post('seller_user_name');
-			$seller_pass = $input->post('seller_pass');
-			$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
-			$row_seller = $select_seller->fetch();
-			@$hashed_password = $row_seller->seller_pass;
-			@$seller_status = $row_seller->seller_status;
-			$decrypt_password = password_verify($seller_pass, $hashed_password);
-			
-			if($decrypt_password == 0){
-				echo "
-				<script>
-	        swal({
-	          type: 'error',
-	          html: $('<div>')
-	            .text('Opps! password or username is incorrect. Please try again.'),
-	          animation: false,
-	          customClass: 'animated tada'
-	        })
-		    </script>
-				";
-			}else{
-				if($seller_status == "block-ban"){
-					echo "
-					<script>
-			            swal({
-			              type: 'warning',
-			              html: $('<div>')
-			                .text('You have been blocked by the Admin. Please contact customer support.'),
-			              animation: false,
-			              customClass: 'animated tada'
-			            })
-			    	</script>";
-				}elseif($seller_status == "deactivated"){
-					echo "
-					<script>
-					swal({
-					  type: 'warning',
-					  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
-					  animation: false,
-					  customClass: 'animated tada'
-					})
-					</script>";
-				}else{
-					$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
-			
-					if($select_seller){
-				    $_SESSION['seller_user_name'] = $seller_user_name;
-				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
-							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
-				      $seller_user_name = ucfirst(strtolower($seller_user_name));
-				      if($row_seller->account_type == 'buyer'){
-
-             // $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
-				      	$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-             
-		          echo "
-		          <script>
-		                swal({
-		                type: 'success',
-		                text: 'Hey $seller_user_name, welcome back!',
-		                timer: 2000,
-		                onOpen: function(){
-		                  swal.showLoading()
-		                }
-		                }).then(function(){
-		                  window.open('$url','_self')
-		              });
-		          </script>";
-				      }else{
-							$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		          echo "
-		          <script>
-		                swal({
-		                type: 'success',
-		                text: 'Hey $seller_user_name, welcome back!',
-		                timer: 2000,
-		                onOpen: function(){
-		                  swal.showLoading()
-		                }
-		                }).then(function(){
-		                  window.open('how-it-works-seller','_self')
-		              });
-		          </script>";
-		      }
-		        }
-					}
-				}
-		  }
-				
-		}
-		
-	}
-
-	use PHPMailer\PHPMailer\PHPMailer;
-	use PHPMailer\PHPMailer\SMTP;
-	use PHPMailer\PHPMailer\Exception;
-
-	require_once("$dir/functions/email.php");
-
-	$get_general_settings = $db->select("general_settings");   
-	$row_general_settings = $get_general_settings->fetch();
-	$site_email_address = $row_general_settings->site_email_address;
-	$site_logo = $row_general_settings->site_logo;
-	$site_name = $row_general_settings->site_name;
-	$signup_email = $row_general_settings->signup_email;
-	$referral_money = $row_general_settings->referral_money;
-
-
-	if(isset($_POST['forgot'])){
-	
-	$forgot_email = $input->post('forgot_email');
-	
-	$select_seller_email = $db->select("sellers",array("seller_email" => $forgot_email));
-		
-	$count_seller_email = $select_seller_email->rowCount();
-	
-	if($count_seller_email == 0){
-		echo "
-		<script>
-		swal({
-		type: 'warning',
-		text: 'Hmm! We don\'t seem to have this email in our system.',
-		})
-		</script>";
-	}else{
-		$row_seller_email = $select_seller_email->fetch();
-		$seller_user_name = $row_seller_email->seller_user_name;
-		$seller_pass = $row_seller_email->seller_pass;
-		require "$dir/mailer/PHPMailerAutoload.php";
-
-		$mail = new PHPMailer(true);
-  	try{
-			if($enable_smtp == "yes"){
-			$mail->isSMTP();
-			$mail->Host = $s_host;
-			$mail->Port = $s_port;
-			$mail->SMTPAuth = true;
-			$mail->SMTPSecure = $s_secure;
-			$mail->Username = $s_username;
-			$mail->Password = $s_password;
-			}
-			$mail->setFrom($site_email_address,$site_name);
-			$mail->addAddress($forgot_email);
-			$mail->addReplyTo($site_email_address,$site_name);
-			$mail->isHTML(true);
-			$mail->Subject = "$site_name: Password Reset";
-			$mail->Body = "
-			<html>
-			<head>
-			<style>
-	    .container {
-			background: rgb(238, 238, 238);
-			padding: 80px;
-			}
-			.box {
-			background: #fff;
-			margin: 0px 0px 30px;
-			padding: 8px 20px 20px 20px;
-			border:1px solid #e6e6e6;
-			box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
-			}
-			h2{
-			margin-top: 0px;
-			margin-bottom: 0px;
-			}
-			.lead {
-			margin-top: 10px;
-			margin-bottom: 0px;
-			font-size:16px;
-			}
-			.btn{
-			background:green;
-			margin-top:20px;
-			color:white !important;
-			text-decoration:none;
-			padding:10px 16px;
-			font-size:18px;
-			border-radius:3px;
-			}
-			hr{
-			margin-top:20px;
-			margin-bottom:20px;
-			border:1px solid #eee;
-			}
-			@media only screen and (max-device-width: 690px) {
-				.container {
-				background: rgb(238, 238, 238);
-				width:100%;
-				padding:1px;
-				}
-				.btn{
-				background:green;
-				margin-top:15px;
-				color:white !important;
-				text-decoration:none;
-				padding:10px;
-				font-size:14px;
-				border-radius:3px;
-				}
-				.lead {
-				font-size:14px;
-				}
-			}
-			</style>
-			</head>
-			<body>
-			<div class='container'>
-			<div class='box'>
-			<center>
-			<img class='logo' src='$site_url/images/$site_logo' width='100' >
-			<h2> Dear $seller_user_name </h2>
-			<p class='lead'> Are You Ready To Change Your Password. </p>
-			<br>
-			<a href='$site_url/change_password?code=$seller_pass".""."&username=$seller_user_name' class='btn'>
-			 Click Here To Change Your Password
-			</a>
-			<hr>
-			<p class='lead'>
-			If clicking the button above does not work, copy and paste the following url in a new browser window: $site_url/change_password?code=$seller_pass".""."&username=$seller_user_name
-			</p>
-			</center>
-			</div>
-			</div>
-			</body>
-			</html>
-			";
-	    $mail->send();
-			echo "
-	    <script>
-	      swal({
-	      type: 'success',
-	      text: 'An email has been sent to your email address with instructions on how to change your password.',
-	      });
-	    </script>
-			";
-	  }catch(Exception $e){
-	    echo "
-	    <script>
-	      swal({
-	      type: 'success',
-	      text: 'An email has been sent to your email address with instructions on how to change your password.',
-	      });
-	    </script>
-			";
-		}
-		
-	}
-	
-}
- ?>
     
 <?php
     
