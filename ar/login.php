@@ -65,7 +65,54 @@ if(isset($_SESSION['seller_user_name'])){
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none;}</style>
+	<style>
+		#forgot-modal .form-group .form-control {
+	    background-color: white;
+	    border-color: #afafaf;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	    border-radius: 5px;
+	    border-style: solid;
+	    border-width: 1px;
+	    border: 1px solid #afafaf;
+	    -webkit-box-shadow: none;
+	    -moz-box-shadow: none;
+	    box-shadow: none;
+	    color: #424242;
+	    font-size: 14px;
+	    font-family: 'Montserrat', sans-serif;
+	    font-weight: 400;
+	    height: 60px;
+	    padding: 12px 15px;
+	    -webkit-transition: all 0.3s ease-in-out 0s;
+	    -o-transition: all 0.3s ease-in-out 0s;
+	    -moz-transition: all 0.3s ease-in-out 0s;
+	    transition: all 0.3s ease-in-out 0s;
+		}
+		#forgot-modal .login-button {
+	    background-color: #ff0707;
+	    border: 2px solid #ff0707;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	    border-radius: 5px;
+	    color: white;
+	    font-size: 16px;
+	    font-family: 'Montserrat', sans-serif;
+	    font-weight: 600;
+	    height: 60px;
+	    -webkit-transition: all 0.4s ease-in-out 0s;
+	    -o-transition: all 0.4s ease-in-out 0s;
+	    -moz-transition: all 0.4s ease-in-out 0s;
+	    transition: all 0.4s ease-in-out 0s;
+	    text-transform: uppercase;
+	    width: 100%;
+		}
+		.modal-header .close {
+	    padding: 1rem;
+	    margin: -1rem auto -1rem -1rem;
+		}
+	</style>
 </head>
 
 <body class="all-content">
@@ -244,11 +291,11 @@ if(isset($_SESSION['seller_user_name'])){
     						<form action="" method="POST">
     							<div class="form-group">
     								<label class="control-label">الإيميل</label>
-    								<input class="form-control" type="text" placeholder="Enter Username"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>" required=""/>
+    								<input class="form-control" type="text" placeholder="ادخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>" required=""/>
     							</div>
     							<div class="form-group">
     								<label class="control-label">الباسوورد</label>
-    								<input class="form-control" type="password" name="seller_pass" placeholder="Enter Password" required=""/>
+    								<input class="form-control" type="password" name="seller_pass" placeholder="أدخل كلمة المرور" required=""/>
     							</div>
     							<div class="form-group d-flex flex-row align-items-center justify-content-between">
     								<div class="custom-control custom-checkbox">
@@ -270,44 +317,8 @@ if(isset($_SESSION['seller_user_name'])){
     		</div>
     	</section>
     </main>
-    <!-- Forgot password starts -->
-	<div class="modal fade login" id="forgot-modal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <!-- Modal header starts -->
-	        <i class="fa fa-meh-o fa-log"></i>
-	        <h5 class="modal-title"> <?= $lang['modals']['forgot']['title']; ?> </h5>
-	        <button type="button" class="close" data-dismiss="modal">
-	        <span>&times;</span>
-	        </button>
-	      </div>
-	      <!-- Modal header ends -->
-	      <div class="modal-body">
-	        <!-- Modal body starts -->
-	        <p class="text-muted text-center mb-2">
-	          <?= $lang['modals']['forgot']['desc']; ?>
-	        </p>
-	        <form action="" method="post">
-	          <div class="form-group">
-	            <input type="text" name="forgot_email" class="form-control" placeholder="Enter Email" required>
-	          </div>
-	          <input type="submit" class="btn btn-success btn-block" value="submit" name="forgot">
-	          <p class="text-muted text-center mt-4">
-	            <?= $lang['modals']['forgot']['not_member_yer']; ?>
-	            <a href="#"class="text-success" data-toggle="modal" data-target="#register-modal" data-dismiss="modal">Join Now.</a>
-	          </p>
-	        </form>
-	      </div>
-	      <!-- Modal body ends -->
-	    </div>
-	  </div>
-	</div>
+    
 	
-	<!-- Forgot password ends -->
-	<?php
-	require('register-login-forgot.php');
-	?>
     <!-- Main content end -->
 
 <?php

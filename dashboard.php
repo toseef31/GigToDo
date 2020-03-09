@@ -77,6 +77,23 @@
   }
 
 ?>
+<?php
+
+  $count_orders = $db->count("orders",array("seller_id" => $login_seller_id, "order_status" => 'completed'));
+   
+  $in_progress = $db->count("orders",array("seller_id" => $login_seller_id, "order_active" => 'yes'));
+  $delivered = $db->count("orders",array("seller_id"=>$login_seller_id,"order_status"=>'delivered'));
+  $canceled_orders = $db->count("orders",array("seller_id"=>$login_seller_id,"order_status"=>'cancelled'));
+
+  $dataPoints = array(
+    array("label"=>"Completed", "symbol" => "Complete","y"=> $count_orders),
+    array("label"=>"In Progress", "symbol" => "Progress","y"=> $in_progress),
+    array("label"=>"Delivered", "symbol" => "Deliver","y"=> $delivered),
+    array("label"=>"Cancelled", "symbol" => "Cancel","y"=> $canceled_orders),
+   
+  )
+ 
+?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
@@ -122,9 +139,44 @@
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/chartjs.min.js"></script>
+  <script type="text/javascript" src="assets/js/chart.js"></script>
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+   <script>
+   window.onload = function() {
+    
+   var chart = new CanvasJS.Chart("chartContainer", {
+    theme: "light2",
+    animationEnabled: true,
+    title: {
+      // text: "Average Composition of Magma"
+    },
+    data: [{
+      type: "doughnut",
+      indexLabel: "{symbol} - {y}",
+      yValueFormatString: "#,##0\"\"",
+      showInLegend: true,
+      legendText: "{label} : {y}",
+      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+    }]
+   });
+   chart.render();
+    
+   }
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+      demo.initChartsPages();
+    });
+  </script>
+  <style>
+    .canvasjs-chart-credit{
+      display: none;
+    }
+  </style>
 </head>
 <body class="all-content ddashborad">
   <!-- Preloader Start -->
@@ -134,7 +186,7 @@
     </div>
   </div>
   <!-- Preloader End -->
-  <?php require_once("includes/user_header.php") ?>
+  <?php require_once("includes/user_dashboard_header.php") ?>
 
   <!-- Dashborad-area-start -->
   <div class="dashborad-day mt-35 mb-15">
@@ -152,13 +204,13 @@
               <p>last 7 days <span>0.0 EGP</span></p>
             </div>
             <div class="day-item">
-              <p>last 30 days <span>0.0 EGP</span></p>
+              <p>last 30 days <span><?= $month_earnings; ?> <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>last 365 days <span>0.0 EGP</span></p>
             </div>
             <div class="day-item">
-              <p>All time <span>0.0 EGP</span></p>
+              <p>All time <span><?= $current_balance; ?> <?= $s_currency; ?></span></p>
             </div>
           </div>
         </div>
@@ -215,7 +267,14 @@
         <div class="col-12 col-lg-4">
           <div class="all-project-chart">
             <h2>All Projects</h2>
-            <img src="assets/img/img/all-chart.png" alt="">
+            <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+            if($count_orders == 0){
+            ?>
+            <img src="assets/img/img/all-chart2.png" alt="">
+            <?php }else{ ?>
+            <div id="chartContainer" style="height: 250px; width: 100%;"></div>
+            <?php } ?>
+            <!-- <img src="assets/img/img/all-chart.png" alt=""> -->
           </div>
         </div>
       </div>
@@ -227,10 +286,87 @@
         <div class="col-12 col-xl-6">
           <div class="message-notification">
             <div class="message-title">
-              Messages & Notifications
+              <?php
+                $select_all_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty'");
+                $count_all_inbox_sellers = $select_all_inbox_sellers->rowCount();
+              ?>
+              Messages <span class="badge badge-success"><?= $count_all_inbox_sellers; ?></span> & Notifications 
             </div>
             <div class="messge-noti-box">
-              <div class="messge-item">
+              <?php
+              
+              if($count_all_inbox_sellers == 0){
+              echo "<h5 class='text-center mb-3'> No Messages. </h5>";
+              }
+
+              $select_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty' order by 1 DESC LIMIT 0,4");
+              while($row_inbox_sellers = $select_inbox_sellers->fetch()){
+
+              $inbox_seller_id = $row_inbox_sellers->inbox_seller_id;
+              $message_group_id = $row_inbox_sellers->message_group_id;
+              $sender_id = $row_inbox_sellers->sender_id;
+              $receiver_id = $row_inbox_sellers->receiver_id;
+              $message_id = $row_inbox_sellers->message_id;
+
+              /// Ids
+              if($login_seller_id == $sender_id){
+              $sender_id = $receiver_id;
+              }else{
+              $sender_id = $sender_id;
+              }
+
+              /// Select Sender Information
+              $select_sender = $db->select("sellers",array("seller_id" => $sender_id));
+              $row_sender = $select_sender->fetch();
+              $sender_user_name = $row_sender->seller_user_name;
+              $sender_image = $row_sender->seller_image;
+
+              $select_inbox_message = $db->select("inbox_messages",array("message_id" => $message_id));
+              $row_inbox_message = $select_inbox_message->fetch();
+              $message_desc = strip_tags($row_inbox_message->message_desc);
+              $message_date = $row_inbox_message->message_date;
+              $message_status = $row_inbox_message->message_status;
+
+              if($message_desc == ""){
+                $message_desc = "Sent you an offer";
+              }
+
+              if($message_status == 'unread'){ 
+                if($login_seller_id == $receiver_id){
+                  $msgClass = "header-message-div-unread"; 
+                }else{ 
+                  $msgClass = "header-message-div"; 
+                } 
+              }else{ 
+                $msgClass = "header-message-div"; 
+              }
+
+              ?>
+              <div class="messge-item <?= $msgClass; ?>">
+                <div class="msg-logo">
+                  <a href="conversations/inbox?single_message_id=<?= $message_group_id; ?>">
+                  <?php if(!empty($sender_image)){ ?>
+                  <img src="user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                  <?php }else{ ?>
+                  <img src="assets/img/img/logoogo.png" width="60" height="60" class="rounded-circle">
+                  <?php } ?>
+                  </a>
+                </div>
+                <div class="msg-text">
+                  <h5><?= $sender_user_name; ?> <span>posted a message</span></h5>
+                  <p class="text-muted date"><i class="fal fa-clock"></i> <?= $message_date; ?></p>
+                  <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= $message_desc; ?></p>
+                </div>
+              </div>
+              <?php } ?>
+              <!-- <?php if($count_all_inbox_sellers > 0){ ?>
+              <div class="p-3">
+                <a href="<?= $site_url; ?>/conversations/inbox" class="btn btn-success btn-block">
+                <?= $lang['see_all']; ?>
+                </a>
+              </div>
+              <?php } ?> -->
+              <!-- <div class="messge-item">
                 <div class="msg-logo">
                   <img src="assets/img/img/logoogo.png" alt="">
                 </div>
@@ -249,17 +385,7 @@
                   <p><i class="fal fa-clock"></i> 03-02-2016</p>
                   <p><i class="fas fa-external-link-alt"></i> Hello World</p>
                 </div>
-              </div>
-              <div class="messge-item">
-                <div class="msg-logo">
-                  <img src="assets/img/img/logoogo.png" alt="">
-                </div>
-                <div class="msg-text">
-                  <h5>Frends Marks <span>posted a message</span></h5>
-                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
-                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
-                </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -285,7 +411,7 @@
                   <img src="assets/img/img/income-chart1.png" alt="">
                 </div>
                 <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
-                  <img src="assets/img/img/income-chart1.png" alt="">
+                  <canvas id="chartHours" width="400" height="100"></canvas>
                 </div>
                 <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
                   <img src="assets/img/img/income-chart1.png" alt="">
@@ -332,7 +458,7 @@
 
 
 
-<div class="container mt-4 mb-5" style="max-width: 1200px !important;">
+<!-- <div class="container mt-4 mb-5" style="max-width: 1200px !important;">
 <div class="row">
   <div class="col-md-4 <?=($lang_dir == "right" ? 'order-2 order-sm-1':'')?>">
     <?php require_once("includes/dashboard_sidebar.php"); ?>
@@ -586,7 +712,8 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <?php require_once("includes/footer.php"); ?>
 </body>
 </html>

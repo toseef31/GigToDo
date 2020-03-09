@@ -9,10 +9,21 @@ $row_slides = $get_slides->fetch();
 $slide_id = $row_slides->slide_id; 
 $slide_image = $row_slides->slide_image; 
 ?>
+<link href="styles/styles.css" rel="stylesheet">
 <style>
   .get-started .started-section-wrapper .started-item .started-inner .started-thumb img {
       width: 100%;
       height: 280px;
+  }
+  .trusted-by-section{
+    position: relative;
+  }
+  .banner-section{
+    z-index: 99;
+    position: relative;
+  }
+  .home-header{
+    z-index: 999;
   }
 </style>
 <div class="banner-section style-two" style="background-image: url(<?= $site_url; ?>/home_slider_images/<?= $slide_image; ?>);">
@@ -23,10 +34,18 @@ $slide_image = $row_slides->slide_image;
       </h2>
       <p>عين فريلانسرز بجودة عالية و ادى دفعة البداية لمشروعك </p>
     </div>
-    <form class="join-form">
-      <input type="search" placeholder="ما نوع العمل هل تحتاج إلى القيام به؟">
-      <input type="submit" value="البحث">
+    <form class="join-form" id="gnav-search" method="POST">
+      <input type="search" id="search-query" name="search_query" value="<?php echo @$_SESSION["search_query"]; ?>" placeholder="ما نوع العمل هل تحتاج إلى القيام به؟">
+      <input name="search" type="submit" value="البحث">
+      <ul class="search-bar-panel d-none"></ul>
     </form>
+    <?php
+      if (isset($_POST['search'])) {
+          $search_query = $input->post('search_query');
+          $_SESSION['search_query'] = $search_query;
+          echo "<script>window.open('$site_url/search.php','_self')</script>";
+      }
+    ?>
   </div>
 </div>
 <!-- end main -->

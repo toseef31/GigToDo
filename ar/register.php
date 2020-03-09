@@ -11,21 +11,6 @@ if(isset($_SESSION['seller_user_name'])){
 	echo "<script> window.open('home.php','_self'); </script>";
 	
 }
-
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require_once("$dir/functions/email.php");
-
-$get_general_settings = $db->select("general_settings");   
-$row_general_settings = $get_general_settings->fetch();
-$site_email_address = $row_general_settings->site_email_address;
-$site_logo = $row_general_settings->site_logo;
-$site_name = $row_general_settings->site_name;
-$signup_email = $row_general_settings->signup_email;
-$referral_money = $row_general_settings->referral_money;
 ?>
 <!DOCTYPE html>
 
@@ -159,7 +144,7 @@ $referral_money = $row_general_settings->referral_money;
 								<div class="form-group">
 									<label class="control-label">الاسم الأخير</label>
 									<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" required="" />
-									<small class="form-text text-muted">Note: You will not be able to change username once your account has been created.</small>
+									<small class="form-text text-muted">ملاحظة: لن تتمكن من تغيير اسم المستخدم بمجرد إنشاء حسابك</small>
 									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
@@ -174,7 +159,7 @@ $referral_money = $row_general_settings->referral_money;
 									<input class="form-control" type="password" name="pass" placeholder="أدخل كلمة المرور" required="" />
 								</div>
 								<div class="form-group">
-								  <label class="control-label"> Confirm Password: </label>
+								  <label class="control-label"> تؤكد  الباسوورد</label>
 								  <input type="password" class="form-control" name="con_pass" placeholder="تأكيد كلمة المرور" required="">
 								  <?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
 								</div>
@@ -207,12 +192,12 @@ $referral_money = $row_general_settings->referral_money;
 								</div>
 								<div class="form-group d-flex flex-row align-items-center justify-content-between">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1">
-										<label class="custom-control-label" style="text-transform: none;" for="customCheck1">اوافق على  <a href="javascript:void(0);">الشروط والأحكام</a></label>
+										<input type="checkbox" class="custom-control-input" id="terms">
+										<label class="custom-control-label" style="text-transform: none;" for="terms">اوافق على  <a href="javascript:void(0);">الشروط والأحكام</a></label>
 									</div>
 								</div>
 								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="register">التسجيل</button>
+									<button class="login-button" role="button" type="submit" name="register" disabled>التسجيل</button>
 								</div>
 							</form>
 						</div>
@@ -223,7 +208,17 @@ $referral_money = $row_general_settings->referral_money;
 	</main>
 	<!-- Main content end -->
 
-<?php require_once('register-login-forgot.php'); ?>
+
+<script>
+$(document).on("click","#terms",function(){
+        if($(this).prop("checked") == true){
+        	$(':input[type="submit"]').prop('disabled', false);
+        }
+        else if($(this).prop("checked") == false){
+        	$(':input[type="submit"]').prop('disabled', true);
+        }
+    });
+</script>
 
 <?php require_once("includes/footer.php"); ?>
 <?php require_once("includes/footerJs.php"); ?>

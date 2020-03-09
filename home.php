@@ -9,10 +9,21 @@ $row_slides = $get_slides->fetch();
 $slide_id = $row_slides->slide_id; 
 $slide_image = $row_slides->slide_image; 
 ?>
+<link href="styles/styles.css" rel="stylesheet">
 <style>
   .get-started .started-section-wrapper .started-item .started-inner .started-thumb img {
     width: 100%;
     height: 280px;
+  }
+  .trusted-by-section{
+    position: relative;
+  }
+  .banner-section{
+    z-index: 99;
+    position: relative;
+  }
+  .home-header{
+    z-index: 999;
   }
 </style>
 <div class="banner-section style-two" style="background-image: url(home_slider_images/<?= $slide_image; ?>);">
@@ -25,8 +36,16 @@ $slide_image = $row_slides->slide_image;
     </div>
     <form class="join-form" id="gnav-search" method="post">
       <input type="text" placeholder="<?= $lang['search']['placeholder']; ?>" id="search-query" name="search_query" value="<?= @$_SESSION["search_query"]; ?>"  autocomplete="off">
-      <input type="submit" value="<?= $lang['search']['button']; ?>">
+      <input type="submit" name="search" value="<?= $lang['search']['button']; ?>">
+      <ul class="search-bar-panel d-none"></ul>
     </form>
+    <?php
+      if (isset($_POST['search'])) {
+          $search_query = $input->post('search_query');
+          $_SESSION['search_query'] = $search_query;
+          echo "<script>window.open('$site_url/search.php','_self')</script>";
+      }
+    ?>
   </div>
 </div>
 <!-- end main -->

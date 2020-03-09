@@ -311,7 +311,7 @@ $(document).ready(function(){
 	      	html += "<h6 class='text-center mt-3'>"+result['lang'].no_notifications+"</h6>";
 	      }
 	      for(i in notifications){
-	      	html += "<div class='"+notifications[i].class+" mesagee-single-item'><a href='"+base_url+"/dashboard?n_id="+notifications[i].id+"'><div class='notifiction-user-img'><img src='"+base_url+"/"+notifications[i].sender_image+"' width='50' height='50' class='rounded-circle'></div><strong class='heading'>"+notifications[i]['sender_user_name']+"</strong><p class='message text-truncate'>"+notifications[i].message+"</p><p class='date text-muted'>"+notifications[i].date+"</p></a></div>";
+	      	html += "<div class='"+notifications[i].class+" mesagee-single-item'><a href='"+base_url+"dashboard?delete_notification="+notifications[i].id+"' class='float-right delete text-danger'><i class='fa fa-times-circle fa-lg'></i></a><a href='"+base_url+"/dashboard?n_id="+notifications[i].id+"'><div class='notifiction-user-img'><img src='"+base_url+"/"+notifications[i].sender_image+"' width='50' height='50' class='rounded-circle'></div><strong class='heading'>"+notifications[i]['sender_user_name']+"</strong><p class='message text-truncate'>"+notifications[i].message+"</p><p class='date text-muted'>"+notifications[i].date+"</p></a></div>";
 	      }
 	      if(parseInt(result.count_all_notifications) > 0){
 	      	html += "<div class='mt-2'><center class='pl-2 pr-2'><a href='"+base_url+"/notifications' class='ml-0 btn btn-success btn-block'>"+result.see_all+"</a></center></div>";

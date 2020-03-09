@@ -1496,7 +1496,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     left: -.25em;
     width: 100%;
     height: 100%;
-    border: .25em solid rgba(165, 220, 134, .3);
+    border: .25em solid #ff0707;
     border-radius: 50%;
     z-index: 2;
     box-sizing: content-box
@@ -1518,7 +1518,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     position: absolute;
     height: .3125em;
     border-radius: .125em;
-    background-color: #a5dc86;
+    background-color: #ff0707;
     z-index: 2
 }
 

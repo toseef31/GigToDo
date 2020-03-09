@@ -22,7 +22,7 @@ if(isset($_POST['register'])){
 	"email" => "email|required",
 	"pass" => "required",
 	"con_pass" => "required",
-	"accountType" = "required");
+	"accountType" => "required");
 
 	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account Tyoe Is Required.");
 	$val = new Validator($_POST,$rules,$messages);
@@ -85,7 +85,6 @@ if(isset($_POST['register'])){
 			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
 					
 			$regsiter_seller_id = $db->lastInsertId();
-			
 			if($insert_seller){
 				
 		    $_SESSION['seller_user_name'] = $u_name;
@@ -114,30 +113,62 @@ if(isset($_POST['register'])){
 						userSignupEmail($email);
 				  }
 
-					echo "
-					<script>
-					swal({
-					type: 'success',
-					text: 'Successfully Registered! Welcome onboard, $name. ',
-					timer: 6000,
-					onOpen: function(){
-					swal.showLoading()
-					}
-					}).then(function(){
-					if (
-					// Read more about handling dismissals
-					window.open('$site_url','_self')
-					) {
-					console.log('Successful Registration')
-					}
-					})
-					</script>
-					";
-					$_SESSION['name'] = "";
-					$_SESSION['u_name']="";
-					$_SESSION['email']= "";
-					$_SESSION['error_array'] = array();
-						
+			      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+			  		$seller_meta = $get_seller->fetch();
+			  		print_r($seller_meta->account_type);
+			  		if($seller_meta->account_type == 'buyer'){
+
+	           
+	           
+	          echo "
+	          <script>
+	          swal({
+	          type: 'success',
+	          text: 'Successfully Registered! Welcome onboard, $name. ',
+	          timer: 6000,
+	          onOpen: function(){
+	          swal.showLoading()
+	          }
+	          }).then(function(){
+	          if (
+	          // Read more about handling dismissals
+	          window.open('$site_url','_self')
+	          ) {
+	          console.log('Successful Registration')
+	          }
+	          })
+	          </script>
+	          ";
+	          $_SESSION['name'] = "";
+	          $_SESSION['u_name']="";
+	          $_SESSION['email']= "";
+	          $_SESSION['error_array'] = array();
+			      }else{
+							echo "
+							<script>
+							swal({
+							type: 'success',
+							text: 'Successfully Registered! Welcome onboard, $name. ',
+							timer: 6000,
+							onOpen: function(){
+							swal.showLoading()
+							}
+							}).then(function(){
+							if (
+							// Read more about handling dismissals
+							window.open('$site_url/dashboard','_self')
+							) {
+							console.log('Successful Registration')
+							}
+							})
+							</script>
+							";
+							$_SESSION['name'] = "";
+							$_SESSION['u_name']="";
+							$_SESSION['email']= "";
+							$_SESSION['error_array'] = array();
+						}
+							
 				}
 					
 			}
@@ -164,7 +195,7 @@ if(isset($_POST['register'])){
 }
 
 if(isset($_POST['login'])){
-	
+
 	$rules = array(
 	"seller_user_name" => "required",
 	"seller_pass" => "required"
@@ -191,7 +222,7 @@ if(isset($_POST['login'])){
 			echo "
 			<script>
         swal({
-          type: 'warning',
+          type: 'error',
           html: $('<div>')
             .text('Opps! password or username is incorrect. Please try again.'),
           animation: false,
@@ -223,15 +254,17 @@ if(isset($_POST['login'])){
 				</script>";
 			}else{
 				$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+		
 				if($select_seller){
 			    $_SESSION['seller_user_name'] = $seller_user_name;
 			    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
 						$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 			      $seller_user_name = ucfirst(strtolower($seller_user_name));
-						$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+			      if($row_seller->account_type == 'buyer'){
 
-						
-
+         // $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
+			      	$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+         
 	          echo "
 	          <script>
 	                swal({
@@ -245,6 +278,22 @@ if(isset($_POST['login'])){
 	                  window.open('$url','_self')
 	              });
 	          </script>";
+			      }else{
+						$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	          echo "
+	          <script>
+	                swal({
+	                type: 'success',
+	                text: 'Hey $seller_user_name, welcome back!',
+	                timer: 2000,
+	                onOpen: function(){
+	                  swal.showLoading()
+	                }
+	                }).then(function(){
+	                  window.open('$url/dashboard','_self')
+	              });
+	          </script>";
+	      }
 	        }
 				}
 			}

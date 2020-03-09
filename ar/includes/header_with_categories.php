@@ -67,7 +67,7 @@ $page_url = substr("$full_url", 12);
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo">
-            <a href="index.html"><img src="<?= $site_url; ?>/ar/assets/img/logo.svg" alt=""></a>
+            <a href="<?= $site_url; ?>/ar"><img src="<?= $site_url; ?>/ar/assets/img/logo.svg" alt=""></a>
           </div>
         </div>
         <div class="col-6 d-block d-lg-none">

@@ -44,6 +44,7 @@ if(isset($_POST['register'])){
 		$_SESSION['email']=$email;
 		$pass = strip_tags($input->post('pass'));
 		$con_pass = strip_tags($input->post('con_pass'));
+		$accountType = strip_tags($input->post('accountType'));
 		$referral = strip_tags($input->post('referral'));
 		$geoplugin = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
 		$country = $geoplugin['geoplugin_countryName'];
@@ -82,7 +83,7 @@ if(isset($_POST['register'])){
 			// Convert minutes to seconds and get timezone
 			$timezone = timezone_name_from_abbr("", $timezone_offset_minutes*60, false);
 			
-			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_activity"=>$seller_activity,"seller_timezone"=>$timezone,"seller_status" => 'online'));
+			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_activity"=>$seller_activity,"seller_timezone"=>$timezone,"seller_status" => 'online'));
 					
 			$regsiter_seller_id = $db->lastInsertId();
 			if($insert_seller){
@@ -111,28 +112,62 @@ if(isset($_POST['register'])){
 					if($signup_email == "yes"){
 						userSignupEmail($email);
 				  }
-					echo "
-					<script>
+				      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+				  		$seller_meta = $get_seller->fetch();
+				  		//print_r($seller_meta); die();
+				  		if($seller_meta->account_type == 'buyer'){
+
+		           
+		           
+		          echo "
+		          <script>
+		          swal({
+		          type: 'success',
+		          text: 'Successfully Registered! Welcome onboard, $name. ',
+		          timer: 6000,
+		          onOpen: function(){
+		          swal.showLoading()
+		          }
+		          }).then(function(){
+		          if (
+		          // Read more about handling dismissals
+		          window.open('$site_url/ar/','_self')
+		          ) {
+		          console.log('Successful Registration')
+		          }
+		          })
+		          </script>
+		          ";
+		          $_SESSION['name'] = "";
+		          $_SESSION['u_name']="";
+		          $_SESSION['email']= "";
+		          $_SESSION['error_array'] = array();
+				      }else{
+
+						echo "
+						<script>
 						swal({
-							type: 'success',
-							text: 'Successfully Registered! Welcome onboard, $name. ',
-							timer: 6000,
-							onOpen: function(){
-							swal.showLoading()
-							}
+						type: 'success',
+						text: 'Successfully Registered! Welcome onboard, $name. ',
+						timer: 6000,
+						onOpen: function(){
+						swal.showLoading()
+						}
 						}).then(function(){
-							if (
-							// Read more about handling dismissals
-							window.open('$site_url','_self')
-							) {
-							console.log('Successful Registration')
-							}
-						});
-					</script>";
-					$_SESSION['name'] = "";
-					$_SESSION['u_name']="";
-					$_SESSION['email']= "";
-					$_SESSION['error_array'] = array();
+						if (
+						// Read more about handling dismissals
+						window.open('$site_url/ar/dashboard','_self')
+						) {
+						console.log('Successful Registration')
+						}
+						})
+						</script>
+						";
+						$_SESSION['name'] = "";
+						$_SESSION['u_name']="";
+						$_SESSION['email']= "";
+						$_SESSION['error_array'] = array();
+					}
 				}
 			}
 		}
@@ -219,20 +254,39 @@ if(isset($_POST['login'])){
 					if(isset($_SESSION['sessionStart']) and $_SESSION['sessionStart'] === $seller_user_name){
 						$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 						$seller_user_name = ucfirst(strtolower($seller_user_name));
-						$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-						echo "
-						<script>
-							swal({
-								type: 'success',
-								text: 'Hey $seller_user_name, welcome back!',
-								timer: 2000,
-								onOpen: function(){
-									swal.showLoading()
-								}
-							}).then(function(){
-								window.open('$url','_self')
-							});
-						</script>";
+				      if($row_seller->account_type == 'buyer'){
+
+				      	$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	         
+		          echo "
+		          <script>
+		                swal({
+		                type: 'success',
+		                text: 'Hey $seller_user_name, welcome back!',
+		                timer: 2000,
+		                onOpen: function(){
+		                  swal.showLoading()
+		                }
+		                }).then(function(){
+		                  window.open('$url','_self')
+		              });
+		          </script>";
+				      }else{
+							$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		          echo "
+		          <script>
+		                swal({
+		                type: 'success',
+		                text: 'Hey $seller_user_name, welcome back!',
+		                timer: 2000,
+		                onOpen: function(){
+		                  swal.showLoading()
+		                }
+		                }).then(function(){
+		                  window.open('dashboard','_self')
+		              });
+		          </script>";
+		      	}
 					}
 				}
 			}
@@ -397,14 +451,14 @@ if(isset($_POST['forgot'])){
 		
 		<br>
 		
-		<a href='$site_url/change_password?code=$seller_pass".""."&username=$seller_user_name' class='btn'>
+		<a href='$site_url/ar/change_password?code=$seller_pass".""."&username=$seller_user_name' class='btn'>
 		 Click Here To Change Your Password
 		</a>
 		
 		<hr>
 		
 		<p class='lead'>
-		If clicking the button above does not work, copy and paste the following url in a new browser window: $site_url/change_password?code=$seller_pass".""."&username=$seller_user_name
+		If clicking the button above does not work, copy and paste the following url in a new browser window: $site_url/ar/change_password?code=$seller_pass".""."&username=$seller_user_name
 		</p>
 		
 		</center>

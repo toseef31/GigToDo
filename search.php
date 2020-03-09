@@ -13,12 +13,34 @@ require_once("functions/functions.php");
   <meta name="description" content="<?php echo $site_desc; ?>">
   <meta name="keywords" content="<?php echo $site_keywords; ?>">
   <meta name="author" content="<?php echo $site_author; ?>">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-  <link href="styles/bootstrap.css" rel="stylesheet">
-  <link href="styles/custom.css" rel="stylesheet"> <!-- Custom css code from modified in admin panel --->
+  <!-- ==============Google Fonts============= -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <!--====== Bootstrap css ======-->
+  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+  <!-- <link href="styles/bootstrap.css" rel="stylesheet">
+  <link href="styles/custom.css" rel="stylesheet"> --> 
+  <!-- Custom css code from modified in admin panel --->
   <link href="styles/styles.css" rel="stylesheet">
   <link href="styles/categories_nav_styles.css" rel="stylesheet">
-  <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+  <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
   <link href="styles/sweat_alert.css" rel="stylesheet">
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
@@ -28,12 +50,18 @@ require_once("functions/functions.php");
   <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
 </head>
-<body class="bg-white is-responsive">
+<body class="all-content">
 
-<?php require_once("includes/header.php"); ?>
+  <?php
+    if(isset($_SESSION['seller_user_name'])){
+    require_once("includes/buyer-header.php");
+   }else{
+    require_once("includes/header_with_categories.php");
+   }
+  ?>
 
-<div class="wide-header">
-<div class="container-fluid mt-5"> <!-- Container start -->
+<div class="all-gigs-area pb-60">
+<div class="container"> <!-- Container start -->
   <div class="row mt-3">
     <div class="col-md-12">
       <center>
@@ -48,8 +76,10 @@ require_once("functions/functions.php");
       <?php require_once("includes/search_sidebar.php");?>
     </div>
     <div class="col-lg-9 col-md-8 col-sm-12 <?=($lang_dir == "right" ? 'order-1 order-sm-2':'')?>">
-      <div class="row flex-wrap" id="search_proposals">
-        <?php get_search_proposals(); ?>
+      <div class="all-gigs"> 
+        <div class="row flex-wrap" id="search_proposals">
+          <?php get_search_proposals(); ?>
+        </div>
       </div>
       <div id="wait"></div>
       <br>

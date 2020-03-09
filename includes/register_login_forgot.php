@@ -15,14 +15,16 @@ $signup_email = $row_general_settings->signup_email;
 $referral_money = $row_general_settings->referral_money;
 
 if(isset($_POST['register'])){
+	
 	$rules = array(
 	"name" => "required",
 	"u_name" => "required",
 	"email" => "email|required",
 	"pass" => "required",
-	"con_pass" => "required");
+	"con_pass" => "required",
+	"accountType" => "required");
 
-	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.");
+	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account Tyoe Is Required.");
 	$val = new Validator($_POST,$rules,$messages);
 
 	if($val->run() == false){
@@ -44,12 +46,14 @@ if(isset($_POST['register'])){
 		$_SESSION['email']=$email;
 		$pass = strip_tags($input->post('pass'));
 		$con_pass = strip_tags($input->post('con_pass'));
+		$accountType = strip_tags($input->post('accountType'));
 		$referral = strip_tags($input->post('referral'));
 		$geoplugin = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
 		$country = $geoplugin['geoplugin_countryName'];
 		if(empty($country)){ $country = ""; }
 		$regsiter_date = date("F d, Y");
 		$date = date("F d, Y");
+
 	
 		$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 		$check_seller_email = $db->count("sellers",array("seller_email" => $email));
@@ -63,35 +67,31 @@ if(isset($_POST['register'])){
 		  array_push($error_array, "Email has already been taken. Try logging in instead.");
 		}
 		if($pass != $con_pass){
-     	  array_push($error_array, "Passwords don't match. Please try again.");
+      array_push($error_array, "Passwords don't match. Please try again.");
 		}
     
 		if(empty($error_array)){
 
 			$referral_code = mt_rand();
+
 			if($signup_email == "yes"){
 				$verification_code = mt_rand();
 			}else{
 				$verification_code = "ok";
 			}
+
 			$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
-			$seller_activity = date("Y-m-d H:i:s");
 			
-			// This is just an example. In application this will come from Javascript (via an AJAX or something)
-			$timezone_offset_minutes = $input->post('timezone');  // $_GET['timezone_offset_minutes']
-			// Convert minutes to seconds and get timezone
-			$timezone = timezone_name_from_abbr("", $timezone_offset_minutes*60, false);
-			
-			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_activity"=>$seller_activity,"seller_timezone"=>$timezone,"seller_status" => 'online'));
+			$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
 					
 			$regsiter_seller_id = $db->lastInsertId();
 			if($insert_seller){
-			  $_SESSION['seller_user_name'] = $u_name;
+				
+		    $_SESSION['seller_user_name'] = $u_name;
 				$insert_seller_account = $db->insert("seller_accounts",array("seller_id" => $regsiter_seller_id));
-				if($paymentGateway == 1){
-					$insert_seller_settings = $db->insert("seller_settings",array("seller_id" => $regsiter_seller_id));
-				}
+
 				if($insert_seller_account){
+
 					if(!empty($referral)){
 				    $sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
 						$row_seller = $sel_seller->fetch();
@@ -108,53 +108,94 @@ if(isset($_POST['register'])){
 							}
 						}	
 					}
+
 					if($signup_email == "yes"){
 						userSignupEmail($email);
 				  }
-					echo "
-					<script>
-						swal({
+
+			      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+			  		$seller_meta = $get_seller->fetch();
+			  		print_r($seller_meta->account_type);
+			  		if($seller_meta->account_type == 'buyer'){
+
+	           
+	           
+	          echo "
+	          <script>
+	          swal({
+	          type: 'success',
+	          text: 'Successfully Registered! Welcome onboard, $name. ',
+	          timer: 6000,
+	          onOpen: function(){
+	          swal.showLoading()
+	          }
+	          }).then(function(){
+	          if (
+	          // Read more about handling dismissals
+	          window.open('$site_url','_self')
+	          ) {
+	          console.log('Successful Registration')
+	          }
+	          })
+	          </script>
+	          ";
+	          $_SESSION['name'] = "";
+	          $_SESSION['u_name']="";
+	          $_SESSION['email']= "";
+	          $_SESSION['error_array'] = array();
+			      }else{
+							echo "
+							<script>
+							swal({
 							type: 'success',
 							text: 'Successfully Registered! Welcome onboard, $name. ',
 							timer: 6000,
 							onOpen: function(){
 							swal.showLoading()
 							}
-						}).then(function(){
+							}).then(function(){
 							if (
 							// Read more about handling dismissals
-							window.open('$site_url','_self')
+							window.open('$site_url/dashboard','_self')
 							) {
 							console.log('Successful Registration')
 							}
-						});
-					</script>";
-					$_SESSION['name'] = "";
-					$_SESSION['u_name']="";
-					$_SESSION['email']= "";
-					$_SESSION['error_array'] = array();
+							})
+							</script>
+							";
+							$_SESSION['name'] = "";
+							$_SESSION['u_name']="";
+							$_SESSION['email']= "";
+							$_SESSION['error_array'] = array();
+						}
+							
 				}
+					
 			}
+					
 		}
+			
 		if(!empty($error_array)){
 			$_SESSION['error_array'] = $error_array;
 			echo "
 			<script>
 			swal({
-				type: 'warning',
-				html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
-				animation: false,
-				customClass: 'animated tada'
+			type: 'warning',
+			html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+			animation: false,
+			customClass: 'animated tada'
 			}).then(function(){
-				window.open('index','_self')
+			window.open('index','_self')
 			});
 			</script>";
 		}
+
 	}
+	
 }
 
 if(isset($_POST['login'])){
-	
+
 	$rules = array(
 	"seller_user_name" => "required",
 	"seller_pass" => "required"
@@ -171,10 +212,9 @@ if(isset($_POST['login'])){
 
 		$seller_user_name = $input->post('seller_user_name');
 		$seller_pass = $input->post('seller_pass');
-		$select_seller = $db->query("select * from sellers where seller_user_name=:u_name",array(":u_name"=>$seller_user_name));
+		$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
 		$row_seller = $select_seller->fetch();
 		@$hashed_password = $row_seller->seller_pass;
-		@$seller_user_name = $row_seller->seller_user_name;
 		@$seller_status = $row_seller->seller_status;
 		$decrypt_password = password_verify($seller_pass, $hashed_password);
 		
@@ -182,7 +222,7 @@ if(isset($_POST['login'])){
 			echo "
 			<script>
         swal({
-          type: 'warning',
+          type: 'error',
           html: $('<div>')
             .text('Opps! password or username is incorrect. Please try again.'),
           animation: false,
@@ -214,26 +254,47 @@ if(isset($_POST['login'])){
 				</script>";
 			}else{
 				$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+		
 				if($select_seller){
-					$_SESSION['sessionStart'] = $seller_user_name;
-					if(isset($_SESSION['sessionStart']) and $_SESSION['sessionStart'] === $seller_user_name){
+			    $_SESSION['seller_user_name'] = $seller_user_name;
+			    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
 						$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
-						$seller_user_name = ucfirst(strtolower($seller_user_name));
+			      $seller_user_name = ucfirst(strtolower($seller_user_name));
+			      if($row_seller->account_type == 'buyer'){
+
+         // $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/buyer";
+			      	$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+         
+	          echo "
+	          <script>
+	                swal({
+	                type: 'success',
+	                text: 'Hey $seller_user_name, welcome back!',
+	                timer: 2000,
+	                onOpen: function(){
+	                  swal.showLoading()
+	                }
+	                }).then(function(){
+	                  window.open('$url','_self')
+	              });
+	          </script>";
+			      }else{
 						$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-						echo "
-						<script>
-							swal({
-								type: 'success',
-								text: 'Hey $seller_user_name, welcome back!',
-								timer: 2000,
-								onOpen: function(){
-									swal.showLoading()
-								}
-							}).then(function(){
-								window.open('$url','_self')
-							});
-						</script>";
-					}
+	          echo "
+	          <script>
+	                swal({
+	                type: 'success',
+	                text: 'Hey $seller_user_name, welcome back!',
+	                timer: 2000,
+	                onOpen: function(){
+	                  swal.showLoading()
+	                }
+	                }).then(function(){
+	                  window.open('dashboard','_self')
+	              });
+	          </script>";
+	      }
+	        }
 				}
 			}
 	  }

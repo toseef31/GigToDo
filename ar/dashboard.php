@@ -77,24 +77,68 @@
   }
 
 ?>
+<?php
+
+  $count_orders = $db->count("orders",array("seller_id" => $login_seller_id, "order_status" => 'completed'));
+   
+  $in_progress = $db->count("orders",array("seller_id" => $login_seller_id, "order_active" => 'yes'));
+  $delivered = $db->count("orders",array("seller_id"=>$login_seller_id,"order_status"=>'delivered'));
+  $canceled_orders = $db->count("orders",array("seller_id"=>$login_seller_id,"order_status"=>'cancelled'));
+
+  $dataPoints = array(
+    array("label"=>"Completed", "symbol" => "Complete","y"=> $count_orders),
+    array("label"=>"In Progress", "symbol" => "Progress","y"=> $in_progress),
+    array("label"=>"Delivered", "symbol" => "Deliver","y"=> $delivered),
+    array("label"=>"Cancelled", "symbol" => "Cancel","y"=> $canceled_orders),
+   
+  )
+ 
+?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
   <title><?= $site_name; ?> - <?= $lang["titles"]["dashboard"]; ?></title>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="<?= $site_desc; ?>">
   <meta name="keywords" content="<?= $site_keywords; ?>">
   <meta name="author" content="<?= $site_author; ?>">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-  <link href="styles/bootstrap.css" rel="stylesheet">
-  <link href="styles/custom.css" rel="stylesheet">
+
+  <!--====== Bootstrap css ======-->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!--====== PreLoader css ======-->
+  <link href="assets/css/preloader.css" rel="stylesheet">
+
+  <!--====== Animate css ======-->
+  <link href="assets/css/animate.min.css" rel="stylesheet">
+
+  <!--====== Fontawesome css ======-->
+  <link href="assets/css/fontawesome.min.css" rel="stylesheet">
+
+  <!--====== Owl carousel css ======-->
+  <link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+
+  <!--====== Nice select css ======-->
+  <link href="assets/css/nice-select.css" rel="stylesheet">
+
+  <!--====== Default css ======-->
+  <link href="assets/css/default.css" rel="stylesheet">
+
+  <!--====== Style css ======-->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!--====== Responsive css ======-->
+  <link href="assets/css/responsive.css" rel="stylesheet">
+  <!-- <link href="styles/bootstrap.css" rel="stylesheet">
+  <link href="styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
-  <link href="styles/styles.css" rel="stylesheet">
-  <link href="styles/user_nav_styles.css" rel="stylesheet">
+  <!-- <link href="styles/styles.css" rel="stylesheet">
   <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="styles/owl.carousel.css" rel="stylesheet">
-  <link href="styles/owl.theme.default.css" rel="stylesheet">
+  <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
+  <link href="styles/user_nav_styles.css" rel="stylesheet">
   <link href="styles/sweat_alert.css" rel="stylesheet">
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
@@ -104,9 +148,276 @@
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
 </head>
-<body class="is-responsive">
-<?php require_once("includes/user_header.php") ?>
-<div class="container mt-4 mb-5" style="max-width: 1200px !important;">
+<body class="all-content">
+  <!-- Preloader Start -->
+    <div class="proloader">
+        <div class="loader">
+            <img src="assets/img/emongez_cube.png" />
+        </div>
+    </div>
+    <!-- Preloader End -->
+  <?php require_once("includes/user_dashboard_header.php") ?>
+
+  <!-- Dashborad-area-start -->
+  <div class="dashborad-day mt-35 mb-15">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="dashborad-box">
+            <div class="day-item">
+              <p>اليوم <span>0 جنيه</span></p>
+            </div>
+            <div class="day-item">
+              <p>امبارح <span>0 جنيه</span></p>
+            </div>
+            <div class="day-item">
+              <p>آخر 7 آيام <span>0 جنيه</span></p>
+            </div>
+            <div class="day-item">
+              <p>آخر 30 يوم <span><?= $month_earnings; ?> <?= $s_currency; ?></span></p>
+            </div>
+            <div class="day-item">
+              <p>آخر 365 يوم <span>0 جنيه</span></p>
+            </div>
+            <div class="day-item">
+              <p>كل الأوقات <span><?= $current_balance; ?> <?= $s_currency; ?></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-chart-area mb-30">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg1.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/user.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>3.432 <span>مشاهدة للملف الشخصي</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg2.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/clip.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>105 <span>مشاهدة للخدمة</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg3.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/filter.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>10% <span>مشاهدة للمحادثات </span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg4.png);">
+                <div class="profile-cart-icon">
+                  <img src="assets/img/img/cal.png" alt="">
+                </div>
+                <div class="profile-cart-text">
+                  <h4>4 <span>متوسط تكلفة الخدمة </span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="all-project-chart">
+            <h2>المشاريع كلها</h2>
+            <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+            if($count_orders == 0){
+            ?>
+            <img src="assets/img/img/all-chart2.png" alt="">
+            <?php }else{ ?>
+            <div id="chartContainer" style="height: 250px; width: 100%;"></div>
+            <?php } ?>
+            <!-- <img src="assets/img/img/all-chart.png" alt=""> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dash-chart-area pb-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <div class="message-notification">
+            <div class="message-title">
+              <?php
+                $select_all_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty'");
+                $count_all_inbox_sellers = $select_all_inbox_sellers->rowCount();
+              ?>
+              الرسايل والإشعارات
+            </div>
+            <div class="messge-noti-box">
+              <?php
+              
+              if($count_all_inbox_sellers == 0){
+              echo "<h5 class='text-center mb-3'> No Messages. </h5>";
+              }
+
+              $select_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty' order by 1 DESC LIMIT 0,4");
+              while($row_inbox_sellers = $select_inbox_sellers->fetch()){
+
+              $inbox_seller_id = $row_inbox_sellers->inbox_seller_id;
+              $message_group_id = $row_inbox_sellers->message_group_id;
+              $sender_id = $row_inbox_sellers->sender_id;
+              $receiver_id = $row_inbox_sellers->receiver_id;
+              $message_id = $row_inbox_sellers->message_id;
+
+              /// Ids
+              if($login_seller_id == $sender_id){
+              $sender_id = $receiver_id;
+              }else{
+              $sender_id = $sender_id;
+              }
+
+              /// Select Sender Information
+              $select_sender = $db->select("sellers",array("seller_id" => $sender_id));
+              $row_sender = $select_sender->fetch();
+              $sender_user_name = $row_sender->seller_user_name;
+              $sender_image = $row_sender->seller_image;
+
+              $select_inbox_message = $db->select("inbox_messages",array("message_id" => $message_id));
+              $row_inbox_message = $select_inbox_message->fetch();
+              $message_desc = strip_tags($row_inbox_message->message_desc);
+              $message_date = $row_inbox_message->message_date;
+              $message_status = $row_inbox_message->message_status;
+
+              if($message_desc == ""){
+                $message_desc = "Sent you an offer";
+              }
+
+              if($message_status == 'unread'){ 
+                if($login_seller_id == $receiver_id){
+                  $msgClass = "header-message-div-unread"; 
+                }else{ 
+                  $msgClass = "header-message-div"; 
+                } 
+              }else{ 
+                $msgClass = "header-message-div"; 
+              }
+
+              ?>
+              <div class="messge-item <?= $msgClass; ?>">
+                <div class="msg-logo">
+                  <a href="conversations/inbox?single_message_id=<?= $message_group_id; ?>">
+                  <?php if(!empty($sender_image)){ ?>
+                    <img src="user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                  <?php }else{ ?>
+                    <img src="assets/img/img/logoogo.png" width="60" height="60" class="rounded-circle">
+                  <?php } ?>
+                  </a>
+                </div>
+                <div class="msg-text">
+                  <h5><?= $sender_user_name; ?> <span>أهلا بالعالم</span></h5>
+                  <p class="text-muted date"><i class="fal fa-clock"></i> <?= $message_date; ?></p>
+                  <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= $message_desc; ?></p>
+                </div>
+              </div>
+              <?php } ?>
+              <!-- <div class="messge-item">
+                <div class="msg-logo">
+                  <img src="assets/img/img/logoogo.png" alt="">
+                </div>
+                <div class="msg-text">
+                  <h5>ابعت  رسالة <span>أهلا بالعالم</span></h5>
+                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
+                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
+                </div>
+              </div>
+              <div class="messge-item">
+                <div class="msg-logo">
+                  <img src="assets/img/img/logoogo.png" alt="">
+                </div>
+                <div class="msg-text">
+                  <h5>ابعت  رسالة <span>أهلا بالعالم</span></h5>
+                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
+                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="income-chart">
+            <div class="income-chart-title">
+              <h5>فرز الدخل بالتاريخ</h5>
+              <ul class="nav" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#altime" role="tab" aria-controls="home" aria-selected="true">كل الوقت</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#lastyear" role="tab" aria-controls="profile" aria-selected="false">السنة اللي فاتت</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#last30day" role="tab" aria-controls="contact" aria-selected="false">آخر 30 يوم </a>
+                </li>
+              </ul>
+            </div>
+            <div class="income-chart-box">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="altime" role="tabpanel" aria-labelledby="home-tab">
+                  <img src="assets/img/img/income-chart1.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
+                  <img src="assets/img/img/income-chart1.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
+                  <img src="assets/img/img/income-chart1.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="income-chart border-top-none border-bottom-1">
+            <div class="income-chart-title">
+              <h5>المشاريع المكتملة</h5>
+              <ul class="nav" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#altime2" role="tab" aria-controls="home" aria-selected="true">كل الوقت</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#lastyear2" role="tab" aria-controls="profile" aria-selected="false">السنة اللي فاتت</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#last30day2" role="tab" aria-controls="contact" aria-selected="false">آخر 30 يوم</a>
+                </li>
+              </ul>
+            </div>
+            <div class="income-chart-box">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="altime2" role="tabpanel" aria-labelledby="home-tab">
+                  <img src="assets/img/img/income-chart2.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="lastyear2" role="tabpanel" aria-labelledby="profile-tab">
+                  <img src="assets/img/img/income-chart2.png" alt="">
+                </div>
+                <div class="tab-pane fade" id="last30day2" role="tabpanel" aria-labelledby="contact-tab">
+                  <img src="assets/img/img/income-chart2.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dashborad-area-END -->
+
+<!-- <div class="container mt-4 mb-5" style="max-width: 1200px !important;">
 <div class="row">
   <div class="col-md-4 <?=($lang_dir == "right" ? 'order-2 order-sm-1':'')?>">
     <?php require_once("includes/dashboard_sidebar.php"); ?>
@@ -360,7 +671,8 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <?php require_once("includes/footer.php"); ?>
 </body>
 </html>
