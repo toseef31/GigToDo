@@ -78,7 +78,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
                 if($count_proposals == 0){
                     echo "
                     <div class='col-md-12 text-center'>
-                    <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+                    <p class='text-muted'><i class='fa fa-frown-o'></i> لا توجد مقترحات / خدمات مميزة لعرضها بعد </p>
                     </div>";
                 }
                 while($row_proposals = $get_proposals->fetch()){
@@ -144,7 +144,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
               if($count_proposals == 0){
                   echo "
                   <div class='col-md-12 text-center'>
-                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+                  <p class='text-muted'><i class='fa fa-frown-o'></i> لا توجد مقترحات / خدمات مميزة لعرضها بعد </p>
                   </div>";
               }
               while($row_proposals = $get_proposals->fetch()){
@@ -376,7 +376,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
                 if($count_proposals == 0){
                   echo "
                   <div class='col-md-12 text-center'>
-                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_top_proposals']} </p>
+                  <p class='text-muted'><i class='fa fa-frown-o'></i> لا توجد مقترحات / خدمات ذات تصنيف أعلى للعرض </p>
                   </div>";
                 }
                 while($row_proposals = $get_proposals->fetch()){
@@ -454,7 +454,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
               if($count_proposals == 0){
                 echo "
                 <div class='col-md-12 text-center'>
-                <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_top_proposals']} </p>
+                <p class='text-muted'><i class='fa fa-frown-o'></i> لا توجد مقترحات / خدمات ذات تصنيف أعلى للعرض </p>
                 </div>";
               }
               while($row_proposals = $get_proposals->fetch()){
@@ -603,7 +603,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
             $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
             $count_recent = $select_recent->rowCount();
             if($count_recent == 0){
-              echo "<p class='text-muted'> <i class='fa fa-frown-o'></i> {$lang['no_recently_viewed']} </p>";
+              echo "<p class='text-muted'> <i class='fa fa-frown-o'></i> لا شيء ينظر حتى الآن </p>";
             }else{ 
             ?>
               <?php

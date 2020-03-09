@@ -229,7 +229,7 @@ $count_proposals = $get_proposals->rowCount();
 if($count_proposals == 0){
 echo"
 <div class='col-md-12'>
-<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> We haven't found any proposals/services matching that search </h1>
+<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> لم نعثر على أي مقترحات / خدمات مطابقة لهذا البحث </h1>
 </div>
 ";
 }
@@ -537,12 +537,12 @@ if($count_proposals == 0){
 	if(isset($_SESSION['cat_id'])){
 	echo "
 	<div class='col-md-12'>
-	<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> No proposals/services to Show in this Category Yet. </h1>
+	<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> لا توجد مقترحات / خدمات لإظهارها في هذه الفئة الفرعية بعد. </h1>
 	</div>";
 	}elseif(isset($_SESSION['cat_child_id'])){
 	echo "
 	<div class='col-md-12'>
-	<h1 class='text-center mt-4'> <i class='fa fa-meh-o'></i> No proposals/services to Show in this Sub-Category Yet. </h1>
+	<h1 class='text-center mt-4'> <i class='fa fa-meh-o'></i> لا توجد مقترحات / خدمات لإظهارها في هذه الفئة الفرعية بعد. </h1>
 	</div>";
 	}
 }

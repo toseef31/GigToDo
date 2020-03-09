@@ -72,7 +72,7 @@
           <div class="row align-items-center">
             <div class="col-6 col-lg-2">
               <div class="logo">
-                <a href="index.html"><img src="<?= $site_url; ?>/ar/assets/img/logo.svg" alt="" width="150"></a>
+                <a href="index.html"><img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt="" width="150"></a>
               </div>
             </div>
             <div class="col-6 d-block d-lg-none">
@@ -298,7 +298,7 @@
           <li><a href="javascript:void(0);"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
           <li><a href="javascript:void(0);"> <img src="assets/img/icon/indox.png" alt=""> Inbox</a></li>
           <li><a href="javascript:void(0);"> <img src="assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
-          <li><a href="javascript:void(0);"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>
+          <li><a href="<?= $site_url; ?>/logout.php"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>
         </ul>
       </div>
     </div>

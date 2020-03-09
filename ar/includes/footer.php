@@ -160,7 +160,7 @@
             $url.= $_SERVER['REQUEST_URI'];    
             $full_url = $_SERVER['REQUEST_URI'];
             
-            $page_url = substr("$full_url", 12);
+            $page_url = substr("$full_url", 18);
           ?>
           <div>
             <select name=""  id="languageSelect" onChange="window.location.href=this.value">

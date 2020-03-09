@@ -47,7 +47,7 @@
   $url.= $_SERVER['REQUEST_URI'];    
   $full_url = $_SERVER['REQUEST_URI'];
 
-  $page_url = substr("$full_url", 12);
+  $page_url = substr("$full_url", 15);
 ?>
 
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">

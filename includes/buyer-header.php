@@ -55,7 +55,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 9);
+$page_url = substr("$full_url", 15);
 ?>
 
 <!-- Header -->

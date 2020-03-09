@@ -288,7 +288,7 @@ if(isset($_POST['login'])){
 		                  swal.showLoading()
 		                }
 		                }).then(function(){
-		                  window.open('$url','_self')
+		                  window.open('how-it-works-seller','_self')
 		              });
 		          </script>";
 		        }

@@ -52,7 +52,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
   $url.= $_SERVER['REQUEST_URI'];    
   $full_url = $_SERVER['REQUEST_URI'];
   
-  $page_url = substr("$full_url", 12);
+  $page_url = substr("$full_url", 18);
 ?>
 <!-- <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?= $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
