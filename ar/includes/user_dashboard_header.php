@@ -61,7 +61,7 @@
           <div class="col-6 col-lg-4 col-md-3">
             <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
               <a href="<?php echo $site_url; ?>/ar/">
-                <img src="assets/img/home-logo-positive.png" alt="">
+                <img src="<?= $site_url; ?>/images/ar/<?= $arabic_sticky_logo; ?>" alt="">
               </a>
             </div>
           </div>

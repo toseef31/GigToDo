@@ -46,6 +46,8 @@ if(empty(DB_HOST) and empty(DB_USER) and empty(DB_NAME)){
 	$site_logo_text = $row_general_settings->site_logo_text;
 	$site_logo_image = $row_general_settings->site_logo_image;
 	$site_sticky_logo = $row_general_settings->site_sticky_logo;
+	$site_arabic_logo = $row_general_settings->site_arabic_logo;
+	$arabic_sticky_logo = $row_general_settings->site_arabic_sticky_logo;
 	$site_logo = $row_general_settings->site_logo;
 	$site_timezone = $row_general_settings->site_timezone;
 	$tinymce_api_key = $row_general_settings->tinymce_api_key;
