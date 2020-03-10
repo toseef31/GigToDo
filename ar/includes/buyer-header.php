@@ -67,7 +67,7 @@ $page_url = substr("$full_url", 18);
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo">
-            <a href="<?php echo $site_url; ?>/ar"><img src="<?= $site_url; ?>/ar/assets/img/logo.svg" alt="" width="150"></a>
+            <a href="<?php echo $site_url; ?>/ar"><img src="<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>" alt="" width="150"></a>
           </div>
         </div>
         <div class="col-6 d-block d-lg-none">

@@ -13,21 +13,43 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
-	<title><?php echo $site_name; ?> - View My Proposals.</title>
+	<title><?php echo $site_name; ?> - View My Gigs.</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="<?php echo $site_desc; ?>">
 	<meta name="keywords" content="<?php echo $site_keywords; ?>">
 	<meta name="author" content="<?php echo $site_author; ?>">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-	<link href="../styles/bootstrap.css" rel="stylesheet">
-    <link href="../styles/custom.css" rel="stylesheet"> <!-- Custom css code from modified in admin panel --->
+  <!-- ==============Google Fonts============= -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+ 	<!--====== Bootstrap css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+ 	<!--====== PreLoader css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+ 	<!--====== Animate css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+ 	<!--====== Fontawesome css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+ 	<!--====== Owl carousel css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+ 	<!--====== Nice select css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+ 	<!--====== Range Slider css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+ 	<!--====== Default css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+ 	<!--====== Style css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+ 	<!--====== Responsive css ======-->
+ 	<link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+	<!-- <link href="../styles/bootstrap.css" rel="stylesheet">
+    <link href="../styles/custom.css" rel="stylesheet"> --> 
+    <!-- Custom css code from modified in admin panel --->
 	<link href="../styles/styles.css" rel="stylesheet">
-	<link href="../styles/user_nav_styles.css" rel="stylesheet">
+	<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet">
 	<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 	<link href="../styles/owl.carousel.css" rel="stylesheet">
 	<link href="../styles/owl.theme.default.css" rel="stylesheet">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script> -->
     <link href="../styles/sweat_alert.css" rel="stylesheet">
     <link href="../styles/animate.css" rel="stylesheet">
     <script type="text/javascript" src="../js/ie.js"></script>
@@ -37,8 +59,903 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
     <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
     <?php } ?>
 </head>
-<body class="is-responsive">
+<body class="all-content">
+	<!-- Preloader Start -->
+		<div class="proloader">
+			<div class="loader">
+				<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+			</div>
+		</div>
+		<!-- Preloader End -->
 <?php require_once("../includes/user_header.php"); ?>
+
+<main>
+		<section class="container-fluid list-page">
+			<div class="row">
+				<div class="container">
+					<div class="row align-items-start">
+						<div class="col-12 col-sm-6">
+							<h1 class="list-page-title">List Of Gigs</h1>
+						</div>
+						<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
+							<a class="button button-red" href="create_proposal">Create a New Gig</a>
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="list-page-filter">
+						<div class="row flex-md-row-reverse">
+							<div class="col-12 col-md-6">
+								<ul class="pagination">
+									<li class="pagination-item">
+										<a class="pagination-link" href="javascript:void(0);">
+											<i class="fal fa-angle-left"></i>
+										</a>
+									</li>
+									<li class="pagination-item">
+										<a class="pagination-link" href="javascript:void(0);">1</a>
+									</li>
+									<li class="pagination-item">
+										<div class="pagination-status d-flex flex-row align-items-center">
+											<span>Of</span>
+											<span>1</span>
+										</div>
+									</li>
+									<li class="pagination-item">
+										<a class="pagination-link" href="javascript:void(0);">
+											<i class="fal fa-angle-right"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-12 col-md-6">
+								<nav class="list-page-nav">
+									<div class="nav nav-tabs" id="nav-tab" role="tablist">
+										<?php
+									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'active'));
+										?>
+										<a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">Active <span class="badge"><?php echo $count_proposals; ?></span></a>
+										<?php
+									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'pause'));
+										?>
+										<a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">Paused <span class="badge"><?php echo $count_proposals; ?></span></a>
+										<?php
+									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'draft'));
+										?>
+										<a class="nav-item nav-link deep-sky-blue" id="draft-tab" data-toggle="tab" href="#nav-draft" role="tab" aria-controls="nav-draft" aria-selected="false">Draft <span class="badge"><?php echo $count_proposals; ?></span></a>
+									</div>
+								</nav>
+							</div>
+						</div>
+						<!-- Row -->
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="active-tab">
+									<div class="all-gigs-small">
+										<div class="row">
+                      <?php
+                        $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+                        $count_proposals = $select_proposals->rowCount();
+                        while($row_proposals = $select_proposals->fetch()){
+                        $proposal_id = $row_proposals->proposal_id;
+                        $proposal_title = $row_proposals->proposal_title;
+                        $proposal_views = $row_proposals->proposal_views;
+                        $proposal_price = $row_proposals->proposal_price;
+                        $proposals_rating = $row_proposals->proposal_rating;
+                        $proposal_status = $row_proposals->proposal_status;
+												if($proposal_price == 0){
+												$get_p = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+												$proposal_price = $get_p->fetch()->price;
+												}
+												
+                        $proposal_img1 = $row_proposals->proposal_img1;
+                        $proposal_url = $row_proposals->proposal_url;
+                        $proposal_featured = $row_proposals->proposal_featured;
+												$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
+                      ?>
+											<div class="col-12">
+												<div class="small-gigs-item limerick d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);"><?php echo $proposal_title; ?></a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (<?php echo $proposals_rating; ?>)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a>
+																		<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">Delete</a>
+																		<a class="dropdown-item" href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>">Preview</a>
+																		<a class="dropdown-item" href="edit_proposal?proposal_id=<?php echo $proposal_id; ?>">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span><?php echo $proposal_views; ?></span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span><?php echo $count_orders; ?></span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span><?php echo $proposal_status; ?></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<?php } ?>
+											<!-- Each item -->
+										</div>
+									</div>
+									<!-- Small gigs item for mobile -->
+									<div class="gigs-list d-none d-lg-flex flex-column">
+                    <?php
+                      $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+                      $count_proposals = $select_proposals->rowCount();
+                      while($row_proposals = $select_proposals->fetch()){
+                      $proposal_id = $row_proposals->proposal_id;
+                      $proposal_title = $row_proposals->proposal_title;
+                      $proposal_views = $row_proposals->proposal_views;
+                      $proposal_price = $row_proposals->proposal_price;
+                      $proposals_rating = $row_proposals->proposal_rating;
+                      $proposal_status = $row_proposals->proposal_status;
+											if($proposal_price == 0){
+											$get_p = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+											$proposal_price = $get_p->fetch()->price;
+											}
+											
+                      $proposal_img1 = $row_proposals->proposal_img1;
+                      $proposal_url = $row_proposals->proposal_url;
+                      $proposal_featured = $row_proposals->proposal_featured;
+											$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
+                    ?>
+										<div class="gig-item limerick d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/greenforest" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4><?php echo $proposal_title; ?></h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (<?php echo $proposals_rating; ?>)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a>
+															<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">Delete</a>
+															<a class="dropdown-item" href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>">Preview</a>
+															<a class="dropdown-item" href="edit_proposal?proposal_id=<?php echo $proposal_id; ?>">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span><?php echo $proposal_views; ?></span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span><?php echo $count_orders; ?></span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span><?php echo $proposal_status; ?></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php } ?>
+										<!-- Each item -->
+									</div>
+									<!-- Gigs list end -->
+								</div>
+								<div class="tab-pane fade" id="nav-paused" role="tabpanel" aria-labelledby="paused-tab">
+									<div class="all-gigs-small">
+										<div class="row">
+	                    <?php
+	                      $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'pause'));
+	                      $count_proposals = $select_proposals->rowCount();
+	                      while($row_proposals = $select_proposals->fetch()){
+	                      $proposal_id = $row_proposals->proposal_id;
+	                      $proposal_title = $row_proposals->proposal_title;
+	                      $proposal_views = $row_proposals->proposal_views;
+	                      $proposal_price = $row_proposals->proposal_price;
+	                      $proposals_rating = $row_proposals->proposal_rating;
+	                      $proposal_status = $row_proposals->proposal_status;
+												if($proposal_price == 0){
+												$get_p = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+												$proposal_price = $get_p->fetch()->price;
+												}
+												
+	                      $proposal_img1 = $row_proposals->proposal_img1;
+	                      $proposal_url = $row_proposals->proposal_url;
+	                      $proposal_featured = $row_proposals->proposal_featured;
+												$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
+	                    ?>
+											<div class="col-12">
+												<div class="small-gigs-item selective-yellow d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);">I will do sensational, professional logo design in 12 hours</a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (0)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span><?php echo $proposal_views; ?></span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span><?php echo $count_orders; ?></span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span><?php echo $proposal_status; ?></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<?php } ?>
+											<!-- Each item -->
+										</div>
+									</div>
+									<!-- Small gigs item for mobile -->
+									<div class="gigs-list d-none d-lg-flex flex-column">
+                    <?php
+                      $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'pause'));
+                      $count_proposals = $select_proposals->rowCount();
+                      while($row_proposals = $select_proposals->fetch()){
+                      $proposal_id = $row_proposals->proposal_id;
+                      $proposal_title = $row_proposals->proposal_title;
+                      $proposal_views = $row_proposals->proposal_views;
+                      $proposal_price = $row_proposals->proposal_price;
+                      $proposals_rating = $row_proposals->proposal_rating;
+                      $proposal_status = $row_proposals->proposal_status;
+											if($proposal_price == 0){
+											$get_p = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+											$proposal_price = $get_p->fetch()->price;
+											}
+											
+                      $proposal_img1 = $row_proposals->proposal_img1;
+                      $proposal_url = $row_proposals->proposal_url;
+                      $proposal_featured = $row_proposals->proposal_featured;
+											$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
+                    ?>
+										<div class="gig-item selective-yellow d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4>I will design the best logo</h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (0)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+															<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span><?php echo $proposal_views; ?></span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span><?php echo $count_orders; ?></span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span><?php echo $proposal_status; ?></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php } ?>
+										<!-- Each item -->
+									</div>
+									<!-- Gigs list end -->
+								</div>
+								<div class="tab-pane fade" id="nav-draft" role="tabpanel" aria-labelledby="draft-tab">
+									<div class="all-gigs-small">
+										<div class="row">
+											<div class="col-12">
+												<div class="small-gigs-item deep-sky-blue d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);">I will do sensational, professional logo design in 12 hours</a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (0)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span>Active</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Each item -->
+											<div class="col-12">
+												<div class="small-gigs-item deep-sky-blue d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);">I will do sensational, professional logo design in 12 hours</a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (0)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span>Active</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Each item -->
+											<div class="col-12">
+												<div class="small-gigs-item deep-sky-blue d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);">I will do sensational, professional logo design in 12 hours</a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (0)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span>Active</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Each item -->
+											<div class="col-12">
+												<div class="small-gigs-item deep-sky-blue d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);">I will do sensational, professional logo design in 12 hours</a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (0)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span>Active</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Each item -->
+											<div class="col-12">
+												<div class="small-gigs-item deep-sky-blue d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="javascript:void(0);">I will do sensational, professional logo design in 12 hours</a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item">24 Nov, 2018</li>
+																	<li class="list-inline-item">Reviews (0)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+																		<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span>Active</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Each item -->
+										</div>
+									</div>
+									<!-- Small gigs item for mobile -->
+									<div class="gigs-list d-none d-lg-flex flex-column">
+										<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4>I will design the best logo</h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (0)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+															<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span>Draft</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Each item -->
+										<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4>I will design the best logo</h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (0)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+															<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span>Draft</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Each item -->
+										<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4>I will design the best logo</h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (0)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+															<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span>Draft</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Each item -->
+										<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4>I will design the best logo</h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (0)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+															<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span>Draft</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Each item -->
+										<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="https://loremflickr.com/g/460/500/gig" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4>I will design the best logo</h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: 24 Nov, 2018</li>
+															<li class="list-inline-item">Reviews (0)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="javascript:void(0);">Pause</a>
+															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+															<a class="dropdown-item" href="javascript:void(0);">Preview</a>
+															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span>Draft</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Each item -->
+									</div>
+									<!-- Gigs list end -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Row -->
+				</div>
+			</div>
+			<!-- Row -->
+		</section>
+	</main>
+
+
 <div class="container-fluid view-proposals"><!-- container-fluid view-proposals Starts -->
 <div class="row"><!-- row Starts -->
 <div class="col-md-12 mt-5 mb-3"><!-- col-md-12 mt-5 mb-3 Starts -->

@@ -366,8 +366,8 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
           <div class="col-6 col-md-3 d-flex flex-row">
             <div class="logo">
               <?php if($site_logo_type == "image"){ ?>
-              <a class="logo-1" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/ar/assets/img/home-logo-negative.png" alt="" width="150"></a>
-              <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/ar//assets/img/home-logo-positive.png" alt="" width="150"></a>
+              <a class="logo-1" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>" alt="" width="150"></a>
+              <a class="home-logo" href="<?= $site_url; ?>"><img src="<?= $site_url; ?>/images/ar/<?= $arabic_sticky_logo; ?>" alt="" width="150"></a>
               <?php }else{ ?>
               <?= $site_logo_text; ?>
               <?php } ?>

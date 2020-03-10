@@ -96,7 +96,7 @@
             <div class="menu-inner">
               <ul>
                 <li><a href="javascript:void(0);">Buyer Request</a></li>
-                <li><a href="javascript:void(0);">Gigs</a></li>
+                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Gigs</a></li>
                 <li><a href="<?= $site_url; ?>/dashboard">Dashboard</a></li>
               </ul>
             </div>
@@ -115,7 +115,7 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -293,26 +293,26 @@
     <?php if(!empty($seller_image)){ ?>
     <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="80" height="80" class="rounded-circle">
     <?php }else{ ?>
-    <img src="assets/img/user2.png" alt="">
+    <img src="<?= $site_url; ?>/assets/img/user2.png" alt="">
     <?php } ?>
     <h4>Welcome back, <span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
-      <li><a href="<?= $site_url ?>/settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
-      <li><a href="<?= $site_url; ?>/dashboard"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/16.png" alt=""> Portfolio</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
+      <li><a href="<?= $site_url ?>/settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
+      <li><a href="<?= $site_url; ?>/dashboard"> <img src="<?= $site_url; ?>/assets/img/icon/12.png" alt=""> Dashboard </a></li>
+      <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Gigs</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a Gig</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/15.png" alt=""> Revenue</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/16.png" alt=""> Portfolio</a></li>
       <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
-      <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="assets/img/icon/indox.png" alt=""> Inbox</a></li>
-      <li><a href="<?= $site_url; ?>/how-it-works-seller.php"> <img src="assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
-      <li><a href="<?= $site_url; ?>/logout.php"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>
+      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
+      <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
+      <li><a href="<?= $site_url; ?>/how-it-works-seller.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
+      <li><a href="<?= $site_url; ?>/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> Logout</a></li>
     </ul>
   </div>
 </div>

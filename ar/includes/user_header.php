@@ -64,7 +64,7 @@
           <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
             <a href="<?php echo $site_url; ?>/ar/">
               <?php if($site_logo_type == "image"){ ?>
-              <img src="assets/img/logo.svg" alt="">
+              <img src="<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>" alt="">
               <?php }else{ ?>
               <?php echo $site_logo_text; ?>
               <?php } ?>

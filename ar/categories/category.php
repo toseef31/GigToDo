@@ -79,7 +79,7 @@
   <!-- <link href="<?= $site_url; ?>/styles/bootstrap.css" rel="stylesheet"> -->
   <!-- <link href="<?= $site_url; ?>/styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
-  <!-- <link href="<?= $site_url; ?>/styles/styles.css" rel="stylesheet"> -->
+  <link href="<?= $site_url; ?>/styles/styles.css" rel="stylesheet">
   <link href="<?= $site_url; ?>/styles/categories_nav_styles.css" rel="stylesheet">
   <link href="<?= $site_url; ?>/font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="<?= $site_url; ?>/styles/sweat_alert.css" rel="stylesheet">

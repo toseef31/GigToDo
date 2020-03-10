@@ -18,9 +18,14 @@ $site_logo_type = $row_general_settings->site_logo_type;
 $site_logo_text = $row_general_settings->site_logo_text;
 $site_logo_image = $row_general_settings->site_logo_image;
 $site_sticky_logo = $row_general_settings->site_sticky_logo;
+$s_site_sticky_logo = $row_general_settings->site_sticky_logo;
 $s_logo_image = $row_general_settings->site_logo_image;
 $site_name = $row_general_settings->site_name;
 $site_logo = $row_general_settings->site_logo;
+$site_arabic_logo = $row_general_settings->site_arabic_logo;
+$s_site_arabic_logo = $row_general_settings->site_arabic_logo;
+$arabic_sticky_logo = $row_general_settings->site_arabic_sticky_logo;
+$s_arabic_sticky_logo = $row_general_settings->site_arabic_sticky_logo;
 $s_logo = $row_general_settings->site_logo;
 $site_url = $row_general_settings->site_url;
 $site_email_address = $row_general_settings->site_email_address;
@@ -244,6 +249,36 @@ require 'timezones.php';
       <input type="file" name="site_sticky_logo" class="form-control">
     </div>
     <img style="margin-top:7px;" src="../images/<?php echo $site_sticky_logo; ?>" width="90" height="30">
+  </div>
+</div>
+<!--- form-group row Ends --->
+
+
+<div class="form-group row site_logo_image">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Arabic Site Logo Image : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-paper-plane"></i></b>
+      </span>
+      <input type="file" name="site_arabic_logo" class="form-control">
+    </div>
+    <img style="margin-top:7px;" src="../images/ar/<?php echo $site_arabic_logo; ?>" width="90" height="30">
+  </div>
+</div>
+<!--- form-group row Ends --->
+<div class="form-group row site_logo_image">
+  <!--- form-group row Starts --->
+  <label class="col-md-3 control-label"> Arabic Site Sticky Logo Image : </label>
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <b><i class="fa fa-paper-plane"></i></b>
+      </span>
+      <input type="file" name="arabic_sticky_logo" class="form-control">
+    </div>
+    <img style="margin-top:7px;" src="../images/ar/<?php echo $arabic_sticky_logo; ?>" width="90" height="30">
   </div>
 </div>
 <!--- form-group row Ends --->
@@ -869,13 +904,19 @@ if(isset($_POST['general_settings_update'])){
 	$site_logo_image_tmp = $_FILES['site_logo_image']['tmp_name'];
   $site_sticky_logo = $_FILES['site_sticky_logo']['name'];
   $site_sticky_logo_tmp = $_FILES['site_sticky_logo']['tmp_name'];
+  $site_arabic_logo = $_FILES['site_arabic_logo']['name'];
+  $site_arabic_logo_tmp = $_FILES['site_arabic_logo']['tmp_name'];
+  $arabic_sticky_logo = $_FILES['arabic_sticky_logo']['name'];
+  $arabic_sticky_logo_tmp = $_FILES['arabic_sticky_logo']['tmp_name'];
 	$favicon_extension = pathinfo($site_favicon, PATHINFO_EXTENSION);
 	$logo_extension = pathinfo($site_logo, PATHINFO_EXTENSION);
 	$logo_image_extension = pathinfo($site_logo_image, PATHINFO_EXTENSION);
   $site_sticky_logo_extension = pathinfo($site_sticky_logo, PATHINFO_EXTENSION);
+  $site_arabic_logo_extension = pathinfo($site_arabic_logo, PATHINFO_EXTENSION);
+  $arabic_sticky_logo_extension = pathinfo($arabic_sticky_logo, PATHINFO_EXTENSION);
 	$allowed = array('jpeg','jpg','gif','png','tif','ico','webp', 'svg');
 
-	if(!in_array($favicon_extension,$allowed) & !empty($site_favicon) or !in_array($logo_extension,$allowed) & !empty($site_logo) or !in_array($logo_image_extension,$allowed) & !empty($site_logo_image) or !in_array($site_sticky_logo_extension,$allowed) & !empty($site_sticky_logo)){
+	if(!in_array($favicon_extension,$allowed) & !empty($site_favicon) or !in_array($logo_extension,$allowed) & !empty($site_logo) or !in_array($logo_image_extension,$allowed) & !empty($site_logo_image) or !in_array($site_sticky_logo_extension,$allowed) & !empty($site_sticky_logo) or !in_array($site_arabic_logo_extension,$allowed) & !empty($site_arabic_logo) or !in_array($arabic_sticky_logo_extension,$allowed) & !empty($arabic_sticky_logo)){
 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
 	}else{
 		if(empty($site_favicon)){
@@ -888,14 +929,22 @@ if(isset($_POST['general_settings_update'])){
 			$site_logo_image = $s_logo_image;
 		}
     if(empty($site_sticky_logo)){
-      $site_sticky_logo = $site_sticky_logo;
+      $site_sticky_logo = $s_site_sticky_logo;
+    }
+    if(empty($site_arabic_logo)){
+      $site_arabic_logo = $s_site_arabic_logo;
+    }
+    if(empty($arabic_sticky_logo)){
+      $arabic_sticky_logo = $s_arabic_sticky_logo;
     }
 		move_uploaded_file($site_favicon_tmp,"../images/$site_favicon");
 		move_uploaded_file($site_logo_tmp,"../images/$site_logo");
 		move_uploaded_file($site_logo_image_tmp,"../images/$site_logo_image");
     move_uploaded_file($site_sticky_logo_tmp,"../images/$site_sticky_logo");
+    move_uploaded_file($site_arabic_logo_tmp,"../images/ar/$site_arabic_logo");
+    move_uploaded_file($arabic_sticky_logo_tmp,"../images/ar/$arabic_sticky_logo");
 
-		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_sticky_logo" => $site_sticky_logo,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
+		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_sticky_logo" => $site_sticky_logo,"site_arabic_logo" => $site_arabic_logo,"site_arabic_sticky_logo" => $arabic_sticky_logo,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
 
 		if($update_general_settings){
 			$insert_log = $db->insert_log($admin_id,"general_settings","","updated");

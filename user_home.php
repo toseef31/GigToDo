@@ -9,7 +9,7 @@ $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
 
 ?>
-
+<link href="styles/styles.css" rel="stylesheet">
 <!-- New Design -->
 <div class="main-box">
   <div class="container">
