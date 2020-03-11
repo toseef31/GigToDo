@@ -11,7 +11,7 @@ require_once("../includes/db.php");
 // }
 
 
-echo "<option value=''> اختر تصنيف فرعى </option>";
+// echo "<option value=''> اختر تصنيف فرعى </option>";
 
 $category_id = $input->post('category_id');
 
@@ -30,8 +30,18 @@ $child_title = $row_meta->child_title;
 $child_arabic_title = $row_meta->child_arabic_title;
 
 
-echo "<option value='$child_id'> $child_arabic_title </option>";
+// echo "<option value='$child_id'> $child_arabic_title </option>";
+	
+echo "<label class='gig-category-tag' for='cat".$child_id."'><input type='radio' name='child_id' value='".$child_id."' id='cat".$child_id."' hidden> $child_arabic_title </label>";
 	
 }
 
 ?>
+<script>
+	$('.gig-category-tag input[type="radio"]').click(function() {
+	  $(this).parent().addClass('tag-selected').siblings('label').removeClass('tag-selected')
+	});
+	// $('.gig-category-tag').on('click', function(){
+ //                $(this).toggleClass('tag-selected');
+ //            });
+</script>
