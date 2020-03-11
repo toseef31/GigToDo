@@ -381,20 +381,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
                   <li><a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a></li>
                 </ul>
               </div>
-              <?php if($language_switcher == 1){ 
-                if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-                     $url = "https://";   
-                else  
-                     $url = "http://";   
-                // Append the host(domain name, ip) to the URL.   
-                $url.= $_SERVER['HTTP_HOST'];   
-                
-                // Append the requested resource location to the URL   
-                $url.= $_SERVER['REQUEST_URI'];    
-                $full_url = $_SERVER['REQUEST_URI'];
-                
-                $page_url = substr("$full_url", 12);
-              ?>
+              <?php if($language_switcher == 1){?>
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
