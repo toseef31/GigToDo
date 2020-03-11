@@ -67,11 +67,11 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			.gig-category .nice-select:nth-Child(2){
 				display: none;
 			}
-			#category{
+			/*#category{
 				display: block !important;
 				width: 47%;
 				margin-right: 8px;
-			}
+			}*/
 			.post-register-form h4, .post-register-form p{
 				padding-left: 30px;
 			}
@@ -85,9 +85,126 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			.nice-select.swal2-select{
 				display: none;
 			}
+			
+			/*.gig-category-select .text {
+			    color: white;
+			    font-size: 18px;
+			    font-family: 'Montserrat', sans-serif;
+			    font-weight: 600;
+			    line-height: 24px;
+			    margin-top: 10px;
+			    text-align: center;
+			}*/
+			.gig-category-item{
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -moz-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-flex-wrap: wrap;
+				-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
+				-webkit-flex-basis: 100%;
+				-ms-flex-preferred-size: 100%;
+				flex-basis: 100%;
+				-webkit-box-pack: justify;
+				-webkit-justify-content: space-between;
+				-moz-box-pack: justify;
+				-ms-flex-pack: justify;
+				justify-content: space-between;
+				max-width: 100%;
+				margin: 0;
+				-webkit-flex-basis: -webkit-calc(100% - 10px) !important;
+		    -ms-flex-preferred-size: calc(100% - 10px) !important;
+		    flex-basis: -moz-calc(100% - 10px) !important;
+		    flex-basis: calc(100% - 10px) !important;
+		    max-width: -webkit-calc(100% - 10px) !important;
+		    max-width: -moz-calc(100% - 10px) !important;
+		    max-width: calc(100% - 10px) !important;
+			}
+			.gig-category-select{
+				-webkit-flex-basis: -webkit-calc(100% - 10px);
+		    -ms-flex-preferred-size: calc(100% - 10px);
+		    flex-basis: -moz-calc(100% - 10px);
+		    flex-basis: calc1050% - 10px);
+		    max-width: -webkit-calc(100% - 10px);
+		    max-width: -moz-calc(100% - 10px);
+		    max-width: calc(100% - 10px);
+			}
+			.cat_item-content{
+				-webkit-flex-basis: -webkit-calc(50% - 10px) !important;
+		    -ms-flex-preferred-size: calc(50% - 10px) !important;
+		    flex-basis: -moz-calc(50% - 10px) !important;
+		    flex-basis: calc(50% - 10px) !important;
+		    max-width: -webkit-calc(50% - 10px) !important;
+		    max-width: -moz-calc(50% - 10px) !important;
+		    max-width: calc(50% - 10px) !important;
+			}
+			.cat_item-content.item-active .gig-category-select {
+			    -webkit-flex-basis: -webkit-calc(50% - 10px);
+			    -ms-flex-preferred-size: calc(50% - 10px);
+			    flex-basis: -moz-calc(50% - 10px);
+			    flex-basis: calc(100% - 0px);
+			    max-width: -webkit-calc(50% - 10px);
+			    max-width: -moz-calc(50% - 10px);
+			    max-width: calc(100% - 0px);
+			}
+			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active {
+			    display: -webkit-box;
+			    display: -webkit-flex;
+			    display: -moz-box;
+			    display: -ms-flexbox;
+			    display: flex;
+			    -webkit-flex-wrap: wrap;
+			    -ms-flex-wrap: wrap;
+			    flex-wrap: wrap;
+			    -webkit-flex-basis: 100%;
+			    -ms-flex-preferred-size: 100%;
+			    flex-basis: 100%;
+			    -webkit-box-pack: justify;
+			    -webkit-justify-content: space-between;
+			    -moz-box-pack: justify;
+			    -ms-flex-pack: justify;
+			    justify-content: space-between;
+			    max-width: 100%;
+			    margin: 0;
+			}
+			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+			    -webkit-flex-basis: -webkit-calc(100% - 10px);
+			    -ms-flex-preferred-size: calc(100% - 10px);
+			    flex-basis: -moz-calc(100% - 10px);
+			    flex-basis: calc(100% - 10px);
+			    max-width: -webkit-calc(100% - 10px);
+			    max-width: -moz-calc(100% - 10px);
+			    max-width: calc(100% - 10px);
+			}
+			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+			    -webkit-flex-basis: -webkit-calc(50% - 10px);
+			    -ms-flex-preferred-size: calc(50% - 10px);
+			    flex-basis: -moz-calc(50% - 10px);
+			    flex-basis: calc(50% - 10px);
+			    margin-bottom: 20px;
+			    height: auto;
+			    max-width: -webkit-calc(50% - 10px);
+			    max-width: -moz-calc(50% - 10px);
+			    max-width: calc(50% - 10px);
+			}
+			.postarequest .create-request .form-group .gig-category .cat_item-content.item-removed {
+			    display: none;
+			}
+			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .backto-main {
+			    display: -webkit-box;
+			    display: -webkit-flex;
+			    display: -moz-box;
+			    display: -ms-flexbox;
+			    display: flex;
+			}
+			/*.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+		    background-color: white;
+			}*/
 		</style>
 	</head>
-	<body class="is-responsive">
+	<body class="all-content">
 		<!-- Preloader Start -->
     <div class="proloader">
         <div class="loader">
@@ -194,60 +311,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
 														$get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
 														$row_meta = $get_meta->fetch();
 														$cat_title = $row_meta->cat_title;
-														if($cat_id == 1){
-															$cat_class= "gd";
-															$cat_img1 = "/assets/img/post-a-gig/graphic-design-white.png";
-															$cat_img2 = "/assets/img/post-a-gig/graphic-design-color.png";
-														}elseif ($cat_id == 2) {
-															$cat_class = "dm";
-															$cat_img1 = "/assets/img/post-a-gig/digital-marketing-white.png";
-															$cat_img2 = "/assets/img/post-a-gig/digital-marketing-color.png";
-														}elseif ($cat_id == 3) {
-															$cat_class = "wt";
-															$cat_img1 = "/assets/img/post-a-gig/writing-translation-white.png";
-															$cat_img2 = "/assets/img/post-a-gig/writing-translation-color.png";
-														}elseif ($cat_id == 4) {
-															$cat_class = "va";
-															$cat_img1 = "/assets/img/post-a-gig/video-animation-white.png";
-															$cat_img2 = "/assets/img/post-a-gig/video-animation-color.png";
-														}elseif ($cat_id == 7) {
-															$cat_class = "ma";
-															$cat_img1 = "/assets/img/post-a-gig/music-audio-white.png";
-															$cat_img2 = "/assets/img/post-a-gig/music-audio-color.png";
-														}elseif ($cat_id == 6) {
-															$cat_class = "pt";
-															$cat_img1 = "/assets/img/post-a-gig/programming-tech-white.png";
-															$cat_img2 = "/assets/img/post-a-gig/programming-tech-color.png";
-														}elseif($cat_id == 8){
-															$cat_class= "va";
-															$cat_img1 = '/cat_images/p7.png';
-															$cat_img2 = '/cat_images/p7.png';
-														}else{
-															$cat_class= "ma";
-															$cat_img1 = '/cat_images/p6.png';
-															$cat_img2 = '/cat_images/p6.png';
-														}
+														
 													?>
 													<!-- <label class="gig-category-item" for="categoryItem-<?= $cat_id; ?>"> -->
-														<select class="form-control" name="cat_id" id="category" required="" style="display: none;">
-															<option value="" class="hidden"> Select A Category </option>
-															<?php
-															$get_cats = $db->select("categories");
-															while($row_cats = $get_cats->fetch()){
-															$cat_id = $row_cats->cat_id;
-															$get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
-															$row_meta = $get_meta->fetch();
-															$cat_title = $row_meta->cat_title;
-															?>
-															<option value="<?= $cat_id; ?>">  <?= $cat_title; ?> </option>
-															<?php } ?>
-														</select>
-														<div class="">
-															<!-- <label></label> -->
-															<select class="form-control" name="child_id" id="sub-category" required="" style="display: none;">
-																
-															</select>
-														</div>
+														
 														<!-- <div class="backto-main flex-row">
 															<a href="javascript:void(0)" class="d-flex flex-row align-items-center">
 																<span>
@@ -257,7 +324,118 @@ $relevant_requests = $row_general_settings->relevant_requests;
 															</a>
 														</div> -->
 													<!-- </label> -->
-													<?php } ?>
+													
+													
+													<div class="gig-category-item">
+														<?php
+															$get_cats = $db->select("categories");
+															while($row_cats = $get_cats->fetch()){
+															$cat_id = $row_cats->cat_id;
+															$cat_image = $row_cats->cat_image;
+															$cat_icon = $row_cats->cat_icon;
+
+															$get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+															$row_meta = $get_meta->fetch();
+															$cat_title = $row_meta->cat_title;
+
+															if($cat_id == 1){
+															$cat_class= "gd";
+															}elseif ($cat_id == 2) {
+																$cat_class = "dm";
+															}elseif ($cat_id == 3) {
+																$cat_class = "wt";
+															}elseif ($cat_id == 4) {
+																$cat_class = "va";
+															}elseif ($cat_id == 7) {
+																$cat_class = "ma";
+															}elseif ($cat_id == 6) {
+																$cat_class = "pt";
+															}elseif($cat_id == 8){
+																$cat_class= "va";
+															}else{
+																$cat_class= "ma";
+															}
+															?>
+															<div class="cat_item-content" data-id="<?= $cat_class; ?>">
+																<div class="gig-category-select <?php echo $cat_class; ?> d-flex flex-column align-items-center justify-content-between" onclick="categoryItem(<?= $cat_id; ?>);">
+																	
+																	<label for="categoryItem-<?= $cat_id; ?>" class="d-flex flex-column align-items-center justify-content-between">
+					                          <input id="categoryItem-<?= $cat_id; ?>" class="cat_value" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
+					                          <span class="icon">
+					                              <img class="img-fluid white-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
+					                              <img class="img-fluid color-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
+					                          </span>
+					                          <span class="text"><?= $cat_title; ?></span>
+																	</label>
+																</div>
+															</div>
+														<?php } ?>
+
+														<!-- <select class="form-control" name="child_id" required="" style="display: none;">
+															
+														</select> -->
+														<div class="gig-category-tags"  id="sub-category" style="display: none;">
+															
+														</div>
+														<div class="backto-main flex-row">
+														    <a href="javascript:void(0)" class="d-flex flex-row align-items-center">
+														        <span>
+														            <i class="fal fa-angle-left"></i>
+														        </span>
+														        <span>Go Back</span>
+														    </a>
+														</div>
+													</div>
+												<?php } ?>
+													<!-- <div class="gig-category-item">
+															<div>
+																<?php
+																$get_cats = $db->select("categories");
+																while($row_cats = $get_cats->fetch()){
+																$cat_id = $row_cats->cat_id;
+																$get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+																$row_meta = $get_meta->fetch();
+																$cat_title = $row_meta->cat_title;
+																?>
+																<label for="<?= $cat_id; ?>">
+		                            <input id="<?= $cat_id; ?>" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
+		                            <div class="gig-category-select gd d-flex flex-column align-items-center justify-content-between">
+		                                <span class="icon">
+		                                    <img class="img-fluid white-icon" src="<?= $site_url; ?>assets/img/post-a-gig/graphic-design-white.png" />
+		                                    <img class="img-fluid color-icon" src="assets/img/post-a-gig/graphic-design-color.png" />
+		                                </span>
+		                                <span class="text"><?= $cat_title; ?></span>
+		                            </div>
+		                          </label>
+		                          	<?php } ?>
+															</div>
+  													<div class="gig-category-tags gd">
+  														<label class="gig-category-tag" for="cat1">
+  															<input type="radio" name="cat" id="cat1"> Logo
+  														</label>
+  														<label class="gig-category-tag" for="cat2">
+  															<input type="radio" name="cat" id="cat2"> Logo
+  														</label>
+                              <a class="gig-category-tag" href="javascript:void(0);">Logos</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+  	                        </div>
+  	                        <div class="backto-main flex-row">
+  	                            <a href="javascript:void(0)" class="d-flex flex-row align-items-center">
+  	                                <span>
+  	                                    <i class="fal fa-angle-left"></i>
+  	                                </span>
+  	                                <span>Go Back</span>
+  	                            </a>
+  	                        </div>
+                        </div> -->
 													<!-- Each item -->
 												</div>
 												<div class="popup">
@@ -506,7 +684,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
                 });
             });
             $('.gig-category-select').on('click', function(){
+                $('.cat_item-content').addClass('item-removed');
                 $('.gig-category-item').addClass('item-removed');
+                $(this).parents('.cat_item-content').removeClass('item-removed');
+                $(this).parents('.cat_item-content').addClass('item-active');
                 $(this).parents('.gig-category-item').removeClass('item-removed');
                 $(this).parents('.gig-category-item').addClass('item-active');
             });
@@ -516,11 +697,18 @@ $relevant_requests = $row_general_settings->relevant_requests;
             $('.backto-main').on('click', function(){
                 $('.gig-category-item').removeClass('item-active');
                 $('.gig-category-item').removeClass('item-removed');
+                $('.cat_item-content').removeClass('item-active');
+                $('.cat_item-content').removeClass('item-removed');
                 $('.gig-category-tag').removeClass('tag-selected');
                 $('.gig-category-item').find('input[type="radio"]').prop('checked', false);
             });
             $('.deliver-time-item[for="days30"]').on('click', function(){
                 $('.input-number').focus();
+            });
+            $(".gig-category-select").on('click', function(){
+            	var cat_class = $(this).parents('.cat_item-content').attr("data-id");
+            		$(".gig-category-tags").removeAttr('class').addClass('gig-category-tags '+cat_class);
+            		// $('.gig-category-tags').addClass(cat_class);
             });
         });
     </script>
@@ -583,34 +771,38 @@ $(document).ready(function(){
 	
 	$("#sub-category").hide();
 
-	$("#category").change(function(){
+	// $("#category").click(function(){
+	// 	$("#sub-category").show();	
+	// 	var category_id = $(".cat_value").val();
+	// 	alert(category_id);
+	// 	$.ajax({
+	// 	url:"fetch_subcategory",
+	// 	method:"POST",
+	// 	data:{category_id:category_id},
+	// 	success:function(data){
+	// 	$("#sub-category").html(data);
+	// 	}
+	// 	});
+	// });
+
+
+
+});
+	function categoryItem(id){
 		$("#sub-category").show();	
-		var category_id = $(this).val();
+		var category_id =  id;
 		$.ajax({
 		url:"fetch_subcategory",
 		method:"POST",
 		data:{category_id:category_id},
+
 		success:function(data){
+			console.log(data);
 		$("#sub-category").html(data);
 		}
 		});
-	});
+	}
 
-});
-// function categoryItem(id){
-// 	$("#sub-category").show();	
-// 	var category_id = id;
-// 	$.ajax({
-// 	url:"fetch_subcategory",
-// 	method:"POST",
-// 	data:{category_id:category_id},
-
-// 	success:function(data){
-// 		console.log(data);
-// 	$("#sub-category").html(data);
-// 	}
-// 	});
-// }
 $('#showLogin').click(function(){
 	$('.register-form').hide();
 	$('.login-form').show();
