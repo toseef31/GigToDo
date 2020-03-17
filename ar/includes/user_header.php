@@ -74,7 +74,7 @@
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -97,7 +97,7 @@
             <div class="menu-inner">
               <ul>
                 <li><a href="<?= $site_url; ?>/ar/dashboard">لوحة التحكم</a></li>
-                <li><a href="javascript:void(0);">الخدمات </a></li>
+                <li><a href="<?= $site_url; ?>/ar/proposals/view_proposals">الخدمات </a></li>
                 <li><a href="javascript:void(0);">طلب المشتري</a></li>
               </ul>
             </div>
@@ -116,7 +116,7 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -160,121 +160,11 @@
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="mesagee-item-box notifications-dropdown">
               
-              <!-- <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div> -->
-              <!-- <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div> -->
             </div>
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="mesagee-item-box messages-dropdown">
               
-              <!-- <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -306,34 +196,34 @@
     <?php if(!empty($seller_image)){ ?>
     <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="80" height="80" class="rounded-circle">
     <?php }else{ ?>
-    <img src="assets/img/user2.png" alt="">
+    <img src="<?= $site_url; ?>/assets/img/user2.png" alt="">
     <?php } ?>
     <h4>أهلا بيك من تاني<span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
   </div>
   <div class="canvs-menu">
     <ul>
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt="">
           الملفالشخصي
         </a>
       </li>
       <li>
-        <a href="<?= $site_url ?>/ar/settings"> <img src="assets/img/icon/2.png" alt="">
+        <a href="<?= $site_url ?>/ar/settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt="">
           الإعدادات
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/ar/dashboard"> <img src="assets/img/icon/12.png" alt="">
+        <a href="<?= $site_url; ?>/ar/dashboard"> <img src="<?= $site_url; ?>/assets/img/icon/12.png" alt="">
           لوحة التحكم
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt="">
           الخدمات
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
           انشر خدمة
         </a>
       </li>
@@ -343,38 +233,38 @@
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt="">
           الطلبات
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/15.png" alt="">
           العوائد
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/16.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/16.png" alt="">
           المحفظة
         </a>
       </li>
       <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
       <li>
-        <a href="javascript:void(0);"> <img src="assets/img/icon/7.png" alt="">
+        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt="">
           دعوة صديق
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/ar/conversations/inbox"> <img src="assets/img/icon/indox.png" alt="">
+        <a href="<?= $site_url; ?>/ar/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt="">
           صندوق الوارد
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/ar/how-it-works-seller.php"> <img src="assets/img/icon/how-it-work.png" alt="">
+        <a href="<?= $site_url; ?>/ar/how-it-works-seller.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt="">
           ازاي بيشتغل
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/logout.php"> <img src="assets/img/icon/logout.png" alt="">
+        <a href="<?= $site_url; ?>/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt="">
           الخروج
         </a>
       </li>
