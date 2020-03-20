@@ -15,20 +15,41 @@ $login_seller_language = $row_login_seller->seller_language;
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
-<title><?php echo $site_name; ?> - Create A New Proposal</title>
+<title><?php echo $site_name; ?> - Post a Gig</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="<?php echo $site_desc; ?>">
 <meta name="keywords" content="<?php echo $site_keywords; ?>">
 <meta name="author" content="<?php echo $site_author; ?>">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
+
+<!-- ==============Google Fonts============= -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+<!--====== Bootstrap css ======-->
+<link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+<!--====== PreLoader css ======-->
+<link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+<!--====== Animate css ======-->
+<link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+<!--====== Fontawesome css ======-->
+<link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+<!--====== Owl carousel css ======-->
+<link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+<!--====== Nice select css ======-->
+<link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+<!--====== Default css ======-->
+<link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+<!--====== Style css ======-->
+<link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+<!--====== Responsive css ======-->
+<link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+
 <link href="../styles/bootstrap.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <link href="../styles/styles.css" rel="stylesheet">
-<link href="../styles/user_nav_styles.css" rel="stylesheet">
+<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet">
 <link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 <link href="../styles/owl.carousel.css" rel="stylesheet">
-<link href="../styles/owl.theme.default.css" rel="stylesheet">
+<link href="../styles/owl.theme.default.css" rel="stylesheet"> -->
 <link href="../styles/tagsinput.css" rel="stylesheet" >
 <link href="../styles/sweat_alert.css" rel="stylesheet">
 <link href="../styles/animate.css" rel="stylesheet">
@@ -44,7 +65,14 @@ $login_seller_language = $row_login_seller->seller_language;
 <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
 <?php } ?>
 </head>
-<body class="is-responsive">
+<body class="all-content">
+  <!-- Preloader Start -->
+  <div class="proloader">
+        <div class="loader">
+            <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+        </div>
+    </div>
+  <!-- Preloader End -->
 <?php 
 require_once("../includes/user_header.php"); 
 

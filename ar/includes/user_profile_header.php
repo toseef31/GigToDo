@@ -37,7 +37,61 @@ if(!$count_reviews == 0){
 $level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
 $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_id,"proposal_status" => 'active'));
 ?>
-<div class="col-md-12 user-header pl-5 pr-5 pt-5 pb-5" style="background: url(<?= $seller_cover_image; ?>);">
+
+<div class="row">
+  <div class="col-12">
+    <div class="buyer-profile-header" style="background-image: url(<?= $seller_cover_image; ?>);">
+      <div class="buyer-profile-image">
+        <?php if(!empty($seller_image)){ ?>
+            <img src="user_images/<?= $seller_image; ?>" class="rounded-circle">
+          <?php }else{ ?>
+            <img alt class="img-fluid d-block" src="assets/img/emongez_cube.png" />
+          <?php } ?>
+        <span class="name">أهلا ، أنا .. <?= ucfirst($seller_user_name); ?></span>
+      </div>
+      <div class="buyer-current-status d-flex flex-wrap">
+        <ul class="list-inline d-flex d-flex flex-column flex-lg-row">
+          <?php if(check_status($seller_id) == "Online"){ ?>
+          <li class="list-inline-item d-flex flex-row align-items-center">
+            <span>
+              <i class="fas fa-check-circle"></i>
+            </span>
+            <span>
+              أونلاين
+            </span>
+          </li>
+          <?php }else{?>
+            <li class="list-inline-item d-flex flex-row align-items-center">
+              <span>
+                <i class="fas fa-times-circle"></i>
+              </span>
+              <span>غير متصل على الانترنت</span>
+            </li>
+          <?php } ?>
+          <li class="list-inline-item d-flex flex-row align-items-center">
+            <span>
+              <img alt="" class="img-fluid d-block" src="assets/img/buyer/location-icon.png" />
+            </span>
+            <span> <?= $seller_country; ?></span>
+          </li>
+          <li class="list-inline-item d-flex flex-row align-items-center">
+            <span>
+              <img alt="" class="img-fluid d-block" src="assets/img/buyer/time-icon.png" />
+            </span>
+            <span>متوسط مدة الرد : <strong>1 ساعة</strong></span>
+          </li>
+        </ul>
+        <?php if(isset($_SESSION['seller_user_name'])){ ?>
+        <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
+        <a class="edit-profile-button" href="/ar/settings?profile_settings">تعديل الملف الشخصى</a>
+        <?php } ?>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="col-md-12 user-header pl-5 pr-5 pt-5 pb-5" style="background: url(<?= $seller_cover_image; ?>);">
   <?php if(isset($_SESSION['seller_user_name'])){ ?>
   <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
   <a href="settings?profile_settings" class="btn btn-edit btn-success" ><i class="fa fa-pencil"></i> Edit&nbsp;</a>    
@@ -118,4 +172,4 @@ $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_
     </li>
     <?php } ?>
   </ul>
-</div>
+</div> -->

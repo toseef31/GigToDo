@@ -41,15 +41,15 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
  	<link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
  	<!--====== Responsive css ======-->
  	<link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
-	<!-- <link href="../styles/bootstrap.css" rel="stylesheet">
-    <link href="../styles/custom.css" rel="stylesheet"> --> 
+	<!-- <link href="../styles/bootstrap.css" rel="stylesheet"> -->
+    <link href="../styles/custom.css" rel="stylesheet"> 
     <!-- Custom css code from modified in admin panel --->
 	<link href="<?= $site_url; ?>/styles/styles.css" rel="stylesheet">
 	<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet">
 	<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 	<link href="../styles/owl.carousel.css" rel="stylesheet">
 	<link href="../styles/owl.theme.default.css" rel="stylesheet"> -->
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="../js/jquery.min.js"></script> -->
     <link href="../styles/sweat_alert.css" rel="stylesheet">
     <link href="../styles/animate.css" rel="stylesheet">
     <script type="text/javascript" src="../js/ie.js"></script>
