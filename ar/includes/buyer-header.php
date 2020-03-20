@@ -245,7 +245,7 @@ $page_url = substr("$full_url", 18);
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
+      <li><a href="<?php echo $site_url; ?>/ar/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> ضبط </a></li>
       <li><a href="<?= $site_url ?>/ar/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt="">إدارة الطلبات</a></li>

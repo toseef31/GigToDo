@@ -241,7 +241,7 @@ $page_url = substr("$full_url", 15);
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
+      <li><a href="<?php echo $site_url; ?>/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Post a Job</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Requests</a></li>
