@@ -612,7 +612,7 @@ if($count_seller == 0){
         }
         ?>
         <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
-        <?php require("includes/proposals.php"); ?>
+        <?php //require("includes/proposals.php"); ?>
         </div>
        <?php } ?>
        <?php if(isset($_SESSION['seller_user_name']) AND $_SESSION['seller_user_name'] == $get_seller_user_name AND $count_proposals > 0) { ?>
