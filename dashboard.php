@@ -195,19 +195,19 @@
         <div class="col-lg-12">
           <div class="dashborad-box">
             <div class="day-item">
-              <p>Today <span>0.0 EGP</span></p>
+              <p>Today <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>Yesterday <span>0.0 EGP</span></p>
+              <p>Yesterday <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>last 7 days <span>0.0 EGP</span></p>
+              <p>last 7 days <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>last 30 days <span><?= $month_earnings; ?> <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>last 365 days <span>0.0 EGP</span></p>
+              <p>last 365 days <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>All time <span><?= $current_balance; ?> <?= $s_currency; ?></span></p>
@@ -228,7 +228,7 @@
                   <img src="assets/img/img/user.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>3.432 <span>Profile Views</span></h4>
+                  <h4>0 <span>Profile Views</span></h4>
                 </div>
               </div>
             </div>
@@ -238,7 +238,7 @@
                   <img src="assets/img/img/clip.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>105 <span>Gig Views</span></h4>
+                  <h4>0 <span>Gig Views</span></h4>
                 </div>
               </div>
             </div>
@@ -248,7 +248,7 @@
                   <img src="assets/img/img/filter.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>10% <span>Conversion Rates </span></h4>
+                  <h4>0 <span>Conversion Rates </span></h4>
                 </div>
               </div>
             </div>
@@ -258,7 +258,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>4 <span>Average Cost of Gigs </span></h4>
+                  <h4>0 <span>Average Cost of Gigs </span></h4>
                 </div>
               </div>
             </div>
@@ -408,13 +408,25 @@
             <div class="income-chart-box">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="altime" role="tabpanel" aria-labelledby="home-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
                   <canvas id="chartHours" width="400" height="100"></canvas>
                 </div>
                 <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
               </div>
             </div>
@@ -437,13 +449,31 @@
             <div class="income-chart-box">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="altime2" role="tabpanel" aria-labelledby="home-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="lastyear2" role="tabpanel" aria-labelledby="profile-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="last30day2" role="tabpanel" aria-labelledby="contact-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
               </div>
             </div>

@@ -165,19 +165,19 @@
         <div class="col-lg-12">
           <div class="dashborad-box">
             <div class="day-item">
-              <p>اليوم <span>0 جنيه</span></p>
+              <p>اليوم <span>0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>امبارح <span>0 جنيه</span></p>
+              <p>امبارح <span>0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 7 آيام <span>0 جنيه</span></p>
+              <p>آخر 7 آيام <span>0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>آخر 30 يوم <span><?= $month_earnings; ?> <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 365 يوم <span>0 جنيه</span></p>
+              <p>آخر 365 يوم <span>0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>كل الأوقات <span><?= $current_balance; ?> <?= $s_currency; ?></span></p>
@@ -198,7 +198,7 @@
                   <img src="assets/img/img/user.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>3.432 <span>مشاهدة للملف الشخصي</span></h4>
+                  <h4>02 <span>مشاهدة للملف الشخصي</span></h4>
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@
                   <img src="assets/img/img/clip.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>105 <span>مشاهدة للخدمة</span></h4>
+                  <h4>0 <span>مشاهدة للخدمة</span></h4>
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@
                   <img src="assets/img/img/filter.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>10% <span>مشاهدة للمحادثات </span></h4>
+                  <h4>0 <span>مشاهدة للمحادثات </span></h4>
                 </div>
               </div>
             </div>
@@ -228,7 +228,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>4 <span>متوسط تكلفة الخدمة </span></h4>
+                  <h4>0 <span>متوسط تكلفة الخدمة </span></h4>
                 </div>
               </div>
             </div>
@@ -371,13 +371,31 @@
             <div class="income-chart-box">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="altime" role="tabpanel" aria-labelledby="home-tab">
+                 <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
               </div>
             </div>
@@ -400,13 +418,31 @@
             <div class="income-chart-box">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="altime2" role="tabpanel" aria-labelledby="home-tab">
+                 <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                  <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="lastyear2" role="tabpanel" aria-labelledby="profile-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="last30day2" role="tabpanel" aria-labelledby="contact-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
               </div>
             </div>
