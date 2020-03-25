@@ -36,6 +36,12 @@ if(!$count_reviews == 0){
 }
 $level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
 $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_id,"proposal_status" => 'active'));
+
+$posted_projects = $db->count("buyer_requests",array("seller_id" => $seller_id, "request_status" => 'active'));
+
+$purchased_services = $db->count("orders",array("buyer_id"=>$seller_id,"order_status"=>'delivered'));
+
+$total_sellers = $db->count("orders",array("buyer_id"=>$seller_id));
 ?>
 
 <div class="row">

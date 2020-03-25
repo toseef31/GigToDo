@@ -203,7 +203,7 @@
   <div class="canvs-menu">
     <ul>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt="">
+        <a href="<?php echo $site_url; ?>/ar/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt="">
           الملفالشخصي
         </a>
       </li>

@@ -36,6 +36,12 @@ if(!$count_reviews == 0){
 }
 $level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
 $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_id,"proposal_status" => 'active'));
+
+$posted_projects = $db->count("buyer_requests",array("seller_id" => $seller_id, "request_status" => 'active'));
+
+$purchased_services = $db->count("orders",array("buyer_id"=>$seller_id,"order_status"=>'delivered'));
+
+$total_sellers = $db->count("orders",array("buyer_id"=>$seller_id));
 ?>
 <!-- New Design -->
 <div class="row">
@@ -83,7 +89,11 @@ $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_
         <?php if(isset($_SESSION['seller_user_name'])){ ?>
         <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
         <a class="edit-profile-button" href="settings?profile_settings">Edit profile</a>
+        <?php } else{ ?>
+          <a class="edit-profile-button"  href="<?= $site_url; ?>/conversations/message?seller_id=<?= $seller_id ?>">Contact Me</a>
         <?php } ?>
+        <?php } else{ ?>
+          <a class="edit-profile-button" href="<?= $site_url; ?>/login.php">Contact Me</a>
         <?php } ?>
       </div>
     </div>

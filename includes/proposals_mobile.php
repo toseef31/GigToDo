@@ -49,7 +49,7 @@
         <div class="user-image">
           <img class="img-fluid d-block" src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" />
         </div>
-        <div class="user-name"><?= $seller_user_name; ?></div>
+        <div class="user-name"><a href="<?= $site_url; ?>/<?= $seller_user_name; ?>" style="color: #353535;"><?= $seller_user_name; ?></a></div>
       </div>
       <div class="small-gigs-pricing d-flex flex-row">
         <a href="javascript:void(0);"><?= $s_currency; ?><?= $proposal_price; ?></a>

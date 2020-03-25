@@ -298,7 +298,7 @@
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
+      <li><a href="<?php echo $site_url; ?>/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
       <li><a href="<?= $site_url ?>/settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="<?= $site_url; ?>/assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Gigs</a></li>
