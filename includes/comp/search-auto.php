@@ -23,7 +23,9 @@ $i++;
 
 $get_seller = $db->select("sellers",array("seller_id" => $row->proposal_seller_id));
 $row_seller = $get_seller->fetch();
+
 $seller_user_name = $row_seller->seller_user_name;
+$seller_user_type = $row_seller->account_type;
 
 $title = str_ireplace("$search",ucwords("<b>$search</b>"),$row->proposal_title);
 
@@ -46,8 +48,12 @@ $i++;
 $user_name = str_ireplace("$search",ucwords("<b>$search</b>"),$row->seller_user_name);
 
 $data['sellers'][$i]['name'] = $user_name;
-$data['sellers'][$i]['url'] = "$site_url/".$row->seller_user_name;
 
+if($row->account_type == 'seller'){
+	$data['sellers'][$i]['url'] = "$site_url/".$row->seller_user_name;
+}else{
+	$data['sellers'][$i]['url'] = "$site_url/profile/?user_name=".$row->seller_user_name;
+}
 }
 
 echo json_encode($data);

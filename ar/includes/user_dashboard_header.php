@@ -49,7 +49,7 @@
 
   $page_url = substr("$full_url", 12);
 ?>
-
+<style>.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 

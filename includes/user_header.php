@@ -80,7 +80,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png">
                 <?php } ?>
               </div>
               <div class="icon">
@@ -405,7 +405,7 @@ echo $message;
 ?>
 </div>
 <div class="float-right">
-<button id="send-email" class="btn btn-success btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+<button id="send-email" class="btn btn-danger btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
 </div>
 </div>
 <script>

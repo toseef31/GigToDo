@@ -180,7 +180,6 @@ $enableVideo = 0;
 		<meta name="description" content="<?= $proposal_short_desc; ?>">
 		<meta name="keywords" content="<?= $proposal_tags; ?>">
 		<meta name="author" content="<?= $proposal_seller_user_name; ?>">
-		
 		<!--====== Bootstrap css ======-->
 		<link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 		<!--====== PreLoader css ======-->
@@ -227,18 +226,26 @@ $enableVideo = 0;
 		<?php if(!empty($site_favicon)){ ?>
 		<link rel="shortcut icon" href="../../images/<?= $site_favicon; ?>" type="image/x-icon">
 		<?php } ?>
+		<style>.owl-nav{display: block !important;}</style>
 	</head>
-	<body class="is-responsive">
+	<body class="all-content">
+		<!-- Preloader Start -->
+		<div class="proloader">
+			<div class="loader">
+				<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+			</div>
+		</div>
+		<!-- Preloader End -->
 		<script src="//platform-api.sharethis.com/js/sharethis.js#property=5c812224d11c6a0011c485fd&product=inline-share-buttons"></script>
 		<?php
 		if(isset($_SESSION['seller_user_name'])){ 
 		  if($login_user_type == 'seller'){ 
-		    require_once('includes/user_header.php');
+		    require_once('../includes/user_header.php');
 		  }else{
-		    require_once("includes/buyer-header.php");
+		    require_once("../includes/buyer-header.php");
 		  }
 		}else{
-		  require_once("includes/header_with_categories.php");
+		  require_once("../includes/header_with_categories.php");
 		}
 
 		//require_once("../includes/header.php");
@@ -248,7 +255,8 @@ $enableVideo = 0;
 		$show_img4 = "../proposal_files/$proposal_img4";
 		$show_video = "../proposal_files/$proposal_video";
 		if($deviceType == "phone"){
-			include("../screens/mobile_proposal.php");
+			// include("../screens/mobile_proposal.php");
+			include("../screens/desktop_proposal.php");
 		}else{
 			include("../screens/desktop_proposal.php");
 		}
@@ -341,7 +349,7 @@ $enableVideo = 0;
 		});
 		</script>
 		<?php
-			include("../screens/includes/proposal_footer.php");
+			//include("../screens/includes/proposal_footer.php");
 			include("../includes/footer.php");
 		?>
 	</body>
