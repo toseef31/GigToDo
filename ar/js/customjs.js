@@ -114,14 +114,14 @@ $(document).ready(function(){
 					if(result.count_proposals > 0){
 					 	html += "<aside><li> <i class='fa fa-paint-brush'></i> Services </li><ul>";
 					for(i in proposals){
-						html += "<li><a href='"+proposals[i].url+"'>"+proposals[i].title+"</a></li>";
+						html += "<li><a class='text-right' href='"+proposals[i].url+"'>"+proposals[i].title+"</a></li>";
 					}
 						html += "</ul></aside>";
 					}
 					if(result.count_sellers > 0){
 						html += "<aside><li> <i class='fa fa-user'></i> Users </li><ul>";
 					for(i in sellers){
-						html += "<li><a href='"+sellers[i].url+"'>"+sellers[i].name+"</a></li>";
+						html += "<li><a class='text-right' href='"+sellers[i].url+"'>"+sellers[i].name+"</a></li>";
 					}
 						html += "</ul></aside>";
 					}

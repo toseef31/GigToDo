@@ -49,7 +49,9 @@
 
   $page_url = substr("$full_url", 9);
 ?>
-
+<style>
+  .activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
+</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
@@ -104,7 +106,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png">
                 <?php } ?>
                 <!-- <img src="assets/img/menu-left-logo-2.png" alt=""> -->
               </div>
