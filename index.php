@@ -60,7 +60,6 @@ $site_title = $row_general_settings->site_title;
 	<link href="styles/knowledge_bank.css" rel="stylesheet">
 	<?php endif ?>
 	<?php if(!empty($site_favicon)){ ?>
-	<!-- <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon" /> -->
 	<!--====== Favicon Icon ======-->
 	<link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
 	<?php } ?>

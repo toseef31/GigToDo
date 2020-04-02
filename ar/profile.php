@@ -91,6 +91,8 @@ $count_requests = $get_requests->rowCount();
   <link href="styles/owl.carousel.css" rel="stylesheet">
   <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
   <link href="styles/sweat_alert.css" rel="stylesheet">
+  <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
+  <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>

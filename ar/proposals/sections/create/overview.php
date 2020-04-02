@@ -8,109 +8,266 @@ if (empty($form_data)) {
 
 ?>
 
-<form action="#" method="post" class="proposal-form"><!--- form Starts -->
+<form action="#" class="create-gig proposal-form" method="post">
+  <div class="form-group">
+    <label class="control-label d-flex flex-row align-items-center">
+      <span>
+        <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/create-gig-icon.png" />
+      </span>
+      <span>
+        عنوان الخدمة
+      </span>
+    </label>
+    <input class="form-control" type="text" name="proposal_title" value="هصمم لوجو الشركة ..." placeholder="I can..." />
+    <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_description']); ?></small>
+    <!-- <label class="bottom-label text-right">
+      0 \2500 حرف بحد أقصى
+    </label> -->
+    <div class="popup">
+      <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
+      <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+      <p>
+        عشان تجذب المشاهدين، لازم تحط عنوان جذاب. استخدامك شوية كلمات معروفة في العنوان بتاعك هيخلي خدماتك تبقا واضحة و بارزة في عيون المشترين. قبل ما تكتب العنوان، ابحث شوية عن أفضل الكلمات الرئيسية بالنسبة للأداء في مجالك و دة هيساعدك تكتب عنوان مميز و جذاب.
+      </p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label d-flex flex-row align-items-center">
+      <span>
+        <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/category-icon.png" />
+      </span>
+      <span>
+        اختارالفئة
+      </span>
+    </label>
+    <div class="gig-category d-flex flex-wrap align-items-start">
+      <?php 
+        $get_cats = $db->select("categories");
+        while($row_cats = $get_cats->fetch()){
+        
+        $cat_id = $row_cats->cat_id;
+        $cat_icon = $row_cats->cat_icon;
+        $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+        $row_meta = $get_meta->fetch();
+        $cat_title = $row_meta->cat_title;
+        $arabic_title = $row_meta->arabic_title;
+      ?>
+      <!-- <label class="gig-category-item" for="categoryItem-<?= $cat_id; ?>"> -->
+        <div class="gig-category-item">
+          <?php
+            $get_cats = $db->select("categories");
+            while($row_cats = $get_cats->fetch()){
+            $cat_id = $row_cats->cat_id;
+            $cat_image = $row_cats->cat_image;
+            $cat_icon = $row_cats->cat_icon;
 
-<div class="form-group row"><!--- form-group row Starts --->
-<div class="col-md-3">Proposal Title</div>
-<div class="col-md-9"><textarea name="proposal_title" rows="3" required="" placeholder="I Will" class="form-control"></textarea></div>
-<small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_description']); ?></small>
-</div><!--- form-group row Ends --->
+            $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+            $row_meta = $get_meta->fetch();
+            $cat_title = $row_meta->cat_title;
+            $arabic_title = $row_meta->arabic_title;
 
-<div class="form-group row"><!--- form-group row Starts --->
-<div class="col-md-3"> Category </div>
-<div class="col-md-9">
-<select name="proposal_cat_id" id="category" class="form-control mb-3"  required="">
-<option value="" class="hidden"> Select A Category </option>
-<?php 
-  $get_cats = $db->select("categories");
-  while($row_cats = $get_cats->fetch()){
-  $cat_id = $row_cats->cat_id;
-  $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
-  $cat_title = $get_meta->fetch()->cat_title;
-?>
-<option <?php if(@$form_data['proposal_cat_id'] == $cat_id){ echo "selected"; } ?> value="<?php echo $cat_id; ?>"> <?php echo $cat_title; ?> </option>
-<?php } ?>
-</select>
-<small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></small>
-<select name="proposal_child_id" id="sub-category" class="form-control" required="">
-<option value="" class="hidden"> Select A Sub Category </option>
-<?php if(@$form_data['proposal_child_id']){ ?>
-<?php
-  $get_c_cats = $db->select("categories_children",array("child_parent_id"=> $form_data['proposal_cat_id']));
-  while($row_c_cats = $get_c_cats->fetch()){
-  $child_id = $row_c_cats->child_id;
-  $get_meta = $db->select("child_cats_meta",array("child_id"=>$child_id,"language_id"=>$siteLanguage));
-  $row_meta = $get_meta->fetch();
-  $child_title = $row_meta->child_title;
-  echo "<option ".($form_data['proposal_cat_id'] == $child_id ? "selected" : "")." value='$child_id'> $child_title </option>";
-  }
-?>
-<?php } ?>
-</select>
-</div>
-</div><!--- form-group row Ends --->
+            if($cat_id == 1){
+            $cat_class= "gd";
+            }elseif ($cat_id == 2) {
+              $cat_class = "dm";
+            }elseif ($cat_id == 3) {
+              $cat_class = "wt";
+            }elseif ($cat_id == 4) {
+              $cat_class = "va";
+            }elseif ($cat_id == 7) {
+              $cat_class = "ma";
+            }elseif ($cat_id == 6) {
+              $cat_class = "pt";
+            }elseif($cat_id == 8){
+              $cat_class= "va";
+            }else{
+              $cat_class= "ma";
+            }
+            ?>
+            <div class="cat_item-content" data-id="<?= $cat_class; ?>">
+              <div class="gig-category-select <?php echo $cat_class; ?> d-flex flex-column align-items-center justify-content-between" onclick="categoryItem(<?= $cat_id; ?>);">
+                
+                <label for="categoryItem-<?= $cat_id; ?>" class="d-flex flex-column align-items-center justify-content-between">
+                  <input id="categoryItem-<?= $cat_id; ?>" class="cat_value" value="<?= $cat_id; ?>" type="radio" name="proposal_cat_id" hidden />
+                  <span class="icon">
+                      <img class="img-fluid white-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
+                      <img class="img-fluid color-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
+                  </span>
+                  <span class="text"><?= $arabic_title; ?></span>
+                </label>
+              </div>
+            </div>
+          <?php } ?>
+          <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></small>
+          <!-- <select class="form-control" name="child_id" required="" style="display: none;">
+            
+          </select> -->
+          <div class="gig-category-tags"  id="sub-category" style="display: none;">
+            
+          </div>
+          <div class="backto-main flex-row">
+              <a href="javascript:void(0)" class="d-flex flex-row align-items-center">
+                  <span>
+                      <i class="fal fa-angle-left"></i>
+                  </span>
+                  <span>عد</span>
+              </a>
+          </div>
+        </div>
+      <?php } ?>
+      <!-- Each item -->
+    </div>
+    <div class="popup">
+      <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
+      <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+      <p>
+        لو اخترت الفئة و الفئة الفرعية ليهم صلة بالخدمات اللي بتقدمها، هيبقا عندك  أفضل فرصة ممكنة إنك تأمن المشترين. إذا قدمت خدمات توصل لفئات مختلفة هتقدر تنوع خدماتك و يبقا عندك مجموعات كتيرة.
+      </p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label d-flex flex-row align-items-center">
+      <span>
+        <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/document-icon.png" />
+      </span>
+      <span>
+        قول للمشتري كل حاجة محتاجها عشان تبدأ
+      </span>
+    </label>
+    <div class="d-flex flex-column">
+      <ul class="nav nav-tabs justify-content-end" id="langulageTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="english-tab" data-toggle="tab" href="#english" role="tab" aria-controls="english" aria-selected="false">
+            الإنجليزية
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" id="arabic-tab" data-toggle="tab" href="#arabic" role="tab" aria-controls="arabic" aria-selected="true">
+            العربية
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade" id="english" role="tabpanel" aria-labelledby="english-tab">
+          <textarea rows="6" class="form-control" name="proposal_desc" placeholder="I need...."></textarea>
+        </div>
+        <div class="tab-pane fade show active" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
+          <textarea dir="rtl" rows="6" class="form-control" name="proposal_desc" placeholder="أدخل متطلبات الخدمة"></textarea>
+        </div>
+      </div>
+    </div>
+    <label class="bottom-label text-right">
+      <span class="descCount">0</span>-2500 حرف بحد أقصى
+    </label>
+    <div class="d-flex flex-column">
+      <label class="bottom-label">
+        نوع الإجابة :
+      </label>
+      <div class="d-flex flex-row mt-10 mb-10">
+        <select class="form-control wide">
+          <option value="1">كتابة حرة</option>
+          <option value="2">نص مركب</option>
+        </select>
+      </div>
+      <div class="d-flex flex-row">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <label class="custom-control-label" for="customCheck1">
+            إجابة أجبارية
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="popup">
+      <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
+      <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+      <p>
+        حط شوية طلبات خاصة بالخدمة للمشترين قبل ما يحصلوا عليها عشان تضمن إن معاك المعلومات الضرورية قبل ما تبدأ تشتغل على مشروعك. اختار من بين مجالات الكتابة الحرة و كمان مجالات الملفات المرفقة عشات تكمل الخدمة للمشترين.
+      </p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="d-flex flex-column">
+      <!--- form-group row Starts --->
+      <label class="bottom-label">موعد التسليم</label>
+      <div class="d-flex flex-row mt-10 mb-10">
+        <select name="delivery_id" class="form-control wide" required="">
+          <?php
+          $get_delivery_times = $db->select("delivery_times");
+          while($row_delivery_times = $get_delivery_times->fetch()){
+          $delivery_id = $row_delivery_times->delivery_id;
+          $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+          ?>
+          <option value="<?php echo $delivery_id; ?>" <?php if(@$form_data['delivery_id'] == $delivery_proposal_title){ echo "selected"; } ?>><?php echo $delivery_proposal_title; ?></option>
+          <?php } ?>
+        </select>
+      </div>
+      <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
+    </div>
+  </div>
+  <!--- form-group row Ends --->
+  <?php if($enable_referrals == "yes"){ ?>
+  <div class="form-group">
+    <div class="d-flex flex-column">
+      <!--- form-group row Starts --->
+      <label class="bottom-label">تمكين الإحالات: </label>
+      <div class="d-flex flex-row mt-10 mb-10">
+        <select name="proposal_enable_referrals" class="proposal_enable_referrals form-control wide">
+          <?php if(@$form_data['proposal_enable_referrals'] == "yes"){ ?>
+          <option value="yes"> Yes </option>
+          <option value="no"> No </option>
+          <?php }else{ ?>
+          <option value="no"> No </option>
+          <option value="yes"> Yes </option>
+          <?php } ?>
+        </select>
+      </div>
+        <small>في حالة التمكين ، يمكن للمستخدمين الآخرين الترويج لاقتراحك من خلال مشاركته على منصات مختلفة.</small>
+        <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_enable_referrals']); ?></small>
+    </div>
+  </div>
+  <!--- form-group row Ends --->
+  <div class="form-group proposal_referral_money">
+    <div class="d-flex flex-column">
+      <!--- form-group row Starts --->
+      <label class="bottom-label">لجنة الترويج: </label>
+      <div class="d-flex flex-row mt-10 mb-10">
+        <input type="number" name="proposal_referral_money" class="form-control" min="1" value="<?php echo @$form_data['proposal_referral_money']; ?>" placeholder="Figure should be in percentage e.g 20">
+        <small>Fيجب أن يكون igure في النسبة المئوية. على سبيل المثال 20 هو نفس 20٪ من بيع هذا الاقتراح.</small>
+        <br>
+        <small> عندما يروج مستخدم آخر لاقتراحك ، كم تريد أن يحصل عليه هذا المستخدم من البيع؟ (بالنسبة المئوية) </small>
+      </div>
+    </div>
+  </div>
+  <!--- form-group row Ends --->
+  <?php } ?>
+  <div class="form-group">
+    <div class="d-flex flex-column">
+      <!--- form-group row Starts --->
+      <label class="bottom-label">العلامات</label>
+      <div class="d-flex flex-row mt-10 mb-10">
+        <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
+        <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
+      </div>
+    </div>
+  </div>
+  <!--- form-group row Ends --->
+  <div class="form-group mb-0">
+    <div class="d-flex flex-column">
+      <!-- <div class="d-flex flex-row justify-content-end">
+        <button class="button-add-more" type="button" role="button">
+          <i class="fal fa-plus"></i>
+        </button>
+      </div> -->
+      <div class="d-flex flex-row">
+        <button class="button" name="submit" type="submit">حفظ و استمرار</button>
+      </div>
+    </div>
+  </div>
+</form>
 
-<div class="form-group row"><!--- form-group row Starts --->
-<div class="col-md-3">Delivery Time</div>
-<div class="col-md-9">
-<select name="delivery_id" class="form-control" required="">
-<?php
-$get_delivery_times = $db->select("delivery_times");
-while($row_delivery_times = $get_delivery_times->fetch()){
-$delivery_id = $row_delivery_times->delivery_id;
-$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
-?>
-<option value="<?php echo $delivery_id; ?>" <?php if(@$form_data['delivery_id'] == $delivery_proposal_title){ echo "selected"; } ?>><?php echo $delivery_proposal_title; ?></option>
-<?php } ?>
-</select>
-</div>
-<small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
-</div><!--- form-group row Ends --->
 
 
-<?php if($enable_referrals == "yes"){ ?>
-
-<div class="form-group row"><!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Enable Referrals : </label>
-<div class="col-md-9">
-<select name="proposal_enable_referrals" class="proposal_enable_referrals form-control">
-<?php if(@$form_data['proposal_enable_referrals'] == "yes"){ ?>
-<option value="yes"> Yes </option>
-<option value="no"> No </option>
-<?php }else{ ?>
-<option value="no"> No </option>
-<option value="yes"> Yes </option>
-<?php } ?>
-</select>
-<small>If enabled, other users can promote your proposal by sharing it on different platforms.</small>
-<small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_enable_referrals']); ?></small>
-</div>
-</div><!--- form-group row Ends --->
-
-<div class="form-group row proposal_referral_money"><!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Promotion Commission: </label>
-<div class="col-md-9">
-<input type="number" name="proposal_referral_money" class="form-control" min="1" value="<?php echo @$form_data['proposal_referral_money']; ?>" placeholder="Figure should be in percentage e.g 20">
-<small>Figure should be in percentage. E.g 20 is the same as 20% from the sale of this proposal.</small>
-<br>
-<small> When another user promotes your proposal, how much would you like that user to get from the sale? (in percentage) </small>
-</div>
-</div><!--- form-group row Ends --->
-<?php } ?>
-
-<div class="form-group row"><!--- form-group row Starts --->
-<div class="col-md-3">Tags</div>
-<div class="col-md-9">
-  <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
-  <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
-</div>
-</div><!--- form-group row Ends --->
-<div class="form-group text-right mb-0"><!--- form-group Starts --->
-<a href="view_proposals" class="btn btn-secondary">Cancel</a>
-<input class="btn btn-success" type="submit" name="submit" value="Save & Continue">
-</div><!--- form-group Starts --->
-
-</form><!--- form Ends -->
 <?php 
 
 function insertPackages($proposal_id){

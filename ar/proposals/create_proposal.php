@@ -13,7 +13,7 @@ $login_seller_language = $row_login_seller->seller_language;
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="ui-toolkit">
+<html dir="rtl" lang="ar" class="ui-toolkit">
 <head>
 <title><?php echo $site_name; ?> - Create A New Proposal</title>
 <meta charset="utf-8">
@@ -21,14 +21,36 @@ $login_seller_language = $row_login_seller->seller_language;
 <meta name="description" content="<?php echo $site_desc; ?>">
 <meta name="keywords" content="<?php echo $site_keywords; ?>">
 <meta name="author" content="<?php echo $site_author; ?>">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-<link href="../styles/bootstrap.css" rel="stylesheet">
+
+<!--====== Favicon Icon ======-->
+<?php if(!empty($site_favicon)){ ?>
+<link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
+<?php } ?>
+<!--====== Bootstrap css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
+<!--====== PreLoader css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
+<!--====== Animate css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
+<!--====== Fontawesome css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
+<!--====== Owl carousel css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
+<!--====== Nice select css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
+<!--====== Default css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
+<!--====== Style css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
+<!--====== Responsive css ======-->
+<link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
+<!-- <link href="../styles/bootstrap.css" rel="stylesheet"> -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <link href="../styles/styles.css" rel="stylesheet">
-<link href="../styles/user_nav_styles.css" rel="stylesheet">
+<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet">
 <link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 <link href="../styles/owl.carousel.css" rel="stylesheet">
-<link href="../styles/owl.theme.default.css" rel="stylesheet">
+<link href="../styles/owl.theme.default.css" rel="stylesheet"> -->
 <link href="../styles/tagsinput.css" rel="stylesheet" >
 <link href="../styles/sweat_alert.css" rel="stylesheet">
 <link href="../styles/animate.css" rel="stylesheet">
@@ -40,11 +62,124 @@ $login_seller_language = $row_login_seller->seller_language;
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/croppie.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
-<?php if(!empty($site_favicon)){ ?>
-<link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
-<?php } ?>
+<style>
+  .gig-category-item{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: 0;
+    -webkit-flex-basis: -webkit-calc(100% - 10px) !important;
+    -ms-flex-preferred-size: calc(100% - 10px) !important;
+    flex-basis: -moz-calc(100% - 10px) !important;
+    flex-basis: calc(100% - 10px) !important;
+    max-width: -webkit-calc(100% - 10px) !important;
+    max-width: -moz-calc(100% - 10px) !important;
+    max-width: calc(100% - 10px) !important;
+  }
+  .gig-category-select{
+    -webkit-flex-basis: -webkit-calc(100% - 10px);
+    -ms-flex-preferred-size: calc(100% - 10px);
+    flex-basis: -moz-calc(100% - 10px);
+    flex-basis: calc1050% - 10px);
+    max-width: -webkit-calc(100% - 10px);
+    max-width: -moz-calc(100% - 10px);
+    max-width: calc(100% - 10px);
+  }
+  .cat_item-content{
+    -webkit-flex-basis: -webkit-calc(50% - 10px) !important;
+    -ms-flex-preferred-size: calc(50% - 10px) !important;
+    flex-basis: -moz-calc(50% - 10px) !important;
+    flex-basis: calc(50% - 10px) !important;
+    max-width: -webkit-calc(50% - 10px) !important;
+    max-width: -moz-calc(50% - 10px) !important;
+    max-width: calc(50% - 10px) !important;
+  }
+  .cat_item-content.item-active .gig-category-select {
+    -webkit-flex-basis: -webkit-calc(50% - 10px);
+    -ms-flex-preferred-size: calc(50% - 10px);
+    flex-basis: -moz-calc(50% - 10px);
+    flex-basis: calc(100% - 0px);
+    max-width: -webkit-calc(50% - 10px);
+    max-width: -moz-calc(50% - 10px);
+    max-width: calc(100% - 0px);
+  }
+  .postagig .create-gig .form-group .gig-category .cat_item-content.item-active {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: 0;
+  }
+  .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+    -webkit-flex-basis: -webkit-calc(100% - 10px);
+    -ms-flex-preferred-size: calc(100% - 10px);
+    flex-basis: -moz-calc(100% - 10px);
+    flex-basis: calc(100% - 10px);
+    max-width: -webkit-calc(100% - 10px);
+    max-width: -moz-calc(100% - 10px);
+    max-width: calc(100% - 10px);
+  }
+  .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+    -webkit-flex-basis: -webkit-calc(50% - 10px);
+    -ms-flex-preferred-size: calc(50% - 10px);
+    flex-basis: -moz-calc(50% - 10px);
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 20px;
+    height: auto;
+    max-width: -webkit-calc(50% - 10px);
+    max-width: -moz-calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+  .postagig .create-gig .form-group .gig-category .cat_item-content.item-removed {
+    display: none;
+  }
+  .postagig .create-request .form-group .gig-category .cat_item-content.item-active .backto-main {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .bootstrap-tagsinput{
+    line-height: 40px;
+  }
+</style>
 </head>
-<body class="is-responsive">
+<body class="all-content">
+  <!-- Preloader Start -->
+  <div class="proloader">
+    <div class="loader">
+      <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+    </div>
+  </div>
+  <!-- Preloader End -->
 <?php 
 require_once("../includes/user_header.php"); 
 
@@ -56,20 +191,110 @@ if($seller_verification != "ok"){
 }else{
 
 ?>
+<main>
+    <!-- Post a gig overview step -->
+    <?php require_once("sections/createProposalNav.php"); ?>
+    <!-- Post a gig overview step end -->
+    <!-- Post a gig -->
+    <section class="container-fluid postagig pt-0 border-top-0">
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-lg-8">
+              <div class="row">
+                <div class="col-12 col-md-8">
+                  <div class="tab-content"><!--- tab-content Starts --->
+                    <div class="tab-pane fade show active" id="overview">
+                      <?php include("sections/create/overview.php"); ?>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4" id="popupWidth"></div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+              <div class="howitwork-card">
+                <div class="howitwork-card-title d-flex align-items-center">
+                  ازاي بيشتغل
+                </div>
+                <div class="howitwork-list d-flex flex-column">
+                  <div class="howitwork-list-item d-flex flex-row align-items-start">
+                    <div class="howitwork-list-icon">
+                      <img alt="Post a gig" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/postagig.png" />
+                    </div>
+                    <div class="howitwork-list-content">
+                      <h3>1. نشر خدمة</h3>
+                      <p>
+                          ابدأ وخصص خدماتك بحيث الناس اللى هتشترى يقدروا يفهموا بشكل واضح الخدمات اللى بتوفرها علشان تقابل احتياجاتهم
+                          
+                      </p>
+                    </div>
+                  </div>
+                  <!-- How it work each item -->
+                  <div class="howitwork-list-item d-flex flex-row align-items-start">
+                    <div class="howitwork-list-icon">
+                      <img alt="Get Hired" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/gethired.png" />
+                    </div>
+                    <div class="howitwork-list-content">
+                      <h3>2. التعاقد</h3>
+                      <p>
+                        اتواصل مع المشتري عشان تحددوا التفاصيل الخاصة بالمشروع. بمجرد ما تتفق انت و مقدم الخدمة على الطلبات، هتبدأ الشغل.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- How it work each item -->
+                  <div class="howitwork-list-item d-flex flex-row align-items-start">
+                    <div class="howitwork-list-icon">
+                      <img alt="Work" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/work.png" />
+                    </div>
+                    <div class="howitwork-list-content">
+                      <h3>3. الشغل</h3>
+                      <p>
+                        بمجردما تخلص شغلك،هتسلمال شغل الرائع على منصتنا عشان العميل يوافق عليه.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- How it work each item -->
+                  <div class="howitwork-list-item d-flex flex-row align-items-start">
+                    <div class="howitwork-list-icon">
+                      <img alt="Get Paid" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/getpaid.png" />
+                    </div>
+                    <div class="howitwork-list-content">
+                      <h3>4. استلم فلوسك</h3>
+                      <p>
+                        لما العميل يوافق على شغلك اللي اتسلم، فلوسك هتتحول لحسابك على موقع "منجز" و كمان ممكن تخلي فلوسك في حسابك على موقع "منجز" أو تحولهم لحسابك في البنك.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- How it work each item -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Post a gig end -->
+  </main>
 
-<?php require_once("sections/createProposalNav.php"); ?>
 
-<div class="container mt-5 mb-5"><!--- container Starts --->
-<div class="row"><!--- row Starts --->
-<div class="col-md-8">
-<div class="tab-content card card-body"><!--- tab-content Starts --->
-<div class="tab-pane fade show active" id="overview">
-<?php include("sections/create/overview.php"); ?>
+<!-- <div class="container mt-5 mb-5"> -->
+  <!--- container Starts --->
+<!-- <div class="row"> -->
+  <!--- row Starts --->
+<!-- <div class="col-md-8">
+<div class="tab-content card card-body"> -->
+  <!--- tab-content Starts --->
+<!-- <div class="tab-pane fade show active" id="overview">
+<?php //include("sections/create/overview.php"); ?>
 </div>
-</div><!--- tab-content Ends --->
-</div>
-</div><!--- row Ends --->
-</div><!--- container Ends --->
+</div> -->
+<!--- tab-content Ends --->
+<!-- </div>
+</div> -->
+<!--- row Ends --->
+<!-- </div> -->
+<!--- container Ends --->
 
 <script>
 $(document).ready(function(){
@@ -97,18 +322,18 @@ $(document).ready(function(){
 
   <?php } ?>
 
-  $("#category").change(function(){
-    $("#sub-category").show();
-    var category_id = $(this).val();
-    $.ajax({
-    url:"fetch_subcategory",
-    method:"POST",
-    data:{category_id:category_id},
-    success:function(data){
-    $("#sub-category").html(data);
-    }
-    });
-  });
+  // $("#category").change(function(){
+  //   $("#sub-category").show();
+  //   var category_id = $(this).val();
+  //   $.ajax({
+  //   url:"fetch_subcategory",
+  //   method:"POST",
+  //   data:{category_id:category_id},
+  //   success:function(data){
+  //   $("#sub-category").html(data);
+  //   }
+  //   });
+  // });
 
  	$image_crop = $('#image_demo').croppie({
     enableExif: true,
@@ -188,6 +413,69 @@ $(document).ready(function(){
 </script>
 
 <?php } ?>
+<script>
+    $(function(){
+        $(window).on('load resize', function(){
+            var popupWidth = $('#popupWidth').outerWidth();
+            $('.popup').css({
+                'width': popupWidth + 30 + 'px'
+            });
+        });
+        $('.gig-category-select').on('click', function(){
+            $('.cat_item-content').addClass('item-removed');
+            $('.gig-category-item').addClass('item-removed');
+            $(this).parents('.cat_item-content').removeClass('item-removed');
+            $(this).parents('.cat_item-content').addClass('item-active');
+            $(this).parents('.gig-category-item').removeClass('item-removed');
+            $(this).parents('.gig-category-item').addClass('item-active');
+        });
+        $('.gig-category-tag').on('click', function(){
+            $(this).toggleClass('tag-selected');
+        });
+        $('.backto-main').on('click', function(){
+            $('.gig-category-item').removeClass('item-active');
+            $('.gig-category-item').removeClass('item-removed');
+            $('.cat_item-content').removeClass('item-active');
+            $('.cat_item-content').removeClass('item-removed');
+            $('.gig-category-tag').removeClass('tag-selected');
+            $('.gig-category-item').find('input[type="radio"]').prop('checked', false);
+        });
+        $('.deliver-time-item[for="days30"]').on('click', function(){
+            $('.input-number').focus();
+        });
+        $(".gig-category-select").on('click', function(){
+          var cat_class = $(this).parents('.cat_item-content').attr("data-id");
+            $(".gig-category-tags").removeAttr('class').addClass('gig-category-tags '+cat_class);
+            // $('.gig-category-tags').addClass(cat_class);
+        });
+    });
+
+    $(".text-count").keydown(function(){
+    var textarea = $(".text-count").val();
+    $(".descCount").text(textarea.length);  
+    }); 
+
+    $(".gig-category-tags  .nice-select.form-control").remove();
+
+    
+    $("#sub-category").hide();
+
+    function categoryItem(id){
+      $("#sub-category").show();  
+      var category_id =  id;
+      $.ajax({
+      url:"fetch_subcategory",
+      method:"POST",
+      data:{category_id:category_id},
+
+      success:function(data){
+        console.log(data);
+      $("#sub-category").html(data);
+      }
+      });
+    }
+
+  </script>
 <?php require_once("../includes/footer.php"); ?>
 <script src="../js/tagsinput.js"></script>
 </body>

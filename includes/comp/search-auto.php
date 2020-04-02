@@ -35,7 +35,7 @@ $data['proposals'][$i]['url'] = "$site_url/proposals/".$seller_user_name."/".$ro
 
 }
 
-$get_s = $db->query("select * from sellers where seller_user_name Like :search AND NOT seller_status='block-ban' LIMIT 0,6",["search"=>"%$search%"]);
+$get_s = $db->query("select * from sellers where seller_user_name Like :search AND NOT seller_status='block-ban' AND NOT account_type='buyer' LIMIT 0,6",["search"=>"%$search%"]);
 
 $data['count_sellers'] = $get_s->rowCount();
 
@@ -51,8 +51,6 @@ $data['sellers'][$i]['name'] = $user_name;
 
 if($row->account_type == 'seller'){
 	$data['sellers'][$i]['url'] = "$site_url/".$row->seller_user_name;
-}else{
-	$data['sellers'][$i]['url'] = "$site_url/profile/?user_name=".$row->seller_user_name;
 }
 }
 
