@@ -170,6 +170,9 @@ $login_seller_language = $row_login_seller->seller_language;
   .bootstrap-tagsinput{
     line-height: 40px;
   }
+  .header-top{
+    background-color: white;
+  }
 </style>
 </head>
 <body class="all-content">
@@ -185,7 +188,7 @@ require_once("../includes/user_header.php");
 
 if($seller_verification != "ok"){
   echo "
-  <div class='alert alert-danger rounded-0 mt-0 text-center'>
+  <div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 15rem;'>
   Please confirm your email to use this feature.
   </div>";
 }else{

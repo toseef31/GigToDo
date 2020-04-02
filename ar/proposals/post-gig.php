@@ -525,7 +525,7 @@ $login_seller_language = $row_login_seller->seller_language;
                 </div>
                 <div class="col-12 col-lg-4">
                   <div class="howitwork-card">
-                    <div class="howitwork-card-title d-flex align-items-center">How it Works</div>
+                    <div class="howitwork-card-title d-flex align-items-center">كيف يعمل</div>
                     <div class="howitwork-list d-flex flex-column">
                       <div class="howitwork-list-item d-flex flex-row align-items-start">
                         <div class="howitwork-list-icon">

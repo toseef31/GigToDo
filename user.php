@@ -146,7 +146,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  
+  <style>.sub_cat .nice-select{display: none;}</style>
 </head>
 <body class="all-content">  
   <!-- Preloader Start -->
@@ -209,7 +209,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                   <?php } }else{ ?>
                     <ul class="profile-btn pt-20">
                       <li><a class="p-btn-1" href="<?= $site_url; ?>/login">Contact me</a></li>
-                      <li><a class="p-btn-2" href="<?= $site_url; ?>/login" data-toggle="modal" data-target="#exampleModalCenter">Custom order</a></li>
+                      <li><a class="p-btn-2" href="<?= $site_url; ?>/login">Custom order</a></li>
                     </ul>
                   <?php }  ?>
                 <!-- <div class="setup-accunt-progressbar profile-progressbar">
@@ -673,24 +673,28 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
         <div class="modal-body">
           <div class="customer-profile d-flex align-items-start align-items-md-center">
             <div class="profile-img">
-              <img src="assets/img/seller-profile/profile-img.png" alt="">
+              <?php if(!empty($get_seller_image)){ ?>
+              <img src="user_images/<?= $get_seller_image; ?>" alt="profile">
+              <?php }else { ?>
+              <img src="assets/img/seller-profile/profile-img.png" alt="profile">
+              <?php } ?>
             </div>
             <div class="profile-content media-body">
-              <h6 class="profile-name">Content4site</h6>
+              <h6 class="profile-name"><?= ucfirst($get_seller_user_name); ?></h6>
               <p class="text">Hi. please provide your request details below and i’ll get back to you.</p>
             </div>
           </div>
-          <form action="" method="POST">
+          <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label class="control-label d-flex align-items-start">
                 <span><img src="assets/img/post-request/icon-1.png" alt="Icon"></span>
                 <span>Describe the service you’re looking to purchase</span>
               </label>
-              <textarea class="form-control" placeholder="I’m looking for..." rows="5"></textarea>
+              <textarea class="form-control" id="textarea" name="request_description" placeholder="I’m looking for..." rows="5"></textarea>
               <div class="bottom-label d-flex flex-row align-items-center justify-content-between mb-30 mt-15">
                 <div class="attach-file d-flex flex-row align-items-center">
                   <label for="file">
-                    <input type="file" id="file" hidden="">
+                    <input type="file" id="file" name="request_file" hidden="">
                     <span class="file d-flex flex-row align-items-center">
                       <span><img src="assets/img/post-request/attach.png" alt=""></span>
                       <span>Attach File</span>
@@ -698,7 +702,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                   </label>
                   <span class="max-size">Max Size 30MB</span>
                 </div>
-                <span class="chars-max">0/2500 Chars Max</span>
+                <span class="chars-max"><span class="descCount">0</span>/2500 Chars Max</span>
               </div>
             </div>
             <div class="form-group">
@@ -708,21 +712,23 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
               </div>
               <div class="row">
                 <div class="col-12 col-sm-6 mb-30">
-                  <select>
-                    <option value="0">Select Category</option>
-                    <option value="1">Select Category 01</option>
-                    <option value="2">Select Category 02</option>
-                    <option value="3">Select Category 03</option>
-                    <option value="4">Select Category 04</option>
+                  <select name="cat_id" id="category">
+                    <option value="" class="hidden"> Select A Category </option>
+                  <?php 
+                  $get_cats = $db->select("categories");
+                  while($row_cats = $get_cats->fetch()){
+                  $cat_id = $row_cats->cat_id;
+                  $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+                  $row_meta = $get_meta->fetch();
+                  $cat_title = $row_meta->cat_title;
+                  ?>
+                    <option value="<?= $cat_id; ?>"> <?= $cat_title; ?> </option>
+                  <?php } ?>
                   </select>
                 </div>
-                <div class="col-12 col-sm-6 mb-30">
-                  <select>
-                    <option value="0">Select Category</option>
-                    <option value="1">Select Category 01</option>
-                    <option value="2">Select Category 02</option>
-                    <option value="3">Select Category 03</option>
-                    <option value="4">Select Category 04</option>
+                <div class="col-12 col-sm-6 mb-30 sub_cat">
+                  <select class="form-control" name="child_id" id="sub-category" required="">
+                    
                   </select>
                 </div>
               </div>
@@ -733,47 +739,28 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                 <span>When would you like your Service Delivered?</span>
               </div>
               <div class="deliver-time d-flex flex-wrap mb-15">
-                <label class="deliver-time-item" for="hours24">
-                  <input id="hours24" type="radio" name="deliver-time" hidden />
+                <?php
+                  $get_delivery_times = $db->select("delivery_times");
+                  while($row_delivery_times = $get_delivery_times->fetch()){
+                  $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+                  $delivery_id = $row_delivery_times->delivery_id;
+                ?>
+                <label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
+                  <input id="hours<?= $delivery_id; ?>"  value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
                   <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                     <span class="color-icon">
                       <span>-</span>
                       <span>+</span>
                     </span>
                     <span class="d-flex flex-row align-items-end time">
-                      <span>24</span>
-                      <span>HRS</span>
+                      <span><?= $delivery_proposal_title; ?></span>
+                      <!-- <span>HRS</span> -->
                     </span>
                   </div>
                 </label>
-                <label class="deliver-time-item" for="days3">
-                  <input id="days3" type="radio" name="deliver-time" hidden />
-                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
-                    <span class="color-icon">
-                      <span>-</span>
-                      <span>+</span>
-                    </span>
-                    <span class="d-flex flex-row align-items-end time">
-                      <span>3</span>
-                      <span>Days</span>
-                    </span>
-                  </div>
-                </label>
-                <label class="deliver-time-item" for="days7">
-                  <input id="days7" type="radio" name="deliver-time" hidden />
-                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
-                    <span class="color-icon">
-                      <span>-</span>
-                      <span>+</span>
-                    </span>
-                    <span class="d-flex flex-row align-items-end time">
-                      <span>7</span>
-                      <span>Days</span>
-                    </span>
-                  </div>
-                </label>
+              <?php } ?>
                 <label class="deliver-time-item" for="days30">
-                  <input id="days30" type="radio" name="deliver-time" hidden />
+                  <input id="days30" type="radio" name="delivery_time" hidden />
                   <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                     <span class="color-icon">
                       <span>-</span>
@@ -781,7 +768,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                     </span>
                     <span class="d-flex flex-row align-items-end time">
                       <span>Custom</span>
-                      <input autofocus="autofocus" class="input-number" type="text" name="" pattern="[0-9]" />
+                      <input autofocus="autofocus" name="delivery_time" class="input-number" type="text" pattern="[0-30]" />
                     </span>
                   </div>
                 </label>
@@ -792,10 +779,10 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                 <span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
                 <span>What is your budget?</span>
               </div>
-              <input class="form-control mb-30" type="text" placeholder="$ 5 Minimum" />
+              <input class="form-control mb-30" name="request_budget" type="text" placeholder="$ 5 Minimum" />
             </div>
             <div class="form-group d-flex flex-row align-items-center justify-content-between">
-              <button class="button" type="submit" role="button">Send a request</button>
+              <button class="button" name="send_request" type="submit" role="button">Send a request</button>
               <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">Cancel</button>
             </div>
           </form>
@@ -804,7 +791,75 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
     </div>
   </div>
   <!-- Customer Order Puppup END-->
+  <script>
+    $(document).ready(function(){
+      $("#textarea").keydown(function(){
+      var textarea = $("#textarea").val();
+      $(".descCount").text(textarea.length);  
+      }); 
 
+      $("#sub-category").hide();
+
+      $("#category").change(function(){
+        $("#sub-category").show();  
+        var category_id = $(this).val();
+        $.ajax({
+        url:"fetch_subcategory",
+        method:"POST",
+        data:{category_id:category_id},
+        success:function(data){
+        $("#sub-category").html(data);
+        }
+        });
+      });
+    });
+  </script>
+  <?php 
+    if(isset($_POST['send_request'])){
+      // $buyer_id = $login_seller_id;
+      // $order_price = $input->post('order_price');
+
+      
+      $request_description = $input->post('request_description');
+      $cat_id = $input->post('cat_id');
+      $child_id = $input->post('child_id');
+      $request_budget = $input->post('request_budget');
+      $delivery_time = $input->post('delivery_time');
+
+      echo "You have selected :" .$delivery_time;
+      $request_file = $_FILES['request_file']['name'];
+      $request_file_tmp = $_FILES['request_file']['tmp_name'];
+      $request_date = date("F d, Y");
+      $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+      $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+      if(!empty($request_file)){
+        if(!in_array($file_extension,$allowed)){
+          echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+          echo "<script>window.open('<?= ucfirst($get_seller_user_name); ?>','_self')</script>";
+          exit();
+        }
+        $request_file = pathinfo($request_file, PATHINFO_FILENAME);
+        $request_file = $request_file."_".time().".$file_extension";
+        move_uploaded_file($request_file_tmp,"requests/request_files/$request_file");
+      }
+      
+      $insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"user_id"=>$get_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'active'));
+      if($insert_request){
+        echo "<script>
+            swal({
+              type: 'success',
+              text: 'Your request has been submitted successfully!',
+              timer: 3000,
+              onOpen: function(){
+                swal.showLoading()
+              }
+            }).then(function(){
+                window.open('conversations/message?seller_id=<?= $get_seller_id ?>','_self');
+            });
+        </script>";
+      }
+    }
+  ?>
 <!-- <?php //require_once("includes/user_profile_header.php"); ?>
 <div class="container">  -->
   <!-- Container starts -->

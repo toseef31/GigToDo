@@ -4311,4 +4311,5 @@ font-size: 18px;
 .navbar-brand:focus, .navbar-brand:hover{
   color: #28a745;
 }
-.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
+.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;font-family: 'Montserrat', sans-serif;
+    font-weight: 600; text-transform: uppercase;}

@@ -57,6 +57,14 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	<?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+  <style>
+  	@media(min-width: 767px){
+  		.page-height{
+  			position: relative;
+  			min-height: 45vh;
+  		}
+  	}
+  </style>
 </head>
 <body class="all-content">
 <?php require_once("../includes/user_header.php"); ?>
@@ -68,7 +76,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	</div>
 	<!-- Preloader End -->
 
-	<main>
+	<main class="page-height">
 
 			<section class="container-fluid list-page">
 				<div class="row">
