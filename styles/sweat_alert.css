@@ -1124,7 +1124,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     border: 0;
     border-radius: .25em;
     background: initial;
-    background-color: #3085d6;
+    background-color: #ff0707;
     color: #fff;
     font-size: 1.0625em
 }
@@ -1443,22 +1443,22 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-icon.swal2-warning {
-    border-color: #facea8;
-    color: #f8bb86
+    border-color: #ff0707;
+    color: #ff0707;
 }
 
 .swal2-icon.swal2-info {
-    border-color: #9de0f6;
-    color: #3fc3ee
+    border-color: #ff0707;
+    color: #ff0707;
 }
 
 .swal2-icon.swal2-question {
-    border-color: #c9dae1;
-    color: #87adbd
+    border-color: #ff0707;
+    color: #ff0707;
 }
 
 .swal2-icon.swal2-success {
-    border-color: #a5dc86
+    border-color: #ff0707;
 }
 
 .swal2-icon.swal2-success [class^=swal2-success-circular-line] {
@@ -1554,7 +1554,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     width: 2em;
     height: 2em;
     border-radius: 2em;
-    background: #3085d6;
+    background: #ff0707;
     color: #fff;
     line-height: 2em;
     text-align: center;
@@ -1570,22 +1570,22 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep {
-    background: #3085d6
+    background: #ff0707;
 }
 
 .swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progresscircle {
-    background: #add8e6
+    background: #ff0707;
 }
 
 .swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progressline {
-    background: #add8e6
+    background: #ff0707;
 }
 
 .swal2-progresssteps .swal2-progressline {
     width: 2.5em;
     height: .4em;
     margin: 0 -1px;
-    background: #3085d6;
+    background: #ff0707;
     z-index: 10
 }
 

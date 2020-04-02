@@ -6,15 +6,17 @@
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
   <head>
-    <title> <?php echo $site_name; ?> - <?php echo $lang['titles']['how_it_works']; ?> </title>
+    <title> <?php echo $site_name; ?> - Landing Page </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="<?php echo $site_desc; ?>">
     <meta name="keywords" content="<?php echo $site_keywords; ?>">
     <meta name="author" content="<?php echo $site_author; ?>">
+    <?php if(!empty($site_favicon)){ ?>
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/png">
+    <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
+    <?php } ?>
     <!-- ==============Google Fonts============= -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <!--====== Bootstrap css ======-->
@@ -41,7 +43,7 @@
     <script src="js/ie.js"></script>
     <script type="text/javascript" src="js/sweat_alert.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.footer-area, .copyright-area{display: none;}</style>
+    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none !important;}.footer-area, .copyright-area{display: none;}</style>
   </head>
   <body class="home-content">
     <!-- Preloader Start -->
@@ -67,9 +69,9 @@
           </h2>
           <p>Discover New Clients with the Click of a Button </p>
         </div>
-        <form class="join-form">
-          <input type="email" placeholder="Enter Your Email Adress">
-          <input type="submit" value="Join Now">
+        <form class="join-form" method="post">
+          <input type="email" name="email" placeholder="Enter Your Email Adress">
+          <input type="submit" value="Join Now" name="join_now">
         </form>
       </div>
     </div>
@@ -154,50 +156,26 @@
             <p>Finding new clients couldn’t be easier</p>
           </div>
           <div class="row justify-content-center mb-30-none">
+            <?php
+              $get_boxes = $db->query("select * from section_boxes where language_id='$siteLanguage' LIMIT 0,4");
+              while($row_boxes = $get_boxes->fetch()){
+              $box_id = $row_boxes->box_id;
+              $box_title = $row_boxes->box_title;
+              $box_desc = $row_boxes->box_desc;
+              $box_image = $row_boxes->box_image; 
+            ?>
             <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
               <div class="work-item">
                 <div class="work-thumb">
-                  <img src="assets/img/work/find.png" alt="work">
+                  <img src="assets/img/work/<?= $box_image; ?>" alt="work">
                 </div>
                 <div class="work-content text-center">
-                  <h5 class="title">Find</h5>
-                                <p>Create and customise services so that buyers can understand clearly the services you provide in order to meet their requirements. </p>
+                  <h5 class="title"><?= $box_title; ?></h5>
+                  <p><?= $box_desc; ?></p>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-              <div class="work-item">
-                <div class="work-thumb">
-                  <img src="assets/img/work/hire.png" alt="work">
-                </div>
-                <div class="work-content text-center">
-                  <h5 class="title">Get Hired</h5>
-                  <p>Communicate with the buyer to work out the specific details of the project. Once you and the seller agree on the requirements, you can begin working. </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-              <div class="work-item">
-                <div class="work-thumb">
-                  <img src="assets/img/work/work.png" alt="work">
-                </div>
-                <div class="work-content text-center">
-                  <h5 class="title">work</h5>
-                  <p>Once you finish your gig, deliver your awesome work on our platform for your client to approve. </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-              <div class="work-item">
-                <div class="work-thumb">
-                  <img src="assets/img/work/pay.png" alt="work">
-                </div>
-                <div class="work-content text-center">
-                  <h5 class="title">Get Paid</h5>
-                  <p> When the client approves your professional delivery, your funds will be released into your eMongez account. Keep your funds in your eMongez account or transfer them to your bank account.</p>
-                </div>
-              </div>
-            </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -401,9 +379,9 @@
                     </h2>
                     <p>Create your profile and commence work!</p>
           </div>
-          <form class="join-form">
-            <input type="email" placeholder="Enter Your Email Adress">
-            <input type="submit" value="Join Now">
+          <form class="join-form" method="post">
+            <input type="email" name="email" placeholder="Enter Your Email Adress">
+            <input type="submit" value="Join Now" name="join_now">
           </form>
           <div class="d-flex flex-row align-items-center justify-content-center copy-right">
             <span><?= $db->select("general_settings")->fetch()->site_copyright; ?></span>
@@ -411,7 +389,7 @@
         </div>
       </div>
       <!-- Stay Connected Ends -->
-    <?php require_once("includes/footer.php"); ?>
+    
     <script>
         $(function() {
           $(".mesagee-item-box").niceScroll({
@@ -420,5 +398,54 @@
         });
 
       </script>
+      <?php
+        if(isset($_POST['join_now'])){
+          $rules = array(
+          "email" => "email|required");
+          $messages = array("email" => "Email Is Required.");
+          $val = new Validator($_POST,$rules,$messages);
+          if($val->run() == false){
+            $_SESSION['error_array'] = array();
+            Flash::add("register_errors",$val->get_all_errors());
+            Flash::add("form_data",$_POST);
+            echo "<script>window.open('index','_self')</script>";
+          }else{
+            $email = strip_tags($input->post('email'));
+            $email = strip_tags($email);
+            $_SESSION['email']=$email;
+
+            $check_seller_email = $db->count("sellers",array("seller_email" => $email));
+            if($check_seller_email > 0){
+              echo "
+              <script>
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! Email has already been taken. Try logging in instead..'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('landing-page','_self')
+              });
+              </script>";
+              // array_push($error_array, "Email has already been taken. Try logging in instead.");
+            }else{
+
+              echo "<script>
+              swal({
+              type: 'success',
+              text: 'Details Saved.',
+              timer: 2000,
+              onOpen: function(){
+              swal.showLoading()
+              }
+              }).then(function(){
+                window.open('proposals/post-gig','_self')
+              });
+              </script>";
+            }
+          }
+        }
+      ?>
+      <?php require_once("includes/footer.php"); ?>
   </body>
 </html>

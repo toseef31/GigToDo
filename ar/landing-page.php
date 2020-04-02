@@ -6,15 +6,17 @@
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
   <head>
-    <title> <?php echo $site_name; ?> - <?php echo $lang['titles']['how_it_works']; ?> </title>
+    <title> <?php echo $site_name; ?> - Landing Page </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="<?php echo $site_desc; ?>">
     <meta name="keywords" content="<?php echo $site_keywords; ?>">
     <meta name="author" content="<?php echo $site_author; ?>">
+    <?php if(!empty($site_favicon)){ ?>
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
+    <?php } ?>
     <!-- ==============Google Fonts============= -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <!--====== Bootstrap css ======-->
@@ -41,7 +43,7 @@
     <script src="js/ie.js"></script>
     <script type="text/javascript" src="js/sweat_alert.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.footer-area, .copyright-area{display: none;}</style>
+    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none !important;}.footer-area, .copyright-area{display: none;}</style>
   </head>
   <body class="all-content">
     <!-- Preloader Start -->
@@ -68,9 +70,9 @@
           </h2>
           <p>هتلاقي عملاء جدد بدوسة زرار</p>
         </div>
-        <form class="join-form">
-          <input type="text" placeholder="دخلالإيميل الخاص بيك ">
-          <input type="submit" value="انضم دلوقتي">
+        <form class="join-form" method="post">
+          <input type="text" name="email" placeholder="دخلالإيميل الخاص بيك ">
+          <input type="submit" name="join_now" value="انضم دلوقتي">
         </form>
       </div>
     </div>
@@ -154,50 +156,26 @@
             <p>مفيش أسهل من كدة عشان تبدأ</p>
           </div>
           <div class="row justify-content-center mb-30-none">
+            <?php
+              $get_boxes = $db->query("select * from section_boxes where language_id='2' LIMIT 0,4");
+              while($row_boxes = $get_boxes->fetch()){
+              $box_id = $row_boxes->box_id;
+              $box_title = $row_boxes->box_title;
+              $box_desc = $row_boxes->box_desc;
+              $box_image = $row_boxes->box_image; 
+            ?>
             <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
               <div class="work-item">
                 <div class="work-thumb">
-                  <img src="assets/img/work/find.png" alt="work">
+                  <img src="assets/img/work/<?= $box_image; ?>" alt="work">
                 </div>
                 <div class="work-content text-center">
-                  <h5 class="title">استكشف</h5>
-                  <p>ابدأ وخصص خدماتك بحيث الناس اللى هتشترى يقدروا يفهموا بشكل واضح الخدمات اللى بتوفرها علشان تقابل احتياجاتهم</p>
+                  <h5 class="title"><?= $box_title; ?><h5>
+                  <p><?= $box_desc; ?></p>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-              <div class="work-item">
-                <div class="work-thumb">
-                  <img src="assets/img/work/hire.png" alt="work">
-                </div>
-                <div class="work-content text-center">
-                  <h5 class="title">التوظيف</h5>
-                  <p>اتواصل مع المشتري عشان تعرف تفاصيل المشروع، و بمجرد ما يوافق البائع على الطلبات تقدر تبدأ شغل</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-              <div class="work-item">
-                <div class="work-thumb">
-                  <img src="assets/img/work/work.png" alt="work">
-                </div>
-                <div class="work-content text-center">
-                  <h5 class="title">الشغل</h5>
-                  <p>أول ما تنتهي من شغلك، قدم شغلك الرائع على منصتنا عشان عميلك يوافق عليه</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row">
-              <div class="work-item">
-                <div class="work-thumb">
-                  <img src="assets/img/work/pay.png" alt="work">
-                </div>
-                <div class="work-content text-center">
-                  <h5 class="title">الدفع</h5>
-                  <p> لما العميل يوافق على شغلك اللي اتسلم، فلوسك هتتحول لحسابك على موقع "منجز" و كمان ممكن تخلي فلوسك في حسابك على موقع "منجز" أو تحولهم لحسابك في البنك</p>
-                </div>
-              </div>
-            </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -399,9 +377,9 @@
                       </h2>
                       <p>اعمل بروفايلك وابدأ شغل!</p>
           </div>
-          <form class="join-form">
-            <input type="text" placeholder="دخلالإيميل الخاص بيك ">
-            <input type="submit" value="انضم دلوقتي">
+          <form class="join-form" method="post">
+            <input type="text" name="email" placeholder="دخلالإيميل الخاص بيك ">
+            <input type="submit" name="join_now" value="انضم دلوقتي">
           </form>
           <div class="d-flex flex-row align-items-center justify-content-center copy-right">
             <span><?= $db->select("general_settings")->fetch()->site_copyright; ?></span>
@@ -409,14 +387,62 @@
         </div>
       </div>
       <!-- Stay Connected Ends -->
-    <?php require_once("includes/footer.php"); ?>
-    <script>
-        $(function() {
-          $(".mesagee-item-box").niceScroll({
-            cursorcolor: "#D72929",
-          });
-        });
+      <?php
+        if(isset($_POST['join_now'])){
+          $rules = array(
+          "email" => "email|required");
+          $messages = array("email" => "Email Is Required.");
+          $val = new Validator($_POST,$rules,$messages);
+          if($val->run() == false){
+            $_SESSION['error_array'] = array();
+            Flash::add("register_errors",$val->get_all_errors());
+            Flash::add("form_data",$_POST);
+            echo "<script>window.open('index','_self')</script>";
+          }else{
+            $email = strip_tags($input->post('email'));
+            $email = strip_tags($email);
+            $_SESSION['email']=$email;
 
-      </script>
+            $check_seller_email = $db->count("sellers",array("seller_email" => $email));
+            if($check_seller_email > 0){
+              echo "
+              <script>
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! Email has already been taken. Try logging in instead..'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('landing-page','_self')
+              });
+              </script>";
+              // array_push($error_array, "Email has already been taken. Try logging in instead.");
+            }else{
+
+              echo "<script>
+              swal({
+              type: 'success',
+              text: 'Details Saved.',
+              timer: 2000,
+              onOpen: function(){
+              swal.showLoading()
+              }
+              }).then(function(){
+                window.open('proposals/post-gig','_self')
+              });
+              </script>";
+            }
+          }
+        }
+      ?>
+      <script>
+          $(function() {
+            $(".mesagee-item-box").niceScroll({
+              cursorcolor: "#D72929",
+            });
+          });
+
+        </script>
+    <?php require_once("includes/footer.php"); ?>
   </body>
 </html>

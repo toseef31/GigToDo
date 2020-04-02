@@ -204,7 +204,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                   <?php if($_SESSION['seller_user_name'] != $get_seller_user_name){ ?>
                     <ul class="profile-btn pt-20">
                       <li><a class="p-btn-1" href="<?= $site_url; ?>/conversations/message?seller_id=<?= $get_seller_id ?>">Contact me</a></li>
-                      <li><a class="p-btn-2" href="javascript:void(0);" data-toggle="modal" data-target="#exampleModalCenter">Custom order</a></li>
+                      <li><a class="p-btn-2" href="javascript:void(0);" data-toggle="modal" data-target="#custom_order">Custom order</a></li>
                     </ul>
                   <?php } }else{ ?>
                     <ul class="profile-btn pt-20">
@@ -658,8 +658,153 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
       </div>
     </div>
   </div>
-
   <!--  SELLER PROFILE END -->
+  <!-- Customer Order Puppup Start-->
+  <!-- Modal -->
+  <div class="modal fade" id="custom_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered customer-order" role="document">
+      <div class="modal-content">
+        <div class="modal-header align-items-center">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Request a Quote</h5>
+          <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+            <img src="assets/img/seller-profile/popup-close-icon.png" />
+          </a>
+        </div>
+        <div class="modal-body">
+          <div class="customer-profile d-flex align-items-start align-items-md-center">
+            <div class="profile-img">
+              <img src="assets/img/seller-profile/profile-img.png" alt="">
+            </div>
+            <div class="profile-content media-body">
+              <h6 class="profile-name">Content4site</h6>
+              <p class="text">Hi. please provide your request details below and i’ll get back to you.</p>
+            </div>
+          </div>
+          <form action="" method="POST">
+            <div class="form-group">
+              <label class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-1.png" alt="Icon"></span>
+                <span>Describe the service you’re looking to purchase</span>
+              </label>
+              <textarea class="form-control" placeholder="I’m looking for..." rows="5"></textarea>
+              <div class="bottom-label d-flex flex-row align-items-center justify-content-between mb-30 mt-15">
+                <div class="attach-file d-flex flex-row align-items-center">
+                  <label for="file">
+                    <input type="file" id="file" hidden="">
+                    <span class="file d-flex flex-row align-items-center">
+                      <span><img src="assets/img/post-request/attach.png" alt=""></span>
+                      <span>Attach File</span>
+                    </span>
+                  </label>
+                  <span class="max-size">Max Size 30MB</span>
+                </div>
+                <span class="chars-max">0/2500 Chars Max</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-2.png" alt="Icon"></span>
+                <span>Choose a category</span>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-6 mb-30">
+                  <select>
+                    <option value="0">Select Category</option>
+                    <option value="1">Select Category 01</option>
+                    <option value="2">Select Category 02</option>
+                    <option value="3">Select Category 03</option>
+                    <option value="4">Select Category 04</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 mb-30">
+                  <select>
+                    <option value="0">Select Category</option>
+                    <option value="1">Select Category 01</option>
+                    <option value="2">Select Category 02</option>
+                    <option value="3">Select Category 03</option>
+                    <option value="4">Select Category 04</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-3.png" alt="Icon"></span>
+                <span>When would you like your Service Delivered?</span>
+              </div>
+              <div class="deliver-time d-flex flex-wrap mb-15">
+                <label class="deliver-time-item" for="hours24">
+                  <input id="hours24" type="radio" name="deliver-time" hidden />
+                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                    <span class="color-icon">
+                      <span>-</span>
+                      <span>+</span>
+                    </span>
+                    <span class="d-flex flex-row align-items-end time">
+                      <span>24</span>
+                      <span>HRS</span>
+                    </span>
+                  </div>
+                </label>
+                <label class="deliver-time-item" for="days3">
+                  <input id="days3" type="radio" name="deliver-time" hidden />
+                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                    <span class="color-icon">
+                      <span>-</span>
+                      <span>+</span>
+                    </span>
+                    <span class="d-flex flex-row align-items-end time">
+                      <span>3</span>
+                      <span>Days</span>
+                    </span>
+                  </div>
+                </label>
+                <label class="deliver-time-item" for="days7">
+                  <input id="days7" type="radio" name="deliver-time" hidden />
+                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                    <span class="color-icon">
+                      <span>-</span>
+                      <span>+</span>
+                    </span>
+                    <span class="d-flex flex-row align-items-end time">
+                      <span>7</span>
+                      <span>Days</span>
+                    </span>
+                  </div>
+                </label>
+                <label class="deliver-time-item" for="days30">
+                  <input id="days30" type="radio" name="deliver-time" hidden />
+                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                    <span class="color-icon">
+                      <span>-</span>
+                      <span>+</span>
+                    </span>
+                    <span class="d-flex flex-row align-items-end time">
+                      <span>Custom</span>
+                      <input autofocus="autofocus" class="input-number" type="text" name="" pattern="[0-9]" />
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
+                <span>What is your budget?</span>
+              </div>
+              <input class="form-control mb-30" type="text" placeholder="$ 5 Minimum" />
+            </div>
+            <div class="form-group d-flex flex-row align-items-center justify-content-between">
+              <button class="button" type="submit" role="button">Send a request</button>
+              <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Customer Order Puppup END-->
+
 <!-- <?php //require_once("includes/user_profile_header.php"); ?>
 <div class="container">  -->
   <!-- Container starts -->

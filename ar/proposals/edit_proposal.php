@@ -80,95 +80,244 @@ if($videoPlugin == 1){
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
-<title><?= $site_name; ?> - Edit Proposal</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="<?= $site_desc; ?>">
-<meta name="keywords" content="<?= $site_keywords; ?>">
-<meta name="author" content="<?= $site_author; ?>">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-<link href="../styles/bootstrap.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-<link href="../styles/styles.css" rel="stylesheet">
-<?php if($paymentGateway == 1){ ?>
-<link href="../plugins/paymentGateway/proposals/styles/styles.css" rel="stylesheet">
-<?php } ?>
-<link href="../styles/user_nav_styles.css" rel="stylesheet">
-<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
-<link href="../styles/owl.carousel.css" rel="stylesheet">
-<link href="../styles/owl.theme.default.css" rel="stylesheet">
-<link href="../styles/tagsinput.css" rel="stylesheet" >
-<link href="../styles/sweat_alert.css" rel="stylesheet">
-<link href="../styles/animate.css" rel="stylesheet">
-<link href="../styles/croppie.css" rel="stylesheet">
-<link href="../styles/create-proposal.css" rel="stylesheet">
-<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-<script src="../js/ie.js"></script>
-<script type="text/javascript" src="../js/sweat_alert.js"></script>
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/croppie.js"></script>
-<script src="https://checkout.stripe.com/checkout.js"></script>
-<?php if($paymentGateway == 1){ ?>
-<script src="../plugins/paymentGateway/proposals/javascript/javascript.js"></script>
-<?php } ?>
-<?php if(!empty($site_favicon)){ ?>
-<link rel="shortcut icon" href="../images/<?= $site_favicon; ?>" type="image/x-icon">
-<?php } ?>
-<script>var videoOrNotVideo;</script>
+  <title><?= $site_name; ?> - Edit Proposal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="<?= $site_desc; ?>">
+  <meta name="keywords" content="<?= $site_keywords; ?>">
+  <meta name="author" content="<?= $site_author; ?>">
+
+  <!--====== Bootstrap css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
+
+  <!-- <link href="../styles/bootstrap.css" rel="stylesheet"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+  <link href="../styles/styles.css" rel="stylesheet">
+  <?php if($paymentGateway == 1){ ?>
+    <link href="../plugins/paymentGateway/proposals/styles/styles.css" rel="stylesheet">
+  <?php } ?>
+  <!-- <link href="../styles/user_nav_styles.css" rel="stylesheet"> -->
+  <link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
+  <!-- <link href="../styles/owl.carousel.css" rel="stylesheet"> -->
+  <!-- <link href="../styles/owl.theme.default.css" rel="stylesheet"> -->
+  <link href="../styles/tagsinput.css" rel="stylesheet" >
+  <link href="../styles/sweat_alert.css" rel="stylesheet">
+  <link href="../styles/animate.css" rel="stylesheet">
+  <link href="../styles/croppie.css" rel="stylesheet">
+  <!-- <link href="../styles/create-proposal.css" rel="stylesheet"> -->
+  <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+  <script src="../js/ie.js"></script>
+  <script type="text/javascript" src="../js/sweat_alert.js"></script>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <?php if($paymentGateway == 1){ ?>
+    <script src="../plugins/paymentGateway/proposals/javascript/javascript.js"></script>
+  <?php } ?>
+  <?php if(!empty($site_favicon)){ ?>
+    <link rel="shortcut icon" href="<?= $site_url ?>/images/<?= $site_favicon; ?>" type="image/x-icon">
+  <?php } ?>
+  <script>var videoOrNotVideo;</script>
+  <style>
+    .gig-category-item{
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-flex-basis: 100%;
+      -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -moz-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0;
+      -webkit-flex-basis: -webkit-calc(100% - 10px) !important;
+      -ms-flex-preferred-size: calc(100% - 10px) !important;
+      flex-basis: -moz-calc(100% - 10px) !important;
+      flex-basis: calc(100% - 10px) !important;
+      max-width: -webkit-calc(100% - 10px) !important;
+      max-width: -moz-calc(100% - 10px) !important;
+      max-width: calc(100% - 10px) !important;
+    }
+    .gig-category-select{
+      -webkit-flex-basis: -webkit-calc(100% - 10px);
+      -ms-flex-preferred-size: calc(100% - 10px);
+      flex-basis: -moz-calc(100% - 10px);
+      flex-basis: calc1050% - 10px);
+      max-width: -webkit-calc(100% - 10px);
+      max-width: -moz-calc(100% - 10px);
+      max-width: calc(100% - 10px);
+    }
+    .cat_item-content{
+      -webkit-flex-basis: -webkit-calc(50% - 10px) !important;
+      -ms-flex-preferred-size: calc(50% - 10px) !important;
+      flex-basis: -moz-calc(50% - 10px) !important;
+      flex-basis: calc(50% - 10px) !important;
+      max-width: -webkit-calc(50% - 10px) !important;
+      max-width: -moz-calc(50% - 10px) !important;
+      max-width: calc(50% - 10px) !important;
+    }
+    .cat_item-content.item-active .gig-category-select {
+      -webkit-flex-basis: -webkit-calc(50% - 10px);
+      -ms-flex-preferred-size: calc(50% - 10px);
+      flex-basis: -moz-calc(50% - 10px);
+      flex-basis: calc(100% - 0px);
+      max-width: -webkit-calc(50% - 10px);
+      max-width: -moz-calc(50% - 10px);
+      max-width: calc(100% - 0px);
+    }
+    .postagig .create-gig .form-group .gig-category .cat_item-content.item-active {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-flex-basis: 100%;
+      -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -moz-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0;
+    }
+    .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+      -webkit-flex-basis: -webkit-calc(100% - 10px);
+      -ms-flex-preferred-size: calc(100% - 10px);
+      flex-basis: -moz-calc(100% - 10px);
+      flex-basis: calc(100% - 10px);
+      max-width: -webkit-calc(100% - 10px);
+      max-width: -moz-calc(100% - 10px);
+      max-width: calc(100% - 10px);
+    }
+    .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+      -webkit-flex-basis: -webkit-calc(50% - 10px);
+      -ms-flex-preferred-size: calc(50% - 10px);
+      flex-basis: -moz-calc(50% - 10px);
+      flex-basis: calc(50% - 10px);
+      margin-bottom: 20px;
+      height: auto;
+      max-width: -webkit-calc(50% - 10px);
+      max-width: -moz-calc(50% - 10px);
+      max-width: calc(50% - 10px);
+    }
+    .postagig .create-gig .form-group .gig-category .cat_item-content.item-removed {
+      display: none;
+    }
+    .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .backto-main {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+    .proposal-form.create-gig .row{
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .proposal-form.create-gig .row .col-md-3{
+      padding-left: 0;
+    }
+    .gallery .pic{
+      border: 2px dashed #3b3b3b;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      padding: 40px 20px;
+      width: 100%;
+    }
+    .insert-attribute, .btn.crop_image{
+      background-color: #ff0707;
+      border-color: #ff0707;
+    }
+  </style>
 </head>
-<body class="is-responsive">
-<?php require_once("../includes/user_header.php"); ?>
-<?php
-if($d_proposal_status == "draft"){
-require_once("sections/createProposalNav.php"); 
-}else{
-require_once("sections/editProposalNav.php"); 
-}
-?>
-<div class="container mt-5 mb-5"><!--- container mt-5 Starts --->
-  <div class="row"><!--- row Starts --->
-    <div class="col-md-8"><!--- col-md-8 Starts --->
-      <div class="tab-content card card-body"><!--- tab-content Starts --->
-        <div class="tab-pane fade <?php if(!isset($_GET['video']) AND !isset($_GET['pricing']) and !isset($_GET['publish'])){ echo " show active"; } ?>" id="overview">
-          <?php include("sections/edit/overview.php"); ?>
-        </div>
-        <?php if($videoPlugin == 1){ ?>
-          <div class="tab-pane fade <?php if(isset($_GET['video'])){ echo "show active"; } ?>" id="video">
-            <?php include("../plugins/videoPlugin/proposals/sections/edit/video.php"); ?>
-          </div>
-        <?php } ?>
-        <div class="tab-pane fade <?php if(isset($_GET['pricing'])){ echo "show active"; } ?>" id="pricing">
-         <?php include("sections/edit/pricing.php"); ?>
-        </div>
-        <div class="tab-pane fade" id="description">
-          <?php include("sections/edit/description.php"); ?>
-        </div>
-        <div class="tab-pane fade" id="requirements">
-          <?php include("sections/edit/requirements.php"); ?>
-        </div>
-        <div class="tab-pane fade" id="gallery">
-          <?php include("sections/edit/gallery.php"); ?>
-        </div>
-        <?php if($d_proposal_status == "draft"){ ?>
-        <div class="tab-pane fade <?php if(isset($_GET['publish'])){ echo "show active"; } ?>" id="publish">
-          <?php include("sections/edit/publish.php"); ?>
-        </div>
-        <?php } ?>
-        <input type="hidden" name="section" value="<?= (isset($_GET['pricing']) ? "pricing" : "overview"); ?>">
-      </div><!--- tab-content Ends --->
-    </div><!--- col-md-8 Ends --->
-  </div><!--- row Ends --->
-</div><!--- container mt-5 Ends --->
+<body class="all-content">
+  <?php require_once("../includes/user_header.php"); ?>
+  <main>
+    <?php
+    if($d_proposal_status == "draft"){
+      require_once("sections/createProposalNav.php"); 
+    }else{
+      require_once("sections/editProposalNav.php"); 
+    }
+    ?>
+    <div class="container-fluid mt-5 mb-5"><!--- container mt-5 Starts --->
+      <div class="row"><!--- row Starts --->
+        <div class="container">
+          <div class="packages-container d-flex flex-column"><!--- col-md-8 Starts --->
+            <div class="tab-content"><!--- tab-content Starts --->
+              <div class="tab-pane fade <?php if(!isset($_GET['video']) AND !isset($_GET['pricing']) and !isset($_GET['publish'])){ echo " show active"; } ?>" id="overview">
+                <?php include("sections/edit/overview.php"); ?>
+              </div>
+              <?php if($videoPlugin == 1){ ?>
+                <div class="tab-pane fade <?php if(isset($_GET['video'])){ echo "show active"; } ?>" id="video">
+                  <?php include("../plugins/videoPlugin/proposals/sections/edit/video.php"); ?>
+                </div>
+              <?php } ?>
+              <div class="tab-pane fade <?php if(isset($_GET['pricing'])){ echo "show active"; } ?>" id="pricing">
+                <?php include("sections/edit/pricing.php"); ?>
+              </div>
+              <div class="tab-pane fade" id="gallery">
+                <?php include("sections/edit/gallery.php"); ?>
+              </div>
+              <div class="tab-pane fade" id="description">
+                <?php include("sections/edit/description.php"); ?>
+              </div>
+              <div class="tab-pane fade" id="requirements">
+                <?php include("sections/edit/requirements.php"); ?>
+              </div>
+              <?php if($d_proposal_status == "draft"){ ?>
+              <div class="tab-pane fade <?php if(isset($_GET['publish'])){ echo "show active"; } ?>" id="publish">
+                <?php include("sections/edit/publish.php"); ?>
+              </div>
+              <?php } ?>
+              <input type="hidden" name="section" value="<?= (isset($_GET['pricing']) ? "pricing" : "overview"); ?>">
+            </div><!--- tab-content Ends --->
+          </div><!--- col-md-8 Ends --->
+        </div><!--- row Ends --->
+      </div>
+    </div><!--- container mt-5 Ends --->
 
-<?php require_once("sections/insertimageModal.php"); ?>
-<div id="featured-proposal-modal"></div>
+    <?php require_once("sections/insertimageModal.php"); ?>
+    <div id="featured-proposal-modal"></div>
 
-<?php 
-if($paymentGateway == 1){
-  include("../plugins/paymentGateway/proposals/addVideoModal.php");
-}
-?>
-
+    <?php 
+    if($paymentGateway == 1){
+      include("../plugins/paymentGateway/proposals/addVideoModal.php");
+    }
+    ?>
+  </main>
 <script>
 $(document).ready(function(){
 
@@ -219,6 +368,13 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
           if(current_section == "overview"){
             $('#overview').removeClass('show active');
+            section.val("pricing");
+            <?php if($d_proposal_status == "draft"){ ?>
+            $('#pricing').addClass('show active');
+            $('#package_tab').addClass('active');
+            <?php }else{ ?> 
+            $('#package_tab').tab('show'); 
+            <?php } ?>
             if(data == "video"){
               section.val("video");
               <?php if($d_proposal_status == "draft"){ ?>
@@ -231,9 +387,9 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
               section.val("pricing");
               <?php if($d_proposal_status == "draft"){ ?>
               $('#pricing').addClass('show active');
-              $('#tabs a[href="#pricing"]').addClass('active');
+              $('#package_tab').addClass('active');
               <?php }else{ ?> 
-              $('.nav a[href="#pricing"]').tab('show'); 
+              $('#package_tab').tab('show'); 
               <?php } ?>
             }
           }else if(current_section == "description"){
@@ -315,6 +471,86 @@ $('textarea[name="proposal_desc"]').summernote({
 
 });
 </script>
+<script>
+    $(function(){
+      $('#switch').on('change', function(){
+        if ($(this).is(':checked')) {
+          $(this).prop('checked', true);
+          $('.tryit-overlay').addClass('packages-active');
+        } else {
+          $(this).prop('checked', false);
+          $('.tryit-overlay').removeClass('packages-active');
+        }
+      });
+      $('.tryit-overlay-button').on('click', function(){
+        $(this).parents('.tryit-overlay').addClass('packages-active');
+        $('#switch').prop('checked', false);
+      });
+    });
+  </script>
+  <script>
+      $(function(){
+          $(window).on('load resize', function(){
+              var popupWidth = $('#popupWidth').outerWidth();
+              $('.popup').css({
+                  'width': popupWidth + 30 + 'px'
+              });
+          });
+          $('.gig-category-select').on('click', function(){
+              $('.cat_item-content').addClass('item-removed');
+              $('.gig-category-item').addClass('item-removed');
+              $(this).parents('.cat_item-content').removeClass('item-removed');
+              $(this).parents('.cat_item-content').addClass('item-active');
+              $(this).parents('.gig-category-item').removeClass('item-removed');
+              $(this).parents('.gig-category-item').addClass('item-active');
+          });
+          $('.gig-category-tag').on('click', function(){
+              $(this).toggleClass('tag-selected');
+          });
+          $('.backto-main').on('click', function(){
+              $('.gig-category-item').removeClass('item-active');
+              $('.gig-category-item').removeClass('item-removed');
+              $('.cat_item-content').removeClass('item-active');
+              $('.cat_item-content').removeClass('item-removed');
+              $('.gig-category-tag').removeClass('tag-selected');
+              $('.gig-category-item').find('input[type="radio"]').prop('checked', false);
+          });
+          $('.deliver-time-item[for="days30"]').on('click', function(){
+              $('.input-number').focus();
+          });
+          $(".gig-category-select").on('click', function(){
+            var cat_class = $(this).parents('.cat_item-content').attr("data-id");
+              $(".gig-category-tags").removeAttr('class').addClass('gig-category-tags '+cat_class);
+              // $('.gig-category-tags').addClass(cat_class);
+          });
+      });
+
+      $(".text-count").keydown(function(){
+      var textarea = $(".text-count").val();
+      $(".descCount").text(textarea.length);  
+      }); 
+
+      $(".gig-category-tags  .nice-select.form-control").remove();
+
+      
+      $("#sub-category").hide();
+
+      function categoryItem(id){
+        $("#sub-category").show();  
+        var category_id =  id;
+        $.ajax({
+        url:"fetch_subcategory",
+        method:"POST",
+        data:{category_id:category_id},
+
+        success:function(data){
+          console.log(data);
+        $("#sub-category").html(data);
+        }
+        });
+      }
+
+    </script>
 <?php require_once("../includes/footer.php"); ?>
 <script src="../js/tagsinput.js"></script>
 </body>
