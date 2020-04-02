@@ -168,7 +168,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
 
 
 <!--  SELLER PROFILE area -->
-
+<main>
   <div class="seller-profile-area pt-80 pb-80">
     <div class="container">
       <div class="row">
@@ -202,12 +202,12 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                   <?php if($_SESSION['seller_user_name'] != $get_seller_user_name){ ?>
                     <ul class="profile-btn pt-20">
                       <li><a class="p-btn-1" href="<?= $site_url; ?>/ar/conversations/message?seller_id=<?= $get_seller_id ?>">اتواصل معايا</a></li>
-                      <li><a class="p-btn-2" href="javascript:void(0);" data-toggle="modal" data-target="#exampleModalCenter">حدد الطلب</a></li>
+                      <li><a class="p-btn-2" href="javascript:void(0);" data-toggle="modal" data-target="#custome_order">حدد الطلب</a></li>
                     </ul>
                   <?php } }else{ ?>
                     <ul class="profile-btn pt-20">
                       <li><a class="p-btn-1" href="<?= $site_url; ?>/ar/login">Contact me</a></li>
-                      <li><a class="p-btn-2" href="<?= $site_url; ?>/ar/login" data-toggle="modal" data-target="#exampleModalCenter">حدد الطلب</a></li>
+                      <li><a class="p-btn-2" href="<?= $site_url; ?>/ar/login">حدد الطلب</a></li>
                     </ul>
                   <?php }  ?>
                 <!-- <div class="setup-accunt-progressbar profile-progressbar">
@@ -642,8 +642,226 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
       </div>
     </div>
   </div>
-
+  </main>
   <!--  SELLER PROFILE END -->
+  <!-- Customer Order Puppup Start-->
+  <!-- Modal -->
+  <div class="modal fade" id="custome_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered customer-order" role="document">
+      <div class="modal-content">
+        <div class="modal-header align-items-center">
+          <h5 class="modal-title" id="exampleModalCenterTitle">
+          طلب عرض سعر
+          </h5>
+          <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+            <img src="assets/img/seller-profile/popup-close-icon.png" />
+          </a>
+        </div>
+        <div class="modal-body">
+          <div class="customer-profile d-flex align-items-start align-items-md-center">
+            <div class="profile-img">
+              <img src="assets/img/seller-profile/profile-img.png" alt="">
+            </div>
+            <div class="profile-content media-body">
+              <h6 class="profile-name">
+              محتوى الموقع
+              </h6>
+              <p class="text">
+                اهلا ، يرجى تقديم تفاصيل طلبك أدناه وسوف اعود إليك لاحقا
+              </p>
+            </div>
+          </div>
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-1.png" alt="Icon"></span>
+                <span>
+                  اوصف الخدمة التى تبحث عن شرائها
+                </span>
+              </label>
+              <textarea class="form-control" id="textarea" name="request_description" placeholder="انا ابحث عن .." rows="5"></textarea>
+              <div class="bottom-label d-flex flex-row align-items-center justify-content-between mb-30 mt-15">
+                <div class="attach-file d-flex flex-row align-items-center">
+                  <label for="file">
+                    <input type="file" id="file" name="request_file" hidden="">
+                    <span class="file d-flex flex-row align-items-center">
+                      <span><img src="assets/img/post-request/attach.png" alt=""></span>
+                      <span>الملف الملحق</span>
+                    </span>
+                  </label>
+                  <span class="max-size">
+                    اقصى حجم 30 ميجا بايت
+                  </span>
+                </div>
+                <span class="chars-max">
+                  <span class="descCount">0</span>/2500 اقصى عدد حروف
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-2.png" alt="Icon"></span>
+                <span>
+                  اختر فئة
+                </span>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-6 mb-30">
+                  <select name="cat_id" id="category">
+                    <option value="0">
+                      اختر الفئة الفرعية
+                    </option>
+                    <?php 
+                    $get_cats = $db->select("categories");
+                    while($row_cats = $get_cats->fetch()){
+                    $cat_id = $row_cats->cat_id;
+                    $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
+                    $row_meta = $get_meta->fetch();
+                    $cat_title = $row_meta->cat_title;
+                    $arabic_title = $row_meta->arabic_title;
+                    ?>
+                      <option value="<?= $cat_id; ?>"> <?= $arabic_title; ?> </option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 mb-30">
+                  <select class="form-control" name="child_id" id="sub-category" required="">
+                    
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-3.png" alt="Icon"></span>
+                <span>متى تريد أن تستلم خدمتك المطلوبة؟</span>
+              </div>
+              <div class="deliver-time d-flex flex-wrap mb-15">
+                <?php
+                  $get_delivery_times = $db->select("delivery_times");
+                  while($row_delivery_times = $get_delivery_times->fetch()){
+                  $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+                  $delivery_id = $row_delivery_times->delivery_id;
+                ?>
+                <label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
+                  <input id="hours<?= $delivery_id; ?>" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
+                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                    <span class="color-icon">
+                      <span>-</span>
+                      <span>+</span>
+                    </span>
+                    <span class="d-flex flex-row align-items-end time">
+                      <span><?= $delivery_proposal_title; ?></span>
+                      <!-- <span>ساعة </span> -->
+                    </span>
+                  </div>
+                </label>
+                <?php } ?>
+                <label class="deliver-time-item" for="days30">
+                  <input id="days30" type="radio" name="delivery_time" hidden />
+                  <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                    <span class="color-icon">
+                      <span>-</span>
+                      <span>+</span>
+                    </span>
+                    <span class="d-flex flex-row align-items-end time">
+                      <span>مخصص</span>
+                      <input autofocus="autofocus" class="input-number" name="delivery_time" type="text" pattern="[0-30]" />
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="control-label d-flex align-items-start">
+                <span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
+                <span>ما هى ميزانيتك؟</span>
+              </div>
+              <input class="form-control mb-30" type="text" name="request_budget" placeholder="اقل مبلغ 5 $" />
+            </div>
+            <div class="form-group d-flex flex-row align-items-center justify-content-between">
+              <button class="button" name="send_request" type="submit" role="button">
+              ارسل طلب
+              </button>
+              <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">
+              إلغاء
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Customer Order Puppup END-->
+  <script>
+    $(document).ready(function(){
+      $("#textarea").keydown(function(){
+      var textarea = $("#textarea").val();
+      $(".descCount").text(textarea.length);  
+      }); 
+
+      $("#sub-category").hide();
+
+      $("#category").change(function(){
+        $("#sub-category").show();  
+        var category_id = $(this).val();
+        $.ajax({
+        url:"fetch_subcategory",
+        method:"POST",
+        data:{category_id:category_id},
+        success:function(data){
+        $("#sub-category").html(data);
+        }
+        });
+      });
+    });
+  </script>
+  <?php 
+    if(isset($_POST['send_request'])){
+      // $buyer_id = $login_seller_id;
+      // $order_price = $input->post('order_price');
+
+      
+      $request_description = $input->post('request_description');
+      $cat_id = $input->post('cat_id');
+      $child_id = $input->post('child_id');
+      $request_budget = $input->post('request_budget');
+      $delivery_time = $input->post('delivery_time');
+
+      echo "You have selected :" .$delivery_time;
+      $request_file = $_FILES['request_file']['name'];
+      $request_file_tmp = $_FILES['request_file']['tmp_name'];
+      $request_date = date("F d, Y");
+      $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+      $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+      if(!empty($request_file)){
+        if(!in_array($file_extension,$allowed)){
+          echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+          echo "<script>window.open('<?= ucfirst($get_seller_user_name); ?>','_self')</script>";
+          exit();
+        }
+        $request_file = pathinfo($request_file, PATHINFO_FILENAME);
+        $request_file = $request_file."_".time().".$file_extension";
+        move_uploaded_file($request_file_tmp,"requests/request_files/$request_file");
+      }
+      
+      $insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"user_id"=>$get_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'active'));
+      if($insert_request){
+        echo "<script>
+            swal({
+              type: 'success',
+              text: 'Your request has been submitted successfully!',
+              timer: 3000,
+              onOpen: function(){
+                swal.showLoading()
+              }
+            }).then(function(){
+                window.open('conversations/message?seller_id=<?= $get_seller_id ?>','_self');
+            });
+        </script>";
+      }
+    }
+  ?>
 <!-- <?php //require_once("includes/user_profile_header.php"); ?>
 <div class="container">  -->
   <!-- Container starts -->

@@ -98,7 +98,50 @@ $count_requests = $get_requests->rowCount();
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  
+  <style>
+    .edit-profile-button {
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      background-color: #ff0707;
+      border: 2px solid #ff0707;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      color: white;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+      -moz-box-orient: horizontal;
+      -moz-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      height: 40px;
+      line-height: 26px;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      margin-left: auto;
+      text-transform: uppercase;
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      -o-transition: all 0.3s ease-in-out 0s;
+      -moz-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+      width: 160px;
+    }
+    .edit-profile-button:hover{
+      background-color: white;
+      border: 2px solid #ff0707;
+      color: #ff0707;
+    }
+  </style>
 </head>
 <body class="all-content">  
   <!-- Preloader Start -->
@@ -429,11 +472,11 @@ $count_requests = $get_requests->rowCount();
                     </table>
                     <?php
                       if($count_requests == 0){
-                          echo "<center><h4 class='pb-2 pt-2'>{$lang['user_home']['no_recent_requests']}</h4></center>";
+                          echo "<center><h4 class='pb-2 pt-2'>you still dont have any job requests <a class='edit-profile-button btn' href='requests/post-request.php'>Post a request</a></h4></center>";
                       } else {
                     ?>
                     <center>
-                      <a href="requests/buyer_requests.php" class="btn btn-success btn-lg mb-3">
+                      <a href="requests/buyer_requests.php" class="btn edit-profile-button mb-3">
                       <i class="fa fa-spinner"></i> Load More
                       </a>
                     </center>

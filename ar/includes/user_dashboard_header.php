@@ -310,7 +310,7 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt="">
+          <a href="<?= $site_url; ?>/ar/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt="">
             انشر خدمة
           </a>
         </li>
@@ -389,7 +389,7 @@
   ?>
   </div>
   <div class="float-right">
-  <button id="send-email" class="btn btn-success btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+  <button id="send-email" class="btn btn-success float-right text-white">إعادة إرسال البريد الإلكتروني</button>
   </div>
   </div>
   <script>

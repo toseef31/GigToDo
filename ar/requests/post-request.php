@@ -190,9 +190,15 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				    display: -ms-flexbox;
 				    display: flex;
 				}
+				@media(min-width: 767px){
+					.page-height{
+						position: relative;
+						min-height: 60vh;
+					}
+				}
 		</style>
 	</head>
-	<body class="is-responsive">
+	<body class="all-content">
 		<!-- Preloader Start -->
     <div class="proloader">
         <div class="loader">
@@ -208,7 +214,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		}
 		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
 		echo "
-		<div class='alert alert-danger rounded-0 mt-0 text-center'>
+		<div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 15rem;'>
 			Please confirm your email to use this feature.
 		</div>
 		";

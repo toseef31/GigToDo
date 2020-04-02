@@ -134,12 +134,12 @@
   <!-- <link href="styles/bootstrap.css" rel="stylesheet">
   <link href="styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
-  <!-- <link href="styles/styles.css" rel="stylesheet">
-  <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/styles/styles.css" rel="stylesheet">
+  <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="styles/owl.carousel.css" rel="stylesheet">
-  <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
+  <link href="styles/owl.theme.default.css" rel="stylesheet">
   <link href="styles/user_nav_styles.css" rel="stylesheet">
-  <link href="styles/sweat_alert.css" rel="stylesheet">
+  <link href="styles/sweat_alert.css" rel="stylesheet"> -->
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>

@@ -223,7 +223,7 @@
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
+        <a href="<?= $site_url; ?>/ar/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
           انشر خدمة
         </a>
       </li>
@@ -360,7 +360,7 @@ echo $message;
 ?>
 </div>
 <div class="float-right">
-<button id="send-email" class="btn btn-success btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+<button id="send-email" class="btn btn-success float-right text-white">إعادة إرسال البريد الإلكتروني</button>
 </div>
 </div>
 <script>

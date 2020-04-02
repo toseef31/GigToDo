@@ -49,7 +49,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 	<link href="../styles/owl.carousel.css" rel="stylesheet">
 	<link href="../styles/owl.theme.default.css" rel="stylesheet"> -->
-	<!-- <script type="text/javascript" src="../js/jquery.min.js"></script> -->
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
     <link href="../styles/sweat_alert.css" rel="stylesheet">
     <link href="../styles/animate.css" rel="stylesheet">
     <script type="text/javascript" src="../js/ie.js"></script>
@@ -58,6 +58,14 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	<?php if(!empty($site_favicon)){ ?>
     <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
     <?php } ?>
+    <style>
+    	@media(min-width: 767px){
+    		.page-height{
+    			position: relative;
+    			min-height: 45vh;
+    		}
+    	}
+    </style>
 </head>
 <body class="all-content">
 	<!-- Preloader Start -->
@@ -69,7 +77,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 		<!-- Preloader End -->
 <?php require_once("../includes/user_header.php"); ?>
 
-<main>
+<main class="page-height">
 		<section class="container-fluid list-page">
 			<div class="row">
 				<div class="container">

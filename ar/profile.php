@@ -99,7 +99,52 @@ $count_requests = $get_requests->rowCount();
   <script src="<?= $site_url; ?>/ar/assets/js/jquery.min.js"></script>
   <script type="text/javascript" src="<?= $site_url; ?>/ar/js/bootstrap.js"></script>
   <style>.modal-header .close {margin: -1rem -1rem -1rem -1rem;}.login-button{background-color: #ff0707;
-    border: 2px solid #ff0707;width: 100%;color: white;}</style>
+    border: 2px solid #ff0707;width: 100%;color: white;}
+    .edit-profile-button {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #ff0707;
+    border: 2px solid #ff0707;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: white;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    font-size: 13px;
+    font-family: 'Hacen Saudi Arabia', sans-serif;
+    font-weight: bold;
+    height: 40px;
+    line-height: 25px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    width: auto;
+  }
+  .edit-profile-button:hover{
+    background-color: white;
+    border: 2px solid #ff0707;
+    color: #ff0707;
+  }
+  </style>
 </head>
 <body class="all-content"> 
   <!-- Preloader Start -->
@@ -503,11 +548,11 @@ $count_requests = $get_requests->rowCount();
                   </table>
                   <?php
                     if($count_requests == 0){
-                        echo "<center><h4 class='pb-2 pt-2'>{$lang['user_home']['no_recent_requests']}</h4></center>";
+                        echo "<center><h4 class='pb-2 pt-2'>لا يزال لديك أي طلبات عمل  <a class='edit-profile-button btn' href='/ar/requests/post-request.php'>انشر أي طلب</a></h4></center>";
                     } else {
                   ?>
                     <center>
-                      <a href="/ar/requests/buyer_requests.php" class="btn btn-success btn-lg mb-3">
+                      <a href="/ar/requests/buyer_requests.php" class="btn edit-profile-button mb-3">
                       <i class="fa fa-spinner"></i> تحميل المزيد
                       </a>
                     </center>

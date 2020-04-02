@@ -303,7 +303,7 @@
       <li><a href="<?= $site_url ?>/settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="<?= $site_url; ?>/assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Gigs</a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a Gig</a></li>
+      <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a Gig</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/15.png" alt=""> Revenue</a></li>
@@ -405,7 +405,7 @@ echo $message;
 ?>
 </div>
 <div class="float-right">
-<button id="send-email" class="btn btn-danger btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+<button id="send-email" class="btn btn-danger float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
 </div>
 </div>
 <script>
