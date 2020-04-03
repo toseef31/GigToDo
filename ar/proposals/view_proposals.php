@@ -61,7 +61,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
   	@media(min-width: 767px){
   		.page-height{
   			position: relative;
-  			min-height: 45vh;
+  			min-height: 50%;
   		}
   	}
   </style>

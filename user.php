@@ -759,7 +759,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                   </div>
                 </label>
               <?php } ?>
-                <label class="deliver-time-item" for="days30">
+                <!-- <label class="deliver-time-item" for="days30">
                   <input id="days30" type="radio" name="delivery_time" hidden />
                   <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                     <span class="color-icon">
@@ -771,7 +771,7 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                       <input autofocus="autofocus" name="delivery_time" class="input-number" type="text" pattern="[0-30]" />
                     </span>
                   </div>
-                </label>
+                </label> -->
               </div>
             </div>
             <div class="form-group">

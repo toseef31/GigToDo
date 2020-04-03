@@ -214,7 +214,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		}
 		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
 		echo "
-		<div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 15rem;'>
+		<div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 25rem;'>
 			Please confirm your email to use this feature.
 		</div>
 		";
