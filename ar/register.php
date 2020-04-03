@@ -66,7 +66,7 @@ if(isset($_SESSION['seller_user_name'])){
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none;}</style>
 </head>
 
 <body class="home-content">

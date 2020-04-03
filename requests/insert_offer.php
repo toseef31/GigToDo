@@ -22,9 +22,9 @@ $login_seller_id = $row_login_seller->seller_id;
 $proposal_id = $input->post('proposal_id');
 $request_id = $input->post('request_id');
 $description = $input->post('description');
-$delivery_time = $input->post('delivery_time');
+$delivery_time = $_POST['delivery_time'];
 $amount = $input->post('amount');
-
+// echo "delivery_time".$delivery_time;die();
 $get_requests = $db->select("buyer_requests",array("request_id" => $request_id));
 $row_requests = $get_requests->fetch();
 $seller_id = $row_requests->seller_id;

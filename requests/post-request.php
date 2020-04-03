@@ -226,7 +226,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		}
 		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
 		echo "
-		<div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 15rem;'>
+		<div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 25rem;'>
 			Please confirm your email to use this feature.
 		</div>
 		";
@@ -480,7 +480,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 														</div>
 													</label>
 													<?php } ?>
-													<label class="deliver-time-item" for="days30">
+													<!-- <label class="deliver-time-item" for="days30">
 														<input id="days30" type="radio" name="delivery_time" hidden />
 														<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 															<span class="color-icon">
@@ -492,7 +492,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 																<input autofocus="autofocus" class="input-number" type="text" name="delivery_time" pattern="[0-9]" />
 															</span>
 														</div>
-													</label>
+													</label> -->
 												</div>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />

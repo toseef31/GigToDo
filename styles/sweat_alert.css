@@ -1339,7 +1339,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     align-items: center;
     justify-content: center;
     padding: .625em;
-    background: #f0f0f0;
+    background: #ff0707;
     color: #666;
     font-size: 1em;
     font-weight: 300;
@@ -1353,7 +1353,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     height: 1.5em;
     margin: 0 .625em;
     border-radius: 50%;
-    background-color: #f27474;
+    background-color: #ff0707;
     color: #fff;
     font-weight: 600;
     line-height: 1.5em;
