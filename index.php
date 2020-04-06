@@ -69,7 +69,11 @@ $site_title = $row_general_settings->site_title;
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}.header-menu .mainmenu ul li a {font-size: 15px;}</style>
 </head>
+<?php if(!isset($_SESSION['seller_user_name'])){ ?>
 <body class="home-content">
+<?php }else{ ?>
+<body class="all-content">
+<?php } ?>
 	<!-- Preloader Start -->
 	<div class="proloader">
 		<div class="loader">

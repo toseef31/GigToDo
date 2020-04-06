@@ -344,8 +344,17 @@ if(isset($_POST['submit'])){
       $site_email_address = $row_general_settings->site_email_address;
       $site_logo = $row_general_settings->site_logo;
 
-      $data = $input->post();
+      // $data = $input->post();
       unset($data['submit']);
+
+      $data['proposal_title'] = $input->post('proposal_title');
+      $data['proposal_desc'] = $input->post('proposal_desc');
+      $data['proposal_cat_id'] = $input->post('proposal_cat_id');
+      $data['proposal_child_id'] = $input->post('proposal_child_id');
+      $data['proposal_tags'] = $input->post('proposal_tags');
+      $data['proposal_price'] = $input->post('proposal_price');
+      $data['delivery_id'] = $input->post('delivery_id');
+      
       $data['proposal_url'] = $sanitize_url;
       $data['proposal_seller_id'] = $login_seller_id;
       $data['proposal_featured'] = "no";

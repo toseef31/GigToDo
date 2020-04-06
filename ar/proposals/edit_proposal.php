@@ -359,10 +359,10 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
           var current_section = $("input[type='hidden'][name='section']").val();
 
           if(data == "video"){
-            $('#tabs a[href="#pricing"]').addClass('d-none');
+            $('#package_tab"]').addClass('d-none');
             $('#tabs a[href="#video"]').removeClass('d-none');
           }else if(data == "not-video"){
-            $('#tabs a[href="#pricing"]').removeClass('d-none');
+            $('#package_tab"]').removeClass('d-none');
             $('#tabs a[href="#video"]').addClass('d-none');
           }
 

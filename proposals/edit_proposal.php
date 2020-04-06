@@ -343,17 +343,17 @@ $checkVideo = false;
     var section = $("input[type='hidden'][name='section']");
           var current_section = $("input[type='hidden'][name='section']").val();
           // alert(current_section);
-          // if(data == "video"){
-          //   $('#tabs a[href="#pricing"]').addClass('d-none');
-          //   $('#tabs a[href="#video"]').removeClass('d-none');
-          // }else if(data == "not-video"){
-          //   $('#tabs a[href="#pricing"]').removeClass('d-none');
-          //   $('#tabs a[href="#video"]').addClass('d-none');
-          // }
+          if(data == "video"){
+            $('#package_tab"]').addClass('d-none');
+            $('#tabs a[href="#video"]').removeClass('d-none');
+          }else if(data == "not-video"){
+            $('#package_tab"]').removeClass('d-none');
+            $('#tabs a[href="#video"]').addClass('d-none');
+          }
 
           if(current_section == "overview"){
             $('#overview').removeClass('show active');
-            // section.val("pricing");
+            section.val("pricing");
             <?php if($d_proposal_status == "draft"){ ?>
             $('#pricing').addClass('show active');
             $('#package_tab').addClass('active');
