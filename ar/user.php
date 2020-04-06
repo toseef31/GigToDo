@@ -93,6 +93,14 @@ $delivered = $db->count("orders",array("seller_id"=>$get_seller_id,"order_status
 
 $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
 
+if(!isset($_SESSION['seller_user_name'])){
+$update_profile_views = $db->query("update sellers set profile_views=profile_views+1 where seller_id='$get_seller_id'");
+}
+if(isset($_SESSION['seller_user_name'])){
+  if($get_seller_id != $login_seller_id ){
+  $update_profile_views = $db->query("update sellers set profile_views=profile_views+1 where seller_id='$get_seller_id'");
+  }
+}
 ?>
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" class="ui-toolkit">
@@ -206,8 +214,8 @@ $total_buyer = $db->count("orders",array("seller_id"=>$get_seller_id));
                     </ul>
                   <?php } }else{ ?>
                     <ul class="profile-btn pt-20">
-                      <li><a class="p-btn-1" href="<?= $site_url; ?>/ar/login">Contact me</a></li>
-                      <li><a class="p-btn-2" href="<?= $site_url; ?>/ar/login">حدد الطلب</a></li>
+                      <li><a class="p-btn-1" href="<?= $site_url; ?>/ar/register">Contact me</a></li>
+                      <li><a class="p-btn-2" href="<?= $site_url; ?>/ar/register">حدد الطلب</a></li>
                     </ul>
                   <?php }  ?>
                 <!-- <div class="setup-accunt-progressbar profile-progressbar">

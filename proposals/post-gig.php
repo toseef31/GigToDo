@@ -188,6 +188,9 @@ $login_seller_language = $row_login_seller->seller_language;
       transition: all 0.3s ease-in-out 0s;
       width: 250px;
     }
+    .header-top {
+      background-color: #fff;
+    }
   </style>
 </head>
 
@@ -314,7 +317,7 @@ $login_seller_language = $row_login_seller->seller_language;
                           </div>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
-                            <img alt="Ask our Community" class="img-fluid d-block" src="assets/img/post-a-gig/ask-our-community.png" width="100%" />
+                            <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                             <p>Set an appropriate budget for the quality and quantity of work you produce. Communicate your budget expectations to your buyers clearly from the start through to completion of your order.</p>
                           </div>
                         </div>

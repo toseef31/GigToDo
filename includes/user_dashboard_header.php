@@ -62,7 +62,7 @@
       <div class="row align-items-center">
         <div class="col-6 col-lg-4 col-md-3">
           <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
-            <a href="<?php echo $site_url; ?>">
+            <a href="<?php echo $site_url; ?>/dashboard">
               
               <?php if($site_logo_type == "image"){ ?>
               <img src="<?= $site_url; ?>/assets/img/<?= $site_sticky_logo; ?>">

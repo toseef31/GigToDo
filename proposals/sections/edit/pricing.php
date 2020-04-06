@@ -85,9 +85,10 @@ $('.back-to-overview').click(function(){
     $("input[type='hidden'][name='section']").val("overview");
     $('#pricing').removeClass('show active');
     $('#overview').addClass('show active');
-    $('#tabs a[href="#pricing"]').removeClass('active');
+    $('#package_tab').removeClass('active');
+    $('#overview_tab').addClass('active');
   <?php }else{ ?>
-    $('.nav a[href="#overview"]').tab('show');
+    $('#overview_tab').tab('show');
   <?php } ?>
 });
 

@@ -278,7 +278,7 @@ echo "<script>window.open('login','_self');</script>";
                                     <?php if($seller_verification != "ok"){ ?>
                                     <a class="dropdown-item" href="index?verify_email=<?= $seller_id; ?>">
 
-                                        <i class="fa fa-envelope"></i> Verify Seller Email
+                                        <i class="fa fa-envelope"></i> Verify User Email
 
                                     </a>
                                     <?php } ?>    

@@ -18,8 +18,8 @@ if (empty($form_data)) {
         عنوان الخدمة
       </span>
     </label>
-    <input class="form-control" type="text" name="proposal_title" value="هصمم لوجو الشركة ..." placeholder="I can..." />
-    <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_description']); ?></small>
+    <input class="form-control" type="text" name="proposal_title" value="" placeholder="هصمم لوجو الشركة ..." />
+    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_title']); ?></span>
     <!-- <label class="bottom-label text-right">
       0 \2500 حرف بحد أقصى
     </label> -->
@@ -98,7 +98,7 @@ if (empty($form_data)) {
               </div>
             </div>
           <?php } ?>
-          <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></small>
+          <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></span>
           <!-- <select class="form-control" name="child_id" required="" style="display: none;">
             
           </select> -->
@@ -155,6 +155,7 @@ if (empty($form_data)) {
           <textarea dir="rtl" rows="6" class="form-control" name="proposal_desc" placeholder="أدخل متطلبات الخدمة"></textarea>
         </div>
       </div>
+      <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_desc']); ?></span>
     </div>
     <label class="bottom-label text-right">
       <span class="descCount">0</span>-2500 حرف بحد أقصى
@@ -187,22 +188,41 @@ if (empty($form_data)) {
     </div>
   </div>
   <div class="form-group">
-    <div class="d-flex flex-column">
-      <!--- form-group row Starts --->
-      <label class="bottom-label">موعد التسليم</label>
-      <div class="d-flex flex-row mt-10 mb-10">
-        <select name="delivery_id" class="form-control wide" required="">
-          <?php
-          $get_delivery_times = $db->select("delivery_times");
-          while($row_delivery_times = $get_delivery_times->fetch()){
-          $delivery_id = $row_delivery_times->delivery_id;
-          $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
-          ?>
-          <option value="<?php echo $delivery_id; ?>" <?php if(@$form_data['delivery_id'] == $delivery_proposal_title){ echo "selected"; } ?>><?php echo $delivery_proposal_title; ?></option>
-          <?php } ?>
-        </select>
-      </div>
-      <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
+    <label class="control-label d-flex flex-row align-items-center">
+      <span>
+        <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
+      </span>
+      <span>متي سيتم تسليم العمل ؟</span>
+    </label>
+    <div class="deliver-time d-flex flex-wrap">
+      <?php
+      $get_delivery_times = $db->select("delivery_times");
+      while($row_delivery_times = $get_delivery_times->fetch()){
+      $delivery_id = $row_delivery_times->delivery_id;
+      $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+      ?>
+      <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
+        <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+        <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+          <span class="color-icon">
+            <span>-</span>
+            <span>+</span>
+          </span>
+          <span class="d-flex flex-row align-items-end time">
+            <span><?php echo $delivery_proposal_title; ?></span>
+            <!-- <span>HRS</span> -->
+          </span>
+        </div>
+      </label>
+      <?php } ?>
+    </div>
+    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></span>
+    <div class="popup">
+      <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
+      <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+      <p>
+          حدد مواعيد نهائية واقعية للشغل اللى بتنتجه. ممكن دايما تعدل الميعاد النهائى لتسليم شغلك. يُرجى انك تخلى المشترى يعرف لو اخترت تعمل كدة
+      </p>
     </div>
   </div>
   <!--- form-group row Ends --->
@@ -242,14 +262,22 @@ if (empty($form_data)) {
   <!--- form-group row Ends --->
   <?php } ?>
   <div class="form-group">
-    <div class="d-flex flex-column">
+    <label class="control-label d-flex flex-row align-items-center">
+      <!-- <span>
+        <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/create-gig-icon.png" />
+      </span> -->
+      <span class="pl-0">العلامات</span>
+    </label>
+    <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
+    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></span>
+    <!-- <div class="d-flex flex-column"> -->
       <!--- form-group row Starts --->
-      <label class="bottom-label">العلامات</label>
+      <!-- <label class="bottom-label">العلامات</label>
       <div class="d-flex flex-row mt-10 mb-10">
         <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
         <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
       </div>
-    </div>
+    </div> -->
   </div>
   <!--- form-group row Ends --->
   <div class="form-group mb-0">
@@ -284,9 +312,11 @@ if(isset($_POST['submit'])){
   "proposal_title" => "required",
   "proposal_cat_id" => "required",
   "proposal_child_id" => "required",
-  "proposal_tags" => "required",);
+  "proposal_tags" => "required",
+  "proposal_desc" => "required",
+  "delivery_id" => "required");
 
-  $messages = array("proposal_cat_id" => "you must need to select a category","proposal_child_id" => "you must need to select a child category","proposal_enable_referrals"=>"you must need to enable or disable proposal referrals.","proposal_img1"=>"Proposal Image 1 Is Required.");
+  $messages = array("proposal_title" => "you need to write gig title","proposal_cat_id" => "you must need to select a category","proposal_desc" => "you need to write proposal description","proposal_cat_id" => "you must need to select a category","proposal_child_id" => "you must need to select a child category","proposal_enable_referrals"=>"you must need to enable or disable proposal referrals.","proposal_img1"=>"Proposal Image 1 Is Required.");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){

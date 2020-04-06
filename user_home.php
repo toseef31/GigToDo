@@ -74,7 +74,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <div class="all-gigs-small mt-30">
             <div class="row">
               <?php
-                $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
+                $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
                 $count_proposals = $get_proposals->rowCount();
                 if($count_proposals == 0){
                     echo "
@@ -140,7 +140,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for Desktop -->
           <div class="row d-none d-lg-flex">
             <?php
-              $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
+              $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
               $count_proposals = $get_proposals->rowCount();
               if($count_proposals == 0){
                   echo "
@@ -217,7 +217,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <div class="all-gigs-small mt-30">
             <div class="row">
               <?php
-                $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
+                $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,9");
                 $count_proposals = $get_proposals->rowCount();
                 if($count_proposals == 0){
                     echo "
@@ -283,7 +283,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for Desktop -->
           <div class="row d-none d-lg-flex">
             <?php
-              $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
+              $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,9");
               $count_proposals = $get_proposals->rowCount();
               if($count_proposals == 0){
                   echo "
@@ -450,7 +450,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
               $topRatedWhere = "level_id='4' and proposal_status='active'";
               $query_where2 = "where proposal_id in ($topProposals) or ($topRatedWhere) ";
               }
-              $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,8");
+              $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,9");
               $count_proposals = $get_proposals->rowCount();
               if($count_proposals == 0){
                 echo "

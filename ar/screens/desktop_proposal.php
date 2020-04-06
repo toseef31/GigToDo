@@ -242,62 +242,30 @@
                     <!-- Each item -->
                   </div>
                   <!-- Package-item -->
+                  <?php
+                  $get_a = $db->select("package_attributes",array("package_id"=>$p_id_1));
+                  while($row_a = $get_a->fetch()){
+                  $a_id = $row_a->attribute_id;
+                  $a_name = $row_a->attribute_name;
+                  $a_value = $row_a->attribute_value;
+                  ?>
                   <div class="package-item d-flex flex-row">
                     <div class="package-item-single">
-                      <span class="title">الاستخدام التجارى</span>
+                      <span class="title"><?= $a_name; ?></span>
                     </div>
                     <!-- Each item -->
+                    <?php
+                    $get_v = $db->query("select * from package_attributes where proposal_id='$proposal_id' and attribute_name='$a_name' and not attribute_id='$a_id'");
+                    while($row_v = $get_v->fetch()){
+                    $value = $row_v->attribute_value;
+                    ?>
                     <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <i class="fal fa-check"></i>
+                      <p class="text-center"><?= $value; ?></p>
                     </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <i class="fal fa-check"></i>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <i class="fal fa-check"></i>
-                    </div>
+                    <?php } ?>
                     <!-- Each item -->
                   </div>
-                  <!-- Package-item -->
-                  <div class="package-item d-flex flex-row">
-                    <div class="package-item-single">
-                      <span class="title">موضوع البحث</span>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <i class="fal fa-check"></i>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <i class="fal fa-check"></i>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <i class="fal fa-check"></i>
-                    </div>
-                    <!-- Each item -->
-                  </div>
-                  <!-- Package-item -->
-                  <div class="package-item d-flex flex-row">
-                    <div class="package-item-single">
-                      <span class="title">الكلمات المتضمنة</span>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center">300</p>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center">1000</p>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center">2000</p>
-                    </div>
-                    <!-- Each item -->
-                  </div>
+                  <?php } ?>
                   <!-- Package-item -->
                   <div class="package-item d-flex flex-row">
                     <div class="package-item-single">
@@ -333,25 +301,6 @@
                     <!-- Each item -->
                     <div class="package-item-single d-flex align-items-center justify-content-center">
                       <p class="text-center"><?= $p_delivery_time_3; ?> Day</p>
-                    </div>
-                    <!-- Each item -->
-                  </div>
-                  <!-- Package-item -->
-                  <div class="package-item d-flex flex-row">
-                    <div class="package-item-single">
-                      <span class="title">مصدر الملف</span>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center">No</p>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center">Yes</p>
-                    </div>
-                    <!-- Each item -->
-                    <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center">Yes</p>
                     </div>
                     <!-- Each item -->
                   </div>
@@ -928,7 +877,7 @@ $(document).ready(function(){
 });
 $(function(){
       $('.owl-carousel').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: true,
         items: 4,

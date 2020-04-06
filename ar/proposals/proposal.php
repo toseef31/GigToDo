@@ -109,6 +109,7 @@ $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
+$login_user_type = $row_login_seller->account_type;
 if($proposal_seller_id != $login_seller_id ){
 $update_proposal_views = $db->query("update proposals set proposal_views=proposal_views+1 where proposal_id='$proposal_id'");
 }
@@ -222,7 +223,7 @@ $enableVideo = 0;
 		<?php if(!empty($site_favicon)){ ?>
 		<link rel="shortcut icon" href="../../images/<?= $site_favicon; ?>" type="image/x-icon">
 		<?php } ?>
-		<style>.owl-nav{display: block !important;}</style>
+		<style>.owl-nav{display: block !important;}.gigs-single .gigs-single-card .gigs-single-body .owl-carousel .owl-nav button{background-color: transparent;border: 0;}</style>
 	</head>
 	<body class="all-content">
 		<!-- Preloader Start -->

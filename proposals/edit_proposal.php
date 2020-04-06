@@ -248,6 +248,9 @@ $checkVideo = false;
           background-color: #ff0707;
           border-color: #ff0707;
         }
+        .header-top{
+          background-color: white;
+        }
     </style>
   </head>
   <body class="all-content">
@@ -328,7 +331,7 @@ $checkVideo = false;
     videoOrNotVideo = data;
     $('#wait').removeClass("loader");
     if(data == "error"){
-    swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
+    swal({type: 'warning',text: 'Please fill in the missing Details.'});
     }else if(data == "error_img"){
     swal({type: 'warning',text: 'You Must Need To Add At Least 1 Image In Proposal To Continue.'});
     }else if(data != "error" || data != "error_img"){
@@ -353,7 +356,9 @@ $checkVideo = false;
 
           if(current_section == "overview"){
             $('#overview').removeClass('show active');
+            $('#overview_tab').addClass('active');
             section.val("pricing");
+
             <?php if($d_proposal_status == "draft"){ ?>
             $('#pricing').addClass('show active');
             $('#package_tab').addClass('active');

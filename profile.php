@@ -339,7 +339,7 @@ $count_requests = $get_requests->rowCount();
                 <div class="managerequest">
                   <h3>Manage Request</h3>
                   <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
-                    <div class="managerequest-status d-flex flex-row align-items-center">
+                    <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                       <span>Show</span>
                       <div>
                         <select class="wide">
@@ -351,8 +351,8 @@ $count_requests = $get_requests->rowCount();
                           <option>Select Request status</option>
                         </select>
                       </div>
-                    </div>
-                    <div class="managerequest-pagination">
+                    </div> -->
+                    <!-- <div class="managerequest-pagination">
                       <ul class="pagination">
                         <li class="pagination-item">
                           <a class="pagination-link" href="javascript:void(0);">
@@ -374,7 +374,7 @@ $count_requests = $get_requests->rowCount();
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="mangaerequest-body">
                     <table class="table managerequest-table" cellpadding="0" cellspacing="0" border="0">
@@ -427,12 +427,14 @@ $count_requests = $get_requests->rowCount();
                               <?php }else{ ?>
                               <span> ----- </span>
                               <?php } ?>
+                              <?php if($_SESSION['seller_user_name'] != $seller_user_name){ ?>
                               <?php if($login_seller_offers == "0"){ ?>
                               <a class="send-offer send_button_<?= $request_id; ?>" data-toggle="modal" href="#quota-finish">Send offer</a>
                               <?php }else{ ?>
                               <button class="send-offer send_button_<?= $request_id; ?>">
                               Send Offer
                               </button>
+                              <?php } ?>
                               <?php } ?>
                             </div>
                           </td>
@@ -475,11 +477,11 @@ $count_requests = $get_requests->rowCount();
                           echo "<center><h4 class='pb-2 pt-2'>you still dont have any job requests <a class='edit-profile-button btn' href='requests/post-request.php'>Post a request</a></h4></center>";
                       } else {
                     ?>
-                    <center>
+                    <!-- <center>
                       <a href="requests/buyer_requests.php" class="btn edit-profile-button mb-3">
                       <i class="fa fa-spinner"></i> Load More
                       </a>
-                    </center>
+                    </center> -->
                     <?php } ?>
                   </div>
                 </div>
@@ -523,7 +525,7 @@ $count_requests = $get_requests->rowCount();
                     <div class="managerequest">
                       <h3>Manage Request</h3>
                       <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
-                        <div class="managerequest-status d-flex flex-row align-items-center">
+                        <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                           <span>Category</span>
                           <span>
                             <select class="wide">
@@ -535,8 +537,8 @@ $count_requests = $get_requests->rowCount();
                               <option>Category</option>
                             </select>
                           </span>
-                        </div>
-                        <div class="managerequest-pagination">
+                        </div> -->
+                        <!-- <div class="managerequest-pagination">
                           <ul class="pagination">
                             <li class="pagination-item">
                               <a class="pagination-link" href="javascript:void(0);">
@@ -558,7 +560,7 @@ $count_requests = $get_requests->rowCount();
                               </a>
                             </li>
                           </ul>
-                        </div>
+                        </div> -->
                       </div>
                       <div class="mangaerequest-body">
                         <table class="table managerequest-table" cellpadding="0" cellspacing="0" border="0">
