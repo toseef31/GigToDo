@@ -36,7 +36,7 @@ $child_title = $row_meta->child_title;
                         <span>Gig Title</span>
                       </label>
                       <input class="form-control" type="text" name="proposal_title" value="<?= $d_proposal_title; ?>" placeholder="I can..." />
-                      <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_description']); ?></small>
+                      <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_title']); ?></small>
                       <!-- <textarea name="proposal_title" rows="3" required="" placeholder="I Will" class="form-control"></textarea> -->
                       <!-- <label class="bottom-label text-right">0/2500 Chars Max</label> -->
                       <div class="popup">

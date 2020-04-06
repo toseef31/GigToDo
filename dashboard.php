@@ -16,7 +16,7 @@
   $login_seller_register_date = $row_login_seller->seller_register_date;
   $login_seller_image = $row_login_seller->seller_image;
   $login_seller_payouts = $row_login_seller->seller_payouts;
-
+  $login_seller_view = $row_login_seller->profile_views;
   if(empty($login_seller_country)){
     $login_seller_country = "&nbsp;";
   }
@@ -75,7 +75,19 @@
     $payout_date->add($interval);
     $p_date = $payout_date->format("F d, Y H:i A");
   }
+  $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+  $count_proposals = $select_proposals->rowCount();
+  if(!$count_proposals == 0){
+    $total_view = array();
+    while($row_proposals = $select_proposals->fetch()){
+      $proposal_views = $row_proposals->proposal_views;
+      array_push($total_view,$proposal_views);
+    }
+    $total_gigs_view = array_sum($total_view);
 
+  }else{
+   $total_gigs_view = "0"; 
+  }
 ?>
 <?php
 
@@ -228,7 +240,7 @@
                   <img src="assets/img/img/user.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>0 <span>Profile Views</span></h4>
+                  <h4><?= $login_seller_view; ?> <span>Profile Views</span></h4>
                 </div>
               </div>
             </div>
@@ -238,7 +250,7 @@
                   <img src="assets/img/img/clip.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>0 <span>Gig Views</span></h4>
+                  <h4><?= $total_gigs_view; ?> <span>Gig Views</span></h4>
                 </div>
               </div>
             </div>

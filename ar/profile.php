@@ -382,7 +382,7 @@ $count_requests = $get_requests->rowCount();
                   إدارة الطلب
                 </h3>
                 <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
-                  <div class="managerequest-status d-flex flex-row align-items-center">
+                  <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                     <span>
                       إظهار
                     </span>
@@ -408,8 +408,8 @@ $count_requests = $get_requests->rowCount();
                         </option>
                       </select>
                     </div>
-                  </div>
-                  <div class="managerequest-pagination">
+                  </div> -->
+                  <!-- <div class="managerequest-pagination">
                     <ul class="pagination">
                       <li class="pagination-item">
                         <a class="pagination-link" href="javascript:void(0);">
@@ -431,7 +431,7 @@ $count_requests = $get_requests->rowCount();
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="mangaerequest-body">
                   <table class="table managerequest-table" cellpadding="0" cellspacing="0" border="0">
@@ -499,12 +499,14 @@ $count_requests = $get_requests->rowCount();
                             <?php }else{ ?>
                             <span> ----- </span>
                             <?php } ?>
+                            <?php if($_SESSION['seller_user_name'] != $seller_user_name){ ?>
                             <?php if($login_seller_offers == "0"){ ?>
                             <a class="send-offer send_button_<?= $request_id; ?>" data-toggle="modal" href="#quota-finish">إرسال العرض</a>
                             <?php }else{ ?>
                             <button class="send-offer send_button_<?= $request_id; ?>">
                             إرسال العرض
                             </button>
+                            <?php } ?>
                             <?php } ?>
                           </div>
                         </td>
@@ -551,11 +553,11 @@ $count_requests = $get_requests->rowCount();
                         echo "<center><h4 class='pb-2 pt-2'>لا يزال لديك أي طلبات عمل  <a class='edit-profile-button btn' href='/ar/requests/post-request.php'>انشر أي طلب</a></h4></center>";
                     } else {
                   ?>
-                    <center>
+                    <!-- <center>
                       <a href="/ar/requests/buyer_requests.php" class="btn edit-profile-button mb-3">
                       <i class="fa fa-spinner"></i> تحميل المزيد
                       </a>
-                    </center>
+                    </center> -->
                   <?php } ?>
                 </div>
               </div>
@@ -601,7 +603,7 @@ $count_requests = $get_requests->rowCount();
                       إدارة الطلب
                     </h3>
                     <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
-                      <div class="managerequest-status d-flex flex-row align-items-center">
+                      <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                         <span>
                           إظهار
                         </span>
@@ -627,8 +629,8 @@ $count_requests = $get_requests->rowCount();
                             </option>
                           </select>
                         </div>
-                      </div>
-                      <div class="managerequest-pagination">
+                      </div> -->
+                      <!-- <div class="managerequest-pagination">
                         <ul class="pagination">
                           <li class="pagination-item">
                             <a class="pagination-link" href="javascript:void(0);">
@@ -650,7 +652,7 @@ $count_requests = $get_requests->rowCount();
                             </a>
                           </li>
                         </ul>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="mangaerequest-body">
                       <table class="table managerequest-table" cellpadding="0" cellspacing="0" border="0">

@@ -60,7 +60,7 @@
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
-            <a href="<?php echo $site_url; ?>">
+            <a href="<?php echo $site_url; ?>/dashboard">
               <?php if($site_logo_type == "image"){ ?>
               <img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt="" width="150">
               <?php }else{ ?>
@@ -121,7 +121,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png">
                 <?php } ?>
                 <!-- <img src="assets/img/menu-left-logo.png" alt=""> -->
               </div>

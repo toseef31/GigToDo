@@ -343,7 +343,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       videoOrNotVideo = data;
       $('#wait').removeClass("loader");
       if(data == "error"){
-        swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
+        swal({type: 'warning',text: 'Please fill in the missing Details.'});
       }else if(data == "error_img"){
         swal({type: 'warning',text: 'You Must Need To Add At Least 1 Image In Proposal To Continue.'});
       }else if(data != "error" || data != "error_img"){

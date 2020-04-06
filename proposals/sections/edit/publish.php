@@ -45,8 +45,8 @@ if($approve_proposals == "yes"){
               <form action="" method="post" class="create-gig">
                 <?php if($featured_proposal_while_creating == 1){ ?>
                   <?php if($featured_proposal != "yes"){ ?>
-                    <h1 class="h3">Make Proposal Featured (Optional)</h1>
-                    <h6 class="font-weight-normal line-height-normal">
+                    <h1 class="h3 d-none">Make Proposal Featured (Optional)</h1>
+                    <h6 class="font-weight-normal line-height-normal d-none">
                       Let your proposal appear on several places on <?PHP echo $site_name; ?><br>
                       Proposal will always be at the top section of search results <br>
                       WIth <?PHP echo $site_name; ?> feature, your proposal already has a 50% chance of getting ordered by potential buyers
@@ -58,9 +58,9 @@ if($approve_proposals == "yes"){
                     </h6>
                   <?php }} ?>
                   <div class="form-group mb-0">
-                    <div class="d-flex flex-row justify-content-center">
+                    <!-- <div class="d-flex flex-row justify-content-center d-none">
                       <a href="#" class="package-save" id="featured-button">Make Proposal Featured</a>
-                    </div>
+                    </div> -->
                     <div class="d-flex flex-row justify-content-center">
                       <input class="package-save" type="submit" name="submit_proposal" value="<?= $text; ?>">
                       <!-- <input class="package-save" type="submit" form="gallery_form" value="Save & Continue"> -->
