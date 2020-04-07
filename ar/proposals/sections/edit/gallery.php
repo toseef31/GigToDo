@@ -268,10 +268,10 @@
                     <div class="d-flex flex-row justify-content-center">
                       <input class="package-save" type="submit" form="gallery_form" value="                        حفظ واستمرار">
                     </div>
-                    <div class="d-flex flex-row justify-content-center">
+                    <!-- <div class="d-flex flex-row justify-content-center">
                       <a href="<?php echo $_SESSION["seller_user_name"]; ?>/<?php echo $d_proposal_url; ?>" id="previewProposal" class="package-save">اقتراح المعاينة</a>
-                      <!-- <input class="package-save" type="submit" form="gallery_form" value="Save & Continue"> -->
-                    </div>
+                      <input class="package-save" type="submit" form="gallery_form" value="Save & Continue">
+                    </div> -->
                     <div class="d-flex flex-row align-items-center justify-content-center backbuton backButton">
                       <span><i class="fal fa-long-arrow-left"></i></span>
                       <span>

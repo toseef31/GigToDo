@@ -42,6 +42,7 @@ if($videoPlugin == 1){
 $error = "";
 $proposal_id = strip_tags($input->post('proposal_id'));
 $data = $input->post();
+$data['proposal_date'] = date("F d, Y");
 unset($data['proposal_id']);
 
 if(isset($_POST['proposal_desc'])){

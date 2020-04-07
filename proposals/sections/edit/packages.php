@@ -265,7 +265,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 						</div>
 						<!-- Try it overlay -->
 					</div>
-					<div class="form-group row add-attribute justify-content-center">
+					<div class="form-group row add-attribute justify-content-center d-none">
 					  <div class="col-md-7">
 					    <div class="input-group">
 					      <input class="form-control form-control-sm attribute-name" placeholder="Add New Attribute" name="">

@@ -46,7 +46,7 @@ if($approve_proposals == "yes"){
               <form action="" method="post" class="create-gig">
                 <?php if($featured_proposal_while_creating == 1){ ?>
                 <?php if($featured_proposal != "yes"){ ?>
-                <h1 class="h3">Make Proposal Featured (Optional)</h1>
+                <!-- <h1 class="h3">Make Proposal Featured (Optional)</h1>
                 <h6 class="font-weight-normal line-height-normal">
                   Let your proposal appear on several places on <?PHP echo $site_name; ?><br>
                   Proposal will always be at the top section of search results <br>
@@ -56,12 +56,12 @@ if($approve_proposals == "yes"){
                       <input type="checkbox" name="proposal_featured" value="1" style="vertical-align:middle;margin-left: -1.25rem;"> Make Proposal Featured
                     </label>
                   </p>
-                </h6>
+                </h6> -->
                 <?php }} ?>
                 <div class="form-group mb-0">
-                  <div class="d-flex flex-row justify-content-center">
+                  <!-- <div class="d-flex flex-row justify-content-center">
                     <a href="#" class="package-save" id="featured-button">تقديم اقتراح مميز</a>
-                  </div>
+                  </div> -->
                   <div class="d-flex flex-row justify-content-center">
                     <input class="package-save" type="submit" name="submit_proposal" value="<?= $text; ?>">
                     <!-- <input class="package-save" type="submit" form="gallery_form" value="Save & Continue"> -->

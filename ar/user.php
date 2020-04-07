@@ -152,7 +152,7 @@ if(isset($_SESSION['seller_user_name'])){
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  
+  <style>.sub_cat .nice-select{display: none;}</style>
 </head>
 <body class="all-content">  
   <!-- Preloader Start -->
@@ -720,7 +720,24 @@ if(isset($_SESSION['seller_user_name'])){
                       اختر الفئة الفرعية
                     </option>
                     <?php 
-                    $get_cats = $db->select("categories");
+                    // $db->select("proposals",array("proposal_seller_id"=>$get_seller_id,"proposal_status" => "active"));
+                    $select_proposal = $db->query("select DISTINCT(proposal_cat_id) from proposals where proposal_seller_id = '$get_seller_id' AND proposal_status = 'active'");
+                    $i=0;
+                    $d_proposal_cat_id = array();
+
+                    while($row_proposal = $select_proposal->fetch()){
+                      $d_proposal_cat_id['proposal_cat_id'][] = $row_proposal->proposal_cat_id;
+                      $proposal[$i] =
+                        $row_proposal;
+
+                      $proposal_cat = array($proposal[0]->proposal_cat_id);
+                      
+                      
+                      $propsal_cats_id = ($d_proposal_cat_id['proposal_cat_id']);
+                      $cat_array = array_unique(($propsal_cats_id[$i]));
+
+
+                    $get_cats = $db->select("categories",array("cat_id" => $propsal_cats_id[$i]));
                     while($row_cats = $get_cats->fetch()){
                     $cat_id = $row_cats->cat_id;
                     $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
@@ -729,10 +746,10 @@ if(isset($_SESSION['seller_user_name'])){
                     $arabic_title = $row_meta->arabic_title;
                     ?>
                       <option value="<?= $cat_id; ?>"> <?= $arabic_title; ?> </option>
-                    <?php } ?>
+                    <?php $i++; } } ?>
                   </select>
                 </div>
-                <div class="col-12 col-sm-6 mb-30">
+                <div class="col-12 col-sm-6 mb-30 sub_cat">
                   <select class="form-control" name="child_id" id="sub-category" required="">
                     
                   </select>
@@ -765,7 +782,7 @@ if(isset($_SESSION['seller_user_name'])){
                   </div>
                 </label>
                 <?php } ?>
-                <label class="deliver-time-item" for="days30">
+                <!-- <label class="deliver-time-item" for="days30">
                   <input id="days30" type="radio" name="delivery_time" hidden />
                   <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                     <span class="color-icon">
@@ -777,7 +794,7 @@ if(isset($_SESSION['seller_user_name'])){
                       <input autofocus="autofocus" class="input-number" name="delivery_time" type="text" pattern="[0-30]" />
                     </span>
                   </div>
-                </label>
+                </label> -->
               </div>
             </div>
             <div class="form-group">

@@ -82,7 +82,7 @@ $child_title = $row_meta->child_title;
 	                      </select>
 	                    </div>
 
-                      <!-- <div class="gig-category d-flex flex-wrap align-items-start">
+                      <div class="gig-category d-flex flex-wrap align-items-start">
                         <?php 
                           $get_cats = $db->select("categories");
                           while($row_cats = $get_cats->fetch()){
@@ -95,7 +95,7 @@ $child_title = $row_meta->child_title;
                           
                         ?>
 
-                        <div class="gig-category-item">
+                        <!-- <div class="gig-category-item">
                           <?php
                             $get_cats = $db->select("categories");
                             while($row_cats = $get_cats->fetch()){
@@ -140,6 +140,7 @@ $child_title = $row_meta->child_title;
                             </div>
                           <?php } ?>
 
+                          
                           <div class="gig-category-tags"  id="sub-category" style="display: none;">
                             
                           </div>
@@ -151,11 +152,11 @@ $child_title = $row_meta->child_title;
                                   <span>Go Back</span>
                               </a>
                           </div>
-                        </div>
+                        </div> -->
                       <?php } ?>
                       <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></small>
 
-                      </div> -->
+                      </div>
                       <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -216,28 +217,60 @@ $child_title = $row_meta->child_title;
                     </div>
 
                     <div class="form-group">
-                      <div class="d-flex flex-column">
-                        <!--- form-group row Starts --->
-                        <label class="bottom-label">Delivery Time</label>
-                        <div class="d-flex flex-row mt-10 mb-10">
-                        	<select name="delivery_id" class="form-control wide" required="">
-                        	<option value="<?= $d_delivery_id; ?>">  <?= $delivery_proposal_title; ?> </option>
-                        	<?php 
-                        	$get_delivery_times = $db->query("select * from delivery_times where not delivery_id='$d_delivery_id'");
-                        	while($row_delivery_times = $get_delivery_times->fetch()){
-                        	$delivery_id = $row_delivery_times->delivery_id;
-                        	$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
-                        	echo "<option value='$delivery_id'>$delivery_proposal_title</option>";
-                        	}
-                        	?>
-                        	</select>
-                        </div>
-                        <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
+                      <label class="control-label d-flex flex-row align-items-center">
+                        <span>
+                          <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
+                        </span>
+                        <span>when will you deliver the work?</span>
+                      </label>
+                      <div class="deliver-time d-flex flex-wrap">
+                        <label class="deliver-time-item" for="hours<?= $d_delivery_id; ?>">
+                          <input id="hours<?= $d_delivery_id; ?>" type="radio" name="delivery_id" value="<?= $d_delivery_id; ?>" hidden required="" checked/>
+                          <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                            <span class="color-icon">
+                              <span>-</span>
+                              <span>+</span>
+                            </span>
+                            <span class="d-flex flex-row align-items-end time">
+                              <span><?= $delivery_proposal_title; ?></span>
+                              <!-- <span>HRS</span> -->
+                            </span>
+                          </div>
+                        </label>
+                        <?php 
+                        $get_delivery_times = $db->query("select * from delivery_times where not delivery_id='$d_delivery_id'");
+                        while($row_delivery_times = $get_delivery_times->fetch()){
+                        $delivery_id = $row_delivery_times->delivery_id;
+                        $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+                       
+                        ?>
+                        <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
+                          <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+                          <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                            <span class="color-icon">
+                              <span>-</span>
+                              <span>+</span>
+                            </span>
+                            <span class="d-flex flex-row align-items-end time">
+                              <span><?php echo $delivery_proposal_title; ?></span>
+                              <!-- <span>HRS</span> -->
+                            </span>
+                          </div>
+                        </label>
+                        <?php } ?>
+                      </div>
+                      <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
+                      <div class="popup">
+                        <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
+                        <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+                        <p>Set realistic deadlines for the work you produce. You can always edit your delivery deadline. Please let your buyer know in advance if you chose to do so.</p>
                       </div>
                     </div>
+
+                    
                     <!--- form-group row Ends --->
                     <?php if($enable_referrals == "yes"){ ?>
-                    <div class="form-group">
+                    <div class="form-group d-none">
                       <div class="d-flex flex-column">
                         <!--- form-group row Starts --->
                         <label class="bottom-label">Enable Referrals : </label>
@@ -257,7 +290,7 @@ $child_title = $row_meta->child_title;
                       </div>
                     </div>
                     <!--- form-group row Ends --->
-                    <div class="form-group proposal_referral_money">
+                    <div class="form-group proposal_referral_money d-none">
                       <div class="d-flex flex-column">
                         <!--- form-group row Starts --->
                         <label class="bottom-label">Promotion Commission: </label>
@@ -271,7 +304,7 @@ $child_title = $row_meta->child_title;
                     </div>
                     <!--- form-group row Ends --->
                     <?php } ?>
-                    <div class="form-group">
+                    <div class="form-group d-none">
                       <div class="d-flex flex-column">
                         <!--- form-group row Starts --->
                         <label class="bottom-label">Tags</label>

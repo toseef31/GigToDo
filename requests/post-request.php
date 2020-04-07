@@ -225,10 +225,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			require_once("../includes/buyer-header.php");
 		}
 		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
-		echo "
-		<div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 25rem;'>
+		echo "<main style='min-height:80%'>
+		<div class='alert alert-danger rounded-0 mt-0 text-center'>
 			Please confirm your email to use this feature.
-		</div>
+		</div></main>
 		";
 		}else{
 		?>

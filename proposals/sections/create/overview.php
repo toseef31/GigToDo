@@ -407,6 +407,7 @@ if(isset($_POST['submit'])){
       $data['level_id'] = $login_seller_level;
       $data['language_id'] = $login_seller_language;
       $data['proposal_status'] = "draft";
+      $data['proposal_date'] = date("F d, Y");
       $insert_proposal = $db->insert("proposals",$data);
 
       if($insert_proposal){

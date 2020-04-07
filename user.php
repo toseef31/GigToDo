@@ -106,6 +106,8 @@ if(isset($_SESSION['seller_user_name'])){
   $update_profile_views = $db->query("update sellers set profile_views=profile_views+1 where seller_id='$get_seller_id'");
   }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -726,7 +728,25 @@ if(isset($_SESSION['seller_user_name'])){
                   <select name="cat_id" id="category">
                     <option value="" class="hidden"> Select A Category </option>
                   <?php 
-                  $get_cats = $db->select("categories");
+                  // $db->select("proposals",array("proposal_seller_id"=>$get_seller_id,"proposal_status" => "active"));
+                  $select_proposal = $db->query("select DISTINCT(proposal_cat_id) from proposals where proposal_seller_id = '$get_seller_id' AND proposal_status = 'active'");
+                  $i=0;
+                  $d_proposal_cat_id = array();
+
+                  while($row_proposal = $select_proposal->fetch()){
+                    $d_proposal_cat_id['proposal_cat_id'][] = $row_proposal->proposal_cat_id;
+                    $proposal[$i] =
+                      $row_proposal;
+
+                    $proposal_cat = array($proposal[0]->proposal_cat_id);
+                    
+                    
+                    $propsal_cats_id = ($d_proposal_cat_id['proposal_cat_id']);
+                    $cat_array = array_unique(($propsal_cats_id[$i]));
+                   
+                  
+
+                  $get_cats = $db->select("categories",array("cat_id" => $propsal_cats_id[$i]));
                   while($row_cats = $get_cats->fetch()){
                   $cat_id = $row_cats->cat_id;
                   $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
@@ -734,7 +754,7 @@ if(isset($_SESSION['seller_user_name'])){
                   $cat_title = $row_meta->cat_title;
                   ?>
                     <option value="<?= $cat_id; ?>"> <?= $cat_title; ?> </option>
-                  <?php } ?>
+                  <?php $i++; } }?>
                   </select>
                 </div>
                 <div class="col-12 col-sm-6 mb-30 sub_cat">
