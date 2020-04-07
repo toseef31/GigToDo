@@ -53,7 +53,7 @@ $login_seller_language = $row_login_seller->seller_language;
     <link href="../styles/sweat_alert.css" rel="stylesheet">
     <link href="../styles/animate.css" rel="stylesheet">
     <link href="../styles/croppie.css" rel="stylesheet">
-    <link href="../styles/create-proposal.css" rel="stylesheet">
+    <!-- <link href="../styles/create-proposal.css" rel="stylesheet"> -->
     <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
     <script src="../js/ie.js"></script>
     <script type="text/javascript" src="../js/sweat_alert.js"></script>
@@ -187,10 +187,10 @@ $login_seller_language = $row_login_seller->seller_language;
     <?php
     require_once("../includes/user_header.php");
     if($seller_verification != "ok"){
-    echo "
-    <div class='alert alert-danger rounded-0 mt-0 text-center' style='margin-bottom: 25rem;'>
+    echo "<main style='min-height:80%'>
+    <div class='alert alert-danger rounded-0 mt-0 text-center'>
       Please confirm your email to use this feature.
-    </div>";
+    </div></main>";
     }else{
     ?>
 
@@ -376,21 +376,21 @@ $login_seller_language = $row_login_seller->seller_language;
     });
     });
     });
-    $('textarea[name="proposal_desc"]').summernote({
-    placeholder: 'Write Your Description Here.',
-    height: 150,
-    toolbar: [
-    ['style', ['style']],
-    ['font', ['bold', 'italic', 'underline', 'clear']],
-    ['fontname', ['fontname']],
-    ['fontsize', ['fontsize']],
-    ['height', ['height']],
-    ['color', ['color']],
-    ['para', ['ul', 'ol', 'paragraph']],
-    ['table', ['table']],
-    ['insert', ['link', 'picture']],
-    ],
-    });
+    // $('textarea[name="proposal_desc"]').summernote({
+    // placeholder: 'Write Your Description Here.',
+    // height: 150,
+    // toolbar: [
+    // ['style', ['style']],
+    // ['font', ['bold', 'italic', 'underline', 'clear']],
+    // ['fontname', ['fontname']],
+    // ['fontsize', ['fontsize']],
+    // ['height', ['height']],
+    // ['color', ['color']],
+    // ['para', ['ul', 'ol', 'paragraph']],
+    // ['table', ['table']],
+    // ['insert', ['link', 'picture']],
+    // ],
+    // });
     });
     </script>
     <?php } ?>

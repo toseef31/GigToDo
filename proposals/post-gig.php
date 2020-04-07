@@ -290,8 +290,9 @@ $login_seller_language = $row_login_seller->seller_language;
                             </span>
                             <span>What can you do?</span>
                           </label>
-                          <input class="form-control" type="text" name="proposal_title" placeholder="I can..." required="" />
-                          <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_description']); ?></small>
+                          <input class="form-control" id="proposal_title" type="text" name="proposal_title" placeholder="I can..." required="" />
+                          <span class="form-text text-danger" id="title_error">you must need to write gig title</span>
+                          <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_title']); ?></span>
                           <!-- <label class="bottom-label text-right"><span class="descCount">0</span>/2500 Chars Max</label> -->
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
@@ -313,8 +314,10 @@ $login_seller_language = $row_login_seller->seller_language;
                                 <option value="2">GBP</option>
                               </select>
                             </div>
-                            <input class="form-control" type="text" name="proposal_price" min="0" required="" />
+                            <input class="form-control" type="text" id="proposal_price" name="proposal_price" min="0" required="" />
                           </div>
+                          <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_price']); ?></span>
+                          <span class="form-text text-danger" id="price_error">you must need to write price</span>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -402,7 +405,8 @@ $login_seller_language = $row_login_seller->seller_language;
                               </div>
                             </div>
                           <?php } ?>
-                          <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></small>
+                          <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_cat_id']); ?></span>
+                          <span class="form-text text-danger" id="category_error">you need to select category</span>
                             <!-- Each item -->
                           </div>
                           <div class="popup">
@@ -420,8 +424,9 @@ $login_seller_language = $row_login_seller->seller_language;
                             </span>
                             <span>What do you need from the buyer to get started?</span>
                           </label>
-                          <textarea rows="6" class="form-control text-count" name="proposal_desc" placeholder="I need...." required=""></textarea>
+                          <textarea rows="6" id="proposal_desc" class="form-control text-count" name="proposal_desc" placeholder="I need...." required=""></textarea>
                           <label class="bottom-label text-right"><span class="descCount">0</span>/2500 Chars Max</label>
+                          <span class="form-text text-danger" id="desc_error">you need to write description</span>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -468,7 +473,7 @@ $login_seller_language = $row_login_seller->seller_language;
                         </div>
                         <!--- form-group row Ends --->
                         <?php if($enable_referrals == "yes"){ ?>
-                        <div class="form-group">
+                        <div class="form-group d-none">
                           <div class="d-flex flex-column">
                             <!--- form-group row Starts --->
                             <label class="bottom-label">Enable Referrals : </label>
@@ -488,7 +493,7 @@ $login_seller_language = $row_login_seller->seller_language;
                           </div>
                         </div>
                         <!--- form-group row Ends --->
-                        <div class="form-group proposal_referral_money">
+                        <div class="form-group proposal_referral_money d-none">
                           <div class="d-flex flex-column">
                             <!--- form-group row Starts --->
                             <label class="bottom-label">Promotion Commission: </label>
@@ -502,7 +507,7 @@ $login_seller_language = $row_login_seller->seller_language;
                         </div>
                         <!--- form-group row Ends --->
                         <?php } ?>
-                        <div class="form-group">
+                        <div class="form-group d-none">
                           <div class="d-flex flex-column">
                             <!--- form-group row Starts --->
                             <label class="bottom-label">Tags</label>
@@ -720,8 +725,7 @@ if(isset($_POST['publish'])){
             $rules = array(
             "proposal_title" => "required",
             "proposal_cat_id" => "required",
-            "proposal_child_id" => "required",
-            "proposal_tags" => "required",);
+            "proposal_child_id" => "required");
 
             $messages = array("proposal_cat_id" => "you must need to select a category","proposal_child_id" => "you must need to select a child category","proposal_enable_referrals"=>"you must need to enable or disable proposal referrals.");
             $val = new Validator($_POST,$rules,$messages);
@@ -792,7 +796,7 @@ if(isset($_POST['publish'])){
                 $data['proposal_desc'] = $input->post('proposal_desc');
                 $data['proposal_cat_id'] = $input->post('proposal_cat_id');
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
-                $data['proposal_tags'] = $input->post('proposal_tags');
+                // $data['proposal_tags'] = $input->post('proposal_tags');
                 $data['proposal_price'] = $input->post('proposal_price');
                 $data['delivery_id'] = $input->post('delivery_id');
                 
@@ -944,11 +948,99 @@ if(isset($_POST['publish'])){
         }
         });
       }
-
+        $('#title_error').hide();
+        $('#price_error').hide();
+        $('#category_error').hide();
+        $('#desc_error').hide();
         $('#next').click(function(){
-                $('#post_gig').removeClass('show active');
-                $('#publish_section').addClass('show active');
-                $('#publish_tab').addClass('active');
+          $('.form-field').each(function() {
+
+            if ( $('#proposal_desc').val() === '' && $('#proposal_price').val() === '' && $('#proposal_title').val() === '' ){
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('post-gig#publish_section','_self')
+              });
+              $('#title_error').show();
+              $('#price_error').show();
+              $('#category_error').show();
+              $('#desc_error').show();
+            }else if( $('#proposal_title').val() === ''){
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('post-gig#publish_section','_self')
+              });
+              $('#title_error').show();
+            }else if( $('#proposal_price').val() === '' && $('#proposal_title').val() != ''){
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('post-gig#publish_section','_self')
+              });
+              $('#price_error').show();
+              $('#title_error').hide();
+            }else if( $('.cat_value').val() === '' && $('#proposal_desc').val() != '' && $('#proposal_price').val() != '' && $('#proposal_title').val() != ''){
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('post-gig#publish_section','_self')
+              });
+              $('#title_error').hide();
+              $('#price_error').hide();
+              $('#category_error').show();
+              $('#desc_error').hide();
+            }else if( $('.cat_value').val() === '' && $('#proposal_desc').val() != '' && $('#proposal_price').val() != '' && $('#proposal_title').val() != ''){
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('post-gig#publish_section','_self')
+              });
+              $('#title_error').hide();
+              $('#price_error').hide();
+              $('#category_error').show();
+              $('#desc_error').hide();
+            }else if( $('#proposal_desc').val() === '' && $('#proposal_price').val() != '' && $('#proposal_title').val() != '' && $('.cat_value').val() != ''){
+              swal({
+              type: 'error',
+              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('post-gig#publish_section','_self')
+              });
+              $('#desc_error').show();
+              $('#title_error').hide();
+              $('#price_error').hide();
+              $('#category_error').hide();
+            }else{
+              $('#post_gig').removeClass('show active');
+              $('#publish_section').addClass('show active');
+              $('#publish_tab').addClass('active');
+            }
+
+                    //   if ( $(this).val() === '' ){
+                    //        isValid = false;
+                    //   }else{
+                        
+                    //   }
+                    });
+                
               });
         // function validateForm() {
         //   var isValid = true;

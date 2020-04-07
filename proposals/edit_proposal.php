@@ -448,10 +448,10 @@ $checkVideo = false;
     }
     });
     });
-    $('textarea[name="proposal_desc"]').summernote({
-    placeholder: 'Write Your Description Here.',
-    height: 200,
-    });
+    // $('textarea[name="proposal_desc"]').summernote({
+    // placeholder: 'Write Your Description Here.',
+    // height: 200,
+    // });
     });
     </script>
     <script>

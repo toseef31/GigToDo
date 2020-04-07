@@ -272,7 +272,7 @@ if($videoPlugin == 1){
       require_once("sections/editProposalNav.php"); 
     }
     ?>
-    <div class="container-fluid mt-5 mb-5"><!--- container mt-5 Starts --->
+    <div class="container-fluid postagig pt-0 border-top-0"><!--- container mt-5 Starts --->
       <div class="row"><!--- row Starts --->
         <div class="container">
           <div class="packages-container d-flex flex-column"><!--- col-md-8 Starts --->
@@ -464,10 +464,10 @@ $("#category").change(function(){
   });
 });
 
-$('textarea[name="proposal_desc"]').summernote({
-    placeholder: 'Write Your Description Here.',
-    height: 200,
- });
+// $('textarea[name="proposal_desc"]').summernote({
+//     placeholder: 'Write Your Description Here.',
+//     height: 200,
+//  });
 
 });
 </script>

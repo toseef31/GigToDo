@@ -5,9 +5,11 @@ $delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
 $get_meta = $db->select("cats_meta",array("cat_id" => $d_proposal_cat_id,"language_id" => $siteLanguage));
 $row_meta = $get_meta->fetch();
 $cat_title = $row_meta->cat_title;
+$arabic_title = $row_meta->arabic_title;
 $get_meta = $db->select("child_cats_meta",array("child_id"=>$d_proposal_child_id,"language_id"=>$siteLanguage));
 $row_meta = $get_meta->fetch();
 $child_title = $row_meta->child_title;
+$child_arabic_title = $row_meta->child_arabic_title;
 ?>
 <style>
 	#sub-category{
@@ -56,7 +58,7 @@ $child_title = $row_meta->child_title;
 									</label>
                   <div class="d-flex flex-column">
                     <select name="proposal_cat_id" id="category" class="form-control mb-3" required>
-                    <option value="<?= $d_proposal_cat_id; ?>" selected> <?= $cat_title; ?> </option>
+                    <option value="<?= $d_proposal_cat_id; ?>" selected> <?= $arabic_title; ?> </option>
                     <?php 
                     $get_cats = $db->query("select * from categories where not cat_id='$d_proposal_cat_id'");
                     while($row_cats = $get_cats->fetch()){
@@ -155,28 +157,60 @@ $child_title = $row_meta->child_title;
 									</div>
 								</div>
 								<div class="form-group">
-								  <div class="d-flex flex-column">
-								    <!--- form-group row Starts --->
-								    <label class="bottom-label">موعد التسليم</label>
-								    <div class="d-flex flex-row mt-10 mb-10">
-								    	<select name="delivery_id" class="form-control wide" required="">
-								    	<option value="<?= $d_delivery_id; ?>">  <?= $delivery_proposal_title; ?> </option>
-								    	<?php 
-								    	$get_delivery_times = $db->query("select * from delivery_times where not delivery_id='$d_delivery_id'");
-								    	while($row_delivery_times = $get_delivery_times->fetch()){
-								    	$delivery_id = $row_delivery_times->delivery_id;
-								    	$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
-								    	echo "<option value='$delivery_id'>$delivery_proposal_title</option>";
-								    	}
-								    	?>
-								    	</select>
-								    </div>
-								    <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
-								  </div>
-								</div>
+                  <label class="control-label d-flex flex-row align-items-center">
+                    <span>
+                      <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
+                    </span>
+                    <span>متي سيتم تسليم العمل ؟</span>
+                  </label>
+                  <div class="deliver-time d-flex flex-wrap">
+                    <label class="deliver-time-item" for="hours<?= $d_delivery_id; ?>">
+                      <input id="hours<?= $d_delivery_id; ?>" type="radio" name="delivery_id" value="<?= $d_delivery_id; ?>" hidden required="" checked/>
+                      <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                        <span class="color-icon">
+                          <span>-</span>
+                          <span>+</span>
+                        </span>
+                        <span class="d-flex flex-row align-items-end time">
+                          <span><?= $delivery_proposal_title; ?></span>
+                          <!-- <span>HRS</span> -->
+                        </span>
+                      </div>
+                    </label>
+                    <?php 
+                    $get_delivery_times = $db->query("select * from delivery_times where not delivery_id='$d_delivery_id'");
+                    while($row_delivery_times = $get_delivery_times->fetch()){
+                    $delivery_id = $row_delivery_times->delivery_id;
+                    $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+                   
+                    ?>
+                    <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
+                      <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+                      <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                        <span class="color-icon">
+                          <span>-</span>
+                          <span>+</span>
+                        </span>
+                        <span class="d-flex flex-row align-items-end time">
+                          <span><?php echo $delivery_proposal_title; ?></span>
+                          <!-- <span>HRS</span> -->
+                        </span>
+                      </div>
+                    </label>
+                    <?php } ?>
+                  </div>
+                  <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
+                  <div class="popup">
+                    <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
+                    <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+                    <p>
+							          حدد مواعيد نهائية واقعية للشغل اللى بتنتجه. ممكن دايما تعدل الميعاد النهائى لتسليم شغلك. يُرجى انك تخلى المشترى يعرف لو اخترت تعمل كدة
+							      </p>
+                  </div>
+                </div>
 								<!--- form-group row Ends --->
 								<?php if($enable_referrals == "yes"){ ?>
-								<div class="form-group">
+								<div class="form-group d-none">
 								  <div class="d-flex flex-column">
 								    <!--- form-group row Starts --->
 								    <label class="bottom-label">تمكين الإحالات: </label>
@@ -196,7 +230,7 @@ $child_title = $row_meta->child_title;
 								  </div>
 								</div>
 								<!--- form-group row Ends --->
-								<div class="form-group proposal_referral_money">
+								<div class="form-group proposal_referral_money d-none">
 								  <div class="d-flex flex-column">
 								    <!--- form-group row Starts --->
 								    <label class="bottom-label">لجنة الترويج: </label>
@@ -210,7 +244,7 @@ $child_title = $row_meta->child_title;
 								</div>
 								<!--- form-group row Ends --->
 								<?php } ?>
-								<div class="form-group">
+								<div class="form-group d-none">
 								  <div class="d-flex flex-column">
 								    <!--- form-group row Starts --->
 								    <label class="bottom-label">العلامات</label>

@@ -4208,7 +4208,7 @@ footer a:hover{
 
 .messagePopup{
     position: fixed;
-    bottom: 0;
+    top: 90px;
     right: 50px;
     z-index: 5000;
     font-size: 15px;
@@ -4224,6 +4224,9 @@ footer a:hover{
     box-shadow: 1px 1px 2px 1px #ccc !important;
     border-bottom: 0px;
 }
+.messagePopup .header-message-div img{
+	float: left;
+}
 .messagePopup .header-message-div.offer{
 	width:200%;
 }
@@ -4234,6 +4237,8 @@ footer a:hover{
 .messagePopup .message{
 	left: 10px;
 	width: auto;
+    margin-bottom: 0;
+    margin-left: 4rem;
 }
 .messagePopup .date{
 	left: 10px;
