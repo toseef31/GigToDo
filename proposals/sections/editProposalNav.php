@@ -5,7 +5,7 @@
     <div class="container">
       <div class="postgig-step-container">
         <div class="postgig-step-wrapper d-flex flex-row justify-content-between" role="tablist">
-          <div class="postgig-step-item <?php if(!isset($_GET['pricing']) AND !isset($_GET['video'])){ echo "active"; } ?>">
+          <div class="postgig-step-item active<?php if(!isset($_GET['video']) AND !isset($_GET['pricing']) and !isset($_GET['publish'])){ echo " show active"; } ?>" id="overview_tab">
             <div class="icon">
               <img alt="" class="icon-active" src="<?= $site_url; ?>/assets/img/post-a-gig/overview-icon-red.png" />
               <img alt="" class="icon-inactive" src="<?= $site_url; ?>/assets/img/post-a-gig/overview-icon-gray.png" />
@@ -27,7 +27,7 @@
             <div class="title">Packages</div>
           </div>
           <!-- Each item -->
-          <div class="postgig-step-item <?= (isset($_GET['publish']) ? "active" : ""); ?>">
+          <div class="postgig-step-item <?= (isset($_GET['publish']) ? "active" : ""); ?>" id="gallery_tab">
             <div class="icon">
               <img alt="" class="icon-active" src="<?= $site_url; ?>/assets/img/post-a-gig/gallery-icon-red.png" />
               <img alt="" class="icon-inactive" src="<?= $site_url; ?>/assets/img/post-a-gig/gallery-icon-gray.png" />

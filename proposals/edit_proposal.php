@@ -356,7 +356,6 @@ $checkVideo = false;
 
           if(current_section == "overview"){
             $('#overview').removeClass('show active');
-            $('#overview_tab').addClass('active');
             section.val("pricing");
 
             <?php if($d_proposal_status == "draft"){ ?>

@@ -26,7 +26,7 @@
                     </div>
                     <?php }else{ ?>
                     <div class="img">
-                    <img src="proposal_files/<?= $d_proposal_img1; ?>" class='img-fluid' alt="">
+                    <img src="../../proposals/proposal_files/<?= $d_proposal_img1; ?>" class='img-fluid' alt="">
                     <span><?= $lang['proposals']['remove']; ?></span>
                     <input type="hidden" name="proposal_img1" value="<?= $d_proposal_img1; ?>">
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                     <?php }else{ ?>
                     <div class="img">
-                    <img src="proposal_files/<?= $d_proposal_img2; ?>" class='img-fluid' alt="">
+                    <img src="../../proposals/proposal_files/<?= $d_proposal_img2; ?>" class='img-fluid' alt="">
                     <span><?= $lang['proposals']['remove']; ?></span>
                     <input type="hidden" name="proposal_img2" value="<?= $d_proposal_img2; ?>">
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                     <?php }else{ ?>
                     <div class="img">
-                    <img src="proposal_files/<?= $d_proposal_img3; ?>" class='img-fluid' alt="">
+                    <img src="../../proposals/proposal_files/<?= $d_proposal_img3; ?>" class='img-fluid' alt="">
                     <span><?= $lang['proposals']['remove']; ?></span>
                     <input type="hidden" name="proposal_img3" value="<?= $d_proposal_img3; ?>">
                     </div>
@@ -68,7 +68,7 @@
                     </div>
                     <?php }else{ ?>
                     <div class="img">
-                    <img src="proposal_files/<?= $d_proposal_img4; ?>" class='img-fluid' alt="">
+                    <img src="../../proposals/proposal_files/<?= $d_proposal_img4; ?>" class='img-fluid' alt="">
                     <span><?= $lang['proposals']['remove']; ?></span>
                     <input type="hidden" name="proposal_img4" value="<?= $d_proposal_img4; ?>">
                     </div>
@@ -495,7 +495,7 @@ $(document).ready(function(){
           main = $('input[type=hidden][name='+ name +']').parent();
           main.children("i,br,span").remove();
           main.addClass("img").removeClass("pic");
-          main.prepend("<img src='proposal_files/"+data+"' class='img-fluid'> <span><?= $lang['proposals']['remove']; ?></span>");
+          main.prepend("<img src='../../proposals/proposal_files/"+data+"' class='img-fluid'> <span><?= $lang['proposals']['remove']; ?></span>");
         }
       });
     });

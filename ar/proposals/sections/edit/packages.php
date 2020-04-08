@@ -14,7 +14,7 @@ $row_2 = $get_p_2->fetch();
 $get_p_3 = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance'));
 $row_3 = $get_p_3->fetch();
 
-$prices = array(5,10,15,20,25,50,60,70,80,90,100);
+$prices = array(5,10,15,20,25,50,60,70,80,90,100,120,130,150,170);
 $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 
 ?>

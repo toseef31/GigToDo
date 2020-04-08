@@ -175,7 +175,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 													<div class="small-gigs-item limerick d-flex flex-column">
 														<div class="small-gigs-item-header d-flex justify-content-between">
 															<div class="small-gigs-image">
-																<img class="img-fluid d-block" src="<?= $site_url; ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
+																<img class="img-fluid d-block" src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
 															</div>
 															<div class="small-gigs-content d-flex justify-content-between">
 																<div class="content d-flex flex-column justify-content-between">
@@ -276,7 +276,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
                       ?>
 											<div class="gig-item limerick d-flex flex-wrap align-items-start">
 												<div class="gig-item-image">
-													<img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
+													<img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
 												</div>
 												<div class="gig-item-content d-flex flex-column">
 													<div class="d-flex flex-row justify-content-between">
@@ -375,7 +375,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 													<div class="small-gigs-item selective-yellow d-flex flex-column">
 														<div class="small-gigs-item-header d-flex justify-content-between">
 															<div class="small-gigs-image">
-																<img class="img-fluid d-block" src="<?= $site_url; ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
+																<img class="img-fluid d-block" src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
 															</div>
 															<div class="small-gigs-content d-flex justify-content-between">
 																<div class="content d-flex flex-column justify-content-between">
@@ -476,7 +476,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	                    ?>
 											<div class="gig-item selective-yellow d-flex flex-wrap align-items-start">
 												<div class="gig-item-image">
-													<img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
+													<img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
 												</div>
 												<div class="gig-item-content d-flex flex-column">
 													<div class="d-flex flex-row justify-content-between">
@@ -576,7 +576,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 													<div class="small-gigs-item deep-sky-blue d-flex flex-column">
 														<div class="small-gigs-item-header d-flex justify-content-between">
 															<div class="small-gigs-image">
-																<img class="img-fluid d-block" src="<?= $site_url ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" />
+																<img class="img-fluid d-block" src="<?= $site_url ?>/proposals/proposal_files/<?= $proposal_img1 ?>" />
 															</div>
 															<div class="small-gigs-content d-flex justify-content-between">
 																<div class="content d-flex flex-column justify-content-between">
@@ -678,7 +678,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
                       ?>
 											<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
 												<div class="gig-item-image">
-													<img alt="" class="img-fluid d-block" src="../proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
+													<img alt="" class="img-fluid d-block" src="../../proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
 												</div>
 												<div class="gig-item-content d-flex flex-column">
 													<div class="d-flex flex-row justify-content-between">
@@ -778,7 +778,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 													<div class="small-gigs-item deep-sky-blue d-flex flex-column">
 														<div class="small-gigs-item-header d-flex justify-content-between">
 															<div class="small-gigs-image">
-																<img class="img-fluid d-block" src="<?= $site_url ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
+																<img class="img-fluid d-block" src="<?= $site_url ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
 															</div>
 															<div class="small-gigs-content d-flex justify-content-between">
 																<div class="content d-flex flex-column justify-content-between">
@@ -878,7 +878,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	                    ?>
 											<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
 												<div class="gig-item-image">
-													<img alt="" class="img-fluid d-block" src="<?= $site_url ?>/ar/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
+													<img alt="" class="img-fluid d-block" src="<?= $site_url ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
 												</div>
 												<div class="gig-item-content d-flex flex-column">
 													<div class="d-flex flex-row justify-content-between">
