@@ -227,7 +227,7 @@ if (empty($form_data)) {
   </div>
   <!--- form-group row Ends --->
   <?php if($enable_referrals == "yes"){ ?>
-  <div class="form-group">
+  <div class="form-group d-none">
     <div class="d-flex flex-column">
       <!--- form-group row Starts --->
       <label class="bottom-label">تمكين الإحالات: </label>
@@ -247,7 +247,7 @@ if (empty($form_data)) {
     </div>
   </div>
   <!--- form-group row Ends --->
-  <div class="form-group proposal_referral_money">
+  <div class="form-group proposal_referral_money d-none">
     <div class="d-flex flex-column">
       <!--- form-group row Starts --->
       <label class="bottom-label">لجنة الترويج: </label>
@@ -261,7 +261,7 @@ if (empty($form_data)) {
   </div>
   <!--- form-group row Ends --->
   <?php } ?>
-  <div class="form-group">
+  <div class="form-group d-none">
     <label class="control-label d-flex flex-row align-items-center">
       <!-- <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/create-gig-icon.png" />
@@ -312,7 +312,6 @@ if(isset($_POST['submit'])){
   "proposal_title" => "required",
   "proposal_cat_id" => "required",
   "proposal_child_id" => "required",
-  "proposal_tags" => "required",
   "proposal_desc" => "required",
   "delivery_id" => "required");
 
@@ -381,7 +380,7 @@ if(isset($_POST['submit'])){
       $data['proposal_desc'] = $input->post('proposal_desc');
       $data['proposal_cat_id'] = $input->post('proposal_cat_id');
       $data['proposal_child_id'] = $input->post('proposal_child_id');
-      $data['proposal_tags'] = $input->post('proposal_tags');
+      // $data['proposal_tags'] = $input->post('proposal_tags');
       $data['proposal_price'] = $input->post('proposal_price');
       $data['delivery_id'] = $input->post('delivery_id');
       

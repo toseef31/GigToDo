@@ -960,7 +960,10 @@ if(isset($_POST['publish'])){
         }
         });
       }
-
+        $('#title_error').hide();
+        $('#price_error').hide();
+        $('#category_error').hide();
+        $('#desc_error').hide();
         $('#next').click(function(){
           $('.form-field').each(function() {
 
