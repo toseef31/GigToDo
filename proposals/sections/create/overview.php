@@ -218,7 +218,7 @@ if (empty($form_data)) {
       $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
       ?>
       <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
-        <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+        <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden />
         <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
           <span class="color-icon">
             <span>-</span>
@@ -231,6 +231,19 @@ if (empty($form_data)) {
         </div>
       </label>
       <?php } ?>
+      <label class="deliver-time-item" for="days30">
+        <input id="days30" type="radio" name="delivery_id" class="time_select" hidden  />
+        <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+          <span class="color-icon">
+            <span>-</span>
+            <span>+</span>
+          </span>
+          <span class="d-flex flex-row align-items-end time">
+            <span>Custom</span>
+            <input autofocus="autofocus" class="input-number" type="text" />
+          </span>
+        </div>
+      </label>
     </div>
     <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></span>
     <div class="popup">
@@ -275,15 +288,13 @@ if (empty($form_data)) {
   </div>
   <!--- form-group row Ends --->
   <?php } ?>
-  <div class="form-group d-none">
+ <!--  <div class="form-group d-none">
     <label class="control-label d-flex flex-row align-items-center">
-      <!-- <span>
-        <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/create-gig-icon.png" />
-      </span> -->
+      
       <span class="pl-0">Tags</span>
     </label>
     <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
-    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></span>
+    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></span> -->
     <!-- <div class="d-flex flex-column"> -->
       <!--- form-group row Starts --->
       <!-- <label class="bottom-label d-flex flex-row">Tags</label> -->
@@ -292,7 +303,7 @@ if (empty($form_data)) {
         <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small> -->
       <!-- </div> -->
     <!-- </div> -->
-  </div>
+  <!-- </div> -->
   <!--- form-group row Ends --->
   <div class="form-group mb-0">
     <div class="d-flex flex-column">
@@ -308,6 +319,13 @@ if (empty($form_data)) {
   </div>
   
 </form>
+
+<script>
+  $('.input-number').keyup(function(){
+    var custom_btn = $('.input-number').val();
+    $('#days30').val(custom_btn);
+  });
+</script>
 <?php 
 
 function insertPackages($proposal_id){
@@ -327,7 +345,7 @@ if(isset($_POST['submit'])){
   "proposal_desc" => "required",
   "delivery_id" => "required");
 
-  $messages = array("proposal_title" => "you need to write gig title","proposal_cat_id" => "you must need to select a category","proposal_desc" => "you need to write proposal description","proposal_child_id" => "you must need to select a child category","proposal_enable_referrals"=>"you must need to enable or disable proposal referrals.","proposal_img1"=>"Proposal Image 1 Is Required.");
+  $messages = array("proposal_title" => "please gig title","proposal_cat_id" => "please select a category and subcategory","proposal_desc" => "please enter service requirements","proposal_child_id" => "please select a category and subcategory","proposal_img1"=>"Proposal Image 1 Is Required.");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){

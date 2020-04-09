@@ -290,7 +290,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             </span>
                             <span>ما الذي يمكنك عمل ؟</span>
                           </label>
-                          <input class="form-control" type="text" name="proposal_title" placeholder="I can..." required="" />
+                          <input class="form-control" type="text" id="proposal_title" name="proposal_title" placeholder="I can..." required="" />
                           <span class="form-text text-danger" id="title_error">يجب أن تكتب عنوان أزعج</span>
                           <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_description']); ?></small>
                           <!-- <label class="bottom-label text-right"><span class="descCount">0</span>/2500 Chars Max</label> -->
@@ -314,7 +314,7 @@ $login_seller_language = $row_login_seller->seller_language;
                                 <option value="2">GBP</option>
                               </select>
                             </div>
-                            <input class="form-control" type="text" name="proposal_price" min="0" required="" />
+                            <input class="form-control" type="text" id="proposal_price" name="proposal_price" min="0" required="" />
                           </div>
                           <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_price']); ?></span>
                           <span class="form-text text-danger" id="price_error">يجب عليك كتابة السعر</span>
@@ -427,7 +427,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             </span>
                             <span>ماذا تريد من المشتري للبدأ؟</span>
                           </label>
-                          <textarea rows="6" class="form-control text-count" name="proposal_desc" placeholder="I need...." required=""></textarea>
+                          <textarea rows="6" id="proposal_desc" class="form-control text-count" name="proposal_desc" placeholder="I need...." required=""></textarea>
                           <label class="bottom-label text-right"><span class="descCount">0</span>/2500 حرف بحد اقصى</label>
                           <span class="form-text text-danger" id="desc_error">تحتاج إلى كتابة وصف</span>
                           <div class="popup">
@@ -466,8 +466,22 @@ $login_seller_language = $row_login_seller->seller_language;
                               </div>
                             </label>
                             <?php } ?>
+                            <label class="deliver-time-item" for="days30">
+                              <input id="days30" type="radio" name="delivery_id" hidden  />
+                              <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+                                <span class="color-icon">
+                                  <span>-</span>
+                                  <span>+</span>
+                                </span>
+                                <span class="d-flex flex-row align-items-end time">
+                                  <span>مخصص</span>
+                                  <input autofocus="autofocus" class="input-number" type="text" />
+                                </span>
+                              </div>
+                            </label>
                           </div>
                           <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></small>
+                          <span class="form-text text-danger" id="time_error">يرجى تحديد أو إدخال الوقت</span>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -512,16 +526,15 @@ $login_seller_language = $row_login_seller->seller_language;
                         </div>
                         <!--- form-group row Ends --->
                         <?php } ?>
-                        <div class="form-group d-none">
+                        <!-- <div class="form-group d-none">
                           <div class="d-flex flex-column">
-                            <!--- form-group row Starts --->
                             <label class="bottom-label">العلامات</label>
                             <div class="d-flex flex-row mt-10 mb-10">
                               <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
                               <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <!--- form-group row Ends --->
                         <div class="form-group mb-0">
                           <a class="button btn" id="next">التالي</a>
@@ -897,7 +910,10 @@ if(isset($_POST['publish'])){
       $("#sub-category").hide();
       <?php } ?>
 
-      
+      $('.input-number').keyup(function(){
+        var custom_btn = $('.input-number').val();
+        $('#days30').val(custom_btn);
+      });
     });
 
       $(function(){
@@ -964,6 +980,7 @@ if(isset($_POST['publish'])){
         $('#price_error').hide();
         $('#category_error').hide();
         $('#desc_error').hide();
+        $('#time_error').hide();
         $('#next').click(function(){
           $('.form-field').each(function() {
 
@@ -980,6 +997,7 @@ if(isset($_POST['publish'])){
               $('#price_error').show();
               $('#category_error').show();
               $('#desc_error').show();
+              $('#time_error').show();
             }else if( $('#proposal_title').val() === ''){
               swal({
               type: 'error',
@@ -1045,8 +1063,15 @@ if(isset($_POST['publish'])){
               $('#publish_section').addClass('show active');
               $('#publish_tab').addClass('active');
             }
-          });        
-        });
+
+                    //   if ( $(this).val() === '' ){
+                    //        isValid = false;
+                    //   }else{
+                        
+                    //   }
+                    });
+                
+              });
         // function validateForm() {
         //   var isValid = true;
         //   $('.form-field').each(function() {

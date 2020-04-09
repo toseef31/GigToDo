@@ -190,6 +190,14 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				    display: -ms-flexbox;
 				    display: flex;
 				}
+				#file_name span{
+					width: 130px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					display: inline-block;
+			    direction: rtl;
+				}
 				@media(min-width: 767px){
 					.page-height{
 						position: relative;
@@ -234,19 +242,19 @@ $relevant_requests = $row_general_settings->relevant_requests;
 							<div class="col-12 col-lg-8">
 								<div class="row">
 									<div class="col-12 col-md-8">
-										<?php 
+										<!-- <?php 
 										$form_errors = Flash::render("form_errors");
 										$form_data = Flash::render("form_data");
 										if(is_array($form_errors)){
 										?>
-										<div class="alert alert-danger"><!--- alert alert-danger Starts --->
+										<div class="alert alert-danger">
 										<ul>
 											<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
 											<li><?= $i ?>. <?= ucfirst($error); ?></li>
 											<?php } ?>
 										</ul>
-										</div><!--- alert alert-danger Ends --->
-										<?php } ?>
+										</div>
+										<?php } ?> -->
 										<form action="" class="create-request" method="post" enctype="multipart/form-data">
 											<div class="form-group">
 												<label class="control-label d-flex flex-row align-items-center">
@@ -255,7 +263,15 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													</span>
 													<span>عنوان طلبك</span>
 												</label>
-												<input type="text" name="request_title" placeholder="طلب عنوان...." class="form-control input-lg" required="" value="<?= $form_data['request_title']; ?>">
+												<input type="text" name="request_title" placeholder="طلب عنوان...." class="form-control input-lg" value="<?= $form_data['request_title']; ?>">
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_title']); ?></span>
+												<div class="popup">
+													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
+													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+													<p>
+														اكتب عنوان عملك. كلما كنت أكثر تحديدًا ، كلما كان العمل الذي يمكن أن يقوم به صاحب العمل المستقل لك أكثر دقة.
+													</p>
+												</div>
 											</div>
 											<div class="form-group">
 												<label class="control-label d-flex flex-row align-items-center">
@@ -266,6 +282,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												</label>
 
 												<textarea class="form-control" name="request_description" id="textarea" placeholder="أنا بدور على...." rows="5"><?= $form_data['request_description']; ?></textarea>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_description']); ?></span>
 												<div class="bottom-label d-flex flex-row align-items-center justify-content-between mt-15">
 													<div class="attach-file d-flex flex-row align-items-center">
 														<label for="file">
@@ -275,6 +292,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 																<span>أرفق ملف</span>
 															</span>
 														</label>
+														<span id="file_name"></span>
 														<span class="max-size">بحد اقصي 30 ميجا</span>
 													</div>
 													<span class="chars-max"><span class="descCount">0</span>\2500 حرف بحد أقصى</span>
@@ -382,6 +400,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<!-- </label> -->
 													<!-- Each item -->
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['cat_id']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -418,7 +437,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 														</div>
 													</label>
 													<?php } ?>
-													<label class="deliver-time-item" for="days30">
+													<label class="deliver-time-item" id="custom_time_label" for="days30">
 														<input id="days30" type="radio" name="delivery_time" hidden />
 														<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 															<span class="color-icon">
@@ -427,11 +446,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 															</span>
 															<span class="d-flex flex-row align-items-end time">
 																<span>مخصص</span>
-																<input autofocus="autofocus" class="input-number" type="text" name="delivery_time" pattern="[0-9]" />
+																<input autofocus="autofocus" class="input-number" type="text" />
 															</span>
 														</div>
 													</label>
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_time']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -448,8 +468,9 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<span>ايه هي المهارات المطلوبة ؟</span>
 												</label>
 												<div class="postarequest-tags">
-													<input type="text" name="skills_required" data-role="tagsinput" value="HTML,PHP,Website Design,Graphic Design">
+													<input type="text" name="skills_required" data-role="tagsinput" value="">
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['skills_required']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -464,8 +485,9 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<span>اللغات</span>
 												</label>
 												<div class="postarequest-tags">
-													<input type="text" name="languages" data-role="tagsinput" value="English, German">
+													<input type="text" name="languages" data-role="tagsinput" value="">
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['languages']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -488,6 +510,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													</div>
 													<input class="form-control" type="number" name="request_budget" value="<?= $form_data['request_budget']; ?>" />
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_budget']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -500,25 +523,25 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											<?php if(!isset($_SESSION['seller_user_name'])){ ?>
 											<!-- Register Form -->
 											<div class="post-register-form register-form" style="display: none;">
-												<?php 
+												<!-- <?php 
 												  $form_errors = Flash::render("register_errors");
 												  $form_data = Flash::render("form_data");
 												  if(is_array($form_errors)){
 												  ?>
 												<div class="alert alert-danger">
-												  <!--- alert alert-danger Starts --->
 												  <ul class="list-unstyled mb-0">
 												    <?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
 												    <li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
 												    <?php } ?>
 												  </ul>
 												</div>
-								        <?php } ?>
+								        <?php } ?> -->
 
 												<h4>الاشتراك كمشتري</h4>
 												<div class="form-group">
 													<label class="control-label"><span>الاسم الكامل</span></label>
 													<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="" />
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>اسم المستخدم</span></label>
@@ -527,15 +550,18 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 													<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 													<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>عنوان بريدك الإلكتروني</span></label>
 													<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="">
 				            			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+				            			<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>الباسوورد</span></label>
 													<input class="form-control" type="password" name="pass" placeholder="Enter Password"/>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 												</div>
 												<p>عندك حساب أصلا ؟ <a href="javascript:void(0);" id="showLogin">الدخول</a></p>
 											</div>
@@ -545,10 +571,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												<div class="form-group">
 													<label class="control-label"><span>اسم المستخدم</span></label>
 													<input class="form-control" type="text" placeholder="ادخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>الباسوورد</span></label>
 													<input class="form-control" type="password" name="seller_pass" placeholder="الباسوورد"/>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
 												</div>
 												<p>ماعندكش حساب؟ <a href="javascript:void(0);" id="showRegister">سجل</a></p>
 											</div>
@@ -725,6 +753,28 @@ $(document).ready(function(){
 	// 	}
 	// 	});
 	// });
+	$('#file').change(function() {
+
+	  var i = $(this).prev('label').clone();
+	  var file = $('#file')[0].files[0].name;
+	  
+	  $('#file_name').html('<span>'+file+'</span>');
+	  // $(this).prev('label').text(file);
+	});
+	$('#file').bind('change', function() {
+    var totalSize = this.files[0].size;
+    var totalSizeMb = totalSize  / Math.pow(1024,2);
+
+    $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+	});
+
+	$('.input-number').keyup(function(){
+		var custom_btn = $('.input-number').val();
+		$('#days30').val(custom_btn);
+	});
+		
+
+
 
 });
 function categoryItem(id){
@@ -767,7 +817,7 @@ if(isset($_POST['submit'])){
 				"seller_user_name" => "required",
 				"seller_pass" => "required"
 				);
-				$messages = array("seller_user_name" => "Username Is Required.","seller_pass" => "Password Is Required.");
+				$messages = array("seller_user_name" => "اسم المستخدم مطلوب.","seller_pass" => "كلمة المرور مطلوبة.");
 
 				$val = new Validator($_POST,$rules,$messages);
 
@@ -837,8 +887,10 @@ if(isset($_POST['submit'])){
 				          "request_title" => "required",
 				          "request_description" => "required",
 				          "cat_id" => "required",
-				          "request_budget" => "number|required");
-				          $messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+				          "request_budget" => "number|required",
+				        	"skills_required" => "required",
+				        	"languages" => "required");
+				          $messages = array("cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 				          $val = new Validator($_POST,$rules,$messages);
 				          if($val->run() == false){
 				          	Flash::add("form_errors",$val->get_all_errors());
@@ -900,7 +952,7 @@ if(isset($_POST['submit'])){
 				"email" => "email|required",
 				"pass" => "required");
 
-				$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.");
+				$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.", "email" => "البريد الالكتروني مطلوب");
 				$val = new Validator($_POST,$rules,$messages);
 
 				if($val->run() == false){
@@ -984,11 +1036,14 @@ if(isset($_POST['submit'])){
 							  }
 
 								$rules = array(
-								"request_title" => "required",
-								"request_description" => "required",
-								"cat_id" => "required",
-								"request_budget" => "number|required");
-								$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+								  "request_title" => "required",
+								  "request_description" => "required",
+								  "cat_id" => "required",
+								  "request_budget" => "number|required",
+									
+									"skills_required" => "required",
+									"languages" => "required");
+								  $messages = array("cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 								$val = new Validator($_POST,$rules,$messages);
 								if($val->run() == false){
 									Flash::add("form_errors",$val->get_all_errors());
@@ -1062,11 +1117,14 @@ if(isset($_POST['submit'])){
 	}else{
 
 		$rules = array(
-		"request_title" => "required",
-		"request_description" => "required",
-		"cat_id" => "required",
-		"request_budget" => "number|required");
-		$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+			"request_title" => "required",
+		  "request_description" => "required",
+		  "cat_id" => "required",
+		  "request_budget" => "number|required",
+			
+			"skills_required" => "required",
+			"languages" => "required");
+		  $messages = array("cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 		$val = new Validator($_POST,$rules,$messages);
 		if($val->run() == false){
 			Flash::add("form_errors",$val->get_all_errors());

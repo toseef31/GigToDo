@@ -6,8 +6,8 @@
 						<div class="postgig-step-wrapper d-flex flex-row justify-content-between">
 							<div class="postgig-step-item active <?php if(!isset($_GET['video']) AND !isset($_GET['pricing']) and !isset($_GET['publish'])){ echo " show active"; } ?>" id="overview_tab">
 								<div class="icon">
-									<img alt="" class="icon-active" src="assets/img/post-a-gig/overview-icon-red.png" />
-									<img alt="" class="icon-inactive" src="assets/img/post-a-gig/overview-icon-gray.png" />
+									<img alt="" class="icon-active" src="<?= $site_url; ?>/assets/img/post-a-gig/overview-icon-red.png" />
+									<img alt="" class="icon-inactive" src="<?= $site_url; ?>/assets/img/post-a-gig/overview-icon-gray.png" />
 								</div>
 								<div class="step">
 									<span>1</span>
@@ -19,8 +19,8 @@
 							<!-- Each item -->
 							<div class="postgig-step-item <?php if(isset($_GET['pricing']) or isset($_GET['publish'])){ echo "active"; } ?>" id="package_tab">
 								<div class="icon">
-									<img alt="" class="icon-active" src="assets/img/post-a-gig/packages-icon-red.png" />
-									<img alt="" class="icon-inactive" src="assets/img/post-a-gig/packages-icon-gray.png" />
+									<img alt="" class="icon-active" src="<?= $site_url; ?>/assets/img/post-a-gig/packages-icon-red.png" />
+									<img alt="" class="icon-inactive" src="<?= $site_url; ?>/assets/img/post-a-gig/packages-icon-gray.png" />
 								</div>
 								<div class="step">
 									<span>2</span>
@@ -32,8 +32,8 @@
 							<!-- Each item -->
 							<div class="postgig-step-item <?= (isset($_GET['publish']) ? "active" : ""); ?>" id="gallery_tab">
 								<div class="icon">
-									<img alt="" class="icon-active" src="assets/img/post-a-gig/gallery-icon-red.png" />
-									<img alt="" class="icon-inactive" src="assets/img/post-a-gig/gallery-icon-gray.png" />
+									<img alt="" class="icon-active" src="<?= $site_url; ?>/assets/img/post-a-gig/gallery-icon-red.png" />
+									<img alt="" class="icon-inactive" src="<?= $site_url; ?>/assets/img/post-a-gig/gallery-icon-gray.png" />
 								</div>
 								<div class="step">
 									<span>3</span>

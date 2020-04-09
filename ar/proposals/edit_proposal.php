@@ -28,6 +28,7 @@ $d_proposal_img2 = $row_proposal->proposal_img2;
 $d_proposal_img3 = $row_proposal->proposal_img3;
 $d_proposal_img4 = $row_proposal->proposal_img4;
 $d_delivery_id = $row_proposal->delivery_id;
+// print_r($d_delivery_id);
 $d_proposal_enable_referrals = $row_proposal->proposal_enable_referrals;
 $d_proposal_referral_money = $row_proposal->proposal_referral_money;
 $d_proposal_status = $row_proposal->proposal_status;

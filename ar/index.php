@@ -65,6 +65,16 @@ $site_title = $row_general_settings->site_title;
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}</style>
+	<style>
+		.messagePopup {
+		    position: fixed;
+		    top: 90px;
+		    right: 0px;
+		    z-index: 5000;
+		    font-size: 15px;
+		    direction: rtl;
+		}
+	</style>
 </head>
 <body class="all-content">
 	<!-- Preloader Start -->

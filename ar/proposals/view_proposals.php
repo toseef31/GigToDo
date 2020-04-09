@@ -137,7 +137,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 											<?php
 									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'modification'));
 										?>
-										<a class="nav-item nav-link deep-sky-blue" id="modification-tab" data-toggle="tab" href="#nav-modification" role="tab" aria-controls="nav-modification" aria-selected="false">تعديل <span class="badge bg-dark"><?php echo $count_proposals; ?></span></a>
+										<a class="nav-item nav-link deep-red" id="modification-tab" data-toggle="tab" href="#nav-modification" role="tab" aria-controls="nav-modification" aria-selected="false">تعديل <span class="badge"><?php echo $count_proposals; ?></span></a>
 										</div>
 									</nav>
 								</div>
@@ -775,7 +775,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 													$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
 	                      ?>
 												<div class="col-12">
-													<div class="small-gigs-item deep-sky-blue d-flex flex-column">
+													<div class="small-gigs-item deep-red d-flex flex-column">
 														<div class="small-gigs-item-header d-flex justify-content-between">
 															<div class="small-gigs-image">
 																<img class="img-fluid d-block" src="<?= $site_url ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
@@ -876,7 +876,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 	                      $proposal_featured = $row_proposals->proposal_featured;
 												$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
 	                    ?>
-											<div class="gig-item deep-sky-blue d-flex flex-wrap align-items-start">
+											<div class="gig-item deep-red d-flex flex-wrap align-items-start">
 												<div class="gig-item-image">
 													<img alt="" class="img-fluid d-block" src="<?= $site_url ?>/proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
 												</div>

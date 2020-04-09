@@ -165,7 +165,12 @@ $child_arabic_title = $row_meta->child_arabic_title;
                   </label>
                   <div class="deliver-time d-flex flex-wrap">
                     <label class="deliver-time-item" for="hours<?= $d_delivery_id; ?>">
-                      <input id="hours<?= $d_delivery_id; ?>" type="radio" name="delivery_id" value="<?= $d_delivery_id; ?>" hidden required="" checked/>
+                      <?php 
+                      	if($delivery_proposal_title == ''){
+                      		$delivery_proposal_title = $d_delivery_id;
+                      	}
+                      ?>
+                      <input id="hours<?= $d_delivery_id; ?>" type="radio" name="delivery_id" value="<?= $d_delivery_id; ?>" hidden checked/>
                       <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                         <span class="color-icon">
                           <span>-</span>
@@ -185,7 +190,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
                    
                     ?>
                     <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
-                      <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+                      <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden />
                       <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                         <span class="color-icon">
                           <span>-</span>
@@ -244,16 +249,15 @@ $child_arabic_title = $row_meta->child_arabic_title;
 								</div>
 								<!--- form-group row Ends --->
 								<?php } ?>
-								<div class="form-group d-none">
+								<!-- <div class="form-group d-none">
 								  <div class="d-flex flex-column">
-								    <!--- form-group row Starts --->
 								    <label class="bottom-label">العلامات</label>
 								    <div class="d-flex flex-row mt-10 mb-10">
 								      <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput" value="<?= $d_proposal_tags; ?>">
 								      <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
 								    </div>
 								  </div>
-								</div>
+								</div> -->
 								<!--- form-group row Ends --->
 								<div class="form-group mb-0">
 									<div class="d-flex flex-column">

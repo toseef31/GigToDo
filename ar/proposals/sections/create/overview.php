@@ -202,7 +202,7 @@ if (empty($form_data)) {
       $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
       ?>
       <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
-        <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+        <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden />
         <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
           <span class="color-icon">
             <span>-</span>
@@ -215,6 +215,19 @@ if (empty($form_data)) {
         </div>
       </label>
       <?php } ?>
+      <label class="deliver-time-item" for="days30">
+        <input id="days30" type="radio" name="delivery_id" hidden  />
+        <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+          <span class="color-icon">
+            <span>-</span>
+            <span>+</span>
+          </span>
+          <span class="d-flex flex-row align-items-end time">
+            <span>مخصص</span>
+            <input autofocus="autofocus" class="input-number" type="text" />
+          </span>
+        </div>
+      </label>
     </div>
     <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_id']); ?></span>
     <div class="popup">
@@ -294,7 +307,12 @@ if (empty($form_data)) {
   </div>
 </form>
 
-
+<script>
+  $('.input-number').keyup(function(){
+    var custom_btn = $('.input-number').val();
+    $('#days30').val(custom_btn);
+  });
+</script>
 
 <?php 
 
@@ -315,7 +333,7 @@ if(isset($_POST['submit'])){
   "proposal_desc" => "required",
   "delivery_id" => "required");
 
-  $messages = array("proposal_title" => "you need to write gig title","proposal_cat_id" => "you must need to select a category","proposal_desc" => "you need to write proposal description","proposal_cat_id" => "you must need to select a category","proposal_child_id" => "you must need to select a child category","proposal_enable_referrals"=>"you must need to enable or disable proposal referrals.","proposal_img1"=>"Proposal Image 1 Is Required.");
+  $messages = array("proposal_title" => "يرجى إدخال عنوان أزعج","proposal_cat_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_desc" => "الرجاء إدخال متطلبات الخدمة","proposal_child_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_img1"=>"صورة الاقتراح 1 مطلوبة.");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){

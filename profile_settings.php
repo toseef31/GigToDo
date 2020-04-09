@@ -22,6 +22,116 @@
 <!--- alert alert-danger Ends --->
 <?php } ?>
 <form method="post" enctype="multipart/form-data" runat="server" autocomplete="off">
+  <div class="edit-profile-image">
+    <label class="cover-image-label" for="cover-image">
+      <input type="file" id="cover-image" name="cover-image" hidden />
+      <div class="icontext d-flex flex-row align-items-center justify-content-center">
+        <span>
+          <img class="img-fluid d-block" src="assets/img/edit-profile/pen-icon.png" />
+        </span>
+        <span>Edit Cover Image</span>
+      </div>
+    </label>
+    <label class="profile-image" for="profile-image">
+      <input type="file" id="profile-image" name="profile_photo" class="form-control" hidden="">
+      <input type="hidden" name="profile_photo">
+      <?php if(!empty($login_seller_image)){ ?>
+      <img src="user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
+      <?php }else{ ?>
+      <img class="img-fluid d-block" src="assets/img/emongez_cube.png" />
+      <?php } ?>
+
+      <!-- <input type="file" id="profile-image" name="profile-image" hidden /> -->
+      <!-- <img class="img-fluid d-block" src="assets/img/emongez_cube.png" /> -->
+      <img class="img-fluid d-block pen-icon" src="assets/img/edit-profile/pen-icon.png" />
+    </label>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column">
+        <label class="control-label">Full Name</label>
+        <input class="form-control" type="text" name="seller_name" value="<?php echo $login_seller_name; ?>" />
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column">
+        <label class="control-label">Email</label>
+        <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" />
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column">
+        <label class="control-label">Country</label>
+        <select class="wide" name="seller_country" required="">
+          <?php
+            $get_countries = $db->select("countries");
+            while($row_countries = $get_countries->fetch()){
+              $id = $row_countries->id;
+              $name = $row_countries->name;
+              echo "<option value='$name'".($name == $login_seller_country ? "selected" : "").">$name</option>";
+            }
+            ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column">
+        <label class="control-label">Timezone</label>
+        <select class="wide site_logo_type" name="seller_timezone" required="">
+          <?php foreach ($timezones as $key => $zone) { ?>
+            <option <?=($login_seller_timzeone == $zone)?"selected=''":""; ?> value="<?= $zone; ?>"><?= $zone; ?></option>
+          <?php } ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group d-flex flex-column">
+        <!-- <label class="control-label">Languages</label>
+        <input type="text" data-role="tagsinput" value="English,German"> -->
+        <select name="seller_language" class="form-control wide">
+          <?php if($login_seller_language == 0){ ?>
+          <option class="hidden"> Select Language </option>
+          <?php 
+            $get_languages = $db->select("seller_languages");
+            while($row_languages = $get_languages->fetch()){
+            $language_id = $row_languages->language_id;
+            $language_title = $row_languages->language_title;
+            ?>
+          <option value="<?php echo $language_id; ?>"> <?php echo $language_title; ?> </option>
+          <?php } ?>
+          <?php }else{ ?>
+          <?php 
+            $get_languages = $db->select("seller_languages");
+            while($row_languages = $get_languages->fetch()){
+            $language_id = $row_languages->language_id;
+            $language_title = $row_languages->language_title;
+            ?>
+          <option value="<?php echo $language_id; ?>" <?php if($language_id == $login_seller_language){ echo "selected"; } ?>> <?php echo $language_title; ?> </option>
+          <?php } ?>
+          <?php } ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group d-flex flex-column">
+        <label class="control-label">tell us a bit about yourself</label>
+        <textarea rows="5" class="form-control" name="seller_about" id="textarea-about" maxlength="300"><?php echo $login_seller_about; ?></textarea>
+        <span class="float-right mt-1">
+          <span class="count-about"> 0 </span> / 300 MAX
+        </span>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group d-flex flex-row justify-content-end">
+        <button class="button button-white" type="button" role="button">Cancel</button>
+        <button class="button button-red" type="submit" name="submit">Save</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<form method="post" enctype="multipart/form-data" runat="server" autocomplete="off">
   <div class="form-group row">
     <label class="col-md-3 col-form-label"> Full Name </label>
     <div class="col-md-8">
@@ -35,7 +145,7 @@
     </div>
   </div>
 
-  <div class="form-group row"><!-- form-group row Starts --> 
+  <div class="form-group row">
 
   <label class="col-md-3 col-form-label"> Country </label>
 
@@ -54,7 +164,7 @@
 
   </div>
 
-  </div><!-- form-group row Ends -->
+  </div>
 
     <div class="form-group row">
     <label class="col-md-3 col-form-label"> Timezone </label>

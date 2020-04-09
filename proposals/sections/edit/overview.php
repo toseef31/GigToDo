@@ -225,6 +225,11 @@ $child_title = $row_meta->child_title;
                       </label>
                       <div class="deliver-time d-flex flex-wrap">
                         <label class="deliver-time-item" for="hours<?= $d_delivery_id; ?>">
+                          <?php 
+                            if($delivery_proposal_title == ''){
+                              $delivery_proposal_title = $d_delivery_id;
+                            }
+                          ?>
                           <input id="hours<?= $d_delivery_id; ?>" type="radio" name="delivery_id" value="<?= $d_delivery_id; ?>" hidden required="" checked/>
                           <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                             <span class="color-icon">
