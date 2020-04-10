@@ -309,16 +309,15 @@ $child_title = $row_meta->child_title;
                     </div>
                     <!--- form-group row Ends --->
                     <?php } ?>
-                    <div class="form-group d-none">
+                    <!-- <div class="form-group d-none">
                       <div class="d-flex flex-column">
-                        <!--- form-group row Starts --->
                         <label class="bottom-label">Tags</label>
                         <div class="d-flex flex-row mt-10 mb-10">
                           <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput" value="<?= $d_proposal_tags; ?>">
                           <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <!--- form-group row Ends --->
                     <div class="form-group mb-0">
                       <div class="d-flex flex-column align-items-center">

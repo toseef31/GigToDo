@@ -152,7 +152,16 @@ if(isset($_SESSION['seller_user_name'])){
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  <style>.sub_cat .nice-select{display: none;}</style>
+  <style>.sub_cat .nice-select{display: none;}
+    #file_name span{
+      width: 130px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      direction: rtl;
+    }
+  </style>
 </head>
 <body class="all-content">  
   <!-- Preloader Start -->
@@ -697,6 +706,7 @@ if(isset($_SESSION['seller_user_name'])){
                       <span>الملف الملحق</span>
                     </span>
                   </label>
+                  <span id="file_name"></span>
                   <span class="max-size">
                     اقصى حجم 30 ميجا بايت
                   </span>
@@ -782,7 +792,7 @@ if(isset($_SESSION['seller_user_name'])){
                   </div>
                 </label>
                 <?php } ?>
-                <!-- <label class="deliver-time-item" for="days30">
+                <label class="deliver-time-item" for="days30">
                   <input id="days30" type="radio" name="delivery_time" hidden />
                   <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                     <span class="color-icon">
@@ -791,10 +801,10 @@ if(isset($_SESSION['seller_user_name'])){
                     </span>
                     <span class="d-flex flex-row align-items-end time">
                       <span>مخصص</span>
-                      <input autofocus="autofocus" class="input-number" name="delivery_time" type="text" pattern="[0-30]" />
+                      <input autofocus="autofocus" class="input-number" type="text" pattern="[0-9]{2}" />
                     </span>
                   </div>
-                </label> -->
+                </label>
               </div>
             </div>
             <div class="form-group">
@@ -838,6 +848,24 @@ if(isset($_SESSION['seller_user_name'])){
         $("#sub-category").html(data);
         }
         });
+      });
+      $('#file').change(function() {
+        var i = $(this).prev('label').clone();
+        var file = $('#file')[0].files[0].name;
+        
+        $('#file_name').html('<span>'+file+'</span>');
+        // $(this).prev('label').text(file);
+      });
+      $('#file').bind('change', function() {
+        var totalSize = this.files[0].size;
+        var totalSizeMb = totalSize  / Math.pow(1024,2);
+
+        $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+      });
+
+      $('.input-number').keyup(function(){
+        var custom_btn = $('.input-number').val();
+        $('#days30').val(custom_btn);
       });
     });
   </script>

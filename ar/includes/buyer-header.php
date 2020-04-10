@@ -132,7 +132,7 @@ $page_url = substr("$full_url", 18);
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
                 <?php if(!empty($seller_image)){ ?>
-                <img src="user_images/<?= $seller_image; ?>" alt="" class="img-fluid rounded-circle" width="40px" height="40px">
+                <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="" class="img-fluid rounded-circle" width="40px" height="40px">
                 <?php }else{ ?>
                 <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png"  class="img-fluid" width="40px" height="40px">
                 <?php } ?>
@@ -237,7 +237,7 @@ $page_url = substr("$full_url", 18);
   </div>
   <div class="profile-inner">
     <?php if(!empty($seller_image)){ ?>
-    <img src="user_images/<?= $seller_image; ?>" alt="">
+    <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="">
     <?php }else{ ?>
     <img src="<?= $site_url; ?>/assets/img/user2.png"  class="img-fluid rounded-circle mb-3">
     <?php } ?>
@@ -245,7 +245,7 @@ $page_url = substr("$full_url", 18);
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="<?php echo $site_url; ?>/ar/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
+      <li><a href="<?php echo $site_url; ?>/ar/profile?user_name=<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> ضبط </a></li>
       <li><a href="<?= $site_url ?>/ar/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt="">إدارة الطلبات</a></li>

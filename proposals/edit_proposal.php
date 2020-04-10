@@ -333,7 +333,7 @@ $checkVideo = false;
     if(data == "error"){
     swal({type: 'warning',text: 'Please fill in the missing Details.'});
     }else if(data == "error_img"){
-    swal({type: 'warning',text: 'You Must Need To Add At Least 1 Image In Proposal To Continue.'});
+    swal({type: 'warning',text: 'Please add at least 1 image to continue.'});
     }else if(data != "error" || data != "error_img"){
     swal({
     type: 'success',

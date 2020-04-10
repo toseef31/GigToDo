@@ -446,7 +446,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 															</span>
 															<span class="d-flex flex-row align-items-end time">
 																<span>مخصص</span>
-																<input autofocus="autofocus" class="input-number" type="text" />
+																<input autofocus="autofocus" class="input-number" type="text" pattern="[0-9]{2}" />
 															</span>
 														</div>
 													</label>
@@ -505,7 +505,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<div class="input-group-prepend">
 														<select class="form-control">
 															<option value="1">USD</option>
-															<option value="2">GBP</option>
+															<option value="2">EGP</option>
 														</select>
 													</div>
 													<input class="form-control" type="number" name="request_budget" value="<?= $form_data['request_budget']; ?>" />

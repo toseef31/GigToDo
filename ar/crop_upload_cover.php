@@ -19,7 +19,7 @@ if(isset($_POST["image"])){
 	if(!in_array($file_extension,$allowed)){
 		echo "";
 	}else{
-		 file_put_contents("../user_images/" . $imageName, $data);
+		 file_put_contents("../cover_images/" . $imageName, $data);
 	    echo $imageName;
 	}
 

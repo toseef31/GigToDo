@@ -88,6 +88,23 @@
   }else{
    $total_gigs_view = "0"; 
   }
+  $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+  $count_gigs = $select_proposals->rowCount();
+  // print_r($count_gigs);
+  if(!$count_gigs == 0){
+    $total_price = array();
+    while($row_proposals = $select_proposals->fetch()){
+      $proposal_prices = $row_proposals->proposal_price;
+      // print_r($proposal_prices);
+      array_push($total_price,$proposal_prices);
+    }
+    $total_price_gig= array_sum($total_price);
+    @$average = $total_price_gig/count($total_price);
+    $average_price = substr($average ,0,1);
+  }else{
+    $average = "0";
+    $average_price = "0";
+  }
 ?>
 <?php
 
@@ -270,7 +287,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>0 <span>Average Cost of Gigs </span></h4>
+                  <h4><?= round($average); ?> <span>Average Cost of Gigs </span></h4>
                 </div>
               </div>
             </div>
@@ -302,7 +319,7 @@
                 $select_all_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty'");
                 $count_all_inbox_sellers = $select_all_inbox_sellers->rowCount();
               ?>
-              Messages <span class="badge badge-success"><?= $count_all_inbox_sellers; ?></span> & Notifications 
+              Messages <!-- <span class="badge badge-success"><?= $count_all_inbox_sellers; ?></span> --> & Notifications 
             </div>
             <div class="messge-noti-box">
               <?php

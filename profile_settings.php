@@ -23,17 +23,25 @@
 <?php } ?>
 <form method="post" enctype="multipart/form-data" runat="server" autocomplete="off">
   <div class="edit-profile-image">
-    <label class="cover-image-label" for="cover-image">
-      <input type="file" id="cover-image" name="cover-image" hidden />
+    <label class="cover-image-label" for="cover">
+      <input type="file" id="cover" name="cover_photo" hidden />
+      <input type="hidden" name="cover_photo">
       <div class="icontext d-flex flex-row align-items-center justify-content-center">
         <span>
           <img class="img-fluid d-block" src="assets/img/edit-profile/pen-icon.png" />
         </span>
         <span>Edit Cover Image</span>
+        
       </div>
+      <?php if(!empty($login_seller_cover_image)){ ?>
+      <img src="cover_images/<?php echo $login_seller_cover_image; ?>" width="750" height="280" class="img-thumbnail img-circle cover_pic">
+      <span class="remove text-danger"><i class="fa fa-trash"></i></span>
+      <?php }else{ ?>
+      <!-- <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail img-circle" > -->
+      <?php } ?>
     </label>
     <label class="profile-image" for="profile-image">
-      <input type="file" id="profile-image" name="profile_photo" class="form-control" hidden="">
+      <input type="file" id="profile-image" name="profile_photo" class="form-control" hidden />
       <input type="hidden" name="profile_photo">
       <?php if(!empty($login_seller_image)){ ?>
       <img src="user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
@@ -60,9 +68,9 @@
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="form-group d-flex flex-column">
+      <div class="form-group d-flex flex-column custom_nice">
         <label class="control-label">Country</label>
-        <select class="wide" name="seller_country" required="">
+        <select class="form-control wide" name="seller_country" required="">
           <?php
             $get_countries = $db->select("countries");
             while($row_countries = $get_countries->fetch()){
@@ -75,9 +83,9 @@
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="form-group d-flex flex-column">
+      <div class="form-group d-flex flex-column custom_nice">
         <label class="control-label">Timezone</label>
-        <select class="wide site_logo_type" name="seller_timezone" required="">
+        <select class="form-control wide site_logo_type" name="seller_timezone" required="">
           <?php foreach ($timezones as $key => $zone) { ?>
             <option <?=($login_seller_timzeone == $zone)?"selected=''":""; ?> value="<?= $zone; ?>"><?= $zone; ?></option>
           <?php } ?>
@@ -86,8 +94,8 @@
     </div>
     <div class="col-12">
       <div class="form-group d-flex flex-column">
-        <!-- <label class="control-label">Languages</label>
-        <input type="text" data-role="tagsinput" value="English,German"> -->
+        <label class="control-label">Languages</label>
+        <!-- <input type="text" data-role="tagsinput" value="English,German"> -->
         <select name="seller_language" class="form-control wide">
           <?php if($login_seller_language == 0){ ?>
           <option class="hidden"> Select Language </option>
@@ -116,7 +124,7 @@
       <div class="form-group d-flex flex-column">
         <label class="control-label">tell us a bit about yourself</label>
         <textarea rows="5" class="form-control" name="seller_about" id="textarea-about" maxlength="300"><?php echo $login_seller_about; ?></textarea>
-        <span class="float-right mt-1">
+        <span class="float-left mt-1">
           <span class="count-about"> 0 </span> / 300 MAX
         </span>
       </div>
@@ -131,7 +139,7 @@
 </form>
 
 
-<form method="post" enctype="multipart/form-data" runat="server" autocomplete="off">
+<!-- <form method="post" enctype="multipart/form-data" runat="server" autocomplete="off">
   <div class="form-group row">
     <label class="col-md-3 col-form-label"> Full Name </label>
     <div class="col-md-8">
@@ -259,7 +267,7 @@
   <button type="submit" name="submit" class="btn btn-success <?= $floatRight ?>" style="<?=($lang_dir == "right" ? 'margin-left: 110px;':'')?>">
   <i class="fa fa-floppy-o"></i> Save Changes
   </button>
-</form>
+</form> -->
 <script>
   $(document).ready(function(){
   $image_crop = $('#image_demo').croppie({
@@ -316,6 +324,69 @@
         });
       });
       });
+
+    // Cover Image Crop
+    $image_crop_cover = $('#cover_demo').croppie({
+        enableExif: true,
+        viewport: {
+          width:750,
+          height:280,
+          type:'square' //circle
+        },
+        boundary:{
+          width:100,
+          height:250
+        }    
+        });
+      function crop_cover(data){
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          $image_crop_cover.croppie('bind',{
+          url: event.target.result
+          }).then(function(){
+          console.log('jQuery bind complete');
+          });
+        }
+        reader.readAsDataURL(data.files[0]);
+        $('#insertCoverModal').modal('show');
+        $('input[type=hidden][name=img_type_cover]').val($(data).attr('name'));
+      }
+      $(document).on('change','input[type=file]:not(#profile-image)', function(){
+        
+      var size = $(this)[0].files[0].size; 
+      var ext = $(this).val().split('.').pop().toLowerCase();
+      if($.inArray(ext,['jpeg','jpg','gif','png']) == -1){
+      alert('Your File Extension Is Not Allowed.');
+      $(this).val('');
+      }else{
+      crop_cover(this);
+      }
+      });
+      $('.crop_image_cover').click(function(event){
+      $('#wait').addClass("loader");
+      var name = $('input[type=hidden][name=img_type_cover]').val();
+        $image_crop_cover.croppie('result', {
+          type: 'canvas',
+          size: 'viewport'
+        }).then(function(response){
+          $.ajax({
+            url:"crop_upload_cover",
+            type: "POST",
+            data:{image: response, name: $('input[type=file][name='+ name +']').val().replace(/C:\\fakepath\\/i, '') },
+            success:function(data){
+              $('#wait').removeClass("loader");
+              $('#insertCoverModal').modal('hide');
+              $('input[type=hidden][name='+ name +']').val(data);
+              main = $('input[type=hidden][name='+ name +']').parent();
+              main.prepend("<img src='cover_images/"+data+"' class='img-fluid'>");
+            }
+          });
+        });
+        });
+        $('.remove').click(function(){
+          $('.cover_pic').remove();
+          $('.remove').hide();
+        });
     $("#textarea-headline").keydown(function(){
       var textarea_headline = $("#textarea-headline").val();
       $(".count-headline").text(textarea_headline.length);  
@@ -349,23 +420,24 @@
       $seller_headline = strip_tags($input->post('seller_headline'));
       $seller_about = strip_tags($input->post('seller_about'));
       $profile_photo = strip_tags($input->post('profile_photo'));
-      $cover_photo = $_FILES['cover_photo']['name'];
-      $cover_photo_tmp = $_FILES['cover_photo']['tmp_name'];
-      $allowed = array('jpeg','jpg','gif','png','tif');
-      $cover_file_extension = pathinfo($cover_photo, PATHINFO_EXTENSION);
-      if(!in_array($cover_file_extension,$allowed) & !empty($cover_photo)){
-        echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-      }else{
+      $cover_photo = strip_tags($input->post('cover_photo'));
+      // $cover_photo = $_FILES['cover_photo']['name'];
+      // $cover_photo_tmp = $_FILES['cover_photo']['tmp_name'];
+      // $allowed = array('jpeg','jpg','gif','png','tif');
+      // $cover_file_extension = pathinfo($cover_photo, PATHINFO_EXTENSION);
+      // if(!in_array($cover_file_extension,$allowed) & !empty($cover_photo)){
+      //   echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+      // }else{
         if(empty($profile_photo)){
           $profile_photo = $login_seller_image;
         }
         if(empty($cover_photo)){
           $cover_photo = $login_seller_cover_image;
         }else{
-          $cover_photo = pathinfo($cover_photo, PATHINFO_FILENAME);
-          $cover_photo = $cover_photo."_".time().".$cover_file_extension";
+          // $cover_photo = pathinfo($cover_photo, PATHINFO_FILENAME);
+          // $cover_photo = $cover_photo."_".time().".$cover_file_extension";
         }
-        move_uploaded_file($cover_photo_tmp,"cover_images/$cover_photo");
+        // move_uploaded_file($cover_photo_tmp,"cover_images/$cover_photo");
         
         $update_proposals = $db->update("proposals",array("language_id" => $seller_language),array("proposal_seller_id" => $login_seller_id));
 
@@ -402,7 +474,7 @@
             </script>";
           }
         }
-      }
+      // }
     }
   }
 ?>

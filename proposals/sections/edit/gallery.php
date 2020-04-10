@@ -477,6 +477,14 @@
     $('#gallery_tab').tab('show');
     <?php } ?>
   });
+  $(function(){
+      $(window).on('load resize', function(){
+        var popupWidth = $('#popupWidth').outerWidth();
+        $('.popup').css({
+          'width': popupWidth + 'px'
+      });
+    });
+  });
 $(document).ready(function(){
   // alert("fhdsfhsdjf");
   var browsers = ["Opera", "Edge", "Chrome", "Safari", "Firefox", "MSIE", "Trident"];

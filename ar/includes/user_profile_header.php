@@ -46,10 +46,10 @@ $total_sellers = $db->count("orders",array("buyer_id"=>$seller_id));
 
 <div class="row">
   <div class="col-12">
-    <div class="buyer-profile-header" style="background-image: url(<?= $seller_cover_image; ?>);">
+    <div class="buyer-profile-header" style="background-image: url(<?= $site_url; ?>/<?= $seller_cover_image; ?>);">
       <div class="buyer-profile-image">
         <?php if(!empty($seller_image)){ ?>
-            <img src="user_images/<?= $seller_image; ?>" class="rounded-circle">
+            <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" class="rounded-circle">
           <?php }else{ ?>
             <img alt class="img-fluid d-block" src="assets/img/emongez_cube.png" />
           <?php } ?>
@@ -89,7 +89,7 @@ $total_sellers = $db->count("orders",array("buyer_id"=>$seller_id));
         </ul>
         <?php if(isset($_SESSION['seller_user_name'])){ ?>
         <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
-        <a class="edit-profile-button" href="/ar/settings?profile_settings">تعديل الملف الشخصى</a>
+        <a class="edit-profile-button" href="<?= $site_url; ?>/ar/settings?profile_settings">تعديل الملف الشخصى</a>
         <?php } ?>
         <?php } ?>
       </div>

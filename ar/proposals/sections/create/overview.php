@@ -333,7 +333,7 @@ if(isset($_POST['submit'])){
   "proposal_desc" => "required",
   "delivery_id" => "required");
 
-  $messages = array("proposal_title" => "يرجى إدخال عنوان أزعج","proposal_cat_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_desc" => "الرجاء إدخال متطلبات الخدمة","proposal_child_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_img1"=>"صورة الاقتراح 1 مطلوبة.");
+  $messages = array("proposal_title" => "يرجى إدخال عنوان الخدمة","proposal_cat_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_desc" => "الرجاء إدخال متطلبات الخدمة","proposal_child_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_img1"=>"صورة الاقتراح 1 مطلوبة.", "delivery_id" => "الرجاء تحديد وقت التسليم");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){

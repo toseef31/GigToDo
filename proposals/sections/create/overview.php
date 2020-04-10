@@ -162,18 +162,18 @@ if (empty($form_data)) {
     <div class="d-flex flex-column">
       <ul class="nav nav-tabs justify-content-end" id="langulageTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="english-tab" data-toggle="tab" href="#english" role="tab" aria-controls="english" aria-selected="true">English</a>
+          <a class="nav-link" id="arabic-tab" data-toggle="tab" href="#arabic" role="tab" aria-controls="arabic" aria-selected="false">Arabic</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="arabic-tab" data-toggle="tab" href="#arabic" role="tab" aria-controls="arabic" aria-selected="false">Arabic</a>
+          <a class="nav-link active" id="english-tab" data-toggle="tab" href="#english" role="tab" aria-controls="english" aria-selected="true">English</a>
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="english" role="tabpanel" aria-labelledby="english-tab">
-          <textarea rows="6" class="form-control text-count" name="proposal_desc" placeholder="I need...."></textarea>
-        </div>
         <div class="tab-pane fade" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
           <textarea dir="rtl" rows="6" class="form-control text-count" name="proposal_desc" placeholder="أدخل متطلبات الخدمة"></textarea>
+        </div>
+        <div class="tab-pane fade show active" id="english" role="tabpanel" aria-labelledby="english-tab">
+          <textarea rows="6" class="form-control text-count" name="proposal_desc" placeholder="I need...."></textarea>
         </div>
       </div>
       <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_desc']); ?></span>
@@ -240,7 +240,7 @@ if (empty($form_data)) {
           </span>
           <span class="d-flex flex-row align-items-end time">
             <span>Custom</span>
-            <input autofocus="autofocus" class="input-number" type="text" />
+            <input autofocus="autofocus" class="input-number" type="text" pattern="[0-9]{2}" />
           </span>
         </div>
       </label>
@@ -342,10 +342,9 @@ if(isset($_POST['submit'])){
   "proposal_title" => "required",
   "proposal_cat_id" => "required",
   "proposal_child_id" => "required",
-  "proposal_desc" => "required",
   "delivery_id" => "required");
 
-  $messages = array("proposal_title" => "please gig title","proposal_cat_id" => "please select a category and subcategory","proposal_desc" => "please enter service requirements","proposal_child_id" => "please select a category and subcategory","proposal_img1"=>"Proposal Image 1 Is Required.");
+  $messages = array("proposal_title" => "please enter gig title","proposal_cat_id" => "please select a category and subcategory","proposal_desc" => "please enter service requirements","proposal_child_id" => "please select a category and subcategory","proposal_img1"=>"Please add at least 1 image to continue.", "delivery_id" => "please select delivery time");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){

@@ -218,7 +218,7 @@
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt="">
+        <a href="<?= $site_url; ?>/ar/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt="">
           الخدمات
         </a>
       </li>

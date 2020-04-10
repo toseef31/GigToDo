@@ -97,6 +97,28 @@ if($lang_dir == "right"){
 		.profile-edit-step-item{
 			cursor: pointer;
 		}
+		.icontext{
+			left: -webkit-calc(50% - (33px / 2));
+	    left: -moz-calc(50% - (33px / 2));
+	    left: calc(50% - (33px / 2));
+	    position: absolute;
+	    top: -webkit-calc(50% - (33px / 2));
+	    top: -moz-calc(50% - (33px / 2));
+	    top: calc(50% - (33px / 2));
+		}
+		.remove{
+			position: absolute;
+    	top: 10px;
+    	right: 30px;
+		}
+		.edit-profile .profile-edit-card .edit-profile-image .cover-image-label{
+			padding: 20px 0;
+		}
+		.edit-profile .profile-edit-card  .custom_nice .nice-select .list {
+	    width: 100%;
+	    height: 300px;
+	    overflow: auto;
+		}
 	</style>
 </head>
 <body class="all-content">
@@ -227,7 +249,7 @@ if($lang_dir == "right"){
 										</div>
 										<div class="howitwork-list-content">
 											<h3>3. Verify your account</h3>
-                                            <p>Build credibility for your profile through linking your other social media accounts. This will boost your chances of receiving more offers and better quality proposals from the best talent on eMongez.</p>
+                      <p>Build credibility for your profile through linking your other social media accounts. This will boost your chances of receiving more offers and better quality proposals from the best talent on eMongez.</p>
 										</div>
 									</div>
 									<!-- How it work each item -->
@@ -310,6 +332,25 @@ if($lang_dir == "right"){
     </div>
   </div>
 </div>
+
+<div id="insertCoverModal" class="modal" role="dialog">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+     Crop & Insert Cover <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="cover_demo" style="width:100% !important;"></div>
+    </div>
+    <div class="modal-footer">
+      <input type="hidden" name="img_type_cover" value="">
+      <button class="btn btn-success crop_image_cover">Crop Image</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+  </div>
+</div>
+
 <div id="wait"></div>
 <script>
 	$('#verification_tab').click(function(){
