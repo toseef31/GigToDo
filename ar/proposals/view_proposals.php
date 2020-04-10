@@ -805,9 +805,10 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 																			<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">
 																				حذف
 																			</a>
-																			<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">
+																			<!-- <a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">
 																				وقف
-																			</a>
+																			</a> -->
+																			<a href="submit_approval?proposal_id=<?php echo $proposal_id; ?>" class="dropdown-item"> تقدم للحصول على موافقة </a>
 																		</div>
 																	</div>
 																</div>
@@ -903,9 +904,10 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 																<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">
 																	حذف
 																</a>
-																<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">
+																<!-- <a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">
 																	وقف
-																</a>
+																</a> -->
+																<a href="submit_approval?proposal_id=<?php echo $proposal_id; ?>" class="dropdown-item"> تقدم للحصول على موافقة </a>
 															</div>
 														</div>
 													</div>

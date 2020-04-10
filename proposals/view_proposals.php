@@ -678,10 +678,12 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 																		<i class="far fa-cog"></i>
 																	</a>
 																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
-																		<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a>
+																		<!-- <a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a> -->
+																		<a href="submit_approval?proposal_id=<?php echo $proposal_id; ?>" class="dropdown-item"> Submit For Approval </a>
 																		<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">Delete</a>
 																		<a class="dropdown-item" href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>">Preview</a>
 																		<a class="dropdown-item" href="edit_proposal?proposal_id=<?php echo $proposal_id; ?>">Edit</a>
+																		
 																	</div>
 																</div>
 															</div>
@@ -758,10 +760,12 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 															<i class="far fa-cog"></i>
 														</a>
 														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
-															<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a>
+															<a href="submit_approval?proposal_id=<?php echo $proposal_id; ?>" class="dropdown-item"> Submit For Approval </a>
+															<!-- <a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a> -->
 															<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">Delete</a>
 															<a class="dropdown-item" href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>">Preview</a>
 															<a class="dropdown-item" href="edit_proposal?proposal_id=<?php echo $proposal_id; ?>">Edit</a>
+															
 														</div>
 													</div>
 												</div>

@@ -87,7 +87,10 @@ $('.back-to-overview').click(function(){
     $('#overview').addClass('show active');
     $('#tabs a[href="#pricing"]').removeClass('active');
   <?php }else{ ?>
-    $('.nav a[href="#overview"]').tab('show');
+    $('#pricing').removeClass('show active');
+    $('#overview').addClass('show active');
+    $('#package_tab').removeClass('active');
+    $('#overview_tab').addClass('active');
   <?php } ?>
 });
 
@@ -175,7 +178,11 @@ $(".pricing-form").submit(function(event){
           $('#pricing').removeClass('show active');
           $('#gallery').addClass('show active');
           $('#gallery_tab').addClass('active');
-        <?php }else{ ?> $('#gallery_tab').tab('show'); <?php } ?>
+        <?php }else{ ?> 
+          $('#pricing').removeClass('show active');
+          $('#gallery').addClass('show active');
+          $('#gallery_tab').addClass('active'); 
+        <?php } ?>
       });
     }
   });

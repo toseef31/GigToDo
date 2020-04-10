@@ -362,7 +362,8 @@ $checkVideo = false;
             $('#pricing').addClass('show active');
             $('#package_tab').addClass('active');
             <?php }else{ ?> 
-            $('#package_tab').tab('show'); 
+            $('#pricing').addClass('show active');
+            $('#package_tab').addClass('active'); 
             <?php } ?>
             if(data == "video"){
               section.val("video");
@@ -378,7 +379,8 @@ $checkVideo = false;
               $('#pricing').addClass('show active');
               $('#package_tab').addClass('active');
               <?php }else{ ?> 
-              $('#package_tab').tab('show'); 
+              $('#pricing').addClass('show active');
+              $('#package_tab').addClass('active'); 
               <?php } ?>
             }
           }else if(current_section == "description"){

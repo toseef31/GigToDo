@@ -195,10 +195,10 @@
                       <div class="d-flex flex-row justify-content-center">
                         <input class="package-save" type="submit" form="gallery_form" value="Save & Continue">
                       </div>
-                      <!-- <div class="d-flex flex-row justify-content-center">
-                        <a href="<?php echo $_SESSION["seller_user_name"]; ?>/<?php echo $d_proposal_url; ?>" id="previewProposal" class="package-save">Preview Proposal</a>
-                        <input class="package-save" type="submit" form="gallery_form" value="Save & Continue">
-                      </div> -->
+                      <div class="d-flex flex-row justify-content-center">
+                        <a href="<?php echo $_SESSION["seller_user_name"]; ?>/<?php echo $d_proposal_url; ?>" id="previewProposal" class="package-save d-none">Preview Proposal</a>
+                        <!-- <input class="package-save" type="submit" form="gallery_form" value="Save & Continue"> -->
+                      </div>
                       <div class="d-flex flex-row align-items-center justify-content-center backbuton backButton">
                         <span><i class="fal fa-long-arrow-left"></i></span>
                         <span>go back</span>
@@ -474,7 +474,9 @@
     $('#pricing').addClass('show active');
     $('#gallery_tab').removeClass('active');
     <?php }else{ ?>
-    $('#gallery_tab').tab('show');
+    $('#gallery').removeClass('show active');
+    $('#pricing').addClass('show active');
+    $('#gallery_tab').removeClass('active');
     <?php } ?>
   });
   $(function(){
