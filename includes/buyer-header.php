@@ -130,7 +130,7 @@ $page_url = substr("$full_url", 15);
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
                 <?php if(!empty($seller_image)){ ?>
-                <img src="user_images/<?= $seller_image; ?>" alt="" class="img-fluid rounded-circle" width="40px" height="40px">
+                <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="" class="img-fluid rounded-circle" width="40px" height="40px">
                 <?php }else{ ?>
                 <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png"  class="img-fluid" width="40px" height="40px">
                 <?php } ?>
@@ -233,7 +233,7 @@ $page_url = substr("$full_url", 15);
   </div>
   <div class="profile-inner">
     <?php if(!empty($seller_image)){ ?>
-    <img src="user_images/<?= $seller_image; ?>" alt="">
+    <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="">
     <?php }else{ ?>
     <img src="<?= $site_url; ?>/assets/img/user2.png"  class="img-fluid rounded-circle mb-3">
     <?php } ?>

@@ -177,6 +177,13 @@
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+  <style>
+    .float-right.delete{
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+  </style>
 </head>
 <body class="all-content">
   <!-- Preloader Start -->
@@ -356,6 +363,59 @@
                   <h5><?= $sender_user_name; ?> <span>أهلا بالعالم</span></h5>
                   <p class="text-muted date"><i class="fal fa-clock"></i> <?= $message_date; ?></p>
                   <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= $message_desc; ?></p>
+                </div>
+              </div>
+              <?php } ?>
+              <?php
+                $count_notifications = $db->count("notifications",array("receiver_id" => $login_seller_id));
+                if($count_notifications == 0){
+                  echo "<h5 class='text-center mb-3'> No Notifications Are Available </h5>";
+                }
+                
+                $get_notifications = $db->query("select * from notifications where receiver_id='$login_seller_id' order by 1 DESC limit 0,5");
+                while($row_notifications = $get_notifications->fetch()){
+                $notification_id = $row_notifications->notification_id;
+                $sender_id = $row_notifications->sender_id;
+                $order_id = $row_notifications->order_id;
+                $reason = $row_notifications->reason;
+                $date = $row_notifications->date;
+                $status = $row_notifications->status;
+
+                // Select Sender Details
+                $select_sender = $db->select("sellers",array("seller_id" => $sender_id));
+                $row_sender = $select_sender->fetch();
+                $sender_user_name = @$row_sender->seller_user_name;
+                $sender_image = @$row_sender->seller_image;
+                if(strpos($sender_id,'admin') !== false){
+                  $admin_id = trim($sender_id, "admin_");
+                  $get_admin = $db->select("admins",array("admin_id" => $admin_id));
+                  $sender_user_name = "Admin";
+                  $sender_image = $get_admin->fetch()->admin_image;
+                }
+              ?>
+              <div class="messge-item <?php if($status == "unread"){ echo "header-message-div-unread"; }else{ echo "header-message-div"; } ?>">
+                <a href="dashboard?delete_notification=<?= $notification_id; ?>" class="float-right delete text-danger">
+                <i class="fa fa-times-circle fa-lg"></i>  
+                </a>
+                <div class="msg-logo">
+                  <a href="dashboard?n_id=<?= $notification_id; ?>">
+                  <?php if(!empty($sender_image)){ ?>
+                  <?php if(strpos($sender_id, "admin_") !== false){ ?>
+                    <img src="admin/admin_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                  <?php }else{ ?>
+                    <img src="user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                  <?php } ?>
+                  <?php }else{ ?>
+                  <img src="user_images/empty-image.png" width="60" height="60" class="rounded-circle">
+                  <?php } ?>
+                  </a>
+                </div>
+                <div class="msg-text">
+                  <a href="dashboard?n_id=<?= $notification_id; ?>">
+                    <h5><?= $sender_user_name; ?></h5>
+                    <p class="text-muted date"><i class="fal fa-clock"></i> <?= $date; ?></p>
+                    <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= include("includes/comp/notification_reasons.php"); ?></p>
+                  </a>
                 </div>
               </div>
               <?php } ?>
