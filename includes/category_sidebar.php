@@ -51,7 +51,7 @@
       </div>
       <div class="gigs-filter-content ">
         <div class="single-filter clearfix">
-          <select>
+          <select id="category" name="cat_value">
             <?php
               $get_categories = $db->query("select * from categories where cat_featured='yes' ".($lang_dir == "right" ? 'order by 1 DESC LIMIT 6,6':' LIMIT 0,6')."");
               while($row_categories = $get_categories->fetch()){
@@ -66,26 +66,16 @@
               $arabic_title = $row_meta->arabic_title;
               $arabic_desc = $row_meta->arabic_desc;
             ?>
-            <option value="0"><?= $cat_title; ?></option>
+            <option <?php
+            if($cat_id == @$_SESSION['cat_id']){ echo "selected"; }
+            if($cat_id == @$child_parent_id){ echo "selected"; }
+            ?> value="<?= $cat_id; ?>"><?= $cat_title; ?></option>
             <?php } ?>
           </select>
         </div>
         <div class="single-filter clearfix">
-          <select>
-            <?php
-              $get_child_cat = $db->select("categories_children",array("child_parent_id" => $cat_id));
-              while($row_child_cat = $get_child_cat->fetch()){
-                $cat_url = $input->get('cat_url');
-                $child_id = $row_child_cat->child_id;
-                $child_url = $row_child_cat->child_url;
-                $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
-                $row_meta = $get_meta->fetch();
-                $child_title = $row_meta->child_title;
-                $child_arabic_title = $row_meta->child_arabic_title;
-                if(!empty($child_arabic_title)){
-            ?>
-            <option value="0"><?php echo $child_title; ?></option>
-            <?php } } ?>
+          <select id="sub-category">
+            
           </select>
         </div>
       </div>
@@ -267,7 +257,7 @@
         </span>
         <ul id="cat_<?php echo $cat_id; ?>" class="collapse">
           <?php
-            $get_child_cat = $db->select("categories_children",array("child_parent_id" => $cat_id));
+            $get_child_cat = $db->select("categories_children",array("child_parent_id" => $child_parent_id));
             while($row_child_cat = $get_child_cat->fetch()){
               $child_id = $row_child_cat->child_id;
               $child_url = $row_child_cat->child_url;

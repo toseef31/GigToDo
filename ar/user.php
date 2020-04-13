@@ -801,7 +801,7 @@ if(isset($_SESSION['seller_user_name'])){
                     </span>
                     <span class="d-flex flex-row align-items-end time">
                       <span>مخصص</span>
-                      <input autofocus="autofocus" class="input-number" type="text" pattern="[0-9]{2}" />
+                      <input autofocus="autofocus" class="input-number" maxlength="2" type="text" pattern="[0-9]{2}" />
                     </span>
                   </div>
                 </label>

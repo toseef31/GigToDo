@@ -475,7 +475,7 @@ $login_seller_language = $row_login_seller->seller_language;
                                 </span>
                                 <span class="d-flex flex-row align-items-end time">
                                   <span>مخصص</span>
-                                  <input autofocus="autofocus" class="input-number" type="text" />
+                                  <input autofocus="autofocus" class="input-number" pattern="[0-9]{2}" maxlength="2" type="text" />
                                 </span>
                               </div>
                             </label>
