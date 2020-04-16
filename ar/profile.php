@@ -144,6 +144,15 @@ $count_requests = $get_requests->rowCount();
     border: 2px solid #ff0707;
     color: #ff0707;
   }
+  @media(max-width: 768px){
+    .buyer-profile .managerequest .mangaerequest-body .managerequest-table tbody tr td .attachment {
+      width: 255px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+    }
+  }
   </style>
 </head>
 <body class="all-content"> 
@@ -691,7 +700,7 @@ $count_requests = $get_requests->rowCount();
                               <div class="d-flex flex-column align-items-center">
                                 <div class="buyer-image">
                                   <?php if(!empty($request_seller_image)){ ?>
-                                  <img alt class="img-fluid d-block" src="user_images/<?= $request_seller_image; ?>" />
+                                  <img alt class="img-fluid d-block rounded-circle" src="user_images/<?= $request_seller_image; ?>" />
                                   <?php } else { ?>
                                   <img alt class="img-fluid d-block" src="assets/img/emongez_cube.png" />
                                   <?php } ?>

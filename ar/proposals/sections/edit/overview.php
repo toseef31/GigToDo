@@ -15,6 +15,21 @@ $child_arabic_title = $row_meta->child_arabic_title;
 	#sub-category{
 		display: none;
 	}
+	.insert_btn{
+	  background-color: #ff0707;
+	  border: 2px solid #ff0707;
+	  -webkit-border-radius: 3px;
+	  -moz-border-radius: 3px;
+	  border-radius: 3px;
+	  color: white;
+	  font-size: 16px;
+	  font-weight: 600;
+	  text-transform: uppercase;
+	}
+	.delete-extra{
+	  text-transform: uppercase;
+	  font-size: 16px;
+	}
 </style>
 <!-- New Design -->
 <!-- Post a gig -->
@@ -25,7 +40,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 				<div class="col-12 col-lg-8">
 					<div class="row">
 						<div class="col-12 col-md-8">
-							<form action="#" class="create-gig proposal-form" method="post">
+							<form action="#" class="create-gig proposal-form mb-0 border-bottom-0" id="proposal-form" method="post">
 								<div class="form-group">
 									<label class="control-label d-flex flex-row align-items-center">
 										<span>
@@ -156,7 +171,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 										</p>
 									</div>
 								</div>
-								<div class="form-group">
+								<div class="form-group mb-0">
                   <label class="control-label d-flex flex-row align-items-center">
                     <span>
                       <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -249,25 +264,45 @@ $child_arabic_title = $row_meta->child_arabic_title;
 								</div>
 								<!--- form-group row Ends --->
 								<?php } ?>
-								
+								</form>
+								<div class="postagig create-gigpostagig create-gig mb-0 border-bottom-0 pl-0 border-top-0 pt-0"">
+								  <div class="form-group rounded-0">
+								    <div class="pt-3 pb-0">
+								    <!-- <h6 class="font-weight-normal">My Proposal Extras</h6> -->
+								    <!-- <a data-toggle="collapse" href="#insert-extra" class="small text-success">+ Add Extra</a> -->
+								     <div class="tabs accordion mt-2" id="allTabs"><!--- All Tabs Starts --->
+								        <?php include("extras.php"); ?>
+								      </div><!--- All Tabs Ends --->
+								    </div>
+								    <div class="d-flex flex-column align-items-end">
+								      <div class="d-flex flex-row justify-content-end">
+								        <a class="btn button-add-more mb-0" type="button" data-toggle="collapse" href="#insert-extra">
+								          <i class="fal fa-plus"></i>
+								        </a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
 								<!--- form-group row Ends --->
-								<div class="form-group mb-0">
-									<div class="d-flex flex-column">
-										<!-- <div class="d-flex flex-row justify-content-end">
-											<button class="button-add-more" type="button" role="button">
-												<i class="fal fa-plus"></i>
-											</button>
-										</div> -->
-										<div class="d-flex flex-row">
-											<button class="button" type="submit">حفظ و استمرار</button>
-										</div>
-										<div class="d-flex flex-row align-items-center justify-content-center backbuton mt-4">
-											<a href="view_proposals"><span><i class="fal fa-long-arrow-left"></i></span>
-											<span>عد</span></a>
+								<div class="postagig create-gig">
+									<div class="form-group mb-0">
+										<div class="d-flex flex-column">
+											<!-- <div class="d-flex flex-row justify-content-end">
+												<button class="button-add-more" type="button" role="button">
+													<i class="fal fa-plus"></i>
+												</button>
+											</div> -->
+											<div class="d-flex flex-row">
+												<button class="button" type="submit" form="proposal-form">حفظ و استمرار</button>
+											</div>
+											<div class="d-flex flex-row align-items-center justify-content-center backbuton mt-4">
+												<a href="view_proposals"><span><i class="fal fa-long-arrow-left"></i></span>
+												<span>عد</span></a>
+											</div>
 										</div>
 									</div>
 								</div>
-							</form>
+							<!-- </form> -->
 						</div>
 						<div class="col-12 col-md-4" id="popupWidth"></div>
 					</div>

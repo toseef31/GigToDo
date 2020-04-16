@@ -122,7 +122,7 @@ $page_url = substr("$full_url", 15);
     <div class="canvs-menu">
       <ul class="d-flex flex-column">
         <li>
-          <a href="javascript:void(0);">Post A Request</a>
+          <a href="<?= $site_url; ?>/requests/post-request.php">Post A Request</a>
         </li>
         <li>
           <a href="<?= $site_url ?>/how-it-works.php">How it Works</a>

@@ -661,16 +661,16 @@ margin-bottom:10px;
  
  }*/
 
- /*.header-message-div-unread {
+ .header-message-div-unread {
 
-	 background:#ebf2f5;
-	 padding-bottom:0px;
+	 /*background:#ebf2f5;*/
+	/* padding-bottom:0px;
 	 padding-top: 10px;
 	 border-bottom:1px solid #ccc;
 	 padding-left:15px;
-	 height:85px;
+	 height:85px;*/
 
- }*/
+ }
 
  .header-message-div:last-child {
 

@@ -51,12 +51,11 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		<link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
 		<!--====== Responsive css ======-->
 		<link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
-		<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-		<link href="../styles/bootstrap.css" rel="stylesheet">
+		<!-- <link href="../styles/bootstrap.css" rel="stylesheet">
 		<link href="../styles/custom.css" rel="stylesheet"> --> 
 		<!-- Custom css code from modified in admin panel --->
 		<link href="../styles/styles.css" rel="stylesheet">
-		<link href="../styles/user_nav_styles.css" rel="stylesheet">
+		<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet"> -->
 		<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 		<link href="../styles/sweat_alert.css" rel="stylesheet">
 		<link href="../styles/animate.css" rel="stylesheet">
@@ -117,7 +116,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 					-webkit-flex-basis: -webkit-calc(100% - 10px);
 			    -ms-flex-preferred-size: calc(100% - 10px);
 			    flex-basis: -moz-calc(100% - 10px);
-			    flex-basis: calc1050% - 10px);
+			    flex-basis: calc(100% - 10px);
 			    max-width: -webkit-calc(100% - 10px);
 			    max-width: -moz-calc(100% - 10px);
 			    max-width: calc(100% - 10px);
@@ -202,6 +201,62 @@ $relevant_requests = $row_general_settings->relevant_requests;
 					.page-height{
 						position: relative;
 						min-height: 60vh;
+					}
+				}
+				@media(max-width: 768px){
+					.gig-category-item{
+						-webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+				    -ms-flex-preferred-size: calc(100% - 0px) !important;
+				    flex-basis: -moz-calc(100% - 0px) !important;
+				    flex-basis: calc(100% - 0px) !important;
+				    max-width: -webkit-calc(100% - 0px) !important;
+				    max-width: -moz-calc(100% - 0px) !important;
+				    max-width: calc(100% - 0px) !important;
+					}
+					.gig-category-select{
+						-webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+					.cat_item-content{
+						-webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+				    -ms-flex-preferred-size: calc(100% - 0px) !important;
+				    flex-basis: -moz-calc(100% - 0px) !important;
+				    flex-basis: calc(100% - 0px) !important;
+				    max-width: -webkit-calc(100% - 0px) !important;
+				    max-width: -moz-calc(100% - 0px) !important;
+				    max-width: calc(100% - 0px) !important;
+					}
+					.cat_item-content.item-active .gig-category-select {
+				    -webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+					.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+				    -webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+					.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+				    -webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
 					}
 				}
 		</style>
@@ -523,19 +578,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											<?php if(!isset($_SESSION['seller_user_name'])){ ?>
 											<!-- Register Form -->
 											<div class="post-register-form register-form" style="display: none;">
-												<!-- <?php 
-												  $form_errors = Flash::render("register_errors");
-												  $form_data = Flash::render("form_data");
-												  if(is_array($form_errors)){
-												  ?>
-												<div class="alert alert-danger">
-												  <ul class="list-unstyled mb-0">
-												    <?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-												    <li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
-												    <?php } ?>
-												  </ul>
-												</div>
-								        <?php } ?> -->
+												
 
 												<h4>الاشتراك كمشتري</h4>
 												<div class="form-group">
@@ -950,14 +993,21 @@ if(isset($_POST['submit'])){
 				"name" => "required",
 				"u_name" => "required",
 				"email" => "email|required",
-				"pass" => "required");
+				"pass" => "required",
+				"request_title" => "required",
+			  "request_description" => "required",
+			  "cat_id" => "required",
+			  "request_budget" => "number|required",
+				
+				"skills_required" => "required",
+				"languages" => "required");
 
-				$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.", "email" => "البريد الالكتروني مطلوب");
+				$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.", "email" => "البريد الالكتروني مطلوب" , "cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 				$val = new Validator($_POST,$rules,$messages);
 
 				if($val->run() == false){
 					$_SESSION['error_array'] = array();
-					Flash::add("register_errors",$val->get_all_errors());
+					Flash::add("form_errors",$val->get_all_errors());
 					Flash::add("form_data",$_POST);
 					echo "<script>window.open('post-request','_self')</script>";
 				}else{

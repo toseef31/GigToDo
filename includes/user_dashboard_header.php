@@ -274,7 +274,12 @@
     <i class="fal fa-times"></i>
   </div>
   <div class="profile-inner">
+    <?php if(!empty($seller_image)){ ?>
+    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
+    <?php }else{ ?>
     <img src="assets/img/user2.png" alt="">
+    <?php } ?>
+    
     <h4>Welcome back, <span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
   </div>
   <div class="canvs-menu">

@@ -9,7 +9,7 @@ if (empty($form_data)) {
 ?>
 
 
-<form action="#" method="post" class="create-gig proposal-form">
+<form action="#" method="post" class="create-gig proposal-form mb-0 border-bottom-0" id="proposal-form">
   <!--- form Starts -->
   <div class="form-group">
     <label class="control-label d-flex flex-row align-items-center">
@@ -203,7 +203,7 @@ if (empty($form_data)) {
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group mb-0">
     <label class="control-label d-flex flex-row align-items-center">
       <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -305,20 +305,41 @@ if (empty($form_data)) {
     <!-- </div> -->
   <!-- </div> -->
   <!--- form-group row Ends --->
-  <div class="form-group mb-0">
-    <div class="d-flex flex-column">
-      <!-- <div class="d-flex flex-row justify-content-end">
-        <button class="button-add-more" type="button" role="button">
-          <i class="fal fa-plus"></i>
-        </button>
-      </div> -->
-      <div class="d-flex flex-row">
-        <button class="button" name="submit" type="submit">Next</button>
+</form>
+  <div class="postagig create-gigpostagig create-gig mb-0 border-bottom-0 pl-0 border-top-0 pt-0">
+    <div class="form-group rounded-0">
+      <div class="pt-3 pb-0">
+      <!-- <h6 class="font-weight-normal">My Proposal Extras</h6> -->
+      <!-- <a data-toggle="collapse" href="#insert-extra" class="small text-success">+ Add Extra</a> -->
+       <div class="tabs accordion mt-2" id="allTabs"><!--- All Tabs Starts --->
+          <?php include("sections/edit/extras.php"); ?>
+        </div><!--- All Tabs Ends --->
+      </div>
+      <div class="d-flex flex-column align-items-end">
+        <div class="d-flex flex-row justify-content-end">
+          <a class="btn button-add-more mb-0" type="button" data-toggle="collapse" href="#insert-extra">
+            <i class="fal fa-plus"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="create-gig proposal-form">
+    <div class="form-group mb-0">
+      <div class="d-flex flex-column">
+        <!-- <div class="d-flex flex-row justify-content-end">
+          <button class="button-add-more" type="button" role="button">
+            <i class="fal fa-plus"></i>
+          </button>
+        </div> -->
+        <div class="d-flex flex-row">
+          <button class="button" name="submit" type="submit" form="proposal-form">Next</button>
+        </div>
       </div>
     </div>
   </div>
   
-</form>
+<!-- </form> -->
 
 <script>
   $('.input-number').keyup(function(){

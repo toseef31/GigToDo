@@ -203,7 +203,7 @@ if(isset($_SESSION['seller_user_name'])){
               <?php } ?>
               <div class="profile-image">
                 <?php if(!empty($get_seller_image)){ ?>
-                <img src="<?= $site_url; ?>/user_images/<?= $get_seller_image; ?>" alt="profile">
+                <img src="<?= $site_url; ?>/user_images/<?= $get_seller_image; ?>" class="rounded-circle" alt="profile">
                 <?php }else { ?>
                 <img src="assets/img/seller-profile/profile-img.png" alt="profile">
                 <?php } ?>
@@ -240,7 +240,7 @@ if(isset($_SESSION['seller_user_name'])){
                 </div> -->
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
                 <?php if($_SESSION['seller_user_name'] == $get_seller_user_name){ ?>
-                <a href="settings?profile_settings" class="edit-btn">Edit Profile</a>
+                <a href="edit_profile" class="edit-btn">Edit Profile</a>
                 <?php } } ?>
               </div>
             </div>

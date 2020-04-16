@@ -1,6 +1,6 @@
 <?php
 session_start([
-    'cookie_lifetime' => 86400,
+	'cookie_lifetime' => 86400,
   ]);
 require_once("../includes/db.php");
 // if(!isset($_SESSION['seller_user_name'])){
@@ -55,7 +55,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		<link href="../styles/custom.css" rel="stylesheet"> --> 
 		<!-- Custom css code from modified in admin panel --->
 		<link href="../styles/styles.css" rel="stylesheet">
-		<link href="../styles/user_nav_styles.css" rel="stylesheet">
+		<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet"> -->
 		<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 		<link href="../styles/sweat_alert.css" rel="stylesheet">
 		<link href="../styles/animate.css" rel="stylesheet">
@@ -87,13 +87,13 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			}
 			
 			/*.gig-category-select .text {
-			    color: white;
-			    font-size: 18px;
-			    font-family: 'Montserrat', sans-serif;
-			    font-weight: 600;
-			    line-height: 24px;
-			    margin-top: 10px;
-			    text-align: center;
+				color: white;
+				font-size: 18px;
+				font-family: 'Montserrat', sans-serif;
+				font-weight: 600;
+				line-height: 24px;
+				margin-top: 10px;
+				text-align: center;
 			}*/
 			.gig-category-item{
 				display: -webkit-box;
@@ -115,89 +115,89 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				max-width: 100%;
 				margin: 0;
 				-webkit-flex-basis: -webkit-calc(100% - 10px) !important;
-		    -ms-flex-preferred-size: calc(100% - 10px) !important;
-		    flex-basis: -moz-calc(100% - 10px) !important;
-		    flex-basis: calc(100% - 10px) !important;
-		    max-width: -webkit-calc(100% - 10px) !important;
-		    max-width: -moz-calc(100% - 10px) !important;
-		    max-width: calc(100% - 10px) !important;
+			-ms-flex-preferred-size: calc(100% - 10px) !important;
+			flex-basis: -moz-calc(100% - 10px) !important;
+			flex-basis: calc(100% - 10px) !important;
+			max-width: -webkit-calc(100% - 10px) !important;
+			max-width: -moz-calc(100% - 10px) !important;
+			max-width: calc(100% - 10px) !important;
 			}
 			.gig-category-select{
 				-webkit-flex-basis: -webkit-calc(100% - 10px);
-		    -ms-flex-preferred-size: calc(100% - 10px);
-		    flex-basis: -moz-calc(100% - 10px);
-		    flex-basis: calc1050% - 10px);
-		    max-width: -webkit-calc(100% - 10px);
-		    max-width: -moz-calc(100% - 10px);
-		    max-width: calc(100% - 10px);
+			-ms-flex-preferred-size: calc(100% - 10px);
+			flex-basis: -moz-calc(100% - 10px);
+			flex-basis: calc(100% - 10px);
+			max-width: -webkit-calc(100% - 10px);
+			max-width: -moz-calc(100% - 10px);
+			max-width: calc(100% - 10px);
 			}
 			.cat_item-content{
 				-webkit-flex-basis: -webkit-calc(50% - 10px) !important;
-		    -ms-flex-preferred-size: calc(50% - 10px) !important;
-		    flex-basis: -moz-calc(50% - 10px) !important;
-		    flex-basis: calc(50% - 10px) !important;
-		    max-width: -webkit-calc(50% - 10px) !important;
-		    max-width: -moz-calc(50% - 10px) !important;
-		    max-width: calc(50% - 10px) !important;
+			-ms-flex-preferred-size: calc(50% - 10px) !important;
+			flex-basis: -moz-calc(50% - 10px) !important;
+			flex-basis: calc(50% - 10px) !important;
+			max-width: -webkit-calc(50% - 10px) !important;
+			max-width: -moz-calc(50% - 10px) !important;
+			max-width: calc(50% - 10px) !important;
 			}
 			.cat_item-content.item-active .gig-category-select {
-			    -webkit-flex-basis: -webkit-calc(50% - 10px);
-			    -ms-flex-preferred-size: calc(50% - 10px);
-			    flex-basis: -moz-calc(50% - 10px);
-			    flex-basis: calc(100% - 0px);
-			    max-width: -webkit-calc(50% - 10px);
-			    max-width: -moz-calc(50% - 10px);
-			    max-width: calc(100% - 0px);
+				-webkit-flex-basis: -webkit-calc(50% - 10px);
+				-ms-flex-preferred-size: calc(50% - 10px);
+				flex-basis: -moz-calc(50% - 10px);
+				flex-basis: calc(100% - 0px);
+				max-width: -webkit-calc(50% - 10px);
+				max-width: -moz-calc(50% - 10px);
+				max-width: calc(100% - 0px);
 			}
 			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active {
-			    display: -webkit-box;
-			    display: -webkit-flex;
-			    display: -moz-box;
-			    display: -ms-flexbox;
-			    display: flex;
-			    -webkit-flex-wrap: wrap;
-			    -ms-flex-wrap: wrap;
-			    flex-wrap: wrap;
-			    -webkit-flex-basis: 100%;
-			    -ms-flex-preferred-size: 100%;
-			    flex-basis: 100%;
-			    -webkit-box-pack: justify;
-			    -webkit-justify-content: space-between;
-			    -moz-box-pack: justify;
-			    -ms-flex-pack: justify;
-			    justify-content: space-between;
-			    max-width: 100%;
-			    margin: 0;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -moz-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-flex-wrap: wrap;
+				-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
+				-webkit-flex-basis: 100%;
+				-ms-flex-preferred-size: 100%;
+				flex-basis: 100%;
+				-webkit-box-pack: justify;
+				-webkit-justify-content: space-between;
+				-moz-box-pack: justify;
+				-ms-flex-pack: justify;
+				justify-content: space-between;
+				max-width: 100%;
+				margin: 0;
 			}
 			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
-			    -webkit-flex-basis: -webkit-calc(100% - 10px);
-			    -ms-flex-preferred-size: calc(100% - 10px);
-			    flex-basis: -moz-calc(100% - 10px);
-			    flex-basis: calc(100% - 10px);
-			    max-width: -webkit-calc(100% - 10px);
-			    max-width: -moz-calc(100% - 10px);
-			    max-width: calc(100% - 10px);
+				-webkit-flex-basis: -webkit-calc(100% - 10px);
+				-ms-flex-preferred-size: calc(100% - 10px);
+				flex-basis: -moz-calc(100% - 10px);
+				flex-basis: calc(100% - 10px);
+				max-width: -webkit-calc(100% - 10px);
+				max-width: -moz-calc(100% - 10px);
+				max-width: calc(100% - 10px);
 			}
 			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
-			    -webkit-flex-basis: -webkit-calc(50% - 10px);
-			    -ms-flex-preferred-size: calc(50% - 10px);
-			    flex-basis: -moz-calc(50% - 10px);
-			    flex-basis: calc(50% - 10px);
-			    margin-bottom: 20px;
-			    height: auto;
-			    max-width: -webkit-calc(50% - 10px);
-			    max-width: -moz-calc(50% - 10px);
-			    max-width: calc(50% - 10px);
+				-webkit-flex-basis: -webkit-calc(50% - 10px);
+				-ms-flex-preferred-size: calc(50% - 10px);
+				flex-basis: -moz-calc(50% - 10px);
+				flex-basis: calc(50% - 10px);
+				margin-bottom: 20px;
+				height: auto;
+				max-width: -webkit-calc(50% - 10px);
+				max-width: -moz-calc(50% - 10px);
+				max-width: calc(50% - 10px);
 			}
 			.postarequest .create-request .form-group .gig-category .cat_item-content.item-removed {
-			    display: none;
+				display: none;
 			}
 			.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .backto-main {
-			    display: -webkit-box;
-			    display: -webkit-flex;
-			    display: -moz-box;
-			    display: -ms-flexbox;
-			    display: flex;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -moz-box;
+				display: -ms-flexbox;
+				display: flex;
 			}
 			#file_name span{
 				width: 130px;
@@ -207,7 +207,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				display: inline-block;
 			}
 			/*.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
-		    background-color: white;
+			background-color: white;
 			}*/
 			@media(min-width: 767px){
 				.page-height{
@@ -215,16 +215,72 @@ $relevant_requests = $row_general_settings->relevant_requests;
 					min-height: 60vh;
 				}
 			}
+			@media(max-width: 768px){
+				.gig-category-item{
+					-webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+				-ms-flex-preferred-size: calc(100% - 0px) !important;
+				flex-basis: -moz-calc(100% - 0px) !important;
+				flex-basis: calc(100% - 0px) !important;
+				max-width: -webkit-calc(100% - 0px) !important;
+				max-width: -moz-calc(100% - 0px) !important;
+				max-width: calc(100% - 0px) !important;
+				}
+				.gig-category-select{
+					-webkit-flex-basis: -webkit-calc(100% - 0px);
+				-ms-flex-preferred-size: calc(100% - 0px);
+				flex-basis: -moz-calc(100% - 0px);
+				flex-basis: calc(100% - 0px);
+				max-width: -webkit-calc(100% - 0px);
+				max-width: -moz-calc(100% - 0px);
+				max-width: calc(100% - 0px);
+				}
+				.cat_item-content{
+					-webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+				-ms-flex-preferred-size: calc(100% - 0px) !important;
+				flex-basis: -moz-calc(100% - 0px) !important;
+				flex-basis: calc(100% - 0px) !important;
+				max-width: -webkit-calc(100% - 0px) !important;
+				max-width: -moz-calc(100% - 0px) !important;
+				max-width: calc(100% - 0px) !important;
+				}
+				.cat_item-content.item-active .gig-category-select {
+				-webkit-flex-basis: -webkit-calc(100% - 0px);
+				-ms-flex-preferred-size: calc(100% - 0px);
+				flex-basis: -moz-calc(100% - 0px);
+				flex-basis: calc(100% - 0px);
+				max-width: -webkit-calc(100% - 0px);
+				max-width: -moz-calc(100% - 0px);
+				max-width: calc(100% - 0px);
+				}
+				.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+				-webkit-flex-basis: -webkit-calc(100% - 0px);
+				-ms-flex-preferred-size: calc(100% - 0px);
+				flex-basis: -moz-calc(100% - 0px);
+				flex-basis: calc(100% - 0px);
+				max-width: -webkit-calc(100% - 0px);
+				max-width: -moz-calc(100% - 0px);
+				max-width: calc(100% - 0px);
+				}
+				.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+				-webkit-flex-basis: -webkit-calc(100% - 0px);
+				-ms-flex-preferred-size: calc(100% - 0px);
+				flex-basis: -moz-calc(100% - 0px);
+				flex-basis: calc(100% - 0px);
+				max-width: -webkit-calc(100% - 0px);
+				max-width: -moz-calc(100% - 0px);
+				max-width: calc(100% - 0px);
+				}
+			}
 		</style>
 	</head>
 	<body class="all-content">
 		<!-- Preloader Start -->
-    <div class="proloader">
-        <div class="loader">
-            <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
-        </div>
-    </div>
-    <!-- Preloader End -->
+	<div class="proloader">
+		<div class="loader">
+			<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+		</div>
+	</div>
+	<!-- Preloader End -->
 		<?php
 		if(!isset($_SESSION['seller_user_name'])){
 			require_once("../includes/header_with_categories.php");
@@ -383,12 +439,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 																<div class="gig-category-select <?php echo $cat_class; ?> d-flex flex-column align-items-center justify-content-between" onclick="categoryItem(<?= $cat_id; ?>);">
 																	
 																	<label for="categoryItem-<?= $cat_id; ?>" class="d-flex flex-column align-items-center justify-content-between">
-					                          <input id="categoryItem-<?= $cat_id; ?>" class="cat_value" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
-					                          <span class="icon">
-					                              <img class="img-fluid white-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
-					                              <img class="img-fluid color-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
-					                          </span>
-					                          <span class="text"><?= $cat_title; ?></span>
+											  <input id="categoryItem-<?= $cat_id; ?>" class="cat_value" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
+											  <span class="icon">
+												  <img class="img-fluid white-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
+												  <img class="img-fluid color-icon" src="<?= $site_url; ?>/assets/img/category/<?= $cat_icon; ?>" width="75" height="75" />
+											  </span>
+											  <span class="text"><?= $cat_title; ?></span>
 																	</label>
 																</div>
 															</div>
@@ -401,12 +457,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 															
 														</div>
 														<div class="backto-main flex-row">
-														    <a href="javascript:void(0)" class="d-flex flex-row align-items-center">
-														        <span>
-														            <i class="fal fa-angle-left"></i>
-														        </span>
-														        <span>Go Back</span>
-														    </a>
+															<a href="javascript:void(0)" class="d-flex flex-row align-items-center">
+																<span>
+																	<i class="fal fa-angle-left"></i>
+																</span>
+																<span>Go Back</span>
+															</a>
 														</div>
 													</div>
 												<?php } ?>
@@ -421,44 +477,44 @@ $relevant_requests = $row_general_settings->relevant_requests;
 																$cat_title = $row_meta->cat_title;
 																?>
 																<label for="<?= $cat_id; ?>">
-		                            <input id="<?= $cat_id; ?>" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
-		                            <div class="gig-category-select gd d-flex flex-column align-items-center justify-content-between">
-		                                <span class="icon">
-		                                    <img class="img-fluid white-icon" src="<?= $site_url; ?>assets/img/post-a-gig/graphic-design-white.png" />
-		                                    <img class="img-fluid color-icon" src="assets/img/post-a-gig/graphic-design-color.png" />
-		                                </span>
-		                                <span class="text"><?= $cat_title; ?></span>
-		                            </div>
-		                          </label>
-		                          	<?php } ?>
+									<input id="<?= $cat_id; ?>" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
+									<div class="gig-category-select gd d-flex flex-column align-items-center justify-content-between">
+										<span class="icon">
+											<img class="img-fluid white-icon" src="<?= $site_url; ?>assets/img/post-a-gig/graphic-design-white.png" />
+											<img class="img-fluid color-icon" src="assets/img/post-a-gig/graphic-design-color.png" />
+										</span>
+										<span class="text"><?= $cat_title; ?></span>
+									</div>
+								  </label>
+									<?php } ?>
 															</div>
-  													<div class="gig-category-tags gd">
-  														<label class="gig-category-tag" for="cat1">
-  															<input type="radio" name="cat" id="cat1"> Logo
-  														</label>
-  														<label class="gig-category-tag" for="cat2">
-  															<input type="radio" name="cat" id="cat2"> Logo
-  														</label>
-                              <a class="gig-category-tag" href="javascript:void(0);">Logos</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-                              <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-  	                        </div>
-  	                        <div class="backto-main flex-row">
-  	                            <a href="javascript:void(0)" class="d-flex flex-row align-items-center">
-  	                                <span>
-  	                                    <i class="fal fa-angle-left"></i>
-  	                                </span>
-  	                                <span>Go Back</span>
-  	                            </a>
-  	                        </div>
-                        </div> -->
+													<div class="gig-category-tags gd">
+														<label class="gig-category-tag" for="cat1">
+															<input type="radio" name="cat" id="cat1"> Logo
+														</label>
+														<label class="gig-category-tag" for="cat2">
+															<input type="radio" name="cat" id="cat2"> Logo
+														</label>
+							  <a class="gig-category-tag" href="javascript:void(0);">Logos</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+							</div>
+							<div class="backto-main flex-row">
+								<a href="javascript:void(0)" class="d-flex flex-row align-items-center">
+									<span>
+										<i class="fal fa-angle-left"></i>
+									</span>
+									<span>Go Back</span>
+								</a>
+							</div>
+						</div> -->
 													<!-- Each item -->
 												</div>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['cat_id']); ?></span>
@@ -585,20 +641,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											<?php if(!isset($_SESSION['seller_user_name'])){ ?>
 											<!-- Register Form -->
 											<div class="post-register-form register-form" style="display: none;">
-												<!-- <?php 
-												  $form_errors = Flash::render("register_errors");
-												  $form_data = Flash::render("form_data");
-												  if(is_array($form_errors)){
-												  ?>
-												<div class="alert alert-danger">
-												  
-												  <ul class="list-unstyled mb-0">
-												    <?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-												    <li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
-												    <?php } ?>
-												  </ul>
-												</div>
-								        <?php } ?> -->
+												
 
 												<h4>Signup as Buyer</h4>
 												<div class="form-group">
@@ -618,8 +661,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												<div class="form-group">
 													<label class="control-label"><span>YOUR EMAIL ADDRESS</span></label>
 													<input class="form-control" type="email" name="email" placeholder="Enter Email" value="">
-				            			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
-				            			<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
+										<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+										<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>Password</span></label>
@@ -710,42 +753,42 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		<!-- Main content end -->
 <?php } ?>
 <script>
-        $(function(){
-            $(window).on('load resize', function(){
-                var popupWidth = $('#popupWidth').outerWidth();
-                $('.popup').css({
-                    'width': popupWidth + 30 + 'px'
-                });
-            });
-            $('.gig-category-select').on('click', function(){
-                $('.cat_item-content').addClass('item-removed');
-                $('.gig-category-item').addClass('item-removed');
-                $(this).parents('.cat_item-content').removeClass('item-removed');
-                $(this).parents('.cat_item-content').addClass('item-active');
-                $(this).parents('.gig-category-item').removeClass('item-removed');
-                $(this).parents('.gig-category-item').addClass('item-active');
-            });
-            $('.gig-category-tag').on('click', function(){
-                $(this).toggleClass('tag-selected');
-            });
-            $('.backto-main').on('click', function(){
-                $('.gig-category-item').removeClass('item-active');
-                $('.gig-category-item').removeClass('item-removed');
-                $('.cat_item-content').removeClass('item-active');
-                $('.cat_item-content').removeClass('item-removed');
-                $('.gig-category-tag').removeClass('tag-selected');
-                $('.gig-category-item').find('input[type="radio"]').prop('checked', false);
-            });
-            $('.deliver-time-item[for="days30"]').on('click', function(){
-                $('.input-number').focus();
-            });
-            $(".gig-category-select").on('click', function(){
-            	var cat_class = $(this).parents('.cat_item-content').attr("data-id");
-            		$(".gig-category-tags").removeAttr('class').addClass('gig-category-tags '+cat_class);
-            		// $('.gig-category-tags').addClass(cat_class);
-            });
-        });
-    </script>
+		$(function(){
+			$(window).on('load resize', function(){
+				var popupWidth = $('#popupWidth').outerWidth();
+				$('.popup').css({
+					'width': popupWidth + 30 + 'px'
+				});
+			});
+			$('.gig-category-select').on('click', function(){
+				$('.cat_item-content').addClass('item-removed');
+				$('.gig-category-item').addClass('item-removed');
+				$(this).parents('.cat_item-content').removeClass('item-removed');
+				$(this).parents('.cat_item-content').addClass('item-active');
+				$(this).parents('.gig-category-item').removeClass('item-removed');
+				$(this).parents('.gig-category-item').addClass('item-active');
+			});
+			$('.gig-category-tag').on('click', function(){
+				$(this).toggleClass('tag-selected');
+			});
+			$('.backto-main').on('click', function(){
+				$('.gig-category-item').removeClass('item-active');
+				$('.gig-category-item').removeClass('item-removed');
+				$('.cat_item-content').removeClass('item-active');
+				$('.cat_item-content').removeClass('item-removed');
+				$('.gig-category-tag').removeClass('tag-selected');
+				$('.gig-category-item').find('input[type="radio"]').prop('checked', false);
+			});
+			$('.deliver-time-item[for="days30"]').on('click', function(){
+				$('.input-number').focus();
+			});
+			$(".gig-category-select").on('click', function(){
+				var cat_class = $(this).parents('.cat_item-content').attr("data-id");
+					$(".gig-category-tags").removeAttr('class').addClass('gig-category-tags '+cat_class);
+					// $('.gig-category-tags').addClass(cat_class);
+			});
+		});
+	</script>
 <script>
 $(document).ready(function(){
 	$('.h-2').css("visibility", "hidden");
@@ -828,10 +871,10 @@ $(document).ready(function(){
 	  // $(this).prev('label').text(file);
 	});
 	$('#file').bind('change', function() {
-      var totalSize = this.files[0].size;
-      var totalSizeMb = totalSize  / Math.pow(1024,2);
+	  var totalSize = this.files[0].size;
+	  var totalSizeMb = totalSize  / Math.pow(1024,2);
   
-      $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+	  $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
 	});
 
 	$('.input-number').keyup(function(){
@@ -902,27 +945,27 @@ if(isset($_POST['submit'])){
 					if($decrypt_password == 0){
 						echo "
 						<script>
-			        swal({
-			          type: 'warning',
-			          html: $('<div>')
-			            .text('Opps! password or username is incorrect. Please try again.'),
-			          animation: false,
-			          customClass: 'animated tada'
-			        })
-				    </script>
+					swal({
+					  type: 'warning',
+					  html: $('<div>')
+						.text('Opps! password or username is incorrect. Please try again.'),
+					  animation: false,
+					  customClass: 'animated tada'
+					})
+					</script>
 						";
 					}else{
 						if($seller_status == "block-ban"){
 							echo "
 							<script>
-					            swal({
-					              type: 'warning',
-					              html: $('<div>')
-					                .text('You have been blocked by the Admin. Please contact customer support.'),
-					              animation: false,
-					              customClass: 'animated tada'
-					            })
-					    	</script>";
+								swal({
+								  type: 'warning',
+								  html: $('<div>')
+									.text('You have been blocked by the Admin. Please contact customer support.'),
+								  animation: false,
+								  customClass: 'animated tada'
+								})
+							</script>";
 						}elseif($seller_status == "deactivated"){
 							echo "
 							<script>
@@ -937,73 +980,73 @@ if(isset($_POST['submit'])){
 							$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 							if($select_seller){
 								$row_seller = $select_seller->fetch();
-						    $_SESSION['seller_user_name'] = $seller_user_name;
-						    $login_seller_id = $row_seller->seller_id;
+							$_SESSION['seller_user_name'] = $seller_user_name;
+							$login_seller_id = $row_seller->seller_id;
 
 
-						    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
+							if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
 									$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
-						      $seller_user_name = ucfirst(strtolower($seller_user_name));
+							  $seller_user_name = ucfirst(strtolower($seller_user_name));
 									$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 									
-				          $rules = array(
-				            "request_title" => "required",
-				            "request_description" => "required",
-				            "cat_id" => "required",
-				            "request_budget" => "number|required",
-				          	
-				          	"skills_required" => "required",
-				          	"languages" => "required");
-				            $messages = array("cat_id" => "please select a category and sub category","request_title" => "please enter request title", "request_description" => "please enter description", "request_budget" => "please enter budget amount", "delivery_time" => "please select delivery time", "skills_required" => "please enter required skills", "languages" => "please enter languages");
-				          $val = new Validator($_POST,$rules,$messages);
-				          if($val->run() == false){
-				          	Flash::add("form_errors",$val->get_all_errors());
-				          	Flash::add("form_data",$_POST);
-				          	echo "<script> window.open('post-request','_self');</script>";
-				          }else{
-				          	$request_title = $input->post('request_title');
-				          	$request_description = $input->post('request_description');
-				          	$cat_id = $input->post('cat_id');
-				          	$child_id = $input->post('child_id');
-				          	$request_budget = $input->post('request_budget');
-				          	$delivery_time = $input->post('delivery_time');
+						  $rules = array(
+							"request_title" => "required",
+							"request_description" => "required",
+							"cat_id" => "required",
+							"request_budget" => "number|required",
+							
+							"skills_required" => "required",
+							"languages" => "required");
+							$messages = array("cat_id" => "please select a category and sub category","request_title" => "please enter request title", "request_description" => "please enter description", "request_budget" => "please enter budget amount", "delivery_time" => "please select delivery time", "skills_required" => "please enter required skills", "languages" => "please enter languages");
+						  $val = new Validator($_POST,$rules,$messages);
+						  if($val->run() == false){
+							Flash::add("form_errors",$val->get_all_errors());
+							Flash::add("form_data",$_POST);
+							echo "<script> window.open('post-request','_self');</script>";
+						  }else{
+							$request_title = $input->post('request_title');
+							$request_description = $input->post('request_description');
+							$cat_id = $input->post('cat_id');
+							$child_id = $input->post('child_id');
+							$request_budget = $input->post('request_budget');
+							$delivery_time = $input->post('delivery_time');
 
-				          	echo "You have selected :" .$delivery_time;
-				          	$skills_required = $input->post('skills_required');
-				          	$languages = $input->post('languages');
-				          	$request_file = $_FILES['request_file']['name'];
-				          	$request_file_tmp = $_FILES['request_file']['tmp_name'];
-				          	$request_date = date("F d, Y");
-				          	$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-				          	$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-				          	if(!empty($request_file)){
-				          		if(!in_array($file_extension,$allowed)){
-				          			echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-				          			echo "<script>window.open('post-request','_self')</script>";
-				          			exit();
-				          		}
-				          		$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-				          		$request_file = $request_file."_".time().".$file_extension";
-				          		move_uploaded_file($request_file_tmp,"request_files/$request_file");
-				          	}
-				          	$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
-				          	if($insert_request){
-				          		echo "<script>
-				          		    swal({
-				          		      type: 'success',
-				          		      text: 'Your request has been submitted successfully!',
-				          		      timer: 3000,
-				          		      onOpen: function(){
-				          		      	swal.showLoading()
-				          		      }
-				          		    }).then(function(){
-				          		      	window.open('manage_requests.php','_self');
-				          		    });
-				          		</script>";
-				          	}
-				          }
-				        }
+							echo "You have selected :" .$delivery_time;
+							$skills_required = $input->post('skills_required');
+							$languages = $input->post('languages');
+							$request_file = $_FILES['request_file']['name'];
+							$request_file_tmp = $_FILES['request_file']['tmp_name'];
+							$request_date = date("F d, Y");
+							$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+							$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+							if(!empty($request_file)){
+								if(!in_array($file_extension,$allowed)){
+									echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+									echo "<script>window.open('post-request','_self')</script>";
+									exit();
+								}
+								$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+								$request_file = $request_file."_".time().".$file_extension";
+								move_uploaded_file($request_file_tmp,"request_files/$request_file");
+							}
+							$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
+							if($insert_request){
+								echo "<script>
+									swal({
+									  type: 'success',
+									  text: 'Your request has been submitted successfully!',
+									  timer: 3000,
+									  onOpen: function(){
+										swal.showLoading()
+									  }
+									}).then(function(){
+										window.open('manage_requests.php','_self');
+									});
+								</script>";
+							}
+						  }
+						}
 							}
 						}
 				  }
@@ -1015,14 +1058,21 @@ if(isset($_POST['submit'])){
 				"name" => "required",
 				"u_name" => "required",
 				"email" => "email|required",
-				"pass" => "required");
+				"pass" => "required",
+				"request_title" => "required",
+			  "request_description" => "required",
+			  "cat_id" => "required",
+			  "request_budget" => "number|required",
+				
+				"skills_required" => "required",
+				"languages" => "required");
 
-				$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.", "email" => "Email is Required.");
+				$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.", "email" => "Email is Required.","cat_id" => "please select a category and sub category","request_title" => "please enter request title", "request_description" => "please enter description", "request_budget" => "please enter budget amount", "delivery_time" => "please select delivery time", "skills_required" => "please enter required skills", "languages" => "please enter languages");
 				$val = new Validator($_POST,$rules,$messages);
 
 				if($val->run() == false){
 					$_SESSION['error_array'] = array();
-					Flash::add("register_errors",$val->get_all_errors());
+					Flash::add("form_errors",$val->get_all_errors());
 					Flash::add("form_data",$_POST);
 					echo "<script>window.open('post-request','_self')</script>";
 				}else{
@@ -1074,13 +1124,13 @@ if(isset($_POST['submit'])){
 						
 						if($insert_seller){
 							
-					    $_SESSION['seller_user_name'] = $u_name;
+						$_SESSION['seller_user_name'] = $u_name;
 							$insert_seller_account = $db->insert("seller_accounts",array("seller_id" => $regsiter_seller_id));
 
 							if($insert_seller_account){
 
 								if(!empty($referral)){
-							    $sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
+								$sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
 									$row_seller = $sel_seller->fetch();
 									$seller_id = $row_seller->seller_id;	
 									$seller_ip = $row_seller->seller_ip;
@@ -1089,7 +1139,7 @@ if(isset($_POST['submit'])){
 									}else{
 										$count_referrals = $db->count("referrals",array("ip" => $ip));	
 										if($count_referrals == 1){
-									    echo "<script>alert('You are trying to referral yourself more then one time.');</script>";
+										echo "<script>alert('You are trying to referral yourself more then one time.');</script>";
 										}else{
 											$insert_referral = $db->insert("referrals",array("seller_id" => $seller_id,"referred_id" => $regsiter_seller_id,"comission" => $referral_money,"date" => $date,"ip" => $ip,"status" => 'pending'));
 										}
@@ -1143,16 +1193,16 @@ if(isset($_POST['submit'])){
 									$insert_request = $db->insert("buyer_requests",array("seller_id"=>$regsiter_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 									if($insert_request){
 										echo "<script>
-										    swal({
-										      type: 'success',
-										      text: 'Your request has been submitted successfully!',
-										      timer: 3000,
-										      onOpen: function(){
-										      	swal.showLoading()
-										      }
-										    }).then(function(){
-										      	window.open('manage_requests.php','_self');
-										    });
+											swal({
+											  type: 'success',
+											  text: 'Your request has been submitted successfully!',
+											  timer: 3000,
+											  onOpen: function(){
+												swal.showLoading()
+											  }
+											}).then(function(){
+												window.open('manage_requests.php','_self');
+											});
 										</script>";
 									}
 								}
@@ -1223,16 +1273,16 @@ if(isset($_POST['submit'])){
 			$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 			if($insert_request){
 				echo "<script>
-				    swal({
-				      type: 'success',
-				      text: 'Your request has been submitted successfully!',
-				      timer: 3000,
-				      onOpen: function(){
-				      	swal.showLoading()
-				      }
-				    }).then(function(){
-				      	window.open('manage_requests.php','_self');
-				    });
+					swal({
+					  type: 'success',
+					  text: 'Your request has been submitted successfully!',
+					  timer: 3000,
+					  onOpen: function(){
+						swal.showLoading()
+					  }
+					}).then(function(){
+						window.open('manage_requests.php','_self');
+					});
 				</script>";
 			}
 		}

@@ -88,18 +88,45 @@
   }else{
    $total_gigs_view = "0"; 
   }
+
+  // $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+  // $count_gigs = $select_proposals->rowCount();
+  // if(!$count_gigs == 0){
+  //   $total_price = array();
+  //   while($row_proposals = $select_proposals->fetch()){
+  //     $proposal_prices = $row_proposals->proposal_price;
+  //     array_push($total_price,$proposal_prices);
+  //   }
+  //   $total_price_gig= array_sum($total_price);
+  //   @$average = $total_price_gig/count($total_price);
+  //   $average_price = substr($average ,0,1);
+  // }else{
+  //   $average = "0";
+  //   $average_price = "0";
+  // }
+
+
   $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
   $count_gigs = $select_proposals->rowCount();
   // print_r($count_gigs);
   if(!$count_gigs == 0){
     $total_price = array();
     while($row_proposals = $select_proposals->fetch()){
-      $proposal_prices = $row_proposals->proposal_price;
-      // print_r($proposal_prices);
-      array_push($total_price,$proposal_prices);
+      // print_r($row_proposals);
+      $proposal_id = $row_proposals->proposal_id;
+      $select_proposals_packg = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
+      while($row_proposals_packg = $select_proposals_packg->fetch()){
+        $package_dec = $row_proposals_packg->description;
+        // print_r($package_dec);
+        if ($package_dec != '') {
+          $package_price = $row_proposals_packg->price;
+          // print_r($package_price);
+          array_push($total_price,$package_price);
+        }
+      }
     }
     $total_price_gig= array_sum($total_price);
-    @$average = $total_price_gig/count($total_price);
+    @$average = $total_price_gig/$count_gigs;
     $average_price = substr($average ,0,1);
   }else{
     $average = "0";
@@ -292,7 +319,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4><?= round($average); ?> <span>Average Cost of Gigs </span></h4>
+                  <h4><?= $average; ?> <span>Average Cost of Gigs </span></h4>
                 </div>
               </div>
             </div>

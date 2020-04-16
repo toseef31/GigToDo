@@ -197,7 +197,7 @@ if(isset($_SESSION['seller_user_name'])){
               <?php } ?>
               <div class="profile-image">
                 <?php if(!empty($get_seller_image)){ ?>
-                <img src="user_images/<?= $get_seller_image; ?>" alt="profile">
+                <img src="<?= $site_url; ?>/user_images/<?= $get_seller_image; ?>" alt="profile" class="rounded-circle">
                 <?php }else { ?>
                 <img src="assets/img/seller-profile/profile-img.png" alt="profile">
                 <?php } ?>

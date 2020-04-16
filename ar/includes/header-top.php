@@ -119,7 +119,7 @@ $page_url = substr("$full_url", 18);
   <div class="canvs-menu">
     <ul class="d-flex flex-column">
       <li>
-        <a href="javascript:void(0);">نشر طلب</a>
+        <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
       </li>
       <li>
         <a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a>

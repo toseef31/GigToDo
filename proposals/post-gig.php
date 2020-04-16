@@ -191,6 +191,62 @@ $login_seller_language = $row_login_seller->seller_language;
     .header-top {
       background-color: #fff;
     }
+    @media(max-width: 768px){
+      .gig-category-item{
+        -webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+        -ms-flex-preferred-size: calc(100% - 0px) !important;
+        flex-basis: -moz-calc(100% - 0px) !important;
+        flex-basis: calc(100% - 0px) !important;
+        max-width: -webkit-calc(100% - 0px) !important;
+        max-width: -moz-calc(100% - 0px) !important;
+        max-width: calc(100% - 0px) !important;
+      }
+      .gig-category-select{
+        -webkit-flex-basis: -webkit-calc(100% - 0px);
+        -ms-flex-preferred-size: calc(100% - 0px);
+        flex-basis: -moz-calc(100% - 0px);
+        flex-basis: calc(100% - 0px);
+        max-width: -webkit-calc(100% - 0px);
+        max-width: -moz-calc(100% - 0px);
+        max-width: calc(100% - 0px);
+      }
+      .cat_item-content{
+        -webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+        -ms-flex-preferred-size: calc(100% - 0px) !important;
+        flex-basis: -moz-calc(100% - 10px) !important;
+        flex-basis: calc(100% - 0px) !important;
+        max-width: -webkit-calc(100% - 0px) !important;
+        max-width: -moz-calc(100% - 0px) !important;
+        max-width: calc(100% - 0px) !important;
+      }
+      .cat_item-content.item-active .gig-category-select {
+        -webkit-flex-basis: -webkit-calc(100% - 0px);
+        -ms-flex-preferred-size: calc(100% - 0px);
+        flex-basis: -moz-calc(100% - 0px);
+        flex-basis: calc(100% - 0px);
+        max-width: -webkit-calc(100% - 0px);
+        max-width: -moz-calc(100% - 0px);
+        max-width: calc(100% - 0px);
+      }
+      .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+        -webkit-flex-basis: -webkit-calc(100% - 0px);
+        -ms-flex-preferred-size: calc(100% - 0px);
+        flex-basis: -moz-calc(100% - 0px);
+        flex-basis: calc(100% - 0px);
+        max-width: -webkit-calc(100% - 0px);
+        max-width: -moz-calc(100% - 0px);
+        max-width: calc(100% - 0px);
+      }
+      .postagig .create-gig .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+        -webkit-flex-basis: -webkit-calc(100% - 0px);
+        -ms-flex-preferred-size: calc(100% - 0px);
+        flex-basis: -moz-calc(100% - 0px);
+        flex-basis: calc(100% - 0px);
+        max-width: -webkit-calc(100% - 0px);
+        max-width: -moz-calc(100% - 0px);
+        max-width: calc(100% - 0px);
+      }
+    }
   </style>
 </head>
 

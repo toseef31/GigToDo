@@ -642,7 +642,7 @@ margin-bottom:10px;
  .notifications-dropdown .dropdown-header,
  .messages-dropdown .dropdown-header {
 
-	 margin-top:-7px;
+	 margin-top:0px;
 	 color:inherit;
 	 font-size:15px;
 	 background-color:#f7f7f7;
@@ -657,18 +657,18 @@ margin-bottom:10px;
 	 padding-top: 10px;
 	 border-bottom:1px solid #ccc;
 	 padding-left:15px;
-	 height:85px;
+	 /*height:85px;*/
  
  }
 
  .header-message-div-unread {
 
-	 background:#ebf2f5;
-	 padding-bottom:0px;
+	 /*background:#ebf2f5;*/
+	 /*padding-bottom:0px;
 	 padding-top: 10px;
 	 border-bottom:1px solid #ccc;
 	 padding-left:15px;
-	 height:85px;
+	 height:85px;*/
 
  }
 
@@ -686,7 +686,7 @@ margin-bottom:10px;
  }
 
 
- .header-message-div .heading,
+/* .header-message-div .heading,
  .header-message-div-unread .heading {
 	 font-weight: bold;
 	 position:relative;
@@ -695,9 +695,9 @@ margin-bottom:10px;
 	 color:black;
 	 font-size:15px;
 
- }
+ }*/
 
-.header-message-div .message,
+/*.header-message-div .message,
 .header-message-div-unread .message {
 
 	font-size:15px;
@@ -708,9 +708,9 @@ margin-bottom:10px;
 	width: 80%;
 	color:black;
 
-}
+}*/
 
- .header-message-div .date,
+/* .header-message-div .date,
  .header-message-div-unread .date {
 
 	 position:relative;
@@ -721,7 +721,7 @@ margin-bottom:10px;
 	 left:20px;
 	 height:0px;
 
- }
+ }*/
 
 
 .navbar-login .collapse.navbar-collapse .nav-item .btn {

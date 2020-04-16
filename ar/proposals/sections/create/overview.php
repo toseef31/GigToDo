@@ -8,7 +8,7 @@ if (empty($form_data)) {
 
 ?>
 
-<form action="#" class="create-gig proposal-form" method="post">
+<form action="#" class="create-gig proposal-form mb-0 border-bottom-0" id="proposal-form" method="post">
   <div class="form-group">
     <label class="control-label d-flex flex-row align-items-center">
       <span>
@@ -187,7 +187,7 @@ if (empty($form_data)) {
       </p>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group mb-0">
     <label class="control-label d-flex flex-row align-items-center">
       <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -274,15 +274,15 @@ if (empty($form_data)) {
   </div>
   <!--- form-group row Ends --->
   <?php } ?>
-  <div class="form-group d-none">
+  <!-- <div class="form-group d-none">
     <label class="control-label d-flex flex-row align-items-center">
-      <!-- <span>
+      <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/create-gig-icon.png" />
-      </span> -->
+      </span>
       <span class="pl-0">العلامات</span>
     </label>
     <input type="text" name="proposal_tags" class="form-control" data-role="tagsinput">
-    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></span>
+    <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></span> -->
     <!-- <div class="d-flex flex-column"> -->
       <!--- form-group row Starts --->
       <!-- <label class="bottom-label">العلامات</label>
@@ -291,21 +291,42 @@ if (empty($form_data)) {
         <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_tags']); ?></small>
       </div>
     </div> -->
-  </div>
-  <!--- form-group row Ends --->
-  <div class="form-group mb-0">
-    <div class="d-flex flex-column">
-      <!-- <div class="d-flex flex-row justify-content-end">
-        <button class="button-add-more" type="button" role="button">
-          <i class="fal fa-plus"></i>
-        </button>
-      </div> -->
-      <div class="d-flex flex-row">
-        <button class="button" name="submit" type="submit">حفظ و استمرار</button>
+  <!-- </div> -->
+</form>
+  <div class="postagig create-gigpostagig create-gig mb-0 border-bottom-0 pl-0 border-top-0 pt-0">
+    <div class="form-group rounded-0">
+      <div class="pt-3 pb-0">
+      <!-- <h6 class="font-weight-normal">My Proposal Extras</h6> -->
+      <!-- <a data-toggle="collapse" href="#insert-extra" class="small text-success">+ Add Extra</a> -->
+       <div class="tabs accordion mt-2" id="allTabs"><!--- All Tabs Starts --->
+          <?php include("sections/edit/extras.php"); ?>
+        </div><!--- All Tabs Ends --->
+      </div>
+      <div class="d-flex flex-column align-items-end">
+        <div class="d-flex flex-row justify-content-end">
+          <a class="btn button-add-more mb-0" type="button" data-toggle="collapse" href="#insert-extra">
+            <i class="fal fa-plus"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</form>
+  <!--- form-group row Ends --->
+  <div class="create-gig proposal-form">
+    <div class="form-group mb-0">
+      <div class="d-flex flex-column">
+        <!-- <div class="d-flex flex-row justify-content-end">
+          <button class="button-add-more" type="button" role="button">
+            <i class="fal fa-plus"></i>
+          </button>
+        </div> -->
+        <div class="d-flex flex-row">
+          <button class="button" name="submit" type="submit" form="proposal-form">حفظ و استمرار</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </form> -->
 
 <script>
   $('.input-number').keyup(function(){
