@@ -290,7 +290,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4><?= $average; ?> <span>متوسط تكلفة الخدمة </span></h4>
+                  <h4><?= round($average,2); ?> <span>متوسط تكلفة الخدمة </span></h4>
                 </div>
               </div>
             </div>
