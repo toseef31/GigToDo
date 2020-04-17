@@ -197,6 +197,9 @@ $relevant_requests = $row_general_settings->relevant_requests;
 					display: inline-block;
 			    direction: rtl;
 				}
+				.bootstrap-tagsinput.focus{
+					border-color: #ff0707 !important;
+				}
 				@media(min-width: 767px){
 					.page-height{
 						position: relative;

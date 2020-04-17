@@ -209,6 +209,9 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			/*.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
 			background-color: white;
 			}*/
+			.bootstrap-tagsinput.focus{
+				border-color: #ff0707 !important;
+			}
 			@media(min-width: 767px){
 				.page-height{
 					position: relative;

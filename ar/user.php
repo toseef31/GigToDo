@@ -161,6 +161,9 @@ if(isset($_SESSION['seller_user_name'])){
       display: inline-block;
       direction: rtl;
     }
+    #category{
+      display: block !important;
+    }
   </style>
 </head>
 <body class="all-content">  
@@ -677,7 +680,11 @@ if(isset($_SESSION['seller_user_name'])){
         <div class="modal-body">
           <div class="customer-profile d-flex align-items-start align-items-md-center">
             <div class="profile-img">
-              <img src="assets/img/seller-profile/profile-img.png" alt="">
+              <?php if(!empty($get_seller_image)){ ?>
+              <img src="<?= $site_url; ?>/user_images/<?= $get_seller_image; ?>" alt="profile" class="rounded-circle">
+              <?php }else { ?>
+              <img src="assets/img/seller-profile/profile-img.png" alt="profile">
+              <?php } ?>
             </div>
             <div class="profile-content media-body">
               <h6 class="profile-name">
@@ -724,8 +731,8 @@ if(isset($_SESSION['seller_user_name'])){
                 </span>
               </div>
               <div class="row">
-                <div class="col-12 col-sm-6 mb-30">
-                  <select name="cat_id" id="category">
+                <div class="col-12 col-sm-6 mb-30 sub_cat">
+                  <select name="cat_id" id="category" class="form-control">
                     <option value="0">
                       اختر الفئة الفرعية
                     </option>

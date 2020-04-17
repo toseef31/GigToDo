@@ -81,7 +81,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 								<span class="package-title">
 									الأساسية
 								</span>
-								<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control" placeholder="Description"><?= $row_1->description; ?></textarea>
+								<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control" placeholder="Description" required><?= $row_1->description; ?></textarea>
 							</div>
 							<!-- Each item -->
 							<div class="package-item-single">

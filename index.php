@@ -10,6 +10,15 @@ require_once("social-config.php");
 $site_title = $row_general_settings->site_title;
 
 ?>
+<?php 
+	if(isset($_SESSION['seller_user_name'])){
+	  $login_seller_user_name = $_SESSION['seller_user_name'];
+	  $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+	  $row_login_seller = $select_login_seller->fetch();
+	  $login_user_type = $row_login_seller->account_type;
+	  // print_r($login_user_type);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
@@ -89,8 +98,12 @@ if(!isset($_SESSION['seller_user_name'])){
 }
 if(!isset($_SESSION['seller_user_name'])){
 	require_once("home.php");
-}else{  
-	require_once("user_home.php");
+}else{
+	if($login_user_type == 'buyer'){  
+		require_once("user_home.php");
+	}else {
+		echo "<script> window.open('dashboard','_self') </script>"; 
+	}
 }
 require_once("includes/footer.php"); 
 

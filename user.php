@@ -37,8 +37,6 @@ if(isset($_SESSION['seller_user_name'])){
   }
 }
 
-// Update Proposal Views
-
 
 $get_seller_user_name = $input->get('seller_user_name');
 $select_seller = $db->query("select * from sellers where seller_user_name=:u_name AND NOT seller_status='deactivated' AND NOT seller_status='block-ban'",array("u_name"=>$get_seller_user_name));
@@ -166,6 +164,9 @@ if(isset($_SESSION['seller_user_name'])){
       text-overflow: ellipsis;
       white-space: nowrap;
       display: inline-block;
+    }
+    #category{
+      display: block !important;
     }
   </style>
 </head>
@@ -695,7 +696,7 @@ if(isset($_SESSION['seller_user_name'])){
           <div class="customer-profile d-flex align-items-start align-items-md-center">
             <div class="profile-img">
               <?php if(!empty($get_seller_image)){ ?>
-              <img src="user_images/<?= $get_seller_image; ?>" alt="profile">
+              <img src="user_images/<?= $get_seller_image; ?>" alt="profile" class="rounded-circle">
               <?php }else { ?>
               <img src="assets/img/seller-profile/profile-img.png" alt="profile">
               <?php } ?>
@@ -733,8 +734,8 @@ if(isset($_SESSION['seller_user_name'])){
                 <span>Choose a category</span>
               </div>
               <div class="row">
-                <div class="col-12 col-sm-6 mb-30">
-                  <select name="cat_id" id="category">
+                <div class="col-12 col-sm-6 mb-30 sub_cat">
+                  <select name="cat_id" class="form-control" id="category" style="display: block !important;">
                     <option value="" class="hidden"> Select A Category </option>
                   <?php 
                   // $db->select("proposals",array("proposal_seller_id"=>$get_seller_id,"proposal_status" => "active"));

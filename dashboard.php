@@ -237,6 +237,25 @@
       right: 10px;
       top: 10px;
     }
+    .messge-noti-box{
+      max-height: 470px;
+      overflow: auto;
+    }
+    /* width */
+    .messge-noti-box::-webkit-scrollbar {
+      width: 4px;
+    }
+    /* Track */
+    .messge-noti-box::-webkit-scrollbar-track {
+      background: rgb(255, 255, 255);
+    }
+    .messge-noti-box::-webkit-scrollbar-thumb {
+      background: rgb(255, 7, 7);
+    }
+    /* Handle on hover */
+    .messge-noti-box::-webkit-scrollbar-thumb:hover {
+      background: rgb(255, 7, 7);
+    }
   </style>
 </head>
 <body class="all-content ddashborad">
