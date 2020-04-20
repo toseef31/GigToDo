@@ -265,14 +265,12 @@ $child_arabic_title = $row_meta->child_arabic_title;
 								<!--- form-group row Ends --->
 								<?php } ?>
 								</form>
-								<div class="postagig create-gigpostagig create-gig mb-0 border-bottom-0 pl-0 border-top-0 pt-0"">
+								<!-- <div class="postagig create-gigpostagig create-gig mb-0 border-bottom-0 pl-0 border-top-0 pt-0"">
 								  <div class="form-group rounded-0">
 								    <div class="pt-3 pb-0">
-								    <!-- <h6 class="font-weight-normal">My Proposal Extras</h6> -->
-								    <!-- <a data-toggle="collapse" href="#insert-extra" class="small text-success">+ Add Extra</a> -->
-								     <div class="tabs accordion mt-2" id="allTabs"><!--- All Tabs Starts --->
-								        <?php include("extras.php"); ?>
-								      </div><!--- All Tabs Ends --->
+								     <div class="tabs accordion mt-2" id="allTabs">
+								        <?php //include("extras.php"); ?>
+								      </div>
 								    </div>
 								    <div class="d-flex flex-column align-items-end">
 								      <div class="d-flex flex-row justify-content-end">
@@ -282,7 +280,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 								      </div>
 								    </div>
 								  </div>
-								</div>
+								</div> -->
 								<!--- form-group row Ends --->
 								<div class="postagig create-gig">
 									<div class="form-group mb-0">
