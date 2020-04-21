@@ -356,7 +356,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												<div class="bottom-label d-flex flex-row align-items-center justify-content-between mt-15">
 													<div class="attach-file d-flex flex-row align-items-center">
 														<label for="file">
-															<input type="file" id="file" name="request_file" hidden="">
+															<input type="file" id="file" name="request_file[]" hidden="" multiple="multiple">
 															<span class="file d-flex flex-row align-items-center">
 																<span><img src="<?= $site_url;?>/assets/img/post-request/attach.png" alt=""></span>
 																<span>Attach File</span>
@@ -480,44 +480,44 @@ $relevant_requests = $row_general_settings->relevant_requests;
 																$cat_title = $row_meta->cat_title;
 																?>
 																<label for="<?= $cat_id; ?>">
-									<input id="<?= $cat_id; ?>" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
-									<div class="gig-category-select gd d-flex flex-column align-items-center justify-content-between">
-										<span class="icon">
-											<img class="img-fluid white-icon" src="<?= $site_url; ?>assets/img/post-a-gig/graphic-design-white.png" />
-											<img class="img-fluid color-icon" src="assets/img/post-a-gig/graphic-design-color.png" />
-										</span>
-										<span class="text"><?= $cat_title; ?></span>
-									</div>
-								  </label>
-									<?php } ?>
+																	<input id="<?= $cat_id; ?>" value="<?= $cat_id; ?>" type="radio" name="cat_id" hidden />
+																	<div class="gig-category-select gd d-flex flex-column align-items-center justify-content-between">
+																		<span class="icon">
+																			<img class="img-fluid white-icon" src="<?= $site_url; ?>assets/img/post-a-gig/graphic-design-white.png" />
+																			<img class="img-fluid color-icon" src="assets/img/post-a-gig/graphic-design-color.png" />
+																		</span>
+																		<span class="text"><?= $cat_title; ?></span>
+																	</div>
+																  </label>
+																	<?php } ?>
+																							</div>
+																					<div class="gig-category-tags gd">
+																						<label class="gig-category-tag" for="cat1">
+																							<input type="radio" name="cat" id="cat1"> Logo
+																						</label>
+																						<label class="gig-category-tag" for="cat2">
+																							<input type="radio" name="cat" id="cat2"> Logo
+																						</label>
+															  <a class="gig-category-tag" href="javascript:void(0);">Logos</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
+															  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
 															</div>
-													<div class="gig-category-tags gd">
-														<label class="gig-category-tag" for="cat1">
-															<input type="radio" name="cat" id="cat1"> Logo
-														</label>
-														<label class="gig-category-tag" for="cat2">
-															<input type="radio" name="cat" id="cat2"> Logo
-														</label>
-							  <a class="gig-category-tag" href="javascript:void(0);">Logos</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							  <a class="gig-category-tag" href="javascript:void(0);">Tags Item</a>
-							</div>
-							<div class="backto-main flex-row">
-								<a href="javascript:void(0)" class="d-flex flex-row align-items-center">
-									<span>
-										<i class="fal fa-angle-left"></i>
-									</span>
-									<span>Go Back</span>
-								</a>
-							</div>
-						</div> -->
+															<div class="backto-main flex-row">
+																<a href="javascript:void(0)" class="d-flex flex-row align-items-center">
+																	<span>
+																		<i class="fal fa-angle-left"></i>
+																	</span>
+																	<span>Go Back</span>
+																</a>
+															</div>
+														</div> -->
 													<!-- Each item -->
 												</div>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['cat_id']); ?></span>
@@ -676,6 +676,24 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											</div>
 											<!-- Login Form -->
 											<div class="post-register-form login-form">
+												<?php 
+
+												$form_errors = Flash::render("login_errors");
+												$form_data = Flash::render("form_data");
+												if(is_array($form_errors)){
+
+												?>
+
+												<div class="alert alert-danger"><!--- alert alert-danger Starts --->
+
+												<ul class="list-unstyled mb-0">
+												<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+												<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
+												<?php } ?>
+												</ul>
+
+												</div><!--- alert alert-danger Ends --->
+												<?php } ?>
 												<h4>Signin as Buyer</h4>
 												<div class="form-group">
 													<label class="control-label"><span>Username</span></label>
@@ -845,6 +863,16 @@ $(document).ready(function(){
 	$(".descCount").text(textarea.length);	
 	});	
 
+
+	$(".input-number").keypress(function (e) {
+	     //if the letter is not digit then display error and don't type anything
+	     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	        //display error message
+	        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+	               return false;
+	    }
+	   });
+
 	// $("#sub-category").hide();
 	$(".gig-category-tags  .nice-select.form-control").remove();
 
@@ -932,7 +960,7 @@ if(isset($_POST['submit'])){
 				$val = new Validator($_POST,$rules,$messages);
 
 				if($val->run() == false){
-					Flash::add("login_errors",$val->get_all_errors());
+					Flash::add("form_errors",$val->get_all_errors());
 					Flash::add("form_data",$_POST);
 					echo "<script>window.open('index','_self')</script>";
 				}else{
@@ -941,6 +969,7 @@ if(isset($_POST['submit'])){
 					$seller_pass = $input->post('seller_pass');
 					$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
 					$row_seller = $select_seller->fetch();
+					
 					@$hashed_password = $row_seller->seller_pass;
 					@$seller_status = $row_seller->seller_status;
 					$decrypt_password = password_verify($seller_pass, $hashed_password);
@@ -1018,21 +1047,34 @@ if(isset($_POST['submit'])){
 							echo "You have selected :" .$delivery_time;
 							$skills_required = $input->post('skills_required');
 							$languages = $input->post('languages');
-							$request_file = $_FILES['request_file']['name'];
-							$request_file_tmp = $_FILES['request_file']['tmp_name'];
-							$request_date = date("F d, Y");
-							$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-							$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-							if(!empty($request_file)){
-								if(!in_array($file_extension,$allowed)){
-									echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-									echo "<script>window.open('post-request','_self')</script>";
-									exit();
+							// $request_file = $_FILES['request_file']['name'];
+							
+							$countfiles = count($_FILES['request_file']['name']);
+
+
+							
+							$request_filee = array();
+							for($i=0;$i<$countfiles;$i++){
+
+								$request_filee[] = $_FILES['request_file']['name'][$i];
+								// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+								
+								// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+								// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+								// if(!empty($request_file)){
+								// 	if(!in_array($file_extension,$allowed)){
+								// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+								// 		echo "<script>window.open('post-request','_self')</script>";
+								// 		exit();
+								// 	}
+								// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+								// 	$request_file = $request_file."_".time().".$file_extension";
+									move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 								}
-								$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-								$request_file = $request_file."_".time().".$file_extension";
-								move_uploaded_file($request_file_tmp,"request_files/$request_file");
-							}
+							// }
+								$request_file = implode("," , $request_filee);
+								
+							$request_date = date("F d, Y");
 							$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 							if($insert_request){
 								echo "<script>
@@ -1178,21 +1220,32 @@ if(isset($_POST['submit'])){
 									echo "You have selected :" .$delivery_time;
 									$skills_required = $input->post('skills_required');
 									$languages = $input->post('languages');
-									$request_file = $_FILES['request_file']['name'];
-									$request_file_tmp = $_FILES['request_file']['tmp_name'];
-									$request_date = date("F d, Y");
-									$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-									$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-									if(!empty($request_file)){
-										if(!in_array($file_extension,$allowed)){
-											echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-											echo "<script>window.open('post-request','_self')</script>";
-											exit();
+									// $request_file = $_FILES['request_file']['name'];
+									
+									$countfiles = count($_FILES['request_file']['name']);
+									
+									$request_filee = array();
+									for($i=0;$i<$countfiles;$i++){
+
+										$request_filee[] = $_FILES['request_file']['name'][$i];
+										// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+										
+										// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+										// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+										// if(!empty($request_file)){
+										// 	if(!in_array($file_extension,$allowed)){
+										// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+										// 		echo "<script>window.open('post-request','_self')</script>";
+										// 		exit();
+										// 	}
+										// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+										// 	$request_file = $request_file."_".time().".$file_extension";
+											move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 										}
-										$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-										$request_file = $request_file."_".time().".$file_extension";
-										move_uploaded_file($request_file_tmp,"request_files/$request_file");
-									}
+									// }
+										$request_file = implode("," , $request_filee);
+
+									$request_date = date("F d, Y");
 									$insert_request = $db->insert("buyer_requests",array("seller_id"=>$regsiter_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 									if($insert_request){
 										echo "<script>
@@ -1258,21 +1311,38 @@ if(isset($_POST['submit'])){
 			echo "You have selected :" .$delivery_time;
 			$skills_required = $input->post('skills_required');
 			$languages = $input->post('languages');
-			$request_file = $_FILES['request_file']['name'];
-			$request_file_tmp = $_FILES['request_file']['tmp_name'];
+			// $request_file = $_FILES['request_file']['name'];
+			// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 			$request_date = date("F d, Y");
-			$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-			$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-			if(!empty($request_file)){
-				if(!in_array($file_extension,$allowed)){
-					echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-					echo "<script>window.open('post-request','_self')</script>";
-					exit();
+			// $request_file = $_FILES['request_file']['name'];
+												
+			$countfiles = count($_FILES['request_file']['name']);
+			
+			// print_r("total file" .$countfiles);die("die at line 1225 ");
+
+$request_filee = array();
+			for($i=0;$i<$countfiles;$i++){
+
+				$request_filee[] = $_FILES['request_file']['name'][$i];
+				// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+				
+				// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+				// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+				// if(!empty($request_file)){
+				// 	if(!in_array($file_extension,$allowed)){
+				// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+				// 		echo "<script>window.open('post-request','_self')</script>";
+				// 		exit();
+				// 	}
+				// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				// 	$request_file = $request_file."_".time().".$file_extension";
+					move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 				}
-				$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-				$request_file = $request_file."_".time().".$file_extension";
-				move_uploaded_file($request_file_tmp,"request_files/$request_file");
-			}
+			// }
+				$request_file = implode("," , $request_filee);
+				// var_dump($request_file); die();
+
+
 			$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 			if($insert_request){
 				echo "<script>

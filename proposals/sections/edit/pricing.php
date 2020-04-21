@@ -72,6 +72,50 @@ if(isset($_POST['proposal_id'])){
 
 <script>
 $(document).ready(function(){
+  // $('#overly-check').hasClass('packages-active'){
+  //   alert("dfdfsdfsdfsdf");
+  // }
+   $('.packg-desc').prop('required',false);
+  $('.tryit-overlay-button').click(function(){
+    // alert("overlay");
+     var pack_desc = $('.packg-desc');
+     // console.log(pack_desc.find('textarea').prop('required', true));
+
+   $(this).parent().parent().addClass('packages-active');
+    var status = false;
+    if ( $('#overly-check').hasClass('packages-active')) {
+      // pack_desc.prop('required',true);
+      status = true;
+     }
+     if (status = true) {
+      console.log(status + "if");
+       pack_desc.prop('required',true);
+       $('.desc2').show();
+       $('.desc3').show();
+     }else{
+      console.log(status + "else");
+       pack_desc.prop('required',false);
+
+     }  
+  })
+  $('.desc1').hide();
+  $('.desc2').hide();
+  $('.desc3').hide();
+  $('#switch').change(function(){
+  if ($(this).is(':checked')) {
+        switchStatus = $(this).is(':checked');
+        $('.packg-desc').prop('required',true);
+        $('.desc2').show();
+        $('.desc3').show();        
+      }
+      else {
+         switchStatus = $(this).is(':checked');
+          $('.packg-desc').prop('required',false);
+           $('.desc2').hide();
+        $('.desc3').hide();
+      }
+  });
+  
 
 <?php if($d_proposal_price == "0" or isset($_POST["fixedPriceOff"])){ ?>
   $('.proposal-price').hide();
@@ -153,6 +197,12 @@ $(".insert-attribute").on('click', function(event){
 
 $(".pricing-form").submit(function(event){
   event.preventDefault();
+  if($('.description1').val() == '')
+  {
+    event.preventDefault();
+    $('.desc1').show();
+  }else{
+
   var form_data = new FormData(this);
   form_data.append('proposal_id',<?= $proposal_id; ?>);
   $('#wait').addClass("loader");
@@ -187,6 +237,7 @@ $(".pricing-form").submit(function(event){
       });
     }
   });
+}
 });
 
 });

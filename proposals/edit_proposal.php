@@ -251,6 +251,13 @@ $checkVideo = false;
         .header-top{
           background-color: white;
         }
+        .desc1, .desc2, .desc3{
+          color: red;
+          /*display: none;*/
+        }
+        /*.desc1 , .desc2 , .desc3{
+          display: none;
+        } */
     </style>
   </head>
   <body class="all-content">

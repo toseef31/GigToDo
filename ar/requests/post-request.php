@@ -781,6 +781,15 @@ $(document).ready(function(){
 	$(".descCount").text(textarea.length);	
 	});	
 
+	$(".input-number").keypress(function (e) {
+   	//if the letter is not digit then display error and don't type anything
+   	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+      //display error message
+      $("#errmsg").html("Digits Only").show().fadeOut("slow");
+             return false;
+  	}
+ 	});
+
 	// $("#sub-category").hide();
 	$(".gig-category-tags  .nice-select.form-control").remove();
 
@@ -953,21 +962,33 @@ if(isset($_POST['submit'])){
 				          	echo "You have selected :" .$delivery_time;
 				          	$skills_required = $input->post('skills_required');
 				          	$languages = $input->post('languages');
-				          	$request_file = $_FILES['request_file']['name'];
-				          	$request_file_tmp = $_FILES['request_file']['tmp_name'];
+				          	// $request_file = $_FILES['request_file']['name'];
+				          	// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 				          	$request_date = date("F d, Y");
-				          	$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-				          	$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-				          	if(!empty($request_file)){
-				          		if(!in_array($file_extension,$allowed)){
-				          			echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-				          			echo "<script>window.open('post-request','_self')</script>";
-				          			exit();
+				          	// $request_file = $_FILES['request_file']['name'];
+				          	
+				          	$countfiles = count($_FILES['request_file']['name']);
+
+				          	$request_filee = array();
+				          	for($i=0;$i<$countfiles;$i++){
+
+				          		$request_filee[] = $_FILES['request_file']['name'][$i];
+				          		// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+				          		
+				          		// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+				          		// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+				          		// if(!empty($request_file)){
+				          		// 	if(!in_array($file_extension,$allowed)){
+				          		// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+				          		// 		echo "<script>window.open('post-request','_self')</script>";
+				          		// 		exit();
+				          		// 	}
+				          		// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				          		// 	$request_file = $request_file."_".time().".$file_extension";
+				          			move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 				          		}
-				          		$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-				          		$request_file = $request_file."_".time().".$file_extension";
-				          		move_uploaded_file($request_file_tmp,"request_files/$request_file");
-				          	}
+				          	// }
+				          		$request_file = implode("," , $request_filee);
 				          	$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 				          	if($insert_request){
 				          		echo "<script>
@@ -1113,21 +1134,33 @@ if(isset($_POST['submit'])){
 									echo "You have selected :" .$delivery_time;
 									$skills_required = $input->post('skills_required');
 									$languages = $input->post('languages');
-									$request_file = $_FILES['request_file']['name'];
-									$request_file_tmp = $_FILES['request_file']['tmp_name'];
+									// $request_file = $_FILES['request_file']['name'];
+									// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 									$request_date = date("F d, Y");
-									$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-									$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-									if(!empty($request_file)){
-										if(!in_array($file_extension,$allowed)){
-											echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-											echo "<script>window.open('post-request','_self')</script>";
-											exit();
+									// $request_file = $_FILES['request_file']['name'];
+																
+									$countfiles = count($_FILES['request_file']['name']);
+
+									$request_filee = array();
+									for($i=0;$i<$countfiles;$i++){
+
+										$request_filee[] = $_FILES['request_file']['name'][$i];
+										// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+										
+										// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+										// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+										// if(!empty($request_file)){
+										// 	if(!in_array($file_extension,$allowed)){
+										// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+										// 		echo "<script>window.open('post-request','_self')</script>";
+										// 		exit();
+										// 	}
+										// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+										// 	$request_file = $request_file."_".time().".$file_extension";
+											move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 										}
-										$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-										$request_file = $request_file."_".time().".$file_extension";
-										move_uploaded_file($request_file_tmp,"request_files/$request_file");
-									}
+									// }
+										$request_file = implode("," , $request_filee);
 									$insert_request = $db->insert("buyer_requests",array("seller_id"=>$regsiter_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 									if($insert_request){
 										echo "<script>
@@ -1194,21 +1227,33 @@ if(isset($_POST['submit'])){
 			echo "You have selected :" .$delivery_time;
 			$skills_required = $input->post('skills_required');
 			$languages = $input->post('languages');
-			$request_file = $_FILES['request_file']['name'];
-			$request_file_tmp = $_FILES['request_file']['tmp_name'];
+			// $request_file = $_FILES['request_file']['name'];
+			// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 			$request_date = date("F d, Y");
-			$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-			$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-			if(!empty($request_file)){
-				if(!in_array($file_extension,$allowed)){
-					echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-					echo "<script>window.open('post-request','_self')</script>";
-					exit();
+			// $request_file = $_FILES['request_file']['name'];
+			
+			$countfiles = count($_FILES['request_file']['name']);
+
+			$request_filee = array();
+			for($i=0;$i<$countfiles;$i++){
+
+				$request_filee[] = $_FILES['request_file']['name'][$i];
+				// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+				
+				// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+				// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+				// if(!empty($request_file)){
+				// 	if(!in_array($file_extension,$allowed)){
+				// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+				// 		echo "<script>window.open('post-request','_self')</script>";
+				// 		exit();
+				// 	}
+				// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				// 	$request_file = $request_file."_".time().".$file_extension";
+					move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 				}
-				$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-				$request_file = $request_file."_".time().".$file_extension";
-				move_uploaded_file($request_file_tmp,"request_files/$request_file");
-			}
+			// }
+				$request_file = implode("," , $request_filee);
 			$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 			if($insert_request){
 				echo "<script>

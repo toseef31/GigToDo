@@ -57,6 +57,15 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 						</div>
 						<!-- Packages header -->
 						<div class="package-body d-flex flex-column">
+							<?php 
+
+							$form_errors = Flash::render("form_errors");
+							$form_data = Flash::render("form_data");
+							if (empty($form_data)) {
+							  $form_data = $input->post();
+							}
+
+							?>
 							<form action="#" method="post" class="pricing-form" id="pricing-form">
 								<input type="hidden" name="proposal_packages[1][package_id]" form="pricing-form" value="<?= $row_1->package_id; ?>">
 								<input type="hidden" name="proposal_packages[2][package_id]" form="pricing-form" value="<?= $row_2->package_id; ?>">
@@ -68,17 +77,20 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<!-- Each item -->
 									<div class="package-item-single">
 										<span class="package-title">Basic</span>
-										<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control" placeholder="Description" required=""><?= $row_1->description; ?></textarea>
+										<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control description1" placeholder="Description"><?= $row_1->description; ?></textarea>
+										<span class="desc1">description is required</span>
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
 										<span class="package-title">Standard</span>
-										<textarea maxlength="35" name="proposal_packages[2][description]" class="form-control" placeholder="Description"><?= $row_2->description; ?></textarea>
+										<textarea maxlength="35" name="proposal_packages[2][description]" class="form-control packg-desc" placeholder="Description"><?= $row_2->description; ?></textarea>
+										<span class="desc2">description is required</span>
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
 										<span class="package-title">Premium</span>
-										<textarea maxlength="35" name="proposal_packages[3][description]" class="form-control" placeholder="Description"><?= $row_3->description; ?></textarea>
+										<textarea maxlength="35" name="proposal_packages[3][description]" class="form-control packg-desc" placeholder="Description"><?= $row_3->description; ?></textarea>
+										<span class="desc3">description is required</span>
 									</div>
 									<!-- Each item -->
 								</div>
@@ -257,7 +269,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 							</form>
 						</div>
 						<!-- Packages body -->
-						<div class="tryit-overlay d-flex flex-column justify-content-center align-items-center" style="background-image: url(../assets/img/post-a-gig/tryit-bg.png);">
+						<div class="tryit-overlay d-flex flex-column justify-content-center align-items-center" id="overly-check" style="background-image: url(../assets/img/post-a-gig/tryit-bg.png);">
 							<p>Increase your revenue by offering 2 additional packages</p>
 							<div class="d-flex flex-row justify-content-center">
 								<button class="tryit-overlay-button" type="button" role="button">try it now</button>

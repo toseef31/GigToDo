@@ -461,35 +461,40 @@ if($lang_dir == "right"){
                               <form method="post">
                                 <div class="row">
                                   <div class="col-12 col-md-6">
-                                    <div class="form-group d-flex flex-column">
-                                      <select class="wide form-control">
+                                    <div class="form-group d-flex flex-column custom_nice">
+                                      <select class="wide form-control" name="country">
                                         <option>Select Country</option>
-                                        <option value="1">United States</option>
-                                        <option value="2">United Kingdom</option>
-                                        <option value="3">Egypt</option>
-                                        <option value="3">Bangladesh</option>
+                                        <?php
+                                          $get_countries = $db->select("countries");
+                                          while($row_countries = $get_countries->fetch()){
+                                            $id = $row_countries->id;
+                                            $name = $row_countries->name;
+                                            echo "<option value='$name'".($name == $login_seller_country ? "selected" : "").">$name</option>";
+                                          }
+                                          ?>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
-                                      <input class="form-control" type="text" name="" placeholder="Name" />
+                                      <input class="form-control" type="text" name="institute" placeholder="Name" />
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
-                                      <select class="wide form-control">
+                                      <input class="form-control" type="text" name="major" placeholder="Major" />
+                                      <!-- <select class="wide form-control" name="major">
                                         <option>Major</option>
                                         <option value="1">Major</option>
                                         <option value="2">Major</option>
                                         <option value="3">Major</option>
                                         <option value="3">Major</option>
-                                      </select>
+                                      </select> -->
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
-                                      <select class="wide form-control">
+                                      <select class="wide form-control" name="degree_year">
                                         <option>Year</option>
                                         <option value="1">2001</option>
                                         <option value="2">2002</option>
@@ -512,11 +517,15 @@ if($lang_dir == "right"){
 
                               if(isset($_POST['insert_education'])){
                                 
-                              $skill_id = $input->post('skill_id');
+                              $country = $input->post('country');
+                              $major = $input->post('major');
+                              $institute = $input->post('institute');
+                              $degree_year = $input->post('degree_year');
 
-                              $skill_level = $input->post('skill_level');
+                              $educationQry = array('country' => $country, 'major' => $major, 'institute' => $institute, 'degree_year' => $degree_year);
                                 
-                              $insert_skill = $db->insert("seller_education",array("seller_id" => $seller_id,"skill_id" => $skill_id,"skill_level" => $skill_level));
+                              
+                              $insert_skill = $db->insert("seller_education",array("seller_id" => $seller_id,"education_data" => @json_encode($educationQry)));
                                 
                               echo "<script>window.open('edit_profile','_self');</script>";
                                 
