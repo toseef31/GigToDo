@@ -839,7 +839,7 @@ $(document).ready(function(){
 		    output.innerHTML = '<ul>'+children+'</ul>';
 	      $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
 		});
-	
+
 
 	$('.input-number').keyup(function(){
 		var custom_btn = $('.input-number').val();
@@ -902,8 +902,10 @@ if(isset($_POST['submit'])){
 
 					$seller_user_name = $input->post('seller_user_name');
 					$seller_pass = $input->post('seller_pass');
-					$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
+					$select_seller = $db->query("select * from sellers where (seller_user_name = '".$seller_user_name."' OR seller_email = '".$seller_user_name."')");
+					// $select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
 					$row_seller = $select_seller->fetch();
+					@$user_name = $row_seller->seller_user_name;
 					@$hashed_password = $row_seller->seller_pass;
 					@$seller_status = $row_seller->seller_status;
 					$decrypt_password = password_verify($seller_pass, $hashed_password);
@@ -943,14 +945,14 @@ if(isset($_POST['submit'])){
 							})
 							</script>";
 						}else{
-							$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+							$select_seller = $db->select("sellers",array("seller_user_name"=>$user_name,"seller_pass"=>$hashed_password));
 							if($select_seller){
 								$row_seller = $select_seller->fetch();
-						    $_SESSION['seller_user_name'] = $seller_user_name;
+						    $_SESSION['seller_user_name'] = $user_name;
 						    $login_seller_id = $row_seller->seller_id;
 
 
-						    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
+						    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $user_name){
 									$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 						      $seller_user_name = ucfirst(strtolower($seller_user_name));
 									$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
