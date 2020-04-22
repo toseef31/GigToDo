@@ -356,7 +356,7 @@ $page_url = substr("$full_url", 15);
 </div>
 <!-- Login modal end -->
 
-<?php require_once("register_login_forgot.php"); ?>
+<?php //("register_login_forgot.php"); ?>
 
 
 <!-- New Header Design -->

@@ -344,7 +344,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												<div class="bottom-label d-flex flex-row align-items-center justify-content-between mt-15">
 													<div class="attach-file d-flex flex-row align-items-center">
 														<label for="file">
-															<input type="file" id="file" name="request_file" hidden="">
+															<input type="file" id="file" name="request_file[]" hidden="" multiple="multiple">
 															<span class="file d-flex flex-row align-items-center">
 																<span><img src="<?= $site_url;?>/assets/img/post-request/attach.png" alt=""></span>
 																<span>أرفق ملف</span>

@@ -111,64 +111,64 @@ if(isset($_SESSION['seller_user_name'])){
 								<span>التسجيل عن طريقGoogle</span>
 							</a>
 						</div>
-					<?php } ?>
+						<?php } ?>
 						<div class="login-with-credentials">
-							<?php 
-							  $form_errors = Flash::render("register_errors");
-							  $form_data = Flash::render("form_data");
-							  if(is_array($form_errors)){
-							  ?>
+							<?php
+							$form_errors = Flash::render("register_errors");
+							$form_data = Flash::render("form_data");
+							if(is_array($form_errors)){
+							?>
 							<div class="alert alert-danger">
-							  <!--- alert alert-danger Starts --->
-							  <ul class="list-unstyled mb-0">
-							    <?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-							    <li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
-							    <?php } ?>
-							  </ul>
+								<!--- alert alert-danger Starts --->
+								<ul class="list-unstyled mb-0">
+									<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+									<li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
+									<?php } ?>
+								</ul>
 							</div>
-							<script type="text/javascript">
-			          $(document).ready(function(){
-			            $('#register-modal').modal('show');
-			          });
-			        </script>
-			        <?php } ?>
+							<?php } ?>
 							<form action="" method="POST">
-								<div class="form-group">
-									<label class="control-label">الاسم الأول</label>
-									<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name']; ?>" required="" />
-								</div>
 								<!-- <div class="form-group">
-									<label class="control-label">Last Name</label>
-									<input class="form-control" type="text" name="" />
+									<label class="control-label">الاسم الأول</label>
+									<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name']; ?>" />
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></span>
+								</div> -->
+								<!-- <div class="form-group">
+										<label class="control-label">Last Name</label>
+										<input class="form-control" type="text" name="" />
 								</div> -->
 								<div class="form-group">
 									<label class="control-label">الاسم الأخير</label>
-									<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" required="" />
+									<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" />
 									<small class="form-text text-muted">ملاحظة: لن تتمكن من تغيير اسم المستخدم بمجرد إنشاء حسابك</small>
 									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">الإيميل</label>
-									<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" required="">
-            			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+									<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>">
+									<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">الباسوورد</label>
-									<input class="form-control" type="password" name="pass" placeholder="أدخل كلمة المرور" required="" />
+									<input class="form-control" type="password" name="pass" placeholder="أدخل كلمة المرور"/>
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 								</div>
 								<div class="form-group">
-								  <label class="control-label"> تؤكد  الباسوورد</label>
-								  <input type="password" class="form-control" name="con_pass" placeholder="تأكيد كلمة المرور" required="">
-								  <?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
+									<label class="control-label"> تؤكد  الباسوورد</label>
+									<input type="password" class="form-control" name="con_pass" placeholder="تأكيد كلمة المرور">
+									<?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['con_pass']); ?></span>
 								</div>
 								<?php if(isset($_GET['referral'])){ ?>
-			          <input type="hidden" class="form-control" name="referral" value="<?= $input->get('referral'); ?>">
-			          <?php }else{ ?>
-			          <input type="hidden" class="form-control" name="referral" value="">
-			          <?php } ?>
-			          <input type="hidden" name="timezone" value="">
+								<input type="hidden" class="form-control" name="referral" value="<?= $input->get('referral'); ?>">
+								<?php }else{ ?>
+								<input type="hidden" class="form-control" name="referral" value="">
+								<?php } ?>
+								<input type="hidden" name="timezone" value="">
 								<div class="row">
 									<div class="col-12">
 										<label class="control-label">نوع الحساب</label>
@@ -189,6 +189,7 @@ if(isset($_SESSION['seller_user_name'])){
 											</label>
 										</div>
 									</div>
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['accountType']); ?></span>
 								</div>
 								<div class="form-group d-flex flex-row align-items-center justify-content-between">
 									<div class="custom-control custom-checkbox">
@@ -211,15 +212,189 @@ if(isset($_SESSION['seller_user_name'])){
 
 <script>
 $(document).on("click","#terms",function(){
-        if($(this).prop("checked") == true){
-        	$(':input[type="submit"]').prop('disabled', false);
-        }
-        else if($(this).prop("checked") == false){
-        	$(':input[type="submit"]').prop('disabled', true);
-        }
-    });
+		if($(this).prop("checked") == true){
+			$(':input[type="submit"]').prop('disabled', false);
+		}
+		else if($(this).prop("checked") == false){
+			$(':input[type="submit"]').prop('disabled', true);
+		}
+	});
 </script>
+<?php 
+	if(isset($_POST['register'])){
+		$rules = array(
+		"u_name" => "required",
+		"email" => "email|required",
+		"pass" => "required",
+		"con_pass" => "required",
+		"accountType" => "required");
 
+		$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.","con_pass" => "تأكيد كلمة المرور مطلوب.", "accountType" => "نوع الحساب مطلوب.", 'email' => 'البريد الالكتروني مطلوب');
+		$val = new Validator($_POST,$rules,$messages);
+
+		if($val->run() == false){
+			$_SESSION['error_array'] = array();
+			Flash::add("register_errors",$val->get_all_errors());
+			Flash::add("form_data",$_POST);
+			echo "<script>window.open('register','_self')</script>";
+		}else{
+			$error_array = array();
+			$name = strip_tags($input->post('name'));
+			$name = strip_tags($name);
+			$name = ucfirst(strtolower($name));
+			$_SESSION['name']= $name;
+			$u_name = strip_tags($input->post('u_name'));
+			$u_name = strip_tags($u_name);
+			$_SESSION['u_name']= $u_name;
+			$email = strip_tags($input->post('email'));
+			$email = strip_tags($email);
+			$_SESSION['email']=$email;
+			$pass = strip_tags($input->post('pass'));
+			$con_pass = strip_tags($input->post('con_pass'));
+			$accountType = strip_tags($input->post('accountType'));
+			$referral = strip_tags($input->post('referral'));
+			$geoplugin = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
+			$country = $geoplugin['geoplugin_countryName'];
+			if(empty($country)){ $country = ""; }
+			$regsiter_date = date("F d, Y");
+			$date = date("F d, Y");
+		
+			$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
+			$check_seller_email = $db->count("sellers",array("seller_email" => $email));
+			if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
+			  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+			}
+			if($check_seller_username > 0 ){
+			  array_push($error_array, "Opps! This username has already been taken. Please try another one");
+			}
+			if($check_seller_email > 0){
+			  array_push($error_array, "Email has already been taken. Try logging in instead.");
+			}
+			if($pass != $con_pass){
+	     	  array_push($error_array, "Passwords don't match. Please try again.");
+			}
+	    
+			if(empty($error_array)){
+
+				$referral_code = mt_rand();
+				if($signup_email == "yes"){
+					$verification_code = mt_rand();
+				}else{
+					$verification_code = "ok";
+				}
+				$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
+				$seller_activity = date("Y-m-d H:i:s");
+				
+				// This is just an example. In application this will come from Javascript (via an AJAX or something)
+				$timezone_offset_minutes = $input->post('timezone');  // $_GET['timezone_offset_minutes']
+				// Convert minutes to seconds and get timezone
+				$timezone = timezone_name_from_abbr("", $timezone_offset_minutes*60, false);
+				
+				$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_activity"=>$seller_activity,"seller_timezone"=>$timezone,"seller_status" => 'online'));
+						
+				$regsiter_seller_id = $db->lastInsertId();
+				if($insert_seller){
+				  $_SESSION['seller_user_name'] = $u_name;
+					$insert_seller_account = $db->insert("seller_accounts",array("seller_id" => $regsiter_seller_id));
+					if($paymentGateway == 1){
+						$insert_seller_settings = $db->insert("seller_settings",array("seller_id" => $regsiter_seller_id));
+					}
+					if($insert_seller_account){
+						if(!empty($referral)){
+					    $sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
+							$row_seller = $sel_seller->fetch();
+							$seller_id = $row_seller->seller_id;	
+							$seller_ip = $row_seller->seller_ip;
+							if($seller_ip == $ip){
+								echo "<script>alert('You Cannot Referral Yourself To Make Money.');</script>";
+							}else{
+								$count_referrals = $db->count("referrals",array("ip" => $ip));	
+								if($count_referrals == 1){
+							    echo "<script>alert('You are trying to referral yourself more then one time.');</script>";
+								}else{
+									$insert_referral = $db->insert("referrals",array("seller_id" => $seller_id,"referred_id" => $regsiter_seller_id,"comission" => $referral_money,"date" => $date,"ip" => $ip,"status" => 'pending'));
+								}
+							}	
+						}
+						if($signup_email == "yes"){
+							userSignupEmail($email);
+					  }
+					      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+					  		$seller_meta = $get_seller->fetch();
+					  		//print_r($seller_meta); die();
+					  		if($seller_meta->account_type == 'buyer'){
+
+			           
+			           
+			          echo "
+			          <script>
+			          swal({
+			          type: 'success',
+			          text: 'Successfully Registered! Welcome onboard, $name. ',
+			          timer: 6000,
+			          onOpen: function(){
+			          swal.showLoading()
+			          }
+			          }).then(function(){
+			          if (
+			          // Read more about handling dismissals
+			          window.open('$site_url/ar/','_self')
+			          ) {
+			          console.log('Successful Registration')
+			          }
+			          })
+			          </script>
+			          ";
+			          $_SESSION['name'] = "";
+			          $_SESSION['u_name']="";
+			          $_SESSION['email']= "";
+			          $_SESSION['error_array'] = array();
+					      }else{
+
+							echo "
+							<script>
+							swal({
+							type: 'success',
+							text: 'Successfully Registered! Welcome onboard, $name. ',
+							timer: 6000,
+							onOpen: function(){
+							swal.showLoading()
+							}
+							}).then(function(){
+							if (
+							// Read more about handling dismissals
+							window.open('$site_url/ar/dashboard','_self')
+							) {
+							console.log('Successful Registration')
+							}
+							})
+							</script>
+							";
+							$_SESSION['name'] = "";
+							$_SESSION['u_name']="";
+							$_SESSION['email']= "";
+							$_SESSION['error_array'] = array();
+						}
+					}
+				}
+			}
+			if(!empty($error_array)){
+				$_SESSION['error_array'] = $error_array;
+				echo "
+				<script>
+				swal({
+					type: 'warning',
+					html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+					animation: false,
+					customClass: 'animated tada'
+				}).then(function(){
+					window.open('index','_self')
+				});
+				</script>";
+			}
+		}
+	}
+?>
 <?php require_once("includes/footer.php"); ?>
 <?php require_once("includes/footerJs.php"); ?>
 
