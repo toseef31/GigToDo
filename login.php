@@ -289,7 +289,7 @@ if(isset($_SESSION['seller_user_name'])){
 						<?php } ?>
 						<form action="" method="POST">
 							<div class="form-group">
-								<label class="control-label">Username</label>
+								<label class="control-label">Username or Email</label>
 								<input class="form-control" type="text" placeholder="Enter Username or Email"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
 								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 							</div>

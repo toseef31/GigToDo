@@ -341,6 +341,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 
 												<textarea class="form-control" name="request_description" id="textarea" placeholder="أنا بدور على...." rows="5"><?= $form_data['request_description']; ?></textarea>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_description']); ?></span>
+												<div id="file_name"></div>
 												<div class="bottom-label d-flex flex-row align-items-center justify-content-between mt-15">
 													<div class="attach-file d-flex flex-row align-items-center">
 														<label for="file">
@@ -350,7 +351,6 @@ $relevant_requests = $row_general_settings->relevant_requests;
 																<span>أرفق ملف</span>
 															</span>
 														</label>
-														<span id="file_name"></span>
 														<span class="max-size">بحد اقصي 30 ميجا</span>
 													</div>
 													<span class="chars-max"><span class="descCount">0</span>\2500 حرف بحد أقصى</span>
@@ -808,20 +808,38 @@ $(document).ready(function(){
 	// 	}
 	// 	});
 	// });
-	$('#file').change(function() {
+	// $('#file').change(function() {
 
-	  var i = $(this).prev('label').clone();
-	  var file = $('#file')[0].files[0].name;
+	//   var i = $(this).prev('label').clone();
+	//   var file = $('#file')[0].files[0].name;
 	  
-	  $('#file_name').html('<span>'+file+'</span>');
+	//   $('#file_name').html('<span>'+file+'</span>');
 	  // $(this).prev('label').text(file);
-	});
-	$('#file').bind('change', function() {
-    var totalSize = this.files[0].size;
-    var totalSizeMb = totalSize  / Math.pow(1024,2);
+	// });
+	// $('#file').bind('change', function() {
+ //    var totalSize = this.files[0].size;
+ //    var totalSizeMb = totalSize  / Math.pow(1024,2);
 
-    $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
-	});
+ //    $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+	// });
+
+		$('#file').on('change', function() {
+		    var input = document.getElementById('file');
+		    var output = document.getElementById('file_name');
+		    var children = "";
+		    var totalSizeMb = 0;
+		    for (var i = 0; i < input.files.length; ++i) {
+		        children += '<li>' + input.files.item(i).name + '</li>';
+		        var totalSize = input.files[i].size;
+
+		        var totalSizeMb = totalSize  / Math.pow(1024,2);
+		        
+		    }
+		    totalSizeMb += totalSizeMb;
+		    output.innerHTML = '<ul>'+children+'</ul>';
+	      $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+		});
+	
 
 	$('.input-number').keyup(function(){
 		var custom_btn = $('.input-number').val();
