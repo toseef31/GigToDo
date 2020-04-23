@@ -206,6 +206,8 @@ $(".pricing-form").submit(function(event){
     $('.description1').addClass('border-red');
     $('.description1').prop('required', true);
   }else{
+    $('.desc1').hide();
+    $('.description1').removeClass('border-red');
 
   var form_data = new FormData(this);
   form_data.append('proposal_id',<?= $proposal_id; ?>);
