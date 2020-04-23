@@ -72,6 +72,53 @@ if(isset($_POST['proposal_id'])){
 
 <script>
 $(document).ready(function(){
+  // $('#overly-check').hasClass('packages-active'){
+  //   alert("dfdfsdfsdfsdf");
+  // }
+   $('.packg-desc').prop('required',false);
+  $('.tryit-overlay-button').click(function(){
+    // alert("overlay");
+     var pack_desc = $('.packg-desc');
+     // console.log(pack_desc.find('textarea').prop('required', true));
+
+   $(this).parent().parent().addClass('packages-active');
+    var status = false;
+    if ( $('#overly-check').hasClass('packages-active')) {
+      // pack_desc.prop('required',true);
+      status = true;
+     }
+     if (status = true) {
+      console.log(status + "if");
+       pack_desc.prop('required',true);
+       $('.desc2').show();
+       $('.desc3').show();
+       $('.packg-desc').addClass('border-red');
+     }else{
+      console.log(status + "else");
+       pack_desc.prop('required',false);
+
+     }  
+  })
+  $('.desc1').hide();
+  $('.desc2').hide();
+  $('.desc3').hide();
+  $('#switch').change(function(){
+  if ($(this).is(':checked')) {
+        switchStatus = $(this).is(':checked');
+        $('.packg-desc').prop('required',true);
+        $('.desc2').show();
+        $('.desc3').show();
+        $('.packg-desc').addClass('border-red');        
+      }
+      else {
+         switchStatus = $(this).is(':checked');
+          $('.packg-desc').prop('required',false);
+           $('.desc2').hide();
+        $('.desc3').hide();
+        $('.packg-desc').removeClass('border-red');
+      }
+  });
+
 
 <?php if($d_proposal_price == "0" or isset($_POST["fixedPriceOff"])){ ?>
   $('.proposal-price').hide();
@@ -121,7 +168,7 @@ $(".insert-attribute").on('click', function(event){
   success:function(data){
     if(data == "error"){
       $('#wait').removeClass("loader");
-      swal({type: 'warning',text: 'You Must Need To Give A Name To Attribute Before Inserting It.'});
+      swal({type: 'warning',text: 'يجب أن تعطي اسمًا للسمة قبل إدراجه.'});
     }else{
       $('#wait').removeClass("loader");
       $('.attribute-name').val("");
@@ -152,6 +199,14 @@ $(".insert-attribute").on('click', function(event){
 
 $(".pricing-form").submit(function(event){
   event.preventDefault();
+  if($('.description1').val() == '')
+  {
+    event.preventDefault();
+    $('.desc1').show();
+    $('.description1').addClass('border-red');
+    $('.description1').prop('required', true);
+  }else{
+
   var form_data = new FormData(this);
   form_data.append('proposal_id',<?= $proposal_id; ?>);
   $('#wait').addClass("loader");
@@ -163,11 +218,11 @@ $(".pricing-form").submit(function(event){
   }).done(function(data){
     $('#wait').removeClass("loader");
     if(data == "error"){
-      swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
+      swal({type: 'warning',text: 'يجب أن تملأ جميع الحقول قبل تحديث التفاصيل.'});
     }else{
       swal({
         type: 'success',
-        text: 'Details Saved.',
+        text: 'تم حفظ التفاصيل.',
         timer: 1000,
         onOpen: function(){
             swal.showLoading()
@@ -186,6 +241,7 @@ $(".pricing-form").submit(function(event){
       });
     }
   });
+    }
 });
 
 });

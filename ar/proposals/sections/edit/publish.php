@@ -120,10 +120,10 @@ $("#featured-button").click(function(){
 if(isset($_POST['submit_proposal'])){
   if($approve_proposals == "yes"){ 
   $status = "pending";
-  $text = "Your Proposal Has Been Successfully Submitted For Approval."; 
+  $text = "تم تقديم اقتراحك بنجاح للموافقة عليه."; 
   }else{ 
   $status = "active"; 
-  $text = "Your Proposal Has Been Successfully Publish. Now Its Live"; 
+  $text = "تم نشر اقتراحك بنجاح. الآن على الهواء مباشرة"; 
   }
   $update_proposal = $db->update("proposals",array("proposal_status"=>$status),array("proposal_id"=>$proposal_id));
   if($update_proposal){

@@ -408,7 +408,7 @@ if(isset($_POST['submit'])){
       echo "<script>
       swal({
       type: 'warning',
-      text: 'Opps! Your Already Made A Proposal With Same Title Try Another.',
+      text: 'عذراً! قدم بالفعل اقتراحًا بنفس العنوان جرب عنوانًا آخر.',
       })</script>";
     }else{
       $proposal_referral_code = mt_rand();
@@ -457,7 +457,7 @@ if(isset($_POST['submit'])){
         echo "<script>
         swal({
         type: 'success',
-        text: 'Details Saved.',
+        text: 'تم حفظ التفاصيل.',
         timer: 2000,
         onOpen: function(){
         swal.showLoading()

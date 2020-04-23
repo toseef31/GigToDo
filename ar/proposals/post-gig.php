@@ -724,7 +724,7 @@ if(isset($_POST['publish'])){
   "u_name" => "required",
   "pass" => "required");
 
-  $messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.");
+  $messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){
@@ -754,13 +754,13 @@ if(isset($_POST['publish'])){
     $check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
     $check_seller_email = $db->count("sellers",array("seller_email" => $email));
     if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-      array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+      array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
     }
     if($check_seller_username > 0 ){
-      array_push($error_array, "Opps! This username has already been taken. Please try another one");
+      array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");
     }
     if($check_seller_email > 0){
-      array_push($error_array, "Email has already been taken. Try logging in instead.");
+      array_push($error_array, "لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.");
     }
     if(empty($error_array)){
       $referral_code = mt_rand();
@@ -808,7 +808,7 @@ if(isset($_POST['publish'])){
             "proposal_cat_id" => "required",
             "proposal_child_id" => "required");
 
-            $messages = array("proposal_cat_id" => "you must need to select a category","proposal_child_id" => "you must need to select a child category","proposal_enable_referrals"=>"you must need to enable or disable proposal referrals.");
+            $messages = array("proposal_cat_id" => "يجب عليك تحديد فئة","proposal_child_id" => "يجب عليك تحديد فئة فرعية","proposal_enable_referrals"=>"يجب عليك تمكين أو تعطيل إحالات الاقتراح.");
             $val = new Validator($_POST,$rules,$messages);
 
             if($val->run() == false){
@@ -856,7 +856,7 @@ if(isset($_POST['publish'])){
                 echo "<script>
                 swal({
                 type: 'warning',
-                text: 'Opps! Your Already Made A Proposal With Same Title Try Another.',
+                text: 'عذراً! قدم بالفعل اقتراحًا بنفس العنوان جرب عنوانًا آخر.',
                 })</script>";
               }else{
                 $proposal_referral_code = mt_rand();
@@ -909,7 +909,7 @@ if(isset($_POST['publish'])){
                   echo "<script>
                   swal({
                   type: 'success',
-                  text: 'Details Saved.',
+                  text: 'تم حفظ التفاصيل.',
                   timer: 2000,
                   onOpen: function(){
                   swal.showLoading()
@@ -931,7 +931,7 @@ if(isset($_POST['publish'])){
       <script>
       swal({
       type: 'error',
-      html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+      html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
       animation: false,
       customClass: 'animated tada'
       }).then(function(){
@@ -1051,7 +1051,7 @@ if(isset($_POST['publish'])){
             if ( $('#proposal_desc').val() === '' && $('#proposal_price').val() === '' && $('#proposal_title').val() === '' ){
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){
@@ -1065,7 +1065,7 @@ if(isset($_POST['publish'])){
             }else if( $('#proposal_title').val() === ''){
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){
@@ -1075,7 +1075,7 @@ if(isset($_POST['publish'])){
             }else if( $('#proposal_price').val() === '' && $('#proposal_title').val() != ''){
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){
@@ -1086,7 +1086,7 @@ if(isset($_POST['publish'])){
             }else if( $('.cat_value').val() === '' && $('#proposal_desc').val() != '' && $('#proposal_price').val() != '' && $('#proposal_title').val() != ''){
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){
@@ -1099,7 +1099,7 @@ if(isset($_POST['publish'])){
             }else if( $('.cat_value').val() === '' && $('#proposal_desc').val() != '' && $('#proposal_price').val() != '' && $('#proposal_title').val() != ''){
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){
@@ -1112,7 +1112,7 @@ if(isset($_POST['publish'])){
             }else if( $('#proposal_desc').val() === '' && $('#proposal_price').val() != '' && $('#proposal_title').val() != '' && $('.cat_value').val() != ''){
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+              html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){

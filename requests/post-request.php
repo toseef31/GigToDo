@@ -1122,7 +1122,24 @@ if(isset($_POST['submit'])){
 						
 				}
 
-		}else{
+	 	} //elseif($count_seller == 0){
+
+	// 		echo "
+	// 					<script>
+	// 				swal({
+	// 				  type: 'warning',
+	// 				  html: $('<div>')
+	// 					.text('Opps! password or username is incorrect. Please try again.'),
+	// 				  animation: false,
+	// 				  customClass: 'animated tada'
+	// 				})
+	// 				$('.proloader').hide();
+	// 				$('.register-form').show();
+	// 				$('.login-form').hide();
+	// 				</script>
+	// 					";
+	// }
+	 		else {
 				$rules = array(
 				"name" => "required",
 				"u_name" => "required",

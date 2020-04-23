@@ -81,7 +81,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32">
                 <?php } ?>
               </div>
               <div class="icon">
@@ -373,7 +373,7 @@ success:function(){
 $("#send-email").html("Resend Email");
 swal({
   type: 'success',
-text: 'Confirmation email sent. Please check your email.',
+text: 'تم إرسال رسالة تأكيد. من فضلك تفقد بريدك الالكتروني.',
 });
 }
 });

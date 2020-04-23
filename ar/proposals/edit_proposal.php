@@ -261,6 +261,12 @@ if($videoPlugin == 1){
       background-color: #ff0707;
       border-color: #ff0707;
     }
+    .desc1, .desc2, .desc3{
+      color: red;
+    }
+    .border-red{
+      border-color: #ff0707;
+    }
   </style>
 </head>
 <body class="all-content">
@@ -344,13 +350,13 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       videoOrNotVideo = data;
       $('#wait').removeClass("loader");
       if(data == "error"){
-        swal({type: 'warning',text: 'Please fill in the missing Details.'});
+        swal({type: 'warning',text: 'يرجى ملء التفاصيل المفقودة.'});
       }else if(data == "error_img"){
-        swal({type: 'warning',text: 'Please add at least 1 image to continue.'});
+        swal({type: 'warning',text: 'يرجى إضافة صورة واحدة على الأقل للمتابعة.'});
       }else if(data != "error" || data != "error_img"){
         swal({
           type: 'success',
-          text: 'Details Saved.',
+          text: 'تم حفظ التفاصيل.',
           timer: 1000,
           onOpen: function(){
             swal.showLoading();

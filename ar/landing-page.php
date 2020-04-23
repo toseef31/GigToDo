@@ -409,7 +409,7 @@
               <script>
               swal({
               type: 'error',
-              html: $('<div>').text('Opps! Email has already been taken. Try logging in instead..'),
+              html: $('<div>').text('عذراً! لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.'),
               animation: false,
               customClass: 'animated tada'
               }).then(function(){
@@ -422,7 +422,7 @@
               echo "<script>
               swal({
               type: 'success',
-              text: 'Details Saved.',
+              text: 'تم حفظ التفاصيل.',
               timer: 2000,
               onOpen: function(){
               swal.showLoading()

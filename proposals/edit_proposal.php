@@ -255,6 +255,9 @@ $checkVideo = false;
           color: red;
           /*display: none;*/
         }
+        .border-red{
+          border-color: #ff0707;
+        }
         /*.desc1 , .desc2 , .desc3{
           display: none;
         } */

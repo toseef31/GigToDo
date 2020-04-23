@@ -260,7 +260,7 @@ require_once("../includes/user_header.php");
 if($seller_verification != "ok"){
   echo "<main style='min-height:80%'>
   <div class='alert alert-danger rounded-0 mt-0 text-center'>
-  Please confirm your email to use this feature.
+  يرجى تأكيد بريدك الإلكتروني لاستخدام هذه الميزة.
   </div></main>";
 }else{
 

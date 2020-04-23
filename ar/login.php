@@ -356,7 +356,7 @@ if(isset($_SESSION['seller_user_name'])){
 	        swal({
 	          type: 'warning',
 	          html: $('<div>')
-	            .text('Opps! password or username is incorrect. Please try again.'),
+	            .text('عذراً! كلمة المرور أو اسم المستخدم غير صحيح. حاول مرة اخرى.'),
 	          animation: false,
 	          customClass: 'animated tada'
 	        })
@@ -366,20 +366,20 @@ if(isset($_SESSION['seller_user_name'])){
 				if($seller_status == "block-ban"){
 					echo "
 					<script>
-			            swal({
-			              type: 'warning',
-			              html: $('<div>')
-			                .text('You have been blocked by the Admin. Please contact customer support.'),
-			              animation: false,
-			              customClass: 'animated tada'
-			            })
+            swal({
+              type: 'warning',
+              html: $('<div>')
+                .text('لقد تم حظرك من قبل المشرف. يرجى الاتصال بدعم العملاء.'),
+              animation: false,
+              customClass: 'animated tada'
+            })
 			    	</script>";
 				}elseif($seller_status == "deactivated"){
 					echo "
 					<script>
 					swal({
 					  type: 'warning',
-					  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
+					  html: $('<div>').text('لقد قمت بتعطيل حسابك ، يرجى الاتصال بنا للحصول على مزيد من التفاصيل.'),
 					  animation: false,
 					  customClass: 'animated tada'
 					})
@@ -405,7 +405,7 @@ if(isset($_SESSION['seller_user_name'])){
 			          <script>
 			                swal({
 			                type: 'success',
-			                text: 'Hey $seller_user_name, welcome back!',
+			                text: 'رحبًا   $seller_user_name ، مرحبًا بك مرة أخرى!',
 			                timer: 2000,
 			                onOpen: function(){
 			                  swal.showLoading()
@@ -420,7 +420,7 @@ if(isset($_SESSION['seller_user_name'])){
 			          <script>
 			                swal({
 			                type: 'success',
-			                text: 'Hey $seller_user_name, welcome back!',
+			                text: 'رحبًا   $seller_user_name ، مرحبًا بك مرة أخرى!',
 			                timer: 2000,
 			                onOpen: function(){
 			                  swal.showLoading()

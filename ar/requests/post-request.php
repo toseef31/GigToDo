@@ -281,7 +281,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
 		echo "<main style='min-height:80%'>
 		<div class='alert alert-danger rounded-0 mt-0 text-center'>
-			Please confirm your email to use this feature.
+			يرجى تأكيد بريدك الإلكتروني لاستخدام هذه الميزة.
 		</div></main>
 		";
 		}else{
@@ -916,7 +916,7 @@ if(isset($_POST['submit'])){
 			        swal({
 			          type: 'warning',
 			          html: $('<div>')
-			            .text('Opps! password or username is incorrect. Please try again.'),
+			            .text('عذراً! كلمة المرور أو اسم المستخدم غير صحيح. حاول مرة اخرى.'),
 			          animation: false,
 			          customClass: 'animated tada'
 			        })
@@ -926,20 +926,20 @@ if(isset($_POST['submit'])){
 						if($seller_status == "block-ban"){
 							echo "
 							<script>
-					            swal({
-					              type: 'warning',
-					              html: $('<div>')
-					                .text('You have been blocked by the Admin. Please contact customer support.'),
-					              animation: false,
-					              customClass: 'animated tada'
-					            })
+		            swal({
+		              type: 'warning',
+		              html: $('<div>')
+		                .text('لقد تم حظرك من قبل المشرف. يرجى الاتصال بدعم العملاء.'),
+		              animation: false,
+		              customClass: 'animated tada'
+		            })
 					    	</script>";
 						}elseif($seller_status == "deactivated"){
 							echo "
 							<script>
 							swal({
 							  type: 'warning',
-							  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
+							  html: $('<div>').text('لقد قمت بتعطيل حسابك ، يرجى الاتصال بنا للحصول على مزيد من التفاصيل.'),
 							  animation: false,
 							  customClass: 'animated tada'
 							})
@@ -1014,7 +1014,7 @@ if(isset($_POST['submit'])){
 				          		echo "<script>
 				          		    swal({
 				          		      type: 'success',
-				          		      text: 'Your request has been submitted successfully!',
+				          		      text: 'وفد فدم طلبك بنجاح!',
 				          		      timer: 3000,
 				          		      onOpen: function(){
 				          		      	swal.showLoading()
@@ -1077,13 +1077,13 @@ if(isset($_POST['submit'])){
 					$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 					$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 					if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-					  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+					  array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
 					}
 					if($check_seller_username > 0 ){
-					  array_push($error_array, "Opps! This username has already been taken. Please try another one");
+					  array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");
 					}
 					if($check_seller_email > 0){
-					  array_push($error_array, "Email has already been taken. Try logging in instead.");
+					  array_push($error_array, "لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.");
 					}
 
 					if(empty($error_array)){
@@ -1186,7 +1186,7 @@ if(isset($_POST['submit'])){
 										echo "<script>
 										    swal({
 										      type: 'success',
-										      text: 'Your request has been submitted successfully!',
+										      text: 'وفد فدم طلبك بنجاح!',
 										      timer: 3000,
 										      onOpen: function(){
 										      	swal.showLoading()
@@ -1208,7 +1208,7 @@ if(isset($_POST['submit'])){
 						<script>
 						swal({
 						type: 'error',
-						html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+						html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
 						animation: false,
 						customClass: 'animated tada'
 						}).then(function(){
@@ -1279,7 +1279,7 @@ if(isset($_POST['submit'])){
 				echo "<script>
 				    swal({
 				      type: 'success',
-				      text: 'Your request has been submitted successfully!',
+				      text: 'وفد فدم طلبك بنجاح!',
 				      timer: 3000,
 				      onOpen: function(){
 				      	swal.showLoading()

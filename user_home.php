@@ -7,7 +7,10 @@ $login_seller_name = $row_login_seller->seller_name;
 $login_user_name = $row_login_seller->seller_user_name;
 $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
-
+$cookie_name = "user";
+    $cookie_value = $login_seller_user_name;
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+   
 ?>
 <link href="styles/styles.css" rel="stylesheet">
 <!-- New Design -->
@@ -349,6 +352,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
         <!-- Similar-to-recent  END-->
 
         <!-- Shopping-trend-gigs  -->
+        <?php $select = $db->query("select * from top_proposals"); 
+          $count_top = $select->rowCount();
+          if($count_top != 0){
+        ?>
         <div class="featured-gig-area pb-40">
           <div class="row">
             <div class="col-12">
@@ -514,11 +521,15 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for desktop end -->
         </div>
         <!-- Shopping-trend-gigs  END-->
+      <?php } ?>
       </div>
       <!-- Right-sidebar START -->
       <div class="col-12 col-lg-4">
         <!-- .Sidebar-box  START-->
-
+        <?php 
+          $get_favorites = $db->select("favorites",array("seller_id" => $login_seller_id));
+          $count_fvrt = $get_favorites->rowCount();
+        if($count_fvrt != 0){ ?>
         <div class="sidebar-box">
           <div class="sidebar-title">
             <h4>Favourite <a href="<?= $site_url; ?>/favorites.php">See All</a></h4>
@@ -588,25 +599,23 @@ $relevant_requests = $row_general_settings->relevant_requests;
           </div>
           <?php } ?>
           <?php 
-            if($count_favorites == 0){
-              echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> Your favorites page is empty</span></span>";
-            }
+            // if($count_favorites == 0){
+            //   echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> Your favorites page is empty</span></span>";
+            // }
           ?>
           
         </div>
-
+        <?php } ?>
         <!-- Recent-view -->
+        <?php
+        $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
+        $count_recent = $select_recent->rowCount();
+        if($count_recent != 0){ 
+        ?>
         <div class="sidebar-box mb-40">
           <div class="sidebar-title">
             <h4>Recently viewed <a href="javascript:void(0);">See All</a></h4>
           </div>
-            <?php
-            $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
-            $count_recent = $select_recent->rowCount();
-            if($count_recent == 0){
-              echo "<p class='text-muted'> <i class='fa fa-frown-o'></i> {$lang['no_recently_viewed']} </p>";
-            }else{ 
-            ?>
               <?php
               $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT  0,5");
               while($row_recent = $select_recent->fetch()){
@@ -676,8 +685,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
             </div>
             <?php } ?>
           <?php } ?>
+          </div>
         <?php } ?>
-        </div>
 
         <!-- .Sidebar-box  END-->
       </div>

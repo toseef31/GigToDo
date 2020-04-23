@@ -290,17 +290,17 @@ if(isset($_SESSION['seller_user_name'])){
 						<form action="" method="POST">
 							<div class="form-group">
 								<label class="control-label">Username or Email</label>
-								<input class="form-control" type="text" placeholder="Enter Username or Email"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
+								<input class="form-control" type="text" placeholder="Enter Username or Email"  name="seller_user_name" value= "<?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?>"/>
 								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Password</label>
-								<input class="form-control" type="password" name="seller_pass" placeholder="Enter Password"/>
+								<input class="form-control" type="password" name="seller_pass" value="<?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?>" placeholder="Enter Password"/>
 								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
 							</div>
 							<div class="form-group d-flex flex-row align-items-center justify-content-between">
 								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" name="remember" id="customCheck1">
+									<input type="checkbox" class="custom-control-input" name="remember" id="customCheck1" <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?>>
 									<label class="custom-control-label" for="customCheck1">Remember me</label>
 								</div>
 								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">Forgot password?</a>
@@ -392,8 +392,8 @@ if(isset($_SESSION['seller_user_name'])){
 				    if( ($_POST['remember']==1) || ($_POST['remember']=='on')) {
 				    	$hour = time()+3600 *24 * 30;
 
-				    	setcookie('seller_user_name', $user_name, $hour);
-				    	setcookie('seller_pass', $hashed_password, $hour);
+				    	setcookie('user_login', $user_name, $hour);
+				    	setcookie('userpassword', $hashed_password, $hour);
 				    }
 				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $user_name){
 							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));

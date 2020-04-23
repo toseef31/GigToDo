@@ -81,21 +81,24 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 								<span class="package-title">
 									الأساسية
 								</span>
-								<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control" placeholder="Description" required><?= $row_1->description; ?></textarea>
+								<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control description1" placeholder="Description"><?= $row_1->description; ?></textarea>
+								<span class="desc1">الوصف مطلوب</span>
 							</div>
 							<!-- Each item -->
 							<div class="package-item-single">
 								<span class="package-title">
 									قياسية
 								</span>
-								<textarea maxlength="35" name="proposal_packages[2][description]" class="form-control" placeholder="Description"><?= $row_2->description; ?></textarea>
+								<textarea maxlength="35" name="proposal_packages[2][description]" class="form-control packg-desc" placeholder="Description"><?= $row_2->description; ?></textarea>
+								<span class="desc2">الوصف مطلوب</span>
 							</div>
 							<!-- Each item -->
 							<div class="package-item-single">
 								<span class="package-title">
 									بريميوم
 								</span>
-								<textarea maxlength="35" name="proposal_packages[3][description]" class="form-control" placeholder="Description"><?= $row_3->description; ?></textarea>
+								<textarea maxlength="35" name="proposal_packages[3][description]" class="form-control packg-desc" placeholder="Description"><?= $row_3->description; ?></textarea>
+								<span class="desc3">الوصف مطلوب</span>
 							</div>
 							<!-- Each item -->
 						</div>

@@ -262,16 +262,16 @@ $(document).on("click","#terms",function(){
 			$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 			$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 			if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-			  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+			  array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
 			}
 			if($check_seller_username > 0 ){
-			  array_push($error_array, "Opps! This username has already been taken. Please try another one");
+			  array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");
 			}
 			if($check_seller_email > 0){
-			  array_push($error_array, "Email has already been taken. Try logging in instead.");
+			  array_push($error_array, "لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.");
 			}
 			if($pass != $con_pass){
-	     	  array_push($error_array, "Passwords don't match. Please try again.");
+	     	  array_push($error_array, "كلمتا المرور غير متطابقتين. حاول مرة اخرى.");
 			}
 	    
 			if(empty($error_array)){
@@ -330,7 +330,7 @@ $(document).on("click","#terms",function(){
 			          <script>
 			          swal({
 			          type: 'success',
-			          text: 'Successfully Registered! Welcome onboard, $name. ',
+			          text: 'سجلت بنجاح! مرحبًا بكم على متن   $name. ',
 			          timer: 6000,
 			          onOpen: function(){
 			          swal.showLoading()
@@ -355,7 +355,7 @@ $(document).on("click","#terms",function(){
 							<script>
 							swal({
 							type: 'success',
-							text: 'Successfully Registered! Welcome onboard, $name. ',
+							text: 'سجلت بنجاح! مرحبًا بكم على متن   $name. ',
 							timer: 6000,
 							onOpen: function(){
 							swal.showLoading()
@@ -384,7 +384,7 @@ $(document).on("click","#terms",function(){
 				<script>
 				swal({
 					type: 'warning',
-					html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+					html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
 					animation: false,
 					customClass: 'animated tada'
 				}).then(function(){

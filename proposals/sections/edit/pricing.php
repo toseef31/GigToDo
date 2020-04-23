@@ -92,6 +92,7 @@ $(document).ready(function(){
        pack_desc.prop('required',true);
        $('.desc2').show();
        $('.desc3').show();
+       $('.packg-desc').addClass('border-red');
      }else{
       console.log(status + "else");
        pack_desc.prop('required',false);
@@ -106,13 +107,15 @@ $(document).ready(function(){
         switchStatus = $(this).is(':checked');
         $('.packg-desc').prop('required',true);
         $('.desc2').show();
-        $('.desc3').show();        
+        $('.desc3').show();  
+        $('.packg-desc').addClass('border-red');      
       }
       else {
          switchStatus = $(this).is(':checked');
           $('.packg-desc').prop('required',false);
            $('.desc2').hide();
         $('.desc3').hide();
+        $('.packg-desc').removeClass('border-red');
       }
   });
   
@@ -201,6 +204,8 @@ $(".pricing-form").submit(function(event){
   {
     event.preventDefault();
     $('.desc1').show();
+    $('.description1').addClass('border-red');
+    $('.description1').prop('required', true);
   }else{
 
   var form_data = new FormData(this);
