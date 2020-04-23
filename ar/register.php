@@ -191,14 +191,15 @@ if(isset($_SESSION['seller_user_name'])){
 									</div>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['accountType']); ?></span>
 								</div>
-								<div class="form-group d-flex flex-row align-items-center justify-content-between">
+								<div class="form-group d-flex flex-row align-items-center justify-content-between mb-0">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="terms">
+										<input type="checkbox" class="custom-control-input" name="term" id="terms">
 										<label class="custom-control-label" style="text-transform: none;" for="terms">اوافق على  <a href="javascript:void(0);">الشروط والأحكام</a></label>
 									</div>
 								</div>
+								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['term']); ?></span>
 								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="register" disabled>التسجيل</button>
+									<button class="login-button" role="button" type="submit" name="register" >التسجيل</button>
 								</div>
 							</form>
 						</div>
@@ -211,14 +212,14 @@ if(isset($_SESSION['seller_user_name'])){
 
 
 <script>
-$(document).on("click","#terms",function(){
-		if($(this).prop("checked") == true){
-			$(':input[type="submit"]').prop('disabled', false);
-		}
-		else if($(this).prop("checked") == false){
-			$(':input[type="submit"]').prop('disabled', true);
-		}
-	});
+// $(document).on("click","#terms",function(){
+// 		if($(this).prop("checked") == true){
+// 			$(':input[type="submit"]').prop('disabled', false);
+// 		}
+// 		else if($(this).prop("checked") == false){
+// 			$(':input[type="submit"]').prop('disabled', true);
+// 		}
+// 	});
 </script>
 <?php 
 	if(isset($_POST['register'])){
@@ -227,9 +228,10 @@ $(document).on("click","#terms",function(){
 		"email" => "email|required",
 		"pass" => "required",
 		"con_pass" => "required",
-		"accountType" => "required");
+		"accountType" => "required",
+		"term" => "required");
 
-		$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.","con_pass" => "تأكيد كلمة المرور مطلوب.", "accountType" => "نوع الحساب مطلوب.", 'email' => 'البريد الالكتروني مطلوب');
+		$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.","con_pass" => "تأكيد كلمة المرور مطلوب.", "accountType" => "نوع الحساب مطلوب.", 'email' => 'البريد الالكتروني مطلوب' , "term" => "يرجى التحقق من الشروط والأحكام");
 		$val = new Validator($_POST,$rules,$messages);
 
 		if($val->run() == false){

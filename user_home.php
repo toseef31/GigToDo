@@ -7,9 +7,7 @@ $login_seller_name = $row_login_seller->seller_name;
 $login_user_name = $row_login_seller->seller_user_name;
 $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
-$cookie_name = "user";
-    $cookie_value = $login_seller_user_name;
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
    
 ?>
 <link href="styles/styles.css" rel="stylesheet">

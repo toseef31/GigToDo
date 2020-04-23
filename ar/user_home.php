@@ -347,6 +347,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
         </div>
         <!-- Similar-to-recent  END-->
 
+        <?php $select = $db->query("select * from top_proposals"); 
+          $count_top = $select->rowCount();
+          if($count_top != 0){
+        ?>
         <!-- Shopping-trend-gigs  -->
         <div class="featured-gig-area pb-40">
           <div class="row">
@@ -513,11 +517,15 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for desktop end -->
         </div>
         <!-- Shopping-trend-gigs  END-->
+        <?php } ?>
       </div>
       <!-- Right-sidebar START -->
       <div class="col-12 col-lg-4">
         <!-- .Sidebar-box  START-->
-
+        <?php 
+          $get_favorites = $db->select("favorites",array("seller_id" => $login_seller_id));
+          $count_fvrt = $get_favorites->rowCount();
+        if($count_fvrt != 0){ ?>
         <div class="sidebar-box">
           <div class="sidebar-title">
             <h4>مفضل <a href="<?= $site_url; ?>/ar/favorites.php">اظهار الكل</a></h4>
@@ -587,25 +595,23 @@ $relevant_requests = $row_general_settings->relevant_requests;
           </div>
           <?php } ?>
           <?php 
-            if($count_favorites == 0){
-              echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> صفحة المفضلة لديك فارغة</span></span>";
-            }
+            // if($count_favorites == 0){
+            //   echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> صفحة المفضلة لديك فارغة</span></span>";
+            // }
           ?>
           
         </div>
-
+        <?php } ?>
         <!-- Recent-view -->
+        <?php
+        $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
+        $count_recent = $select_recent->rowCount();
+        if($count_recent != 0){ 
+        ?>
         <div class="sidebar-box mb-40">
           <div class="sidebar-title">
             <h4>اللي اتصفحته في الفترة الأخيرة <a href="javascript:void(0);">اظهار الكل</a></h4>
           </div>
-            <?php
-            $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
-            $count_recent = $select_recent->rowCount();
-            if($count_recent == 0){
-              echo "<p class='text-muted'> <i class='fa fa-frown-o'></i> لا شيء ينظر حتى الآن </p>";
-            }else{ 
-            ?>
               <?php
               $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT  0,5");
               while($row_recent = $select_recent->fetch()){
@@ -675,9 +681,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
             </div>
             <?php } ?>
           <?php } ?>
+          </div>
         <?php } ?>
-        </div>
-
         <!-- .Sidebar-box  END-->
       </div>
     </div>

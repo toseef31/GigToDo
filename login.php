@@ -1,5 +1,4 @@
-<?php
-
+<?php ob_start(); 
 session_start();
 
 require_once("includes/db.php");
@@ -391,9 +390,8 @@ if(isset($_SESSION['seller_user_name'])){
 				    $_SESSION['seller_user_name'] = $user_name;
 				    if( ($_POST['remember']==1) || ($_POST['remember']=='on')) {
 				    	$hour = time()+3600 *24 * 30;
-
-				    	setcookie('user_login', $user_name, $hour);
-				    	setcookie('userpassword', $hashed_password, $hour);
+				    	setcookie('user_login', $user_name , $hour,'/');
+				    	setcookie('userpassword', $_POST['seller_pass'], $hour,'/');
 				    }
 				    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $user_name){
 							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));

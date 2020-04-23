@@ -193,14 +193,15 @@ if(isset($_SESSION['seller_user_name'])){
 									</div>
 								</div>
 								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['accountType']); ?></span>
-								<div class="form-group d-flex flex-row align-items-center justify-content-between">
+								<div class="form-group d-flex flex-row align-items-center justify-content-between mb-0">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="terms">
+										<input type="checkbox" class="custom-control-input" name="term" id="terms">
 										<label class="custom-control-label" style="text-transform: none;" for="terms">I agree to the <a href="javascript:void(0);">Terms & Conditions</a></label>
 									</div>
 								</div>
+								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['term']); ?></span>
 								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="register" disabled>Sign up</button>
+									<button class="login-button" role="button" type="submit" name="register">Sign up</button>
 								</div>
 							</form>
 						</div>
@@ -213,14 +214,14 @@ if(isset($_SESSION['seller_user_name'])){
 
 
 <script>
-$(document).on("click","#terms",function(){
-        if($(this).prop("checked") == true){
-        	$(':input[type="submit"]').prop('disabled', false);
-        }
-        else if($(this).prop("checked") == false){
-        	$(':input[type="submit"]').prop('disabled', true);
-        }
-    });
+// $(document).on("click","#terms",function(){
+//         if($(this).prop("checked") == true){
+//         	$(':input[type="submit"]').prop('disabled', false);
+//         }
+//         else if($(this).prop("checked") == false){
+//         	$(':input[type="submit"]').prop('disabled', true);
+//         }
+//     });
    $("#phone_number").intlTelInput({
 		 initialCountry:"{ 'sg': 'Singapore' }",
 // localized country names e.g. { 'de': 'Deutschland' }
@@ -235,9 +236,10 @@ $(document).on("click","#terms",function(){
 		"email" => "email|required",
 		"pass" => "required",
 		"con_pass" => "required",
-		"accountType" => "required");
+		"accountType" => "required",
+		"term" => "required");
 
-		$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account type Is Required.");
+		$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account type Is Required.", "term" => "please check terms and conditions");
 		$val = new Validator($_POST,$rules,$messages);
 
 		if($val->run() == false){
