@@ -875,10 +875,24 @@ if(isset($_POST['publish'])){
                 if($enable_referrals == "no"){ 
                 $data['proposal_enable_referrals'] = "no"; 
                 }
-
+                if($data['proposal_cat_id'] == 1){
+                  $data['proposal_img1'] = 'Graphic-Designing.jpg';
+                }else if($data['proposal_cat_id'] == 1){
+                  $data['proposal_img1'] = 'digital-marketing.jpg';
+                }else if($data['proposal_cat_id'] == 3){
+                  $data['proposal_img1'] = 'writing-and-translation.jpg';
+                }else if($data['proposal_cat_id'] == 4){
+                  $data['proposal_img1'] = 'video-sound.jpg';
+                }else if($data['proposal_cat_id'] == 6){
+                  $data['proposal_img1'] = 'programing-tech.png';
+                }else if($data['proposal_cat_id'] == 7){
+                  $data['proposal_img1'] = 'business.jpeg';
+                }else{
+                  $data['proposal_img1'] = 'becreative.jpg';
+                }
                 $data['level_id'] = '1';
                 $data['language_id'] = '1';
-                $data['proposal_status'] = "draft";
+                $data['proposal_status'] = "pending";
 // var_dump($data);die;
                 $insert_proposal = $db->insert("proposals",$data);
 
