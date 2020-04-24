@@ -291,17 +291,20 @@ if(isset($_SESSION['seller_user_name'])){
     						<form action="" method="POST">
     							<div class="form-group">
     								<label class="control-label">الإيميل   أو   اسم المستخدم</label>
-    								<input class="form-control" type="text" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني"  name="seller_user_name" value= "<?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?>"/>
+    								<input class="form-control" type="text" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني"  name="seller_user_name" value= "<?php if(isset($_SESSION["user_email"])) { echo $_SESSION["user_email"]; } ?>"/>
+    								<!-- <?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?> -->
     								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
     							</div>
     							<div class="form-group">
     								<label class="control-label">الباسوورد</label>
-    								<input class="form-control" type="password" name="seller_pass" placeholder="أدخل كلمة المرور" value="<?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?>" />
+    								<input class="form-control" type="password" name="seller_pass" placeholder="أدخل كلمة المرور" value="<?php if(isset($_SESSION["user_password"])) { echo $_SESSION["user_password"]; }else{ echo " "; } ?>" />
+    								<!-- <?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?> -->
     								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
     							</div>
     							<div class="form-group d-flex flex-row align-items-center justify-content-between">
     								<div class="custom-control custom-checkbox">
-    									<input type="checkbox" class="custom-control-input" name="remember" id="customCheck1" <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?>>
+    									<input type="checkbox" class="custom-control-input" name="remember" id="customCheck1" <?php if(isset($_SESSION["user_email"])){ ?> checked="checked" <?php } ?>>
+    									<!-- <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?> -->
     									<label class="custom-control-label" for="customCheck1">افتكرني</label>
     								</div>
     								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">نسيت الباسوورد ؟</a>
@@ -388,13 +391,22 @@ if(isset($_SESSION['seller_user_name'])){
 					$select_seller = $db->select("sellers",array("seller_user_name"=>$user_name,"seller_pass"=>$hashed_password));
 					if($select_seller){
 						$_SESSION['seller_user_name'] = $user_name;
+					    	$hour = time()+3600 *24 * 30;
 						if( ($_POST['remember']==1) || ($_POST['remember']=='on')) {
-							if( ($_POST['remember']==1) || ($_POST['remember']=='on')) {
-						    	$hour = time()+3600 *24 * 30;
-						    	setcookie('user_login', $user_name , $hour,'/');
-						    	setcookie('userpassword', $_POST['seller_pass'], $hour,'/');
+						    	// setcookie('user_login', $user_name , $hour,'/');
+						    	// setcookie('userpassword', $_POST['seller_pass'], $hour,'/');
+						       $_SESSION["user_email"] = $user_name;
+						       $_SESSION["user_password"] = $seller_pass;
+						       }else{  
+						        if(isset($_SESSION["user_email"])){ 
+						         unset($_SESSION["user_email"]); 
+						        }  
+						        if(isset($_SESSION["user_password"])){  
+						         unset($_SESSION["user_password"]);  
+						    	 }  
 						    }
-						}
+						    $_SESSION['loggedin_user'] = $hour;
+						// }
 						if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $user_name){
 							$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 							$seller_user_name = ucfirst(strtolower($seller_user_name));
