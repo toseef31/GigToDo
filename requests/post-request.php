@@ -648,11 +648,11 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												
 
 												<h4>Signup as Buyer</h4>
-												<div class="form-group">
+												<!-- <div class="form-group">
 													<label class="control-label"><span>Full Name</span></label>
 													<input class="form-control" type="text" name="name" placeholder="Enter Your Full Name" value="" />
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></span>
-												</div>
+												</div> -->
 												<div class="form-group">
 													<label class="control-label"><span>Username</span></label>
 													<input class="form-control" type="text" name="u_name" placeholder="Enter Your Username" value="" />
@@ -697,8 +697,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												<?php } ?>
 												<h4>Signin as Buyer</h4>
 												<div class="form-group">
-													<label class="control-label"><span>Username</span></label>
-													<input class="form-control" type="text" placeholder="Enter Username"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
+													<label class="control-label"><span>Username or Email</span></label>
+													<input class="form-control" type="text" placeholder="Enter Username or email"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 												</div>
 												<div class="form-group">
@@ -1110,7 +1110,7 @@ if(isset($_POST['submit'])){
 										swal.showLoading()
 									  }
 									}).then(function(){
-										window.open('manage_requests.php','_self');
+										window.open('$site_url/ar','_self');
 									});
 								</script>";
 							}
@@ -1141,7 +1141,6 @@ if(isset($_POST['submit'])){
 	// }
 	 		else {
 				$rules = array(
-				"name" => "required",
 				"u_name" => "required",
 				"email" => "email|required",
 				"pass" => "required",
@@ -1298,7 +1297,7 @@ if(isset($_POST['submit'])){
 												swal.showLoading()
 											  }
 											}).then(function(){
-												window.open('manage_requests.php','_self');
+												window.open('$site_url/ar','_self');
 											});
 										</script>";
 									}
@@ -1361,7 +1360,7 @@ if(isset($_POST['submit'])){
 			
 			// print_r("total file" .$countfiles);die("die at line 1225 ");
 
-$request_filee = array();
+			$request_filee = array();
 			for($i=0;$i<$countfiles;$i++){
 
 				$request_filee[] = $_FILES['request_file']['name'][$i];

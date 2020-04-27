@@ -295,7 +295,7 @@ if(isset($_SESSION['seller_user_name'])){
 							</div>
 							<div class="form-group">
 								<label class="control-label">Password</label>
-								<input class="form-control" type="password" name="seller_pass" value="<?php if(isset($_SESSION["user_password"])) { echo $_SESSION["user_password"]; }else{ echo " "; } ?>" placeholder="Enter Password"/>
+								<input class="form-control" type="password" name="seller_pass" value="<?php if(isset($_SESSION["user_password"])) { echo $_SESSION["user_password"]; } ?>" placeholder="Enter Password"/>
 								<!-- <?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?> -->
 								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
 							</div>

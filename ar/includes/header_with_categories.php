@@ -73,7 +73,7 @@ $page_url = substr("$full_url", 18);
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex flex-row align-items-center justify-content-end">
             <div class="menubar d-flex flex-row align-items-center">
-              <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+              <div class="image"><img src="<?= $site_url ?>/assets/img/menu-left-logo.png" alt=""></div>
               <div class="icon">
                 <span></span>
                 <span></span>

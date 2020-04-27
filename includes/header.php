@@ -406,8 +406,8 @@ $page_url = substr("$full_url", 15);
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
                   <div class="image">
-                    <img src="assets/img/menu-left-logo-2.png" alt="">
-                    <img src="assets/img/menu-left-logo.png" alt="">
+                    <img src="<?= $site_url ?>/assets/img/menu-left-logo-2.png" alt="">
+                    <img src="<?= $site_url ?>/assets/img/menu-left-logo.png" alt="">
                   </div>
                   <div class="icon">
                     <span></span>

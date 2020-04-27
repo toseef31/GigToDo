@@ -917,7 +917,7 @@ if(isset($_POST['publish'])){
                   swal.showLoading()
                   }
                   }).then(function(){
-                    window.open('view_proposals','_self')
+                    window.open('dashboard','_self')
                   });
                   </script>";
                 }

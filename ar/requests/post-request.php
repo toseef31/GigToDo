@@ -584,11 +584,11 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												
 
 												<h4>الاشتراك كمشتري</h4>
-												<div class="form-group">
+												<!-- <div class="form-group">
 													<label class="control-label"><span>الاسم الكامل</span></label>
 													<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="" />
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></span>
-												</div>
+												</div> -->
 												<div class="form-group">
 													<label class="control-label"><span>اسم المستخدم</span></label>
 													<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="" />
@@ -615,7 +615,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											<div class="post-register-form login-form">
 												<h4>تسجيل الدخول كمشتري</h4>
 												<div class="form-group">
-													<label class="control-label"><span>اسم المستخدم</span></label>
+													<label class="control-label"><span>الإيميل   أو   اسم المستخدم</span></label>
 													<input class="form-control" type="text" placeholder="ادخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 												</div>
@@ -1020,7 +1020,7 @@ if(isset($_POST['submit'])){
 				          		      	swal.showLoading()
 				          		      }
 				          		    }).then(function(){
-				          		      	window.open('manage_requests.php','_self');
+				          		      	window.open('$site_url','_self');
 				          		    });
 				          		</script>";
 				          	}
@@ -1034,7 +1034,6 @@ if(isset($_POST['submit'])){
 
 		}else{
 				$rules = array(
-				"name" => "required",
 				"u_name" => "required",
 				"email" => "email|required",
 				"pass" => "required",
@@ -1192,7 +1191,7 @@ if(isset($_POST['submit'])){
 										      	swal.showLoading()
 										      }
 										    }).then(function(){
-										      	window.open('manage_requests.php','_self');
+										      	window.open('$site_url','_self');
 										    });
 										</script>";
 									}

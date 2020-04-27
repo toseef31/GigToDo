@@ -63,6 +63,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
     <div class="row">
       <!-- Left-sidebar START -->
       <div class="col-12 col-lg-8">
+        <?php 
+          $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
+          $count_proposals = $get_proposals->rowCount();
+          if($count_proposals != 0){
+           
+        ?>
         <!-- Featured-gig-area -->
         <div class="featured-gig-area pt-40">
           <div class="row">
@@ -76,13 +82,13 @@ $relevant_requests = $row_general_settings->relevant_requests;
             <div class="row">
               <?php
                 $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
-                $count_proposals = $get_proposals->rowCount();
-                if($count_proposals == 0){
-                    echo "
-                    <div class='col-md-12 text-center'>
-                    <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
-                    </div>";
-                }
+                // $count_proposals = $get_proposals->rowCount();
+                // if($count_proposals == 0){
+                //     echo "
+                //     <div class='col-md-12 text-center'>
+                //     <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+                //     </div>";
+                // }
                 while($row_proposals = $get_proposals->fetch()){
                 $proposal_id = $row_proposals->proposal_id;
                 $proposal_title = $row_proposals->proposal_title;
@@ -142,13 +148,13 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <div class="row d-none d-lg-flex">
             <?php
               $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
-              $count_proposals = $get_proposals->rowCount();
-              if($count_proposals == 0){
-                  echo "
-                  <div class='col-md-12 text-center'>
-                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
-                  </div>";
-              }
+              // $count_proposals = $get_proposals->rowCount();
+              // if($count_proposals == 0){
+              //     echo "
+              //     <div class='col-md-12 text-center'>
+              //     <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+              //     </div>";
+              // }
               while($row_proposals = $get_proposals->fetch()){
               $proposal_id = $row_proposals->proposal_id;
               $proposal_title = $row_proposals->proposal_title;
@@ -205,6 +211,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for desktop end -->
         </div>
         <!-- Featured-gig-area  END-->
+        <?php } ?>
+
         
         <!-- Similar-to-recent -->
         <div class="featured-gig-area pt-40 pb-40">

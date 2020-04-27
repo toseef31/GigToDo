@@ -163,16 +163,7 @@
             $page_url = substr("$full_url", 18);
           ?>
           <div>
-            <select name=""  id="languageSelect" onChange="window.location.href=this.value">
-              <?php 
-              $get_languages = $db->select("languages");
-              while($row_languages = $get_languages->fetch()){
-              $id = $row_languages->id;
-              $title = $row_languages->title;
-              $image = $row_languages->image;
-              ?>
-              <!-- <option data-image="<?= $site_url; ?>/languages/images/<?= $image; ?>" data-url="<?= "$site_url/change_language?id=$id"; ?>" <?php if($id == $_SESSION["siteLanguage"]){ echo "selected"; } ?>><?= $title; ?></option> -->
-              <?php } ?>
+            <select name="" id="" onChange="window.location.href=this.value">
               <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
               <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>" selected>AR</option>
             </select>
