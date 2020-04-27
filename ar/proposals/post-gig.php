@@ -930,7 +930,7 @@ if(isset($_POST['publish'])){
                   swal.showLoading()
                   }
                   }).then(function(){
-                    window.open('dashboard','_self')
+                    window.open('$site_url/dashboard','_self')
                   });
                   </script>";
                 }
