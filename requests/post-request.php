@@ -1110,7 +1110,7 @@ if(isset($_POST['submit'])){
 										swal.showLoading()
 									  }
 									}).then(function(){
-										window.open('$site_url/ar','_self');
+										window.open('$site_url','_self');
 									});
 								</script>";
 							}
@@ -1297,7 +1297,7 @@ if(isset($_POST['submit'])){
 												swal.showLoading()
 											  }
 											}).then(function(){
-												window.open('$site_url/ar','_self');
+												window.open('$site_url','_self');
 											});
 										</script>";
 									}
@@ -1317,7 +1317,7 @@ if(isset($_POST['submit'])){
 						animation: false,
 						customClass: 'animated tada'
 						}).then(function(){
-						window.open('index','_self')
+						window.open('post-request.php','_self')
 						});
 						</script>";
 					}
