@@ -1130,6 +1130,9 @@ if(isset($_POST['publish'])){
               $('#post_gig').removeClass('show active');
               $('#publish_section').addClass('show active');
               $('#publish_tab').addClass('active');
+              
+              document.documentElement.scrollTop = 0;
+              
             }
 
                     //   if ( $(this).val() === '' ){
