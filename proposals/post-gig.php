@@ -268,7 +268,7 @@ $login_seller_language = $row_login_seller->seller_language;
           <div class="row align-items-center">
             <div class="col-12 col-md-3 col-lg-2 d-flex flex-row justify-content-center">
               <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
-                <a href="<?php echo $site_url; ?>">
+                <a href="javascript:void(0);">
                   <?php if($site_logo_type == "image"){ ?>
                   <img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt="" width="150">
                   <?php }else{ ?>
@@ -659,10 +659,10 @@ $login_seller_language = $row_login_seller->seller_language;
                      
                       <div class="d-flex flex-column">
                         <input type="hidden" name="email" value="<?= $user_email; ?>">
-                        <div class="form-group d-flex flex-column">
+                        <!-- <div class="form-group d-flex flex-column">
                           <label class="control-label" for="fname">First Name</label>
                           <input class="form-control" id="fname" name="name" type="text" />
-                        </div>
+                        </div> -->
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
                           <label class="control-label" for="lname">User Name</label>
@@ -708,7 +708,6 @@ function insertPackages($proposal_id){
 if(isset($_POST['publish'])){
 
   $rules = array(
-  "name" => "required",
   "u_name" => "required",
   "pass" => "required");
 
