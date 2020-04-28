@@ -253,7 +253,7 @@ if(isset($_SESSION['seller_user_name'])){
     							<span>
     								<i class="fab fa-facebook-f"></i>
     							</span>
-    							<span> تسجيل الدخول عن طريق  Facebook</span>
+    							<span>  الدخول عن طريق  Facebook</span>
     						</a>
     						<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $linkLoginURL; ?>'">
     							<span>
