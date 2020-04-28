@@ -96,7 +96,7 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message-2.png" alt="">
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt="">
                 <!-- <span class="total-user-count count c-messages-header"></span>
                 <span class="total-user-count count c-notifications-header"></span> -->
               </a>

@@ -89,7 +89,7 @@
                 </select>
               </div>
               <div class="message-inner">
-                <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message-2.png" alt=""></a>
+                <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt=""></a>
               </div>
               <div class="menubar d-flex flex-row align-items-center">
                 <div class="image">

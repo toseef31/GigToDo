@@ -875,18 +875,36 @@ if(isset($_POST['publish'])){
                 if($enable_referrals == "no"){ 
                 $data['proposal_enable_referrals'] = "no"; 
                 }
+                $graphic_img = array("Graphic-Designing.jpg", "Graphic-Designing-1.png", "Graphic-Designing-2.jpg", "Graphic-Designing-3.jpg");
+                $random_graphic=array_rand($graphic_img);
+
+                $digital_img = array("digital-marketing.jpg", "digital_marketing-1.jpg", "digital-marketing-2.png", "digital-marketing-3.jpg");
+                $random_digital=array_rand($digital_img);
+
+                $writing_img = array("writing-and-translation.jpg", "writing-and-translation-1.jpg", "writing-and-translation-2.jpg", "writing-and-translation-3.jpg");
+                $writing_digital=array_rand($writing_img);
+
+                $video_img = array("video-sound.jpg", "video-sound-1.jpg", "video-sound-2.jpg", "video-sound-3.jpg");
+                $video_digital=array_rand($video_img);
+
+                $tech_img = array("programing-tech.png", "programming-tech-1.jpeg", "programming-tech-2.jpg", "programming-tech-3.jpg");
+                $tech_digital=array_rand($tech_img);
+
+                $business_img = array("business.jpeg", "business-1.jpg", "Business-2.jpg", "business-3.jpg");
+                $business_digital=array_rand($business_img);
+
                 if($data['proposal_cat_id'] == 1){
-                  $data['proposal_img1'] = 'Graphic-Designing.jpg';
-                }else if($data['proposal_cat_id'] == 1){
-                  $data['proposal_img1'] = 'digital-marketing.jpg';
+                  $data['proposal_img1'] = $graphic_img[$random_graphic];
+                }else if($data['proposal_cat_id'] == 2){
+                  $data['proposal_img1'] = $digital_img[$random_digital];
                 }else if($data['proposal_cat_id'] == 3){
-                  $data['proposal_img1'] = 'writing-and-translation.jpg';
+                  $data['proposal_img1'] = $writing_img[$writing_digital];
                 }else if($data['proposal_cat_id'] == 4){
-                  $data['proposal_img1'] = 'video-sound.jpg';
+                  $data['proposal_img1'] = $video_img[$video_digital];
                 }else if($data['proposal_cat_id'] == 6){
-                  $data['proposal_img1'] = 'programing-tech.png';
+                  $data['proposal_img1'] = $tech_img[$tech_digital];
                 }else if($data['proposal_cat_id'] == 7){
-                  $data['proposal_img1'] = 'business.jpeg';
+                  $data['proposal_img1'] = $business_img[$business_digital];
                 }else{
                   $data['proposal_img1'] = 'becreative.jpg';
                 }
