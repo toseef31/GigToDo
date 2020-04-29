@@ -92,6 +92,23 @@ This delivery title will show on categories, sub categories and search pages.
 </div>
 
 </div><!--- form-group row Ends --->
+<div class="form-group row"><!--- form-group row Starts --->
+
+<label class="col-md-3 control-label"> Delivery Time Title Arabic: </label>
+
+<div class="col-md-6">
+
+<input type="text" name="delivery_title_arabic" class="form-control" required>
+
+<small class="form-text text-muted">
+
+This delivery title will show on categories, sub categories and search pages.
+
+</small>
+
+</div>
+
+</div><!--- form-group row Ends --->
 
 
 <div class="form-group row"><!--- form-group row Starts --->
@@ -101,6 +118,24 @@ This delivery title will show on categories, sub categories and search pages.
 <div class="col-md-6">
 
 <input type="text" name="delivery_proposal_title" class="form-control" required>
+
+<small class="form-text text-muted">
+
+This delivery title will show on proposal related pages.
+
+</small>
+
+</div>
+
+</div><!--- form-group row Ends --->
+
+<div class="form-group row"><!--- form-group row Starts --->
+
+<label class="col-md-3 control-label"> Proposal Delivery Time Title Arabic: </label>
+
+<div class="col-md-6">
+
+<input type="text" name="delivery_proposal_title_arabic" class="form-control" required>
 
 <small class="form-text text-muted">
 
@@ -142,9 +177,11 @@ if(isset($_POST['submit'])){
 
 $rules = array(
 "delivery_title" => "required",
-"delivery_proposal_title" => "required");
+"delivery_proposal_title" => "required",
+"delivery_title_arabic" => "required",
+"delivery_proposal_title_arabic" => "required");
 
-$messages = array("delivery_title" => "Delivery Time Title Is Required.","delivery_proposal_title" => "Proposal Delivery Time Title Is Required.");
+$messages = array("delivery_title" => "Delivery Time Title Is Required.","delivery_proposal_title" => "Proposal Delivery Time Title Is Required.", "delivery_title_arabic" => "Delivery Time Title Arabic Is Required.", "delivery_proposal_title_arabic" => "Proposal Delivery Time Title Arabic Is Required.");
 
 $val = new Validator($_POST,$rules,$messages);
 

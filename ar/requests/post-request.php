@@ -478,18 +478,18 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<?php
 														$get_delivery_times = $db->select("delivery_times");
 														while($row_delivery_times = $get_delivery_times->fetch()){
-														$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+														$delivery_proposal_title_arabic = $row_delivery_times->delivery_proposal_title_arabic;
 														$delivery_id = $row_delivery_times->delivery_id;
 													?>
 													<label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
-														<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> hidden />
+														<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title_arabic){ echo "checked"; } ?> hidden />
 														<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 															<span class="color-icon">
 																<span>-</span>
 																<span>+</span>
 															</span>
 															<span class="d-flex flex-row align-items-end time">
-																<span><?= $delivery_proposal_title; ?></span>
+																<span><?= $delivery_proposal_title_arabic; ?></span>
 																<!-- <span>HRS</span> -->
 															</span>
 														</div>

@@ -199,7 +199,7 @@ if (empty($form_data)) {
       $get_delivery_times = $db->select("delivery_times");
       while($row_delivery_times = $get_delivery_times->fetch()){
       $delivery_id = $row_delivery_times->delivery_id;
-      $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+      $delivery_proposal_title_arabic = $row_delivery_times->delivery_proposal_title_arabic;
       ?>
       <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
         <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden />
@@ -209,7 +209,7 @@ if (empty($form_data)) {
             <span>+</span>
           </span>
           <span class="d-flex flex-row align-items-end time">
-            <span><?php echo $delivery_proposal_title; ?></span>
+            <span><?php echo $delivery_proposal_title_arabic; ?></span>
             <!-- <span>HRS</span> -->
           </span>
         </div>
