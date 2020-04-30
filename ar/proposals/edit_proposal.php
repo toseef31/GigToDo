@@ -254,7 +254,7 @@ if($videoPlugin == 1){
       border-radius: 10px;
       cursor: pointer;
       margin-bottom: 20px;
-      padding: 40px 20px;
+      padding: 30px 20px;
       width: 100%;
     }
     .insert-attribute, .btn.crop_image{
@@ -266,6 +266,63 @@ if($videoPlugin == 1){
     }
     .border-red{
       border-color: #ff0707;
+    }
+    .drag-drop-button{
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+      -moz-box-orient: horizontal;
+      -moz-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .drag-drop-button .button{
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      color: white;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+      -moz-box-orient: horizontal;
+      -moz-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      font-size: 14px !important;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400 !important;
+      height: 38px !important;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      max-width: 100px;
+      text-transform: uppercase;
+      width: 80px !important;
+    }
+    .drag-drop-button .button-white{
+      background-color: white !important;
+      border-color: #afafaf !important;
+      color: #202020 !important;
     }
   </style>
 </head>

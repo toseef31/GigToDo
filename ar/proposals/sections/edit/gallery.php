@@ -22,6 +22,20 @@
                     <?php if(empty($d_proposal_img1)){ ?>
                     <div class="pic add-pic">
                     <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <div class="d-flex flex-column align-items-center img-btns">
+                      <!-- <div class="icon">
+                        <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                      </div> -->
+                      <!-- <div class="text">drag a photo or</div> -->
+                      <div class="drag-drop-button">
+                        <div class="button button-red ml-1">
+                           تصفح
+                        </div>
+                        <div class="button button-white">
+                           اختار
+                        </div>
+                      </div>
+                    </div>
                     <input type="hidden" name="proposal_img1" value="<?= $d_proposal_img1; ?>">
                     </div>
                     <?php }else{ ?>
@@ -35,7 +49,21 @@
                     <div class="col-md-3"><!--- col-md-3 Starts --->
                     <?php if(empty($d_proposal_img2)){ ?>
                     <div class="pic">
-                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او </span>
+                    <div class="d-flex flex-column align-items-center img-btns">
+                      <!-- <div class="icon">
+                        <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                      </div> -->
+                      <!-- <div class="text">drag a photo or</div> -->
+                      <div class="drag-drop-button">
+                        <div class="button button-red ml-1">
+                           تصفح
+                        </div>
+                        <div class="button button-white">
+                           اختار
+                        </div>
+                      </div>
+                    </div>
                     <input type="hidden" name="proposal_img2" value="<?= $d_proposal_img2; ?>">
                     </div>
                     <?php }else{ ?>
@@ -50,6 +78,20 @@
                     <?php if(empty($d_proposal_img3)){ ?>
                     <div class="pic">
                     <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <div class="d-flex flex-column align-items-center img-btns">
+                      <!-- <div class="icon">
+                        <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                      </div> -->
+                      <!-- <div class="text">drag a photo or</div> -->
+                      <div class="drag-drop-button">
+                        <div class="button button-red ml-1">
+                           تصفح
+                        </div>
+                        <div class="button button-white">
+                           اختار
+                        </div>
+                      </div>
+                    </div>
                     <input type="hidden" name="proposal_img3" value="<?= $d_proposal_img3; ?>">
                     </div>
                     <?php }else{ ?>
@@ -64,6 +106,20 @@
                     <?php if(empty($d_proposal_img4)){ ?>
                     <div class="pic">
                     <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <div class="d-flex flex-column align-items-center img-btns">
+                      <!-- <div class="icon">
+                        <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                      </div> -->
+                      <!-- <div class="text">drag a photo or</div> -->
+                      <div class="drag-drop-button">
+                        <div class="button button-red ml-1">
+                          تصفح
+                        </div>
+                        <div class="button button-white">
+                          اختار
+                        </div>
+                      </div>
+                    </div>
                     <input type="hidden" name="proposal_img4" value="">
                     </div>
                     <?php }else{ ?>
@@ -95,6 +151,20 @@
                       <div class="pic <?php if(empty($d_proposal_video)){echo"add-video";}else{echo"video-added";} ?>">
                         <?php if(empty($d_proposal_video)){ ?>
                         <span class="chose"><i class="fa fa-video-camera fa-2x mb-2"></i><br><?= $lang['proposals']['add_video']; ?></span>
+                        <!-- <div class="d-flex flex-column align-items-center img-btns"> -->
+                          <!-- <div class="icon">
+                            <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                          </div> -->
+                          <!-- <div class="text">drag a photo or</div> -->
+                          <!-- <div class="drag-drop-button">
+                            <div class="button button-red ml-1">
+                               تصفح
+                            </div>
+                            <div class="button button-white">
+                               اختار
+                            </div>
+                          </div>
+                        </div> -->
                         <?php }else{ ?>
                         <span>
                           <i class="fa fa-video-camera fa-2x mb-2"></i> <br> <span class="text-success font-weight-bold">Video Added</span>
@@ -496,6 +566,7 @@ $(document).ready(function(){
           $('input[type=hidden][name='+ name +']').val(data);
           main = $('input[type=hidden][name='+ name +']').parent();
           main.children("i,br,span").remove();
+           main.children('.img-btns').remove();
           main.addClass("img").removeClass("pic");
           main.prepend("<img src='../../proposals/proposal_files/"+data+"' class='img-fluid'> <span><?= $lang['proposals']['remove']; ?></span>");
         }
@@ -508,7 +579,8 @@ $(document).ready(function(){
     $(this).children("img,span").remove();
     $(this).children("input[type=hidden]").val("");
     $(this).addClass("pic").removeClass("img");
-    $(this).prepend("<i class='fa fa-picture-o fa-2x mb-2'></i><br> <span><?= $lang['proposals']['browse_image']; ?></span>");
+    $(this).prepend("<div class='d-flex flex-column align-items-center img-btns'><div class='drag-drop-button'><div class='button button-red ml-1'>تصفح</div><div class='button button-white'>اختار</div></div></div>");
+    $(this).prepend("<i class='fa fa-picture-o fa-2x mb-2'></i><br> دراج صورة او </span>");
   });
 
 

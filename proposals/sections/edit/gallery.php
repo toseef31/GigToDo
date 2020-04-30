@@ -20,7 +20,18 @@
                       <div class="col-md-3 file-input-label"><!--- col-md-3 Starts --->
                       <?php if(empty($d_proposal_img1)){ ?>
                       <div class="pic add-pic">
+                        
                       <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span><?= $lang['proposals']['browse_image']; ?></span>
+                      <div class="d-flex flex-column align-items-center img-btns">
+                        <!-- <div class="icon">
+                          <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                        </div> -->
+                        <!-- <div class="text">drag a photo or</div> -->
+                        <div class="drag-drop-button">
+                          <div class="button button-red mr-1">Browse</div>
+                          <div class="button button-white">Choose</div>
+                        </div>
+                      </div>
                       <input type="hidden" name="proposal_img1" value="<?= $d_proposal_img1; ?>">
                       </div>
                       <?php }else{ ?>
@@ -34,7 +45,18 @@
                       <div class="col-md-3"><!--- col-md-3 Starts --->
                       <?php if(empty($d_proposal_img2)){ ?>
                       <div class="pic">
+                        
                       <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span><?= $lang['proposals']['browse_image']; ?></span>
+                      <div class="d-flex flex-column align-items-center img-btns">
+                        <!-- <div class="icon">
+                          <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                        </div> -->
+                        <!-- <div class="text">drag a photo or</div> -->
+                        <div class="drag-drop-button">
+                          <div class="button button-red mr-1">Browse</div>
+                          <div class="button button-white">Choose</div>
+                        </div>
+                      </div>
                       <input type="hidden" name="proposal_img2" value="<?= $d_proposal_img2; ?>">
                       </div>
                       <?php }else{ ?>
@@ -49,6 +71,16 @@
                       <?php if(empty($d_proposal_img3)){ ?>
                       <div class="pic">
                       <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span><?= $lang['proposals']['browse_image']; ?></span>
+                      <div class="d-flex flex-column align-items-center img-btns">
+                        <!-- <div class="icon">
+                          <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                        </div> -->
+                        <!-- <div class="text">drag a photo or</div> -->
+                        <div class="drag-drop-button">
+                          <div class="button button-red mr-1">Browse</div>
+                          <div class="button button-white">Choose</div>
+                        </div>
+                      </div>
                       <input type="hidden" name="proposal_img3" value="<?= $d_proposal_img3; ?>">
                       </div>
                       <?php }else{ ?>
@@ -63,6 +95,16 @@
                       <?php if(empty($d_proposal_img4)){ ?>
                       <div class="pic">
                       <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span><?= $lang['proposals']['browse_image']; ?></span>
+                      <div class="d-flex flex-column align-items-center img-btns">
+                        <!-- <div class="icon">
+                          <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                        </div> -->
+                        <!-- <div class="text">drag a photo or</div> -->
+                        <div class="drag-drop-button">
+                          <div class="button button-red mr-1">Browse</div>
+                          <div class="button button-white">Choose</div>
+                        </div>
+                      </div>
                       <input type="hidden" name="proposal_img4" value="">
                       </div>
                       <?php }else{ ?>
@@ -97,6 +139,16 @@
                         <div class="pic <?php if(empty($d_proposal_video)){echo"add-video";}else{echo"video-added";} ?>">
                           <?php if(empty($d_proposal_video)){ ?>
                           <span class="chose"><i class="fa fa-video-camera fa-2x mb-2"></i><br><?= $lang['proposals']['add_video']; ?></span>
+                          <!-- <div class="d-flex flex-column align-items-center img-btns"> -->
+                            <!-- <div class="icon">
+                              <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
+                            </div> -->
+                            <!-- <div class="text">drag a photo or</div> -->
+                            <!-- <div class="drag-drop-button">
+                              <div class="button button-red mr-1">Browse</div>
+                              <div class="button button-white">Choose</div>
+                            </div>
+                          </div> -->
                           <?php }else{ ?>
                           <span>
                             <i class="fa fa-video-camera fa-2x mb-2"></i> <br> <span class="text-success font-weight-bold">Video Added</span>
@@ -206,131 +258,7 @@
                     </div>
                   </form><!--- form Ends --->
 
-                  <!-- <form action="" class="create-gig proposal-form" id="gallery_form">
-                    <div class="form-group gallery">
-                      <label class="custom-label d-flex flex-row align-items-center">
-                        <span>
-                          <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/photo-icon.png" />
-                        </span>
-                        <span>Photo</span>
-                        <span class="ml-auto item-count">(0/3)</span>
-                      </label>
-                      <div class="drag-drop d-flex flex-wrap">
-                        <div class="drag-drop-fileinput">
-                          <label class="file-input-label pic" for="image-file">
-                            <input type="file" hidden name="image-file" id="image-file" />
-                            <div class="d-flex flex-column align-items-center">
-                              <div class="icon">
-                                <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
-                              </div>
-                              <div class="text">drag a photo or</div>
-                              <div class="drag-drop-button">
-                                <div class="button button-red">Browse</div>
-                                <div class="button button-white">Choose</div>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                        <div class="drag-drop-file d-flex flex-row">
-                          <div class="drag-drop-file-item"></div>
-                          <div class="drag-drop-file-item"></div>
-                          <div class="drag-drop-file-item"></div>
-                        </div>
-                      </div>
-                      <div class="popup">
-                        <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
-                        <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
-                        <p>Using high quality, informational photos will help your buyers visualize the services you have to offer. The minimum image dimensions are 800px wide X 450px height</p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="custom-label d-flex flex-row align-items-center">
-                        <span>
-                          <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/video-icon.png" />
-                        </span>
-                        <span>Video</span>
-                        <span class="ml-auto item-count">(0/3)</span>
-                      </label>
-                      <div class="drag-drop d-flex flex-wrap">
-                        <div class="drag-drop-fileinput">
-                          <label class="file-input-label" for="video-file">
-                            <input type="file" hidden name="video-file" id="video-file" />
-                            <div class="d-flex flex-column align-items-center">
-                              <div class="icon">
-                                <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-video-icon.png" />
-                              </div>
-                              <div class="text">drag a Video or</div>
-                              <div class="drag-drop-button">
-                                <div class="button button-red">Browse</div>
-                                <div class="button button-white">Choose</div>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                        <div class="drag-drop-file d-flex flex-row">
-                          <div class="drag-drop-file-item"></div>
-                          <div class="drag-drop-file-item"></div>
-                          <div class="drag-drop-file-item"></div>
-                        </div>
-                      </div>
-                      <div class="popup">
-                        <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
-                        <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
-                        <p>
-                          Gig videos help your buyer to see and hear exactly what you will do for them. Take some time to create a great video. It will dramatically increase your chances of securing a buyer.<br />
-                          <strong>Valid formats are mp4, avi, m4v</strong><br />
-                          <strong>Maximum file size is 25MB</strong>
-                        </p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="custom-label d-flex flex-row align-items-center">
-                        <span>
-                          <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/pdf-icon.png" />
-                        </span>
-                        <span>pdf</span>
-                        <span class="ml-auto item-count">(0/3)</span>
-                      </label>
-                      <div class="drag-drop d-flex flex-wrap">
-                        <div class="drag-drop-fileinput">
-                          <label class="file-input-label" for="pdf-file">
-                            <input type="file" hidden name="pdf-file" id="pdf-file" />
-                            <div class="d-flex flex-column align-items-center">
-                              <div class="icon">
-                                <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-pdf-icon.png" />
-                              </div>
-                              <div class="text">drag a pdf or</div>
-                              <div class="drag-drop-button">
-                                <div class="button button-red">Browse</div>
-                                <div class="button button-white">Choose</div>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                        <div class="drag-drop-file d-flex flex-row">
-                          <div class="drag-drop-file-item"></div>
-                          <div class="drag-drop-file-item"></div>
-                          <div class="drag-drop-file-item"></div>
-                        </div>
-                      </div>
-                      <div class="popup">
-                        <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
-                        <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
-                        <p>
-                          Uploading any PDFs that explains your gig will go a long way in helping your buyer feel comfortable. Use PDF versions of work samples, flow charts, infographics and anything else that helps to explain your service.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="form-group mb-0">
-                      <div class="d-flex flex-row justify-content-center">
-                        <a class="package-save" href="javascript:void(0);">Save & Continue</a>
-                      </div>
-                      <div class="d-flex flex-row align-items-center justify-content-center backbuton">
-                        <span><i class="fal fa-long-arrow-left"></i></span>
-                        <span>go back</span>
-                      </div>
-                    </div>
-                  </form> -->
+
                 </div>
                 <div class="col-12 col-md-3" id="popupWidth"></div>
               </div>
@@ -561,6 +489,7 @@ $(document).ready(function(){
           $('input[type=hidden][name='+ name +']').val(data);
           main = $('input[type=hidden][name='+ name +']').parent();
           main.children("i,br,span").remove();
+          main.children('.img-btns').remove();
           main.addClass("img").removeClass("pic");
           main.prepend("<img src='proposal_files/"+data+"' class='img-fluid'> <span><?= $lang['proposals']['remove']; ?></span>");
         }
@@ -573,6 +502,8 @@ $(document).ready(function(){
     $(this).children("img,span").remove();
     $(this).children("input[type=hidden]").val("");
     $(this).addClass("pic").removeClass("img");
+    
+    $(this).prepend("<div class='d-flex flex-column align-items-center img-btns'><div class='drag-drop-button'><div class='button button-red mr-1'>Browse</div><div class='button button-white'>Choose</div></div></div>");
     $(this).prepend("<i class='fa fa-picture-o fa-2x mb-2'></i><br> <span><?= $lang['proposals']['browse_image']; ?></span>");
   });
 
