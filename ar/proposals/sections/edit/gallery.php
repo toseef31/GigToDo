@@ -586,17 +586,17 @@ $(document).ready(function(){
 
   gallery.on('click', '.pic:not(.add-video,.video-added,.disable)',function(){
     var name = $(this).children("input[type=hidden]").attr("name");
-    if(userbrowser == "Edge" || userbrowser == "Safari"){
-      $("input[type=file]").click();
-      $("input[type=file]").attr('name',name); 
-      $("input[type=file]").attr('accept','image/*');
-      $("input[type=file]").removeAttr('multiple');
-      $("input[type=file]").on('change',function(){ crop(this); });
-    }else{
+    // if(userbrowser == "Edge" || userbrowser == "Safari"){
+    //   $("input[type=file]").click();
+    //   $("input[type=file]").attr('name',name); 
+    //   $("input[type=file]").attr('accept','image/*');
+    //   $("input[type=file]").removeAttr('multiple');
+    //   $("input[type=file]").on('change',function(){ crop(this); });
+    // }else{
       var uploader = $('<input type="file" name="'+name+'" accept="image/*" />');
       uploader.click();
       uploader.on('input', function(){ crop(this); });
-    }
+    // }
   });
 
   $(document).on('click','.add-video',function(){
