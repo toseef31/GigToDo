@@ -29,7 +29,7 @@ $row_meta = $get_meta->fetch();
 $child_title = $row_meta->child_title;
 
 
-echo "<option value='$child_id'> $child_title </option>";
+echo "<option value='$child_id' <?php if($child_id == @$_SESSION['cat_child_id']){ echo 'selected'; } ? >> $child_title </option>";
 // echo "<label class='gig-category-tag' for='cat".$child_id."'><input type='radio' name='child_id' value='".$child_id."' id='cat".$child_id."' hidden> $child_title </label>";
 	
 }

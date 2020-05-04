@@ -113,7 +113,8 @@ $checkVideo = false;
     <script src="../js/ie.js"></script>
     <script type="text/javascript" src="../js/sweat_alert.js"></script>
     <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/croppie.js"></script>
+    <script type="text/javascript" src="<?= $site_url; ?>/js/croppie.js"></script>
+    <script type="text/javascript" src="<?= $site_url; ?>/js/exif.js"></script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <?php if($paymentGateway == 1){ ?>
     <script src="../plugins/paymentGateway/proposals/javascript/javascript.js"></script>

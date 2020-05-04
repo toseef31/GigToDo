@@ -53,12 +53,11 @@
         <div class="single-filter clearfix">
           <select id="category" name="cat_value">
             <?php
-              $get_categories = $db->query("select * from categories where cat_featured='yes' ".($lang_dir == "right" ? 'order by 1 DESC LIMIT 6,6':' LIMIT 0,6')."");
-              while($row_categories = $get_categories->fetch()){
-              $cat_id = $row_categories->cat_id;
-              $cat_image = $row_categories->cat_image;
-              $cat_icon = $row_categories->cat_icon;
-              $cat_url = $row_categories->cat_url;
+              $get_cats = $db->select("categories");
+              while($row_cats = $get_cats->fetch()){
+              $cat_id = $row_cats->cat_id;
+              $cat_featured = $row_cats->cat_featured;
+              $cat_url = $row_cats->cat_url;
               $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
               $row_meta = $get_meta->fetch();
               $cat_title = $row_meta->cat_title;
@@ -66,17 +65,30 @@
               $arabic_title = $row_meta->arabic_title;
               $arabic_desc = $row_meta->arabic_desc;
             ?>
+            
             <option <?php
             if($cat_id == @$_SESSION['cat_id']){ echo "selected"; }
             if($cat_id == @$child_parent_id){ echo "selected"; }
-            ?> value="<?= $cat_id; ?>"><?= $cat_title; ?></option>
+            ?> value=""><?= $cat_title; ?></option>
             <?php } ?>
           </select>
         </div>
         <div class="single-filter clearfix">
-          <select id="sub-category">
-            
+          <select id="cat_<?php echo $cat_id; ?>" onChange="window.location.href=this.value">
+            <?php
+              $get_child_cat = $db->select("categories_children",array("child_parent_id" => $child_parent_id));
+              while($row_child_cat = $get_child_cat->fetch()){
+                $child_id = $row_child_cat->child_id;
+                $child_url = $row_child_cat->child_url;
+                $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+                $row_meta = $get_meta->fetch();
+                $child_title = $row_meta->child_title;
+                if(!empty($child_title)){
+            ?>
+            <option <?php if($child_id == @$_SESSION['cat_child_id']){ echo "selected"; } ?> value="<?php echo $site_url; ?>/categories/<?php echo $cat_page_url; ?>/<?php echo $child_url; ?>"><?php echo $child_title; ?></option>
+            <?php } } ?>
           </select>
+          
         </div>
       </div>
     </div>
@@ -216,7 +228,7 @@
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/keyword.png" alt="">Keywords</h4>
       </div>
       <div class="gigs-search-content mt-20">
-        <input type="search" placeholder="Search by Keywords">
+        <input type="search" id="keyword" onkeyup="getgig()" placeholder="Search by Keywords">
       </div>
     </div>
     

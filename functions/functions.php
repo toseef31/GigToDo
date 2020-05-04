@@ -115,7 +115,25 @@ function time_ago($timestamp){
  }
 }
 /// Time Ago Function Ends ///
+function get_search_keyword(){
+	global $input;
+	global $siteLanguage;
+	global $db;
+	global $enable_referrals;
+	global $lang;
+	global $dir;
+	global $s_currency;
+	global $login_seller_id;
+	global $videoPlugin;
+	global $site_url;
 
+	$search_query = $_GET['keyword'];
+
+$online_sellers = array();
+$s_value = "%$search_query%";
+$get_proposals = $db->query("select from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
+	print_r($search_query);
+}
 /// get_search_proposals Function Starts ///
 function get_search_proposals(){
 global $input;

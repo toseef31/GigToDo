@@ -141,7 +141,7 @@ $years = range(1910,date("Y"));
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <h1 class="heading-title">Edit Profile</h1>
+              <h1 class="heading-title">تعديل الملف الشخصى</h1>
             </div>
           </div>
           <!-- Row -->
@@ -153,15 +153,15 @@ $years = range(1910,date("Y"));
                     <div class="profile-edit-steps wide d-flex flex-row justify-content-between">
                       <div class="profile-edit-step-item active" id="profile_tab">
                         <span class="step">1</span>
-                        <span class="text">Basic Information</span>
+                        <span class="text">المعلومات الأساسية</span>
                       </div>
                       <div class="profile-edit-step-item" id="professional_tab">
                         <span class="step">2</span>
-                        <span class="text">Professional Information</span>
+                        <span class="text">المعلومات المهنية</span>
                       </div>
                       <div class="profile-edit-step-item" id="verification_tab">
                         <span class="step">2</span>
-                        <span class="text">Trust & Verification</span>
+                        <span class="text">التأكيد & التحقق</span>
                       </div>
                     </div>
                   </div>
@@ -193,13 +193,13 @@ $years = range(1910,date("Y"));
                               <input type="hidden" name="cover_photo">
                               <div class="icontext d-flex flex-row align-items-center justify-content-center">
                                 <span>
-                                  <img class="img-fluid d-block" src="assets/img/edit-profile/pen-icon.png" />
+                                  <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/edit-profile/pen-icon.png" />
                                 </span>
-                                <span>Edit Cover Image</span>
+                                <span>تحرير صورة الغلاف</span>
                                 
                               </div>
                               <?php if(!empty($login_seller_cover_image)){ ?>
-                              <img src="cover_images/<?php echo $login_seller_cover_image; ?>" width="795" height="280" class="img-thumbnail img-circle cover_pic">
+                              <img src="<?= $site_url; ?>/cover_images/<?php echo $login_seller_cover_image; ?>" width="795" height="280" class="img-thumbnail img-circle cover_pic">
                               <span class="remove text-danger"><i class="fa fa-trash"></i></span>
                               <?php }else{ ?>
                               <!-- <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail img-circle" > -->
@@ -209,9 +209,9 @@ $years = range(1910,date("Y"));
                               <input type="file" id="profile-image" name="profile_photo" class="form-control" hidden />
                               <input type="hidden" name="profile_photo">
                               <?php if(!empty($login_seller_image)){ ?>
-                              <img src="user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
+                              <img src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
                               <?php }else{ ?>
-                              <img class="img-fluid d-block" src="assets/img/emongez_cube.png" />
+                              <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
                               <?php } ?>
 
                               <!-- <input type="file" id="profile-image" name="profile-image" hidden /> -->
@@ -222,19 +222,19 @@ $years = range(1910,date("Y"));
                           <div class="row">
                             <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column">
-                                <label class="control-label">Full Name</label>
+                                <label class="control-label">الاسم الكامل</label>
                                 <input class="form-control" type="text" name="seller_name" value="<?php echo $login_seller_name; ?>" />
                               </div>
                             </div>
                             <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column">
-                                <label class="control-label">Email</label>
+                                <label class="control-label"> الاسم الأخير</label>
                                 <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" />
                               </div>
                             </div>
                             <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column custom_nice">
-                                <label class="control-label">Country</label>
+                                <label class="control-label">البلد</label>
                                 <select class="form-control wide" name="seller_country" required="">
                                   <?php
                                     $get_countries = $db->select("countries");
@@ -249,7 +249,7 @@ $years = range(1910,date("Y"));
                             </div>
                             <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column custom_nice">
-                                <label class="control-label">Timezone</label>
+                                <label class="control-label">وحدة زمنية</label>
                                 <select class="form-control wide site_logo_type" name="seller_timezone" required="">
                                   <?php foreach ($timezones as $key => $zone) { ?>
                                     <option <?=($login_seller_timzeone == $zone)?"selected=''":""; ?> value="<?= $zone; ?>"><?= $zone; ?></option>
@@ -259,7 +259,7 @@ $years = range(1910,date("Y"));
                             </div>
                             <div class="col-12">
                               <div class="form-group d-flex flex-column">
-                                <label class="control-label">Languages</label>
+                                <label class="control-label">اللغات</label>
                                 <!-- <input type="text" data-role="tagsinput" value="English,German"> -->
                                 <select name="seller_language" class="form-control wide">
                                   <?php if($login_seller_language == 0){ ?>
@@ -287,7 +287,7 @@ $years = range(1910,date("Y"));
                             </div>
                             <div class="col-12">
                               <div class="form-group d-flex flex-column">
-                                <label class="control-label">tell us a bit about yourself</label>
+                                <label class="control-label">كلمنا شوية عن نفسك</label>
                                 <textarea rows="5" class="form-control" name="seller_about" id="textarea-about" maxlength="300"><?php echo $login_seller_about; ?></textarea>
                                 <span class="float-left mt-1">
                                   <span class="count-about"> 0 </span> / 300 MAX
@@ -296,8 +296,8 @@ $years = range(1910,date("Y"));
                             </div>
                             <div class="col-12">
                               <div class="form-group d-flex flex-row justify-content-end">
-                                <button class="button button-white" type="button" role="button">Cancel</button>
-                                <button class="button button-red" type="submit" name="submit">Save</button>
+                                <button class="button button-white" type="button" role="button">إلغاء</button>
+                                <button class="button button-red" type="submit" name="submit">حفظ</button>
                               </div>
                             </div>
                           </div>
@@ -314,9 +314,9 @@ $years = range(1910,date("Y"));
                           <div class="row">
                             <div class="col-12">
                               <div class="form-group d-flex flex-column">
-                                <label class="control-label">Your Occupation</label>
+                                <label class="control-label">وظيفتك</label>
                                 <select class="wide form-control">
-                                  <option>Select Your Occupation</option>
+                                  <option>حدد مهنتك</option>
                                   <option value="1">Your Occupation 1</option>
                                   <option value="2">Your Occupation 2</option>
                                   <option value="3">Your Occupation 3</option>
@@ -328,7 +328,7 @@ $years = range(1910,date("Y"));
                               <div class="form-group d-flex flex-row justify-content-end">
                                 <button class="add-new" type="button" role="button">
                                   <span><i class="fas fa-plus-circle"></i></span>
-                                  <span>Add New</span>
+                                  <span>إضافة جديد</span>
                                 </button>
                               </div>
                             </div>
@@ -336,7 +336,7 @@ $years = range(1910,date("Y"));
                           <!-- Row -->
                           <div class="row">
                             <div class="col-12">
-                              <label class="control-label">Skills</label>
+                              <label class="control-label">مهاراتك </label>
                             </div>
                             <div class="col-12">
                               <ul class="list-unstyled mt-3"><!-- list-unstyled mt-3 Starts -->
@@ -390,7 +390,7 @@ $years = range(1910,date("Y"));
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
                                       <select class="wide form-control" name="skill_id" required="">
-                                        <option value=""> Select Skill </option>
+                                        <option value=""> مهاراتك </option>
                                         <?php 
                                           $s_skills = array();
                                           $get = $db->select("skills_relation",array("seller_id"=>$login_seller_id));
@@ -413,7 +413,7 @@ $years = range(1910,date("Y"));
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
                                       <select class="wide form-control" name="skill_level">
-                                        <option>Experience Level</option>
+                                        <option>مستوى الخبرة</option>
                                         <option>Beginner</option>
                                         <option>Intermediate</option>
                                         <option>Expert</option>
@@ -424,8 +424,8 @@ $years = range(1910,date("Y"));
                                 <div class="row">
                                   <div class="col-12">
                                     <div class="form-group d-flex flex-row justify-content-end">
-                                      <button class="button button-white" type="button" data-toggle="collapse" data-target="#add_skill">Cancel</button>
-                                      <button class="button button-red" type="submit" name="insert_skill">Save</button>
+                                      <button class="button button-white" type="button" data-toggle="collapse" data-target="#add_skill">إلغاء</button>
+                                      <button class="button button-red" type="submit" name="insert_skill">حفظ</button>
                                     </div>
                                   </div>
                                 </div>
@@ -450,7 +450,7 @@ $years = range(1910,date("Y"));
                               <div class="form-group d-flex flex-row justify-content-end">
                                 <button class="add-new" type="button" data-toggle="collapse" data-target="#add_skill">
                                   <span><i class="fas fa-plus-circle"></i></span>
-                                  <span>Add New</span>
+                                  <span>إضافة جديد</span>
                                 </button>
                               </div>
                             </div>
@@ -458,7 +458,7 @@ $years = range(1910,date("Y"));
                           <!-- Row -->
                           <div class="row">
                             <div class="col-12">
-                              <label class="control-label">Education</label>
+                              <label class="control-label">التعليم</label>
                             </div>
                             <div class="col-12">
                               <ul class="list-unstyled mt-3">
@@ -490,7 +490,7 @@ $years = range(1910,date("Y"));
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column custom_nice">
                                       <select class="wide form-control" name="country">
-                                        <option>Select Country</option>
+                                        <option>البلد</option>
                                         <?php
                                           $get_countries = $db->select("countries");
                                           while($row_countries = $get_countries->fetch()){
@@ -504,12 +504,12 @@ $years = range(1910,date("Y"));
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
-                                      <input class="form-control" type="text" name="institute" placeholder="Institute Name" required="" />
+                                      <input class="form-control" type="text" name="institute" placeholder="اسم المعهد" required="" />
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
-                                      <input class="form-control" type="text" name="major" placeholder="Major" required="" />
+                                      <input class="form-control" type="text" name="major" placeholder="التخصص" required="" />
                                       <!-- <select class="wide form-control" name="major">
                                         <option>Major</option>
                                         <option value="1">Major</option>
@@ -522,7 +522,7 @@ $years = range(1910,date("Y"));
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column custom_nice">
                                       <select class="wide form-control" name="degree_year"required>
-                                        <option value="">Year</option>
+                                        <option value="">السنة</option>
                                         <?php 
                                           foreach ($years as $year) {
                                         ?>
@@ -535,8 +535,8 @@ $years = range(1910,date("Y"));
                                 <div class="row">
                                   <div class="col-12">
                                     <div class="form-group d-flex flex-row justify-content-end">
-                                      <button class="button button-white" type="button"data-toggle="collapse" data-target="#add_education">Cancel</button>
-                                      <button class="button button-red" type="submit" name="insert_education">Save</button>
+                                      <button class="button button-white" type="button"data-toggle="collapse" data-target="#add_education">إلغاء</button>
+                                      <button class="button button-red" type="submit" name="insert_education">حفظ</button>
                                     </div>
                                   </div>
                                 </div>
@@ -567,7 +567,7 @@ $years = range(1910,date("Y"));
                               <div class="form-group d-flex flex-row justify-content-end">
                                 <button class="add-new" type="button"  data-toggle="collapse" data-target="#add_education">
                                   <span><i class="fas fa-plus-circle"></i></span>
-                                  <span>Add New</span>
+                                  <span>إضافة جديد</span>
                                 </button>
                               </div>
                             </div>
@@ -582,41 +582,57 @@ $years = range(1910,date("Y"));
                         <div class="profile-verifications">
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-facebook-f"></i></span>
-                            <span>Facebook</span>
-                            <span class="ml-auto d-flex flex-row align-items-center facebook">
+                            <span>
+                              الفيس بوك
+                            </span>
+                            <span class="mr-auto d-flex flex-row align-items-center facebook">
                               <span><i class="fab fa-facebook-f"></i></span>
-                              <span>Connect</span>
+                              <span>
+                                متصل
+                              </span>
                             </span>
                           </div>
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-linkedin-in"></i></span>
                             <span>LinkedIn</span>
-                            <span class="ml-auto d-flex flex-row align-items-center linkedin">
+                            <span class="mr-auto d-flex flex-row align-items-center linkedin">
                               <span><i class="fab fa-linkedin-in"></i></span>
-                              <span>Connect</span>
+                              <span>
+                                متصل
+                              </span>
                             </span>
                           </div>
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-google"></i></span>
                             <span>Google</span>
-                            <span class="ml-auto d-flex flex-row align-items-center google">
+                            <span class="mr-auto d-flex flex-row align-items-center google">
                               <span><i class="fab fa-google"></i></span>
-                              <span>Connect</span>
+                              <span>
+                                متصل
+                              </span>
                             </span>
                           </div>
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fas fa-envelope"></i></span>
-                            <span>Email</span>
-                            <span class="ml-auto d-flex flex-row align-items-center email">
-                              <span>Verify</span>
+                            <span>
+                              الإيميل
+                            </span>
+                            <span class="mr-auto d-flex flex-row align-items-center email">
+                              <span>
+                                اتحقق
+                              </span>
                             </span>
                           </div>
                           <div class="profile-verification-item d-flex flex-row">
                             <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
-                            <span>Payment</span>
-                            <span class="ml-auto d-flex flex-row align-items-center payment">
+                            <span>
+                              الدفع
+                            </span>
+                            <span class="mr-auto d-flex flex-row align-items-center payment">
                               <span><i class="fal fa-check"></i></span>
-                              <span>Verified</span>
+                              <span>
+                                اتحققنا منه
+                              </span>
                             </span>
                           </div>
                         </div>
@@ -629,15 +645,19 @@ $years = range(1910,date("Y"));
             </div>
             <div class="col-12 col-lg-4">
               <div class="howitwork-card">
-                <div class="howitwork-card-title d-flex align-items-center">Improve Your Profile</div>
+                <div class="howitwork-card-title d-flex align-items-center">
+                  طور ملفك الشخصي
+                </div>
                 <div class="howitwork-list d-flex flex-column">
                   <div class="howitwork-list-item d-flex flex-row align-items-start">
                     <div class="howitwork-list-icon">
                       <img alt="Post a gig" class="img-fluid d-block" src="assets/img/edit-profile/basic-info-icon.png" />
                     </div>
                     <div class="howitwork-list-content">
-                      <h3>1. Basic Information</h3>
-                      <p>As a seller, you want to complete your profile as detailed as possible. Enter in some basic information to get started on your freelancing career. Endless possibilities await you as a freelancer with eMongez. It all starts with putting in your basic details</p>
+                      <h3>1. المعلومات لأساسية</h3>
+                      <p>
+                        عشان انت مقدم خدمة، لازم تكمل بروفايلك بأكتر تفاصيل ممكنة. تقدر تدخل شوية معلومات أساسية عشان تبدأ مهنتك في الفريلانسنج. في عدد لانهائي من الاحتمالات مستنياك لما تبقا فريلانسر على موقع منجز و كل دة هيبدأ أول ما تدخل بياناتك الأساسية.
+                      </p>
                     </div>
                   </div>
                   <!-- How it work each item -->
@@ -646,8 +666,10 @@ $years = range(1910,date("Y"));
                       <img alt="Get Hired" class="img-fluid d-block" src="assets/img/edit-profile/text-edit-icon.png" />
                     </div>
                     <div class="howitwork-list-content">
-                      <h3>2. Professional information</h3>
-                      <p>Here is where you want to share your credentials. Let us know how long you have been involved in your industry? Who have you worked for in the past? What special skills do you have? Most importantly, tell us why you are passionate about what you do?</p>
+                      <h3>2. المعلومات المهنية</h3>
+                      <p>
+                        هو دة المكان المناسب اللي انت عايزه عشان تشارك بيانات اعتمادك. خلينا نعرف بقالك قد ايه في مجالك؟ اشتغلت لصالح مين قبل كدة؟ ايه هي المهارات الخاصة اللي عندك؟ و أهم حاجة، ليه انت شغوف و متحمس للحاجة اللي بتعملها؟
+                      </p>
                     </div>
                   </div>
                   <!-- How it work each item -->
@@ -656,8 +678,10 @@ $years = range(1910,date("Y"));
                       <img alt="Work" class="img-fluid d-block" src="assets/img/edit-profile/verifiy-icon.png" />
                     </div>
                     <div class="howitwork-list-content">
-                      <h3>3. Trust and Verification</h3>
-                      <p>Develop a strong and credible presence on eMongez through verifying your seller profile. Simply connect it to your other social media profiles to enjoy more offers and the best engagements eMongez has to offer.</p>
+                      <h3>3. الثقةوالتحقق</h3>
+                        <p>
+                            اعمل ظهور قوى وفيه ثقة على eMongez عن طريق التحقق من بروفايل البايع بتاعك. ببساطة اربطه بحسابات السوشيال ميديا بتاعتك المختلفة علشان تستمتع بعروض أكتر وأحسن تفاعل ممكن يعرضه eMongez.
+                        </p>
                     </div>
                   </div>
                   <!-- How it work each item -->
@@ -876,6 +900,7 @@ $years = range(1910,date("Y"));
       }
       });
       $('.crop_image_cover').click(function(event){
+        var getUrl = '<?php echo $site_url; ?>';
       $('#wait').addClass("loader");
       var name = $('input[type=hidden][name=img_type_cover]').val();
         $image_crop_cover.croppie('result', {
@@ -891,7 +916,7 @@ $years = range(1910,date("Y"));
               $('#insertCoverModal').modal('hide');
               $('input[type=hidden][name='+ name +']').val(data);
               main = $('input[type=hidden][name='+ name +']').parent();
-              main.prepend("<img src='cover_images/"+data+"' class='img-fluid'>");
+              main.prepend("<img src='"+getUrl+"/cover_images/"+data+"' class='img-fluid'>");
             }
           });
         });

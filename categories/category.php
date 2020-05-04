@@ -10,6 +10,8 @@
   $login_seller_name = $row_login_seller->seller_name;
   $login_user_name = $row_login_seller->seller_user_name;
 
+  $cat_page_url = $input->get('cat_url');
+  
   if(isset($_GET['cat_url'])){
     unset($_SESSION['cat_child_id']);
     $get_cat = $db->select("categories",array('cat_url' => $input->get('cat_url')));
@@ -247,12 +249,24 @@
 <div class="append-modal"></div>
 <?php require_once("../includes/footer.php"); ?>
 <script>
+  // var switchStatus = false;
+// $("#switch").on('change', function() {
+//     if ($(this).is(':checked')) {
+//         switchStatus = $(this).is(':checked');
+//         alert(switchStatus);
+//     }
+//     else {
+//        switchStatus = $(this).is(':checked');
+//        alert(switchStatus);
+//     }
+// });
   function get_category_proposals(){
   
   var sPath = ''; 
   
-  var aInputs = $('li').find('.get_online_sellers');
-  
+  // var aInputs = $('li').find('.get_online_sellers');
+  var aInputs = $('.get_online_sellers');
+
   var aKeys   = Array();
   
   var aValues = Array();
@@ -279,6 +293,7 @@
   
   sPath = sPath + 'online_sellers[]=' + aKeys[i]+'&';
   
+
   }
   
   }
@@ -398,6 +413,8 @@
   }
   
   }		
+
+
   
   $('#wait').addClass("loader");		
   
@@ -458,6 +475,27 @@
   get_category_proposals(); 
   
   });
+
+
+  function getgig(){
+    var getUrl = '<?php echo $site_url; ?>';
+    var keyword = $('#keyword').val();
+    alert(keyword);
+
+    $.ajax({
+   url:"get_gigs",
+   method:"POST",
+   data:{keyword:keyword},
+   success:function(data){
+   // $('#category_proposals').html('');  
+    
+    $('#category_proposals').html(data);
+    
+    $('#wait').removeClass("loader");
+   }
+   });
+
+  }
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -528,7 +566,8 @@
   $("#category").change(function(){
    $("#sub-category").show();  
    var category_id = $(this).val();
-   alert(category_id);
+   alert(category_id );
+   $('#cat_'+category_id).hide();
    $.ajax({
    url:"fetch_subcategory",
    method:"POST",

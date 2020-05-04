@@ -237,7 +237,7 @@ if(isset($_SESSION['seller_user_name'])){
                 </div> -->
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
                 <?php if($_SESSION['seller_user_name'] == $get_seller_user_name){ ?>
-                <a href="settings?profile_settings" class="edit-btn">تعديل الملف الشخصى</a>
+                <a href="edit_profile" class="edit-btn">تعديل الملف الشخصى</a>
                 <?php } } ?>
               </div>
             </div>
@@ -353,10 +353,17 @@ if(isset($_SESSION['seller_user_name'])){
               <div class="profile-title border-bottom pb-15">
                 <h4 class="title">التعليم </h4>
               </div>
-              <div class="education-content pt-20">
-                <h6 class="education-title">B.A. - History</h6>
-                <p class="text">Delhi University, India, Graduated 2005</p>
-              </div>
+              <?php 
+                 $get_seller_education = $db->select("seller_education",array("seller_id" => $login_seller_id));
+                 while($row_seller_education = $get_seller_education->fetch()){
+                 $education = @json_decode($row_seller_education->education_data);
+               ?>
+               <div class="education-content pt-20">
+                 <h6 class="education-title"><?= $education->major ?></h6>
+                 <p class="text"><?= $education->institute ?>, <?= $education->country ?>, Graduated <?= $education->degree_year ?></p>
+               </div>
+               
+               <?php }?>
             </div>
           </div>
 
