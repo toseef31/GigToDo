@@ -130,6 +130,7 @@ if($lang_dir == "right"){
 	</div>
 	<!-- Preloader End -->
 	<?php require_once("includes/buyer-header.php"); ?>
+	<?php if(!isset($_GET['account_settings'])){  ?>
 	<main>
 		<section class="container-fluid edit-profile">
 			<div class="row">
@@ -263,7 +264,516 @@ if($lang_dir == "right"){
 			<!-- Row -->
 		</section>
 	</main>
+	<?php } elseif(isset($_GET['account_settings'])){?>
+	<main>
+		<section class="container-fluid profile-setting">
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h1 class="heading-title">Security</h1>
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="row">
+						<div class="col-12 col-lg-4">
+							<div class="profile-setting-breadcrumb nav nav-tabs d-flex flex-column" id="setting-tab" role="tablist">
+								<a href="#security" id="security-tab" data-toggle="tab" aria-controls="security" aria-selected="true" class="nav-item nav-link profile-setting-breadcrumb-item active d-flex flex-row align-items-center">
+									<span>
+										<img class="img-fluid before-icon" src="assets/img/setting/security-icon-before.png" />
+										<img class="img-fluid after-icon" src="assets/img/setting/security-icon-after.png" />
+									</span>
+									<span class="text">Security</span>
+								</a>
+								<!-- Each item -->
+								<a href="#notification" id="notification-tab" data-toggle="tab" aria-controls="notification" aria-selected="false" class="nav-item nav-link profile-setting-breadcrumb-item d-flex flex-row align-items-center">
+									<span>
+										<img class="img-fluid before-icon" src="assets/img/setting/notifications-icon-before.png" />
+										<img class="img-fluid after-icon" src="assets/img/setting/notifications-icon-after.png" />
+									</span>
+									<span class="text">Notifications</span>
+								</a>
+								<!-- Each item -->
+								<a href="#payments" id="payments-tab" data-toggle="tab" aria-controls="payments" aria-selected="false" class="nav-item nav-link profile-setting-breadcrumb-item d-flex flex-row align-items-center">
+									<span>
+										<img class="img-fluid before-icon" src="assets/img/setting/payments-icon-before.png" />
+										<img class="img-fluid after-icon" src="assets/img/setting/payments-icon-after.png" />
+									</span>
+									<span class="text">Payments</span>
+								</a>
+								<!-- Each item -->
+							</div>
+						</div>
+						<div class="col-12 col-lg-8">
+							<div class="tab-content" id="setting-tabContent">
+								<div class="tab-pane fade show active" id="security" role="tabpanel" aria-labelledby="security-tab">
+									<div class="profile-setting-card d-flex flex-column">
+										<div class="profile-setting-card-header">
+											<div class="icon-title d-flex flex-row align-items-center">
+												<span>
+													<img src="assets/img/setting/password-icon.png" />
+												</span>
+												<span>Password</span>
+											</div>
+											<div class="title">Update Your Password</div>
+											<div class="icon d-flex flex-row">
+												<button type="button" role="button">
+													<i class="fas fa-check-circle"></i>
+												</button>
+												<button type="button" role="button">
+													<i class="fal fa-times-circle"></i>
+												</button>
+											</div>
+										</div>
+										<!-- Profile setting card header -->
+										<div class="profile-setting-card-body">
+											<form method="post" class="clearfix">
+												<div class="row">
+													<div class="col-12">
+														<div class="form-group d-flex flex-column">
+															<label class="control-label">Current Password</label>
+															<input type="password" class="form-control" name="old_pass" />
+														</div>
+													</div>
+													<div class="col-12">
+														<div class="form-group d-flex flex-column">
+															<label class="control-label">New Password</label>
+															<input type="password" class="form-control" name="new_pass" />
+														</div>
+													</div>
+													<div class="col-12">
+														<div class="form-group d-flex flex-column">
+															<label class="control-label">Retype New Password</label>
+															<input type="password" class="form-control" name="new_pass_again" />
+														</div>
+													</div>
+													<div class="col-12">
+														<div class="form-group d-flex flex-column">
+															<p class="mb-0">Password should be a minimum of 8 characters long. Containing at least one numeric value and one upper case character.</p>
+														</div>
+													</div>
+													<div class="col-12">
+														<div class="form-group d-flex flex-row justify-content-end mb-0">
+															<button class="button button-white" type="button" role="button">Cancel</button>
+															<button class="button button-red" type="submit" name="change_password">Save</button>
+														</div>
+													</div>
+												</div>
+											</form>
+											<?php 
+											  if(isset($_POST['change_password'])){
+											  $rules = array(
+											  "old_pass" => "required",
+											  "new_pass" => "required",
+											  "new_pass_again" => "required");
+											  $messages = array("old_pass" => "Old Password Is Required.","new_pass" => "New Password Is Required.","new_pass_again"=>"New Password Again Is Required.");
+											  $val = new Validator($_POST,$rules,$messages);
+											  if($val->run() == false){
+											    Flash::add("change_pass_errors",$val->get_all_errors());
+											    Flash::add("form_data",$_POST);
+											    echo "<script> window.open('settings?account_settings','_self');</script>";
+											  }else{
+											    $old_pass = $input->post('old_pass');
+											    $new_pass = $input->post('new_pass');
+											    $new_pass_again = $input->post('new_pass_again');
+											    $get_seller = $db->select("sellers",array("seller_id"=>$login_seller_id));
+											    $row_seller = $get_seller->fetch();
+											    $hash_password = $row_seller->seller_pass;
+											    $decrypt_password = password_verify($old_pass,$hash_password);
+											    if($decrypt_password == 0){
+											    echo "<script>
+											      swal({
+											      type: 'warning',
+											      html: $('<div>').addClass('some-class').text('Your old password is invalid, please try again!.'),
+											      animation: false,
+											      customClass: 'animated tada'
+											      });
+											      </script>";
+											    }else{
+											      if($new_pass!=$new_pass_again){
+											       echo "<script>alert('Your New Password dose not match.');</script>";
+											      }else{
+											        $encrypted_password = password_hash($new_pass, PASSWORD_DEFAULT);
+											        $update_pass = $db->update("sellers",array("seller_pass" => $encrypted_password),array("seller_id" => $login_seller_id));
+											        echo "<script>
+											        swal({
+											          type: 'success',
+											          text: 'Password updated successfully, login with your new password.',
+											          timer: 3000,
+											          onOpen: function(){
+											            swal.showLoading();
+											          }
+											        }).then(function(){
+											          // Read more about handling dismissals
+											          window.open('logout','_self')
+											        });
+											        </script>";
+											      }
+											    }
+											    }
+											  }
+											  ?>
+										</div>
+									</div>
+								</div>
+								<!-- Security Tab Panel -->
+								<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+									<div class="profile-setting-card d-flex flex-column">
+										<div class="profile-setting-card-header">
+											<div class="icon-title d-flex flex-row align-items-center">
+												<span>
+													<img src="assets/img/setting/notification-icon.png" />
+												</span>
+												<span>Notifications</span>
+											</div>
+											<div class="title">Customize Notifications</div>
+											<div class="icon d-flex flex-row">
+												<button type="button" role="button">
+													<i class="fas fa-check-circle"></i>
+												</button>
+												<button type="button" role="button">
+													<i class="fal fa-times-circle"></i>
+												</button>
+											</div>
+										</div>
+										<!-- Profile setting card header -->
+										<div class="profile-setting-card-body">
+											<form action="" method="POST">
+												<div class="notifications-group d-flex flex-column">
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>Inbox Messages</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck1">
+															<label class="custom-control-label" for="customCheck1">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>Order messages</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck2">
+															<label class="custom-control-label" for="customCheck2">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>Order updates</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck3">
+															<label class="custom-control-label" for="customCheck3">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>Buyer Requests</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck4">
+															<label class="custom-control-label" for="customCheck4">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>My Gigs</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck5">
+															<label class="custom-control-label" for="customCheck5">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>My Account</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck6">
+															<label class="custom-control-label" for="customCheck6">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<span>To-dos</span>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input" id="customCheck7">
+															<label class="custom-control-label" for="customCheck7">&nbsp;</label>
+														</div>
+													</div>
+													<!-- Each item -->
+												</div>
+												<div class="form-group d-flex flex-row justify-content-end mb-0">
+													<button class="button button-white" type="button" role="button">Cancel</button>
+													<button class="button button-red" type="submit" role="button">Save</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- Notification Tab Panel -->
+								<div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+									<div class="profile-setting-card d-flex flex-column">
+										<div class="profile-setting-card-header">
+											<div class="icon-title d-flex flex-row align-items-center">
+												<span>
+													<img src="assets/img/setting/payments-icon.png" />
+												</span>
+												<span>Payments</span>
+											</div>
+											<div class="title">Add Payment Methods</div>
+											<div class="icon d-flex flex-row">&nbsp;</div>
+										</div>
+										<!-- Profile setting card header -->
+										<div class="profile-setting-card-body">
+											<form action="" method="POST">
+												<h4>How you would like to pay on eMongez</h4>
+												<ul class="nav nav-tabs pyments-tab" id="pymentsTab" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" id="online-tab" data-toggle="tab" href="#online" role="tab" aria-controls="online" aria-selected="true">
+															<span><img class="img-fluid d-block" src="assets/img/setting/online.png" /></span>
+															<span>Online</span>
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" id="mobile-tab" data-toggle="tab" href="#mobile" role="tab" aria-controls="mobile" aria-selected="false">
+															<span><img class="img-fluid d-block" src="assets/img/setting/mobile.png" /></span>
+															<span>Mobile Wallet</span>
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" id="cash-tab" data-toggle="tab" href="#cash" role="tab" aria-controls="cash" aria-selected="false">
+															<span><img class="img-fluid d-block" src="assets/img/setting/cash.png" /></span>
+															<span>Cash</span>
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" id="local-tab" data-toggle="tab" href="#local" role="tab" aria-controls="local" aria-selected="false">
+															<span><img class="img-fluid d-block" src="assets/img/setting/local.png" /></span>
+															<span>Local</span>
+														</a>
+													</li>
+												</ul>
+												<div class="tab-content" id="paymentsTabContent">
+													<div class="tab-pane fade show active" id="online" role="tabpanel" aria-labelledby="online-tab">
+														<div class="online-tab d-flex flex-column">
+															<div class="custom-control custom-radio">
+																<input hidden data-toggle="collapse" data-target="#credit-card" aria-controls="credit-card" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+																<label class="custom-control-label" for="customRadio1">
+																	<span>
+																		<img class="img-fluid before-icon" src="assets/img/setting/cradit-card-before.png" />
+																		<img class="img-fluid after-icon" src="assets/img/setting/cradit-card-after.png" />
+																	</span>
+																	<span>Credit or debit card</span>
+																</label>
+																<div class="collapse mt-30" id="credit-card">
+																	<div class="row">
+																		<div class="col-12 col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Card Number</label>
+																				<input type="text" name="" class="form-control" />
+																			</div>
+																		</div>
+																		<div class="col-12 col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Name on card</label>
+																				<input type="text" name="" class="form-control" />
+																			</div>
+																		</div>
+																		<div class="col-12 col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Expiry Date</label>
+																				<input type="text" name="" class="form-control" />
+																			</div>
+																		</div>
+																		<div class="col-12 col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Security Code</label>
+																				<input type="text" name="" class="form-control" />
+																			</div>
+																		</div>
+																		<div class="col-12">
+																			<div class="form-group d-flex flex-row mb-0">
+																				<button class="button button-white" type="button" role="button">Edit</button>
+																				<button class="button button-red" type="submit" role="button">Submit</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="custom-control custom-radio">
+																<input hidden data-toggle="collapse" data-target="#paypal" aria-controls="paypal" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+																<label class="custom-control-label" for="customRadio2">
+																	<span>
+																		<img class="img-fluid before-icon" src="assets/img/setting/paypal-before.png" />
+																		<img class="img-fluid after-icon" src="assets/img/setting/paypal-after.png" />
+																	</span>
+																	<span>Paypal</span>
+																</label>
+																<div class="collapse mt-30" id="paypal">
+																	<form method="post" class="clearfix">
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label class="control-label">Email Address</label>
+																					<input type="email" name="seller_paypal_email" value="<?= $login_seller_paypal_email; ?>" placeholder="Enter paypal email" class="form-control" required />
+																				</div>
+																			</div>
+																			<div class="col-12">
+																				<div class="form-group d-flex flex-row mb-0">
+																					<button class="button button-white" type="button" role="button">Edit</button>
+																					<button class="button button-red" type="submit" name="submit_paypal_email">Submit</button>
+																				</div>
+																			</div>
+																		</div>
+																	</form>
+																	<?php
 
+																	if(isset($_POST['submit_paypal_email'])){
+																	  $seller_paypal_email = strip_tags($input->post('seller_paypal_email'));
+																	  $update_seller = $db->update("sellers",array("seller_paypal_email" => $seller_paypal_email),array("seller_id" => $login_seller_id));
+																	  if($update_seller){
+																	    echo "<script>
+																	    swal({
+																	    type: 'success',
+																	    text: 'PayPal email updated successfully!',
+																	    timer: 3000,
+																	    onOpen: function(){
+																	    swal.showLoading()
+																	    }
+																	    }).then(function(){
+																	      if (
+																	        // Read more about handling dismissals
+																	        window.open('settings?account_settings','_self')
+																	      ) {
+																	        console.log('email updated successfully')
+																	      }
+																	    });</script>";
+																	  }
+																	}
+
+																	if($paymentGateway == 1){ 
+																	  include("plugins/paymentGateway/account_settings.php");
+																	} 
+
+																	?>
+																</div>
+															</div>
+															<div class="custom-control custom-radio">
+																<input hidden type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+																<label class="custom-control-label" for="customRadio3">
+																	<span>
+																		<img class="img-fluid before-icon" src="assets/img/setting/em-wallet.png" />
+																		<img class="img-fluid after-icon" src="assets/img/setting/em-wallet.png" />
+																	</span>
+																	<span>Emongez Wallet</span>
+																</label>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="mobile" role="tabpanel" aria-labelledby="mobile-tab">
+														<div class="row">
+															<div class="col-12">
+																<div class="form-group">
+																	<label class="control-label">Mobile Number</label>
+																	<input type="text" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12">
+																<div class="form-group d-flex flex-row mb-0">
+																	<button class="button button-white" type="button" role="button">Edit</button>
+																	<button class="button button-red" type="submit" role="button">Submit</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="cash" role="tabpanel" aria-labelledby="cash-tab">
+														<div class="row">
+															<div class="col-12">
+																<div class="form-group">
+																	<label class="control-label">Mobile Number</label>
+																	<input type="text" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12">
+																<div class="form-group">
+																	<label class="control-label">Address</label>
+																	<input type="text" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12 col-md-6">
+																<div class="form-group">
+																	<label class="control-label">Apartment Number</label>
+																	<input type="text" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12 col-md-6">
+																<div class="form-group">
+																	<label class="control-label">Floor Number</label>
+																	<input type="text" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12 col-md-6">
+																<div class="form-group d-flex flex-column">
+																	<label class="control-label">State</label>
+																	<select class="form-control wide">
+																		<option>Select State</option>
+																		<option value="1">New York</option>
+																		<option value="2">California</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-12 col-md-6">
+																<div class="form-group d-flex flex-column">
+																	<label class="control-label">City</label>
+																	<select class="form-control wide">
+																		<option>Select City</option>
+																		<option value="1">City 1</option>
+																		<option value="2">City 2</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-12">
+																<div class="form-group d-flex flex-row mb-0">
+																	<button class="button button-white" type="button" role="button">Edit</button>
+																	<button class="button button-red" type="submit" role="button">Submit</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="local" role="tabpanel" aria-labelledby="local-tab">
+														<div class="row">
+															<div class="col-12">
+																<div class="form-group">
+																	<label class="control-label">Mobile Number</label>
+																	<input type="text" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12">
+																<div class="form-group">
+																	<label class="control-label">Email Address</label>
+																	<input type="email" name="" class="form-control" />
+																</div>
+															</div>
+															<div class="col-12">
+																<div class="form-group d-flex flex-row mb-0">
+																	<button class="button button-white" type="button" role="button">Edit</button>
+																	<button class="button button-red" type="submit" role="button">Submit</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- Payments Tab Panel -->
+							</div>
+							
+						</div>
+					</div>
+					<!-- Row -->
+				</div>
+			</div>
+			<!-- Row -->
+		</section>
+	</main>
+	<?php } ?>
 <!-- <div class="container-fluid mt-5 mb-5">
 	<div class="row terms-page" style="<?=($lang_dir == "right" ? 'direction: rtl;':'')?>">
 		<div class="col-md-3 mb-3">
