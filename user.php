@@ -65,6 +65,8 @@ $get_seller_cover_image = "images/user-background.jpg";
 $get_seller_cover_image = "cover_images/".rawurlencode($seller_cover_image)."";
 }
 $get_seller_country = $row_seller->seller_country;
+$get_seller_state = $row_seller->seller_state;
+$get_seller_city = $row_seller->seller_city;
 $get_seller_headline = $row_seller->seller_headline;
 $get_seller_about = $row_seller->seller_about;
 $get_seller_level = $row_seller->seller_level;
@@ -251,7 +253,7 @@ if(isset($_SESSION['seller_user_name'])){
               </div>
               <?php if(!empty($get_seller_country)){ ?>
               <div class="profile-address">
-                <p class="text"><?= $get_seller_country; ?></p>
+                <p class="text"><?= $get_seller_city; ?> , <?= $get_seller_country; ?></p>
               </div>
               <?php } ?>
             </div>

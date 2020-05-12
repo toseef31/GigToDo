@@ -17,6 +17,8 @@ $login_seller_image = $row_login_seller->seller_image;
 $login_seller_cover_image = $row_login_seller->seller_cover_image;
 $login_seller_headline = $row_login_seller->seller_headline;
 $login_seller_country = $row_login_seller->seller_country;
+$login_seller_state = $row_login_seller->seller_state;
+$login_seller_city = $row_login_seller->seller_city;
 $login_seller_timzeone = $row_login_seller->seller_timezone;
 $login_seller_language = $row_login_seller->seller_language;
 $login_seller_about = $row_login_seller->seller_about;
@@ -116,6 +118,22 @@ if($lang_dir == "right"){
 	    height: 300px;
 	    overflow: auto;
 		}
+		.crop_image , .crop_image_cover{
+		  background-color: #ff0707;
+		  border-color: #ff0707;
+		  color: white; 
+		}
+		#insertimageModal .modal-header .close {
+		  padding: 1rem;
+		  margin: -1rem -1rem auto;
+		}
+		#state-list , #city-list, #country{
+      height: 54px;
+      display: block !important;
+    }
+    .state_box .nice-select{
+      display: none;
+    }
 	</style>
 </head>
 <body class="all-content">
@@ -393,6 +411,37 @@ if($lang_dir == "right"){
 		$('#profile_settings').addClass('show active');
 		$('#verification_tab').removeClass('active');
 	});
+	function getState(val) {
+	  $.ajax({
+	    type: "POST",
+	    url: "get-state",
+	    data:'country_name='+val,
+	    beforeSend: function() {
+	      $("#state-list").addClass("loader");
+	    },
+	    success: function(data){
+	      // console.log(data);
+	      $("#state-list").html(data);
+	      $('#city-list').find('option[value]').remove();
+	      $("#state-list").removeClass("loader");
+	    }
+	  });
+	}
+	function getCity(val) {
+	  // alert(val);
+	  $.ajax({
+	    type: "POST",
+	    url: "get-city",
+	    data:'state_name='+val,
+	    beforeSend: function() {
+	      $("#city-list").addClass("loader");
+	    },
+	    success: function(data){
+	      $("#city-list").html(data);
+	      $("#city-list").removeClass("loader");
+	    }
+	  });
+	}
 </script>
 <?php require_once("includes/footer.php"); ?>
 </body>

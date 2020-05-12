@@ -34,7 +34,7 @@
         
       </div>
       <?php if(!empty($login_seller_cover_image)){ ?>
-      <img src="cover_images/<?php echo $login_seller_cover_image; ?>" width="750" height="280" class="img-thumbnail img-circle cover_pic">
+      <img src="cover_images/<?php echo $login_seller_cover_image; ?>" width="750" height="280" class="img-thumbnal cover_pic">
       <span class="remove text-danger"><i class="fa fa-trash"></i></span>
       <?php }else{ ?>
       <!-- <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail img-circle" > -->
@@ -46,7 +46,7 @@
       <?php if(!empty($login_seller_image)){ ?>
       <img src="user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
       <?php }else{ ?>
-      <img class="img-fluid d-block" src="assets/img/emongez_cube.png" />
+      <img class="img-fluid img-circle" src="assets/img/emongez_cube.png" />
       <?php } ?>
 
       <!-- <input type="file" id="profile-image" name="profile-image" hidden /> -->
@@ -64,13 +64,13 @@
     <div class="col-12 col-md-6">
       <div class="form-group d-flex flex-column">
         <label class="control-label">Email</label>
-        <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" />
+        <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" readonly />
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="form-group d-flex flex-column custom_nice">
+      <div class="form-group d-flex flex-column custom_nice state_box">
         <label class="control-label">Country</label>
-        <select class="form-control wide" name="seller_country" required="">
+        <select class="form-control wide" name="seller_country" required="" onChange="getState(this.value);" id="country">
           <?php
             $get_countries = $db->select("countries");
             while($row_countries = $get_countries->fetch()){
@@ -79,6 +79,28 @@
               echo "<option value='$name'".($name == $login_seller_country ? "selected" : "").">$name</option>";
             }
             ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column custom_nice state_box">
+        <label class="control-label">State</label>
+        <select class="form-control wide" name="seller_state" required="" onChange="getCity(this.value);" id="state-list">
+          <?php if (!empty($login_seller_state)){ ?>
+            <option selected><?= $login_seller_state; ?></option>
+          <?php } ?>
+          
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column custom_nice state_box">
+        <label class="control-label">City</label>
+        <select class="form-control wide" name="seller_city" required="" id="city-list">
+          <?php if (!empty($login_seller_city)){ ?>
+            <option selected><?= $login_seller_city; ?></option>
+          <?php } ?>
+          
         </select>
       </div>
     </div>
@@ -320,6 +342,9 @@
             $('#wait').removeClass("loader");
             $('#insertimageModal').modal('hide');
             $('input[type=hidden][name='+ name +']').val(data);
+            main = $('input[type=hidden][name='+ name +']').parent();
+            main.prepend("<img src='user_images/"+data+"' class='img-fluid'>");
+            $('.img-circle').hide();
           }
         });
       });
@@ -379,6 +404,7 @@
               $('input[type=hidden][name='+ name +']').val(data);
               main = $('input[type=hidden][name='+ name +']').parent();
               main.prepend("<img src='cover_images/"+data+"' class='img-fluid'>");
+              $('.cover_pic').hide();
             }
           });
         });

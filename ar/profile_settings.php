@@ -35,7 +35,7 @@
         </span>
       </div>
       <?php if(!empty($login_seller_cover_image)){ ?>
-      <img src="<?= $site_url; ?>/cover_images/<?php echo $login_seller_cover_image; ?>" width="750" height="280" class="img-thumbnail img-circle cover_pic">
+      <img src="<?= $site_url; ?>/cover_images/<?php echo $login_seller_cover_image; ?>" width="750" height="280" class="img-thumbnal cover_pic">
       <span class="remove text-danger"><i class="fa fa-trash"></i></span>
       <?php }else{ ?>
       <!-- <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail img-circle" > -->
@@ -47,7 +47,7 @@
       <?php if(!empty($login_seller_image)){ ?>
       <img src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
       <?php }else{ ?>
-      <img class="img-fluid d-block" src="assets/img/emongez_cube.png" />
+      <img class="img-fluid img-circle" src="assets/img/emongez_cube.png" />
       <?php } ?>
       <!-- <img class="img-fluid d-block" src="assets/img/emongez_cube.png" /> -->
       <img class="img-fluid d-block pen-icon" src="assets/img/edit-profile/pen-icon.png" />
@@ -67,15 +67,15 @@
         <label class="control-label">
           الاسم الأخير
         </label>
-        <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" />
+        <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" readonly />
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="form-group d-flex flex-column custom_nice">
+      <div class="form-group d-flex flex-column custom_nice state_box">
         <label class="control-label">
           البلد
         </label>
-        <select class="form-control wide" name="seller_country" required="">
+        <select class="form-control wide" name="seller_country" required="" onChange="getState(this.value);" id="country">
           <option>
             اختار البلد
           </option>
@@ -87,6 +87,28 @@
               echo "<option value='$name'".($name == $login_seller_country ? "selected" : "").">$name</option>";
             }
           ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column custom_nice state_box">
+        <label class="control-label">حالة </label>
+        <select class="form-control wide" name="seller_state" required="" onChange="getCity(this.value);" id="state-list">
+          <?php if (!empty($login_seller_state)){ ?>
+            <option selected><?= $login_seller_state; ?></option>
+          <?php } ?>
+          
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group d-flex flex-column custom_nice state_box">
+        <label class="control-label">مدينة </label>
+        <select class="form-control wide" name="seller_city" required="" id="city-list">
+          <?php if (!empty($login_seller_city)){ ?>
+            <option selected><?= $login_seller_city; ?></option>
+          <?php } ?>
+          
         </select>
       </div>
     </div>
@@ -321,6 +343,7 @@
     }
     });
     $('.crop_image').click(function(event){
+      var getUrl = '<?php echo $site_url; ?>';
     $('#wait').addClass("loader");
     var name = $('input[type=hidden][name=img_type]').val();
       $image_crop.croppie('result', {
@@ -335,6 +358,9 @@
             $('#wait').removeClass("loader");
             $('#insertimageModal').modal('hide');
             $('input[type=hidden][name='+ name +']').val(data);
+            main = $('input[type=hidden][name='+ name +']').parent();
+            main.prepend("<img src='"+getUrl+"/user_images/"+data+"' class='img-fluid'>");
+            $('.img-circle').hide();
           }
         });
       });
@@ -378,6 +404,7 @@
       }
       });
       $('.crop_image_cover').click(function(event){
+        var getUrl = '<?php echo $site_url; ?>';
       $('#wait').addClass("loader");
       var name = $('input[type=hidden][name=img_type_cover]').val();
         $image_crop_cover.croppie('result', {
@@ -393,7 +420,8 @@
               $('#insertCoverModal').modal('hide');
               $('input[type=hidden][name='+ name +']').val(data);
               main = $('input[type=hidden][name='+ name +']').parent();
-              main.prepend("<img src='../cover_images/"+data+"' class='img-fluid'>");
+              main.prepend("<img src='"+getUrl+"/cover_images/"+data+"' class='img-fluid'>");
+              $('.cover_pic').hide();
             }
           });
         });
@@ -430,6 +458,8 @@
       $seller_name = strip_tags($input->post('seller_name'));
       $seller_email = strip_tags($input->post('seller_email'));
       $seller_country = strip_tags($input->post('seller_country'));
+      $seller_state = strip_tags($input->post('seller_state'));
+      $seller_city = strip_tags($input->post('seller_city'));
       $seller_timezone = strip_tags($input->post('seller_timezone'));
       $seller_language = strip_tags($input->post('seller_language'));
       $seller_headline = strip_tags($input->post('seller_headline'));
@@ -470,7 +500,7 @@
           $verification_code = $login_seller_verification;
         }
 
-        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
+        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_state"=>$seller_state,"seller_city"=>$seller_city,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
         
         if($update_seller){
           if (($seller_email == $login_seller_email) or ($seller_email != $login_seller_email and userConfirmEmail($seller_email))){

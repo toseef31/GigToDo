@@ -11,6 +11,8 @@ $seller_cover_image = "images/user-background.jpg";
 $seller_cover_image = "cover_images/".rawurlencode($seller_cover_image)."";
 }
 $seller_country = $row_seller->seller_country;
+$seller_state = $row_seller->seller_state;
+$seller_city = $row_seller->seller_city;
 $seller_headline = $row_seller->seller_headline;
 $seller_about = $row_seller->seller_about;
 $seller_level = $row_seller->seller_level;
@@ -78,7 +80,7 @@ $total_sellers = $db->count("orders",array("buyer_id"=>$seller_id));
             <span>
               <img alt="" class="img-fluid d-block" src="assets/img/buyer/location-icon.png" />
             </span>
-            <span> <?= $seller_country; ?></span>
+            <span> <?= $seller_city; ?>, <?= $seller_country; ?></span>
           </li>
           <li class="list-inline-item d-flex flex-row align-items-center">
             <span>

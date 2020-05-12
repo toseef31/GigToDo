@@ -20,6 +20,8 @@ $login_seller_image = $row_login_seller->seller_image;
 $login_seller_cover_image = $row_login_seller->seller_cover_image;
 $login_seller_headline = $row_login_seller->seller_headline;
 $login_seller_country = $row_login_seller->seller_country;
+$login_seller_state = $row_login_seller->seller_state;
+$login_seller_city = $row_login_seller->seller_city;
 $login_seller_timzeone = $row_login_seller->seller_timezone;
 $login_seller_language = $row_login_seller->seller_language;
 $login_seller_about = $row_login_seller->seller_about;
@@ -124,6 +126,22 @@ $years = range(1910,date("Y"));
       height: 300px;
       overflow: auto;
     }
+    .crop_image , .crop_image_cover{
+      background-color: #ff0707;
+      border-color: #ff0707;
+      color: white; 
+    }
+    #insertimageModal .modal-header .close {
+      padding: 1rem;
+      margin: -1rem -1rem auto;
+    }
+    #state-list , #city-list, #country{
+      height: 54px;
+      display: block !important;
+    }
+    .state_box .nice-select{
+      display: none;
+    }
   </style>
 </head>
 <body class="all-content">
@@ -187,8 +205,8 @@ $years = range(1910,date("Y"));
                         <!--- alert alert-danger Ends --->
                         <?php } ?>
                         <form method="post" enctype="multipart/form-data" runat="server" autocomplete="off">
-                          <div class="edit-profile-image">
-                            <label class="cover-image-label" for="cover">
+                          <div class="seller-profile-image d-flex flex-row align-items-center">
+                            <!-- <label class="cover-image-label" for="cover">
                               <input type="file" id="cover" name="cover_photo" hidden />
                               <input type="hidden" name="cover_photo">
                               <div class="icontext d-flex flex-row align-items-center justify-content-center">
@@ -202,22 +220,22 @@ $years = range(1910,date("Y"));
                               <img src="<?= $site_url; ?>/cover_images/<?php echo $login_seller_cover_image; ?>" width="795" height="280" class="img-thumbnail img-circle cover_pic">
                               <span class="remove text-danger"><i class="fa fa-trash"></i></span>
                               <?php }else{ ?>
-                              <!-- <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail img-circle" > -->
                               <?php } ?>
-                            </label>
+                            </label> -->
                             <label class="profile-image" for="profile-image">
                               <input type="file" id="profile-image" name="profile_photo" class="form-control" hidden />
                               <input type="hidden" name="profile_photo">
                               <?php if(!empty($login_seller_image)){ ?>
                               <img src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
                               <?php }else{ ?>
-                              <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+                              <img class="img-fluid img-circle" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
                               <?php } ?>
 
                               <!-- <input type="file" id="profile-image" name="profile-image" hidden /> -->
                               <!-- <img class="img-fluid d-block" src="assets/img/emongez_cube.png" /> -->
                               <img class="img-fluid d-block pen-icon" src="assets/img/edit-profile/pen-icon.png" />
                             </label>
+                            <span>تعديل الصورة الشخصية</span>
                           </div>
                           <div class="row">
                             <div class="col-12 col-md-6">
@@ -229,18 +247,20 @@ $years = range(1910,date("Y"));
                             <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column">
                                 <label class="control-label"> الاسم الأخير</label>
-                                <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" />
+                                <input class="form-control" type="email" name="seller_email" value="<?php echo $login_seller_email; ?>" readonly />
                               </div>
                             </div>
                             <div class="col-12 col-md-6">
-                              <div class="form-group d-flex flex-column custom_nice">
-                                <label class="control-label">البلد</label>
-                                <select class="form-control wide" name="seller_country" required="">
+                              <div class="form-group d-flex flex-column custom_nice state_box">
+                                <label class="control-label">البلد </label>
+                                <select class="form-control wide" name="seller_country" required="" onChange="getState(this.value);" id="country">
+                                  <option class="hidden"> حلبلد  </option>
                                   <?php
                                     $get_countries = $db->select("countries");
                                     while($row_countries = $get_countries->fetch()){
                                       $id = $row_countries->id;
                                       $name = $row_countries->name;
+                                      $arabic_name = $row_countries->arabic_name;
                                       echo "<option value='$name'".($name == $login_seller_country ? "selected" : "").">$name</option>";
                                     }
                                     ?>
@@ -248,9 +268,32 @@ $years = range(1910,date("Y"));
                               </div>
                             </div>
                             <div class="col-12 col-md-6">
+                              <div class="form-group d-flex flex-column custom_nice state_box">
+                                <label class="control-label">حالة </label>
+                                <select class="form-control wide" name="seller_state" required="" onChange="getCity(this.value);" id="state-list">
+                                  <?php if (!empty($login_seller_state)){ ?>
+                                    <option selected><?= $login_seller_state; ?></option>
+                                  <?php } ?>
+                                  
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                              <div class="form-group d-flex flex-column custom_nice state_box">
+                                <label class="control-label">مدينة </label>
+                                <select class="form-control wide" name="seller_city" required="" id="city-list">
+                                  <?php if (!empty($login_seller_city)){ ?>
+                                    <option selected><?= $login_seller_city; ?></option>
+                                  <?php } ?>
+                                  
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column custom_nice">
-                                <label class="control-label">وحدة زمنية</label>
+                                <label class="control-label">وحدة زمنية  </label>
                                 <select class="form-control wide site_logo_type" name="seller_timezone" required="">
+                                  <option class="hidden"> حدة زمنية </option>
                                   <?php foreach ($timezones as $key => $zone) { ?>
                                     <option <?=($login_seller_timzeone == $zone)?"selected=''":""; ?> value="<?= $zone; ?>"><?= $zone; ?></option>
                                   <?php } ?>
@@ -263,7 +306,7 @@ $years = range(1910,date("Y"));
                                 <!-- <input type="text" data-role="tagsinput" value="English,German"> -->
                                 <select name="seller_language" class="form-control wide">
                                   <?php if($login_seller_language == 0){ ?>
-                                  <option class="hidden"> Select Language </option>
+                                  <option class="hidden"> اختار اللغة </option>
                                   <?php 
                                     $get_languages = $db->select("seller_languages");
                                     while($row_languages = $get_languages->fetch()){
@@ -751,14 +794,14 @@ $years = range(1910,date("Y"));
   <div class="modal-dialog modal-sm">
   <div class="modal-content">
     <div class="modal-header">
-     Crop & Insert Image <button type="button" class="close" data-dismiss="modal">&times;</button>
+     قص وإدراج الصورة <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
       <div id="image_demo" style="width:100% !important;"></div>
     </div>
     <div class="modal-footer">
       <input type="hidden" name="img_type" value="">
-      <button class="btn btn-success crop_image">Crop Image</button>
+      <button class="btn crop_image">Crop Image</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
     </div>
@@ -776,7 +819,7 @@ $years = range(1910,date("Y"));
     </div>
     <div class="modal-footer">
       <input type="hidden" name="img_type_cover" value="">
-      <button class="btn btn-success crop_image_cover">Crop Image</button>
+      <button class="btn crop_image_cover">Crop Image</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
     </div>
@@ -793,6 +836,7 @@ $years = range(1910,date("Y"));
   });
   $('#profile_tab').click(function(){
     $('#account_verification').removeClass('show active');
+    $('#professional_info').removeClass('show active');
     $('#profile_settings').addClass('show active');
     $('#verification_tab').removeClass('active');
     $('#professional_tab').removeClass('active');
@@ -804,6 +848,37 @@ $years = range(1910,date("Y"));
     $('#professional_tab').addClass('active');
     $('#verification_tab').removeClass('active');
   });
+  function getState(val) {
+    $.ajax({
+      type: "POST",
+      url: "get-state",
+      data:'country_name='+val,
+      beforeSend: function() {
+        $("#state-list").addClass("loader");
+      },
+      success: function(data){
+        // console.log(data);
+        $("#state-list").html(data);
+        $('#city-list').find('option[value]').remove();
+        $("#state-list").removeClass("loader");
+      }
+    });
+  }
+  function getCity(val) {
+    // alert(val);
+    $.ajax({
+      type: "POST",
+      url: "get-city",
+      data:'state_name='+val,
+      beforeSend: function() {
+        $("#city-list").addClass("loader");
+      },
+      success: function(data){
+        $("#city-list").html(data);
+        $("#city-list").removeClass("loader");
+      }
+    });
+  }
 </script>
 <script>
   $(document).ready(function(){
@@ -843,6 +918,7 @@ $years = range(1910,date("Y"));
     }
     });
     $('.crop_image').click(function(event){
+      var getUrl = '<?php echo $site_url; ?>';
     $('#wait').addClass("loader");
     var name = $('input[type=hidden][name=img_type]').val();
       $image_crop.croppie('result', {
@@ -857,6 +933,9 @@ $years = range(1910,date("Y"));
             $('#wait').removeClass("loader");
             $('#insertimageModal').modal('hide');
             $('input[type=hidden][name='+ name +']').val(data);
+            main = $('input[type=hidden][name='+ name +']').parent();
+            main.prepend("<img src='"+getUrl+"/user_images/"+data+"' class='img-fluid'>");
+            $('.img-circle').hide();
           }
         });
       });
@@ -978,6 +1057,8 @@ function getEducation(educationId){
       $seller_name = strip_tags($input->post('seller_name'));
       $seller_email = strip_tags($input->post('seller_email'));
       $seller_country = strip_tags($input->post('seller_country'));
+      $seller_state = strip_tags($input->post('seller_state'));
+      $seller_city = strip_tags($input->post('seller_city'));
       $seller_timezone = strip_tags($input->post('seller_timezone'));
       $seller_language = strip_tags($input->post('seller_language'));
       $seller_headline = strip_tags($input->post('seller_headline'));
@@ -1018,7 +1099,7 @@ function getEducation(educationId){
           $verification_code = $login_seller_verification;
         }
 
-        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
+        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_state"=>$seller_state,"seller_city"=>$seller_city,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
         
         if($update_seller){
           if (($seller_email == $login_seller_email) or ($seller_email != $login_seller_email and userConfirmEmail($seller_email))){
@@ -1032,7 +1113,12 @@ function getEducation(educationId){
             }
             }).then(function(){
                 // Read more about handling dismissals
-                window.open('edit_profile','_self');
+                // window.open('edit_profile','_self');
+              $('#account_verification').removeClass('show active');
+              $('#profile_settings').removeClass('show active');
+              $('#professional_info').addClass('show active');
+              $('#professional_tab').addClass('active');
+              $('#verification_tab').removeClass('active');
             });
             </script>";
           }
@@ -1058,6 +1144,8 @@ function getEducation(educationId){
       $seller_name = strip_tags($input->post('seller_name'));
       $seller_email = strip_tags($input->post('seller_email'));
       $seller_country = strip_tags($input->post('seller_country'));
+      $seller_state = strip_tags($input->post('seller_state'));
+      $seller_city = strip_tags($input->post('seller_city'));
       $seller_timezone = strip_tags($input->post('seller_timezone'));
       $seller_language = strip_tags($input->post('seller_language'));
       $seller_headline = strip_tags($input->post('seller_headline'));
@@ -1098,7 +1186,7 @@ function getEducation(educationId){
           $verification_code = $login_seller_verification;
         }
 
-        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
+        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_state"=>$seller_state,"seller_city"=>$seller_city,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
         
         if($update_seller){
           if (($seller_email == $login_seller_email) or ($seller_email != $login_seller_email and userConfirmEmail($seller_email))){
@@ -1112,7 +1200,12 @@ function getEducation(educationId){
             }
             }).then(function(){
                 // Read more about handling dismissals
-                window.open('edit_profile','_self');
+                // window.open('edit_profile','_self');
+              $('#account_verification').removeClass('show active');
+              $('#profile_settings').removeClass('show active');
+              $('#professional_info').addClass('show active');
+              $('#professional_tab').addClass('active');
+              $('#verification_tab').removeClass('active');
             });
             </script>";
           }

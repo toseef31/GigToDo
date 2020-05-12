@@ -17,6 +17,8 @@ $login_seller_image = $row_login_seller->seller_image;
 $login_seller_cover_image = $row_login_seller->seller_cover_image;
 $login_seller_headline = $row_login_seller->seller_headline;
 $login_seller_country = $row_login_seller->seller_country;
+$login_seller_state = $row_login_seller->seller_state;
+$login_seller_city = $row_login_seller->seller_city;
 $login_seller_timzeone = $row_login_seller->seller_timezone;
 $login_seller_language = $row_login_seller->seller_language;
 $login_seller_about = $row_login_seller->seller_about;
@@ -119,6 +121,60 @@ if($lang_dir == "right"){
 	    height: 300px;
 	    overflow: auto;
 		}
+		.crop_image , .crop_image_cover{
+		  background-color: #ff0707;
+		  border-color: #ff0707;
+		  color: white; 
+		}
+		#insertimageModal .modal-header .close {
+		  padding: 1rem;
+		  margin: -1rem -1rem auto;
+		}
+		#state-list , #city-list, #country{
+      height: 54px;
+      display: block !important;
+    }
+    .state_box .nice-select{
+      display: none;
+    }
+
+
+    /* The message box is shown when the user clicks on the password field */
+    #message {
+      display:none;
+      /*background: #f1f1f1;*/
+      color: #000;
+      position: relative;
+      padding: 20px;
+      margin-top: 0px;
+    }
+
+    #message p {
+      padding: 0px 35px;
+      font-size: 14px;
+    }
+
+    /* Add a green text color and a checkmark when the requirements are right */
+    .valid {
+      color: green;
+    }
+
+    .valid:before {
+      position: relative;
+      left: -35px;
+      content: "✔";
+    }
+
+    /* Add a red text color and an "x" when the requirements are wrong */
+    .invalid {
+      color: red;
+    }
+
+    .invalid:before {
+      position: relative;
+      left: -35px;
+      content: "✖";
+    }
 	</style>
 </head>
 <body class="all-content">
@@ -338,15 +394,23 @@ if($lang_dir == "right"){
 													<div class="col-12">
 														<div class="form-group d-flex flex-column">
 															<label class="control-label">New Password</label>
-															<input type="password" class="form-control" name="new_pass" />
+															<input type="password" class="form-control" id="psw" name="new_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
 														</div>
+													</div>
+													<div id="message">
+													  <!-- <h3>Password must contain the following:</h3> -->
+													  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+													  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+													  <p id="number" class="invalid">A <b>number</b></p>
+													  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
 													</div>
 													<div class="col-12">
 														<div class="form-group d-flex flex-column">
 															<label class="control-label">Retype New Password</label>
-															<input type="password" class="form-control" name="new_pass_again" />
+															<input type="password" class="form-control" id="confirm_pass" name="new_pass_again" />
 														</div>
 													</div>
+													<span id="match" class="pl-3"></span>
 													<div class="col-12">
 														<div class="form-group d-flex flex-column">
 															<p class="mb-0">Password should be a minimum of 8 characters long. Containing at least one numeric value and one upper case character.</p>
@@ -666,20 +730,49 @@ if($lang_dir == "right"){
 														</div>
 													</div>
 													<div class="tab-pane fade" id="mobile" role="tabpanel" aria-labelledby="mobile-tab">
-														<div class="row">
-															<div class="col-12">
-																<div class="form-group">
-																	<label class="control-label">Mobile Number</label>
-																	<input type="text" name="" class="form-control" />
+														<form method="post" class="clearfix mb-3">
+															<div class="row">
+																<div class="col-12">
+																	<div class="form-group">
+																		<label class="control-label">Account Number</label>
+																		<input type="text" name="m_account_number" value="<?= $login_seller_account_number; ?>" placeholder="Enter Account Number" class="form-control" />
+																	</div>
+																</div>
+																<div class="col-12">
+																	<div class="form-group">
+																		<label class="control-label">Account/Owner Name</label>
+																		<input type="text" name="m_account_name" value="<?= $login_seller_account_name; ?>" placeholder="Enter Account/Owner Name" class="form-control" />
+																	</div>
+																</div>
+																<div class="col-12">
+																	<div class="form-group d-flex flex-row mb-0">
+																		<button class="button button-white" type="button" role="button">Edit</button>
+																		<button class="button button-red" type="submit" name="update_mobile_money">Submit</button>
+																	</div>
 																</div>
 															</div>
-															<div class="col-12">
-																<div class="form-group d-flex flex-row mb-0">
-																	<button class="button button-white" type="button" role="button">Edit</button>
-																	<button class="button button-red" type="submit" role="button">Submit</button>
-																</div>
-															</div>
-														</div>
+														</form>
+														<?php 
+														  if(isset($_POST['update_mobile_money'])){
+														  $m_account_number = strip_tags($input->post('m_account_number'));
+														  $m_account_name = strip_tags($input->post('m_account_name'));
+														  $update_seller = $db->update("sellers",array("seller_m_account_number" => $m_account_number,"seller_m_account_name" => $m_account_name),array("seller_id" => $login_seller_id));
+														  if($update_seller){
+														  echo "<script>
+														  swal({
+														  type: 'success',
+														  text: 'Mobile Money Updated Successfully!',
+														  timer: 3000,
+														  onOpen: function(){
+														  swal.showLoading()
+														  }
+														  }).then(function(){
+														  window.open('settings?account_settings','_self')
+														  });
+														  </script>";
+														  }
+														  }
+														?>
 													</div>
 													<div class="tab-pane fade" id="cash" role="tabpanel" aria-labelledby="cash-tab">
 														<div class="row">
@@ -873,6 +966,102 @@ if($lang_dir == "right"){
 		$('#profile_settings').addClass('show active');
 		$('#verification_tab').removeClass('active');
 	});
+	function getState(val) {
+	  $.ajax({
+	    type: "POST",
+	    url: "get-state",
+	    data:'country_name='+val,
+	    beforeSend: function() {
+	      $("#state-list").addClass("loader");
+	    },
+	    success: function(data){
+	      // console.log(data);
+	      $("#state-list").html(data);
+	      $('#city-list').find('option[value]').remove();
+	      $("#state-list").removeClass("loader");
+	    }
+	  });
+	}
+	function getCity(val) {
+	  // alert(val);
+	  $.ajax({
+	    type: "POST",
+	    url: "get-city",
+	    data:'state_name='+val,
+	    beforeSend: function() {
+	      $("#city-list").addClass("loader");
+	    },
+	    success: function(data){
+	      $("#city-list").html(data);
+	      $("#city-list").removeClass("loader");
+	    }
+	  });
+	}
+</script>
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+$('#confirm_pass').on('keyup', function () {
+  if ($('#psw').val() == $('#confirm_pass').val()) {
+    $('#match').html('Password Match').css('color', 'green');
+  } else 
+    $('#match').html('Password Not Matching').css('color', 'red');
+});
 </script>
 <?php require_once("includes/footer.php"); ?>
 </body>
