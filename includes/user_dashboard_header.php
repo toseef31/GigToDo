@@ -285,7 +285,7 @@
   <div class="canvs-menu">
     <ul>
       <li><a href="<?php echo $site_url; ?>/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
-      <li><a href="<?= $site_url; ?>/settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
+      <li><a href="<?= $site_url; ?>/settings?account_settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
       <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
