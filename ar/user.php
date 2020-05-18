@@ -336,7 +336,9 @@ if(isset($_SESSION['seller_user_name'])){
                 <ul>
                   <?php
                   $select_languages_relation = $db->select("languages_relation",array("seller_id" => $get_seller_id));
+
                   while($row_languages_relation = $select_languages_relation->fetch()){
+                    print_r($row_languages_relation);
                     $relation_id = $row_languages_relation->relation_id;
                     $language_id = $row_languages_relation->language_id;
                     $language_level = $row_languages_relation->language_level;

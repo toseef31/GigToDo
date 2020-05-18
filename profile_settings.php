@@ -70,7 +70,8 @@
     <div class="col-12 col-md-6">
       <div class="form-group d-flex flex-column custom_nice state_box">
         <label class="control-label">Country</label>
-        <select class="form-control wide" name="seller_country" required="" onChange="getState(this.value);" id="country">
+        <select class="form-control wide" name="seller_country" onChange="getState(this.value);" id="country">
+          <option disabled selected hidden>Select Country</option>
           <?php
             $get_countries = $db->select("countries");
             while($row_countries = $get_countries->fetch()){
@@ -85,7 +86,7 @@
     <div class="col-12 col-md-6">
       <div class="form-group d-flex flex-column custom_nice state_box">
         <label class="control-label">State</label>
-        <select class="form-control wide" name="seller_state" required="" onChange="getCity(this.value);" id="state-list">
+        <select class="form-control wide" name="seller_state" onChange="getCity(this.value);" id="state-list">
           <?php if (!empty($login_seller_state)){ ?>
             <option selected><?= $login_seller_state; ?></option>
           <?php } ?>
@@ -93,10 +94,10 @@
         </select>
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12">
       <div class="form-group d-flex flex-column custom_nice state_box">
         <label class="control-label">City</label>
-        <select class="form-control wide" name="seller_city" required="" id="city-list">
+        <select class="form-control wide" name="seller_city" id="city-list">
           <?php if (!empty($login_seller_city)){ ?>
             <option selected><?= $login_seller_city; ?></option>
           <?php } ?>
@@ -104,7 +105,7 @@
         </select>
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <!-- <div class="col-12 col-md-6">
       <div class="form-group d-flex flex-column custom_nice">
         <label class="control-label">Timezone</label>
         <select class="form-control wide site_logo_type" name="seller_timezone" required="">
@@ -113,12 +114,12 @@
           <?php } ?>
         </select>
       </div>
-    </div>
+    </div> -->
     <div class="col-12">
-      <div class="form-group d-flex flex-column">
+      <div class="form-group d-flex flex-column state_box">
         <label class="control-label">Languages</label>
         <!-- <input type="text" data-role="tagsinput" value="English,German"> -->
-        <select name="seller_language" class="form-control wide">
+        <select name="seller_language[]" class="form-control wide language js-example-basic-multiple" multiple="multiple">
           <?php if($login_seller_language == 0){ ?>
           <option class="hidden"> Select Language </option>
           <?php 
@@ -136,7 +137,7 @@
             $language_id = $row_languages->language_id;
             $language_title = $row_languages->language_title;
             ?>
-          <option value="<?php echo $language_id; ?>" <?php if($language_id == $login_seller_language){ echo "selected"; } ?>> <?php echo $language_title; ?> </option>
+          <option value="<?php echo $language_id; ?>" <?php foreach ($get_seller_lang as &$lang_id){ if($language_id  == $lang_id){ echo "selected"; } }  ?>> <?php echo $language_title; ?> </option>
           <?php } ?>
           <?php } ?>
         </select>
@@ -425,10 +426,11 @@
 </script>
 <?php
   if(isset($_POST['submit'])){
+
     $rules = array(
     "seller_name" => "required",
     "seller_email" => "required",
-    "seller_country" => "required",
+    // "seller_country" => "required",
     "seller_language" => "required");
 
     $messages = array("seller_name" => "Full Name Is required.","seller_email" => "Email Is Required.","seller_country"=>"Country Is Required.","seller_language"=>"Main Conversational Language Is Required.");
@@ -441,8 +443,13 @@
       $seller_name = strip_tags($input->post('seller_name'));
       $seller_email = strip_tags($input->post('seller_email'));
       $seller_country = strip_tags($input->post('seller_country'));
-      $seller_timezone = strip_tags($input->post('seller_timezone'));
-      $seller_language = strip_tags($input->post('seller_language'));
+      $seller_state = strip_tags($input->post('seller_state'));
+      $seller_city = strip_tags($input->post('seller_city'));
+      // $seller_timezone = strip_tags($input->post('seller_timezone'));
+      // $seller_language= "1,2";
+      $seller_language = implode(',', $input->post('seller_language'));
+      // $seller_language = $seller_lang_array;
+      // var_dump($seller_language);die();
       $seller_headline = strip_tags($input->post('seller_headline'));
       $seller_about = strip_tags($input->post('seller_about'));
       $profile_photo = strip_tags($input->post('profile_photo'));
@@ -481,7 +488,7 @@
           $verification_code = $login_seller_verification;
         }
 
-        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
+        $update_seller = $db->update("sellers",array("seller_name"=>$seller_name,"seller_email"=>$seller_email,"seller_image"=>$profile_photo,"seller_cover_image"=>$cover_photo,"seller_country"=>$seller_country,"seller_state"=>$seller_state,"seller_city"=>$seller_city,"seller_timezone"=>$seller_timezone,"seller_headline"=>$seller_headline,"seller_about"=>$seller_about,"seller_language"=>$seller_language,"seller_verification"=>$verification_code),array("seller_id"=>$login_seller_id));
         
         if($update_seller){
           if (($seller_email == $login_seller_email) or ($seller_email != $login_seller_email and userConfirmEmail($seller_email))){
@@ -495,7 +502,10 @@
             }
             }).then(function(){
                 // Read more about handling dismissals
-                window.open('settings?profile_settings','_self');
+                // window.open('settings?profile_settings','_self');
+                $('#account_verification').addClass('show active');
+                $('#profile_settings').removeClass('show active');
+                $('#verification_tab').addClass('active');
             });
             </script>";
           }

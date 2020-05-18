@@ -30,6 +30,9 @@ $login_seller_account_name = $row_login_seller->seller_m_account_name;
 $login_seller_wallet = $row_login_seller->seller_wallet;
 $login_seller_enable_sound = $row_login_seller->enable_sound;
 $login_seller_verification = $row_login_seller->seller_verification;
+$login_seller_occuption = $row_login_seller->occuption;
+
+$get_seller_lang = explode(',', $row_login_seller->seller_language);
 
 $select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
 $row_seller_accounts = $select_seller_accounts->fetch();
@@ -100,6 +103,7 @@ $years = range(1910,date("Y"));
   <?php } ?>
   <script src="<?php echo $site_url; ?>/js/jquery.easy-autocomplete.min.js"></script>
   <link href="<?php echo $site_url; ?>/styles/easy-autocomplete.min.css" rel="stylesheet">
+  <link href="assets/css/select2.min.css" rel="stylesheet" />
   <style>
     .profile-edit-step-item{
       cursor: pointer;
@@ -135,12 +139,22 @@ $years = range(1910,date("Y"));
       padding: 1rem;
       margin: -1rem -1rem auto;
     }
-    #state-list , #city-list, #country{
+    #state-list , #city-list, #country, #skill_select, .language{
       height: 54px;
       display: block !important;
     }
     .state_box .nice-select{
       display: none;
+    }
+    .select2.select2-container:last-Child{
+      display: none;
+    }
+    .select2-container .select2-selection--multiple{
+      min-height: 54px
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{
+      margin-top: 10px;
+      padding: 5px 10px;
     }
   </style>
 </head>
@@ -178,7 +192,7 @@ $years = range(1910,date("Y"));
                         <span class="text">Professional Information</span>
                       </div>
                       <div class="profile-edit-step-item" id="verification_tab">
-                        <span class="step">2</span>
+                        <span class="step">3</span>
                         <span class="text">Trust & Verification</span>
                       </div>
                     </div>
@@ -278,7 +292,7 @@ $years = range(1910,date("Y"));
                                 </select>
                               </div>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <div class="col-12">
                               <div class="form-group d-flex flex-column custom_nice state_box">
                                 <label class="control-label">City</label>
                                 <select class="form-control wide" name="seller_city" required="" id="city-list">
@@ -289,7 +303,7 @@ $years = range(1910,date("Y"));
                                 </select>
                               </div>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <!-- <div class="col-12 col-md-6">
                               <div class="form-group d-flex flex-column custom_nice">
                                 <label class="control-label">Timezone</label>
                                 <select class="form-control wide site_logo_type" name="seller_timezone" required="">
@@ -299,12 +313,12 @@ $years = range(1910,date("Y"));
                                   <?php } ?>
                                 </select>
                               </div>
-                            </div>
+                            </div> -->
                             <div class="col-12">
-                              <div class="form-group d-flex flex-column">
+                              <div class="form-group d-flex flex-column state_box">
                                 <label class="control-label">Languages</label>
                                 <!-- <input type="text" data-role="tagsinput" value="English,German"> -->
-                                <select name="seller_language" class="form-control wide" multiple>
+                                <select name="seller_language[]" class="form-control wide language js-example-basic-multiple" multiple>
                                   <?php if($login_seller_language == 0){ ?>
                                   <option class="hidden"> Select Language </option>
                                   <?php 
@@ -322,7 +336,7 @@ $years = range(1910,date("Y"));
                                     $language_id = $row_languages->language_id;
                                     $language_title = $row_languages->language_title;
                                     ?>
-                                  <option value="<?php echo $language_id; ?>" <?php if($language_id == $login_seller_language){ echo "selected"; } ?>> <?php echo $language_title; ?> </option>
+                                  <option value="<?php echo $language_id; ?>" <?php foreach ($get_seller_lang as &$lang_id){ if($language_id  == $lang_id){ echo "selected"; } }  ?>> <?php echo $language_title; ?> </option>
                                   <?php } ?>
                                   <?php } ?>
                                 </select>
@@ -354,28 +368,75 @@ $years = range(1910,date("Y"));
                     <div class="row">
                       <div class="col-12">
                         <!-- <form method="post" enctype="multipart/form-data" runat="server" autocomplete="off"> -->
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="form-group d-flex flex-column">
-                                <label class="control-label">Your Occupation</label>
-                                <select class="wide form-control">
-                                  <option>Select Your Occupation</option>
-                                  <option value="1">Your Occupation 1</option>
-                                  <option value="2">Your Occupation 2</option>
-                                  <option value="3">Your Occupation 3</option>
-                                  <option value="3">Your Occupation 4</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-12">
+                          <!-- <div class="row"> -->
+                            <!-- <div class="col-12">
+                              <label class="control-label">Occuption</label>
+                            </div> -->
+                            <!-- <div class="col-12"> -->
+                             <!--  <ul class="list-unstyled mt-3">
+                              <?php
+                              $select_occuption = $db->select("sellers",array("seller_id" => $seller_id));
+
+                              while($row_select_occuption = $select_occuption->fetch()){
+                                
+                                $occuption = $row_select_occuption->occuption;
+                              ?>
+                              <li class="card-li mb-1">
+                              <?php echo $occuption; ?>
+                              </li>
+                              <?php } ?>
+
+                              </ul>
+                            </div> -->
+                            <!-- <div id="" class="col-12 "> -->
+                              <form method="post">
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="form-group d-flex flex-column">
+                                      <label class="control-label">Your Occupation</label>
+                                      <input type="text" name="occuption" class="form-control" placeholder="Write your Occupation" value="<?= $login_seller_occuption; ?>">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="form-group d-flex flex-row justify-content-end">
+                                      <button class="button button-white" type="button" data-toggle="collapse" data-target="#add_occupation">Cancel</button>
+                                      <button class="button button-red" type="submit" name="insert_occupation">Save</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <?php
+
+                              if(isset($_POST['insert_occupation'])){
+
+                              $occuption = $input->post('occuption');
+                                
+                              $insert_skill = $db->update("sellers",array("occuption" => $occuption),array("seller_id"=>$seller_id));
+                                
+                              echo "<script>window.open('edit_profile','_self');
+                              $('#account_verification').removeClass('show active');
+                              $('#profile_settings').removeClass('show active');
+                              $('#professional_info').addClass('show active');
+                              $('#professional_tab').addClass('active');
+                              $('#verification_tab').removeClass('active');
+                              </script>";
+                                
+                              }
+
+                              ?>
+                            <!-- </div> -->
+
+                            <!-- <div class="col-12">
                               <div class="form-group d-flex flex-row justify-content-end">
-                                <button class="add-new" type="button" role="button">
+                                <button class="add-new" type="button"  data-toggle="collapse" data-target="#add_occupation">
                                   <span><i class="fas fa-plus-circle"></i></span>
                                   <span>Add New</span>
                                 </button>
                               </div>
-                            </div>
-                          </div>
+                            </div> -->
+                          <!-- </div> -->
                           <!-- Row -->
                           <div class="row">
                             <div class="col-12">
@@ -431,8 +492,8 @@ $years = range(1910,date("Y"));
                               <form method="post">
                                 <div class="row">
                                   <div class="col-12 col-md-6">
-                                    <div class="form-group d-flex flex-column">
-                                      <select class="wide form-control" name="skill_id" required="">
+                                    <div class="form-group d-flex flex-column state_box">
+                                      <select class="wide form-control" name="skill_id" id="skill_select" required="">
                                         <option value=""> Select Skill </option>
                                         <?php 
                                           $s_skills = array();
@@ -456,7 +517,7 @@ $years = range(1910,date("Y"));
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
                                       <select class="wide form-control" name="skill_level">
-                                        <option>Experience Level</option>
+                                        <option disabled selected hidden>Experience Level</option>
                                         <option>Beginner</option>
                                         <option>Intermediate</option>
                                         <option>Expert</option>
@@ -483,7 +544,13 @@ $years = range(1910,date("Y"));
                                 
                               $insert_skill = $db->insert("skills_relation",array("seller_id" => $seller_id,"skill_id" => $skill_id,"skill_level" => $skill_level));
                                 
-                              echo "<script>window.open('edit_profile','_self');</script>";
+                              echo "<script>window.open('edit_profile','_self');
+                              $('#account_verification').removeClass('show active');
+                              $('#profile_settings').removeClass('show active');
+                              $('#professional_info').addClass('show active');
+                              $('#professional_tab').addClass('active');
+                              $('#verification_tab').removeClass('active');
+                              </script>";
                                 
                               }
 
@@ -598,7 +665,13 @@ $years = range(1910,date("Y"));
                               
                               $insert_skill = $db->insert("seller_education",array("seller_id" => $seller_id,"education_data" => @json_encode($educationQry)));
                                 
-                              echo "<script>window.open('edit_profile','_self');</script>";
+                              echo "<script>window.open('edit_profile','_self');
+                              $('#account_verification').removeClass('show active');
+                              $('#profile_settings').removeClass('show active');
+                              $('#professional_info').addClass('show active');
+                              $('#professional_tab').addClass('active');
+                              $('#verification_tab').removeClass('active');
+                              </script>";
                                 
                               }
 
@@ -858,6 +931,8 @@ $years = range(1910,date("Y"));
 </script>
 <script>
   $(document).ready(function(){
+    $('.js-example-basic-multiple').select2();
+
   $image_crop = $('#image_demo').croppie({
       enableExif: true,
       viewport: {
@@ -1036,7 +1111,8 @@ function getEducation(educationId){
       $seller_state = strip_tags($input->post('seller_state'));
       $seller_city = strip_tags($input->post('seller_city'));
       $seller_timezone = strip_tags($input->post('seller_timezone'));
-      $seller_language = strip_tags($input->post('seller_language'));
+      // $seller_language = strip_tags($input->post('seller_language'));
+      $seller_language = implode(',', $input->post('seller_language'));
       $seller_headline = strip_tags($input->post('seller_headline'));
       $seller_about = strip_tags($input->post('seller_about'));
       $profile_photo = strip_tags($input->post('profile_photo'));
@@ -1124,7 +1200,8 @@ function getEducation(educationId){
       $seller_state = strip_tags($input->post('seller_state'));
       $seller_city = strip_tags($input->post('seller_city'));
       $seller_timezone = strip_tags($input->post('seller_timezone'));
-      $seller_language = strip_tags($input->post('seller_language'));
+      // $seller_language = strip_tags($input->post('seller_language'));
+      $seller_language = implode(',', $input->post('seller_language'));
       $seller_headline = strip_tags($input->post('seller_headline'));
       $seller_about = strip_tags($input->post('seller_about'));
       $profile_photo = strip_tags($input->post('profile_photo'));

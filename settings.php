@@ -29,6 +29,8 @@ $login_seller_wallet = $row_login_seller->seller_wallet;
 $login_seller_enable_sound = $row_login_seller->enable_sound;
 $login_seller_verification = $row_login_seller->seller_verification;
 
+$get_seller_lang = explode(',', $row_login_seller->seller_language);
+// print_r($login_seller_language);
 $select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
 $row_seller_accounts = $select_seller_accounts->fetch();
 $current_balance = $row_seller_accounts->current_balance;
@@ -116,6 +118,7 @@ $local_email = $row_seller_payment->local_email;
   <?php } ?>
 	<script src="<?php echo $site_url; ?>/js/jquery.easy-autocomplete.min.js"></script>
 	<link href="<?php echo $site_url; ?>/styles/easy-autocomplete.min.css" rel="stylesheet">
+	<link href="assets/css/select2.min.css" rel="stylesheet" />
 	<style>
 		.profile-edit-step-item{
 			cursor: pointer;
@@ -151,12 +154,12 @@ $local_email = $row_seller_payment->local_email;
 		  padding: 1rem;
 		  margin: -1rem -1rem auto;
 		}
-		#state-list , #city-list, #country{
+		#state-list , #city-list, #country, .language{
       height: 54px;
       display: block !important;
     }
     .state_box .nice-select{
-      display: none;
+      display: none !important;
     }
     /* The message box is shown when the user clicks on the password field */
     #message {
@@ -188,6 +191,25 @@ $local_email = $row_seller_payment->local_email;
       position: relative;
       left: -35px;
       content: "✖";
+    }
+    .select2.select2-container:last-Child{
+    	display: none;
+    }
+    .select2-container .select2-selection--multiple{
+    	min-height: 54px
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{
+    	margin-top: 10px;
+	    padding: 5px 10px;
+    }
+    @media(max-width: 768px){
+    	.edit-profile .profile-edit-card .edit-profile-image .cover-image-label{
+    		height: auto;
+    		padding: 0;
+    	}
+    	.edit-profile .profile-edit-card .edit-profile-image .cover-image-label .icontext span{
+    		font-size: 14px;
+    	}
     }
 	</style>
 </head>
@@ -1293,6 +1315,9 @@ $local_email = $row_seller_payment->local_email;
 	}
 </script>
 <script>
+	$(document).ready(function() {
+		$('.js-example-basic-multiple').select2();
+	});
 var myInput = document.getElementById("psw");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
@@ -1626,5 +1651,6 @@ var app;
 })();
 </script>
 <?php require_once("includes/footer.php"); ?>
+
 </body>
 </html>

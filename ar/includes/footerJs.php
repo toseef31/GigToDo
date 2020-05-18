@@ -49,6 +49,7 @@ if(isset($_SESSION['seller_user_name'])){
 <script type="text/javascript" src="<?= $site_url; ?>/ar/js/summernote.js"></script>
 <script type="text/javascript" src="<?= $site_url; ?>/ar/js/croppie.js"></script>
 <script type="text/javascript" src="<?= $site_url; ?>/ar/js/exif.js"></script>
+<script src="<?= $site_url; ?>/assets/js/select2.min.js"></script>
 <script>
   $(function(){
     $("#price").ionRangeSlider({

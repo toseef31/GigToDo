@@ -152,6 +152,13 @@ $count_requests = $get_requests->rowCount();
       white-space: nowrap;
       display: inline-block;
     }
+    .buyer-profile .buyer-profile-header{
+      background-size: 100% 47%;
+      background-position: center top;
+    }
+    .buyer-profile .buyer-profile-header .buyer-profile-image{
+      padding: 2px;
+    }
   }
   </style>
 </head>
