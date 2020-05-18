@@ -149,8 +149,11 @@ $years = range(1910,date("Y"));
     .select2.select2-container:last-Child{
       display: none;
     }
+    .select2-container{
+      width: 100% !important;
+    }
     .select2-container .select2-selection--multiple{
-      min-height: 54px
+      min-height: 54px;
     }
     .select2-container--default .select2-selection--multiple .select2-selection__choice{
       margin-top: 10px;
