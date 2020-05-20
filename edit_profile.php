@@ -44,6 +44,14 @@ if($lang_dir == "right"){
   $floatRight = "float-right";
 }
 
+$uri = $_SERVER['REQUEST_URI'];
+// echo $uri; // Outputs: URI
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+// echo $url; // Outputs: Full URL
+$query = $_SERVER['QUERY_STRING'];
+// echo $query; // Outputs: Query String
+
 $years = range(1910,date("Y"));
 
 ?>
@@ -418,12 +426,12 @@ $years = range(1910,date("Y"));
                                 
                               $insert_skill = $db->update("sellers",array("occuption" => $occuption),array("seller_id"=>$seller_id));
                                 
-                              echo "<script>window.open('edit_profile','_self');
-                              $('#account_verification').removeClass('show active');
-                              $('#profile_settings').removeClass('show active');
-                              $('#professional_info').addClass('show active');
-                              $('#professional_tab').addClass('active');
-                              $('#verification_tab').removeClass('active');
+                              echo "<script>window.open('edit_profile?professional_info','_self');
+                              // $('#account_verification').removeClass('show active');
+                              // $('#profile_settings').removeClass('show active');
+                              // $('#professional_info').addClass('show active');
+                              // $('#professional_tab').addClass('active');
+                              // $('#verification_tab').removeClass('active');
                               </script>";
                                 
                               }
@@ -443,7 +451,7 @@ $years = range(1910,date("Y"));
                           <!-- Row -->
                           <div class="row">
                             <div class="col-12">
-                              <label class="control-label">Skills</label>
+                              <!-- <label class="control-label">Your Skills</label> -->
                             </div>
                             <div class="col-12">
                               <ul class="list-unstyled mt-3"><!-- list-unstyled mt-3 Starts -->
@@ -496,6 +504,7 @@ $years = range(1910,date("Y"));
                                 <div class="row">
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column state_box">
+                                      <label class="control-label">Skills</label>
                                       <select class="wide form-control" name="skill_id" id="skill_select" required="">
                                         <option value=""> Select Skill </option>
                                         <?php 
@@ -519,8 +528,9 @@ $years = range(1910,date("Y"));
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
+                                      <label class="control-label">Experience Level</label>
                                       <select class="wide form-control" name="skill_level">
-                                        <option disabled selected hidden>Experience Level</option>
+                                        <!-- <option disabled selected hidden>Experience Level</option> -->
                                         <option>Beginner</option>
                                         <option>Intermediate</option>
                                         <option>Expert</option>
@@ -547,12 +557,12 @@ $years = range(1910,date("Y"));
                                 
                               $insert_skill = $db->insert("skills_relation",array("seller_id" => $seller_id,"skill_id" => $skill_id,"skill_level" => $skill_level));
                                 
-                              echo "<script>window.open('edit_profile','_self');
-                              $('#account_verification').removeClass('show active');
-                              $('#profile_settings').removeClass('show active');
-                              $('#professional_info').addClass('show active');
-                              $('#professional_tab').addClass('active');
-                              $('#verification_tab').removeClass('active');
+                              echo "<script>window.open('edit_profile?professional_info','_self');
+                              // $('#account_verification').removeClass('show active');
+                              // $('#profile_settings').removeClass('show active');
+                              // $('#professional_info').addClass('show active');
+                              // $('#professional_tab').addClass('active');
+                              // $('#verification_tab').removeClass('active');
                               </script>";
                                 
                               }
@@ -668,12 +678,12 @@ $years = range(1910,date("Y"));
                               
                               $insert_skill = $db->insert("seller_education",array("seller_id" => $seller_id,"education_data" => @json_encode($educationQry)));
                                 
-                              echo "<script>window.open('edit_profile','_self');
-                              $('#account_verification').removeClass('show active');
-                              $('#profile_settings').removeClass('show active');
-                              $('#professional_info').addClass('show active');
-                              $('#professional_tab').addClass('active');
-                              $('#verification_tab').removeClass('active');
+                              echo "<script>window.open('edit_profile?professional_info','_self');
+                              // $('#account_verification').removeClass('show active');
+                              // $('#profile_settings').removeClass('show active');
+                              // $('#professional_info').addClass('show active');
+                              // $('#professional_tab').addClass('active');
+                              // $('#verification_tab').removeClass('active');
                               </script>";
                                 
                               }
@@ -880,6 +890,8 @@ $years = range(1910,date("Y"));
 
 <div id="wait"></div>
 <script>
+  $('#country option[value="Egypt"]').insertBefore('#country option[value="Afghanistan"]');
+  var queryString = '<?= $query; ?>';
   $('#verification_tab').click(function(){
     $('#account_verification').addClass('show active');
     $('#profile_settings').removeClass('show active');
@@ -900,6 +912,13 @@ $years = range(1910,date("Y"));
     $('#professional_tab').addClass('active');
     $('#verification_tab').removeClass('active');
   });
+  if (queryString == "professional_info") {
+    $('#account_verification').removeClass('show active');
+    $('#profile_settings').removeClass('show active');
+    $('#professional_info').addClass('show active');
+    $('#professional_tab').addClass('active');
+    $('#verification_tab').removeClass('active');
+  }
   function getState(val) {
     $.ajax({
       type: "POST",
@@ -988,8 +1007,9 @@ $years = range(1910,date("Y"));
             $('#insertimageModal').modal('hide');
             $('input[type=hidden][name='+ name +']').val(data);
             main = $('input[type=hidden][name='+ name +']').parent();
-            main.prepend("<img src='user_images/"+data+"' class='img-fluid'>");
-            $('.img-circle').hide();
+            // main.prepend("<img src='user_images/"+data+"' class='img-fluid'>");
+            // $('.img-circle').hide();
+            $('.img-circle').attr("src", "user_images/"+data+"");
           }
         });
       });
@@ -1168,12 +1188,12 @@ function getEducation(educationId){
             }
             }).then(function(){
                 // Read more about handling dismissals
-                // window.open('edit_profile','_self');
-                $('#account_verification').removeClass('show active');
-                $('#profile_settings').removeClass('show active');
-                $('#professional_info').addClass('show active');
-                $('#professional_tab').addClass('active');
-                $('#verification_tab').removeClass('active');
+                window.open('edit_profile?professional_info','_self');
+                // $('#account_verification').removeClass('show active');
+                // $('#profile_settings').removeClass('show active');
+                // $('#professional_info').addClass('show active');
+                // $('#professional_tab').addClass('active');
+                // $('#verification_tab').removeClass('active');
             });
             
             </script>";
@@ -1257,12 +1277,12 @@ function getEducation(educationId){
             }
             }).then(function(){
                 // Read more about handling dismissals
-                // window.open('edit_profile','_self');
-                $('#account_verification').removeClass('show active');
-                $('#profile_settings').removeClass('show active');
-                $('#professional_info').addClass('show active');
-                $('#professional_tab').addClass('active');
-                $('#verification_tab').removeClass('active');
+                window.open('edit_profile?professional_info','_self');
+                // $('#account_verification').removeClass('show active');
+                // $('#profile_settings').removeClass('show active');
+                // $('#professional_info').addClass('show active');
+                // $('#professional_tab').addClass('active');
+                // $('#verification_tab').removeClass('active');
             });
             
             </script>";
@@ -1276,9 +1296,9 @@ function getEducation(educationId){
     $delete_education = $db->delete("seller_education",array("education_id"=>$delete_education_id,"seller_id"=>$login_seller_id));
     if($delete_education->rowCount() == 1){
       echo "<script>alert('One Education has been deleted.')</script>";
-      echo "<script> window.open('edit_profile','_self') </script>";
+      echo "<script> window.open('edit_profile?professional_info','_self') </script>";
     }else{
-      echo "<script> window.open('edit_profile','_self') </script>";
+      echo "<script> window.open('edit_profile?professional_info','_self') </script>";
     }
   }
 ?>

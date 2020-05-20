@@ -30,9 +30,9 @@ if(isset($_SESSION['seller_user_name'])){
     $delete_skill = $db->delete("skills_relation",array("relation_id"=>$delete_skill_id,"seller_id"=>$login_seller_id));
     if($delete_skill->rowCount() == 1){
       echo "<script>alert('One skill has been deleted.')</script>";
-      echo "<script> window.open('$login_seller_user_name','_self') </script>";
+      echo "<script> window.open('edit_profile?professional_info','_self') </script>";
     }else{
-      echo "<script> window.open('$login_seller_user_name','_self') </script>";
+      echo "<script> window.open('edit_profile?professional_info','_self') </script>";
     }
   }
 }

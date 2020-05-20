@@ -359,8 +359,9 @@
             $('#insertimageModal').modal('hide');
             $('input[type=hidden][name='+ name +']').val(data);
             main = $('input[type=hidden][name='+ name +']').parent();
-            main.prepend("<img src='"+getUrl+"/user_images/"+data+"' class='img-fluid'>");
-            $('.img-circle').hide();
+            // main.prepend("<img src='user_images/"+data+"' class='img-fluid'>");
+            $('.img-circle').attr("src", ""+getUrl+"/user_images/"+data+"");
+            // $('.img-circle').hide();
           }
         });
       });
@@ -420,8 +421,10 @@
               $('#insertCoverModal').modal('hide');
               $('input[type=hidden][name='+ name +']').val(data);
               main = $('input[type=hidden][name='+ name +']').parent();
-              main.prepend("<img src='"+getUrl+"/cover_images/"+data+"' class='img-fluid'>");
-              $('.cover_pic').hide();
+              // main.prepend("<img src='cover_images/"+data+"' class='img-fluid'>");
+              $('.cover_pic').attr("src", ""+getUrl+"/cover_images/"+data+"");
+              // $('.cover-image-label').html("<img src='cover_images/"+data+"' class='img-fluid'>");
+              // $('.cover_pic').hide();
             }
           });
         });

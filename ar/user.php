@@ -29,9 +29,9 @@ if(isset($_SESSION['seller_user_name'])){
     $delete_skill = $db->delete("skills_relation",array("relation_id"=>$delete_skill_id,"seller_id"=>$login_seller_id));
     if($delete_skill->rowCount() == 1){
       echo "<script>alert('One skill has been deleted.')</script>";
-      echo "<script> window.open('$login_seller_user_name','_self') </script>";
+      echo "<script> window.open('edit_profile?professional_info','_self') </script>";
     }else{
-      echo "<script> window.open('$login_seller_user_name','_self') </script>";
+      echo "<script> window.open('edit_profile?professional_info','_self') </script>";
     }
   }
 }
@@ -338,7 +338,7 @@ if(isset($_SESSION['seller_user_name'])){
                   $select_languages_relation = $db->select("languages_relation",array("seller_id" => $get_seller_id));
 
                   while($row_languages_relation = $select_languages_relation->fetch()){
-                    print_r($row_languages_relation);
+                    // print_r($row_languages_relation);
                     $relation_id = $row_languages_relation->relation_id;
                     $language_id = $row_languages_relation->language_id;
                     $language_level = $row_languages_relation->language_level;

@@ -1439,6 +1439,7 @@ $local_email = $row_seller_payment->local_email;
 </div>
 <div id="wait"></div>
 <script>
+	$('#country option[value="Egypt"]').insertBefore('#country option[value="Afghanistan"]');
 	$('#verification_tab').click(function(){
 		$('#account_verification').addClass('show active');
 		$('#profile_settings').removeClass('show active');
