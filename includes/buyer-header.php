@@ -74,7 +74,14 @@ $page_url = substr("$full_url", 15);
               <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
-              <div class="image"><img src="<?= $site_url; ?>/assets/img/menu-left-logo.png" alt=""></div>
+              <div class="image">
+                <?php if(!empty($seller_image)){ ?>
+                <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="" class="img-fluid rounded-circle" height="32px" width="32px">
+                <?php }else{ ?>
+                <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png"  class="img-fluid rounded-circle">
+                <?php } ?>
+                <!-- <img src="<?= $site_url; ?>/assets/img/menu-left-logo.png" alt=""> -->
+              </div>
               <div class="icon">
                 <span></span>
                 <span></span>

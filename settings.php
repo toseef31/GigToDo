@@ -214,6 +214,9 @@ $local_email = $row_seller_payment->local_email;
     	.edit-profile .profile-edit-card .edit-profile-image .cover-image-label .icontext span{
     		font-size: 14px;
     	}
+    	.empty-cover{
+    		height: 135px !important;
+    	}
     }
 	</style>
 </head>

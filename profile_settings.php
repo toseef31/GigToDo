@@ -37,7 +37,7 @@
       <img src="cover_images/<?php echo $login_seller_cover_image; ?>" width="750" height="280" class="img-thumbnal cover_pic">
       <span class="remove text-danger"><i class="fa fa-trash"></i></span>
       <?php }else{ ?>
-      <!-- <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail img-circle" > -->
+      <img src="cover_images/empty-cover.png" width="750" height="280" class="img-thumbnail  cover_pic empty-cover" style="height: 280px; width: 794px;">
       <?php } ?>
     </label>
     <label class="profile-image" for="profile-image">

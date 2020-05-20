@@ -209,6 +209,9 @@ $local_email = $row_seller_payment->local_email;
     		height: auto;
     		padding: 0;
     	}
+    	.empty-cover{
+    		height: 135px !important;
+    	}
     }
 	</style>
 </head>
