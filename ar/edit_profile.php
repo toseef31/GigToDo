@@ -147,7 +147,7 @@ $years = range(1910,date("Y"));
       padding: 1rem;
       margin: -1rem -1rem auto;
     }
-    #state-list , #city-list, #country, #skill_select, .language{
+    #state-list , #city-list, #country, #skill_select, .language, #degree_year, #edu_countries{
       height: 54px;
       display: block !important;
     }
@@ -594,7 +594,7 @@ $years = range(1910,date("Y"));
                               <form method="post">
                                 <div class="row">
                                   <div class="col-12 col-md-6">
-                                    <div class="form-group d-flex flex-column custom_nice">
+                                    <div class="form-group d-flex flex-column custom_nice state_box">
                                       <select class="wide form-control" id="edu_countries" name="country">
                                         <option>البلد</option>
                                         <?php
@@ -626,8 +626,8 @@ $years = range(1910,date("Y"));
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-6">
-                                    <div class="form-group d-flex flex-column custom_nice">
-                                      <select class="wide form-control" name="degree_year"required>
+                                    <div class="form-group d-flex flex-column custom_nice state_box">
+                                      <select class="wide form-control" name="degree_year"required id="degree_year">
                                         <option value="">السنة</option>
                                         <?php 
                                           foreach ($years as $year) {
