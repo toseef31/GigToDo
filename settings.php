@@ -206,6 +206,9 @@ $local_email = $row_seller_payment->local_email;
     	margin-top: 10px;
 	    padding: 5px 10px;
     }
+    .edit-profile .profile-edit-card .edit-profile-image .profile-image{
+    	padding: 0;
+    }
     @media(max-width: 768px){
     	.edit-profile .profile-edit-card .edit-profile-image .cover-image-label{
     		height: auto;
@@ -422,12 +425,12 @@ $local_email = $row_seller_payment->local_email;
 											</div>
 											<div class="title">Update Your Password</div>
 											<div class="icon d-flex flex-row">
-												<button type="button" role="button">
+												<!-- <button type="button" role="button">
 													<i class="fas fa-check-circle"></i>
 												</button>
 												<button type="button" role="button">
 													<i class="fal fa-times-circle"></i>
-												</button>
+												</button> -->
 											</div>
 										</div>
 										<!-- Profile setting card header -->
@@ -541,12 +544,12 @@ $local_email = $row_seller_payment->local_email;
 											</div>
 											<div class="title">Customize Notifications</div>
 											<div class="icon d-flex flex-row">
-												<button type="button" role="button">
+												<!-- <button type="button" role="button">
 													<i class="fas fa-check-circle"></i>
 												</button>
 												<button type="button" role="button">
 													<i class="fal fa-times-circle"></i>
-												</button>
+												</button> -->
 											</div>
 										</div>
 										<!-- Profile setting card header -->

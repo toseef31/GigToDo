@@ -204,6 +204,9 @@ $local_email = $row_seller_payment->local_email;
 	    padding: 5px 10px;
 	    float: right;
     }
+    .edit-profile .profile-edit-card .edit-profile-image .profile-image{
+    	padding: 0;
+    }
     @media(max-width: 768px){
     	.edit-profile .profile-edit-card .edit-profile-image .cover-image-label{
     		height: auto;
@@ -459,12 +462,12 @@ $local_email = $row_seller_payment->local_email;
 													حدث الباسوورد
 												</div>
 												<div class="icon d-flex flex-row">
-													<button type="button" role="button">
+													<!-- <button type="button" role="button">
 														<i class="fas fa-check-circle"></i>
 													</button>
 													<button type="button" role="button">
 														<i class="fal fa-times-circle"></i>
-													</button>
+													</button> -->
 												</div>
 											</div>
 											<!-- Profile setting card header -->
@@ -594,12 +597,12 @@ $local_email = $row_seller_payment->local_email;
 													تعديل الإشعارات
 												</div>
 												<div class="icon d-flex flex-row">
-													<button type="button" role="button">
+													<!-- <button type="button" role="button">
 														<i class="fas fa-check-circle"></i>
 													</button>
 													<button type="button" role="button">
 														<i class="fal fa-times-circle"></i>
-													</button>
+													</button> -->
 												</div>
 											</div>
 											<!-- Profile setting card header -->

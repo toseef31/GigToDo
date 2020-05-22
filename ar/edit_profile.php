@@ -168,6 +168,9 @@ $years = range(1910,date("Y"));
       padding: 5px 10px;
       float: right;
     }
+    .edit-profile .profile-edit-card .seller-profile-image .profile-image{
+      padding: 0;
+    }
     @media(max-width: 768px){
       .edit-profile .profile-edit-card .profile-edit-steps .profile-edit-step-item:first-child .text{
         text-align: right;
@@ -257,7 +260,7 @@ $years = range(1910,date("Y"));
                               <input type="file" id="profile-image" name="profile_photo" class="form-control" hidden />
                               <input type="hidden" name="profile_photo">
                               <?php if(!empty($login_seller_image)){ ?>
-                              <img src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" width="80" class="img-thumbnail img-circle" >
+                              <img src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" class="img-circle rounded-circle" >
                               <?php }else{ ?>
                               <img class="img-fluid img-circle" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
                               <?php } ?>
