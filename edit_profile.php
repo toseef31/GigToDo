@@ -615,7 +615,7 @@ $years = range(1910,date("Y"));
                                 <div class="row">
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column custom_nice">
-                                      <select class="wide form-control" name="country">
+                                      <select class="wide form-control" id="edu_countries" name="country">
                                         <option>Select Country</option>
                                         <?php
                                           $get_countries = $db->select("countries");
@@ -894,6 +894,7 @@ $years = range(1910,date("Y"));
 <div id="wait"></div>
 <script>
   $('#country option[value="Egypt"]').insertBefore('#country option[value="Afghanistan"]');
+  $('#edu_countries option[value="Egypt"]').insertBefore('#edu_countries option[value="Afghanistan"]');
   var queryString = '<?= $query; ?>';
   $('#verification_tab').click(function(){
     $('#account_verification').addClass('show active');
