@@ -217,40 +217,6 @@ if($count_seller == 0){
                 </div>
               </div>
               <div class="managerequest">
-                <?php
-                  $request_child_ids = array();
-                  $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
-                  while($row_proposals = $select_proposals->fetch()){
-                  $proposal_child_id = $row_proposals->proposal_child_id;
-                  array_push($request_child_ids, $proposal_child_id);
-                  }
-                  $where_child_id = array();
-                  foreach($request_child_ids as $child_id){
-                      $where_child_id[] = "child_id=" . $child_id;
-                  }
-                  if(count($where_child_id) > 0){
-                      $query_where = " and (" . implode(" or ", $where_child_id) . ")";
-                  }
-                  
-                  if($relevant_requests == "no"){ $query_where = ""; }
-
-                  if(!empty($query_where) or $relevant_requests == "no"){
-                  
-                  $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
-                  $requests_count = 0;
-                  while($row_requests = $select_requests->fetch()){
-                      $request_id = $row_requests->request_id;
-                      $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
-                      if($count_offers == 0){
-                          $requests_count++;
-                      }
-                  }
-                  
-                  $count_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
-                  
-                  if($requests_count !=0 and !empty($count_proposals)){
-
-                ?>
                 <h3>
                   إدارة الطلب
                 </h3>
@@ -325,31 +291,29 @@ if($count_seller == 0){
                         <th role="column">
                           الميزانية
                         </th>
+                        <?php if(isset($_SESSION['seller_user_name'])){ ?>
+                        <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                         <th role="column">
                           الأحداث
                         </th>
+                        <?php }} ?>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                        $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
-                        while($row_requests = $select_requests->fetch()){
+                        $get_requests = $db->select("buyer_requests",array("seller_id" => $seller_id,"request_status" => "active"),"DESC");
+                  
+                        $count_requests = $get_requests->rowCount();
+                        while($row_requests = $get_requests->fetch()){
+
                         $request_id = $row_requests->request_id;
-                        $seller_id = $row_requests->seller_id;
                         $request_title = $row_requests->request_title;
                         $request_description = $row_requests->request_description;
+                        $request_date = $row_requests->request_date;
                         $delivery_time = $row_requests->delivery_time;
                         $request_budget = $row_requests->request_budget;
-                        $request_file = $row_requests->request_file;
                         $request_skills = $row_requests->skills_required;
-                        $request_date = $row_requests->request_date;
-                        $select_request_seller = $db->select("sellers",array("seller_id"=>$seller_id));
-                        $row_request_seller = $select_request_seller->fetch();
-                        $request_seller_user_name = $row_request_seller->seller_user_name;
-                        $request_seller_image = $row_request_seller->seller_image;
-                        $count_send_offers = $db->count("send_offers",array("request_id" => $request_id));
-                        $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
-                        if($count_offers == 0){
+                        $count_offers = $db->count("send_offers",array("request_id" => $request_id, "status" => 'active'));
                       ?>
                       <tr role="row" id="request_tr_<?= $request_id; ?>">
                         <td data-label="التاريخ"><?= $request_date; ?></td>
@@ -399,6 +363,8 @@ if($count_seller == 0){
                             });
                            <?php } ?>
                         </script>
+                        <?php if(isset($_SESSION['seller_user_name'])){ ?>
+                        <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                         <td data-label="الأحداث">
                           <div class="dropdown">
                             <a class="action-link dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -414,8 +380,9 @@ if($count_seller == 0){
                             </div>
                           </div>
                         </td>
+                        <?php }} ?>
                       </tr>
-                      <?php } } ?>
+                      <?php }  ?>
                     </tbody>
                   </table>
                   <?php
@@ -430,7 +397,6 @@ if($count_seller == 0){
                     </center>
                   <?php } ?>
                 </div>
-                <?php }} ?>
               </div>
 
               <div class="all-gigs">

@@ -83,7 +83,11 @@ $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_
         <?php if(isset($_SESSION['seller_user_name'])){ ?>
         <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
         <a class="edit-profile-button" href="settings?profile_settings">Edit profile</a>
+        <?php } else{ ?>
+          <a class="edit-profile-button"  href="<?= $site_url; ?>/conversations/message?seller_id=<?= $seller_id ?>">Contact Me</a>
         <?php } ?>
+        <?php } else{ ?>
+          <a class="edit-profile-button" href="<?= $site_url; ?>/login.php">Contact Me</a>
         <?php } ?>
       </div>
     </div>

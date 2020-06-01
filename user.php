@@ -8,6 +8,8 @@ if(isset($_SESSION['seller_user_name'])){
   $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
   $row_login_seller = $select_login_seller->fetch();
   $login_seller_id = $row_login_seller->seller_id;
+  $login_user_type = $row_login_seller->account_type;
+
   if(isset($_GET['delete_language'])){
     $delete_language_id = $input->get('delete_language');
     $delete_language = $db->delete("languages_relation",array("relation_id"=>$delete_language_id,"seller_id"=>$login_seller_id));
@@ -81,6 +83,8 @@ if($count_seller == 0){
   <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="styles/owl.carousel.css" rel="stylesheet">
   <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
+  <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
+  <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
   <link href="styles/sweat_alert.css" rel="stylesheet">
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
@@ -96,8 +100,12 @@ if($count_seller == 0){
     </div>
   </div>
   <!-- Preloader End -->      
-<?php //require_once("includes/header.php"); 
-  require_once("includes/buyer-header.php");
+<?php //require_once("includes/header.php");
+  if(isset($_SESSION['seller_user_name'])){  
+    require_once("includes/buyer-header.php");
+  }else{
+    require_once("includes/header_with_categories.php");
+  }
 ?>
 
   <main>
@@ -191,41 +199,9 @@ if($count_seller == 0){
                     <p><?= $seller_about; ?></p>
                   </div>
                 </div>
+                <?php if(isset($_SESSION['seller_user_name'])){ ?>
+                <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                 <div class="managerequest">
-                  <?php
-                    $request_child_ids = array();
-                    $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
-                    while($row_proposals = $select_proposals->fetch()){
-                    $proposal_child_id = $row_proposals->proposal_child_id;
-                    array_push($request_child_ids, $proposal_child_id);
-                    }
-                    $where_child_id = array();
-                    foreach($request_child_ids as $child_id){
-                        $where_child_id[] = "child_id=" . $child_id;
-                    }
-                    if(count($where_child_id) > 0){
-                        $query_where = " and (" . implode(" or ", $where_child_id) . ")";
-                    }
-                    
-                    if($relevant_requests == "no"){ $query_where = ""; }
-
-                    if(!empty($query_where) or $relevant_requests == "no"){
-                    
-                    $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
-                    $requests_count = 0;
-                    while($row_requests = $select_requests->fetch()){
-                        $request_id = $row_requests->request_id;
-                        $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
-                        if($count_offers == 0){
-                            $requests_count++;
-                        }
-                    }
-                    
-                    $count_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
-                    
-                    if($requests_count !=0 and !empty($count_proposals)){
-
-                    ?>
                   <h3>Manage Request</h3>
                   <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
                     <div class="managerequest-status d-flex flex-row align-items-center">
@@ -274,32 +250,30 @@ if($count_seller == 0){
                           <th role="column">Offers</th>
                           <th role="column">Delivery</th>
                           <th role="column">Budget</th>
+                          <?php if(isset($_SESSION['seller_user_name'])){ ?>
+                          <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                           <th role="column">Actions</th>
+                          <?php }} ?>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                          $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
-                          while($row_requests = $select_requests->fetch()){
-                          $request_id = $row_requests->request_id;
-                          $seller_id = $row_requests->seller_id;
-                          $request_title = $row_requests->request_title;
-                          $request_description = $row_requests->request_description;
-                          $delivery_time = $row_requests->delivery_time;
-                          $request_budget = $row_requests->request_budget;
-                          $request_file = $row_requests->request_file;
-                          $request_skills = $row_requests->skills_required;
-                          $request_date = $row_requests->request_date;
-                          $select_request_seller = $db->select("sellers",array("seller_id"=>$seller_id));
-                          $row_request_seller = $select_request_seller->fetch();
-                          $request_seller_user_name = $row_request_seller->seller_user_name;
-                          $request_seller_image = $row_request_seller->seller_image;
-                          $count_send_offers = $db->count("send_offers",array("request_id" => $request_id));
-                          $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
-                          if($count_offers == 0){
+                            $get_requests = $db->select("buyer_requests",array("seller_id" => $seller_id,"request_status" => "active"),"DESC");
+                      
+                            $count_requests = $get_requests->rowCount();
+                            while($row_requests = $get_requests->fetch()){
+
+                            $request_id = $row_requests->request_id;
+                            $request_title = $row_requests->request_title;
+                            $request_description = $row_requests->request_description;
+                            $request_date = $row_requests->request_date;
+                            $delivery_time = $row_requests->delivery_time;
+                            $request_budget = $row_requests->request_budget;
+                            $request_skills = $row_requests->skills_required;
+                            $count_offers = $db->count("send_offers",array("request_id" => $request_id, "status" => 'active'));
                           ?>
-                        <tr role="row" id="request_tr_<?= $request_id; ?>">
-                          <td data-label="Date"><?= $request_date; ?></td>
+                        <tr role="row">
+                          <td data-label="Date"><?php echo $request_date; ?></td>
                           <td data-label="Request">
                             <p><?= $request_description; ?></p>
                             <div class="tags">
@@ -307,14 +281,14 @@ if($count_seller == 0){
                             </div>
                           </td>
                           <td data-label="Offers">
-                            <div class="offers-button"><?= $count_send_offers; ?> offers</div>
+                            <div class="offers-button"><?php echo $count_offers; ?> offers</div>
                           </td>
                           <td data-label="Delivery"><?= $delivery_time; ?></td>
                           
                           <td data-label="Budget">
                             <div class="d-flex flex-column">
                               <?php if(!empty($request_budget)){ ?>
-                              <span><?= $s_currency; ?><?= $request_budget; ?></span>
+                              <span><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
                               <?php }else{ ?>
                               <span> ----- </span>
                               <?php } ?>
@@ -343,23 +317,26 @@ if($count_seller == 0){
                               });
                              <?php } ?>
                           </script>
+                          <?php if(isset($_SESSION['seller_user_name'])){ ?>
+                          <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                           <td data-label="Actions">
                             <div class="dropdown">
                               <a class="action-link dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-cog"></i>
                               </a>
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="javascript:void(0);">Pause</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                <a class="dropdown-item" href="pause_request?request_id=<?php echo $request_id; ?>">Pause</a>
+                                <a class="dropdown-item" href="delete_request?request_id=<?php echo $request_id; ?>">Delete</a>
                               </div>
                             </div>
                           </td>
-                        </tr>
                         <?php } } ?>
+                        </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                     <?php
-                      if($requests_count == 0){
+                      if($count_requests == 0){
                           echo "<center><h4 class='pb-2 pt-2'>{$lang['user_home']['no_recent_requests']}</h4></center>";
                       } else {
                     ?>
@@ -370,8 +347,156 @@ if($count_seller == 0){
                     </center>
                     <?php } ?>
                   </div>
-                  <?php }} ?>
                 </div>
+                <?php } } ?>
+                <?php if(isset($_SESSION['seller_user_name'])) { ?>
+                  <?php if($login_user_type == 'seller'){ ?>
+                  <?php
+                    $request_child_ids = array();
+                    $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
+                    while($row_proposals = $select_proposals->fetch()){
+                    $proposal_child_id = $row_proposals->proposal_child_id;
+                    array_push($request_child_ids, $proposal_child_id);
+                    }
+                    $where_child_id = array();
+                    foreach($request_child_ids as $child_id){
+                        $where_child_id[] = "child_id=" . $child_id;
+                    }
+                    if(count($where_child_id) > 0){
+                        $query_where = " and (" . implode(" or ", $where_child_id) . ")";
+                    }
+                    
+                    if($relevant_requests == "no"){ $query_where = ""; }
+
+                    if(!empty($query_where) or $relevant_requests == "no"){
+                    
+                    $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
+                    $requests_count = 0;
+                    while($row_requests = $select_requests->fetch()){
+                        $request_id = $row_requests->request_id;
+                        $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
+                        if($count_offers == 0){
+                            $requests_count++;
+                        }
+                    }
+                    
+                    $count_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+                    
+                    if($requests_count !=0 and !empty($count_proposals)){
+
+                    ?>
+                    <div class="managerequest">
+                      <h3>Manage Request</h3>
+                      <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
+                        <div class="managerequest-status d-flex flex-row align-items-center">
+                          <span>Category</span>
+                          <span>
+                            <select class="wide">
+                              <option>Category</option>
+                              <option>Category</option>
+                              <option>Category</option>
+                              <option>Category</option>
+                              <option>Category</option>
+                              <option>Category</option>
+                            </select>
+                          </span>
+                        </div>
+                        <div class="managerequest-pagination">
+                          <ul class="pagination">
+                            <li class="pagination-item">
+                              <a class="pagination-link" href="javascript:void(0);">
+                                <i class="fal fa-angle-left"></i>
+                              </a>
+                            </li>
+                            <li class="pagination-item">
+                              <a class="pagination-link" href="javascript:void(0);">1</a>
+                            </li>
+                            <li class="pagination-item">
+                              <div class="pagination-status d-flex flex-row align-items-center">
+                                <span>Of</span>
+                                <span>1</span>
+                              </div>
+                            </li>
+                            <li class="pagination-item">
+                              <a class="pagination-link" href="javascript:void(0);">
+                                <i class="fal fa-angle-right"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="mangaerequest-body">
+                        <table class="table managerequest-table" cellpadding="0" cellspacing="0" border="0">
+                          <thead>
+                            <tr role="row">
+                              <th role="column">Buyer</th>
+                              <th role="column">Request</th>
+                              <th role="column">Offers</th>
+                              <th role="column">Delivery</th>
+                              <th role="column">Budget</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                              $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
+                              while($row_requests = $select_requests->fetch()){
+                              $request_id = $row_requests->request_id;
+                              $seller_id = $row_requests->seller_id;
+                              $request_title = $row_requests->request_title;
+                              $request_description = $row_requests->request_description;
+                              $delivery_time = $row_requests->delivery_time;
+                              $request_budget = $row_requests->request_budget;
+                              $request_file = $row_requests->request_file;
+                              $select_request_seller = $db->select("sellers",array("seller_id"=>$seller_id));
+                              $row_request_seller = $select_request_seller->fetch();
+                              $request_seller_user_name = $row_request_seller->seller_user_name;
+                              $request_seller_image = $row_request_seller->seller_image;
+                              $count_send_offers = $db->count("send_offers",array("request_id" => $request_id));
+                              $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
+                              if($count_offers == 0){
+                              ?>
+                            <tr role="row">
+                              <td data-label="Buyer">
+                                <div class="d-flex flex-column align-items-center">
+                                  <div class="buyer-image">
+                                    <img alt class="img-fluid d-block" src="assets/img/emongez_cube.png" />
+                                  </div>
+                                  <div class="buyer-id">Zeeshi455</div>
+                                  <span>29 DEC</span>
+                                </div>
+                              </td>
+                              <td data-label="Request">
+                                <p>Hello sir.. i want to make avatar of someone.. i just need vector file.. can you provide me??? in $6</p>
+                                <div class="attachment d-flex flex-row align-items-center">
+                                  <span><i class="fal fa-paperclip"></i></span>
+                                  <span>attatchme...jpg</span>
+                                  <span>(1048KB)</span>
+                                </div>
+                                <div class="tags">
+                                  <a href="javascript:void(0);" class="taga-item">Logo Design</a>
+                                  <a href="javascript:void(0);" class="taga-item">Brochure Design</a>
+                                </div>
+                              </td>
+                              <td data-label="Offers">
+                                <div class="offers-button">4 offers</div>
+                              </td>
+                              <td data-label="Delivery">7Days</td>
+                              <td data-label="Budget">
+                                <div class="d-flex flex-column">
+                                  <span>AED 20</span>
+                                  <a class="send-offer" data-toggle="modal" href="#exampleModalCenter">Send offer</a>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php }} ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <?php }} ?>
+                <?php } } ?>
+                <?php if(isset($_SESSION['seller_user_name'])){ ?>
+                <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                 <div class="all-gigs">
                   <div class="row">
                     <div class="col-12">
@@ -500,6 +625,7 @@ if($count_seller == 0){
                     <!-- Each item -->
                   </div>
                 </div>
+                <?php }} ?>
               </div>
             </div>
           </div>
