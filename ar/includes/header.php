@@ -52,7 +52,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
   $url.= $_SERVER['REQUEST_URI'];    
   $full_url = $_SERVER['REQUEST_URI'];
   
-  $page_url = substr("$full_url", 12);
+  $page_url = substr("$full_url", 18);
 ?>
 <!-- <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?= $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -381,20 +381,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
                   <li><a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a></li>
                 </ul>
               </div>
-              <?php if($language_switcher == 1){ 
-                if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-                     $url = "https://";   
-                else  
-                     $url = "http://";   
-                // Append the host(domain name, ip) to the URL.   
-                $url.= $_SERVER['HTTP_HOST'];   
-                
-                // Append the requested resource location to the URL   
-                $url.= $_SERVER['REQUEST_URI'];    
-                $full_url = $_SERVER['REQUEST_URI'];
-                
-                $page_url = substr("$full_url", 12);
-              ?>
+              <?php if($language_switcher == 1){?>
               <div class="language-inner">
                 <select name="" id="" onChange="window.location.href=this.value">
                   <option value="<?= $site_url?>/<?php echo $page_url; ?>">EN</option>
@@ -415,8 +402,8 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
                   <div class="image">
-                    <img src="assets/img/menu-left-logo-2.png" alt="">
-                    <img src="assets/img/menu-left-logo.png" alt="">
+                    <img src="<?= $site_url ?>/assets/img/menu-left-logo-2.png" alt="">
+                    <img src="<?= $site_url ?>/assets/img/menu-left-logo.png" alt="">
                   </div>
                   <div class="icon">
                     <span></span>

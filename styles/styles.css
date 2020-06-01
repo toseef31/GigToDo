@@ -661,16 +661,16 @@ margin-bottom:10px;
  
  }*/
 
- /*.header-message-div-unread {
+ .header-message-div-unread {
 
-	 background:#ebf2f5;
-	 padding-bottom:0px;
+	 /*background:#ebf2f5;*/
+	/* padding-bottom:0px;
 	 padding-top: 10px;
 	 border-bottom:1px solid #ccc;
 	 padding-left:15px;
-	 height:85px;
+	 height:85px;*/
 
- }*/
+ }
 
  .header-message-div:last-child {
 
@@ -1862,7 +1862,7 @@ video.embed-responsive {
 }
 
 .page-link {
-	color: #00a64b !important;
+	color: #ff0707 !important;
 	font-weight: bold;
 }
 
@@ -4208,7 +4208,7 @@ footer a:hover{
 
 .messagePopup{
     position: fixed;
-    bottom: 0;
+    top: 90px;
     right: 50px;
     z-index: 5000;
     font-size: 15px;
@@ -4217,12 +4217,26 @@ footer a:hover{
     width: 100%;
     background: #daecf2;
     color: black;
-    margin: 20px;
+    margin: 30px;
+    padding: 15px;
     margin-top: 0px;
     border-radius: 4px;
     /*font-family: Montserrat-Light;*/
     box-shadow: 1px 1px 2px 1px #ccc !important;
     border-bottom: 0px;
+    position: relative;
+}
+.messagePopup .header-message-div a{
+	float: none !important;
+}
+.messagePopup .header-message-div img{
+	float: left;
+	margin-right: 10px;
+}
+.messagePopup .header-message-div .closePopup{
+	position: absolute;
+    right: 8px;
+    top: 10px;
 }
 .messagePopup .header-message-div.offer{
 	width:200%;
@@ -4234,6 +4248,8 @@ footer a:hover{
 .messagePopup .message{
 	left: 10px;
 	width: auto;
+    margin-bottom: 0;
+    margin-left: 4rem;
 }
 .messagePopup .date{
 	left: 10px;
@@ -4311,3 +4327,5 @@ font-size: 18px;
 .navbar-brand:focus, .navbar-brand:hover{
   color: #28a745;
 }
+.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;font-family: 'Montserrat', sans-serif;
+    font-weight: 600; text-transform: uppercase;}

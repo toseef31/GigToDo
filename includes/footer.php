@@ -91,7 +91,7 @@
     <div class="row">
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4><?= $lang['categories']; ?></h4>
+          <h4 class="text-uppercase">company info</h4>
           <?php
           $get_footer_links = $db->query("select * from footer_links where link_section='categories' AND language_id='$siteLanguage'  LIMIT 0,4");
           while($row_footer_links = $get_footer_links->fetch()){
@@ -107,7 +107,7 @@
       </div>
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4><?= $lang['about']; ?></h4>
+          <h4 class="text-uppercase">support </h4>
           <?php
           $get_footer_links = $db->select("footer_links",array("link_section" => "about","language_id" => $siteLanguage));
           while($row_footer_links = $get_footer_links->fetch()){
@@ -124,7 +124,7 @@
       </div>
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4><?= $lang['find_us_on']; ?></h4>
+          <h4 class="text-uppercase">contact us</h4>
           <p>Email: <a href="javascript:void(0);">emongez@emongez.com</a></p>
 
           <div class="footer-social">
@@ -164,21 +164,12 @@
               $url.= $_SERVER['REQUEST_URI'];    
               $full_url = $_SERVER['REQUEST_URI'];
               
-              $page_url = substr("$full_url", 9);
+              $page_url = substr("$full_url", 15);
             ?>
           <div>
 
-            <select name=""  id="languageSelect" onChange="window.location.href=this.value">
-              <?php 
-                
-                $get_languages = $db->select("languages");
-                while($row_languages = $get_languages->fetch()){
-                $id = $row_languages->id;
-                $title = $row_languages->title;
-                $image = $row_languages->image;
-              ?>
-              <!-- <option data-image="<?= $site_url; ?>/languages/images/<?= $image; ?>" data-url="<?= "$site_url/change_language?id=$id"; ?>" <?php if($id == $_SESSION["siteLanguage"]){ echo "selected"; } ?>><?= $title; ?></option> -->
-              <?php } ?>
+            <select name=""  id="" onChange="window.location.href=this.value">
+              
               <option value="" selected="">EN</option>
               <option value="<?= $site_url?>/ar/<?php echo $page_url; ?>">AR</option>
               <!-- <option value="">AR</option> -->

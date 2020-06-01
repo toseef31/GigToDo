@@ -328,6 +328,9 @@ if(isset($_POST['update_cat'])){
 			if(empty($cat_image)){
 				$cat_image = $c_image;
 			}
+			if(empty($cat_icon)){
+				$cat_icon = $c_icon;
+			}
 
 			if($videoPlugin == 1){
 				$video = $input->post('video');

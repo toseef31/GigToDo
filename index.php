@@ -10,6 +10,15 @@ require_once("social-config.php");
 $site_title = $row_general_settings->site_title;
 
 ?>
+<?php 
+	if(isset($_SESSION['seller_user_name'])){
+	  $login_seller_user_name = $_SESSION['seller_user_name'];
+	  $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+	  $row_login_seller = $select_login_seller->fetch();
+	  $login_user_type = $row_login_seller->account_type;
+	  // print_r($login_user_type);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
@@ -60,7 +69,6 @@ $site_title = $row_general_settings->site_title;
 	<link href="styles/knowledge_bank.css" rel="stylesheet">
 	<?php endif ?>
 	<?php if(!empty($site_favicon)){ ?>
-	<!-- <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon" /> -->
 	<!--====== Favicon Icon ======-->
 	<link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
 	<?php } ?>
@@ -70,7 +78,11 @@ $site_title = $row_general_settings->site_title;
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}.header-menu .mainmenu ul li a {font-size: 15px;}</style>
 </head>
+<?php if(!isset($_SESSION['seller_user_name'])){ ?>
 <body class="home-content">
+<?php }else{ ?>
+<body class="all-content">
+<?php } ?>
 	<!-- Preloader Start -->
 	<div class="proloader">
 		<div class="loader">
@@ -86,8 +98,12 @@ if(!isset($_SESSION['seller_user_name'])){
 }
 if(!isset($_SESSION['seller_user_name'])){
 	require_once("home.php");
-}else{  
-	require_once("user_home.php");
+}else{
+	if($login_user_type == 'buyer'){  
+		require_once("user_home.php");
+	}else {
+		echo "<script> window.open('dashboard','_self') </script>"; 
+	}
 }
 require_once("includes/footer.php"); 
 

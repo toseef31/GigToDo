@@ -11,6 +11,8 @@ $seller_cover_image = "images/user-background.jpg";
 $seller_cover_image = "cover_images/".rawurlencode($seller_cover_image)."";
 }
 $seller_country = $row_seller->seller_country;
+$seller_state = $row_seller->seller_state;
+$seller_city = $row_seller->seller_city;
 $seller_headline = $row_seller->seller_headline;
 $seller_about = $row_seller->seller_about;
 $seller_level = $row_seller->seller_level;
@@ -36,14 +38,20 @@ if(!$count_reviews == 0){
 }
 $level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
 $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_id,"proposal_status" => 'active'));
+
+$posted_projects = $db->count("buyer_requests",array("seller_id" => $seller_id, "request_status" => 'active'));
+
+$purchased_services = $db->count("orders",array("buyer_id"=>$seller_id,"order_status"=>'delivered'));
+
+$total_sellers = $db->count("orders",array("buyer_id"=>$seller_id));
 ?>
 
 <div class="row">
   <div class="col-12">
-    <div class="buyer-profile-header" style="background-image: url(<?= $seller_cover_image; ?>);">
+    <div class="buyer-profile-header" style="background-image: url(<?= $site_url; ?>/<?= $seller_cover_image; ?>);">
       <div class="buyer-profile-image">
         <?php if(!empty($seller_image)){ ?>
-            <img src="user_images/<?= $seller_image; ?>" class="rounded-circle">
+            <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" class="rounded-circle">
           <?php }else{ ?>
             <img alt class="img-fluid d-block" src="assets/img/emongez_cube.png" />
           <?php } ?>
@@ -72,7 +80,7 @@ $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_
             <span>
               <img alt="" class="img-fluid d-block" src="assets/img/buyer/location-icon.png" />
             </span>
-            <span> <?= $seller_country; ?></span>
+            <span> <?= $seller_city; ?>, <?= $seller_country; ?></span>
           </li>
           <li class="list-inline-item d-flex flex-row align-items-center">
             <span>
@@ -83,7 +91,7 @@ $count_proposals = $db->count("proposals",array("proposal_seller_id" => $seller_
         </ul>
         <?php if(isset($_SESSION['seller_user_name'])){ ?>
         <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
-        <a class="edit-profile-button" href="/ar/settings?profile_settings">تعديل الملف الشخصى</a>
+        <a class="edit-profile-button" href="<?= $site_url; ?>/ar/settings?profile_settings">تعديل الملف الشخصى</a>
         <?php } ?>
         <?php } ?>
       </div>

@@ -18,7 +18,7 @@ if(isset($_POST["image"])){
 	if(!in_array($file_extension,$allowed)){
    	echo "";
 	}else{
-		file_put_contents("proposal_files/" . $imageName, $data);
+		file_put_contents("../../proposals/proposal_files/" . $imageName, $data);
    	echo $imageName;
 	}
 

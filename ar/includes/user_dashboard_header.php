@@ -47,9 +47,9 @@
   $url.= $_SERVER['REQUEST_URI'];    
   $full_url = $_SERVER['REQUEST_URI'];
 
-  $page_url = substr("$full_url", 12);
+  $page_url = substr("$full_url", 18);
 ?>
-
+<style>.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
@@ -60,7 +60,7 @@
         <div class="row align-items-center">
           <div class="col-6 col-lg-4 col-md-3">
             <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
-              <a href="<?php echo $site_url; ?>/ar/">
+              <a href="<?php echo $site_url; ?>/ar/dashboard">
                 <img src="<?= $site_url; ?>/images/ar/<?= $arabic_sticky_logo; ?>" alt="">
               </a>
             </div>
@@ -89,14 +89,14 @@
                 </select>
               </div>
               <div class="message-inner">
-                <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message-2.png" alt=""></a>
+                <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt=""></a>
               </div>
               <div class="menubar d-flex flex-row align-items-center">
                 <div class="image">
                   <?php if(!empty($seller_image)){ ?>
                   <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                   <?php }else{ ?>
-                  <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32" class="rounded-circle">
+                  <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32">
                   <?php } ?>
                   <!-- <img src="assets/img/menu-left-logo-2.png" alt=""> -->
                 </div>
@@ -284,13 +284,17 @@
       <i class="fal fa-times"></i>
     </div>
     <div class="profile-inner">
+      <?php if(!empty($seller_image)){ ?>
+      <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
+      <?php }else{ ?>
       <img src="assets/img/user2.png" alt="">
+      <?php } ?>
       <h4>أهلا بيك من تاني<span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
     </div>
     <div class="canvs-menu">
       <ul>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt="">
+          <a href="<?php echo $site_url; ?>/ar/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="assets/img/icon/1.png" alt="">
             الملفالشخصي
           </a>
         </li>
@@ -310,7 +314,7 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt="">
+          <a href="<?= $site_url; ?>/ar/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt="">
             انشر خدمة
           </a>
         </li>
@@ -389,7 +393,7 @@
   ?>
   </div>
   <div class="float-right">
-  <button id="send-email" class="btn btn-success btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+  <button id="send-email" class="btn btn-success float-right text-white">إعادة إرسال البريد الإلكتروني</button>
   </div>
   </div>
   <script>

@@ -51,12 +51,11 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		<link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
 		<!--====== Responsive css ======-->
 		<link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
-		<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-		<link href="../styles/bootstrap.css" rel="stylesheet">
+		<!-- <link href="../styles/bootstrap.css" rel="stylesheet">
 		<link href="../styles/custom.css" rel="stylesheet"> --> 
 		<!-- Custom css code from modified in admin panel --->
 		<link href="../styles/styles.css" rel="stylesheet">
-		<link href="../styles/user_nav_styles.css" rel="stylesheet">
+		<!-- <link href="../styles/user_nav_styles.css" rel="stylesheet"> -->
 		<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 		<link href="../styles/sweat_alert.css" rel="stylesheet">
 		<link href="../styles/animate.css" rel="stylesheet">
@@ -117,7 +116,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 					-webkit-flex-basis: -webkit-calc(100% - 10px);
 			    -ms-flex-preferred-size: calc(100% - 10px);
 			    flex-basis: -moz-calc(100% - 10px);
-			    flex-basis: calc1050% - 10px);
+			    flex-basis: calc(100% - 10px);
 			    max-width: -webkit-calc(100% - 10px);
 			    max-width: -moz-calc(100% - 10px);
 			    max-width: calc(100% - 10px);
@@ -190,9 +189,82 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				    display: -ms-flexbox;
 				    display: flex;
 				}
+				#file_name span{
+					width: 130px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					display: inline-block;
+			    direction: rtl;
+				}
+				.bootstrap-tagsinput.focus{
+					border-color: #ff0707 !important;
+				}
+				@media(min-width: 767px){
+					.page-height{
+						position: relative;
+						min-height: 60vh;
+					}
+				}
+				@media(max-width: 768px){
+					.gig-category-item{
+						-webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+				    -ms-flex-preferred-size: calc(100% - 0px) !important;
+				    flex-basis: -moz-calc(100% - 0px) !important;
+				    flex-basis: calc(100% - 0px) !important;
+				    max-width: -webkit-calc(100% - 0px) !important;
+				    max-width: -moz-calc(100% - 0px) !important;
+				    max-width: calc(100% - 0px) !important;
+					}
+					.gig-category-select{
+						-webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+					.cat_item-content{
+						-webkit-flex-basis: -webkit-calc(100% - 0px) !important;
+				    -ms-flex-preferred-size: calc(100% - 0px) !important;
+				    flex-basis: -moz-calc(100% - 0px) !important;
+				    flex-basis: calc(100% - 0px) !important;
+				    max-width: -webkit-calc(100% - 0px) !important;
+				    max-width: -moz-calc(100% - 0px) !important;
+				    max-width: calc(100% - 0px) !important;
+					}
+					.cat_item-content.item-active .gig-category-select {
+				    -webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+					.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-select {
+				    -webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+					.postarequest .create-request .form-group .gig-category .cat_item-content.item-active .gig-category-tags {
+				    -webkit-flex-basis: -webkit-calc(100% - 0px);
+				    -ms-flex-preferred-size: calc(100% - 0px);
+				    flex-basis: -moz-calc(100% - 0px);
+				    flex-basis: calc(100% - 0px);
+				    max-width: -webkit-calc(100% - 0px);
+				    max-width: -moz-calc(100% - 0px);
+				    max-width: calc(100% - 0px);
+					}
+				}
 		</style>
 	</head>
-	<body class="is-responsive">
+	<body class="all-content">
 		<!-- Preloader Start -->
     <div class="proloader">
         <div class="loader">
@@ -207,10 +279,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			require_once("../includes/buyer-header.php");
 		}
 		if($seller_verification != "ok" && isset($_SESSION['seller_user_name'])){
-		echo "
+		echo "<main style='min-height:80%'>
 		<div class='alert alert-danger rounded-0 mt-0 text-center'>
-			Please confirm your email to use this feature.
-		</div>
+			يرجى تأكيد بريدك الإلكتروني لاستخدام هذه الميزة.
+		</div></main>
 		";
 		}else{
 		?>
@@ -228,19 +300,19 @@ $relevant_requests = $row_general_settings->relevant_requests;
 							<div class="col-12 col-lg-8">
 								<div class="row">
 									<div class="col-12 col-md-8">
-										<?php 
+										<!-- <?php 
 										$form_errors = Flash::render("form_errors");
 										$form_data = Flash::render("form_data");
 										if(is_array($form_errors)){
 										?>
-										<div class="alert alert-danger"><!--- alert alert-danger Starts --->
+										<div class="alert alert-danger">
 										<ul>
 											<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
 											<li><?= $i ?>. <?= ucfirst($error); ?></li>
 											<?php } ?>
 										</ul>
-										</div><!--- alert alert-danger Ends --->
-										<?php } ?>
+										</div>
+										<?php } ?> -->
 										<form action="" class="create-request" method="post" enctype="multipart/form-data">
 											<div class="form-group">
 												<label class="control-label d-flex flex-row align-items-center">
@@ -249,7 +321,15 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													</span>
 													<span>عنوان طلبك</span>
 												</label>
-												<input type="text" name="request_title" placeholder="طلب عنوان...." class="form-control input-lg" required="" value="<?= $form_data['request_title']; ?>">
+												<input type="text" name="request_title" placeholder="طلب عنوان...." class="form-control input-lg" value="<?= $form_data['request_title']; ?>">
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_title']); ?></span>
+												<div class="popup">
+													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
+													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
+													<p>
+														اكتب عنوان عملك. كلما كنت أكثر تحديدًا ، كلما كان العمل الذي يمكن أن يقوم به صاحب العمل المستقل لك أكثر دقة.
+													</p>
+												</div>
 											</div>
 											<div class="form-group">
 												<label class="control-label d-flex flex-row align-items-center">
@@ -260,10 +340,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												</label>
 
 												<textarea class="form-control" name="request_description" id="textarea" placeholder="أنا بدور على...." rows="5"><?= $form_data['request_description']; ?></textarea>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_description']); ?></span>
+												<div id="file_name"></div>
 												<div class="bottom-label d-flex flex-row align-items-center justify-content-between mt-15">
 													<div class="attach-file d-flex flex-row align-items-center">
 														<label for="file">
-															<input type="file" id="file" name="request_file" hidden="">
+															<input type="file" id="file" name="request_file[]" hidden="" multiple="multiple">
 															<span class="file d-flex flex-row align-items-center">
 																<span><img src="<?= $site_url;?>/assets/img/post-request/attach.png" alt=""></span>
 																<span>أرفق ملف</span>
@@ -376,6 +458,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<!-- </label> -->
 													<!-- Each item -->
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['cat_id']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -395,24 +478,24 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<?php
 														$get_delivery_times = $db->select("delivery_times");
 														while($row_delivery_times = $get_delivery_times->fetch()){
-														$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+														$delivery_proposal_title_arabic = $row_delivery_times->delivery_proposal_title_arabic;
 														$delivery_id = $row_delivery_times->delivery_id;
 													?>
 													<label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
-														<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> hidden />
+														<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title_arabic){ echo "checked"; } ?> hidden />
 														<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 															<span class="color-icon">
 																<span>-</span>
 																<span>+</span>
 															</span>
 															<span class="d-flex flex-row align-items-end time">
-																<span><?= $delivery_proposal_title; ?></span>
+																<span><?= $delivery_proposal_title_arabic; ?></span>
 																<!-- <span>HRS</span> -->
 															</span>
 														</div>
 													</label>
 													<?php } ?>
-													<label class="deliver-time-item" for="days30">
+													<label class="deliver-time-item" id="custom_time_label" for="days30">
 														<input id="days30" type="radio" name="delivery_time" hidden />
 														<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 															<span class="color-icon">
@@ -421,11 +504,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 															</span>
 															<span class="d-flex flex-row align-items-end time">
 																<span>مخصص</span>
-																<input autofocus="autofocus" class="input-number" type="text" name="delivery_time" pattern="[0-9]" />
+																<input autofocus="autofocus" class="input-number" maxlength="2" type="text" pattern="[0-9]{2}" />
 															</span>
 														</div>
 													</label>
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['delivery_time']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -442,8 +526,9 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<span>ايه هي المهارات المطلوبة ؟</span>
 												</label>
 												<div class="postarequest-tags">
-													<input type="text" name="skills_required" data-role="tagsinput" value="HTML,PHP,Website Design,Graphic Design">
+													<input type="text" name="skills_required" data-role="tagsinput" value="">
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['skills_required']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -458,8 +543,9 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<span>اللغات</span>
 												</label>
 												<div class="postarequest-tags">
-													<input type="text" name="languages" data-role="tagsinput" value="English, German">
+													<input type="text" name="languages" data-role="tagsinput" value="">
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['languages']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -477,11 +563,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<div class="input-group-prepend">
 														<select class="form-control">
 															<option value="1">USD</option>
-															<option value="2">GBP</option>
+															<option value="2">EGP</option>
 														</select>
 													</div>
 													<input class="form-control" type="number" name="request_budget" value="<?= $form_data['request_budget']; ?>" />
 												</div>
+												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_budget']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -494,26 +581,14 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											<?php if(!isset($_SESSION['seller_user_name'])){ ?>
 											<!-- Register Form -->
 											<div class="post-register-form register-form" style="display: none;">
-												<?php 
-												  $form_errors = Flash::render("register_errors");
-												  $form_data = Flash::render("form_data");
-												  if(is_array($form_errors)){
-												  ?>
-												<div class="alert alert-danger">
-												  <!--- alert alert-danger Starts --->
-												  <ul class="list-unstyled mb-0">
-												    <?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-												    <li class="list-unstyled-item"><?= $i ?>. <?= ucfirst($error); ?></li>
-												    <?php } ?>
-												  </ul>
-												</div>
-								        <?php } ?>
+												
 
 												<h4>الاشتراك كمشتري</h4>
-												<div class="form-group">
+												<!-- <div class="form-group">
 													<label class="control-label"><span>الاسم الكامل</span></label>
 													<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="" />
-												</div>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></span>
+												</div> -->
 												<div class="form-group">
 													<label class="control-label"><span>اسم المستخدم</span></label>
 													<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="" />
@@ -521,15 +596,18 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 													<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 													<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>عنوان بريدك الإلكتروني</span></label>
 													<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="">
 				            			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+				            			<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>الباسوورد</span></label>
 													<input class="form-control" type="password" name="pass" placeholder="Enter Password"/>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 												</div>
 												<p>عندك حساب أصلا ؟ <a href="javascript:void(0);" id="showLogin">الدخول</a></p>
 											</div>
@@ -537,12 +615,14 @@ $relevant_requests = $row_general_settings->relevant_requests;
 											<div class="post-register-form login-form">
 												<h4>تسجيل الدخول كمشتري</h4>
 												<div class="form-group">
-													<label class="control-label"><span>اسم المستخدم</span></label>
+													<label class="control-label"><span>الإيميل   أو   اسم المستخدم</span></label>
 													<input class="form-control" type="text" placeholder="ادخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>الباسوورد</span></label>
 													<input class="form-control" type="password" name="seller_pass" placeholder="الباسوورد"/>
+													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
 												</div>
 												<p>ماعندكش حساب؟ <a href="javascript:void(0);" id="showRegister">سجل</a></p>
 											</div>
@@ -701,6 +781,15 @@ $(document).ready(function(){
 	$(".descCount").text(textarea.length);	
 	});	
 
+	$(".input-number").keypress(function (e) {
+   	//if the letter is not digit then display error and don't type anything
+   	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+      //display error message
+      $("#errmsg").html("Digits Only").show().fadeOut("slow");
+             return false;
+  	}
+ 	});
+
 	// $("#sub-category").hide();
 	$(".gig-category-tags  .nice-select.form-control").remove();
 
@@ -719,6 +808,46 @@ $(document).ready(function(){
 	// 	}
 	// 	});
 	// });
+	// $('#file').change(function() {
+
+	//   var i = $(this).prev('label').clone();
+	//   var file = $('#file')[0].files[0].name;
+	  
+	//   $('#file_name').html('<span>'+file+'</span>');
+	  // $(this).prev('label').text(file);
+	// });
+	// $('#file').bind('change', function() {
+ //    var totalSize = this.files[0].size;
+ //    var totalSizeMb = totalSize  / Math.pow(1024,2);
+
+ //    $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+	// });
+
+		$('#file').on('change', function() {
+		    var input = document.getElementById('file');
+		    var output = document.getElementById('file_name');
+		    var children = "";
+		    var totalSizeMb = 0;
+		    for (var i = 0; i < input.files.length; ++i) {
+		        children += '<li>' + input.files.item(i).name + '</li>';
+		        var totalSize = input.files[i].size;
+
+		        var totalSizeMb = totalSize  / Math.pow(1024,2);
+		        
+		    }
+		    totalSizeMb += totalSizeMb;
+		    output.innerHTML = '<ul>'+children+'</ul>';
+	      $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+		});
+
+
+	$('.input-number').keyup(function(){
+		var custom_btn = $('.input-number').val();
+		$('#days30').val(custom_btn);
+	});
+		
+
+
 
 });
 function categoryItem(id){
@@ -761,7 +890,7 @@ if(isset($_POST['submit'])){
 				"seller_user_name" => "required",
 				"seller_pass" => "required"
 				);
-				$messages = array("seller_user_name" => "Username Is Required.","seller_pass" => "Password Is Required.");
+				$messages = array("seller_user_name" => "اسم المستخدم مطلوب.","seller_pass" => "كلمة المرور مطلوبة.");
 
 				$val = new Validator($_POST,$rules,$messages);
 
@@ -773,8 +902,10 @@ if(isset($_POST['submit'])){
 
 					$seller_user_name = $input->post('seller_user_name');
 					$seller_pass = $input->post('seller_pass');
-					$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
+					$select_seller = $db->query("select * from sellers where (seller_user_name = '".$seller_user_name."' OR seller_email = '".$seller_user_name."')");
+					// $select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
 					$row_seller = $select_seller->fetch();
+					@$user_name = $row_seller->seller_user_name;
 					@$hashed_password = $row_seller->seller_pass;
 					@$seller_status = $row_seller->seller_status;
 					$decrypt_password = password_verify($seller_pass, $hashed_password);
@@ -785,7 +916,7 @@ if(isset($_POST['submit'])){
 			        swal({
 			          type: 'warning',
 			          html: $('<div>')
-			            .text('Opps! password or username is incorrect. Please try again.'),
+			            .text('عذراً! كلمة المرور أو اسم المستخدم غير صحيح. حاول مرة اخرى.'),
 			          animation: false,
 			          customClass: 'animated tada'
 			        })
@@ -795,33 +926,33 @@ if(isset($_POST['submit'])){
 						if($seller_status == "block-ban"){
 							echo "
 							<script>
-					            swal({
-					              type: 'warning',
-					              html: $('<div>')
-					                .text('You have been blocked by the Admin. Please contact customer support.'),
-					              animation: false,
-					              customClass: 'animated tada'
-					            })
+		            swal({
+		              type: 'warning',
+		              html: $('<div>')
+		                .text('لقد تم حظرك من قبل المشرف. يرجى الاتصال بدعم العملاء.'),
+		              animation: false,
+		              customClass: 'animated tada'
+		            })
 					    	</script>";
 						}elseif($seller_status == "deactivated"){
 							echo "
 							<script>
 							swal({
 							  type: 'warning',
-							  html: $('<div>').text('You have deactivated your account, please contact us for more details.'),
+							  html: $('<div>').text('لقد قمت بتعطيل حسابك ، يرجى الاتصال بنا للحصول على مزيد من التفاصيل.'),
 							  animation: false,
 							  customClass: 'animated tada'
 							})
 							</script>";
 						}else{
-							$select_seller = $db->select("sellers",array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
+							$select_seller = $db->select("sellers",array("seller_user_name"=>$user_name,"seller_pass"=>$hashed_password));
 							if($select_seller){
 								$row_seller = $select_seller->fetch();
-						    $_SESSION['seller_user_name'] = $seller_user_name;
+						    $_SESSION['seller_user_name'] = $user_name;
 						    $login_seller_id = $row_seller->seller_id;
 
 
-						    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
+						    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $user_name){
 									$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 						      $seller_user_name = ucfirst(strtolower($seller_user_name));
 									$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -831,8 +962,10 @@ if(isset($_POST['submit'])){
 				          "request_title" => "required",
 				          "request_description" => "required",
 				          "cat_id" => "required",
-				          "request_budget" => "number|required");
-				          $messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+				          "request_budget" => "number|required",
+				        	"skills_required" => "required",
+				        	"languages" => "required");
+				          $messages = array("cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 				          $val = new Validator($_POST,$rules,$messages);
 				          if($val->run() == false){
 				          	Flash::add("form_errors",$val->get_all_errors());
@@ -849,33 +982,45 @@ if(isset($_POST['submit'])){
 				          	echo "You have selected :" .$delivery_time;
 				          	$skills_required = $input->post('skills_required');
 				          	$languages = $input->post('languages');
-				          	$request_file = $_FILES['request_file']['name'];
-				          	$request_file_tmp = $_FILES['request_file']['tmp_name'];
+				          	// $request_file = $_FILES['request_file']['name'];
+				          	// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 				          	$request_date = date("F d, Y");
-				          	$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-				          	$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-				          	if(!empty($request_file)){
-				          		if(!in_array($file_extension,$allowed)){
-				          			echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-				          			echo "<script>window.open('post-request','_self')</script>";
-				          			exit();
+				          	// $request_file = $_FILES['request_file']['name'];
+				          	
+				          	$countfiles = count($_FILES['request_file']['name']);
+
+				          	$request_filee = array();
+				          	for($i=0;$i<$countfiles;$i++){
+
+				          		$request_filee[] = $_FILES['request_file']['name'][$i];
+				          		// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+				          		
+				          		// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+				          		// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+				          		// if(!empty($request_file)){
+				          		// 	if(!in_array($file_extension,$allowed)){
+				          		// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+				          		// 		echo "<script>window.open('post-request','_self')</script>";
+				          		// 		exit();
+				          		// 	}
+				          		// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				          		// 	$request_file = $request_file."_".time().".$file_extension";
+				          			move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 				          		}
-				          		$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-				          		$request_file = $request_file."_".time().".$file_extension";
-				          		move_uploaded_file($request_file_tmp,"request_files/$request_file");
-				          	}
+				          	// }
+				          		$request_file = implode("," , $request_filee);
 				          	$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 				          	if($insert_request){
 				          		echo "<script>
 				          		    swal({
 				          		      type: 'success',
-				          		      text: 'Your request has been submitted successfully!',
+				          		      text: 'وفد فدم طلبك بنجاح!',
 				          		      timer: 3000,
 				          		      onOpen: function(){
 				          		      	swal.showLoading()
 				          		      }
 				          		    }).then(function(){
-				          		      	window.open('manage_requests.php','_self');
+				          		      	window.open('$site_url/ar','_self');
 				          		    });
 				          		</script>";
 				          	}
@@ -889,17 +1034,23 @@ if(isset($_POST['submit'])){
 
 		}else{
 				$rules = array(
-				"name" => "required",
 				"u_name" => "required",
 				"email" => "email|required",
-				"pass" => "required");
+				"pass" => "required",
+				"request_title" => "required",
+			  "request_description" => "required",
+			  "cat_id" => "required",
+			  "request_budget" => "number|required",
+				
+				"skills_required" => "required",
+				"languages" => "required");
 
-				$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.");
+				$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.", "email" => "البريد الالكتروني مطلوب" , "cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 				$val = new Validator($_POST,$rules,$messages);
 
 				if($val->run() == false){
 					$_SESSION['error_array'] = array();
-					Flash::add("register_errors",$val->get_all_errors());
+					Flash::add("form_errors",$val->get_all_errors());
 					Flash::add("form_data",$_POST);
 					echo "<script>window.open('post-request','_self')</script>";
 				}else{
@@ -925,13 +1076,13 @@ if(isset($_POST['submit'])){
 					$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 					$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 					if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-					  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+					  array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
 					}
 					if($check_seller_username > 0 ){
-					  array_push($error_array, "Opps! This username has already been taken. Please try another one");
+					  array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");
 					}
 					if($check_seller_email > 0){
-					  array_push($error_array, "Email has already been taken. Try logging in instead.");
+					  array_push($error_array, "لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.");
 					}
 
 					if(empty($error_array)){
@@ -978,11 +1129,14 @@ if(isset($_POST['submit'])){
 							  }
 
 								$rules = array(
-								"request_title" => "required",
-								"request_description" => "required",
-								"cat_id" => "required",
-								"request_budget" => "number|required");
-								$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+								  "request_title" => "required",
+								  "request_description" => "required",
+								  "cat_id" => "required",
+								  "request_budget" => "number|required",
+									
+									"skills_required" => "required",
+									"languages" => "required");
+								  $messages = array("cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 								$val = new Validator($_POST,$rules,$messages);
 								if($val->run() == false){
 									Flash::add("form_errors",$val->get_all_errors());
@@ -999,33 +1153,45 @@ if(isset($_POST['submit'])){
 									echo "You have selected :" .$delivery_time;
 									$skills_required = $input->post('skills_required');
 									$languages = $input->post('languages');
-									$request_file = $_FILES['request_file']['name'];
-									$request_file_tmp = $_FILES['request_file']['tmp_name'];
+									// $request_file = $_FILES['request_file']['name'];
+									// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 									$request_date = date("F d, Y");
-									$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-									$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-									if(!empty($request_file)){
-										if(!in_array($file_extension,$allowed)){
-											echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-											echo "<script>window.open('post-request','_self')</script>";
-											exit();
+									// $request_file = $_FILES['request_file']['name'];
+																
+									$countfiles = count($_FILES['request_file']['name']);
+
+									$request_filee = array();
+									for($i=0;$i<$countfiles;$i++){
+
+										$request_filee[] = $_FILES['request_file']['name'][$i];
+										// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+										
+										// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+										// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+										// if(!empty($request_file)){
+										// 	if(!in_array($file_extension,$allowed)){
+										// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+										// 		echo "<script>window.open('post-request','_self')</script>";
+										// 		exit();
+										// 	}
+										// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+										// 	$request_file = $request_file."_".time().".$file_extension";
+											move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 										}
-										$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-										$request_file = $request_file."_".time().".$file_extension";
-										move_uploaded_file($request_file_tmp,"request_files/$request_file");
-									}
+									// }
+										$request_file = implode("," , $request_filee);
 									$insert_request = $db->insert("buyer_requests",array("seller_id"=>$regsiter_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 									if($insert_request){
 										echo "<script>
 										    swal({
 										      type: 'success',
-										      text: 'Your request has been submitted successfully!',
+										      text: 'وفد فدم طلبك بنجاح!',
 										      timer: 3000,
 										      onOpen: function(){
 										      	swal.showLoading()
 										      }
 										    }).then(function(){
-										      	window.open('manage_requests.php','_self');
+										      	window.open('$site_url/ar','_self');
 										    });
 										</script>";
 									}
@@ -1041,11 +1207,11 @@ if(isset($_POST['submit'])){
 						<script>
 						swal({
 						type: 'error',
-						html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+						html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
 						animation: false,
 						customClass: 'animated tada'
 						}).then(function(){
-						window.open('index','_self')
+						window.open('post-request.php','_self')
 						});
 						</script>";
 					}
@@ -1056,11 +1222,14 @@ if(isset($_POST['submit'])){
 	}else{
 
 		$rules = array(
-		"request_title" => "required",
-		"request_description" => "required",
-		"cat_id" => "required",
-		"request_budget" => "number|required");
-		$messages = array("cat_id" => "you need to select a category","child_id" => "you need to select a child category");
+			"request_title" => "required",
+		  "request_description" => "required",
+		  "cat_id" => "required",
+		  "request_budget" => "number|required",
+			
+			"skills_required" => "required",
+			"languages" => "required");
+		  $messages = array("cat_id" => "يرجى تحديد فئة وفئة فرعية","request_title" => "يرجى إدخال عنوان الطلب", "request_description" => "الرجاء إدخال الوصف", "request_budget" => "الرجاء إدخال مبلغ الميزانية", "delivery_time" => "الرجاء تحديد وقت التسليم", "skills_required" => "يرجى إدخال المهارات المطلوبة", "languages" => "الرجاء إدخال اللغات");
 		$val = new Validator($_POST,$rules,$messages);
 		if($val->run() == false){
 			Flash::add("form_errors",$val->get_all_errors());
@@ -1077,27 +1246,39 @@ if(isset($_POST['submit'])){
 			echo "You have selected :" .$delivery_time;
 			$skills_required = $input->post('skills_required');
 			$languages = $input->post('languages');
-			$request_file = $_FILES['request_file']['name'];
-			$request_file_tmp = $_FILES['request_file']['tmp_name'];
+			// $request_file = $_FILES['request_file']['name'];
+			// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 			$request_date = date("F d, Y");
-			$allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
-			$file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
-			if(!empty($request_file)){
-				if(!in_array($file_extension,$allowed)){
-					echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-					echo "<script>window.open('post-request','_self')</script>";
-					exit();
+			// $request_file = $_FILES['request_file']['name'];
+			
+			$countfiles = count($_FILES['request_file']['name']);
+
+			$request_filee = array();
+			for($i=0;$i<$countfiles;$i++){
+
+				$request_filee[] = $_FILES['request_file']['name'][$i];
+				// $request_file_tmp = $_FILES['request_file']['tmp_name'][$i];
+				
+				// $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+				// $file_extension = pathinfo($request_file, PATHINFO_EXTENSION);
+				// if(!empty($request_file)){
+				// 	if(!in_array($file_extension,$allowed)){
+				// 		echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+				// 		echo "<script>window.open('post-request','_self')</script>";
+				// 		exit();
+				// 	}
+				// 	$request_file = pathinfo($request_file, PATHINFO_FILENAME);
+				// 	$request_file = $request_file."_".time().".$file_extension";
+					move_uploaded_file($_FILES['request_file']['tmp_name'][$i],"request_files/$request_file");
 				}
-				$request_file = pathinfo($request_file, PATHINFO_FILENAME);
-				$request_file = $request_file."_".time().".$file_extension";
-				move_uploaded_file($request_file_tmp,"request_files/$request_file");
-			}
+			// }
+				$request_file = implode("," , $request_filee);
 			$insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_title"=>$request_title,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"skills_required"=>$skills_required,"languages"=>$languages,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'pending'));
 			if($insert_request){
 				echo "<script>
 				    swal({
 				      type: 'success',
-				      text: 'Your request has been submitted successfully!',
+				      text: 'وفد فدم طلبك بنجاح!',
 				      timer: 3000,
 				      onOpen: function(){
 				      	swal.showLoading()

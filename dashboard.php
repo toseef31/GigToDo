@@ -16,7 +16,7 @@
   $login_seller_register_date = $row_login_seller->seller_register_date;
   $login_seller_image = $row_login_seller->seller_image;
   $login_seller_payouts = $row_login_seller->seller_payouts;
-
+  $login_seller_view = $row_login_seller->profile_views;
   if(empty($login_seller_country)){
     $login_seller_country = "&nbsp;";
   }
@@ -75,7 +75,63 @@
     $payout_date->add($interval);
     $p_date = $payout_date->format("F d, Y H:i A");
   }
+  $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+  $count_proposals = $select_proposals->rowCount();
+  if(!$count_proposals == 0){
+    $total_view = array();
+    while($row_proposals = $select_proposals->fetch()){
+      $proposal_views = $row_proposals->proposal_views;
+      array_push($total_view,$proposal_views);
+    }
+    $total_gigs_view = array_sum($total_view);
 
+  }else{
+   $total_gigs_view = "0"; 
+  }
+
+  // $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+  // $count_gigs = $select_proposals->rowCount();
+  // if(!$count_gigs == 0){
+  //   $total_price = array();
+  //   while($row_proposals = $select_proposals->fetch()){
+  //     $proposal_prices = $row_proposals->proposal_price;
+  //     array_push($total_price,$proposal_prices);
+  //   }
+  //   $total_price_gig= array_sum($total_price);
+  //   @$average = $total_price_gig/count($total_price);
+  //   $average_price = substr($average ,0,1);
+  // }else{
+  //   $average = "0";
+  //   $average_price = "0";
+  // }
+
+
+  $select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
+  $count_gigs = $select_proposals->rowCount();
+  // print_r($count_gigs);
+  if(!$count_gigs == 0){
+    $total_price = array();
+    while($row_proposals = $select_proposals->fetch()){
+      // print_r($row_proposals);
+      $proposal_id = $row_proposals->proposal_id;
+      $select_proposals_packg = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
+      while($row_proposals_packg = $select_proposals_packg->fetch()){
+        $package_dec = $row_proposals_packg->description;
+        // print_r($package_dec);
+        if ($package_dec != '') {
+          $package_price = $row_proposals_packg->price;
+          // print_r($package_price);
+          array_push($total_price,$package_price);
+        }
+      }
+    }
+    $total_price_gig= array_sum($total_price);
+    @$average = $total_price_gig/$count_gigs;
+    $average_price = substr($average ,0,1);
+  }else{
+    $average = "0";
+    $average_price = "0";
+  }
 ?>
 <?php
 
@@ -129,7 +185,7 @@
   <!--====== Responsive css ======-->
   <link href="assets/css/responsive.css" rel="stylesheet">
   <!-- Custom css code from modified in admin panel --->
-  <!-- <link href="styles/styles.css" rel="stylesheet"> -->
+  <link href="styles/styles.css" rel="stylesheet">
   <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="styles/owl.carousel.css" rel="stylesheet">
   <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
@@ -176,6 +232,30 @@
     .canvasjs-chart-credit{
       display: none;
     }
+    .float-right.delete{
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .messge-noti-box{
+      max-height: 470px;
+      overflow: auto;
+    }
+    /* width */
+    .messge-noti-box::-webkit-scrollbar {
+      width: 4px;
+    }
+    /* Track */
+    .messge-noti-box::-webkit-scrollbar-track {
+      background: rgb(255, 255, 255);
+    }
+    .messge-noti-box::-webkit-scrollbar-thumb {
+      background: rgb(255, 7, 7);
+    }
+    /* Handle on hover */
+    .messge-noti-box::-webkit-scrollbar-thumb:hover {
+      background: rgb(255, 7, 7);
+    }
   </style>
 </head>
 <body class="all-content ddashborad">
@@ -195,19 +275,19 @@
         <div class="col-lg-12">
           <div class="dashborad-box">
             <div class="day-item">
-              <p>Today <span>0.0 EGP</span></p>
+              <p>Today <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>Yesterday <span>0.0 EGP</span></p>
+              <p>Yesterday <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>last 7 days <span>0.0 EGP</span></p>
+              <p>last 7 days <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>last 30 days <span><?= $month_earnings; ?> <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
-              <p>last 365 days <span>0.0 EGP</span></p>
+              <p>last 365 days <span>0.0 <?= $s_currency; ?></span></p>
             </div>
             <div class="day-item">
               <p>All time <span><?= $current_balance; ?> <?= $s_currency; ?></span></p>
@@ -228,7 +308,7 @@
                   <img src="assets/img/img/user.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>3.432 <span>Profile Views</span></h4>
+                  <h4><?= $login_seller_view; ?> <span>Profile Views</span></h4>
                 </div>
               </div>
             </div>
@@ -238,7 +318,7 @@
                   <img src="assets/img/img/clip.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>105 <span>Gig Views</span></h4>
+                  <h4><?= $total_gigs_view; ?> <span>Gig Views</span></h4>
                 </div>
               </div>
             </div>
@@ -248,7 +328,7 @@
                   <img src="assets/img/img/filter.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>10% <span>Conversion Rates </span></h4>
+                  <h4>0 <span>Conversion Rates </span></h4>
                 </div>
               </div>
             </div>
@@ -258,7 +338,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4>4 <span>Average Cost of Gigs </span></h4>
+                  <h4><?= round($average,2); ?> <span>Average Cost of Gigs </span></h4>
                 </div>
               </div>
             </div>
@@ -290,7 +370,7 @@
                 $select_all_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty'");
                 $count_all_inbox_sellers = $select_all_inbox_sellers->rowCount();
               ?>
-              Messages <span class="badge badge-success"><?= $count_all_inbox_sellers; ?></span> & Notifications 
+              Messages <!-- <span class="badge badge-success"><?= $count_all_inbox_sellers; ?></span> --> & Notifications 
             </div>
             <div class="messge-noti-box">
               <?php
@@ -359,6 +439,60 @@
                 </div>
               </div>
               <?php } ?>
+
+              <?php
+                $count_notifications = $db->count("notifications",array("receiver_id" => $login_seller_id));
+                if($count_notifications == 0){
+                  echo "<h5 class='text-center mb-3'> No Notifications Are Available </h5>";
+                }
+                
+                $get_notifications = $db->query("select * from notifications where receiver_id='$login_seller_id' order by 1 DESC limit 0,5");
+                while($row_notifications = $get_notifications->fetch()){
+                $notification_id = $row_notifications->notification_id;
+                $sender_id = $row_notifications->sender_id;
+                $order_id = $row_notifications->order_id;
+                $reason = $row_notifications->reason;
+                $date = $row_notifications->date;
+                $status = $row_notifications->status;
+
+                // Select Sender Details
+                $select_sender = $db->select("sellers",array("seller_id" => $sender_id));
+                $row_sender = $select_sender->fetch();
+                $sender_user_name = @$row_sender->seller_user_name;
+                $sender_image = @$row_sender->seller_image;
+                if(strpos($sender_id,'admin') !== false){
+                  $admin_id = trim($sender_id, "admin_");
+                  $get_admin = $db->select("admins",array("admin_id" => $admin_id));
+                  $sender_user_name = "Admin";
+                  $sender_image = $get_admin->fetch()->admin_image;
+                }
+              ?>
+              <div class="messge-item <?php if($status == "unread"){ echo "header-message-div-unread"; }else{ echo "header-message-div"; } ?>">
+                <a href="dashboard?delete_notification=<?= $notification_id; ?>" class="float-right delete text-danger">
+                <i class="fa fa-times-circle fa-lg"></i>  
+                </a>
+                <div class="msg-logo">
+                  <a href="dashboard?n_id=<?= $notification_id; ?>">
+                  <?php if(!empty($sender_image)){ ?>
+                  <?php if(strpos($sender_id, "admin_") !== false){ ?>
+                    <img src="admin/admin_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                  <?php }else{ ?>
+                    <img src="user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                  <?php } ?>
+                  <?php }else{ ?>
+                  <img src="user_images/empty-image.png" width="60" height="60" class="rounded-circle">
+                  <?php } ?>
+                  </a>
+                </div>
+                <div class="msg-text">
+                  <a href="dashboard?n_id=<?= $notification_id; ?>">
+                    <h5><?= $sender_user_name; ?></h5>
+                    <p class="text-muted date"><i class="fal fa-clock"></i> <?= $date; ?></p>
+                    <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= include("includes/comp/notification_reasons.php"); ?></p>
+                  </a>
+                </div>
+              </div>
+              <?php } ?>
               <!-- <?php if($count_all_inbox_sellers > 0){ ?>
               <div class="p-3">
                 <a href="<?= $site_url; ?>/conversations/inbox" class="btn btn-success btn-block">
@@ -408,13 +542,25 @@
             <div class="income-chart-box">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="altime" role="tabpanel" aria-labelledby="home-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
                   <canvas id="chartHours" width="400" height="100"></canvas>
                 </div>
                 <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart1.png" alt="">
+                  <?php } ?>
                 </div>
               </div>
             </div>
@@ -437,13 +583,31 @@
             <div class="income-chart-box">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="altime2" role="tabpanel" aria-labelledby="home-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="lastyear2" role="tabpanel" aria-labelledby="profile-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
                 <div class="tab-pane fade" id="last30day2" role="tabpanel" aria-labelledby="contact-tab">
+                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
+                  if($count_orders == 0){
+                  ?>
+                  <img src="assets/img/img/income-chart3.png" alt="">
+                <?php }else{ ?>
                   <img src="assets/img/img/income-chart2.png" alt="">
+                  <?php } ?>
                 </div>
               </div>
             </div>

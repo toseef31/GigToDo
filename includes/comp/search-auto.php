@@ -23,7 +23,9 @@ $i++;
 
 $get_seller = $db->select("sellers",array("seller_id" => $row->proposal_seller_id));
 $row_seller = $get_seller->fetch();
+
 $seller_user_name = $row_seller->seller_user_name;
+$seller_user_type = $row_seller->account_type;
 
 $title = str_ireplace("$search",ucwords("<b>$search</b>"),$row->proposal_title);
 
@@ -33,7 +35,7 @@ $data['proposals'][$i]['url'] = "$site_url/proposals/".$seller_user_name."/".$ro
 
 }
 
-$get_s = $db->query("select * from sellers where seller_user_name Like :search AND NOT seller_status='block-ban' LIMIT 0,6",["search"=>"%$search%"]);
+$get_s = $db->query("select * from sellers where seller_user_name Like :search AND NOT seller_status='block-ban' AND NOT account_type='buyer' LIMIT 0,6",["search"=>"%$search%"]);
 
 $data['count_sellers'] = $get_s->rowCount();
 
@@ -46,8 +48,10 @@ $i++;
 $user_name = str_ireplace("$search",ucwords("<b>$search</b>"),$row->seller_user_name);
 
 $data['sellers'][$i]['name'] = $user_name;
-$data['sellers'][$i]['url'] = "$site_url/".$row->seller_user_name;
 
+if($row->account_type == 'seller'){
+	$data['sellers'][$i]['url'] = "$site_url/".$row->seller_user_name;
+}
 }
 
 echo json_encode($data);

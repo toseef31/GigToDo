@@ -7,7 +7,14 @@ $login_seller_name = $row_login_seller->seller_name;
 $login_user_name = $row_login_seller->seller_user_name;
 $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
+$login_seller_cover = $row_login_seller->seller_cover_image;
+$login_seller_image = $row_login_seller->seller_image;
+$login_seller_country = $row_login_seller->seller_country;
+$login_seller_state = $row_login_seller->seller_state;
+$login_seller_language = $row_login_seller->seller_language;
+$login_seller_about = $row_login_seller->seller_about;
 
+   
 ?>
 <link href="styles/styles.css" rel="stylesheet">
 <!-- New Design -->
@@ -27,7 +34,100 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <div class="setup-accunt-progressbar">
             <p>Set up your account</p>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 19%;" aria-valuenow="19" aria-valuemin="0" aria-valuemax="100">19%</div>
+              <?php if ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
+                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
+                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
+                <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">35%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+              <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+              <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+              <?php } ?>
+              <!-- <div class="progress-bar" role="progressbar" style="width: 19%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div> -->
             </div>
           </div>
           <a href="requests/post-request.php" class="request-btn">Post a request</a>
@@ -62,6 +162,12 @@ $relevant_requests = $row_general_settings->relevant_requests;
     <div class="row">
       <!-- Left-sidebar START -->
       <div class="col-12 col-lg-8">
+        <?php 
+          $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
+          $count_proposals = $get_proposals->rowCount();
+          if($count_proposals != 0){
+           
+        ?>
         <!-- Featured-gig-area -->
         <div class="featured-gig-area pt-40">
           <div class="row">
@@ -74,14 +180,14 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <div class="all-gigs-small mt-30">
             <div class="row">
               <?php
-                $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
-                $count_proposals = $get_proposals->rowCount();
-                if($count_proposals == 0){
-                    echo "
-                    <div class='col-md-12 text-center'>
-                    <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
-                    </div>";
-                }
+                $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
+                // $count_proposals = $get_proposals->rowCount();
+                // if($count_proposals == 0){
+                //     echo "
+                //     <div class='col-md-12 text-center'>
+                //     <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+                //     </div>";
+                // }
                 while($row_proposals = $get_proposals->fetch()){
                 $proposal_id = $row_proposals->proposal_id;
                 $proposal_title = $row_proposals->proposal_title;
@@ -140,14 +246,14 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for Desktop -->
           <div class="row d-none d-lg-flex">
             <?php
-              $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,8");
-              $count_proposals = $get_proposals->rowCount();
-              if($count_proposals == 0){
-                  echo "
-                  <div class='col-md-12 text-center'>
-                  <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
-                  </div>";
-              }
+              $get_proposals = $db->query("select * from proposals where proposal_featured='yes' AND proposal_status='active' LIMIT 0,9");
+              // $count_proposals = $get_proposals->rowCount();
+              // if($count_proposals == 0){
+              //     echo "
+              //     <div class='col-md-12 text-center'>
+              //     <p class='text-muted'><i class='fa fa-frown-o'></i> {$lang['user_home']['no_featured_proposals']} </p>
+              //     </div>";
+              // }
               while($row_proposals = $get_proposals->fetch()){
               $proposal_id = $row_proposals->proposal_id;
               $proposal_title = $row_proposals->proposal_title;
@@ -204,6 +310,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for desktop end -->
         </div>
         <!-- Featured-gig-area  END-->
+        <?php } ?>
+
         
         <!-- Similar-to-recent -->
         <div class="featured-gig-area pt-40 pb-40">
@@ -217,7 +325,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <div class="all-gigs-small mt-30">
             <div class="row">
               <?php
-                $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
+                $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,9");
                 $count_proposals = $get_proposals->rowCount();
                 if($count_proposals == 0){
                     echo "
@@ -283,7 +391,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for Desktop -->
           <div class="row d-none d-lg-flex">
             <?php
-              $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,8");
+              $get_proposals = $db->query("select * from proposals where proposal_status='active' order by rand() LIMIT 0,9");
               $count_proposals = $get_proposals->rowCount();
               if($count_proposals == 0){
                   echo "
@@ -349,6 +457,10 @@ $relevant_requests = $row_general_settings->relevant_requests;
         <!-- Similar-to-recent  END-->
 
         <!-- Shopping-trend-gigs  -->
+        <?php $select = $db->query("select * from top_proposals"); 
+          $count_top = $select->rowCount();
+          if($count_top != 0){
+        ?>
         <div class="featured-gig-area pb-40">
           <div class="row">
             <div class="col-12">
@@ -450,7 +562,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
               $topRatedWhere = "level_id='4' and proposal_status='active'";
               $query_where2 = "where proposal_id in ($topProposals) or ($topRatedWhere) ";
               }
-              $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,8");
+              $get_proposals = $db->query("select * from proposals $query_where2 LIMIT 0,9");
               $count_proposals = $get_proposals->rowCount();
               if($count_proposals == 0){
                 echo "
@@ -514,11 +626,15 @@ $relevant_requests = $row_general_settings->relevant_requests;
           <!-- Gigs for desktop end -->
         </div>
         <!-- Shopping-trend-gigs  END-->
+      <?php } ?>
       </div>
       <!-- Right-sidebar START -->
       <div class="col-12 col-lg-4">
         <!-- .Sidebar-box  START-->
-
+        <?php 
+          $get_favorites = $db->select("favorites",array("seller_id" => $login_seller_id));
+          $count_fvrt = $get_favorites->rowCount();
+        if($count_fvrt != 0){ ?>
         <div class="sidebar-box">
           <div class="sidebar-title">
             <h4>Favourite <a href="<?= $site_url; ?>/favorites.php">See All</a></h4>
@@ -588,25 +704,23 @@ $relevant_requests = $row_general_settings->relevant_requests;
           </div>
           <?php } ?>
           <?php 
-            if($count_favorites == 0){
-              echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> Your favorites page is empty</span></span>";
-            }
+            // if($count_favorites == 0){
+            //   echo "<span class='text-center'><span class='pt-5 pb-5'><i class='fa fa-meh-o'></i> Your favorites page is empty</span></span>";
+            // }
           ?>
           
         </div>
-
+        <?php } ?>
         <!-- Recent-view -->
+        <?php
+        $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
+        $count_recent = $select_recent->rowCount();
+        if($count_recent != 0){ 
+        ?>
         <div class="sidebar-box mb-40">
           <div class="sidebar-title">
             <h4>Recently viewed <a href="javascript:void(0);">See All</a></h4>
           </div>
-            <?php
-            $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT 0,1");
-            $count_recent = $select_recent->rowCount();
-            if($count_recent == 0){
-              echo "<p class='text-muted'> <i class='fa fa-frown-o'></i> {$lang['no_recently_viewed']} </p>";
-            }else{ 
-            ?>
               <?php
               $select_recent = $db->query("select * from recent_proposals where seller_id='$login_seller_id' order by 1 DESC LIMIT  0,5");
               while($row_recent = $select_recent->fetch()){
@@ -676,8 +790,8 @@ $relevant_requests = $row_general_settings->relevant_requests;
             </div>
             <?php } ?>
           <?php } ?>
+          </div>
         <?php } ?>
-        </div>
 
         <!-- .Sidebar-box  END-->
       </div>

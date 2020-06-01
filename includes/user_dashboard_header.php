@@ -49,7 +49,9 @@
 
   $page_url = substr("$full_url", 9);
 ?>
-
+<style>
+  .activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
+</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
@@ -60,7 +62,7 @@
       <div class="row align-items-center">
         <div class="col-6 col-lg-4 col-md-3">
           <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
-            <a href="<?php echo $site_url; ?>">
+            <a href="<?php echo $site_url; ?>/dashboard">
               
               <?php if($site_logo_type == "image"){ ?>
               <img src="<?= $site_url; ?>/assets/img/<?= $site_sticky_logo; ?>">
@@ -94,7 +96,7 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="assets/img/message-2.png" alt="">
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt="">
                 <!-- <span class="total-user-count count c-messages-header"></span>
                 <span class="total-user-count count c-notifications-header"></span> -->
               </a>
@@ -104,7 +106,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png">
                 <?php } ?>
                 <!-- <img src="assets/img/menu-left-logo-2.png" alt=""> -->
               </div>
@@ -272,16 +274,21 @@
     <i class="fal fa-times"></i>
   </div>
   <div class="profile-inner">
+    <?php if(!empty($seller_image)){ ?>
+    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
+    <?php }else{ ?>
     <img src="assets/img/user2.png" alt="">
+    <?php } ?>
+    
     <h4>Welcome back, <span><?php echo $_SESSION['seller_user_name']; ?></span></h4>
   </div>
   <div class="canvs-menu">
     <ul>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
-      <li><a href="<?= $site_url; ?>/settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
+      <li><a href="<?php echo $site_url; ?>/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
+      <li><a href="<?= $site_url; ?>/settings?account_settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
+      <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
@@ -383,7 +390,7 @@ echo $message;
 ?>
 </div>
 <div class="float-right">
-<button id="send-email" class="btn btn-success btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+<button id="send-email" class="btn btn-success float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
 </div>
 </div>
 <script>

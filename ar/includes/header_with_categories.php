@@ -52,7 +52,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 12);
+$page_url = substr("$full_url", 18);
 ?>
 <style>
   .ui-toolkit .text-body-larger{
@@ -73,7 +73,7 @@ $page_url = substr("$full_url", 12);
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex flex-row align-items-center justify-content-end">
             <div class="menubar d-flex flex-row align-items-center">
-              <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+              <div class="image"><img src="<?= $site_url ?>/assets/img/menu-left-logo.png" alt=""></div>
               <div class="icon">
                 <span></span>
                 <span></span>
@@ -168,7 +168,7 @@ $page_url = substr("$full_url", 12);
   <div class="canvs-menu">
     <ul class="d-flex flex-column">
       <li>
-        <a href="javascript:void(0);">نشر طلب</a>
+        <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
       </li>
       <li>
         <a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a>

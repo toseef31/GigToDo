@@ -29,20 +29,28 @@
 
         <input type="hidden" name="id" value="<?php echo $id; ?>" required>
 
-        <div class="form-group">
+        <div class="form-group pl-0 pr-0">
           <input type="text" name="name" placeholder="Extra Name" class="form-control form-control-sm" value="<?php echo $name; ?>" required>
         </div>
-        <div class="form-group">
-          <div class="input-group input-group-sm">
-            <!--- input-group Starts --->
+        <div class="form-group pl-0 pr-0">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <select class="form-control">
+                <option value="1"><?php echo $s_currency; ?></option>
+                <option value="2">EGP</option>
+              </select>
+            </div>
+            <input type="number" name="price" placeholder="Extra Price" class="form-control"value="<?php echo $price; ?>" min="0" required="">
+          </div>
+          <!-- <div class="input-group input-group-sm">
               <span class="input-group-addon"><?php echo $s_currency; ?></span>
             <input type="number" name="price" placeholder="Extra Price" value="<?php echo $price; ?>" class="form-control" required>
-          </div>
+          </div> -->
           <!--- input-group Ends --->
         </div>
-        <div class="form-group mb-0">
+        <div class="form-group mb-0 pl-0 pr-0">
           <a href="#" class="btn btn-danger btn-sm delete-extra">Delete</a>
-          <button type="submit" class="btn btn-success btn-sm float-right">Save</button>
+          <button type="submit" class="btn-sm float-right insert_btn">Save</button>
         </div>
       </form>
     </div>
@@ -58,21 +66,29 @@
     <!-- tab rounded Starts -->
     <div class="tab-body rounded border-1 p-3 pb-0 collapse <?php if(!empty($form_errors)){ echo "show"; } ?>" id="insert-extra" data-parent="#allTabs">
       <form action="#" method="post" class="add-extra">
-        <div class="form-group">
+        <div class="form-group pl-0 pr-0">
           <input type="text" name="name" placeholder="Extra Name" class="form-control form-control-sm" required="">
           <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></small>
         </div>
-        <div class="form-group">
-          <div class="input-group input-group-sm">
-            <!--- input-group Starts --->
+        <div class="form-group pl-0 pr-0">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <select class="form-control">
+                <option value="1"><?php echo $s_currency; ?></option>
+                <option value="2">EGP</option>
+              </select>
+            </div>
+            <input type="number" name="price" placeholder="Extra Price" class="form-control form-control-sm" min="0" required="">
+          </div>
+          <!-- <div class="input-group input-group-sm">
               <span class="input-group-addon"><?php echo $s_currency; ?></span>
             <input type="number" name="price" placeholder="Extra Price" class="form-control form-control-sm" required="">
-          </div>
-          <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['price']); ?></small>
+          </div> -->
+          <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['price']); ?></span>
           <!--- input-group Ends --->
         </div>
-        <div class="form-group mb-0">
-          <button type="submit" class="btn btn-success btn-sm float-right">Insert</button>
+        <div class="form-group mb-0 pl-0 pr-0">
+          <button type="submit" class="btn-sm float-right insert_btn">Insert</button>
           <div class="clearfix"></div>
         </div>
       </form>

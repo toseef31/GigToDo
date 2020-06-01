@@ -10,6 +10,15 @@ require_once("social-config.php");
 $site_title = $row_general_settings->site_title;
 
 ?>
+<?php 
+	if(isset($_SESSION['seller_user_name'])){
+	  $login_seller_user_name = $_SESSION['seller_user_name'];
+	  $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+	  $row_login_seller = $select_login_seller->fetch();
+	  $login_user_type = $row_login_seller->account_type;
+	  // print_r($login_user_type);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 <head>
@@ -65,6 +74,16 @@ $site_title = $row_general_settings->site_title;
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.dil {color: #ff2b2b !important;}.fit-svg-icon path {fill: #ffbf00;}</style>
+	<style>
+		.messagePopup {
+		    position: fixed;
+		    top: 90px;
+		    right: 0px;
+		    z-index: 5000;
+		    font-size: 15px;
+		    direction: rtl;
+		}
+	</style>
 </head>
 <body class="all-content">
 	<!-- Preloader Start -->
@@ -84,7 +103,11 @@ if(!isset($_SESSION['seller_user_name'])){
 if(!isset($_SESSION['seller_user_name'])){
 	require_once("home.php");
 }else{  
-	require_once("user_home.php");
+	if($login_user_type == 'buyer'){  
+		require_once("user_home.php");
+	}else {
+		echo "<script> window.open('dashboard','_self') </script>"; 
+	}
 }
 require_once("includes/footer.php"); 
 

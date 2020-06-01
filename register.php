@@ -67,7 +67,7 @@ if(isset($_SESSION['seller_user_name'])){
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}</style>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none;}</style>
 </head>
 
 <body class="home-content">
@@ -127,42 +127,43 @@ if(isset($_SESSION['seller_user_name'])){
 							    <?php } ?>
 							  </ul>
 							</div>
-							<script type="text/javascript">
-			          $(document).ready(function(){
-			            $('#register-modal').modal('show');
-			          });
-			        </script>
+							
 			        <?php } ?>
 							<form action="" method="POST">
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="control-label">Full Name</label>
-									<input class="form-control" type="text" name="name" placeholder="Enter Your Full Name" value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name']; ?>" required="" />
-								</div>
+									<input class="form-control" type="text" name="name" placeholder="Enter Your Full Name" value="<?php if(isset($_SESSION['name'])) echo $_SESSION['name']; ?>" />
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['name']); ?></span>
+								</div> -->
 								<!-- <div class="form-group">
 									<label class="control-label">Last Name</label>
 									<input class="form-control" type="text" name="" />
 								</div> -->
 								<div class="form-group">
 									<label class="control-label">Username</label>
-									<input class="form-control" type="text" name="u_name" placeholder="Enter Your Username" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" required="" />
+									<input class="form-control" type="text" name="u_name" placeholder="Enter Your Username" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" />
 									<small class="form-text text-muted">Note: You will not be able to change username once your account has been created.</small>
 									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">YOUR EMAIL ADDRESS</label>
-									<input class="form-control" type="email" name="email" placeholder="Enter Email" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" required="">
+									<input class="form-control" type="email" name="email" placeholder="Enter Email" value="<?php if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>">
             			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
+            			<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Password</label>
-									<input class="form-control" type="password" name="pass" placeholder="Enter Password" required="" />
+									<input class="form-control" type="password" name="pass" placeholder="Enter Password" />
+									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 								</div>
 								<div class="form-group">
 								  <label class="control-label"> Confirm Password: </label>
-								  <input type="password" class="form-control" name="con_pass" placeholder="Confirm Password" required="">
+								  <input type="password" class="form-control" name="con_pass" placeholder="Confirm Password">
 								  <?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
+								  <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['con_pass']); ?></span>
 								</div>
 								<?php if(isset($_GET['referral'])){ ?>
 			          <input type="hidden" class="form-control" name="referral" value="<?= $input->get('referral'); ?>">
@@ -191,14 +192,16 @@ if(isset($_SESSION['seller_user_name'])){
 										</div>
 									</div>
 								</div>
-								<div class="form-group d-flex flex-row align-items-center justify-content-between">
+								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['accountType']); ?></span>
+								<div class="form-group d-flex flex-row align-items-center justify-content-between mb-0">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="terms">
+										<input type="checkbox" class="custom-control-input" name="term" id="terms">
 										<label class="custom-control-label" style="text-transform: none;" for="terms">I agree to the <a href="javascript:void(0);">Terms & Conditions</a></label>
 									</div>
 								</div>
+								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['term']); ?></span>
 								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="register" disabled>Sign up</button>
+									<button class="login-button" role="button" type="submit" name="register">Sign up</button>
 								</div>
 							</form>
 						</div>
@@ -211,20 +214,201 @@ if(isset($_SESSION['seller_user_name'])){
 
 
 <script>
-$(document).on("click","#terms",function(){
-        if($(this).prop("checked") == true){
-        	$(':input[type="submit"]').prop('disabled', false);
-        }
-        else if($(this).prop("checked") == false){
-        	$(':input[type="submit"]').prop('disabled', true);
-        }
-    });
+// $(document).on("click","#terms",function(){
+//         if($(this).prop("checked") == true){
+//         	$(':input[type="submit"]').prop('disabled', false);
+//         }
+//         else if($(this).prop("checked") == false){
+//         	$(':input[type="submit"]').prop('disabled', true);
+//         }
+//     });
    $("#phone_number").intlTelInput({
 		 initialCountry:"{ 'sg': 'Singapore' }",
 // localized country names e.g. { 'de': 'Deutschland' }
 
 	 });
 </script>
+<?php 
+	if(isset($_POST['register'])){
+		
+		$rules = array(
+		"u_name" => "required",
+		"email" => "email|required",
+		"pass" => "required",
+		"con_pass" => "required",
+		"accountType" => "required",
+		"term" => "required");
+
+		$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.","con_pass" => "Confirm Password Is Required.", "accountType" => "Account type Is Required.", "term" => "please check terms and conditions");
+		$val = new Validator($_POST,$rules,$messages);
+
+		if($val->run() == false){
+			$_SESSION['error_array'] = array();
+			Flash::add("register_errors",$val->get_all_errors());
+			Flash::add("form_data",$_POST);
+			echo "<script>window.open('register','_self')</script>";
+		}else{
+			$error_array = array();
+			$name = strip_tags($input->post('name'));
+			$name = strip_tags($name);
+			$name = ucfirst(strtolower($name));
+			$_SESSION['name']= $name;
+			$u_name = strip_tags($input->post('u_name'));
+			$u_name = strip_tags($u_name);
+			$_SESSION['u_name']= $u_name;
+			$email = strip_tags($input->post('email'));
+			$email = strip_tags($email);
+			$_SESSION['email']=$email;
+			$pass = strip_tags($input->post('pass'));
+			$con_pass = strip_tags($input->post('con_pass'));
+			$accountType = strip_tags($input->post('accountType'));
+			$referral = strip_tags($input->post('referral'));
+			$geoplugin = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
+			$country = $geoplugin['geoplugin_countryName'];
+			if(empty($country)){ $country = ""; }
+			$regsiter_date = date("F d, Y");
+			$date = date("F d, Y");
+
+		
+			$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
+			$check_seller_email = $db->count("sellers",array("seller_email" => $email));
+			if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
+			  array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+			}
+			if($check_seller_username > 0 ){
+			  array_push($error_array, "Opps! This username has already been taken. Please try another one");
+			}
+			if($check_seller_email > 0){
+			  array_push($error_array, "Email has already been taken. Try logging in instead.");
+			}
+			if($pass != $con_pass){
+	      array_push($error_array, "Passwords don't match. Please try again.");
+			}
+	    
+			if(empty($error_array)){
+
+				$referral_code = mt_rand();
+
+				if($signup_email == "yes"){
+					$verification_code = mt_rand();
+				}else{
+					$verification_code = "ok";
+				}
+
+				$encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
+				
+				$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+						
+				$regsiter_seller_id = $db->lastInsertId();
+				if($insert_seller){
+					
+			    $_SESSION['seller_user_name'] = $u_name;
+					$insert_seller_account = $db->insert("seller_accounts",array("seller_id" => $regsiter_seller_id));
+
+					if($insert_seller_account){
+
+						if(!empty($referral)){
+					    $sel_seller = $db->select("sellers",array("seller_referral" => $referral));		
+							$row_seller = $sel_seller->fetch();
+							$seller_id = $row_seller->seller_id;	
+							$seller_ip = $row_seller->seller_ip;
+							if($seller_ip == $ip){
+								echo "<script>alert('You Cannot Referral Yourself To Make Money.');</script>";
+							}else{
+								$count_referrals = $db->count("referrals",array("ip" => $ip));	
+								if($count_referrals == 1){
+							    echo "<script>alert('You are trying to referral yourself more then one time.');</script>";
+								}else{
+									$insert_referral = $db->insert("referrals",array("seller_id" => $seller_id,"referred_id" => $regsiter_seller_id,"comission" => $referral_money,"date" => $date,"ip" => $ip,"status" => 'pending'));
+								}
+							}	
+						}
+
+						if($signup_email == "yes"){
+							userSignupEmail($email);
+					  }
+
+				      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+				  		$seller_meta = $get_seller->fetch();
+				  		print_r($seller_meta->account_type);
+				  		if($seller_meta->account_type == 'buyer'){
+
+		           
+		           
+		          echo "
+		          <script>
+		          swal({
+		          type: 'success',
+		          text: 'Successfully Registered! Welcome onboard, $name. ',
+		          timer: 6000,
+		          onOpen: function(){
+		          swal.showLoading()
+		          }
+		          }).then(function(){
+		          if (
+		          // Read more about handling dismissals
+		          window.open('$site_url','_self')
+		          ) {
+		          console.log('Successful Registration')
+		          }
+		          })
+		          </script>
+		          ";
+		          $_SESSION['name'] = "";
+		          $_SESSION['u_name']="";
+		          $_SESSION['email']= "";
+		          $_SESSION['error_array'] = array();
+				      }else{
+								echo "
+								<script>
+								swal({
+								type: 'success',
+								text: 'Successfully Registered! Welcome onboard, $name. ',
+								timer: 6000,
+								onOpen: function(){
+								swal.showLoading()
+								}
+								}).then(function(){
+								if (
+								// Read more about handling dismissals
+								window.open('$site_url/dashboard','_self')
+								) {
+								console.log('Successful Registration')
+								}
+								})
+								</script>
+								";
+								$_SESSION['name'] = "";
+								$_SESSION['u_name']="";
+								$_SESSION['email']= "";
+								$_SESSION['error_array'] = array();
+							}
+								
+					}
+						
+				}
+						
+			}
+				
+			if(!empty($error_array)){
+				$_SESSION['error_array'] = $error_array;
+				echo "
+				<script>
+				swal({
+				type: 'warning',
+				html: $('<div>').text('Opps! There are some errors on the form. Please try again.'),
+				animation: false,
+				customClass: 'animated tada'
+				}).then(function(){
+				window.open('index','_self')
+				});
+				</script>";
+			}
+
+		}
+		
+	}
+?>
 <?php require_once("includes/footer.php"); ?>
 <?php require_once("includes/footerJs.php"); ?>
 

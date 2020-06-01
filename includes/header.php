@@ -53,7 +53,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 9);
+$page_url = substr("$full_url", 15);
 
 ?>
 <!-- <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
@@ -356,7 +356,7 @@ $page_url = substr("$full_url", 9);
 </div>
 <!-- Login modal end -->
 
-<?php require_once("register_login_forgot.php"); ?>
+<?php //("register_login_forgot.php"); ?>
 
 
 <!-- New Header Design -->
@@ -406,8 +406,8 @@ $page_url = substr("$full_url", 9);
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
                   <div class="image">
-                    <img src="assets/img/menu-left-logo-2.png" alt="">
-                    <img src="assets/img/menu-left-logo.png" alt="">
+                    <img src="<?= $site_url ?>/assets/img/menu-left-logo-2.png" alt="">
+                    <img src="<?= $site_url ?>/assets/img/menu-left-logo.png" alt="">
                   </div>
                   <div class="icon">
                     <span></span>

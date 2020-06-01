@@ -31,7 +31,7 @@ if(isset($_POST['register'])){
 		$_SESSION['error_array'] = array();
 		Flash::add("register_errors",$val->get_all_errors());
 		Flash::add("form_data",$_POST);
-		echo "<script>window.open('index','_self')</script>";
+		echo "<script>window.open('register','_self')</script>";
 	}else{
 		$error_array = array();
 		$name = strip_tags($input->post('name'));
@@ -185,7 +185,7 @@ if(isset($_POST['register'])){
 			animation: false,
 			customClass: 'animated tada'
 			}).then(function(){
-			window.open('index','_self')
+			window.open('register','_self')
 			});
 			</script>";
 		}
@@ -212,12 +212,13 @@ if(isset($_POST['login'])){
 
 		$seller_user_name = $input->post('seller_user_name');
 		$seller_pass = $input->post('seller_pass');
+		$rememberme = $_POST['remember'];
+
 		$select_seller = $db->query("select * from sellers where binary seller_user_name like :u_name",array(":u_name"=>$seller_user_name));
 		$row_seller = $select_seller->fetch();
 		@$hashed_password = $row_seller->seller_pass;
 		@$seller_status = $row_seller->seller_status;
 		$decrypt_password = password_verify($seller_pass, $hashed_password);
-		
 		if($decrypt_password == 0){
 			echo "
 			<script>
@@ -257,6 +258,11 @@ if(isset($_POST['login'])){
 		
 				if($select_seller){
 			    $_SESSION['seller_user_name'] = $seller_user_name;
+			    if( ($_POST['remember']==1) || ($_POST['remember']=='on')) {
+			    	$hour = time()+3600 *24 * 30;
+			    	setcookie('seller_user_name', $seller_user_name, $hour);
+			    	setcookie('seller_pass', $hashed_password, $hour);
+			    }
 			    if(isset($_SESSION['seller_user_name']) and $_SESSION['seller_user_name'] === $seller_user_name){
 						$update_seller_status = $db->update("sellers",array("seller_status"=>'online',"seller_ip"=>$ip),array("seller_user_name"=>$seller_user_name,"seller_pass"=>$hashed_password));
 			      $seller_user_name = ucfirst(strtolower($seller_user_name));

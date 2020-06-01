@@ -13,8 +13,8 @@ if(isset($_POST['proposal_id'])){
 }
 
 ?>
-<h5 class="font-weight-normal float-left">Pricing</h5>
-<div class="float-right switch-box">
+<h5 class="font-weight-normal float-left" style="display: none;">Pricing</h5>
+<div class="float-right switch-box" style="display: none;">
   <span class="text">Fixed Price :</span>
   <label class="switch">
     <?php if($d_proposal_price == "0" or isset($_POST["fixedPriceOff"])){ ?>
@@ -28,9 +28,9 @@ if(isset($_POST['proposal_id'])){
 
 <div class="clearfix"></div>
 
-<hr class="mt-0">
+<!-- <hr class="mt-0"> -->
 
-<div class="form-group row proposal-price justify-content-center">
+<div class="form-group row proposal-price justify-content-center" style="display: none;">
 <div class="col-md-7">
 <div class="input-group">
 <span class="input-group-addon font-weight-bold">
@@ -42,9 +42,9 @@ if(isset($_POST['proposal_id'])){
 </div>
 </div>
 
-<div class="packages"><?php include("packages.php"); ?></div>
+<div class="packages" style="display: block;"><?php include("packages.php"); ?></div>
 
-<div class="form-group row add-attribute justify-content-center">
+<!-- <div class="form-group row add-attribute justify-content-center" style="display: none;">
   <div class="col-md-7">
     <div class="input-group">
       <input class="form-control form-control-sm attribute-name" placeholder="Add New Attribute" name="">
@@ -53,9 +53,9 @@ if(isset($_POST['proposal_id'])){
       </button>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="card rounded-0">
+<div class="card rounded-0" style="display: none;">
   <div class="card-body bg-light pt-3 pb-0">
   <h6 class="font-weight-normal">My Proposal Extras</h6>
   <a data-toggle="collapse" href="#insert-extra" class="small text-success">+ Add Extra</a>
@@ -65,19 +65,66 @@ if(isset($_POST['proposal_id'])){
   </div>
 </div>
 
-<div class="form-group mt-4 mb-0"><!--- form-group Starts --->
+<div class="form-group mt-4 mb-0" style="display: none;"><!--- form-group Starts --->
 <a href="#" class="btn btn-secondary float-left back-to-overview">Back</a>
 <input class="btn btn-success float-right" type="submit" form="pricing-form" value="Save & Continue">
 </div><!--- form-group Starts --->
 
 <script>
 $(document).ready(function(){
+  // $('#overly-check').hasClass('packages-active'){
+  //   alert("dfdfsdfsdfsdf");
+  // }
+   $('.packg-desc').prop('required',false);
+  $('.tryit-overlay-button').click(function(){
+    // alert("overlay");
+     var pack_desc = $('.packg-desc');
+     // console.log(pack_desc.find('textarea').prop('required', true));
+
+   $(this).parent().parent().addClass('packages-active');
+    var status = false;
+    if ( $('#overly-check').hasClass('packages-active')) {
+      // pack_desc.prop('required',true);
+      status = true;
+     }
+     if (status = true) {
+      console.log(status + "if");
+       pack_desc.prop('required',true);
+       $('.desc2').show();
+       $('.desc3').show();
+       $('.packg-desc').addClass('border-red');
+     }else{
+      console.log(status + "else");
+       pack_desc.prop('required',false);
+
+     }  
+  })
+  $('.desc1').hide();
+  $('.desc2').hide();
+  $('.desc3').hide();
+  $('#switch').change(function(){
+  if ($(this).is(':checked')) {
+        switchStatus = $(this).is(':checked');
+        $('.packg-desc').prop('required',true);
+        $('.desc2').show();
+        $('.desc3').show();  
+        $('.packg-desc').addClass('border-red');      
+      }
+      else {
+         switchStatus = $(this).is(':checked');
+          $('.packg-desc').prop('required',false);
+           $('.desc2').hide();
+        $('.desc3').hide();
+        $('.packg-desc').removeClass('border-red');
+      }
+  });
+  
 
 <?php if($d_proposal_price == "0" or isset($_POST["fixedPriceOff"])){ ?>
   $('.proposal-price').hide();
 <?php }else if($d_proposal_price != "0" and !isset($_POST["fixedPriceOff"])){ ?>
-  $('.packages').hide();
-  $('.add-attribute').hide();
+  $('.packages').show();
+  $('.add-attribute').show();
 <?php } ?>
 
 $('.back-to-overview').click(function(){
@@ -85,9 +132,13 @@ $('.back-to-overview').click(function(){
     $("input[type='hidden'][name='section']").val("overview");
     $('#pricing').removeClass('show active');
     $('#overview').addClass('show active');
-    $('#tabs a[href="#pricing"]').removeClass('active');
+    $('#package_tab').removeClass('active');
+    $('#overview_tab').addClass('active');
   <?php }else{ ?>
-    $('.nav a[href="#overview"]').tab('show');
+    $('#pricing').removeClass('show active');
+    $('#overview').addClass('show active');
+    $('#package_tab').removeClass('active');
+    $('#overview_tab').addClass('active');
   <?php } ?>
 });
 
@@ -149,6 +200,16 @@ $(".insert-attribute").on('click', function(event){
 
 $(".pricing-form").submit(function(event){
   event.preventDefault();
+  if($('.description1').val() == '')
+  {
+    event.preventDefault();
+    $('.desc1').show();
+    $('.description1').addClass('border-red');
+    $('.description1').prop('required', true);
+  }else{
+    $('.desc1').hide();
+    $('.description1').removeClass('border-red');
+
   var form_data = new FormData(this);
   form_data.append('proposal_id',<?= $proposal_id; ?>);
   $('#wait').addClass("loader");
@@ -170,15 +231,20 @@ $(".pricing-form").submit(function(event){
             swal.showLoading()
         }
       }).then(function(){
-        $("input[type='hidden'][name='section']").val("description");
+        $("input[type='hidden'][name='section']").val("gallery");
         <?php if($d_proposal_status == "draft"){ ?>
           $('#pricing').removeClass('show active');
-          $('#description').addClass('show active');
-          $('#tabs a[href="#description"]').addClass('active');
-        <?php }else{ ?> $('.nav a[href="#description"]').tab('show'); <?php } ?>
+          $('#gallery').addClass('show active');
+          $('#gallery_tab').addClass('active');
+        <?php }else{ ?>
+         $('#pricing').removeClass('show active');
+         $('#gallery').addClass('show active');
+         $('#gallery_tab').addClass('active');
+       <?php } ?>
       });
     }
   });
+}
 });
 
 });

@@ -18,6 +18,8 @@ $row_login_seller = $select_login_seller->fetch();
 
 $login_seller_id = $row_login_seller->seller_id;
 
+$login_seller_image = $rows_login_seller->seller_image;
+
 
 $request_id = $input->post('request_id');
 
@@ -29,6 +31,8 @@ $row_requests = $get_requests->fetch();
 $request_title = $row_requests->request_title;
 
 $request_description = $row_requests->request_description;
+
+$request_budget = $row_requests->request_budget;
 
 $child_id = $row_requests->child_id;
 
@@ -44,7 +48,131 @@ $request_seller_image = $row_request_seller->seller_image;
 
 ?>
 
-<div id="send-offer-modal" class="modal fade">
+<div class="modal fade" id="send-offer-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered customer-order" role="document">
+			<div class="modal-content">
+				<div class="modal-header align-items-center">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Send Offer</h5>
+					<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+						<img src="assets/img/seller-profile/popup-close-icon.png" />
+					</a>
+				</div>
+				<div class="modal-body">
+					<form id="proposal-details-form">
+						<input type="hidden" name="proposal_id" value="<?php echo $proposal_id; ?>">
+
+						<input type="hidden" name="request_id" value="<?php echo $request_id; ?>">
+						<div class="customer-profile mb-30">
+							<div class="d-flex align-items-start align-items-md-center pt-15 pb-15">
+								<div class="profile-img">
+									<?php if(!empty($login_seller_image)){ ?>
+									<img src="<?php echo $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" width="50" height="50" class="rounded-circle">
+									<?php }else{ ?>
+									<img src="assets/img/seller-profile/profile-img.png" alt="">
+									<?php } ?>
+								</div>
+								<div class="profile-content media-body">
+									<h6 class="text-danger mb-1"> <?php echo $request_title; ?> </h6>
+									<div class="form-group p-0 m-0">
+										<textarea rows="4" class="form-control bg-white" readonly=""><?php echo $request_description; ?></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mb-0">
+							<div class="control-label d-flex align-items-start">
+								<span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
+								<span>Total Budget</span>
+							</div>
+							<input class="form-control mb-30 bg-white" type="text" value="<?= $s_currency; ?> <?= $request_budget; ?>" placeholder="$ 5 Minimum" readonly="" />
+						</div>
+						<div class="customer-profile mb-30">
+							<div class="d-flex align-items-start align-items-md-center pt-15 pb-15">
+								<div class="profile-img">
+									<?php if(!empty($request_seller_image)){ ?>
+									<img src="<?php echo $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" width="50" height="50" class="rounded-circle">
+									<?php }else{ ?>
+									<img src="assets/img/seller-profile/profile-img.png" alt="">
+									<?php } ?>
+									<!-- <img src="assets/img/seller-profile/profile-img.png" alt=""> -->
+								</div>
+								<div class="profile-content media-body">
+									<div class="form-group p-0 m-0">
+										<textarea rows="4" class="form-control" name="description" placeholder="Enter Text Here..." required=""></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="deliver-time d-flex flex-wrap mb-15">
+								<?php 
+
+								$get_delivery_times = $db->select("delivery_times");
+
+								while($row_delivery_times = $get_delivery_times->fetch()){
+
+								$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+								$delivery_id = $row_delivery_times->delivery_id;
+								?>
+								<label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
+									<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" hidden />
+									<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+										<span class="color-icon">
+											<span>-</span>
+											<span>+</span>
+										</span>
+										<span class="d-flex flex-row align-items-end time">
+											<span><?= $delivery_proposal_title; ?></span>
+											<!-- <span>HRS</span> -->
+										</span>
+									</div>
+								</label>
+								<?php } ?>
+								<!-- <label class="deliver-time-item" for="days30">
+									<input id="days30" type="radio" name="delivery_time" hidden />
+									<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+										<span class="color-icon">
+											<span>-</span>
+											<span>+</span>
+										</span>
+										<span class="d-flex flex-row align-items-end time">
+											<span>1-30 Days</span>
+											<input autofocus="autofocus" class="input-number" type="text" name="delivery_time" pattern="[0-9][a-z][A-Z]" />
+										</span>
+									</div>
+								</label> -->
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="control-label d-flex align-items-start">
+								<span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
+								<span>Total Amount</span>
+							</div>
+							<input class="form-control mb-30" type="text" name="amount" placeholder="$ 5 Minimum" />
+						</div>
+						<!-- <div class="form-group d-flex flex-column">
+							<div class="control-label d-flex align-items-start">
+								<span><img src="assets/img/post-request/icon-7.png" alt="Icon"></span>
+								<span>Revisions</span>
+							</div>
+							<select class="wide mb-30">
+								<option>Select Items</option>
+								<option value="1">0</option>
+								<option value="2">1</option>
+								<option value="3">10</option>
+							</select>
+						</div> -->
+						<div class="form-group d-flex flex-row align-items-center justify-content-between">
+							<button class="button" id="submit-proposal" type="submit">Send Offer</button>
+							<button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="insert_offer"></div>
+<!-- <div id="send-offer-modal" class="modal fade">
 
 
 	<div class="modal-dialog">
@@ -64,15 +192,11 @@ $request_seller_image = $row_request_seller->seller_image;
 
 				<div class="request-summary">
                     
-                <?php if(!empty($request_seller_image)){ ?>
-                    
+                		<?php if(!empty($request_seller_image)){ ?>
                      <img src="<?php echo $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" width="50" height="50" class="rounded-circle">
-
-				<?php }else{ ?>
-
+										<?php }else{ ?>
                     <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="rounded-circle">
-
-                <?php } ?>
+                		<?php } ?>
 
 				<div id="request-description">
 
@@ -138,56 +262,113 @@ $request_seller_image = $row_request_seller->seller_image;
 
 	</div>
 
-</div>
+</div> -->
 
-<div id="submit-proposal-details" class="modal fade"> <!-- Continue's Code -->
+<!-- <div id="submit-proposal-details" class="modal fade">
 
 <div class="modal-dialog">
 
 
 </div>
 
-</div> <!-- Continue end -->
+</div> -->
+ <!-- Continue end -->
 
 <script>
 
-$(document).ready(function(){
+// $(document).ready(function(){
 	
-	$("#send-offer-modal").modal("show");
+// 	$("#send-offer-modal").modal("show");
 	
-	$("#submit-proposal").attr("disabled", "disabled");
+// 	$("#submit-proposal").attr("disabled", "disabled");
 	
-	$(".radio-custom-label").click(function(){
+// 	$(".radio-custom-label").click(function(){
 		
-		$("#submit-proposal").removeAttr("disabled");
+// 		$("#submit-proposal").removeAttr("disabled");
 		
-	});
+// 	});
 	
  
-   $("#submit-proposal").click(function(){
+//    $("#submit-proposal").click(function(){
 	   
-   proposal_id = document.querySelector('input[name="proposal_id"]:checked').value;	   
+//    proposal_id = document.querySelector('input[name="proposal_id"]:checked').value;	   
 	
-   request_id = "<?php echo $request_id; ?>";
+//    request_id = "<?php echo $request_id; ?>";
    
-   $.ajax({
+//    $.ajax({
 	   
-	method: "POST",   
+// 	method: "POST",   
 	
-	url: "<?php echo $site_url; ?>/requests/submit_proposal_details",
+// 	url: "<?php echo $site_url; ?>/requests/submit_proposal_details",
 	
-	data: { proposal_id: proposal_id, request_id: request_id }
+// 	data: { proposal_id: proposal_id, request_id: request_id }
 	   
-   })
+//    })
    
-   .done(function(data){
+//    .done(function(data){
 	   
-	   $("#submit-proposal-details .modal-dialog").html(data);
+// 	   $("#submit-proposal-details .modal-dialog").html(data);
 	   
-   });
+//    });
 	
 	
-   });
+//    });
+	
+// });
+$(document).ready(function(){
+	$("#send-offer-modal").modal("show");
+		
+		// $("#submit-proposal").attr("disabled", "disabled");
+		
+		// $(".radio-custom-label").click(function(){
+			
+		// 	$("#submit-proposal").removeAttr("disabled");
+			
+		// });
+	
+$("#proposal-details-form").submit(function(event){
+
+event.preventDefault();
+
+// proposal_id = document.querySelector('input[name="proposal_id"]:checked').value;
+
+request_id = "<?php echo $request_id; ?>";
+// alert(request_id);
+description = $("textarea[name='description']").val();
+
+delivery_time = $("input[name='delivery_time']:checked").val();
+
+// alert(delivery_time);
+amount = $("input[name='amount']").val();
+
+if(description == "" | delivery_time == "" | amount == ""){
+
+swal({
+type: 'warning',
+text: 'You Must Need To Fill Out All Fields Before Submitting Offer.'
+});
+
+}else{
+
+
+$.ajax({
+	
+method: "POST",
+url: "<?php echo $site_url; ?>/requests/insert_offer",
+data: $('#proposal-details-form').serialize()
+
+}).done(function(data){
+$("#send-offer-modal").modal('hide');
+
+$("#insert_offer").html(data);
+	
+});
+	
+
+}
+
+});
+	
 	
 });
 

@@ -52,7 +52,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 9);
+$page_url = substr("$full_url", 15);
 ?>
 
 <!-- New Header Design -->
@@ -69,7 +69,7 @@ $page_url = substr("$full_url", 9);
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex flex-row align-items-center justify-content-end">
             <div class="menubar d-flex flex-row align-items-center">
-              <div class="image"><img src="assets/img/menu-left-logo.png" alt=""></div>
+              <div class="image"><img src="<?= $site_url ?>/assets/img/menu-left-logo.png" alt=""></div>
               <div class="icon">
                 <span></span>
                 <span></span>
@@ -161,7 +161,7 @@ $page_url = substr("$full_url", 9);
   <div class="canvs-menu">
     <ul class="d-flex flex-column">
       <li>
-        <a href="javascript:void(0);">Post A Request</a>
+        <a href="<?= $site_url; ?>/requests/post-request.php">Post A Request</a>
       </li>
       <li>
         <a href="<?= $site_url ?>/how-it-works.php">How it Works</a>

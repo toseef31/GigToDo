@@ -6,15 +6,17 @@
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
   <head>
-    <title> <?php echo $site_name; ?> - <?php echo $lang['titles']['how_it_works']; ?> </title>
+    <title> <?php echo $site_name; ?> - Landing Page Without Payment </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="<?php echo $site_desc; ?>">
     <meta name="keywords" content="<?php echo $site_keywords; ?>">
     <meta name="author" content="<?php echo $site_author; ?>">
+    <?php if(!empty($site_favicon)){ ?>
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/png">
+    <?php } ?>
     <!-- ==============Google Fonts============= -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <!--====== Bootstrap css ======-->
@@ -41,7 +43,7 @@
     <script src="js/ie.js"></script>
     <script type="text/javascript" src="js/sweat_alert.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.footer-area, .copyright-area{display: none;}</style>
+    <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none !important;}.footer-area, .copyright-area{display: none;}</style>
   </head>
   <body class="all-content">
     <!-- Preloader Start -->
@@ -68,9 +70,9 @@
           </h2>
           <p>هتلاقي عملاء جدد بدوسة زرار</p>
         </div>
-        <form class="join-form">
-          <input type="text" placeholder="دخلالإيميل الخاص بيك ">
-          <input type="submit" value="انضم دلوقتي">
+        <form class="join-form" method="post">
+          <input type="text" name="email" placeholder="دخلالإيميل الخاص بيك ">
+          <input type="submit" name="join_now" value="انضم دلوقتي">
         </form>
       </div>
     </div>
@@ -272,9 +274,9 @@
                       </h2>
                       <p>اعمل بروفايلك وابدأ شغل!</p>
           </div>
-          <form class="join-form">
-            <input type="text" placeholder="دخلالإيميل الخاص بيك ">
-            <input type="submit" value="انضم دلوقتي">
+          <form class="join-form" method="post">
+            <input type="text" value="email" placeholder="دخلالإيميل الخاص بيك ">
+            <input type="submit" name="join_now" value="انضم دلوقتي">
           </form>
           <div class="d-flex flex-row align-items-center justify-content-center copy-right">
             <span><?= $db->select("general_settings")->fetch()->site_copyright; ?></span>
@@ -282,14 +284,62 @@
         </div>
       </div>
       <!-- Stay Connected Ends -->
-    <?php require_once("includes/footer.php"); ?>
+      <?php
+        if(isset($_POST['join_now'])){
+          $rules = array(
+          "email" => "email|required");
+          $messages = array("email" => "Email Is Required.");
+          $val = new Validator($_POST,$rules,$messages);
+          if($val->run() == false){
+            $_SESSION['error_array'] = array();
+            Flash::add("register_errors",$val->get_all_errors());
+            Flash::add("form_data",$_POST);
+            echo "<script>window.open('index','_self')</script>";
+          }else{
+            $email = strip_tags($input->post('email'));
+            $email = strip_tags($email);
+            $_SESSION['email']=$email;
+
+            $check_seller_email = $db->count("sellers",array("seller_email" => $email));
+            if($check_seller_email > 0){
+              echo "
+              <script>
+              swal({
+              type: 'error',
+              html: $('<div>').text('عذراً! لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.'),
+              animation: false,
+              customClass: 'animated tada'
+              }).then(function(){
+              window.open('landing-page','_self')
+              });
+              </script>";
+              // array_push($error_array, "Email has already been taken. Try logging in instead.");
+            }else{
+
+              echo "<script>
+              swal({
+              type: 'success',
+              text: 'تم حفظ التفاصيل.',
+              timer: 2000,
+              onOpen: function(){
+              swal.showLoading()
+              }
+              }).then(function(){
+                window.open('proposals/post-gig','_self')
+              });
+              </script>";
+            }
+          }
+        }
+      ?>
+    
     <script>
         $(function() {
           $(".mesagee-item-box").niceScroll({
             cursorcolor: "#D72929",
           });
         });
-
+        <?php require_once("includes/footer.php"); ?>
       </script>
   </body>
 </html>

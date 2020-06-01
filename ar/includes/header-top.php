@@ -52,7 +52,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 12);
+$page_url = substr("$full_url", 18);
 ?>
 
 
@@ -63,7 +63,7 @@ $page_url = substr("$full_url", 12);
       <div class="row align-items-center">
         <div class="col-6 col-md-3 d-flex flex-row">
           <div class="logo">
-            <a class="home-logo" href="index.html"><img src="<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>" alt="" width="150"></a>
+            <a class="home-logo" href="<?php echo $site_url; ?>/ar"><img src="<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>" alt="" width="150"></a>
           </div>
         </div>
         <div class="col-6 col-md-9">
@@ -119,7 +119,7 @@ $page_url = substr("$full_url", 12);
   <div class="canvs-menu">
     <ul class="d-flex flex-column">
       <li>
-        <a href="javascript:void(0);">نشر طلب</a>
+        <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
       </li>
       <li>
         <a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a>

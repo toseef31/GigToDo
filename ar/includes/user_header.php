@@ -62,7 +62,7 @@
       <div class="row align-items-center">
         <div class="col-6 col-lg-2">
           <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
-            <a href="<?php echo $site_url; ?>/ar/">
+            <a href="<?php echo $site_url; ?>/ar/dashboard">
               <?php if($site_logo_type == "image"){ ?>
               <img src="<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>" alt="">
               <?php }else{ ?>
@@ -81,7 +81,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32">
                 <?php } ?>
               </div>
               <div class="icon">
@@ -123,7 +123,7 @@
                 <?php if(!empty($seller_image)){ ?>
                 <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="32" height="32" class="rounded-circle">
                 <?php }else{ ?>
-                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png" width="32" height="32" class="rounded-circle">
+                <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo.png">
                 <?php } ?>
                 <!-- <img src="assets/img/menu-left-logo.png" alt=""> -->
               </div>
@@ -203,7 +203,7 @@
   <div class="canvs-menu">
     <ul>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt="">
+        <a href="<?php echo $site_url; ?>/ar/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt="">
           الملفالشخصي
         </a>
       </li>
@@ -218,12 +218,12 @@
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt="">
+        <a href="<?= $site_url; ?>/ar/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt="">
           الخدمات
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
+        <a href="<?= $site_url; ?>/ar/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
           انشر خدمة
         </a>
       </li>
@@ -360,7 +360,7 @@ echo $message;
 ?>
 </div>
 <div class="float-right">
-<button id="send-email" class="btn btn-success btn-sm float-right text-white"><?php echo $lang["popup"]["email_confirm"]['button']; ?></button>
+<button id="send-email" class="btn btn-success float-right text-white">إعادة إرسال البريد الإلكتروني</button>
 </div>
 </div>
 <script>
@@ -373,7 +373,7 @@ success:function(){
 $("#send-email").html("Resend Email");
 swal({
   type: 'success',
-text: 'Confirmation email sent. Please check your email.',
+text: 'تم إرسال رسالة تأكيد. من فضلك تفقد بريدك الالكتروني.',
 });
 }
 });
