@@ -81,7 +81,7 @@ $login_seller_id = $row_login_seller->seller_id;
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col-12 col-sm-6">
-							<h1 class="list-page-title">إدارة الطلبات</h1>
+							<h1 class="list-page-title"> إدارة الوظائف </h1>
 						</div>
 						<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
 							<a class="button button-red" href="post-request">

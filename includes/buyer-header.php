@@ -132,7 +132,7 @@ $page_url = substr("$full_url", 15);
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -251,7 +251,7 @@ $page_url = substr("$full_url", 15);
       <li><a href="<?php echo $site_url; ?>/profile?user_name=<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
       <li><a href="<?php echo $site_url; ?>/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Post a Job</a></li>
-      <li><a href="<?= $site_url; ?>/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Requests</a></li>
+      <li><a href="<?= $site_url; ?>/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Jobs</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>

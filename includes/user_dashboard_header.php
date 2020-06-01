@@ -51,6 +51,7 @@
 ?>
 <style>
   .activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
+  .total-user-count.count.c-notifications-header{right: 13%;}
 </style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -97,8 +98,8 @@
             </div>
             <div class="message-inner">
               <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt="">
-                <!-- <span class="total-user-count count c-messages-header"></span>
-                <span class="total-user-count count c-notifications-header"></span> -->
+                <!-- <span class="total-user-count count c-messages-header"></span> -->
+                <span class="total-user-count count c-notifications-header"></span>
               </a>
             </div>
             <div class="menubar menubar-2 d-flex flex-row align-items-center">

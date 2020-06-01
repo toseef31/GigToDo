@@ -50,7 +50,9 @@
   $page_url = substr("$full_url", 15);
 
 ?>
-
+<style>
+  .total-user-count.count.c-notifications-header{right: 10%;}
+</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
@@ -115,7 +117,7 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">

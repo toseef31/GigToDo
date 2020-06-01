@@ -76,7 +76,7 @@
             </h3>
             <div class="d-flex flex-row justify-content-between">
               <a href="<?= $site_url; ?>/ar/proposals/create_proposal" class="how-btn">
-                البدء
+                أنشر خدمة
               </a>
             </div>
           </div>

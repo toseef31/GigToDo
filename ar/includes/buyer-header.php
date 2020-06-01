@@ -133,7 +133,7 @@ $page_url = substr("$full_url", 18);
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -254,7 +254,7 @@ $page_url = substr("$full_url", 18);
       <li><a href="<?php echo $site_url; ?>/ar/profile?user_name=<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> الملف الشخصي</a></li>
       <li><a href="<?php echo $site_url; ?>/ar/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> ضبط </a></li>
       <li><a href="<?= $site_url ?>/ar/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
-      <li><a href="<?= $site_url; ?>/ar/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt="">إدارة الطلبات</a></li>
+      <li><a href="<?= $site_url; ?>/ar/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> إدارة الوظائف </a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>

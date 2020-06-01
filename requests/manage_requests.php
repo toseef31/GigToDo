@@ -76,7 +76,7 @@ $login_seller_id = $row_login_seller->seller_id;
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col-12 col-sm-6">
-							<h1 class="list-page-title">Manage Requests</h1>
+							<h1 class="list-page-title">Manage Jobs</h1>
 						</div>
 						<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
 							<a class="button button-red" href="post-request">post a request</a>
@@ -85,7 +85,7 @@ $login_seller_id = $row_login_seller->seller_id;
 					<!-- Row -->
 					<div class="list-page-filter">
 						<div class="row flex-md-row-reverse">
-							<div class="col-12 col-md-6">
+							<div class="col-12 col-md-4">
 								<!-- <ul class="pagination">
 									<li class="pagination-item">
 										<a class="pagination-link" href="javascript:void(0);">
@@ -108,7 +108,7 @@ $login_seller_id = $row_login_seller->seller_id;
 									</li>
 								</ul> -->
 							</div>
-							<div class="col-12 col-md-6">
+							<div class="col-12 col-md-8">
 								<nav class="list-page-nav">
 									<div class="nav nav-tabs" id="nav-tab" role="tablist">
 										<?php

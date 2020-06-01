@@ -25,8 +25,8 @@
 
 <?php } ?>
 
-<section class="messagePopup animated slideInRight">
-</section>
+<!-- <section class="messagePopup animated slideInRight">
+</section> -->
 
 <link rel="stylesheet" href="<?php echo $site_url; ?>/styles/msdropdown.css"/>
 

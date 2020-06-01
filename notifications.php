@@ -59,9 +59,32 @@ echo "<script>window.open('notifications','_self')</script>";
 	<meta name="description" content="<?php echo $site_desc; ?>">
 	<meta name="keywords" content="<?php echo $site_keywords; ?>">
 	<meta name="author" content="<?php echo $site_author; ?>">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-	<link href="styles/bootstrap.css" rel="stylesheet">
-	<link href="styles/custom.css" rel="stylesheet"> <!-- Custom css code from modified in admin panel --->
+	
+	<!--====== Bootstrap css ======-->
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<!--====== PreLoader css ======-->
+	<link href="assets/css/preloader.css" rel="stylesheet">
+	<!--====== Animate css ======-->
+	<link href="assets/css/animate.min.css" rel="stylesheet">
+	<!--====== Fontawesome css ======-->
+	<link href="assets/css/fontawesome.min.css" rel="stylesheet">
+	<!--====== Owl carousel css ======-->
+	<link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+	<!--====== Nice select css ======-->
+	<link href="assets/css/nice-select.css" rel="stylesheet">
+	<!--====== Nice select css ======-->
+  	<link href="assets/css/tagsinput.css" rel="stylesheet">
+	<!--====== Range Slider css ======-->
+	<link href="assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+	<!--====== Default css ======-->
+	<link href="assets/css/default.css" rel="stylesheet">
+	<!--====== Style css ======-->
+	<link href="assets/css/style.css" rel="stylesheet">
+	<!--====== Responsive css ======-->
+	<link href="assets/css/responsive.css" rel="stylesheet">
+	<!-- <link href="styles/bootstrap.css" rel="stylesheet">
+	<link href="styles/custom.css" rel="stylesheet">  -->
+	<!-- Custom css code from modified in admin panel --->
 	<link href="styles/styles.css" rel="stylesheet">
 	<link href="styles/user_nav_styles.css" rel="stylesheet">
 	<link href="font_awesome/css/font-awesome.css" rel="stylesheet">

@@ -51,7 +51,9 @@
   $page_url = substr("$full_url", 12);
 
 ?>
-
+<style>
+  .total-user-count.count.c-notifications-header{left: 9%;}
+</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
@@ -116,7 +118,7 @@
               </select>
             </div>
             <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -208,7 +210,7 @@
         </a>
       </li>
       <li>
-        <a href="<?= $site_url ?>/ar/settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt="">
+        <a href="<?= $site_url ?>/ar/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt="">
           الإعدادات
         </a>
       </li>

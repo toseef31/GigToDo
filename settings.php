@@ -521,7 +521,7 @@ $local_email = $row_seller_payment->local_email;
 											          }
 											        }).then(function(){
 											          // Read more about handling dismissals
-											          window.open('logout','_self')
+											          window.open('settings?account_settings','_self')
 											        });
 											        </script>";
 											      }
