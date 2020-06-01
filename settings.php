@@ -649,7 +649,8 @@ $local_email = $row_seller_payment->local_email;
 														<li class="nav-item">
 															<a class="nav-link" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false">
 																<span><img class="img-fluid d-block" src="assets/img/setting/bank-transfer.png" /></span>
-																<span>Bank Transfer</span>
+																<!-- <span>Bank Transfer</span> -->
+																<span>Payoneer</span>
 															</a>
 														</li>
 													</ul>
@@ -704,9 +705,15 @@ $local_email = $row_seller_payment->local_email;
 														</div>
 														<div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="bank-tab">
 															<form method="post" class="clearfix">
-																<input type="hidden" name="account_type" value="bank_transfer">
+																<input type="hidden" name="account_type" value="Payoneer">
 																<div class="row">
 																	<div class="col-12">
+																		<div class="form-group">
+																			<label class="control-label">Enter Payoneer Email</label>
+																			<input type="text" name="seller_payoneer_email" value="<?= $login_seller_payoneer_email; ?>" class="form-control" />
+																		</div>
+																	</div>
+																	<!-- <div class="col-12">
 																		<div class="form-group">
 																			<label class="control-label">Account Full Name</label>
 																			<input type="text" name="account_full_name" value="<?= $account_full_name; ?>" class="form-control" />
@@ -729,44 +736,63 @@ $local_email = $row_seller_payment->local_email;
 																			<label class="control-label">Swift Code</label>
 																			<input type="text" name="swift_code" value="<?= $swift_code ?>" class="form-control" />
 																		</div>
-																	</div>
+																	</div> -->
 																	<div class="col-12">
 																		<div class="form-group d-flex flex-row mb-0">
 																			<button class="button button-white" type="button" role="button">Edit</button>
-																			<button class="button button-red" type="submit" name="submit_bank_info">Submit</button>
+																			<!-- <button class="button button-red" type="submit" name="submit_bank_info">Submit</button> -->
+																			<button class="button button-red" type="submit" name="submit_payoneer_email">Submit</button>
 																		</div>
 																	</div>
 																</div>
 															</form>
 															<?php 
-																if(isset($_POST['submit_bank_info'])){
-																	$account_type = strip_tags($input->post('account_type'));
-																	$account_full_name = strip_tags($input->post('account_full_name'));
-																	$iban = strip_tags($input->post('iban'));
-																	$bank_name_address = strip_tags($input->post('bank_name_address'));
-																	$swift_code = strip_tags($input->post('swift_code'));
-																	// print_r($login_seller_id);die();
-																	if (count($seller_account_id) == 0) {
-																		$update_bank_info = $db->insert("seller_payment_account",array("seller_id" => $login_seller_id,"account_type" => $account_type,"account_full_name" => $account_full_name,"iban" => $iban, "bank_name_address" => $bank_name_address, "swift_code" => $swift_code));
-																	}else{
-																		$update_bank_info = $db->update("seller_payment_account",array("seller_id" => $login_seller_id,"account_type" => $account_type,"account_full_name" => $account_full_name,"iban" => $iban, "bank_name_address" => $bank_name_address, "swift_code" => $swift_code),array("seller_id" => $login_seller_id));	
-																	}
+																// if(isset($_POST['submit_bank_info'])){
+																// 	$account_type = strip_tags($input->post('account_type'));
+																// 	$account_full_name = strip_tags($input->post('account_full_name'));
+																// 	$iban = strip_tags($input->post('iban'));
+																// 	$bank_name_address = strip_tags($input->post('bank_name_address'));
+																// 	$swift_code = strip_tags($input->post('swift_code'));
 																	
-																	// print_r($update_bank_info);die();
-																	if($update_bank_info){
-																	echo "<script>
-																	swal({
-																	type: 'success',
-																	text: 'Bank Account Details Updated Successfully!',
-																	timer: 3000,
-																	onOpen: function(){
-																	swal.showLoading()
-																	}
-																	}).then(function(){
-																	window.open('settings?account_settings','_self')
-																	});
-																	</script>";
-																	}
+																// 	if (count($seller_account_id) == 0) {
+																// 		$update_bank_info = $db->insert("seller_payment_account",array("seller_id" => $login_seller_id,"account_type" => $account_type,"account_full_name" => $account_full_name,"iban" => $iban, "bank_name_address" => $bank_name_address, "swift_code" => $swift_code));
+																// 	}else{
+																// 		$update_bank_info = $db->update("seller_payment_account",array("seller_id" => $login_seller_id,"account_type" => $account_type,"account_full_name" => $account_full_name,"iban" => $iban, "bank_name_address" => $bank_name_address, "swift_code" => $swift_code),array("seller_id" => $login_seller_id));	
+																// 	}
+																	
+																	
+																// 	if($update_bank_info){
+																// 	echo "<script>
+																// 	swal({
+																// 	type: 'success',
+																// 	text: 'Bank Account Details Updated Successfully!',
+																// 	timer: 3000,
+																// 	onOpen: function(){
+																// 	swal.showLoading()
+																// 	}
+																// 	}).then(function(){
+																// 	window.open('settings?account_settings','_self')
+																// 	});
+																// 	</script>";
+																// 	}
+																// }
+																if(isset($_POST['submit_payoneer_email'])){
+																  $seller_payoneer_email = strip_tags($input->post('seller_payoneer_email'));
+																  $update_seller = $db->update("sellers",array("seller_payoneer_email" => $seller_payoneer_email),array("seller_id" => $login_seller_id));
+																  if($update_seller){
+																  echo "<script>
+																    swal({
+																      type: 'success',
+																      text: 'Payoneer email updated successfully!',
+																      timer: 3000,
+																      onOpen: function(){
+																        swal.showLoading()
+																      }
+																    }).then(function(){
+																        // Read more about handling dismissals
+																        window.open('settings?account_settings','_self')
+																    });</script>";
+																  }
 																}
 															?>
 														</div>
