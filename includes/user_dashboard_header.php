@@ -79,7 +79,7 @@
               <ul>
                 <li><a href="<?= $site_url; ?>/dashboard">Dashboard</a></li>
                 <li><a href="<?= $site_url; ?>/proposals/view_proposals">Gigs</a></li>
-                <li><a href="javascript:void(0);">Buyer Request</a></li>
+                <li><a href="<?= $site_url; ?>/requests/buyer_requests">Buyer Request</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -290,7 +290,7 @@
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
       <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
+      <li><a href="<?= $site_url; ?>/requests/buyer_requests"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/16.png" alt=""> Portfolio</a></li>

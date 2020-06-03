@@ -54,7 +54,7 @@ $request_seller_image = $row_request_seller->seller_image;
 						ارسل عرض
 					</h5>
 					<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
-						<img src="assets/img/seller-profile/popup-close-icon.png" />
+						<img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
 					</a>
 				</div>
 				<div class="modal-body">
@@ -68,7 +68,7 @@ $request_seller_image = $row_request_seller->seller_image;
 									<?php if(!empty($login_seller_image)){ ?>
 									<img src="<?php echo $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" width="50" height="50" class="rounded-circle">
 									<?php }else{ ?>
-									<img src="assets/img/seller-profile/profile-img.png" alt="">
+									<img src="<?= $site_url; ?>/assets/img/seller-profile/profile-img.png" alt="">
 									<?php } ?>
 								</div>
 								<div class="profile-content media-body">
@@ -81,7 +81,7 @@ $request_seller_image = $row_request_seller->seller_image;
 						</div>
 						<div class="form-group mb-0">
 							<div class="control-label d-flex align-items-start">
-								<span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
+								<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
 								<span>
 									الميزانية الكلية
 								</span>
@@ -94,7 +94,7 @@ $request_seller_image = $row_request_seller->seller_image;
 									<?php if(!empty($request_seller_image)){ ?>
 									<img src="<?php echo $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" width="50" height="50" class="rounded-circle">
 									<?php }else{ ?>
-									<img src="assets/img/seller-profile/profile-img.png" alt="">
+									<img src="<?= $site_url; ?>/assets/img/seller-profile/profile-img.png" alt="">
 									<?php } ?>
 								</div>
 								<div class="profile-content media-body">
@@ -146,7 +146,7 @@ $request_seller_image = $row_request_seller->seller_image;
 						</div>
 						<div class="form-group">
 							<div class="control-label d-flex align-items-start">
-								<span><img src="assets/img/post-request/icon-6.png" alt="Icon"></span>
+								<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
 								<span>
 									التكلفة الكلية
 								</span>

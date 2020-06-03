@@ -72,7 +72,7 @@
                 <ul>
                   <li><a href="<?= $site_url; ?>/ar/dashboard">لوحة التحكم</a></li>
                   <li><a href="<?= $site_url; ?>/ar/proposals/view_proposals">الخدمات</a></li>
-                  <li><a href="javascript:void(0);">طلبات المشترين</a></li>
+                  <li><a href="<?= $site_url; ?>/ar/requests/buyer_requests">طلبات المشترين</a></li>
                 </ul>
               </div>
               <?php if($language_switcher == 1){ ?>
@@ -320,7 +320,7 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/14.png" alt="">
+          <a href="<?= $site_url; ?>/ar/requests/buyer_requests"> <img src="assets/img/icon/14.png" alt="">
             طلبات المشترين
           </a>
         </li>

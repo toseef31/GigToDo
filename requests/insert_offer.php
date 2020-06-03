@@ -134,7 +134,7 @@ try{
 	<p class='lead'> You just received an offer from $login_seller_user_name for your request. </p>
 	<br>
 	<center>
-	<a href='$site_url/requests/view_offers?request_id=$request_id' class='btn'>
+	<a href='$site_url/ar/requests/view_offers?request_id=$request_id' class='btn'>
 	Click to view offer
 	</a>
 	</center>
@@ -149,7 +149,7 @@ try{
 
 if($update_seller){
 	echo "<script>alert('Your offer has been submitted successfully.')</script>";
-	echo "<script>window.open('$site_url/requests/buyer_requests','_self')</script>";
+	echo "<script>window.open('$site_url/ar/requests/buyer_requests','_self')</script>";
 }
 
 ?>

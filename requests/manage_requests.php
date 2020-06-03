@@ -29,7 +29,7 @@ $login_seller_id = $row_login_seller->seller_id;
 	<meta name="description" content="<?php echo $site_desc; ?>">
 	<meta name="keywords" content="<?php echo $site_keywords; ?>">
 	<meta name="author" content="<?php echo $site_author; ?>">
-  <?php if(!empty($site_favicon)){ ?>
+  	<?php if(!empty($site_favicon)){ ?>
 	<!--====== Favicon Icon ======-->
 	<link rel="shortcut icon" href="../images/<?= $site_favicon; ?>" type="image/png">
 	<?php } ?>

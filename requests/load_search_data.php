@@ -121,126 +121,127 @@ if($count_offers == 0){
 
 ?>
 
-<tr id="request_tr_<?php echo $request_id; ?>">
+<tr id="request_tr_<?php echo $request_id; ?>" role="row">
 
-<td>
-
-<?php if(!empty($request_seller_image)){ ?>
-
-<img src="../user_images/<?php echo $request_seller_image; ?>" class="request-img rounded-circle" >
-
-<?php }else{ ?>
-
-<img src="../user_images/empty-image.png" class="request-img rounded-circle" >
-
-<?php } ?>
-
-<div class="request-description"><!-- request-description Starts -->
-
-<h6> <?php echo $request_seller_user_name; ?> </h6>
-
-<h5 class="text-success"> <?php echo $request_title; ?> </h5>
-
-<p class="lead mb-2"> <?php echo $request_description; ?> </p>
-
-<?php if(!empty($request_file)){ ?>
-
-<a href="request_files/ <?php echo $request_file; ?>" download>
-
-<i class="fa fa-arrow-circle-down"></i>  <?php echo $request_file; ?>
-
-</a>
-
-<?php } ?>
-
-<ul class="request-category">
-
-<li> <?php echo $cat_title; ?> </li>
-
-<li> <?php echo $child_title; ?> </li>
-
-</ul>
-
-</div><!-- request-description Ends -->
-
-</td>
-
-<td><?php echo $count_send_offers; ?></td>
-
-<td> <?php echo $request_date; ?> </td>
-
-<td> 
-
-<?php echo $delivery_time; ?> <a href="#" class="remove-link remove_request_<?php echo $request_id; ?> text-success"> Remove Request </a>
-
-</td>
-
-<td class="text-success font-weight-bold">
-
-$<?php if(!empty($request_budget)){ ?> 
-
-<?php echo $request_budget; ?>
-
-<?php }else{ ?> --- <?php } ?>
-
-<br>
-
-<?php if($login_seller_offers == "0"){ ?>
-
-<button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">
-Send Offer
-</button>
-
-<?php }else{ ?>
-
-<button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>">
-Send Offer
-</button>
-
-<?php } ?>
-
-</td>
-
-
-<script>
-
-
-$(".remove_request_<?php echo $request_id; ?>").click(function(event){
+	<td data-label="Buyer">
+	  <div class="d-flex flex-column align-items-center">
+	    <div class="buyer-image">
+	      <?php if(!empty($request_seller_image)){ ?>
+	      <img alt class="img-fluid d-block request-img rounded-circle" src="../user_images/<?php echo $request_seller_image; ?>" />
+	      <?php }else{ ?>
+	      <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+	      <?php } ?>
+	    </div>
+	    <div class="buyer-id"><?php echo $request_seller_user_name; ?></div>
+	    <span><?php echo $request_date; ?></span>
+	  </div>
+	</td>
+	<td data-label="Request">
+	  <p><?php echo $request_description; ?></p>
+	  <div class="attachment d-flex flex-row align-items-center">
+	    <?php if(!empty($request_file)){ ?>
+	    <a href="request_files/<?php echo $request_file; ?>" download>
+	    <span><i class="fal fa-paperclip"></i></span> <span><?php echo $request_file; ?></span>
+	    </a>
+	    <?php } ?>
+	    <!-- <span><i class="fal fa-paperclip"></i></span>
+	    <span>attatchme...jpg</span>
+	    <span>(1048KB)</span> -->
+	  </div>
+	  <div class="tags">
+	    <a href="javascript:void(0);" class="taga-item"><?php echo $cat_title; ?></a>
+	    <a href="javascript:void(0);" class="taga-item"><?php echo $child_title; ?></a>
+	  </div>
+	</td>
+	<td data-label="Offers">
+	  <div class="offers-button"><?php echo $count_send_offers; ?> offers</div>
+	</td>
+	<td data-label="Delivery"><?php echo $delivery_time; ?></td>
+	<td data-label="Budget">
+	  <div class="d-flex flex-column">
+	    <?php if(!empty($request_budget)){ ?> 
+	    <span><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+	    <?php }else{ ?> ----- <?php } ?>
+	    <?php if($login_seller_offers == "0"){ ?>
+	      <a class="send-offer send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">Send offer</a>
+	    <!-- <button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">Send Offer</button> -->
+	    <?php }else{ ?>
+	      <a class="send-offer send_button_<?php echo $request_id; ?>">Send offer</a>
+	    <!-- <button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>">Send Offer</button> -->
+	    <?php } ?>
+	    
+	  </div>
+	</td>
+	<!-- <td>
+		<?php if(!empty($request_seller_image)){ ?>
+		<img src="../user_images/<?php echo $request_seller_image; ?>" class="request-img rounded-circle" >
+		<?php }else{ ?>
+		<img src="../user_images/empty-image.png" class="request-img rounded-circle" >
+		<?php } ?>
+		<div class="request-description">
+		<h6> <?php echo $request_seller_user_name; ?> </h6>
+		<h5 class="text-success"> <?php echo $request_title; ?> </h5>
+		<p class="lead mb-2"> <?php echo $request_description; ?> </p>
+		<?php if(!empty($request_file)){ ?>
+		<a href="request_files/ <?php echo $request_file; ?>" download>
+			<i class="fa fa-arrow-circle-down"></i>  <?php echo $request_file; ?>
+		</a>
+		<?php } ?>
+		<ul class="request-category">
+			<li> <?php echo $cat_title; ?> </li>
+			<li> <?php echo $child_title; ?> </li>
+		</ul>
+		</div>
+	</td>
+	<td><?php echo $count_send_offers; ?></td>
+	<td> <?php echo $request_date; ?> </td>
+	<td>
+		<?php echo $delivery_time; ?> <a href="#" class="remove-link remove_request_<?php echo $request_id; ?> text-success"> Remove Request </a>
+	</td>
+	<td class="text-success font-weight-bold">
+		$<?php if(!empty($request_budget)){ ?>
+		<?php echo $request_budget; ?>
+		<?php }else{ ?> --- <?php } ?>
+		<br>
+		<?php if($login_seller_offers == "0"){ ?>
+		<button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">
+		Send Offer
+		</button>
+		<?php }else{ ?>
+		<button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>">
+		Send Offer
+		</button>
+		<?php } ?>
+	</td> -->
+	<script>
+	$(".remove_request_<?php echo $request_id; ?>").click(function(event){
 	
 	event.preventDefault();
 	
 	$("#request_tr_<?php echo $request_id; ?>").fadeOut().remove();
 	
-});
-
-
-<?php if($login_seller_offers == "0"){ ?>
-
-
-<?php }else{ ?>
-
-$(".send_button_<?php echo $request_id; ?>").click(function(){
+	});
+	<?php if($login_seller_offers == "0"){ ?>
+	<?php }else{ ?>
+	$(".send_button_<?php echo $request_id; ?>").click(function(){
 	
-request_id = "<?php echo $request_id; ?>";
+	request_id = "<?php echo $request_id; ?>";
 	
-$.ajax({
+	$.ajax({
 	
-method: "POST",
-url: "send_offer_modal",
-data: {request_id: request_id}
-})
-.done(function(data){
+	method: "POST",
+	url: "send_offer_modal",
+	data: {request_id: request_id}
+	})
+	.done(function(data){
 	
-$(".append-modal").html(data);
+	$(".append-modal").html(data);
 	
-});
+	});
 	
-});
-
-<?php } ?>
-
-</script>
-
+	});
+	<?php } ?>
+	</script>
 </tr>
 
 <?php 
