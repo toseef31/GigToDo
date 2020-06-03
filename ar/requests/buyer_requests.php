@@ -404,6 +404,11 @@
                       <?php } ?>
                     </tbody>
                   </table>
+                  <?php
+                    if($count_offers == 0){
+                    echo"<center><h3 class='pb-4 pt-4'><i class='fa fa-meh-o'></i> لم ترسل أي عروض حتى الآن!</h3></center>";
+                    }
+                  ?>
                 </div>
               </div>
             </div>

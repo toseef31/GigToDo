@@ -389,7 +389,7 @@
                     if($count_offers == 0){
                     echo"<center><h3 class='pb-4 pt-4'><i class='fa fa-meh-o'></i> You've sent no offers yet!</h3></center>";
                     }
-                    ?>
+                  ?>
                 </div>
               </div>
             </div>
