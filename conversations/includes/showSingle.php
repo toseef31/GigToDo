@@ -43,7 +43,152 @@ $seller_rating = $row_seller->seller_rating;
 $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
 
 ?>
-<div class="col-md-8 <?=($lang_dir == "right" ? 'order-2 order-sm-1 pl-0 pr-3':'pr-lg-0 ')?>">
+<div class="message-body-container d-flex flex-wrap">
+	<div class="col-md-8 pl-0 pr-0 <?=($lang_dir == "right" ? 'order-2 order-sm-1 pl-0 pr-3':'pr-lg-0 ')?>">
+		<div class="message-content d-flex flex-row" style="max-width: calc(100% - 0px)">
+			<div class="message-content-card">
+				<?php require_once("display_messages.php"); ?>
+			</div>
+			<?php require_once("sendMessage.php"); ?>
+			<?php require_once("sendMessageJs.php"); ?>
+		</div>
+	</div>
+	<div class="col-md-4 pl-0 pr-0 <?=($lang_dir == "right" ? 'order-1 order-sm-2 pr-0 border-right':'pl-0 border-left')?>" id="msgSidebar">
+		<div class="message-about d-flex flex-column">
+			<div class="message-about-header">
+				<h4>About</h4>
+				<div class="d-flex flex-column align-items-center justify-content-center">
+					<div class="message-about-user">
+						<?php if(!empty($seller_image)){ ?>
+						<img src="../user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
+						<?php }else{ ?>
+						<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+						<?php } ?>
+					</div>
+					<div class="username"><?= ucfirst($seller_user_name); ?></div>
+				</div>
+			</div>
+			<div class="message-about-body">
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-star.png" />
+						</span>
+						<span>Rating</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<!-- <span class="color-yellow">
+							<i class="fas fa-star"></i>
+							4.9
+						</span> -->
+						<span><?= $seller_rating; ?>%</span>
+					</div>
+				</div>
+				<!-- Each item -->
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-skills.png" />
+						</span>
+						<span>From</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<span><?= $seller_country; ?></span>
+					</div>
+				</div>
+				<!-- Each item -->
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-language.png" />
+						</span>
+						<span>Last Delivery</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<span><?= $seller_recent_delivery; ?></span>
+					</div>
+				</div>
+				<!-- Each item -->
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-language.png" />
+						</span>
+						<span>Languages</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<?php
+						$select_languages_relation = $db->select("languages_relation",array("seller_id"=>$seller_id));
+						while($row_languages_relation = $select_languages_relation->fetch()){
+							$language_id = $row_languages_relation->language_id;
+							$get_languages = $db->select("seller_languages",array("language_id"=>$language_id));
+							$row_languages = $get_languages->fetch();
+							$language_title = @$row_languages->language_title;
+						?>
+						<span><?= ucfirst($language_title); ?>,</span>
+						<?php } ?>
+					</div>
+				</div>
+				<!-- Each item -->
+			</div>
+		</div>
+	</div>
+	<!-- Message about -->
+	<!-- <div class="col-md-4 <?=($lang_dir == "right" ? 'order-1 order-sm-2 pr-0 border-right':'pl-0 border-left')?>" id="msgSidebar">
+		<h5 class="pt-3 p-2">Orders</h5>
+		<div class="dropdown">
+			<a class="lead text-muted p-2 pt-0" href="#" role="button" data-toggle="dropdown">Past Orders (<?= $count_orders; ?>)</a>
+			<div class="dropdown-menu pt-1 pb-1">
+				<a href="../buying_history?buyer_id=<?= $seller_id; ?>" class="dropdown-item">Buying History</a>
+				<a href="../selling_history?seller_id=<?= $seller_id; ?>" class="dropdown-item">Selling History</a>
+			</div>
+		</div>
+		<hr>
+		<h5 class="pb-0 p-2">About</h5>
+		<center class="mb-3">
+			<?php if(!empty($seller_image)){ ?>
+			<img src="../user_images/<?= $seller_image; ?>" width="50" class="rounded-circle">
+			<?php }else{ ?>
+			<img src="../user_images/empty-image.png" width="50" class="rounded-circle">
+			<?php } ?>
+			<a class="text-center" href="../<?= $seller_user_name; ?>">
+				<h6 class="mb-0 mt-2"><?= ucfirst($seller_user_name); ?></h6>
+			</a>
+			<p class="text-muted text-center"><?= $level_title; ?></p>
+		</center>
+		<div class="row p-3">
+			<div class="col-md-6">
+				<p><i class="fa fa-star pr-1"></i> Rating </p>
+				<p><i class="fa fa-globe pr-1"></i> From</p>
+				<p><i class="fa fa-truck pr-1"></i> Last delivery</p>
+				<?php
+				$select_languages_relation = $db->select("languages_relation",array("seller_id"=>$seller_id));
+				while($row_languages_relation = $select_languages_relation->fetch()){
+					$language_id = $row_languages_relation->language_id;
+					$get_languages = $db->select("seller_languages",array("language_id"=>$language_id));
+					$row_languages = $get_languages->fetch();
+					$language_title = @$row_languages->language_title;
+				?>
+				<p> <i class="fa fa-language pr-1"></i> <?= $language_title; ?></p>
+				<?php } ?>
+			</div>
+			<div class="col-md-6 text-right">
+				<p class="font-weight-bold"><?= $seller_rating; ?>%</p>
+				<p class="font-weight-bold"><?= $seller_country; ?></p>
+				<p class="font-weight-bold"><?= $seller_recent_delivery; ?></p>
+				<?php
+				$select_languages_relation = $db->select("languages_relation",array("seller_id"=>$seller_id));
+				while($row_languages_relation = $select_languages_relation->fetch()){
+				$language_level = $row_languages_relation->language_level;
+				?>
+				<p class="font-weight-bold"><?= ucfirst($language_level); ?></p>
+				<?php } ?>
+			</div>		
+		</div>
+	</div> -->
+</div>
+
+<!-- <div class="col-md-8 <?=($lang_dir == "right" ? 'order-2 order-sm-1 pl-0 pr-3':'pr-lg-0 ')?>">
 	<ul class="list-unstyled messages <?=($lang_dir == "right" ? 'direction-rtl':'')?>">
 		<?php require_once("display_messages.php"); ?>
 	</ul>
@@ -101,5 +246,5 @@ $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$lo
 			<?php } ?>
 		</div>		
 	</div>
-</div>
+</div> -->
 <?php require_once("reportModal.php"); ?>

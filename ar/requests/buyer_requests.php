@@ -78,6 +78,14 @@
     <script type="text/javascript" src="../js/sweat_alert.js"></script>
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <style>.attachment a{color: #ff0707;}</style>
+    <style>
+      @media(min-width: 767px){
+        .page-height{
+          position: relative;
+          min-height: 80%;
+        }
+      }
+    </style>
   </head>
 <body class="all-content">
   <!-- Preloader Start -->
@@ -88,7 +96,7 @@
   </div>
   <!-- Preloader End -->
   <?php require_once("../includes/user_header.php"); ?>
-  <main>
+  <main class="page-height">
     <section class="container-fluid list-page">
       <div class="row">
         <div class="container">

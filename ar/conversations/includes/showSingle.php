@@ -43,12 +43,107 @@ $seller_rating = $row_seller->seller_rating;
 $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
 
 ?>
-<div class="col-md-8 <?=($lang_dir == "right" ? 'order-2 order-sm-1 pl-0 pr-3':'pr-lg-0 ')?>">
+<!-- New Design -->
+<div class="message-body-container d-flex flex-wrap">
+	<div class="col-md-8 pr-0 pl-0 <?=($lang_dir == "right" ? 'order-2 order-sm-1 pl-0 pr-3':'pr-lg-0 ')?>">
+		<div class="message-content d-flex flex-row" style="max-width: calc(100% - 0px)">
+			<div class="message-content-card">
+				<?php require_once("display_messages.php"); ?>
+			</div>
+			<?php require_once("sendMessage.php"); ?>
+			<?php require_once("sendMessageJs.php"); ?>
+		</div>
+	</div>
+	<div class="col-md-4 pl-0 pr-0 <?=($lang_dir == "right" ? 'order-1 order-sm-2 pr-0 border-right':'pl-0 border-left')?>" id="msgSidebar">
+		<div class="message-about d-flex flex-column">
+			<div class="message-about-header">
+				<h4>عن</h4>
+				<div class="d-flex flex-column align-items-center justify-content-center">
+					<div class="message-about-user">
+						<?php if(!empty($seller_image)){ ?>
+						<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
+						<?php }else{ ?>
+						<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+						<?php } ?>
+					</div>
+					<div class="username"><?= ucfirst($seller_user_name); ?></div>
+				</div>
+			</div>
+			<div class="message-about-body">
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-star.png" />
+						</span>
+						<span>تقييم</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<!-- <span class="color-yellow">
+							<i class="fas fa-star"></i>
+							4.9
+						</span> -->
+						<span><?= $seller_rating; ?>%</span>
+					</div>
+				</div>
+				<!-- Each item -->
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-skills.png" />
+						</span>
+						<span>من عند</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<span><?= $seller_country; ?></span>
+					</div>
+				</div>
+				<!-- Each item -->
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-language.png" />
+						</span>
+						<span>التسليم الأخير</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<span><?= $seller_recent_delivery; ?></span>
+					</div>
+				</div>
+				<!-- Each item -->
+				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
+					<div class="title d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/icon-language.png" />
+						</span>
+						<span>اللغات</span>
+					</div>
+					<div class="item-value d-flex flex-row align-items-center">
+						<?php
+						$select_languages_relation = $db->select("languages_relation",array("seller_id"=>$seller_id));
+						while($row_languages_relation = $select_languages_relation->fetch()){
+							$language_id = $row_languages_relation->language_id;
+							$get_languages = $db->select("seller_languages",array("language_id"=>$language_id));
+							$row_languages = $get_languages->fetch();
+							$language_title = @$row_languages->language_title;
+						?>
+						<span><?= ucfirst($language_title); ?>,</span>
+						<?php } ?>
+					</div>
+				</div>
+				<!-- Each item -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End New Design -->
+
+
+<!-- <div class="col-md-8 <?=($lang_dir == "right" ? 'order-2 order-sm-1 pl-0 pr-3':'pr-lg-0 ')?>">
 	<ul class="list-unstyled messages <?=($lang_dir == "right" ? 'direction-rtl':'')?>">
-		<?php require_once("display_messages.php"); ?>
+		<?php //require_once("display_messages.php"); ?>
 	</ul>
-	<?php require_once("sendMessage.php"); ?>
-	<?php require_once("sendMessageJs.php"); ?>
+	<?php //require_once("sendMessage.php"); ?>
+	<?php //require_once("sendMessageJs.php"); ?>
 </div>
 <div class="col-md-4 <?=($lang_dir == "right" ? 'order-1 order-sm-2 pr-0 border-right':'pl-0 border-left')?>" id="msgSidebar">
 	<h5 class="pt-3 p-2">Orders</h5>
@@ -101,5 +196,5 @@ $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$lo
 			<?php } ?>
 		</div>		
 	</div>
-</div>
+</div> -->
 <?php require_once("reportModal.php"); ?>

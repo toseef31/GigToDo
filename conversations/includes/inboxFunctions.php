@@ -56,6 +56,7 @@ echo "<script>window.open('inbox?single_message_id=$message_group_id','_self')</
 function time_ago($timestamp){
   $time_ago = strtotime($timestamp);  
   $current_time = time();  
+  // print_r($current_time);
   $time_difference = $current_time - $time_ago;  
   $seconds = $time_difference;  
   $minutes      = round($seconds / 60 );             // value 60 is seconds  

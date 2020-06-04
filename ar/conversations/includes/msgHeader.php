@@ -110,7 +110,69 @@
 
 ?>
 
-<p class="float-left pb-0 mb-0">
+	<div class="message-body-header d-flex flex-wrap align-items-center justify-content-between">
+		<p class="user-status d-flex flex-column bg-white <?php echo $statusClass; ?>">
+			<i class="fal fa-angle-left"></i>
+			<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
+			<?php if (check_status($seller_id) == "Online") { ?>
+				<span class="text-success">Online</span>
+			<?php }else{ ?>
+				<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
+			<?php } ?>
+		</p>
+		<p class="float-right">
+
+		<?php if($message_status != "empty"){ ?>
+
+			<a href="inbox<?php echo "?$star=$message_group_id"; ?>" class="btn <?=$star;?>" data-toggle="tooltip" data-placement="bottom" title="<?php echo ucfirst($star); ?>">
+
+				<i class="fa <?=$star_i;?>"></i>
+			
+			</a>
+
+			<a href="inbox<?php echo "?$unread=$message_group_id"; ?>" class="btn unread" data-toggle="tooltip" data-placement="bottom" title="Mark As <?php echo ucfirst($unread); ?>">
+
+				<i class="fa <?=$unread_i;?>"></i>
+
+			</a>
+
+			<a href="inbox<?php echo "?$archive=$message_group_id"; ?>" class="btn <?=$archive;?>" data-toggle="tooltip" data-placement="bottom" title="<?php echo ucfirst($archive); ?>">
+
+				<i class="fa <?=$archive_i;?>"></i>
+				
+			</a>
+
+			<a href="inbox?hide_seller=<?php echo $seller_id; ?>" class="btn" data-toggle="tooltip" data-placement="bottom" title="Delete">
+				<i class="fa fa-trash-o"></i>
+			</a>
+
+			<?php } ?>
+			
+			<div class="dropdown float-right d-block d-sm-block d-md-none mt-2">
+				
+				<a class="dropdown-toggle closeMsgIcon" href="#" role="button" data-toggle="dropdown">
+					
+					<i class="mr-3 fa fa-2x fa-ellipsis-v"></i>
+				
+				</a>
+
+				<div class="dropdown-menu pt-1 pb-1" style="margin-right: 15px; max-width: 30px !important; min-width: 150px !important; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-126px, 38px, 0px);" x-placement="bottom-start">
+					
+					<a href="inbox?hide_seller=<?php echo $sender_id; ?>" class="dropdown-item">
+					<i class="fa fa-trash-o"></i> حذف
+					</a>
+
+					<a href="#" class="dropdown-item closeMsg">
+					<i class="fa fa-times"></i> قريب
+					</a>
+
+				</div>
+			</div>
+		</p>
+		<a class="offer-hire-button" data-toggle="modal" href="#exampleModalCenter">خصص عرض</a>
+	</div>
+
+<!-- <p class="float-left pb-0 mb-0">
 	
 	<strong class="ml-0 pl-0"><?php echo ucfirst(strtolower($seller_user_name)); ?></strong>
 	
@@ -174,7 +236,7 @@
 
 		</div>
 	</div>
-</p>
+</p> -->
 
 <script>
 	

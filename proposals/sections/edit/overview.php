@@ -10,9 +10,12 @@ $row_meta = $get_meta->fetch();
 $child_title = $row_meta->child_title;
 ?>
 <style>
-	#sub-category{
+	.category_section .nice-select{
 		display: none;
 	}
+  #sub-category, #category{
+    display: block !important;
+  }
   .insert_btn{
     background-color: #ff0707;
     border: 2px solid #ff0707;
@@ -67,7 +70,7 @@ $child_title = $row_meta->child_title;
                         </span>
                         <span>Choose a category</span>
                       </label>
-                      <div class="d-flex flex-column">
+                      <div class="d-flex flex-column category_section">
 	                      <select name="proposal_cat_id" id="category" class="form-control mb-3" required>
 	                      <option value="<?= $d_proposal_cat_id; ?>" selected> <?= $cat_title; ?> </option>
 	                      <?php 
@@ -82,7 +85,7 @@ $child_title = $row_meta->child_title;
 	                      <?php } ?>
 	                      </select>
 	                      <small class="form-text text-danger"><?= ucfirst(@$form_errors['proposal_cat_id']); ?></small>
-	                      <select name="proposal_child_id" class="form-control" required>
+	                      <select name="proposal_child_id" id="sub-category" class="form-control" required>
 	                      <option value="<?= $d_proposal_child_id; ?>" selected> <?= $child_title; ?> </option>
 	                      <?php
 	                      $get_c_cats = $db->query("select * from categories_children where child_parent_id='$d_proposal_cat_id' and not child_id='$d_proposal_child_id'");

@@ -1,11 +1,11 @@
 <script>
 
 var height = 0;
-$(".col-md-8 .messages .inboxMsg").each(function(i, value){
+$(".col-md-8 .message-content-card .inboxMsg").each(function(i, value){
 	height += parseInt($(this).height());
 });
 height += 2000;
-$(".col-md-8 .messages").animate({scrollTop: height});
+$(".col-md-8 .message-content-card").animate({scrollTop: height});
 
 var login_seller_id = "<?= $login_seller_id; ?>";
 var seller_id = "<?= $seller_id; ?>";
@@ -27,7 +27,7 @@ function sendMessage(){
 	    text: 'Message can\'t be empty!',
 	 	});
 		$("#send-msg").prop("disabled", false);
-		$("#send-msg").html("Send");
+		$("#send-msg").html("ابعت  ");
 	}else{
 		file = $('#fileVal').val();
 		$.ajax({
@@ -40,9 +40,9 @@ function sendMessage(){
 				$(".emojionearea-editor").html("");
 				$('.files').html('');
 				$("#send-msg").prop("disabled", false);
-				$("#send-msg").html("Send");
+				$("#send-msg").html("ابعت  ");
 				height += 2000;
-				$(".col-md-8 .messages").animate({scrollTop: height});
+				$(".col-md-8 .message-content-card").animate({scrollTop: height});
 			}
 		});
 	}
@@ -116,8 +116,8 @@ setInterval(function(){
 		url: "includes/display_messages",
 		data: {message_group_id: message_group_id}
 	}).done(function(data){
-		$('.specfic .messages').empty();
-		$('.specfic .messages').append(data);
+		$('.specfic .message-content-card').empty();
+		$('.specfic .message-content-card').append(data);
 		// height += 2000;
 		// $(".col-md-8 .messages").animate({scrollTop: height});
 	});

@@ -230,7 +230,7 @@
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/ar/requests/buyer_requests"> <img src="assets/img/icon/14.png" alt="">
+        <a href="<?= $site_url; ?>/ar/requests/buyer_requests"> <img src="<?= $site_url; ?>/assets/img/icon/14.png" alt="">
           طلبات المشترين
         </a>
       </li>

@@ -132,6 +132,12 @@ $seller_user_name = $row_seller->seller_user_name;
     left: 90px;
     right: auto;
 	}.swal2-popup .swal2-select{display: none;}
+	@media(min-width: 767px){
+  		.page-height{
+  			position: relative;
+  			min-height: 80%;
+  		}
+  	}
 </style>
 </head>
 
@@ -146,7 +152,7 @@ $seller_user_name = $row_seller->seller_user_name;
 	</div>
 	<!-- Preloader End -->
 
-<div class="container"> <!-- Container starts -->
+<div class="container page-height"> <!-- Container starts -->
 
 	<div class="row">
 
@@ -156,7 +162,9 @@ $seller_user_name = $row_seller->seller_user_name;
 
 				<div class="card-header text-center make-white">
 
-					<h3>Dear <?php echo $seller_user_name; ?>, you can change your password here.</h3>
+					<h3>
+						عزيزي   <?php echo $seller_user_name; ?>،يمكنك تغيير كلمة المرور الخاصة بك هنا.
+					</h3>
 
 				</div>
 

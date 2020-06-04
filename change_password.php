@@ -125,6 +125,12 @@ $seller_user_name = $row_seller->seller_user_name;
   	.change-pass #pass_type {
 	    margin-top: 7px;
   	}.swal2-popup .swal2-select{display: none;}
+  	@media(min-width: 767px){
+  		.page-height{
+  			position: relative;
+  			min-height: 80%;
+  		}
+  	}
   </style>
 </head>
 
@@ -138,7 +144,7 @@ $seller_user_name = $row_seller->seller_user_name;
 		</div>
 	</div>
 	<!-- Preloader End -->
-<div class="container"> <!-- Container starts -->
+<div class="container page-height"> <!-- Container starts -->
 
 	<div class="row">
 

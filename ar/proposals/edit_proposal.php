@@ -521,7 +521,7 @@ $("#category").change(function(){
   $("#sub-category").show();
   var category_id = $(this).val();
   $.ajax({
-  url:"fetch_subcategory",
+  url:"fetch_subcategory_edit",
     method:"POST",
     data:{category_id:category_id},
     success:function(data){

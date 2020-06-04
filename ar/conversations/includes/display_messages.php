@@ -51,8 +51,102 @@
 	$allowed = array('jpeg','jpg','gif','png');
 
 	?>
+	<div class="message-content-card-item d-flex flex-row align-items-start inboxMsg media inboxMsg">
+		<div class="user-image">
+			<?php if(!empty($sender_image)){ ?>
+			<img src="<?= $site_url; ?>/user_images/<?php echo $sender_image; ?>" class="rounded-circle" width="60" />
+			<?php } else{ ?>
+			<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+			<?php } ?>
+		</div>
+		<div class="messages-text d-flex flex-column">
+			<div class="username d-flex flex-row align-items-start justify-content-between">
+				<span><?php echo $sender_user_name; ?></span>
+				<span class="timestamp"><?php echo $message_date; ?></span>
+			</div>
+			<p><?php echo $message_desc; ?></p>
+      <?php if(!empty($message_file)){ ?>
+      <?php if(in_array(pathinfo($message_file,PATHINFO_EXTENSION),$allowed)){ ?>
+      <br>
+      <img src="conversations_files/<?php echo $message_file; ?>" alt="..." class="img-thumbnail" width="100">
+      <?php } ?>
+			<a href="conversations_files/<?php echo $message_file; ?>" download class="d-block mt-2 ml-1">
+			<i class="fa fa-download"></i> <?php echo $message_file; ?>
+			</a>
+			<?php } ?>
+		</div>
+	</div>
+	<?php if(!$message_offer_id == 0){ ?>
+	<div class="message-content-card-item d-flex flex-column inboxMsg media inboxMsg">
+		<div class="freelancer-offer d-flex flex-row align-items-start">
+			<div class="user-image">
+				<?php if(!empty($sender_image)){ ?>
+			    <img src="<?= $site_url; ?>/user_images/<?php echo $sender_image; ?>" class="rounded-circle mr-3" width="60">
+				<?php }else{ ?>
+				<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+				<?php } ?>
+			</div>
+			<div class="messages-text d-flex flex-column">
+				<div class="offer-title-price d-flex flex-row align-items-center justify-content-between">
+					<span class="title"><?php echo $proposal_title; ?></span>
+					<span class="price"><?php echo $s_currency; ?><?php echo $amount; ?></span>
+				</div>
+				<div class="offer-summary"><?php echo $description; ?></div>
+				<h5>عرضك بيضم:</h5>
+				<ul class="d-flex flex-wrap">
+					<li class="d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/revision-icon.png" />
+						</span>
+						<span>سعر المبلغ : <?php echo $amount; ?></span>
+					</li>
+					<li class="d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/time-icon.png" />
+						</span>
+						<span>وقت التسليم : <?php echo $delivery_time; ?></span>
+					</li>
+				</ul>
+				<div class="d-flex flex-row justify-content-end align-items-center">
+					<?php if($offer_status == "active"){ ?>
+					<?php if($login_seller_id == $sender_id){ ?>
+					<?php }else{ ?>
+					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="withdraw-offer float-right">
+					اقبل العرض 
+					</button>
+					<script>
+					$("#accept-offer-<?php echo $message_offer_id; ?>").click(function(){
+						single_message_id = "<?php echo $message_group_id; ?>";
+						offer_id = "<?php echo $message_offer_id; ?>";
+						$.ajax({
+						method: "POST",
+						url: "accept_offer_modal",
+						data: {single_message_id: single_message_id, offer_id: offer_id}
+						})
+						.done(function(data){
+							$("#accept-offer-div").html(data);
+						});
+					});
+					</script>
+					<?php } ?>
+					<?php }elseif($offer_status == "accepted"){ ?>
+					<button class="withdraw-offer rounded-0 mt-2 float-right" disabled>
+					عرض قبول
+					</button>
+					<a href="../order_details.php?order_id=<?php echo $order_id; ?>" class="mt-3 mr-3 float-right text-success">
+					مشاهدة الطلب
+					</a>
+					<?php } ?>
+					<!-- <button class="withdraw-offer" type="button" role="button">Withdraw offer</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php } ?>
+	<!-- Each item -->
+
 	
-	<li href="#" class="inboxMsg media inboxMsg">
+	<!-- <li href="#" class="inboxMsg media inboxMsg">
 	<?php if(!empty($sender_image)){ ?>
     <img src="../user_images/<?php echo $sender_image; ?>" class="rounded-circle mr-3" width="40">
 	<?php }else{ ?>
@@ -76,15 +170,17 @@
 			</a>
 			<?php } ?>
 			<?php if(!$message_offer_id == 0){ ?>
-			<div class="message-offer card mb-3"><!--- message-offer Starts --->
-			<div class="card-header p-2">
+			<div class="message-offer card mb-3"> -->
+				<!--- message-offer Starts --->
+			<!-- <div class="card-header p-2">
 		   <h6 class="mt-md-0 mt-2">
 			<?php echo $proposal_title; ?>
 			<span class="price float-right d-sm-block d-none"> <?php echo $s_currency; ?><?php echo $amount; ?> </span>
 			</h6>
 		  </div>
-		<div class="card-body p-2"><!--- card-body Starts --->
-		<p> <?php echo $description; ?> </p>
+		<div class="card-body p-2"> -->
+			<!--- card-body Starts --->
+		<!-- <p> <?php echo $description; ?> </p>
 		<p class="d-block d-sm-none"> <b> Price / Amount : </b> <?php echo $amount; ?> </p>
 		<p> <b> <i class="fa fa-calendar"></i> Delivery Time : </b> <?php echo $delivery_time; ?> </p>
 		<?php if($offer_status == "active"){ ?>
@@ -116,9 +212,12 @@
 		View Order
 		</a>
 		<?php } ?>
-		</div><!--- card-body Ends --->
-		</div><!--- message-offer Ends --->
-	<?php } ?>
+		</div> -->
+		<!--- card-body Ends --->
+		<!-- </div> -->
+		<!--- message-offer Ends --->
+	<!-- <?php } ?>
   </div>
-  </li>
+  </li> -->
+
 <?php } ?>
