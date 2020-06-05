@@ -11,6 +11,7 @@
 	$select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 	$row_login_seller = $select_login_seller->fetch();
 	$login_seller_id = $row_login_seller->seller_id;
+	$login_seller_account_type = $row_login_seller->account_type;
 
 
 	$message_group_id = $input->post('message_group_id');
@@ -32,6 +33,7 @@
 	
 	}
 
+	$count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'active'));
 
 	$select_seller = $db->select("sellers",array("seller_id"=>$seller_id));
 	$row_seller = $select_seller->fetch();
@@ -168,7 +170,14 @@
 			</div>
 		</div>
 	</p>
-	<a class="offer-hire-button" data-toggle="modal" href="#exampleModalCenter">Custom Offer</a>
+	<?php if($login_seller_account_type != 'buyer'){ ?>
+	<?php if($count_active_proposals > 0){ ?>
+
+	<button type="button" id="send-offer" class="offer-hire-button">Create An Offer</button>
+	<?php } } else{ ?>
+		<a class="offer-hire-button" data-toggle="modal" href="#exampleModalCenter">hire freelancer</a>
+	<?php } ?>
+	<!-- <a class="offer-hire-button" data-toggle="modal" href="#exampleModalCenter">Custom Offer</a> -->
 </div>
 
 <!-- <p class="float-left pb-0 mb-0">

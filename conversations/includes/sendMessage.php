@@ -68,7 +68,7 @@
   <form method="post" action="" id="insert-message-form">
     <p class="typing-status mb-1 invisible">Dummy Text</p>
     <textarea class="message-text text"  id="message" placeholder="Type your message here..."></textarea>
-    <div class="d-flex flex-column flex-sm-row justify-content-between">
+    <div class="d-flex flex-column flex-sm-row justify-content-between position-relative">
       <div class="attachment d-flex flex-row align-items-center">
         <p class="mb-2 mt-2 d-none files"></p>
         <label for="file">
@@ -82,9 +82,7 @@
         </label>
         <!-- <div class="file-size">Max Size 30MB</div> -->
       </div>
-      <?php if($count_active_proposals > 0){ ?>
-      <button type="button" id="send-offer" class="btn btn-outline-success float-left">Create An Offer</button>
-      <?php } ?>
+      
       <button class="send-message" type="submit" id="send-msg">SEND</button>
       <button type="button" class="arrow-drop float-right" data-html="true" data-toggle="popover" data-placement="top" data-content='
       <strong>Pressing Enter will :</strong>

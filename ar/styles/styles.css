@@ -2568,7 +2568,7 @@ font-size:1.25rem;
 /***  Buyer Requests Send Offers Modal Styles  ***/
 
 #send-offer-modal .modal-dialog {
-	max-width:600px !important;
+	/*max-width:600px !important;*/
 }
 
 
@@ -2620,7 +2620,52 @@ color:#0e0e0f;
 padding-bottom:20px;
 
 }
-
+#send-offer-div #send-offer-modal .modal-body .request-proposals-list .proposal-title{
+	margin-right: 135px !important;
+}
+#send-offer-div #send-offer-modal .modal-header .close ,#send-offer-div #submit-proposal-details .modal-header .close{
+	margin: -1rem auto -1rem 0;
+}
+#send-offer-div #send-offer-modal #submit-proposal{
+	background-color: #ff0707;
+    border: 2px solid #ff0707;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    height: 60px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    width: 180px;
+	margin-right: 10px;
+}
+#send-offer-div #send-offer-modal .btn-secondary{
+	background-color: transparent;
+	border: none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	color: #888888;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 0;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-o-transition: all 0.3s ease-in-out 0s;
+	-moz-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+.modal{
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 .modal-body .request-proposals-list hr {
 
 margin-left:-15px !important;
@@ -2689,7 +2734,7 @@ margin-right:-15px !important;
 
 	#submit-proposal-details .modal-dialog {
 
-		max-width:600px !important;
+		/*max-width:600px !important;*/
 
 	}
 

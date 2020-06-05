@@ -12,6 +12,23 @@ $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
 $login_seller_account_type = $row_login_seller->account_type;
 require("includes/inboxFunctions.php");
+
+
+
+  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+       $url = "https://";   
+  else  
+       $url = "http://";   
+  // Append the host(domain name, ip) to the URL.   
+  $url.= $_SERVER['HTTP_HOST'];   
+
+  // Append the requested resource location to the URL   
+  $url.= $_SERVER['REQUEST_URI'];    
+  $full_url = $_SERVER['REQUEST_URI'];
+
+  $page_url = substr("$full_url", 15);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">

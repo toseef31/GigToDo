@@ -43,9 +43,12 @@ $proposal_title = $row_proposals->proposal_title;
 
 <h5 class="modal-title"> Specify Your Proposal Details </h5>
 
-<button class="close" data-dismiss="modal">
+<!-- <button class="close" data-dismiss="modal">
 <span> &times; </span>
-</button>
+</button> -->
+<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+	<img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
+</a>
 
 </div><!-- modal-header Ends -->
 
@@ -53,11 +56,14 @@ $proposal_title = $row_proposals->proposal_title;
 
 <form id="proposal-details-form"><!--- proposal-details-form Starts --->
 
-<div class="selected-proposal p-3"><!--- selected-proposal p-3 Starts --->
+<div class="selected-proposal"><!--- selected-proposal p-3 Starts --->
 
-<h5> <?php echo $proposal_title; ?> </h5>
+	<div class="form-group">
+		<div class="customer-profile px-0 border-bottom-0">
+			<h5> <?php echo $proposal_title; ?> </h5>
+		</div>
+	</div>
 
-<hr>
 
 <input type="hidden" name="proposal_id" value="<?php echo $proposal_id; ?>">
 
@@ -68,18 +74,19 @@ $proposal_title = $row_proposals->proposal_title;
 <input type="hidden" name="file" value="<?php echo $file; ?>">
 
 <div class="form-group"><!--- form-group Starts --->
-
+<div class="customer-profile px-0 border-bottom-0">
 <label class="font-weight-bold"> Description :  </label>
 
 <textarea name="description" class="form-control" required=""></textarea>
-
+</div>
 </div><!--- form-group Ends --->
 
-<hr>
 
-<div class="form-group"><!--- form-group Starts --->
 
-<label class="font-weight-bold"> Delivery Time :  </label>
+<!-- <div class="form-group"> -->
+	<!--- form-group Starts --->
+
+<!-- <label class="font-weight-bold"> Delivery Time :  </label>
 
 <select class="form-control float-right" name="delivery_time" required="">
 
@@ -91,13 +98,47 @@ $proposal_title = $row_proposals->proposal_title;
 
 </select>
 
-</div><!--- form-group Ends --->
+</div> -->
+<!--- form-group Ends --->
 
-<hr>
+<div class="form-group">
+	<div class="control-label d-flex align-items-start">
+      <span><img src="<?= $site_url; ?>/assets/img/post-request/icon-3.png" alt="Icon"></span>
+      <span>When would you like your Service Delivered?</span>
+  </div>
+	<div class="deliver-time d-flex flex-wrap mb-15">
+		<?php 
 
-<div class="form-group"><!--- form-group Starts --->
+		$get_delivery_times = $db->select("delivery_times");
 
-<label class="font-weight-bold"> Total Offer Amount :  </label>
+		while($row_delivery_times = $get_delivery_times->fetch()){
+
+		$delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+		$delivery_id = $row_delivery_times->delivery_id;
+		?>
+		<label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
+			<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" hidden />
+			<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+				<span class="color-icon">
+					<span>-</span>
+					<span>+</span>
+				</span>
+				<span class="d-flex flex-row align-items-end time">
+					<span><?= $delivery_proposal_title; ?></span>
+					<!-- <span>HRS</span> -->
+				</span>
+			</div>
+		</label>
+		<?php } ?>
+	</div>
+</div>
+
+
+
+<!-- <div class="form-group"> -->
+	<!--- form-group Starts --->
+
+<!-- <label class="font-weight-bold"> Total Offer Amount :  </label>
 
 <div class="input-group float-right">
 
@@ -107,16 +148,26 @@ $proposal_title = $row_proposals->proposal_title;
 
 </div>
 
-</div><!--- form-group Ends --->
+</div> -->
+<!--- form-group Ends --->
+
+<div class="form-group">
+    <div class="control-label d-flex align-items-start">
+        <span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
+        <span>What is your budget?</span>
+    </div>
+    <input class="form-control mb-30" type="text" name="amount" min="5" placeholder="$ 5 Minimum" required="" />
+</div>
 
 
 </div><!--- selected-proposal p-3 Ends --->
 
-<div class="modal-footer"><!--- modal-footer Starts --->
+<div class="border-top"><!--- modal-footer Starts --->
+<div class="form-group d-flex flex-row align-items-center justify-content-between">
+<button type="button" class="button-close" data-dismiss="modal" data-toggle="modal" data-target="#send-offer-modal">Back</button>
 
-<button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#send-offer-modal">Back</button>
-
-<button type="submit" class="btn btn-success">Submit Offer</button>
+<button type="submit" class="button">Submit Offer</button>
+</div>
 
 </div><!--- modal-footer Ends --->
 
@@ -142,7 +193,7 @@ event.preventDefault();
 
 description = $("textarea[name='description']").val();
 
-delivery_time = $("select[name='delivery_time']").val();
+delivery_time = $("input[name='delivery_time']:checked").val();
 
 amount = $("input[name='amount']").val();
 

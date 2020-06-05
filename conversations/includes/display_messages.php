@@ -23,9 +23,11 @@
 	$message_file = $row_inbox_messages->message_file;
 	$message_offer_id = $row_inbox_messages->message_offer_id;
 
+
 	if(!$message_offer_id == 0){
 		$select_offer = $db->select("messages_offers",array("offer_id" => $message_offer_id));	
 		$row_offer = $select_offer->fetch();
+		$offer_id_msg = $row_offer->offer_id;
 		$sender_id = $row_offer->sender_id;
 		$proposal_id = $row_offer->proposal_id;
 		$description = $row_offer->description;
@@ -49,6 +51,7 @@
 	}
 
 	$allowed = array('jpeg','jpg','gif','png');
+
 
 	?>
 	<div class="message-content-card-item d-flex flex-row align-items-start inboxMsg media inboxMsg">
@@ -110,6 +113,7 @@
 				<div class="d-flex flex-row justify-content-end align-items-center">
 					<?php if($offer_status == "active"){ ?>
 					<?php if($login_seller_id == $sender_id){ ?>
+					<a class="withdraw-offer" type="button" href="delete_offer?offer_id=<?php echo $offer_id_msg; ?>">Withdraw offer</a>
 					<?php }else{ ?>
 					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="withdraw-offer float-right">
 					Accept Offer 

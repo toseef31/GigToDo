@@ -12,12 +12,15 @@ $receiver_id = $input->post('receiver_id');
 $message = $input->post('message');
 $file = $input->post('file');
 ?>
-<div id="send-offer-modal" class="modal fade"><!-- send-offer-modal modal fade Starts -->
-<div class="modal-dialog"><!-- modal-dialog Starts -->
+<div id="send-offer-modal" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true"><!-- send-offer-modal modal fade Starts -->
+<div class="modal-dialog  modal-dialog-centered customer-order" role="document"><!-- modal-dialog Starts -->
 <div class="modal-content"><!-- modal-content Starts -->
 <div class="modal-header"><!-- modal-header Starts -->
-<h5 class="modal-title"> Select A Proposal/Service To Offer </h5>
-<button class="close" data-dismiss="modal"><span>&times;</span></button>
+<h5 class="modal-title"> حدد عرض / خدمة لعرضها </h5>
+<!-- <button class="close" data-dismiss="modal"><span>&times;</span></button> -->
+<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+	<img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
+</a>
 </div><!-- modal-header Ends -->
 <div class="modal-body p-0"><!-- modal-body p-0 Starts -->
 <div class="request-proposals-list"><!--- request-proposals-list Starts --->
@@ -40,15 +43,17 @@ $proposal_img1 = $row_proposals->proposal_img1;
 <?php } ?>
 </div><!--- request-proposals-list Ends --->
 </div><!-- modal-body p-0 Ends -->
-<div class="modal-footer"><!--- modal-footer Starts --->
-<button class="btn btn-secondary" data-dismiss="modal"> Close </button>
-<button id="submit-proposal" class="btn btn-success" data-toggle="modal" data-dismiss="modal" data-target="#submit-proposal-details">Go Next</button>
+<div class="border-top"><!--- modal-footer Starts --->
+	<div class="form-group d-flex flex-row align-items-center justify-content-between">
+<button class="button-close" data-dismiss="modal"> إلغاء </button>
+<button id="submit-proposal" class="button" data-toggle="modal" data-dismiss="modal" data-target="#submit-proposal-details">يذهبون المقبل</button>
+</div>
 </div><!--- modal-footer Ends --->
 </div><!-- modal-content Ends -->
 </div><!-- modal-dialog Ends -->
 </div><!-- send-offer-modal modal fade Ends -->
-<div id="submit-proposal-details" class="modal fade"><!--- modal fade Starts --->
-<div class="modal-dialog"><!--- modal-dialog Starts --->
+<div id="submit-proposal-details" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true"><!--- modal fade Starts --->
+<div class="modal-dialog modal-dialog-centered customer-order" role="document"><!--- modal-dialog Starts --->
 </div><!--- modal-dialog Ends --->
 </div><!--- modal fade Ends --->
 <textarea id="message" class="d-none"><?php echo $message; ?></textarea>
@@ -66,7 +71,7 @@ $(document).ready(function(){
    file = "<?php echo $file; ?>";
    $.ajax({
 		method: "POST",   
-		url: "<?php echo $site_url; ?>/conversations/submit_proposal_details",
+		url: "<?php echo $site_url; ?>/ar/conversations/submit_proposal_details",
 		data: { proposal_id: proposal_id, receiver_id: receiver_id, message: message, file: file}
 		}).done(function(data){
 		 $("#submit-proposal-details .modal-dialog").html(data);

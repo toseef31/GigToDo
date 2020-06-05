@@ -2568,9 +2568,12 @@ font-size:1.25rem;
 /***  Buyer Requests Send Offers Modal Styles  ***/
 
 #send-offer-modal .modal-dialog {
-	max-width:600px !important;
+	/*max-width:600px !important;*/
 }
-
+.modal{
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 
 .modal-body .request-summary {
 padding:15px;
@@ -2689,7 +2692,7 @@ margin-right:-15px !important;
 
 	#submit-proposal-details .modal-dialog {
 
-		max-width:600px !important;
+		/*max-width:600px !important;*/
 
 	}
 

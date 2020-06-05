@@ -40,9 +40,11 @@
 				$select_inbox_sellers = $db->query($inboxQuery,array("r_id"=>$login_seller_id,"s_id"=>$login_seller_id));
 				$count_inbox_sellers = $select_inbox_sellers->rowCount();
 				while($row_inbox_sellers = $select_inbox_sellers->fetch()){
+
 				$message_sender = $row_inbox_sellers->sender_id;
 				$message_receiver = $row_inbox_sellers->receiver_id;
 				$message_id = $row_inbox_sellers->message_id;
+
 				$message_status = $row_inbox_sellers->message_status;
 				$message_group_id = $row_inbox_sellers->message_group_id;
 				if($login_seller_id == $message_sender){
