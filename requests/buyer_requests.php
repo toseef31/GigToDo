@@ -16,7 +16,8 @@
   $login_seller_offers = $row_login_seller->seller_offers;
   
   $request_child_ids = array();
-  $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
+  // $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
+  $select_proposals = $db->query("select DISTINCT proposal_cat_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
   while($row_proposals = $select_proposals->fetch()){
    $proposal_child_id = $row_proposals->proposal_child_id;
    array_push($request_child_ids, $proposal_child_id);
