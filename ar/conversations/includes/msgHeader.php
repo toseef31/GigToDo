@@ -13,6 +13,7 @@
 	$login_seller_id = $row_login_seller->seller_id;
 	$login_seller_account_type = $row_login_seller->account_type;
 
+
 	$message_group_id = $input->post('message_group_id');
 
 	$get_inbox_sellers = $db->select("inbox_sellers",array("message_group_id"=>$message_group_id));
@@ -36,6 +37,7 @@
 
 	$select_seller = $db->select("sellers",array("seller_id"=>$seller_id));
 	$row_seller = $select_seller->fetch();
+	$seller_account_type = $row_seller->account_type;
 	$seller_image = @$row_seller->seller_image;
 	$seller_user_name = @$row_seller->seller_user_name;
 	$seller_status = @$row_seller->seller_status;
@@ -113,12 +115,26 @@
 
 	<div class="message-body-header d-flex flex-wrap align-items-center justify-content-between">
 		<p class="user-status d-flex flex-column bg-white <?php echo $statusClass; ?>">
-			<i class="fal fa-angle-left"></i>
-			<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
-			<?php if (check_status($seller_id) == "Online") { ?>
-				<span class="text-success">Online</span>
+			<?php if ($seller_account_type == "seller") { ?>
+			<a href="<?= $site_url; ?>/ar/<?= $seller_user_name; ?>" style="display: contents;">
+				<i class="fal fa-angle-left"></i>
+				<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
+				<?php if (check_status($seller_id) == "Online") { ?>
+					<span class="text-success">Online</span>
+				<?php }else{ ?>
+					<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
+				<?php } ?>
+			</a>
 			<?php }else{ ?>
-				<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
+				<a href="<?= $site_url; ?>/ar/profile?user_name=<?= $seller_user_name; ?>" style="display: contents;">
+					<i class="fal fa-angle-left"></i>
+					<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
+					<?php if (check_status($seller_id) == "Online") { ?>
+						<span class="text-success">Online</span>
+					<?php }else{ ?>
+						<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
+					<?php } ?>
+				</a>
 			<?php } ?>
 		</p>
 		<p class="float-right">

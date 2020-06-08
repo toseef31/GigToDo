@@ -261,7 +261,7 @@ if(isset($_POST['login'])){
 						
 				      if($row_seller->account_type == 'buyer'){
 
-             $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/ar/";
+             // $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]/gigtodo/ar/";
 
              
 		          echo "
@@ -274,7 +274,7 @@ if(isset($_POST['login'])){
 		                  swal.showLoading()
 		                }
 		                }).then(function(){
-		                  window.open('$url','_self')
+		                  window.open('$site_url/ar/','_self')
 		              });
 		          </script>";
 				      }else{
@@ -289,7 +289,7 @@ if(isset($_POST['login'])){
 		                  swal.showLoading()
 		                }
 		                }).then(function(){
-		                  window.open('dashboard','_self')
+		                  window.open('/ar/dashboard','_self')
 		              });
 		          </script>";
 		        }

@@ -266,7 +266,7 @@
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt="">
+        <a href="<?= $site_url; ?>/ar/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt="">
           الخروج
         </a>
       </li>

@@ -19,29 +19,29 @@ $login_seller_offers = $row_login_seller->seller_offers;
 $relevant_requests = $row_general_settings->relevant_requests;
 
 
-$request_child_ids = array();
+$request_cat_ids = array();
 
-$select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id'");
+$select_proposals = $db->query("select DISTINCT proposal_cat_id from proposals where proposal_seller_id='$login_seller_id'");
 
 while($row_proposals = $select_proposals->fetch()){
 
-$proposal_child_id = $row_proposals->proposal_child_id;
+$proposal_cat_id = $row_proposals->proposal_cat_id;
 
-array_push($request_child_ids, $proposal_child_id);
-
-}
-
-$where_child_id = array();
-
-foreach($request_child_ids as $child_id){
-
-$where_child_id[] = "child_id=" . $child_id; 
+array_push($request_cat_ids, $proposal_cat_id);
 
 }
 
-if(count($where_child_id) > 0){
+$where_cat_id = array();
 
-$requests_query = " and (" . implode(" or ", $where_child_id) . ")";
+foreach($request_cat_ids as $cat_id){
+
+$where_cat_id[] = "cat_id=" . $cat_id; 
+
+}
+
+if(count($where_cat_id) > 0){
+
+$requests_query = " and (" . implode(" or ", $where_cat_id) . ")";
 
 }
 
@@ -51,15 +51,15 @@ if($relevant_requests == "no"){ $requests_query = ""; }
 
 if(!empty($requests_query) or $relevant_requests == "no"){
 
-$child_id = $input->post('child_id');
+$cat_id = $input->post('cat_id');
 	
-if($child_id == "all"){
+if($cat_id == "all"){
 	
 $select_requests = $db->query("select * from buyer_requests where request_status='active'" . $requests_query . " AND NOT seller_id='$login_seller_id' order by 1 DESC");
 
 }else{
 	
-$select_requests = $db->query("select * from buyer_requests where request_status='active' AND child_id=:child_id AND NOT seller_id='$login_seller_id' order by 1 DESC",array("child_id"=>$child_id));
+$select_requests = $db->query("select * from buyer_requests where request_status='active' AND cat_id=:cat_id AND NOT seller_id='$login_seller_id' order by 1 DESC",array("cat_id"=>$cat_id));
 	
 }
 

@@ -68,14 +68,21 @@ $login_seller_id = $row_login_seller->seller_id;
   <link href="../styles/animate.css" rel="stylesheet">
   <script type="text/javascript" src="../js/sweat_alert.js"></script>
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
-
+	<style>
+		@media(min-width: 767px){
+		  .page-height{
+		    position: relative;
+		    min-height: 80%;
+		  }
+		}
+	</style>
 </head>
 
 <body class="all-content">
 
 <?php require_once("../includes/buyer-header.php"); ?>
 
-	<main>
+	<main class="page-height">
 		<section class="container-fluid list-page">
 			<div class="row">
 				<div class="container">

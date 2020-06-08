@@ -4,7 +4,7 @@ session_start();
 require_once("includes/db.php");
 require_once("functions/functions.php");
 if(strpos($_SERVER["REQUEST_URI"], 'index') !== false){
-	header("location: $site_url");
+	header("location: $site_url/ar");
 }
 require_once("social-config.php");
 $site_title = $row_general_settings->site_title;

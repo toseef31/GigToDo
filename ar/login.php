@@ -412,7 +412,7 @@ if(isset($_SESSION['seller_user_name'])){
 							$seller_user_name = ucfirst(strtolower($seller_user_name));
 					      if($row_seller->account_type == 'buyer'){
 
-					      	$url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+					      	// $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/ar";
 		         
 			          echo "
 			          <script>
@@ -424,7 +424,7 @@ if(isset($_SESSION['seller_user_name'])){
 			                  swal.showLoading()
 			                }
 			                }).then(function(){
-			                  window.open('$url','_self')
+			                  window.open('$site_url/ar','_self')
 			              });
 			          </script>";
 					      }else{

@@ -115,7 +115,7 @@
 					<?php if($login_seller_id == $sender_id){ ?>
 					<a class="withdraw-offer" type="button" href="delete_offer?offer_id=<?php echo $offer_id_msg; ?>">Withdraw offer</a>
 					<?php }else{ ?>
-					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="withdraw-offer float-right">
+					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="accepte-offer  float-right">
 					Accept Offer 
 					</button>
 					<script>

@@ -15,22 +15,22 @@
   $login_seller_id = $row_login_seller->seller_id;
   $login_seller_offers = $row_login_seller->seller_offers;
   
-  $request_child_ids = array();
+  $request_cat_ids = array();
   // $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
   $select_proposals = $db->query("select DISTINCT proposal_cat_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
   while($row_proposals = $select_proposals->fetch()){
-   $proposal_child_id = $row_proposals->proposal_child_id;
-   array_push($request_child_ids, $proposal_child_id);
+   $proposal_cat_id = $row_proposals->proposal_cat_id;
+   array_push($request_cat_ids, $proposal_cat_id);
   }
   
-  $where_child_id = array();
-  foreach($request_child_ids as $child_id){
-   $where_child_id[] = "child_id=" . $child_id; 
+  $where_cat_id = array();
+  foreach($request_cat_ids as $cat_id){
+   $where_cat_id[] = "cat_id=" . $cat_id; 
   }
   
-  if(count($where_child_id) > 0){
-   $requests_query = " and (" . implode(" or ", $where_child_id) . ")";
-   $child_cats_query = "(" . implode(" or ", $where_child_id) . ")";
+  if(count($where_cat_id) > 0){
+   $requests_query = " and (" . implode(" or ", $where_cat_id) . ")";
+   $child_cats_query = "(" . implode(" or ", $where_cat_id) . ")";
   }
   $relevant_requests = $row_general_settings->relevant_requests;
   
@@ -116,16 +116,16 @@
             <div class="row flex-md-row-reverse">
               <div class="col-12 col-md-6">
                 <select id="sub-category" class="form-control float-right sort-by">
-                  <option value="all"> All Subcategories </option>
+                  <option value="all"> All Categories </option>
                   <?php
-                    if(count($where_child_id) > 0){
-                    $get_c_cats = $db->query("select * from categories_children where ".$child_cats_query);
+                    if(count($where_cat_id) > 0){
+                    $get_c_cats = $db->query("select * from categories where ".$child_cats_query);
                     while($row_c_cats = @$get_c_cats->fetch()){
-                    $child_id = $row_c_cats->child_id;
-                    $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+                    $cat_id = $row_c_cats->cat_id;
+                    $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
                     $row_meta = $get_meta->fetch();
-                    $child_title = $row_meta->child_title;
-                    echo "<option value='$child_id'> $child_title </option>";
+                    $child_title = $row_meta->cat_title;
+                    echo "<option value='$cat_id'> $child_title </option>";
                     }
                     }
                     ?>
@@ -495,12 +495,12 @@
                 <option value="all"> All Subcategories </option>
                 <?php
                   if(count($where_child_id) > 0){
-                  $get_c_cats = $db->query("select * from categories_children where ".$child_cats_query);
+                  $get_c_cats = $db->query("select * from categories where ".$child_cats_query);
                   while($row_c_cats = @$get_c_cats->fetch()){
                   $child_id = $row_c_cats->child_id;
-                  $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+                  $get_meta = $db->select("cats_meta",array("cat_id" => $child_id, "language_id" => $siteLanguage));
                   $row_meta = $get_meta->fetch();
-                  $child_title = $row_meta->child_title;
+                  $child_title = $row_meta->cat_title;
                   echo "<option value='$child_id'> $child_title </option>";
                   }
                   }
@@ -740,12 +740,12 @@
     });
     });
     $('#sub-category').change(function(){
-    var child_id = $(this).val();
+    var cat_id = $(this).val();
     $('#load-data').html("");
     $.ajax({
     url:"load_category_data",
     method:"POST",
-    data:{child_id:child_id},
+    data:{cat_id:cat_id},
     success:function(data){
     $('#load-data').html(data);
     }

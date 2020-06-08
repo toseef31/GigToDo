@@ -30,6 +30,7 @@ $count_orders = $past_orders->rowCount();
 
 $select_seller = $db->select("sellers",array("seller_id" => $seller_id));
 $row_seller = $select_seller->fetch();
+$seller_account_type = $row_seller->account_type;
 $seller_image = $row_seller->seller_image;
 $seller_user_name = $row_seller->seller_user_name;
 $seller_level = $row_seller->seller_level;
@@ -57,16 +58,33 @@ $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$lo
 		<div class="message-about d-flex flex-column">
 			<div class="message-about-header">
 				<h4>About</h4>
+				<?php if($seller_account_type == "seller"){ ?>
 				<div class="d-flex flex-column align-items-center justify-content-center">
 					<div class="message-about-user">
-						<?php if(!empty($seller_image)){ ?>
-						<img src="../user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
-						<?php }else{ ?>
-						<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
-						<?php } ?>
+						<a href="<?= $site_url; ?>/<?= $seller_user_name; ?>">
+							<?php if(!empty($seller_image)){ ?>
+							<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
+							<?php }else{ ?>
+							<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+							<?php } ?>
+						</a>
 					</div>
-					<div class="username"><?= ucfirst($seller_user_name); ?></div>
+					<div class="username"><a href="<?= $site_url; ?>/<?= $seller_user_name; ?>" style="color: #1b1b1b;"><?= ucfirst($seller_user_name); ?></a></div>
 				</div>
+				<?php }else{ ?>
+				<div class="d-flex flex-column align-items-center justify-content-center">
+					<div class="message-about-user">
+						<a href="<?= $site_url; ?>/profile?user_name=<?= $seller_user_name; ?>">
+							<?php if(!empty($seller_image)){ ?>
+							<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
+							<?php }else{ ?>
+							<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+							<?php } ?>
+						</a>
+					</div>
+					<div class="username"><a href="<?= $site_url; ?>/profile?user_name=<?= $seller_user_name; ?>" style="color: #1b1b1b;"><?= ucfirst($seller_user_name); ?></a></div>
+				</div>
+				<?php } ?>
 			</div>
 			<div class="message-about-body">
 				<div class="message-about-body-item d-flex flex-row justify-content-between align-items-center">
