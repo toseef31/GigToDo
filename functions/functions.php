@@ -55,7 +55,6 @@ function processing_fee($amount){
 	}
 }
 
-
 /// Time Ago Function Starts ///
 
 function time_ago($timestamp){  
