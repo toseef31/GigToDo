@@ -203,7 +203,7 @@ if (empty($form_data)) {
     </div>
   </div>
 
-  <div class="form-group mb-0">
+  <!-- <div class="form-group mb-0">
     <label class="control-label d-flex flex-row align-items-center">
       <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -226,7 +226,7 @@ if (empty($form_data)) {
           </span>
           <span class="d-flex flex-row align-items-end time">
             <span><?php echo $delivery_proposal_title; ?></span>
-            <!-- <span>HRS</span> -->
+            
           </span>
         </div>
       </label>
@@ -251,7 +251,7 @@ if (empty($form_data)) {
       <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
       <p>Set realistic deadlines for the work you produce. You can always edit your delivery deadline. Please let your buyer know in advance if you chose to do so.</p>
     </div>
-  </div>
+  </div> -->
   <!--- form-group row Ends --->
   <?php if($enable_referrals == "yes"){ ?>
   <div class="form-group d-none">
@@ -368,8 +368,7 @@ if(isset($_POST['submit'])){
   $rules = array(
   "proposal_title" => "required",
   "proposal_cat_id" => "required",
-  "proposal_child_id" => "required",
-  "delivery_id" => "required");
+  "proposal_child_id" => "required");
 
   $messages = array("proposal_title" => "please enter gig title","proposal_cat_id" => "please select a category and subcategory","proposal_desc" => "please enter service requirements","proposal_child_id" => "please select a category and subcategory","proposal_img1"=>"Please add at least 1 image to continue.", "delivery_id" => "please select delivery time");
   $val = new Validator($_POST,$rules,$messages);
@@ -439,7 +438,7 @@ if(isset($_POST['submit'])){
       $data['proposal_child_id'] = $input->post('proposal_child_id');
       // $data['proposal_tags'] = $input->post('proposal_tags');
       $data['proposal_price'] = $input->post('proposal_price');
-      $data['delivery_id'] = $input->post('delivery_id');
+      // $data['delivery_id'] = $input->post('delivery_id');
       
       $data['proposal_url'] = $sanitize_url;
       $data['proposal_seller_id'] = $login_seller_id;

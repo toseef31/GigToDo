@@ -181,8 +181,14 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="gigs-more text-center mt-50">
-                <a href="javascript:void(0);">Load more gigs</a>
+                <!-- <a href="javascript:void(0);">Load more gigs</a> -->
               </div>
+              <nav>
+                <!-- nav Starts -->
+                <ul class="pagination" id="category_pagination">
+                  <?php get_category_pagination(); ?>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>

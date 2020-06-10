@@ -18,6 +18,7 @@
 	while($row_inbox_messages = $get_inbox_messages->fetch()){
 	$message_id = $row_inbox_messages->message_id;
 	$message_sender = $row_inbox_messages->message_sender;
+	$message_receiver = $row_inbox_messages->message_receiver;
 	$message_desc = $row_inbox_messages->message_desc;
 	$message_date = $row_inbox_messages->message_date;
 	$message_file = $row_inbox_messages->message_file;
@@ -80,7 +81,7 @@
 		</div>
 	</div>
 	<?php if(!$message_offer_id == 0){ ?>
-	<div class="message-content-card-item d-flex flex-column inboxMsg media inboxMsg">
+	<div class="message-content-card-item d-flex flex-column inboxMsg media inboxMsg" id="offer-<?= $message_offer_id; ?>">
 		<div class="freelancer-offer d-flex flex-row align-items-start">
 			<div class="user-image">
 				<?php if(!empty($sender_image)){ ?>
@@ -101,7 +102,7 @@
 						<span>
 							<img src="<?= $site_url; ?>/assets/img/messages/revision-icon.png" />
 						</span>
-						<span>Price / Amount : <?php echo $amount; ?></span>
+						<span>Price / Amount : <?php echo $s_currency; ?><?php echo $amount; ?></span>
 					</li>
 					<li class="d-flex flex-row align-items-center">
 						<span>
@@ -115,8 +116,9 @@
 					<?php if($login_seller_id == $sender_id){ ?>
 					<a class="withdraw-offer" type="button" href="delete_offer?offer_id=<?php echo $offer_id_msg; ?>">Withdraw offer</a>
 					<?php }else{ ?>
+					<!-- <button class="cancel-offer" id="cancel-offer-<?= $message_offer_id; ?>" type="button">no thanks</button> -->
 					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="accepte-offer  float-right">
-					Accept Offer 
+					Order Now 
 					</button>
 					<script>
 					$("#accept-offer-<?php echo $message_offer_id; ?>").click(function(){
@@ -148,7 +150,94 @@
 	</div>
 	<?php } ?>
 	<!-- Each item -->
-
-
-	
 <?php } ?>
+<?php 
+		$get_custom_offer = $db->query("select * from buyer_requests where seller_id='$login_seller_id' OR user_id='$message_receiver'");
+
+	// $get_custom_offer = $db->select("buyer_requests",array("seller_id" => $login_seller_id, OR "user_id" => $message_receiver));
+	while($row_custom_offer = $get_custom_offer->fetch()){ 
+		$request_id = $row_custom_offer->request_id;
+		$request_type = $row_custom_offer->request_type;
+		$request_seller_id = $row_custom_offer->seller_id;
+		$request_title = $row_custom_offer->request_title;
+		$request_description = $row_custom_offer->request_description;
+		$delivery_time = $row_custom_offer->delivery_time;
+		$request_budget = $row_custom_offer->request_budget;
+		 // print_r($row_custom_offer);
+?>
+	<?php if($request_type == "MessageOffer"){ ?>
+	<div class="message-content-card-item d-flex flex-column inboxMsg media inboxMsg">
+		<div class="freelancer-offer d-flex flex-row align-items-start">
+			<div class="user-image">
+				<?php if(!empty($sender_image)){ ?>
+			    <img src="../user_images/<?php echo $sender_image; ?>" class="rounded-circle mr-3" width="60">
+				<?php }else{ ?>
+				<img src="assets/img/emongez_cube.png" />
+				<?php } ?>
+			</div>
+			<div class="messages-text d-flex flex-column">
+				<div class="offer-title-price d-flex flex-row align-items-center justify-content-between">
+					<span class="title"><?php echo $request_title; ?></span>
+					<span class="price"><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+				</div>
+				<div class="offer-summary"><?php echo $request_description; ?></div>
+				<h5>Your offer includes:</h5>
+				<ul class="d-flex flex-wrap">
+					<li class="d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/revision-icon.png" />
+						</span>
+						<span>Price / Amount : <?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+					</li>
+					<li class="d-flex flex-row align-items-center">
+						<span>
+							<img src="<?= $site_url; ?>/assets/img/messages/time-icon.png" />
+						</span>
+						<span>Deliver Time : <?php echo $delivery_time; ?></span>
+					</li>
+				</ul>
+
+				<div class="d-flex flex-row justify-content-end align-items-center">
+					<?php if($offer_status == "active"){ ?>
+					<?php if($login_seller_id == $request_seller_id){ ?>
+					<!-- <a class="withdraw-offer" type="button" href="delete_offer?offer_id=<?php echo $offer_id_msg; ?>">Withdraw offer</a> -->
+					<?php }else{ ?>
+					<button id="send-offer-<?= $request_id; ?>" class="accepte-offer  float-right">
+					Send Offer
+					</button>
+					<script>
+					$("#send-offer-<?= $request_id; ?>").click(function(){
+						receiver_id = "<?= $request_seller_id; ?>";
+						alert(receiver_id);
+						message = $("#message").val();
+						file = $("#file").val();
+						if(file == ""){
+							message_file = file;
+						}else{
+							message_file = document.getElementById("file").files[0].name;
+						}
+						$.ajax({
+							method: 'POST',
+							url: 'send_offer_modal',
+							data: {receiver_id: receiver_id, message: message, file: message_file}
+						}).done(function(data){
+							$("#send-offer-div").html(data);
+						});
+					});
+					</script>
+					<?php } ?>
+					<?php }elseif($offer_status == "accepted"){ ?>
+					<button class="withdraw-offer rounded-0 mt-2 float-right" disabled>
+					Offer Accepted
+					</button>
+					<a href="../order_details.php?order_id=<?php echo $order_id; ?>" class="mt-3 mr-3 float-right text-success">
+					View Order
+					</a>
+					<?php } ?>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+<?php } } ?>

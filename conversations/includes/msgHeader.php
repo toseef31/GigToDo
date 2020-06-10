@@ -190,7 +190,7 @@
 
 	<button type="button" id="send-offer" class="offer-hire-button">Create An Offer</button>
 	<?php } } else{ ?>
-		<a class="offer-hire-button" data-toggle="modal" href="#exampleModalCenter">hire freelancer</a>
+		<a class="offer-hire-button" data-toggle="modal" data-target="#custom_order">hire freelancer</a>
 	<?php } ?>
 	<!-- <a class="offer-hire-button" data-toggle="modal" href="#exampleModalCenter">Custom Offer</a> -->
 </div>

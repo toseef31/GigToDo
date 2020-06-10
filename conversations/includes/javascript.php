@@ -55,6 +55,21 @@ function showSingle(message_group_id){
   });
 }
 
+$("#sub-category").hide();
+
+$("#category").change(function(){
+  $("#sub-category").show();  
+  var category_id = $(this).val();
+  $.ajax({
+  url:"fetch_subcategory",
+  method:"POST",
+  data:{category_id:category_id},
+  success:function(data){
+  $("#sub-category").html(data);
+  }
+  });
+});
+
 function addRemoveSelected(select){
   $(".col-md-3 .message-recipients").removeClass("selected");
   $(select).addClass("selected");

@@ -187,7 +187,7 @@ if (empty($form_data)) {
       </p>
     </div>
   </div>
-  <div class="form-group mb-0">
+  <!-- <div class="form-group mb-0">
     <label class="control-label d-flex flex-row align-items-center">
       <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -210,7 +210,7 @@ if (empty($form_data)) {
           </span>
           <span class="d-flex flex-row align-items-end time">
             <span><?php echo $delivery_proposal_title_arabic; ?></span>
-            <!-- <span>HRS</span> -->
+            
           </span>
         </div>
       </label>
@@ -237,7 +237,7 @@ if (empty($form_data)) {
           حدد مواعيد نهائية واقعية للشغل اللى بتنتجه. ممكن دايما تعدل الميعاد النهائى لتسليم شغلك. يُرجى انك تخلى المشترى يعرف لو اخترت تعمل كدة
       </p>
     </div>
-  </div>
+  </div> -->
   <!--- form-group row Ends --->
   <?php if($enable_referrals == "yes"){ ?>
   <div class="form-group d-none">
@@ -357,8 +357,7 @@ if(isset($_POST['submit'])){
   "proposal_title" => "required",
   "proposal_cat_id" => "required",
   "proposal_child_id" => "required",
-  "proposal_desc" => "required",
-  "delivery_id" => "required");
+  "proposal_desc" => "required");
 
   $messages = array("proposal_title" => "يرجى إدخال عنوان الخدمة","proposal_cat_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_desc" => "الرجاء إدخال متطلبات الخدمة","proposal_child_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_img1"=>"صورة الاقتراح 1 مطلوبة.", "delivery_id" => "الرجاء تحديد وقت التسليم");
   $val = new Validator($_POST,$rules,$messages);
@@ -427,7 +426,7 @@ if(isset($_POST['submit'])){
       $data['proposal_child_id'] = $input->post('proposal_child_id');
       // $data['proposal_tags'] = $input->post('proposal_tags');
       $data['proposal_price'] = $input->post('proposal_price');
-      $data['delivery_id'] = $input->post('delivery_id');
+      // $data['delivery_id'] = $input->post('delivery_id');
       
       $data['proposal_url'] = $sanitize_url;
       $data['proposal_seller_id'] = $login_seller_id;

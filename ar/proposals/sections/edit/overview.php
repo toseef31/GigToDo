@@ -174,7 +174,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 										</p>
 									</div>
 								</div>
-								<div class="form-group mb-0">
+								<!-- <div class="form-group mb-0">
                   <label class="control-label d-flex flex-row align-items-center">
                     <span>
                       <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -196,7 +196,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
                         </span>
                         <span class="d-flex flex-row align-items-end time">
                           <span><?= $delivery_proposal_title; ?></span>
-                          <!-- <span>HRS</span> -->
+                          
                         </span>
                       </div>
                     </label>
@@ -216,7 +216,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
                         </span>
                         <span class="d-flex flex-row align-items-end time">
                           <span><?php echo $delivery_proposal_title_arabic; ?></span>
-                          <!-- <span>HRS</span> -->
+                          
                         </span>
                       </div>
                     </label>
@@ -230,7 +230,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 							          حدد مواعيد نهائية واقعية للشغل اللى بتنتجه. ممكن دايما تعدل الميعاد النهائى لتسليم شغلك. يُرجى انك تخلى المشترى يعرف لو اخترت تعمل كدة
 							      </p>
                   </div>
-                </div>
+                </div> -->
 								<!--- form-group row Ends --->
 								<?php if($enable_referrals == "yes"){ ?>
 								<div class="form-group d-none">

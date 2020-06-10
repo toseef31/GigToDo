@@ -88,6 +88,11 @@ $("#send-offer").click(function(){
 	});
 });
 
+$('.cancel-offer').click(function(){
+	// alert("jhfdshfj");
+	$('#offer-'+id).hide();
+});
+
 // Javascript Jquery Code To Reload User Typing Status Every half second Code Starts ///
 
 var seller_id = "<?= $seller_id; ?>";

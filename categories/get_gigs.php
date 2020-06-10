@@ -18,7 +18,7 @@ $keyword = $input->post('keyword');
 
 $s_value = $keyword;
 $get_proposals = $db->query("select from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
-	// print_r($search_query);
+	 print_r($get_proposals);
 	
 }
 

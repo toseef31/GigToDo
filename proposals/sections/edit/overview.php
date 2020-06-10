@@ -234,7 +234,7 @@ $child_title = $row_meta->child_title;
                       </div>
                     </div>
 
-                    <div class="form-group mb-0">
+                    <!-- <div class="form-group mb-0">
                       <label class="control-label d-flex flex-row align-items-center">
                         <span>
                           <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/passage-of-time.png" />
@@ -256,7 +256,7 @@ $child_title = $row_meta->child_title;
                             </span>
                             <span class="d-flex flex-row align-items-end time">
                               <span><?= $delivery_proposal_title; ?></span>
-                              <!-- <span>HRS</span> -->
+                              
                             </span>
                           </div>
                         </label>
@@ -276,7 +276,7 @@ $child_title = $row_meta->child_title;
                             </span>
                             <span class="d-flex flex-row align-items-end time">
                               <span><?php echo $delivery_proposal_title; ?></span>
-                              <!-- <span>HRS</span> -->
+                              
                             </span>
                           </div>
                         </label>
@@ -288,7 +288,7 @@ $child_title = $row_meta->child_title;
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>Set realistic deadlines for the work you produce. You can always edit your delivery deadline. Please let your buyer know in advance if you chose to do so.</p>
                       </div>
-                    </div>
+                    </div> -->
 
                     
                     <!--- form-group row Ends --->
