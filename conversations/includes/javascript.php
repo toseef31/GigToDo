@@ -61,13 +61,38 @@ $("#category").change(function(){
   $("#sub-category").show();  
   var category_id = $(this).val();
   $.ajax({
-  url:"fetch_subcategory",
+  url:"../fetch_subcategory",
   method:"POST",
   data:{category_id:category_id},
   success:function(data){
   $("#sub-category").html(data);
   }
   });
+});
+$('#file').change(function() {
+  var i = $(this).prev('label').clone();
+  var file = $('#file')[0].files[0].name;
+  
+  $('#file_name').html('<span>'+file+'</span>');
+  // $(this).prev('label').text(file);
+});
+$('#file').bind('change', function() {
+  var totalSize = this.files[0].size;
+  var totalSizeMb = totalSize  / Math.pow(1024,2);
+
+  $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+});
+$('.input-number').keyup(function(){
+  var custom_btn = $('.input-number').val();
+  $('#days30').val(custom_btn);
+});
+$(".input-number").keypress(function (e) {
+  //if the letter is not digit then display error and don't type anything
+  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    //display error message
+    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+           return false;
+  }
 });
 
 function addRemoveSelected(select){

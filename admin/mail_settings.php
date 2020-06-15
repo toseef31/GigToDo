@@ -87,14 +87,14 @@ $password = $row_smtp_settings->password;
                                 <div class="col-md-6">
 
                                     <select name="enable_smtp" class="form-control">
-
+                                      
                                     <?php if($enable_smtp == 'yes'){ ?>
 
                                     <option value="yes"> Yes </option>
 
                                     <option value="no"> No </option>
 
-                                    <?php }elseif($enable_smtp == 'no'){ ?>
+                                    <?php }else{ ?>
 
                                     <option value="no"> No </option>
 

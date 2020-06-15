@@ -522,7 +522,7 @@ if(isset($_SESSION['seller_user_name'])){
               <a href="proposals/create_proposal" class="col-lg-4 col-md-6 col-sm-6 mb-3">
                <div class="single-gigs mt-30 all-gigs">
                 <div class="proposal-card-base mp-proposal-card add-new-proposal">
-                 Create A New Proposal
+                 إنشاء أزعج جديد
                 </div>
                </div>
               </a>
@@ -535,21 +535,20 @@ if(isset($_SESSION['seller_user_name'])){
               <h3 class="title">المحفظة</h3>
             </div>
             <div class="row">
+              <?php 
+                $select_portfolio = $db->select("seller_portfolio",array("seller_id" => $login_seller_id)); 
+                while($row_portfolio = $select_portfolio->fetch()){
+                  $portfolio_id = $row_portfolio->portfolio_id;
+                  $portfolio_img = $row_portfolio->portfolio_img;
+                  $img_name_tmp = explode('.',$portfolio_img );
+                  $img_name = $img_name_tmp[0];
+              ?>
               <div class="col-md-4">
                 <div class="single-portfolio mt-30">
-                  <img src="assets/img/seller-profile/portfolio-1.jpg" alt="">
+                  <img src="<?= $site_url; ?>/portfolio_images/<?= $portfolio_img ?>" alt="">
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="single-portfolio mt-30">
-                  <img src="assets/img/seller-profile/portfolio-2.jpg" alt="">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="single-portfolio mt-30">
-                  <img src="assets/img/seller-profile/portfolio-3.jpg" alt="">
-                </div>
-              </div>
+              <?php } ?>
             </div>
           </div>
 
@@ -638,7 +637,7 @@ if(isset($_SESSION['seller_user_name'])){
                   <div class="single-review-comment d-flex">
                     <div class="comment-image">
                       <?php if(!empty($buyer_image)){ ?>
-                        <img src="user_images/$buyer_image" alt="author">
+                        <img src="<?= $site_url; ?>/user_images/<?= $buyer_image ?>" width="50" height="50" alt="author">
                       <?php }else{ ?>
                         <img src="assets/img/seller-profile/author-2.jpg" alt="author">
                       <?php } ?>

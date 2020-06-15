@@ -245,13 +245,13 @@
         </a>
       </li>
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/16.png" alt="">
+        <a href="portfolio"> <img src="<?= $site_url; ?>/assets/img/icon/16.png" alt="">
           المحفظة
         </a>
       </li>
       <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
       <li>
-        <a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt="">
+        <a href="invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt="">
           دعوة صديق
         </a>
       </li>
