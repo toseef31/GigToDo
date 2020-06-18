@@ -114,25 +114,7 @@ function time_ago($timestamp){
  }
 }
 /// Time Ago Function Ends ///
-function get_search_keyword(){
-	global $input;
-	global $siteLanguage;
-	global $db;
-	global $enable_referrals;
-	global $lang;
-	global $dir;
-	global $s_currency;
-	global $login_seller_id;
-	global $videoPlugin;
-	global $site_url;
 
-	$search_query = $_GET['keyword'];
-
-$online_sellers = array();
-$s_value = "%$search_query%";
-$get_proposals = $db->query("select from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
-	print_r($search_query);
-}
 /// get_search_proposals Function Starts ///
 function get_search_proposals(){
 global $input;
@@ -146,11 +128,14 @@ global $login_seller_id;
 global $videoPlugin;
 global $site_url;
 
-$search_query = $_SESSION['search_query'];
+$search_query = $input->post('keyword');
+// print_r($search_query);
 $online_sellers = array();
 $s_value = "%$search_query%";
+// print_r($s_value); die();
 $get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
 while($row_proposals = $get_proposals->fetch()){
+	// print_r($row_proposals);
 	$proposal_seller_id = $row_proposals->proposal_seller_id;
 	$select_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
 	$seller_status = $select_seller->fetch()->seller_status;
@@ -233,7 +218,7 @@ if(count($where_level)>0){
 if(count($where_language)>0){
 	$query_where .= " and (" . implode(" or ",$where_language) . ")";
 }
-$per_page = 16;
+$per_page = 15;
 if(isset($_GET['page'])){
 	$page = $input->get('page');
 }else{
@@ -251,7 +236,9 @@ echo"
 ";
 }
 
-while($row_proposals = $get_proposals->fetch()){$proposal_id = $row_proposals->proposal_id;
+while($row_proposals = $get_proposals->fetch()){
+// print_r($row_proposals);
+$proposal_id = $row_proposals->proposal_id;
 $proposal_title = $row_proposals->proposal_title;
 $proposal_price = $row_proposals->proposal_price;
 if($proposal_price == 0){
@@ -320,9 +307,11 @@ global $login_seller_id;
 global $videoPlugin;
 global $site_url;
 
-$search_query = $_SESSION['search_query'];
+$search_query = $input->post('keyword');
+// print_r($search_query);
 $online_sellers = array();
 $s_value = "%$search_query%";
+
 $get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
 while($row_proposals = $get_proposals->fetch()){
 	$proposal_seller_id = $row_proposals->proposal_seller_id;
@@ -407,7 +396,7 @@ if(count($where_level)>0){
 if(count($where_language)>0){
 	$query_where .= " and (" . implode(" or ",$where_language) . ")";
 }
-$per_page = 16;
+$per_page = 15;
 if(isset($_GET['page'])){
 	$page = $input->get('page');
 }else{
@@ -487,9 +476,11 @@ global $db;
 global $input;
 global $lang;
 global $s_currency;
-$search_query = $_SESSION['search_query'];
-$s_value = "%$search_query%";
+
+$search_query = $input->post('keyword');
+// print_r($search_query);
 $online_sellers = array();
+$s_value = "%$search_query%";
 $get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
 while($row_proposals = $get_proposals->fetch()){
 	$proposal_seller_id = $row_proposals->proposal_seller_id;
@@ -580,7 +571,7 @@ if(count($where_level)>0){
 if(count($where_language)>0){
 	$query_where .= " and (" . implode(" or ",$where_language) . ")";
 }
-$per_page = 16;
+$per_page = 15;
 $get_proposals = $db->query("select * from proposals " . $query_where,$values);
 $count_proposals = $get_proposals->rowCount();
 if($count_proposals > 0){
@@ -711,7 +702,7 @@ if(count($where_level)>0){
 if(count($where_language)>0){
 	$query_where .= " and (" . implode(" or ",$where_language) . ")";
 }
-$per_page = 16;
+$per_page = 15;
 if(isset($_GET['page'])){
 	$page = $input->get('page');
 }else{
@@ -887,7 +878,7 @@ if(count($where_level)>0){
 if(count($where_language)>0){
 	$query_where .= " and (" . implode(" or ",$where_language) . ")";
 }
-$per_page = 16;
+$per_page = 15;
 if(isset($_GET['page'])){
 	$page = $input->get('page');
 }else{
@@ -1063,7 +1054,7 @@ if(count($where_level)>0){
 if(count($where_language)>0){
 	$query_where .= " and (" . implode(" or ",$where_language) . ")";
 }
-$per_page = 16;
+$per_page = 15;
 if(isset($_REQUEST['cat_child_url'])){
 $child_url = "/" . $_REQUEST['cat_child_url'];
 }else{
@@ -1103,7 +1094,185 @@ if($count_proposals > 0){
 /// get_category_pagination Function Ends ///
 
 
+// get price filter proposals
+/// get_search_proposals Function Starts ///
+function get_search_price_proposals(){
+global $input;
+global $siteLanguage;
+global $db;
+global $enable_referrals;
+global $lang;
+global $dir;
+global $s_currency;
+global $login_seller_id;
+global $videoPlugin;
+global $site_url;
 
+$search_query = $input->post('price');
+// print_r($search_query);
+$online_sellers = array();
+$s_value = $search_query;
+
+$get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_price like :proposal_price AND proposal_status='active'",array(":proposal_price"=>$s_value));
+while($row_proposals = $get_proposals->fetch()){
+	print_r($row_proposals);
+	$proposal_seller_id = $row_proposals->proposal_seller_id;
+	$select_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+	$seller_status = $select_seller->fetch()->seller_status;
+	if(check_status($proposal_seller_id) == "Online"){
+	array_push($online_sellers,$proposal_seller_id);
+	}
+}
+$where_online = array();
+$where_cat = array();
+$where_delivery_times = array();
+$where_level = array();
+$where_language = array();
+$values = array();
+if(isset($_REQUEST['online_sellers'])){
+	$i = 0;
+	foreach($_REQUEST['online_sellers'] as $value){
+		if($value != 0){
+			foreach($online_sellers as $seller_id){
+				$i++;
+				$where_online[] = "proposal_seller_id=:proposal_seller_id_$i";
+				$values["proposal_seller_id_$i"] = $seller_id;
+			}
+		}
+	}
+}
+if(isset($_REQUEST['cat_id'])){
+	$i = 0;
+	foreach($_REQUEST['cat_id'] as $value){
+		$i++;
+		if($value != 0){
+			$where_cat[] = "proposal_cat_id=:proposal_cat_id_$i";
+			$values["proposal_cat_id_$i"] = $value;
+		}
+	}
+}
+if(isset($_REQUEST['delivery_time'])){
+	$i = 0;
+	foreach($_REQUEST['delivery_time'] as $value){
+		$i++;
+		if($value != 0){
+			$where_delivery_times[] = "delivery_id=:delivery_id_$i";
+			$values["delivery_id_$i"] = $value;
+		}
+	}
+}
+if(isset($_REQUEST['seller_level'])){
+	$i = 0;
+	foreach($_REQUEST['seller_level'] as $value){
+		$i++;
+		if($value != 0){
+			$where_level[] = "level_id=:level_id_$i";
+			$values["level_id_$i"] = $value;
+		}
+	}
+}
+if(isset($_REQUEST['seller_language'])){
+	$i=0;
+	foreach($_REQUEST['seller_language'] as $value){
+		$i++;
+		if($value != 0){
+			$where_language[] = "language_id=:language_id_$i";
+			$values["language_id_$i"] = $value;
+		}
+	}
+}
+$values['proposal_price'] = $s_value;
+$query_where = "where proposal_title like :proposal_price AND proposal_status='active' ";
+if(count($where_online)>0){
+	$query_where .= " and (" . implode(" or ",$where_online) . ")";
+}
+if(count($where_cat)>0){
+	$query_where .= " and (" . implode(" or ",$where_cat) . ")";
+}
+if(count($where_delivery_times)>0){
+	$query_where .= " and (" . implode(" or ",$where_delivery_times) . ")";
+}
+if(count($where_level)>0){
+	$query_where .= " and (" . implode(" or ",$where_level) . ")";
+}
+if(count($where_language)>0){
+	$query_where .= " and (" . implode(" or ",$where_language) . ")";
+}
+$per_page = 15;
+if(isset($_GET['page'])){
+	$page = $input->get('page');
+}else{
+	$page = 1;
+}
+$start_from = ($page-1) * $per_page;
+$where_limit = " order by proposal_featured='yes' DESC LIMIT :limit OFFSET :offset";
+$get_proposals = $db->query("select * from proposals " . $query_where . $where_limit,$values,array("limit"=>$per_page,"offset"=>$start_from));
+$count_proposals = $get_proposals->rowCount();
+if($count_proposals == 0){
+echo"
+<div class='col-md-12'>
+<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> We haven't found any proposals/services matching that search </h1>
+</div>
+";
+}
+
+while($row_proposals = $get_proposals->fetch()){
+print_r($row_proposals);
+$proposal_id = $row_proposals->proposal_id;
+$proposal_title = $row_proposals->proposal_title;
+$proposal_price = $row_proposals->proposal_price;
+if($proposal_price == 0){
+$get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+$proposal_price = $get_p_1->fetch()->price;
+}
+$proposal_img1 = $row_proposals->proposal_img1;
+$proposal_video = $row_proposals->proposal_video;
+$proposal_seller_id = $row_proposals->proposal_seller_id;
+$proposal_rating = $row_proposals->proposal_rating;
+$proposal_url = $row_proposals->proposal_url;
+$proposal_featured = $row_proposals->proposal_featured;
+$proposal_enable_referrals = $row_proposals->proposal_enable_referrals;
+$proposal_referral_money = $row_proposals->proposal_referral_money;
+if(empty($proposal_video)){
+	$video_class = "";
+}else{
+	$video_class = "video-img";
+}
+$get_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
+$row_seller = $get_seller->fetch();
+$seller_user_name = $row_seller->seller_user_name;
+$seller_image = $row_seller->seller_image;
+$seller_level = $row_seller->seller_level;
+$seller_status = $row_seller->seller_status;
+if(empty($seller_image)){
+$seller_image = "empty-image.png";
+}
+// Select Proposal Seller Level
+@$seller_level = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+$proposal_reviews = array();
+$select_buyer_reviews = $db->select("buyer_reviews",array("proposal_id" => $proposal_id));
+$count_reviews = $select_buyer_reviews->rowCount();
+while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+	$proposal_buyer_rating = $row_buyer_reviews->buyer_rating;
+	array_push($proposal_reviews,$proposal_buyer_rating);
+}
+$total = array_sum($proposal_reviews);
+@$average_rating = $total/count($proposal_reviews);
+$count_favorites = $db->count("favorites",array("proposal_id" => $proposal_id,"seller_id" => $login_seller_id));
+if($count_favorites == 0){
+$show_favorite_class = "proposal-favorite dil1";
+}else{
+$show_favorite_class = "proposal-unfavorite dil";
+}
+?>
+<div class="col-lg-4 col-sm-6">
+<?php require("includes/proposals.php"); ?>
+</div>
+<?php	
+}
+
+}
+// price filter proposals end
 
 
 
@@ -1274,7 +1443,7 @@ if(count($where_language)>0){
 	
 }
 
-$per_page = 16;
+$per_page = 15;
 
 if(isset($_GET['page'])){
 	
@@ -1606,7 +1775,7 @@ if(count($where_language)>0){
 	
 }
 
-$per_page = 16;
+$per_page = 15;
 
 $get_proposals = $db->query("select * from proposals " . $query_where,$values);
 
@@ -1853,7 +2022,7 @@ if(count($where_language)>0){
 	
 }
 
-$per_page = 16;
+$per_page = 15;
 
 if(isset($_GET['page'])){
 	
@@ -2180,7 +2349,7 @@ if(count($where_language)>0){
 	
 }
 
-$per_page = 16;
+$per_page = 15;
 
 $get_proposals = $db->query("select * from proposals " . $query_where,$values);
 
@@ -2414,7 +2583,7 @@ if(count($where_language)>0){
 	
 }
 
-$per_page = 16;
+$per_page = 15;
 
 if(isset($_GET['page'])){
 	
@@ -2739,7 +2908,7 @@ if(count($where_language)>0){
 
 }
 
-$per_page = 16;
+$per_page = 15;
 
 $get_proposals = $db->query("select * from proposals " . $query_where . "order by rand()",$values);
 
@@ -2906,7 +3075,7 @@ function get_tag_proposals(){
 		$query_where .= " and (" . implode(" or ",$where_language) . ")";
 	}
 	$values['tag'] = "%$tag%";
-	$per_page = 16;
+	$per_page = 15;
 	if(isset($_GET['page'])){
 		$page = $input->get('page');
 	}else{
@@ -3081,7 +3250,7 @@ function get_tag_pagination(){
 		$query_where .= " and (" . implode(" or ",$where_language) . ")";
 	}
 	$values['tag'] = "%$tag%";
-	$per_page = 16;
+	$per_page = 15;
 	$get_proposals = $db->query("select * from proposals " . $query_where,$values);
 	$count_proposals = $get_proposals->rowCount();
 	if($count_proposals > 0){

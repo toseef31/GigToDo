@@ -1,6 +1,7 @@
 <?php
   if(isset($_SESSION['cat_id'])){
   $session_cat_id = $_SESSION['cat_id'];  
+  
   }
   if(isset($_SESSION['cat_child_id'])){
     $session_cat_child_id = $_SESSION['cat_child_id'];  
@@ -47,7 +48,7 @@
     </h2>
     <div class="gigs-sidebar-filter">
       <div class="gigs-sidebar-title">
-        <h4 class="title"><img src="assets/img/gigs/filter.png" alt="">Filter by</h4>
+        <h4 class="title"><img src="<?= $site_url; ?>/assets/img/gigs/filter.png" alt="">Filter by</h4>
       </div>
       <div class="gigs-filter-content ">
         <div class="single-filter clearfix">
@@ -66,15 +67,15 @@
               $arabic_desc = $row_meta->arabic_desc;
             ?>
             
-            <option <?php
+            <option value="<?php echo $cat_id; ?>" <?php
             if($cat_id == @$_SESSION['cat_id']){ echo "selected"; }
             if($cat_id == @$child_parent_id){ echo "selected"; }
-            ?> value=""><?= $cat_title; ?></option>
+            ?> ><?= $cat_title; ?></option>
             <?php } ?>
           </select>
         </div>
-        <div class="single-filter clearfix">
-          <select id="cat_<?php echo $cat_id; ?>" onChange="window.location.href=this.value">
+        <div class="single-filter clearfix cat_hide">
+          <select id="cat_<?php echo $page_cat_id; ?>" onChange="window.location.href=this.value">
             <?php
               $get_child_cat = $db->select("categories_children",array("child_parent_id" => $child_parent_id));
               while($row_child_cat = $get_child_cat->fetch()){
@@ -90,6 +91,12 @@
           </select>
           
         </div>
+        <div class="single-filter clearfix d-none" id="sub-cat">
+          <select id="sub-category" class="form-control" onChange="window.location.href=this.value">
+            
+          </select>
+          
+        </div>
       </div>
     </div>
     
@@ -98,7 +105,8 @@
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/price.png" alt="">Price</h4>
       </div>
       <div class="gigs-price-content ">
-        <input id="price" type="text" name="" value="" class="irs-hidden-input" tabindex="-1" readonly="">
+        <input id="price" type="text" name="price_slider" value="" class="irs-hidden-input" tabindex="-1" readonly="">
+        <input type="hidden" id="price_range" name="">
       </div>
     </div>
     
@@ -206,7 +214,7 @@
       </div>
     </div> -->
     
-    <div class="gigs-sidebar-rating">
+    <!-- <div class="gigs-sidebar-rating">
       <div class="gigs-sidebar-title">
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/star.png" alt="">Rating</h4>
       </div>
@@ -221,7 +229,7 @@
           </select>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <div class="gigs-sidebar-search">
       <div class="gigs-sidebar-title">

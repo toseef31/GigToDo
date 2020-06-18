@@ -17,6 +17,8 @@
     $get_cat = $db->select("categories",array('cat_url' => $input->get('cat_url')));
     $cat_id = $get_cat->fetch()->cat_id;
     $_SESSION['cat_id']=$cat_id;
+    $page_cat_id = $cat_id;
+    
   }
   if(isset($_GET['cat_child_url'])){
     unset($_SESSION['cat_id']);
@@ -92,7 +94,7 @@
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="<?= $site_url; ?>/images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
-  <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.cat-nav .top-nav-item{margin-top: 0;}.header-menu .mainmenu ul li a{font-size: 15px;}.cat-nav .top-nav-item.active {border-bottom: 3px solid #ff0000;}.ui-toolkit h1, .ui-toolkit .h1, .ui-toolkit h2, .ui-toolkit .h2, .ui-toolkit h3, .ui-toolkit .h3 {font-weight: 600 !important;}</style>
+  <style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #28a745;}.swal2-popup .swal2-select{display: none;}.cat-nav .top-nav-item{margin-top: 0;}.header-menu .mainmenu ul li a{font-size: 15px;}.cat-nav .top-nav-item.active {border-bottom: 3px solid #ff0000;}.ui-toolkit h1, .ui-toolkit .h1, .ui-toolkit h2, .ui-toolkit .h2, .ui-toolkit h3, .ui-toolkit .h3 {font-weight: 600 !important;}#sub-cat .nice-select{display: none;}#sub-cat #sub-category{height: 45px;}</style>
 </head>
 <body class="all-content">
   <!-- Preloader Start -->
@@ -457,6 +459,199 @@
   });
   
   }
+
+  function get_search_category_proposals(){
+  
+  var sPath = ''; 
+  
+  // var aInputs = $('li').find('.get_online_sellers');
+  var aInputs = $('.get_online_sellers');
+
+  var aKeys   = Array();
+  
+  var aValues = Array();
+  
+  iKey = 0;
+  
+  $.each(aInputs,function(key,oInput){
+  
+  if(oInput.checked){
+    
+  aKeys[iKey] =  oInput.value
+  
+  };
+  
+  iKey++;
+  
+  });
+  
+  if(aKeys.length>0){
+    
+  var sPath = '';
+    
+  for(var i = 0; i < aKeys.length; i++){
+  
+  sPath = sPath + 'online_sellers[]=' + aKeys[i]+'&';
+  
+
+  }
+  
+  }
+  
+  
+  var cat_url = "<?php echo $input->get('cat_url'); ?>";
+  
+  sPath = sPath + 'cat_url=' + cat_url +'&';
+  
+  <?php if(isset($_REQUEST['cat_child_url'])){ ?>
+  
+  var cat_child_url = "<?php echo $input->get('cat_child_url'); ?>";
+  
+  sPath = sPath+ 'cat_child_url='+ cat_child_url +'&';
+  
+  var url_plus = "../";
+  
+  <?php }else{ ?>
+  
+  var url_plus = "";
+  
+  <?php } ?>
+  
+  
+  var aInputs = Array();
+  
+  var aInputs = $('li').find('.get_delivery_time');
+  
+  var aKeys   = Array();
+  
+  var aValues = Array();
+  
+  iKey = 0;
+  
+  $.each(aInputs,function(key,oInput){
+  
+  if(oInput.checked){
+    
+  aKeys[iKey] =  oInput.value
+  
+  };
+  
+  iKey++;
+  
+  });
+  
+  if(aKeys.length>0){
+  
+  for(var i = 0; i < aKeys.length; i++){
+    
+  sPath = sPath + 'delivery_time[]=' + aKeys[i]+'&';
+  
+  }
+  
+  }
+  
+  var aInputs = Array();
+  
+  var aInputs = $('li').find('.get_seller_level');
+  
+  var aKeys   = Array();
+  
+  var aValues = Array();
+  
+  iKey = 0;
+  
+  $.each(aInputs,function(key,oInput){
+  
+  if(oInput.checked){
+    
+  aKeys[iKey] =  oInput.value
+  
+  };
+  
+  iKey++;
+  
+  });
+  
+  if(aKeys.length>0){
+    
+  for(var i = 0; i < aKeys.length; i++){
+    
+  sPath = sPath + 'seller_level[]=' + aKeys[i]+'&';
+  
+  }
+  
+  }
+  
+  var aInputs = Array();
+  
+  var aInputs = $('li').find('.get_seller_language');
+  
+  var aKeys   = Array();
+  
+  var aValues = Array();
+  
+  iKey = 0;
+  
+  $.each(aInputs,function(key,oInput){
+  
+  if(oInput.checked){
+    
+  aKeys[iKey] =  oInput.value
+  
+  };
+  
+  iKey++;
+  
+  });
+  
+  if(aKeys.length>0){
+    
+  for(var i = 0; i < aKeys.length; i++){
+  
+  sPath = sPath + 'seller_language[]=' + aKeys[i]+'&';
+  
+  }
+  
+  }   
+
+
+  
+  $('#wait').addClass("loader");    
+  
+  $.ajax({  
+  
+  url: url_plus + "../category_load",  
+  method:"POST",  
+  data: sPath+'zAction=get_search_category_proposals',  
+  success:function(data){
+  
+  $('#category_proposals').html('');  
+  
+  $('#category_proposals').html(data);
+  
+  $('#wait').removeClass("loader");
+  
+  }  
+  
+  });               
+  
+  $.ajax({  
+  
+  url: url_plus + "../category_load",  
+  method:"POST",  
+  data: sPath+'zAction=get_category_pagination',  
+  success:function(data){  
+  
+  $('#category_pagination').html('');  
+  
+  $('#category_pagination').html(data); 
+  
+  }  
+  
+  });
+  
+  }
+
   
   $('.get_online_sellers').click(function(){ 
   
@@ -484,22 +679,199 @@
 
 
   function getgig(){
+
     var getUrl = '<?php echo $site_url; ?>';
     var keyword = $('#keyword').val();
-    alert(keyword);
+    
+    var sPath = ''; 
+    
+    // var aInputs = $('li').find('.get_online_sellers');
+    var aInputs = $('.get_online_sellers');
 
-    $.ajax({
-   url:"get_gigs",
-   method:"POST",
-   data:{keyword:keyword},
-   success:function(data){
-   // $('#category_proposals').html('');  
+    var aKeys   = Array();
     
-    $('#category_proposals').html(data);
+    var aValues = Array();
     
-    $('#wait').removeClass("loader");
-   }
-   });
+    iKey = 0;
+    
+    $.each(aInputs,function(key,oInput){
+    
+    if(oInput.checked){
+      
+    aKeys[iKey] =  oInput.value
+    
+    };
+    
+    iKey++;
+    
+    });
+    
+    if(aKeys.length>0){
+      
+    var sPath = '';
+      
+    for(var i = 0; i < aKeys.length; i++){
+    
+    sPath = sPath + 'online_sellers[]=' + aKeys[i]+'&';
+    
+
+    }
+    
+    }
+    
+    
+    var cat_url = "<?php echo $input->get('cat_url'); ?>";
+    
+    sPath = sPath + 'cat_url=' + cat_url +'&';
+    
+    <?php if(isset($_REQUEST['cat_child_url'])){ ?>
+    
+    var cat_child_url = "<?php echo $input->get('cat_child_url'); ?>";
+    
+    sPath = sPath+ 'cat_child_url='+ cat_child_url +'&';
+    
+    var url_plus = "../";
+    
+    <?php }else{ ?>
+    
+    var url_plus = "";
+    
+    <?php } ?>
+    
+    
+    var aInputs = Array();
+    
+    var aInputs = $('li').find('.get_delivery_time');
+    
+    var aKeys   = Array();
+    
+    var aValues = Array();
+    
+    iKey = 0;
+    
+    $.each(aInputs,function(key,oInput){
+    
+    if(oInput.checked){
+      
+    aKeys[iKey] =  oInput.value
+    
+    };
+    
+    iKey++;
+    
+    });
+    
+    if(aKeys.length>0){
+    
+    for(var i = 0; i < aKeys.length; i++){
+      
+    sPath = sPath + 'delivery_time[]=' + aKeys[i]+'&';
+    
+    }
+    
+    }
+    
+    var aInputs = Array();
+    
+    var aInputs = $('li').find('.get_seller_level');
+    
+    var aKeys   = Array();
+    
+    var aValues = Array();
+    
+    iKey = 0;
+    
+    $.each(aInputs,function(key,oInput){
+    
+    if(oInput.checked){
+      
+    aKeys[iKey] =  oInput.value
+    
+    };
+    
+    iKey++;
+    
+    });
+    
+    if(aKeys.length>0){
+      
+    for(var i = 0; i < aKeys.length; i++){
+      
+    sPath = sPath + 'seller_level[]=' + aKeys[i]+'&';
+    
+    }
+    
+    }
+    
+    var aInputs = Array();
+    
+    var aInputs = $('li').find('.get_seller_language');
+    
+    var aKeys   = Array();
+    
+    var aValues = Array();
+    
+    iKey = 0;
+    
+    $.each(aInputs,function(key,oInput){
+    
+    if(oInput.checked){
+      
+    aKeys[iKey] =  oInput.value
+    
+    };
+    
+    iKey++;
+    
+    });
+    
+    if(aKeys.length>0){
+      
+    for(var i = 0; i < aKeys.length; i++){
+    
+    sPath = sPath + 'seller_language[]=' + aKeys[i]+'&';
+    
+    }
+    
+    }   
+
+
+    
+    $('#wait').addClass("loader");    
+    if (keyword == '') {
+      $.ajax({  
+      
+      url: url_plus + "../category_load",  
+      method:"POST",  
+      data: sPath+'zAction=get_category_proposals',  
+      success:function(data){
+      
+      $('#category_proposals').html('');  
+      
+      $('#category_proposals').html(data);
+      
+      $('#wait').removeClass("loader");
+      
+      }  
+      
+      });
+    }else {
+      // alert(keyword);
+
+      $.ajax({
+       method:"post",  
+       data: {keyword:keyword},  
+       url: url_plus + "../category_load?zAction=get_search_proposals",  
+       success:function(data){
+       // console.log(data);  
+       
+       $('#category_proposals').html('');  
+       
+       $('#category_proposals').html(data); 
+       
+       }
+     });
+    }
 
   }
 </script>
@@ -570,19 +942,28 @@
   $("#sub-category").hide();
 
   $("#category").change(function(){
+    var base_url = '<?php echo $site_url;  ?>';
+    
    $("#sub-category").show();  
    var category_id = $(this).val();
-   alert(category_id );
-   $('#cat_'+category_id).hide();
+   
+   $('.cat_hide').addClass('d-none');
+   $('#sub-cat').addClass('d-block');
    $.ajax({
-   url:"fetch_subcategory",
+   url:base_url+"/categories/fetch_subcategory",
    method:"POST",
    data:{category_id:category_id},
    success:function(data){
-   $("#sub-category").html(data);
+    console.log(data);
+   $('#sub-category').html(data);
    }
    });
+
   });
+
+ 
+
+
 </script>
 </body>
 </html>

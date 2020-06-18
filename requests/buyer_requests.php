@@ -14,6 +14,7 @@
   $row_login_seller = $select_login_seller->fetch();
   $login_seller_id = $row_login_seller->seller_id;
   $login_seller_offers = $row_login_seller->seller_offers;
+  $login_seller_image = $row_login_seller->seller_image;
   
   $request_cat_ids = array();
   // $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
@@ -222,7 +223,8 @@
                         $row_request_seller = $select_request_seller->fetch();
                         $request_seller_user_name = $row_request_seller->seller_user_name;
                         $request_seller_image = $row_request_seller->seller_image;
-                        $count_send_offers = $db->count("send_offers",array("request_id" => $request_id));
+                        $count_send_offers = $db->count("send_offers",array("request_id" => $request_id, "status" => 'active'));
+                        
                         $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
                         if($count_offers == 0){
                         ?>
@@ -310,11 +312,12 @@
                   <table class="table managerequest-table selective-yellow" cellpadding="0" cellspacing="0" border="0">
                     <thead>
                       <tr role="row">
-                        <th role="column">Buyer</th>
-                        <th role="column">Request</th>
+                        <th role="column">Seller</th>
+                        <th role="column">Offer</th>
                         <!-- <th role="column">Offers</th> -->
                         <th role="column">Delivery</th>
                         <th role="column">Budget</th>
+                        <th role="column">Request</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -353,19 +356,45 @@
                         <td data-label="Buyer">
                           <div class="d-flex flex-column align-items-center">
                             <div class="buyer-image">
+                              <?php if(!empty($login_seller_image)){ ?>
+                              <img alt class="img-fluid d-block request-img rounded-circle" src="../user_images/<?php echo $login_seller_image; ?>" />
+                              <?php }else{ ?>
+                              <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+                              <?php } ?>
+                            </div>
+                            <div class="buyer-id"><?php echo $login_seller_user_name ?></div>
+                            <!-- <span><?php echo $request_date; ?></span> -->
+                          </div>
+                        </td>
+                        <td data-label="Request">
+                          <p><?php echo $description; ?></p>
+                          
+                        </td>
+                        <!-- <td data-label="Offers">
+                          <div class="offers-button">4 offers</div>
+                        </td> -->
+                        <td data-label="Delivery"><?php echo $delivery_time; ?></td>
+                        <td data-label="Budget">
+                          <div class="d-flex flex-column">
+                            <span><?php echo $s_currency; ?><?php echo $amount; ?></span>
+                            
+                          </div>
+                        </td>
+                        <td data-label="Buyer">
+                          <div class="d-flex flex-column align-items-center">
+                            <div class="buyer-image">
                               <?php if(!empty($request_seller_image)){ ?>
                               <img alt class="img-fluid d-block request-img rounded-circle" src="../user_images/<?php echo $request_seller_image; ?>" />
                               <?php }else{ ?>
                               <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
                               <?php } ?>
                             </div>
-                            <div class="buyer-id"><?php echo $request_seller_user_name; ?></div>
-                            <span><?php echo $request_date; ?></span>
+                            <strong> <?php echo $request_seller_user_name;; ?></strong>
                           </div>
-                        </td>
-                        <td data-label="Request">
-                          <p><?php echo $request_description; ?></p>
-                          <div class="attachment d-flex flex-row align-items-center">
+                            <p>
+                              <?php echo $request_description; ?>
+                            </p>
+                            <div class="attachment d-flex flex-row">
                             <?php if(!empty($request_file)){ ?>
                             <a href="request_files/<?php echo $request_file; ?>" download>
                             <span><i class="fal fa-paperclip"></i></span> <span><?php echo $request_file; ?></span>
@@ -379,16 +408,7 @@
                             <a href="javascript:void(0);" class="taga-item"><?php echo $cat_title; ?></a>
                             <a href="javascript:void(0);" class="taga-item"><?php echo $child_title; ?></a>
                           </div>
-                        </td>
-                        <!-- <td data-label="Offers">
-                          <div class="offers-button">4 offers</div>
-                        </td> -->
-                        <td data-label="Delivery"><?php echo $delivery_time; ?></td>
-                        <td data-label="Budget">
-                          <div class="d-flex flex-column">
-                            <span><?php echo $s_currency; ?><?php echo $amount; ?></span>
-                            
-                          </div>
+                          
                         </td>
                       </tr>
                       <?php } ?>

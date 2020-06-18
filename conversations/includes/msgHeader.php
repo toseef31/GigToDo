@@ -364,8 +364,8 @@
                 $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
                 $delivery_id = $row_delivery_times->delivery_id;
               ?>
-              <label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
-                <input id="hours<?= $delivery_id; ?>"  value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
+              <label class="deliver-time-item" for="hourss<?= $delivery_id; ?>">
+                <input id="hourss<?= $delivery_id; ?>"  value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
                 <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                   <span class="color-icon">
                     <span>-</span>

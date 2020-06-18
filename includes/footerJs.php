@@ -52,10 +52,28 @@ if(isset($_SESSION['seller_user_name'])){
   $(function(){
     $("#price").ionRangeSlider({
       min: 0,
-      max: 50,
-      from: 25,
+      max: 300,
+      from: 1,
       prefix: "$",
-      hide_min_max:true,
+      hide_min_max:false,
+      onChange: function(data) {
+          // alert(data.from);
+          var base_url = '<?php echo $site_url; ?>';
+          $('#price_range').val(data.from);
+          
+          var price = $('#price_range').val();
+          $.ajax({
+            url:base_url + "/category_load?zAction=get_search_price_proposals",
+            method:"POST",
+            data:{price:price},
+            success:function(data){
+              console.log(data);
+            $('#category_proposals').html('');  
+            
+            $('#category_proposals').html(data); 
+          }
+          });
+        }
     });
     $('.filter-results').on('click', function(){
       $('.gigs-sidebar').addClass('open-mobile');

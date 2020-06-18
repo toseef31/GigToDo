@@ -51,9 +51,9 @@
       </div>
       <div class="gigs-filter-content ">
         <div class="single-filter clearfix">
-          <select>
+          <select id="category" name="cat_value">
             <?php
-              $get_categories = $db->query("select * from categories where cat_featured='yes' ".($lang_dir == "right" ? 'order by 1 DESC LIMIT 6,6':' LIMIT 0,6')."");
+              $get_categories = $db->select("categories");
               while($row_categories = $get_categories->fetch()){
               $cat_id = $row_categories->cat_id;
               $cat_image = $row_categories->cat_image;
@@ -66,14 +66,17 @@
               $arabic_title = $row_meta->arabic_title;
               $arabic_desc = $row_meta->arabic_desc;
             ?>
-            <option value="0"><?= $arabic_title; ?></option>
+            <option value="<?php echo $cat_id; ?>" <?php
+            if($cat_id == @$_SESSION['cat_id']){ echo "selected"; }
+            if($cat_id == @$child_parent_id){ echo "selected"; }
+            ?> ><?= $arabic_title; ?></option>
             <?php } ?>
           </select>
         </div>
-        <div class="single-filter clearfix">
-          <select>
+        <div class="single-filter clearfix cat_hide">
+          <select id="cat_<?php echo $page_cat_id; ?>" onChange="window.location.href=this.value">
             <?php
-              $get_child_cat = $db->select("categories_children",array("child_parent_id" => $cat_id));
+              $get_child_cat = $db->select("categories_children",array("child_parent_id" => $child_parent_id));
               while($row_child_cat = $get_child_cat->fetch()){
                 $cat_url = $input->get('cat_url');
                 $child_id = $row_child_cat->child_id;
@@ -84,9 +87,15 @@
                 $child_arabic_title = $row_meta->child_arabic_title;
                 if(!empty($child_arabic_title)){
             ?>
-            <option value="0"><?php echo $child_arabic_title; ?></option>
+            <option <?php if($child_id == @$_SESSION['cat_child_id']){ echo "selected"; } ?> value="<?php echo $site_url; ?>/categories/<?php echo $cat_page_url; ?>/<?php echo $child_url; ?>"><?php echo $child_arabic_title; ?></option>
             <?php } } ?>
           </select>
+        </div>
+        <div class="single-filter clearfix d-none" id="sub-cat">
+          <select id="sub-category" class="form-control" onChange="window.location.href=this.value">
+            
+          </select>
+          
         </div>
       </div>
     </div>
@@ -206,7 +215,7 @@
     </div> -->
 
 
-    <div class="gigs-sidebar-rating">
+    <!-- <div class="gigs-sidebar-rating">
       <div class="gigs-sidebar-title">
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/star.png" alt="">التقييم </h4>
       </div>
@@ -221,14 +230,14 @@
           </select>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <div class="gigs-sidebar-search">
       <div class="gigs-sidebar-title">
         <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/keyword.png" alt="">الكلمات الرئيسية</h4>
       </div>
       <div class="gigs-search-content mt-20">
-        <input type="search" placeholder="ابحث من خلال الكلمات الرئيسية">
+        <input type="search" id="keyword" onkeyup="getgig()" placeholder="ابحث من خلال الكلمات الرئيسية">
       </div>
     </div>
     

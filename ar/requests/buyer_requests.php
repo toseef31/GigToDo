@@ -14,6 +14,7 @@
   $row_login_seller = $select_login_seller->fetch();
   $login_seller_id = $row_login_seller->seller_id;
   $login_seller_offers = $row_login_seller->seller_offers;
+  $login_seller_image = $row_login_seller->seller_image;
   
   $request_cat_ids = array();
   // $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
@@ -80,6 +81,7 @@
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <style>.attachment a{color: #ff0707;}</style>
     <style>
+      .modal-body .request-proposals-list .proposal-title{margin-right: 135px;}
       @media(min-width: 767px){
         .page-height{
           position: relative;
@@ -322,17 +324,18 @@
                     <thead>
                       <tr role="row">
                         <th role="column">
-                          المشترى
+                          تاجر
                         </th>
-                        <th role="column">
-                          الطلب
-                        </th>
+                        <th role="column">عرض</th>
                         <!-- <th role="column">العروض</th> -->
                         <th role="column">
                           التسليم
                         </th>
                         <th role="column">
                           الميزانية
+                        </th>
+                        <th role="column">
+                          الطلب
                         </th>
                       </tr>
                     </thead>
@@ -372,29 +375,19 @@
                         <td data-label="المشترى">
                           <div class="d-flex flex-column align-items-center">
                             <div class="buyer-image">
-                              <?php if(!empty($request_seller_image)){ ?>
-                              <img alt class="img-fluid d-block request-img rounded-circle" src="<?= $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" />
+                              <?php if(!empty($login_seller_image)){ ?>
+                              <img alt class="img-fluid d-block request-img rounded-circle" src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" />
                               <?php }else{ ?>
                               <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
                               <?php } ?>
                             </div>
-                            <div class="buyer-id"><?php echo $request_seller_user_name; ?></div>
-                            <span><?php echo $request_date; ?></span>
+                            <div class="buyer-id"><?php echo $login_seller_user_name; ?></div>
+                            <!-- <span><?php echo $request_date; ?></span> -->
                           </div>
                         </td>
                         <td data-label="الطلب">
-                          <p><?php echo $request_description; ?></p>
-                          <div class="attachment d-flex flex-row align-items-center">
-                            <?php if(!empty($request_file)){ ?>
-                            <a href="<?= $site_url; ?>/request_files/<?php echo $request_file; ?>" download>
-                            <span><i class="fal fa-paperclip"></i></span> <span><?php echo $request_file; ?></span>
-                            </a>
-                            <?php } ?>
-                          </div>
-                          <div class="tags">
-                            <a href="javascript:void(0);" class="taga-item"><?php echo $cat_title; ?></a>
-                            <a href="javascript:void(0);" class="taga-item"><?php echo $child_title; ?></a>
-                          </div>
+                          <p><?php echo $description; ?></p>
+                          
                         </td>
                         <!-- <td data-label="العروض">
                           <div class="offers-button">
@@ -407,6 +400,36 @@
                             <span><?php echo $s_currency; ?><?php echo $amount; ?></span>
                             
                           </div>
+                        </td>
+                        <td data-label="Buyer">
+                          <div class="d-flex flex-column align-items-center">
+                            <div class="buyer-image">
+                              <?php if(!empty($request_seller_image)){ ?>
+                              <img alt class="img-fluid d-block request-img rounded-circle" src="<?= $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" />
+                              <?php }else{ ?>
+                              <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+                              <?php } ?>
+                            </div>
+                            <strong> <?php echo $request_seller_user_name;; ?></strong>
+                          </div>
+                            <p>
+                              <?php echo $request_description; ?>
+                            </p>
+                            <div class="attachment d-flex flex-row">
+                            <?php if(!empty($request_file)){ ?>
+                            <a href="request_files/<?php echo $request_file; ?>" download>
+                            <span><i class="fal fa-paperclip"></i></span> <span><?php echo $request_file; ?></span>
+                            </a>
+                            <?php } ?>
+                            <!-- <span><i class="fal fa-paperclip"></i></span>
+                            <span>attatchme...jpg</span>
+                            <span>(1048KB)</span> -->
+                          </div>
+                          <div class="tags">
+                            <a href="javascript:void(0);" class="taga-item"><?php echo $cat_title; ?></a>
+                            <a href="javascript:void(0);" class="taga-item"><?php echo $child_title; ?></a>
+                          </div>
+                          
                         </td>
                       </tr>
                       <?php } ?>

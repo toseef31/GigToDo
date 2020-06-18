@@ -489,7 +489,8 @@ $count_requests = $get_requests->rowCount();
                         $request_date = $row_requests->request_date;
                         $delivery_time = $row_requests->delivery_time;
                         $request_budget = $row_requests->request_budget;
-                        $request_skills = $row_requests->skills_required;
+                        // $request_skills = $row_requests->skills_required;
+                        $request_skills = explode(',',$row_requests->skills_required);
                         $count_offers = $db->count("send_offers",array("request_id" => $request_id, "status" => 'active'));
                       ?>
                       <tr role="row">
@@ -497,7 +498,10 @@ $count_requests = $get_requests->rowCount();
                         <td data-label="الطلب">
                           <p><?= $request_description; ?></p>
                           <div class="tags">
-                            <a href="javascript:void(0);" class="taga-item"><?= $request_skills; ?></a>
+                            <!-- <a href="javascript:void(0);" class="taga-item"><?= $request_skills; ?></a> -->
+                            <?php foreach ($request_skills as $key => $skills) { ?>
+                              <a href="javascript:void(0);" class="taga-item"><?php echo $skills; ?></a>
+                            <?php } ?>
                           </div>
                         </td>
                         <td data-label="العروض">
@@ -693,7 +697,8 @@ $count_requests = $get_requests->rowCount();
                             $delivery_time = $row_requests->delivery_time;
                             $request_budget = $row_requests->request_budget;
                             $request_file = $row_requests->request_file;
-                            $request_skills = $row_requests->skills_required;
+                            // $request_skills = $row_requests->skills_required;
+                            $request_skills = explode(',',$row_requests->skills_required);
                             $select_request_seller = $db->select("sellers",array("seller_id"=>$seller_id));
                             $row_request_seller = $select_request_seller->fetch();
                             $request_seller_user_name = $row_request_seller->seller_user_name;
@@ -727,7 +732,10 @@ $count_requests = $get_requests->rowCount();
                                 <?php } ?>
                               </div>
                               <div class="tags">
-                                <a href="javascript:void(0);" class="taga-item"><?= $request_skills; ?></a>
+                                <!-- <a href="javascript:void(0);" class="taga-item"><?= $request_skills; ?></a> -->
+                                <?php foreach ($request_skills as $key => $skills) { ?>
+                                  <a href="javascript:void(0);" class="taga-item"><?php echo $skills; ?></a>
+                                <?php } ?>
                                 <!-- <a href="javascript:void(0);" class="taga-item">
                                   تصميم كتيب
                                 </a> -->

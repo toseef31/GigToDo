@@ -78,7 +78,7 @@ require("includes/inboxFunctions.php");
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
-  <style>.media.selected{background-color: #f7f7f7 !important;}.user-status{background: transparent !important; padding: 0 !important; margin-bottom: 0;}.message-sender-area{padding: 0 30px 20px !important;}.header-top{background-color: white;}#send_offer_modal{display: none !important;}.sub_cat .nice-select{display: none;}.sub_cat select{display: block !important;}</style>
+  <style>.media.selected{background-color: #f7f7f7 !important;}.user-status{background: transparent !important; padding: 0 !important; margin-bottom: 0;}.message-sender-area{padding: 0 30px 20px !important;}.header-top{background-color: white;}.sub_cat .nice-select{display: none;}.sub_cat select{display: block !important;}</style>
 </head>
 <body class="all-content">
 

@@ -70,6 +70,8 @@ $get_seller_city = $row_seller->seller_city;
 $get_seller_headline = $row_seller->seller_headline;
 $get_seller_about = $row_seller->seller_about;
 $get_seller_level = $row_seller->seller_level;
+$get_seller_lang = explode(',', $row_seller->seller_language);
+
 $get_seller_rating = $row_seller->seller_rating;
 $get_seller_register_date = $row_seller->seller_register_date;
 $get_seller_recent_delivery = $row_seller->seller_recent_delivery;
@@ -353,7 +355,7 @@ if(isset($_SESSION['seller_user_name'])){
               </div>
               <div class="languages-list pt-10">
                 <ul>
-                  <?php
+                  <!-- <?php
                   $select_languages_relation = $db->select("languages_relation",array("seller_id" => $get_seller_id));
                   while($row_languages_relation = $select_languages_relation->fetch()){
 
@@ -365,7 +367,15 @@ if(isset($_SESSION['seller_user_name'])){
                     $language_title = $row_language->language_title;
                   ?>
                   <li><?php echo $language_title; ?> - <span><?php echo $language_level; ?></span></li>
-                  <?php } ?>
+                  <?php } ?> -->
+                  <?php
+                    foreach ($get_seller_lang as $key => $lang){
+                    $get_language = $db->select("seller_languages",array("language_id" => $lang));
+                    while($row_language = $get_language->fetch()){
+                    $language_title = $row_language->language_title;
+                  ?>
+                  <li><?php echo $language_title; ?> - <span><?php echo $language_level; ?></span></li>
+                  <?php } }?>
                 </ul>
               </div>
             </div>
@@ -374,7 +384,7 @@ if(isset($_SESSION['seller_user_name'])){
                 <h4 class="title">Education </h4>
               </div>
               <?php 
-                $get_seller_education = $db->select("seller_education",array("seller_id" => $login_seller_id));
+                $get_seller_education = $db->select("seller_education",array("seller_id" => $get_seller_id));
                 while($row_seller_education = $get_seller_education->fetch()){
                 $education = @json_decode($row_seller_education->education_data);
               ?>
@@ -554,7 +564,7 @@ if(isset($_SESSION['seller_user_name'])){
             </div>
             <div class="row">
               <?php 
-                $select_portfolio = $db->select("seller_portfolio",array("seller_id" => $login_seller_id)); 
+                $select_portfolio = $db->select("seller_portfolio",array("seller_id" => $get_seller_id)); 
                 while($row_portfolio = $select_portfolio->fetch()){
                   $portfolio_id = $row_portfolio->portfolio_id;
                   $portfolio_img = $row_portfolio->portfolio_img;

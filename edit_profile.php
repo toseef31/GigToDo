@@ -309,7 +309,7 @@ $years = range(1910,date("Y"));
                             <div class="col-12">
                               <div class="form-group d-flex flex-column custom_nice state_box">
                                 <label class="control-label">City</label>
-                                <select class="form-control wide" name="seller_city" required="" id="city-list">
+                                <select class="form-control wide" name="seller_city" id="city-list">
                                   <?php if (!empty($login_seller_city)){ ?>
                                     <option selected><?= $login_seller_city; ?></option>
                                   <?php } ?>

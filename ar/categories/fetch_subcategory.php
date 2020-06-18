@@ -11,25 +11,29 @@ require_once("../includes/db.php");
 // }
 
 
-echo "<option value=''> Select A Sub Category </option>";
+echo "<option value=''> حدد فئة فرعية </option>";
 
 $category_id = $input->post('category_id');
+
+$get_cat = $db->select("categories",array('cat_id' => $category_id));
+$cat_url = $get_cat->fetch()->cat_url;
 
 $get_c_cats = $db->select("categories_children",array("child_parent_id" => $category_id));
 
 while($row_c_cats = $get_c_cats->fetch()){
 	
 $child_id = $row_c_cats->child_id;
-
+$child_url = $row_c_cats->child_url;
 
 $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id,"language_id" => $siteLanguage));
 
 $row_meta = $get_meta->fetch();
 
 $child_title = $row_meta->child_title;
+$child_arabic_title = $row_meta->child_arabic_title;
 
 
-echo "<option value='$child_id'> $child_title </option>";
+echo "<option value='$site_url/ar/categories/$cat_url/$child_url'> $child_arabic_title </option>";
 // echo "<label class='gig-category-tag' for='cat".$child_id."'><input type='radio' name='child_id' value='".$child_id."' id='cat".$child_id."' hidden> $child_title </label>";
 	
 }

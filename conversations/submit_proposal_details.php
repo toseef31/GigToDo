@@ -36,7 +36,11 @@ $row_proposals = $select_proposals->fetch();
 $proposal_title = $row_proposals->proposal_title;
 
 ?>
-
+<style>
+	.customer-order.modal-dialog .form-group .deliver-time .deliver-time-item input[type="radio"]:checked+.deliver-time-item-content {
+	    background-color: #ff0707;
+	}
+</style>
 <div class="modal-content"><!-- modal-content Starts -->
 
 <div class="modal-header"><!-- modal-header Starts -->
@@ -117,7 +121,7 @@ $proposal_title = $row_proposals->proposal_title;
 		$delivery_id = $row_delivery_times->delivery_id;
 		?>
 		<label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
-			<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" hidden />
+			<input id="hours<?= $delivery_id; ?>" type="radio" name="delivery_time" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> hidden />
 			<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 				<span class="color-icon">
 					<span>-</span>
@@ -194,6 +198,7 @@ event.preventDefault();
 description = $("textarea[name='description']").val();
 
 delivery_time = $("input[name='delivery_time']:checked").val();
+
 
 amount = $("input[name='amount']").val();
 
