@@ -11,6 +11,7 @@ $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
+$login_seller_order_message = $row_login_seller->order_message;
 $order_id = $input->post('order_id');
 
 $get_orders = $db->select("orders",array("order_id" => $order_id));
@@ -68,9 +69,9 @@ if($seller_id == $login_seller_id){ $receiver_id = $buyer_id; }else{ $receiver_i
 $insert_order_conversation = $db->insert("order_conversations",array("order_id" => $order_id,"sender_id" => $login_seller_id,"message" => $message,"file" => $file,"date" => $last_update_date,"status" => "message"));
 
 if($insert_order_conversation){
-
+	if($login_seller_order_message == 'on'){
 	$insert_notification = $db->insert("notifications",array("receiver_id" => $receiver_id,"sender_id" => $login_seller_id,"order_id" => $order_id,"reason" => "order_message","date" => $last_update_date,"status" => "unread"));
-
+	}
 	// New Spam Words Code Starts
 	$n_date = date("F d, Y");
 	$get_words = $db->select("spam_words");

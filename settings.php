@@ -28,6 +28,13 @@ $login_seller_account_name = $row_login_seller->seller_m_account_name;
 $login_seller_wallet = $row_login_seller->seller_wallet;
 $login_seller_enable_sound = $row_login_seller->enable_sound;
 $login_seller_verification = $row_login_seller->seller_verification;
+$login_seller_inbox_message = $row_login_seller->inbox_message;
+$login_seller_order_message = $row_login_seller->order_message;
+$login_seller_order_update = $row_login_seller->order_update;
+$login_seller_buyer_request = $row_login_seller->buyer_request;
+$login_seller_my_gigs = $row_login_seller->my_gigs;
+$login_seller_my_account = $row_login_seller->my_account;
+$login_seller_to_dos = $row_login_seller->to_dos;
 
 $get_seller_lang = explode(',', $row_login_seller->seller_language);
 // print_r($login_seller_language);
@@ -559,7 +566,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>Inbox Messages</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck1">
+															<input type="checkbox" name="inbox_message" class="custom-control-input" id="customCheck1" <?php if($login_seller_inbox_message == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</div>
@@ -567,7 +574,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>Order messages</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck2">
+															<input type="checkbox" name="order_message" class="custom-control-input" id="customCheck2" <?php if($login_seller_order_message == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck2">&nbsp;</label>
 														</div>
 													</div>
@@ -575,7 +582,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>Order updates</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck3">
+															<input type="checkbox" name="order_update" class="custom-control-input" id="customCheck3" <?php if($login_seller_order_update == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck3">&nbsp;</label>
 														</div>
 													</div>
@@ -583,7 +590,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>Buyer Requests</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck4">
+															<input type="checkbox" name="buyer_request" class="custom-control-input" id="customCheck4" <?php if($login_seller_buyer_request == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck4">&nbsp;</label>
 														</div>
 													</div>
@@ -591,7 +598,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>My Gigs</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck5">
+															<input type="checkbox" name="my_gigs" class="custom-control-input" id="customCheck5" <?php if($login_seller_my_gigs == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck5">&nbsp;</label>
 														</div>
 													</div>
@@ -599,7 +606,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>My Account</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck6">
+															<input type="checkbox" name="my_account" class="custom-control-input" id="customCheck6" <?php if($login_seller_my_account == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck6">&nbsp;</label>
 														</div>
 													</div>
@@ -607,7 +614,7 @@ $local_email = $row_seller_payment->local_email;
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>To-dos</span>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="customCheck7">
+															<input type="checkbox" name="to_dos" class="custom-control-input" id="customCheck7" <?php if($login_seller_to_dos == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck7">&nbsp;</label>
 														</div>
 													</div>
@@ -615,9 +622,41 @@ $local_email = $row_seller_payment->local_email;
 												</div>
 												<div class="form-group d-flex flex-row justify-content-end mb-0">
 													<button class="button button-white" type="button" role="button">Cancel</button>
-													<button class="button button-red" type="submit" role="button">Save</button>
+													<button class="button button-red" type="submit" name="save_notification">Save</button>
 												</div>
 											</form>
+											<?php 
+												if(isset($_POST['save_notification'])){
+													$inbox_message = $input->post('inbox_message');
+													$order_message = $input->post('order_message');
+													$order_update = $input->post('order_update');
+													$buyer_request = $input->post('buyer_request');
+													$my_gigs = $input->post('my_gigs');
+													$my_account = $input->post('my_account');
+													$to_dos = $input->post('to_dos');
+													
+													$update_notification = $db->update('sellers',array("inbox_message" => $inbox_message, "order_message" => $order_message, "order_update" => $order_update, "buyer_request" => $buyer_request, "my_gigs" => $my_gigs, "my_account" => $my_account, "to_dos" => $to_dos),array("seller_id" => $login_seller_id));
+													if($update_notification){
+														echo "<script>
+														swal({
+														type: 'success',
+														text: 'Notifications updated successfully!',
+														timer: 3000,
+														onOpen: function(){
+														swal.showLoading()
+														}
+														}).then(function(){
+														  if (
+														    // Read more about handling dismissals
+														    window.open('settings?account_settings','_self')
+														  ) {
+														    console.log('Notifications updated successfully')
+														  }
+														});</script>";
+													}
+
+												}
+											?>
 										</div>
 									</div>
 								</div>

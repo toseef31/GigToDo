@@ -330,18 +330,18 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt="">
+          <a href="<?= $site_url; ?>/ar/revenue"> <img src="assets/img/icon/15.png" alt="">
             العوائد
           </a>
         </li>
         <li>
-          <a href="portfolio"> <img src="assets/img/icon/16.png" alt="">
+          <a href="<?= $site_url; ?>/ar/portfolio"> <img src="assets/img/icon/16.png" alt="">
             المحفظة
           </a>
         </li>
         <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
         <li>
-          <a href="invite_friend"> <img src="assets/img/icon/7.png" alt="">
+          <a href="<?= $site_url; ?>/ar/invite_friend"> <img src="assets/img/icon/7.png" alt="">
             دعوة صديق
           </a>
         </li>

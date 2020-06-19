@@ -6,6 +6,7 @@ $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_
 $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
 $login_seller_level = $row_login_seller->seller_level;
+$login_seller_order_update = $row_login_seller->order_update;
 // select payment_settings
 $get_payment_settings = $db->select("payment_settings");
 $row_payment_settings = $get_payment_settings->fetch();
@@ -42,7 +43,9 @@ $update_messages = $db->update("order_conversations",array("status"=>"message"),
 
 // Insert notification
 $date = date("F d, Y");
+if($login_seller_order_update == 'on'){
 $insert_notification = $db->insert("notifications",array("receiver_id"=>$seller_id,"sender_id"=>$buyer_id,"order_id"=>$order_id,"reason"=>"order_completed","date"=>$date,"status"=>"unread"));
+}
 
 // update seller account
 $update_seller_account = $db->query("update seller_accounts set pending_clearance=pending_clearance+:p_plus,month_earnings=month_earnings+:m_plus where seller_id='$seller_id'",array("p_plus"=>$seller_price,"m_plus"=>$seller_price));

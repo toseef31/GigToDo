@@ -292,10 +292,10 @@
       <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
       <li><a href="<?= $site_url; ?>/requests/buyer_requests"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
       <li><a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>
-      <li><a href="javascript:void(0);"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
-      <li><a href="portfolio"> <img src="assets/img/icon/16.png" alt=""> Portfolio</a></li>
+      <li><a href="<?= $site_url ?>/revenue"> <img src="assets/img/icon/15.png" alt=""> Revenue</a></li>
+      <li><a href="<?= $site_url; ?>/portfolio"> <img src="assets/img/icon/16.png" alt=""> Portfolio</a></li>
       <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
-      <li><a href="invite_friend"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
+      <li><a href="<?= $site_url; ?>/invite_friend"> <img src="assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
       <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="assets/img/icon/indox.png" alt=""> Inbox</a></li>
       <li><a href="<?= $site_url; ?>/how-it-works-seller.php"> <img src="assets/img/icon/how-it-work.png" alt=""> How it works</a></li>
       <li><a href="<?= $site_url; ?>/logout.php"> <img src="assets/img/icon/logout.png" alt=""> Logout</a></li>

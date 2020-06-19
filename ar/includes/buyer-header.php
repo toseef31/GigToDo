@@ -256,8 +256,8 @@ $page_url = substr("$full_url", 18);
       <li><a href="<?= $site_url ?>/ar/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
       <li><a href="<?= $site_url; ?>/ar/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> إدارة الوظائف </a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>
+      <li><a href="<?= $site_url; ?>/ar/purchases"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
+      <li><a href="<?= $site_url; ?>/ar/invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> صندوق الوارد</a></li>
       <li><a href="<?= $site_url ?>/ar/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> كيف تعمل</a></li>
       <li><a href="<?= $site_url ?>/ar/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> الخروج</a></li>
