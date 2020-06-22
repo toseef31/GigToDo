@@ -222,7 +222,7 @@ $get_seller_status = $row_seller->seller_status;
   </main>
   <!-- Modal -->
   <div id="insertimageModal" class="modal" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
        Crop & Insert Image <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -258,13 +258,13 @@ $get_seller_status = $row_seller->seller_status;
    $image_crop = $('#image_demo').croppie({
        enableExif: true,
        viewport: {
-         width:500,
-         height:800,
+         width:270,
+         height:270,
          type:'square' //circle
        },
        boundary:{
          width:100,
-         height:800
+         height:270
        }    
        });
     function crop(data){

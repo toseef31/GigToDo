@@ -931,10 +931,7 @@ $(document).ready(function(){
 
 
 
-	$('.input-number').keyup(function(){
-		var custom_btn = $('.input-number').val();
-		$('#days30').val(custom_btn);
-	});
+	
 
 
 });

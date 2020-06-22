@@ -107,12 +107,12 @@ $referral_money = $row_general_settings->referral_money;
 										<p class="text-center">Share with more friends and earn more money!</p>
 										<ul class="list-inline d-flex flex-row align-items-center justify-content-center">
 											<li class="list-inline-item">
-												<a class="list-inline-link facebook" href="javascript:void(0)">
+												<a class="list-inline-link facebook" href="http://www.facebook.com/sharer.php?u=<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>" target="_blank">
 													<i class="fab fa-facebook-f"></i>
 												</a>
 											</li>
 											<li class="list-inline-item">
-												<a class="list-inline-link twitter" href="javascript:void(0)">
+												<a class="list-inline-link twitter" href="http://twitter.com/share?url=<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>" target="_blank">
 													<i class="fab fa-twitter"></i>
 												</a>
 											</li>
@@ -122,12 +122,12 @@ $referral_money = $row_general_settings->referral_money;
 												</a>
 											</li>
 											<li class="list-inline-item">
-												<a class="list-inline-link linkedin" href="javascript:void(0)">
+												<a class="list-inline-link linkedin" href="javascript:void(0);" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>')" target="_blank">
 													<i class="fab fa-linkedin-in"></i>
 												</a>
 											</li>
 											<li class="list-inline-item">
-												<a class="list-inline-link instagram" href="javascript:void(0)">
+												<a class="list-inline-link instagram" href="http://instagram.com/sharer.php?u=<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>" target="_blank">
 													<i class="fab fa-instagram"></i>
 												</a>
 											</li>

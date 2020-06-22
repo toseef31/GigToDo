@@ -10,7 +10,7 @@ if(isset($_FILES["file"]["name"])){
 	}else{
 		$file = pathinfo($file, PATHINFO_FILENAME);
 		$file = $file."_".time().".$file_extension";
-		move_uploaded_file($file_tmp, "conversations_files/$file");
+		move_uploaded_file($file_tmp, "../../conversations/conversations_files/$file");
 		echo $file;	
 	}
 }

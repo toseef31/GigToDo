@@ -24,6 +24,7 @@ $request_id = $input->post('request_id');
 $description = $input->post('description');
 $delivery_time = $input->post('delivery_time');
 $amount = $input->post('amount');
+$revision_time = $input->post('revision_time');
 
 $get_requests = $db->select("buyer_requests",array("request_id" => $request_id));
 $row_requests = $get_requests->fetch();
@@ -38,7 +39,7 @@ $n_date = date("F d, Y");
 
 $insert_notification = $db->insert("notifications",array("receiver_id"=>$seller_id,"sender_id"=>$login_seller_id,"order_id"=>$request_id,"reason"=>"offer","date"=>$n_date,"status"=>"unread"));
 
-$insert_offer = $db->insert("send_offers",array("request_id"=>$request_id,"sender_id"=>$login_seller_id,"proposal_id"=>$proposal_id,"description"=>$description,"delivery_time"=>$delivery_time,"amount"=>$amount,"status"=>'active'));
+$insert_offer = $db->insert("send_offers",array("request_id"=>$request_id,"sender_id"=>$login_seller_id,"proposal_id"=>$proposal_id,"description"=>$description,"delivery_time"=>$delivery_time,"amount"=>$amount,"revision_time"=>$revision_time,"status"=>'active'));
 $update_seller = $db->query("update sellers set seller_offers=seller_offers-1 where seller_id='$login_seller_id'");
 
 $site_email_address = $row_general_settings->site_email_address;

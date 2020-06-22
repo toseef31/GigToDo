@@ -323,7 +323,7 @@
                   <table class="table managerequest-table selective-yellow" cellpadding="0" cellspacing="0" border="0">
                     <thead>
                       <tr role="row">
-                        <th role="column">
+                        <th role="column" style="display: none;">
                           تاجر
                         </th>
                         <th role="column">عرض</th>
@@ -372,7 +372,7 @@
                         $request_seller_image = $row_request_seller->seller_image;
                       ?>
                       <tr role="row">
-                        <td data-label="المشترى">
+                        <td data-label="المشترى  " style="display: none;">
                           <div class="d-flex flex-column align-items-center">
                             <div class="buyer-image">
                               <?php if(!empty($login_seller_image)){ ?>
@@ -401,7 +401,7 @@
                             
                           </div>
                         </td>
-                        <td data-label="Buyer">
+                        <td data-label="لمشترى ">
                           <div class="d-flex flex-column align-items-center">
                             <div class="buyer-image">
                               <?php if(!empty($request_seller_image)){ ?>

@@ -35,11 +35,12 @@
 		$order_id = $row_offer->order_id;
 		$delivery_time = $row_offer->delivery_time;
 		$amount = $row_offer->amount;
+		$revision = $row_offer->revision_time;
 		$offer_status = $row_offer->status;
 		$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 		$row_proposals = $select_proposals->fetch();
 		$proposal_title = $row_proposals->proposal_title;
-    $proposal_img1 = $row_proposals->proposal_img1;
+    	$proposal_img1 = $row_proposals->proposal_img1;
 	}
 
   $select_sender = $db->select("sellers",array("seller_id" => $message_sender));
@@ -74,7 +75,7 @@
       <br>
       <img src="conversations_files/<?php echo $message_file; ?>" alt="..." class="img-thumbnail" width="100">
       <?php } ?>
-			<a href="conversations_files/<?php echo $message_file; ?>" download class="d-block mt-2 ml-1">
+			<a href="conversations_files/<?php echo $message_file; ?>" download class="d-block mt-2 ml-1"  style="color: #ff0707;">
 			<i class="fa fa-download"></i> <?php echo $message_file; ?>
 			</a>
 			<?php } ?>
@@ -102,7 +103,7 @@
 						<span>
 							<img src="<?= $site_url; ?>/assets/img/messages/revision-icon.png" />
 						</span>
-						<span>Price / Amount : <?php echo $s_currency; ?><?php echo $amount; ?></span>
+						<span>Revision : <?php echo $revision; ?></span>
 					</li>
 					<li class="d-flex flex-row align-items-center">
 						<span>
@@ -136,12 +137,13 @@
 					</script>
 					<?php } ?>
 					<?php }elseif($offer_status == "accepted"){ ?>
-					<button class="withdraw-offer rounded-0 mt-2 float-right" disabled>
-					Offer Accepted
-					</button>
-					<a href="../order_details.php?order_id=<?php echo $order_id; ?>" class="mt-3 mr-3 float-right text-success">
+					<a href="../order_details.php?order_id=<?php echo $order_id; ?>" class="mt-2 mr-3  rounded-0 float-right accepte-offer">
 					View Order
 					</a>
+					<button class="withdraw-offer rounded-0 mt-2 float-right" disabled="true">
+					Offer Accepted
+					</button>
+					
 					<?php } ?>
 					<!-- <button class="withdraw-offer" type="button" role="button">Withdraw offer</button> -->
 				</div>

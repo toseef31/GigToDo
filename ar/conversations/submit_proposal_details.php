@@ -17,7 +17,7 @@ $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_
 $row_login_seller = $select_login_seller->fetch();
 
 $login_seller_id = $row_login_seller->seller_id;
-
+$login_seller_image = $row_login_seller->seller_image;
 
 $proposal_id = $input->post('proposal_id');
 
@@ -36,7 +36,30 @@ $row_proposals = $select_proposals->fetch();
 $proposal_title = $row_proposals->proposal_title;
 
 ?>
-
+<style>
+		.customer-order.modal-dialog .form-group .deliver-time .deliver-time-item[for="custom_time"] .deliver-time-item-content .time span {
+		    font-size: 16px;
+		    line-height: 13px;
+		    margin-right: 0;
+		}
+		.customer-order.modal-dialog .form-group .deliver-time .deliver-time-item[for="custom_time"] .deliver-time-item-content .time .input-number {
+		    background-color: #ff0707;
+		    border: none;
+		    color: white;
+		    display: none;
+		    font-size: 15px;
+		    font-weight: 600;
+		    height: 34px;
+		    padding: 6px 12px;
+		    width: 100%;
+		}
+		.customer-order.modal-dialog .form-group .deliver-time .deliver-time-item[for="custom_time"] input[type="radio"]:checked+.deliver-time-item-content .time span {
+	    display: none;
+		}
+		.customer-order.modal-dialog .form-group .deliver-time .deliver-time-item[for="custom_time"] input[type="radio"]:checked+.deliver-time-item-content .time .input-number {
+		    display: block;
+		}
+</style>
 <div class="modal-content"><!-- modal-content Starts -->
 
 <div class="modal-header"><!-- modal-header Starts -->
@@ -72,15 +95,30 @@ $proposal_title = $row_proposals->proposal_title;
 
 <input type="hidden" name="file" value="<?php echo $file; ?>">
 
-<div class="form-group"><!--- form-group Starts --->
-<div class="customer-profile px-0 border-bottom-0">
+	<div class="customer-profile mb-30">
+		<div class="d-flex align-items-start align-items-md-center pt-15 pb-15">
+			<div class="profile-img">
+				<?php if (!empty($login_seller_image)){ ?>
+					<img src="<?= $site_url; ?>/user_images/<?= $login_seller_image; ?>" alt="">					
+				<?php }else{ ?>
+				<img src="<?= $site_url; ?>/assets/img/seller-profile/profile-img.png" alt="">
+				<?php } ?>
+			</div>
+			<div class="profile-content media-body">
+				<div class="form-group p-0 m-0">
+					<textarea rows="4" class="form-control" name="description" placeholder="اكتب النص هنا" required=""></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- <div class="form-group"> -->
+	<!--- form-group Starts --->
+<!-- <div class="customer-profile px-0 border-bottom-0">
 <label class="font-weight-bold"> وصف :  </label>
-
 <textarea name="description" class="form-control" required=""></textarea>
 </div>
-	
-
-</div><!--- form-group Ends --->
+</div> -->
+<!--- form-group Ends --->
 
 
 
@@ -102,10 +140,10 @@ $proposal_title = $row_proposals->proposal_title;
 </div> -->
 <!--- form-group Ends --->
 <div class="form-group">
-	<div class="control-label d-flex align-items-start">
+	<!-- <div class="control-label d-flex align-items-start">
 		<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-3.png" alt="Icon"></span>
 		<span>متى تريد أن تستلم خدمتك المطلوبة؟</span>
-	</div>
+	</div> -->
 	<div class="deliver-time d-flex flex-wrap mb-15">
 		<?php
 			$get_delivery_times = $db->select("delivery_times");
@@ -127,6 +165,19 @@ $proposal_title = $row_proposals->proposal_title;
 			</div>
 		</label>
 		<?php } ?>
+		<label class="deliver-time-item" for="custom_time">
+			<input id="custom_time" type="radio" name="delivery_time" hidden />
+			<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+				<span class="color-icon">
+					<span>-</span>
+					<span>+</span>
+				</span>
+				<span class="d-flex flex-row align-items-end time">
+					<span>1-30 يوم</span>
+					<input autofocus="autofocus" class="input-number" maxlength="2" type="text" pattern="[0-9]{2}" />
+				</span>
+			</div>
+		</label>
 	</div>
 </div>
 
@@ -150,9 +201,29 @@ $proposal_title = $row_proposals->proposal_title;
 <div class="form-group">
 	<div class="control-label d-flex align-items-start">
 		<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
-		<span>ما هى ميزانيتك؟</span>
+		<span>القيمة الاجمالية</span>
 	</div>
 	<input class="form-control mb-30"  name="amount" type="text" min="5" placeholder="اقل مبلغ 5 $"  required=""/>
+</div>
+<div class="form-group d-flex flex-column">
+	<div class="control-label d-flex align-items-start">
+		<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-7.png" alt="Icon"></span>
+		<span>مراجعة</span>
+	</div>
+	<select class="form-control wide mb-30" name="revision_time">
+		<option>Select Items</option>
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</select>
 </div>
 
 
@@ -180,7 +251,13 @@ $proposal_title = $row_proposals->proposal_title;
 <script>
 
 $(document).ready(function(){
-	
+	$('.deliver-time-item[for="custom_time"]').on('click', function(){
+		$('.input-number').focus();
+	});
+	$('.input-number').keyup(function(){
+		var custom_btn = $('.input-number').val();
+		$('#custom_time').val(custom_btn);
+	});
 
 $("#proposal-details-form").submit(function(event){
 	

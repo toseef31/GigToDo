@@ -209,7 +209,7 @@ color: #afb8bc;
 
 /*beta*/
 .list-inline-item:not(:last-child) {
-	margin-right: 2px !important;
+	/*margin-right: 2px !important;*/
 }
 
 
