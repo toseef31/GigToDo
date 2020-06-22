@@ -33,6 +33,7 @@
 		$order_id = $row_offer->order_id;
 		$delivery_time = $row_offer->delivery_time;
 		$amount = $row_offer->amount;
+		$revision = $row_offer->revision_time;
 		$offer_status = $row_offer->status;
 		$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 		$row_proposals = $select_proposals->fetch();
@@ -69,9 +70,9 @@
       <?php if(!empty($message_file)){ ?>
       <?php if(in_array(pathinfo($message_file,PATHINFO_EXTENSION),$allowed)){ ?>
       <br>
-      <img src="conversations_files/<?php echo $message_file; ?>" alt="..." class="img-thumbnail" width="100">
+      <img src="<?= $site_url; ?>/conversations/conversations_files/<?php echo $message_file; ?>" alt="..." class="img-thumbnail" width="100">
       <?php } ?>
-			<a href="conversations_files/<?php echo $message_file; ?>" download class="d-block mt-2 ml-1">
+			<a href="<?= $site_url; ?>/conversations/conversations_files/<?php echo $message_file; ?>" download class="d-block mt-2 ml-1"  style="color: #ff0707;">
 			<i class="fa fa-download"></i> <?php echo $message_file; ?>
 			</a>
 			<?php } ?>
@@ -99,7 +100,7 @@
 						<span>
 							<img src="<?= $site_url; ?>/assets/img/messages/revision-icon.png" />
 						</span>
-						<span>سعر المبلغ : <?php echo $amount; ?></span>
+						<span> مراجعة: <?php echo $revision; ?></span>
 					</li>
 					<li class="d-flex flex-row align-items-center">
 						<span>
@@ -115,7 +116,7 @@
 							سحب العرض
 						</a>
 					<?php }else{ ?>
-					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="withdraw-offer float-right">
+					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="accepte-offer float-right">
 					اقبل العرض 
 					</button>
 					<script>
@@ -134,12 +135,13 @@
 					</script>
 					<?php } ?>
 					<?php }elseif($offer_status == "accepted"){ ?>
+						<a href="../order_details.php?order_id=<?php echo $order_id; ?>" class="mt-2 ml-3 float-right accepte-offer">
+						مشاهدة الطلب
+						</a>
 					<button class="withdraw-offer rounded-0 mt-2 float-right" disabled>
 					عرض قبول
 					</button>
-					<a href="../order_details.php?order_id=<?php echo $order_id; ?>" class="mt-3 mr-3 float-right text-success">
-					مشاهدة الطلب
-					</a>
+					
 					<?php } ?>
 					<!-- <button class="withdraw-offer" type="button" role="button">Withdraw offer</button> -->
 				</div>

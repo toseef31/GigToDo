@@ -33,6 +33,7 @@ $row_requests = $get_requests->fetch();
 $request_title = $row_requests->request_title;
 
 $request_description = $row_requests->request_description;
+$request_budget = $row_requests->request_budget;
 
 $request_seller_id = $row_requests->seller_id;
 
@@ -112,14 +113,21 @@ $proposal_title = $row_proposals->proposal_title;
 <form id="proposal-details-form"><!--- proposal-details-form Starts --->
 
 <div class="selected-proposal"><!--- selected-proposal p-3 Starts --->
-
-<div class="form-group pt-0">
+	<div class="form-group pt-0">
 		<div class="customer-profile px-0 border-bottom-0 pt-0">
 			<h5> <?php echo $proposal_title; ?> </h5>
 		</div>
 	</div>
-
-
+	<div class="form-group mb-0">
+		<div class="control-label d-flex align-items-start">
+			<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
+			<span>
+				الميزانية الكلية
+			</span>
+		</div>
+		<input class="form-control mb-30" type="text" value="<?= $s_currency; ?> <?= $request_budget; ?>" placeholder="الحد الادني 5 دولار" readonly />
+	</div>
+	
 
 <input type="hidden" name="proposal_id" value="<?php echo $proposal_id; ?>">
 
@@ -194,6 +202,19 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 			</div>
 		</label>
 		<?php } ?>
+		<label class="deliver-time-item" for="days30">
+			<input id="days30" type="radio" name="delivery_time" hidden />
+			<div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
+				<span class="color-icon">
+					<span>-</span>
+					<span>+</span>
+				</span>
+				<span class="d-flex flex-row align-items-end time">
+          <span>مخصص</span>
+					<input autofocus="autofocus" class="input-number" type="text" name="" pattern="[0-9]{2}" />
+				</span>
+			</div>
+		</label>
 	</div>
 </div>
 
@@ -219,6 +240,28 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 	<input class="form-control mb-30"  name="amount" type="text" min="5" placeholder="اقل مبلغ 5 $"  required=""/>
 </div>
 
+<div class="form-group d-flex flex-column">
+	<div class="control-label d-flex align-items-start">
+		<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-7.png" alt="Icon"></span>
+		<span>
+			المراجعات
+		</span>
+	</div>
+	<select class="form-control wide mb-30" name="revision_time">
+		<option>Select Items</option>
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</select>
+</div>
 
 </div><!--- selected-proposal p-3 Ends --->
 
@@ -240,7 +283,13 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 
 
 <script>
-
+	$('.deliver-time-item[for="days30"]').on('click', function(){
+		$('.input-number').focus();
+	});
+	$('.input-number').keyup(function(){
+		var custom_btn = $('.input-number').val();
+		$('#days30').val(custom_btn);
+	});
 $(document).ready(function(){
 	
 $("#proposal-details-form").submit(function(event){

@@ -378,7 +378,7 @@
                 </div>
               </label>
             <?php } ?>
-              <label class="deliver-time-item" for="days30">
+              <!-- <label class="deliver-time-item" for="days30">
                 <input id="days30" type="radio" name="delivery_time" hidden />
                 <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                   <span class="color-icon">
@@ -390,7 +390,7 @@
                     <input autofocus="autofocus" class="input-number" maxlength="2" type="text" pattern="[0-9]{2}" />
                   </span>
                 </div>
-              </label>
+              </label> -->
             </div>
           </div>
           <div class="form-group">

@@ -75,7 +75,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 										</span>
 									</label>
                   <div class="d-flex flex-column category_section">
-                    <select name="proposal_cat_id" id="category" class="form-control mb-3" required>
+                    <select name="proposal_cat_id" id="category" class="form-control mb-3" required  disabled="true">
                     <option value="<?= $d_proposal_cat_id; ?>" selected> <?= $arabic_title; ?> </option>
                     <?php 
                     $get_cats = $db->query("select * from categories where not cat_id='$d_proposal_cat_id'");
@@ -90,7 +90,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
                     <?php } ?>
                     </select>
                     <small class="form-text text-danger"><?= ucfirst(@$form_errors['proposal_cat_id']); ?></small>
-                    <select name="proposal_child_id" class="form-control" id="sub-category" required>
+                    <select name="proposal_child_id" class="form-control" id="sub-category" required  disabled="true">
                     <option value="<?= $d_proposal_child_id; ?>" selected> <?= $child_arabic_title; ?> </option>
                     <?php
                     $get_c_cats = $db->query("select * from categories_children where child_parent_id='$d_proposal_cat_id' and not child_id='$d_proposal_child_id'");
