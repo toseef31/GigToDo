@@ -31,6 +31,7 @@ $login_seller_id = $row_login_seller->seller_id;
 
 $receiver_seller_id = $input->post('receiver_id');
 $proposal_id = $input->post('proposal_id');
+$request_id = $input->post('request_id');
 $message = $input->post('message');
 $file = $input->post('file');
 $description = $input->post('description');
@@ -38,7 +39,8 @@ $delivery_time = $input->post('delivery_time');
 $amount = $input->post('amount');
 $revision_time = $input->post('revision_time');
 
-$insert_offer = $db->insert("messages_offers",array("sender_id" => $login_seller_id,"proposal_id" => $proposal_id,"description" => $description,"delivery_time" => $delivery_time,"amount" => $amount,"revision_time"=>$revision_time,"status" => 'active'));
+
+$insert_offer = $db->insert("messages_offers",array("sender_id" => $login_seller_id,"proposal_id" => $proposal_id,"description" => $description,"delivery_time" => $delivery_time,"amount" => $amount,"revision_time"=>$revision_time,"request_id"=>$request_id,"status" => 'active'));
 $last_offer_id = $db->lastInsertId();
 if($insert_offer){
 		

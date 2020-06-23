@@ -86,7 +86,7 @@ $child_title = $row_meta->child_title;
 	                      <?php } ?>
 	                      </select>
 	                      <small class="form-text text-danger"><?= ucfirst(@$form_errors['proposal_cat_id']); ?></small>
-	                      <select name="proposal_child_id" id="sub-category" class="form-control" required readonly disabled="true">
+	                      <select name="proposal_child_id" id="sub-category" class="form-control" required >
 	                      <option value="<?= $d_proposal_child_id; ?>" selected> <?= $child_title; ?> </option>
 	                      <?php
 	                      $get_c_cats = $db->query("select * from categories_children where child_parent_id='$d_proposal_cat_id' and not child_id='$d_proposal_child_id'");

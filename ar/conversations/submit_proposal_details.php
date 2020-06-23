@@ -271,7 +271,7 @@ delivery_time = $("input[name='delivery_time']:checked").val();
 
 amount = $("input[name='amount']").val();
 
-if(description == "" | delivery_time == "" | amount == ""){
+if(description == "" || delivery_time == "" || amount == ""){
 
 swal({
 type: 'warning',

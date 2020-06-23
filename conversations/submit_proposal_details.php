@@ -27,6 +27,8 @@ $file = $input->post('file');
 
 $receiver_id = $input->post('receiver_id');
 
+$request_id = $input->post('request_id');
+
 
 
 $select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
@@ -67,7 +69,7 @@ $proposal_title = $row_proposals->proposal_title;
 
 <div class="modal-header"><!-- modal-header Starts -->
 
-<h5 class="modal-title"> Specify Your Proposal Details </h5>
+<h5 class="modal-title"> Specify Your Proposal Details</h5>
 
 <!-- <button class="close" data-dismiss="modal">
 <span> &times; </span>
@@ -98,6 +100,7 @@ $proposal_title = $row_proposals->proposal_title;
 <input type="hidden" name="message" value="<?php echo $message; ?>">
 
 <input type="hidden" name="file" value="<?php echo $file; ?>">
+<input type="hidden" name="request_id" value="<?php echo $request_id ?>">
 
 	<div class="customer-profile mb-30">
 		<div class="d-flex align-items-start align-items-md-center pt-15 pb-15">
@@ -282,7 +285,7 @@ delivery_time = $("input[name='delivery_time']:checked").val();
 
 amount = $("input[name='amount']").val();
 
-if(description == "" | delivery_time == "" | amount == ""){
+if(description == "" || delivery_time == "" || amount == ""){
 
 swal({
 type: 'warning',

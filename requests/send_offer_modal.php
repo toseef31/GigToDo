@@ -33,6 +33,7 @@ $request_title = $row_requests->request_title;
 $request_description = $row_requests->request_description;
 
 $request_budget = $row_requests->request_budget;
+$cat_id = $row_requests->cat_id;
 
 $child_id = $row_requests->child_id;
 
@@ -189,7 +190,7 @@ $request_seller_image = $row_request_seller->seller_image;
 				<div class="request-proposals-list form-group">
 					
 					<?php
-					$get_proposals = $db->select("proposals",array("proposal_child_id"=>$child_id,"proposal_seller_id"=>$login_seller_id,"proposal_status"=>"active"));
+					$get_proposals = $db->select("proposals",array("proposal_cat_id"=>$cat_id,"proposal_seller_id"=>$login_seller_id,"proposal_status"=>"active"));
 										while($row_proposals = $get_proposals->fetch()){
 										$proposal_id = $row_proposals->proposal_id;
 										$proposal_title = $row_proposals->proposal_title;
