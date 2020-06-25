@@ -11,6 +11,7 @@ $login_seller_id = $row_login_seller->seller_id;
 $receiver_id = $input->post('receiver_id');
 $message = $input->post('message');
 $file = $input->post('file');
+$request_id = $input->post('request_id');
 ?>
 <div id="send-offer-modal" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true"><!-- send-offer-modal modal fade Starts -->
 <div class="modal-dialog  modal-dialog-centered customer-order" role="document"><!-- modal-dialog Starts -->
@@ -67,12 +68,13 @@ $(document).ready(function(){
    $("#submit-proposal").click(function(){
    proposal_id = document.querySelector('input[name="proposal_id"]:checked').value;	   
    receiver_id = "<?php echo $receiver_id; ?>";
+   request_id = "<?php echo $request_id ?>";
    message = $("#message").val();
    file = "<?php echo $file; ?>";
    $.ajax({
 		method: "POST",   
 		url: "<?php echo $site_url; ?>/conversations/submit_proposal_details",
-		data: { proposal_id: proposal_id, receiver_id: receiver_id, message: message, file: file}
+		data: { proposal_id: proposal_id, receiver_id: receiver_id, message: message, file: file, request_id: request_id}
 		}).done(function(data){
 		 $("#submit-proposal-details .modal-dialog").html(data);
 		});

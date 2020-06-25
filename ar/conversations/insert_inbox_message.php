@@ -72,91 +72,98 @@ if($update_inbox_sellers){
 		$delete_hide_seller_messages = $db->query("delete from hide_seller_messages where hider_id='$login_seller_id' and hide_seller_id='$receiver_seller_id' or hider_id='$receiver_seller_id' AND hide_seller_id='$login_seller_id'");
 	}
 
-	// $site_logo = $row_general_settings->site_logo;
-	// $site_email_address = $row_general_settings->site_email_address;
-	// $get_seller = $db->select("sellers",array("seller_id" => $receiver_seller_id));
-	// $row_seller = $get_seller->fetch();
-	// $seller_user_name = $row_seller->seller_user_name;
-	// $seller_email = $row_seller->seller_email;
-	// require '../vendor/autoload.php';
+	$select_receiver = $db->select("sellers",array("seller_user_name" => $receiver_seller_id));
+	$row_receiver = $select_receiver->fetch();
+	$receiver_status = $row_receiver->seller_status;
 
-	// $mail = new PHPMailer(true);
- //  	try{
-	// 	if($enable_smtp == "yes"){
-	// 	$mail->isSMTP();
-	// 	$mail->Host = $s_host;
-	// 	$mail->Port = $s_port;
-	// 	$mail->SMTPAuth = true;
-	// 	$mail->SMTPSecure = $s_secure;
-	// 	$mail->Username = $s_username;
-	// 	$mail->Password = $s_password;
-	// 	}
-	// 	$mail->setFrom($site_email_address,$site_name);
-	// 	$mail->addAddress($seller_email);
-	// 	$mail->addReplyTo($site_email_address,$site_name);
-	// 	$mail->isHTML(true);
-	// 	$mail->Subject = "You've received a message from $login_seller_user_name";
-	// 	$mail->Body = "
-	// 	<html>
-	// 	<head>
-	// 	<style>
-	// 	.container {
-	// 	background: rgb(238, 238, 238);
-	// 	padding: 80px;
-	// 	}
-	// 	@media only screen and (max-device-width: 690px) {
-	// 	.container {
-	// 	background: rgb(238, 238, 238);
-	// 	width:100%;
-	// 	padding:1px;
-	// 	}
-	// 	}
-	// 	.box {
-	// 		background: #fff;
-	// 		margin: 0px 0px 30px;
-	// 		padding: 8px 20px 20px 20px;
-	// 	    border:1px solid #e6e6e6;
-	// 	    box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
-	// 	}
-	// 	.lead {
-	// 		font-size:16px;
-	// 	}
-	// 	.btn{
-	// 		background:green;
-	// 		margin-top:20px;
-	// 		color:white !important;
-	// 		text-decoration:none;
-	// 		padding:10px 16px;
-	// 		font-size:18px;
-	// 		border-radius:3px;
-	// 	}
-	// 	hr{
-	// 		margin-top:20px;
-	// 		margin-bottom:20px;
-	// 		border:1px solid #eee;
-	// 	}
-	// 	</style>
-	// 	</head>
-	// 	<body class='is-responsive'>
-	// 	<div class='container'>
-	// 	<div class='box'>
-	// 	<center>
-	// 	<img src='$site_url/images/$site_logo' width='100'>
-	// 	<h2> You've received a message from $login_seller_user_name </h2>
-	// 	</center>
-	// 	<hr>
-	// 	<p class='lead'> Dear $seller_user_name, </p>
-	// 	<p class='lead'> $login_seller_user_name left you a message in your inbox. </p>
-	// 	<p class='lead'> $message </p>
-	// 	<center>
-	// 	<a href='$site_url/conversations/inbox?single_message_id=$message_group_id' class='btn'>View & Reply</a>
-	// 	</center>
-	// 	</div>
-	// 	</div>
-	// 	</body>
-	// 	</html>";
-	// 	$mail->send();
-	// }catch(Exception $e){
+	if($receiver_status == 'offline'){
 
- //  	}
+		$site_logo = $row_general_settings->site_logo;
+		$site_email_address = $row_general_settings->site_email_address;
+		$get_seller = $db->select("sellers",array("seller_id" => $receiver_seller_id));
+		$row_seller = $get_seller->fetch();
+		$seller_user_name = $row_seller->seller_user_name;
+		$seller_email = $row_seller->seller_email;
+		require '../vendor/autoload.php';
+
+		$mail = new PHPMailer(true);
+	  	try{
+			if($enable_smtp == "yes"){
+			$mail->isSMTP();
+			$mail->Host = $s_host;
+			$mail->Port = $s_port;
+			$mail->SMTPAuth = true;
+			$mail->SMTPSecure = $s_secure;
+			$mail->Username = $s_username;
+			$mail->Password = $s_password;
+			}
+			$mail->setFrom($site_email_address,$site_name);
+			$mail->addAddress($seller_email);
+			$mail->addReplyTo($site_email_address,$site_name);
+			$mail->isHTML(true);
+			$mail->Subject = "You've received a message from $login_seller_user_name";
+			$mail->Body = "
+			<html>
+			<head>
+			<style>
+			.container {
+			background: rgb(238, 238, 238);
+			padding: 80px;
+			}
+			@media only screen and (max-device-width: 690px) {
+			.container {
+			background: rgb(238, 238, 238);
+			width:100%;
+			padding:1px;
+			}
+			}
+			.box {
+				background: #fff;
+				margin: 0px 0px 30px;
+				padding: 8px 20px 20px 20px;
+			    border:1px solid #e6e6e6;
+			    box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
+			}
+			.lead {
+				font-size:16px;
+			}
+			.btn{
+				background:green;
+				margin-top:20px;
+				color:white !important;
+				text-decoration:none;
+				padding:10px 16px;
+				font-size:18px;
+				border-radius:3px;
+			}
+			hr{
+				margin-top:20px;
+				margin-bottom:20px;
+				border:1px solid #eee;
+			}
+			</style>
+			</head>
+			<body class='is-responsive'>
+			<div class='container'>
+			<div class='box'>
+			<center>
+			<img src='$site_url/images/$site_logo' width='100'>
+			<h2> You've received a message from $login_seller_user_name </h2>
+			</center>
+			<hr>
+			<p class='lead'> Dear $seller_user_name, </p>
+			<p class='lead'> $login_seller_user_name left you a message in your inbox. </p>
+			<p class='lead'> $message </p>
+			<center>
+			<a href='$site_url/conversations/inbox?single_message_id=$message_group_id' class='btn'>View & Reply</a>
+			</center>
+			</div>
+			</div>
+			</body>
+			</html>";
+			$mail->send();
+		}catch(Exception $e){
+
+	  }
+	}
 }

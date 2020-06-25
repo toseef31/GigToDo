@@ -120,6 +120,7 @@ require("includes/inboxFunctions.php");
 <div id="upload_file_div"></div>
 <div id="accept-offer-div"></div>
 <div id="send-offer-div"></div>
+<div id="send-request-div"></div>
 <!-- Customer Order Puppup Start-->
 
 <?php require_once("includes/javascript.php"); ?>
