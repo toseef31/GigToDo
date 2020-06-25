@@ -142,7 +142,7 @@ if($seller_id == $login_seller_id){
 </head>
 
 <body class="is-responsive">
-<?php require_once("includes/user_header.php"); ?>
+<?php require_once("includes/buyer-header.php"); ?>
 <?php require_once("orderIncludes/orderDetails.php"); ?>
 <?php require_once("orderIncludes/orderStatusBar.php"); ?>
 
