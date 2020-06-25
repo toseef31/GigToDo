@@ -88,6 +88,24 @@ $("#send-offer").click(function(){
 	});
 });
 
+$("#send-request").click(function(){
+	
+	receiver_id = "<?= $seller_id; ?>";
+	message = $("#message").val();
+	file = $("#file").val();
+	if(file == ""){
+		message_file = file;
+	}else{
+		message_file = document.getElementById("file").files[0].name;
+	}
+	$.ajax({
+		method: 'POST',
+		url: 'send_request_modal',
+		data: {receiver_id: receiver_id, message: message, file: message_file}
+	}).done(function(data){
+		$("#send-request-div").html(data);
+	});
+});
 // Javascript Jquery Code To Reload User Typing Status Every half second Code Starts ///
 
 var seller_id = "<?= $seller_id; ?>";

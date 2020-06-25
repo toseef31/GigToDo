@@ -61,7 +61,7 @@ $insert_request = $db->insert("messages_requests",array("sender_id"=>$login_sell
 
 $last_request_id = $db->lastInsertId();
 if($insert_request){
-
+	// print_r($insert_request);die();
 	$message_date = date("h:i: F d, Y");
 	$dateAgo = date("Y-m-d H:i:s");
 	$message_status = "unread";

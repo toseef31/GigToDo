@@ -40,24 +40,27 @@ $amount = $input->post('amount');
 $revision_time = $input->post('revision_time');
 
 
-$insert_offer = $db->insert("messages_offers",array("sender_id" => $login_seller_id,"proposal_id" => $proposal_id,"description" => $description,"delivery_time" => $delivery_time,"amount" => $amount,"revision_time"=>$revision_time,"request_id"=>$request_id,"status" => 'active'));
+$insert_offer = $db->insert("messages_offers",array("sender_id" => $login_seller_id,"proposal_id" => $proposal_id,"request_id"=>$request_id,"description" => $description,"delivery_time" => $delivery_time,"amount" => $amount,"revision_time"=>$revision_time,"status" => 'active'));
 $last_offer_id = $db->lastInsertId();
+
 if($insert_offer){
 		
 	$message_date = date("h:i: F d, Y");
 	$dateAgo = date("Y-m-d H:i:s");
 	$message_status = "unread";
 	$time = time();
-
+	
 	$get_inbox_sellers = $db->query("select * from inbox_sellers where sender_id='$login_seller_id' and receiver_id=:r_id or sender_id=:s_id and receiver_id='$login_seller_id'",array("r_id"=>$receiver_seller_id,"s_id"=>$receiver_seller_id));
 	$row_inbox_sellers = $get_inbox_sellers->fetch();
 	$message_group_id = $row_inbox_sellers->message_group_id;
+	
 
 	$insert_message = $db->insert("inbox_messages",array("message_sender" => $login_seller_id,"message_receiver" => $receiver_seller_id,"message_offer_id" => $last_offer_id,"message_group_id" => $message_group_id,"message_desc" => $message,"message_file" => $file,"message_date" => $message_date,"dateAgo" => $dateAgo,"bell" => 'active',"message_status" => $message_status));
 	$last_message_id = $db->lastInsertId();
 
 	$update_inbox_sellers = $db->update("inbox_sellers",array("sender_id" => $login_seller_id,"receiver_id" => $receiver_seller_id,"message_status" => $message_status,"time"=>$time,"message_id" => $last_message_id,'popup'=>'1'),array("message_group_id" => $message_group_id));
 
+	
 	if($update_inbox_sellers){
 
 		$select_hide_seller_messages = $db->delete("hide_seller_messages",array("hider_id"=>$login_seller_id,"hide_seller_id"=>$receiver_seller_id));	

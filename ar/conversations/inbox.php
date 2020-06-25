@@ -100,6 +100,8 @@ require("includes/inboxFunctions.php");
 <div id="upload_file_div"></div>
 <div id="accept-offer-div"></div>
 <div id="send-offer-div"></div>
+<div id="send-request-div"></div>
+
 <?php require_once("includes/javascript.php"); ?>
 <?php require_once("../includes/footerInbox.php"); ?>
 </body>
