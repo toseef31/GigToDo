@@ -4,7 +4,7 @@ var height = 0;
 $(".col-md-8 .message-content-card .inboxMsg").each(function(i, value){
 	height += parseInt($(this).height());
 });
-height += 2000;
+height += 20000;
 $(".col-md-8 .message-content-card").animate({scrollTop: height});
 
 var login_seller_id = "<?= $login_seller_id; ?>";
@@ -41,8 +41,8 @@ function sendMessage(){
 				$('.files').html('');
 				$("#send-msg").prop("disabled", false);
 				$("#send-msg").html("Send");
-				height += 2000;
-				$(".col-md-8 .message-content-card").animate({scrollTop: height});
+				height += 20000;
+				$(".col-md-8 .message-content-card").animate({scrollTop: height}, 2000);
 			}
 		});
 	}
