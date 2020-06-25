@@ -11,5 +11,6 @@
 	$seller_id = $row_seller->seller_id;
 
 	$update_offer = $db->update("sellers",array('seller_offers'=> "10"),array('seller_id'=>$seller_id));
+	
 
 
