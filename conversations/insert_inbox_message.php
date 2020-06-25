@@ -76,7 +76,7 @@ if($update_inbox_sellers){
 	$select_receiver = $db->select("sellers",array("seller_user_name" => $receiver_seller_id));
 	$row_receiver = $select_receiver->fetch();
 	$receiver_status = $row_receiver->seller_status;
-
+	require '../vendor/autoload.php';
 	if($receiver_status == 'offline'){
 		$site_logo = $row_general_settings->site_logo;
 		$site_email_address = $row_general_settings->site_email_address;

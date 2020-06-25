@@ -26,7 +26,7 @@ $receiver_image = $row_receiver_seller->seller_image;
 	<div class="modal-dialog modal-dialog-centered customer-order" role="document">
 	  <div class="modal-content">
 	    <div class="modal-header align-items-center">
-	      <h5 class="modal-title" id="exampleModalCenterTitle">Request a Quote</h5>
+	      <h5 class="modal-title" id="exampleModalCenterTitle">طلب عرض سعر</h5>
 	      <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
 	        <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
 	      </a>
@@ -42,7 +42,7 @@ $receiver_image = $row_receiver_seller->seller_image;
 	        </div>
 	        <div class="profile-content media-body">
 	          <h6 class="profile-name"><?= ucfirst($receiver_user_name); ?></h6>
-	          <p class="texts">Hi. please provide your request details below and i’ll get back to you.</p>
+	          <p class="texts">اهلا ، يرجى تقديم تفاصيل طلبك أدناه وسوف اعود إليك لاحقا</p>
 	        </div>
 	      </div>
 	      <form action="" method="post" id="request-detail-form" enctype="multipart/form-data">
@@ -52,33 +52,33 @@ $receiver_image = $row_receiver_seller->seller_image;
 	        <div class="form-group pt-4">
 	          <label class="control-label d-flex align-items-start">
 	            <span><img src="<?= $site_url; ?>/assets/img/post-request/icon-1.png" alt="Icon"></span>
-	            <span>Describe the service you’re looking to purchase</span>
+	            <span>اوصف الخدمة التى تبحث عن شرائها</span>
 	          </label>
-	          <textarea class="form-control" id="textarea" name="request_description" placeholder="I’m looking for..." rows="5"></textarea>
+	          <textarea class="form-control" id="textarea" name="request_description" placeholder="انا ابحث عن .." rows="5"></textarea>
 	          <div class="bottom-label d-flex flex-row align-items-center justify-content-between mb-30 mt-15">
 	            <div class="attach-file d-flex flex-row align-items-center">
 	              <label for="request_file">
 	                <input type="file" id="request_file" name="request_file" hidden="">
 	                <span class="file d-flex flex-row align-items-center">
 	                  <span><img src="<?= $site_url; ?>/assets/img/post-request/attach.png" alt=""></span>
-	                  <span>Attach File</span>
+	                  <span>الملف الملحق</span>
 	                </span>
 	              </label>
 	              <span id="file_name"></span>
-	              <span class="max-size">Max Size 30MB</span>
+	              <span class="max-size">اقصى حجم 30 ميجا بايت</span>
 	            </div>
-	            <span class="chars-max"><span class="descCount">0</span>/2500 Chars Max</span>
+	            <span class="chars-max"><span class="descCount">0</span>/2500 اقصى عدد حروف</span>
 	          </div>
 	        </div>
 	        <div class="form-group">
 	          <div class="control-label d-flex align-items-start">
 	            <span><img src="<?= $site_url; ?>/assets/img/post-request/icon-2.png" alt="Icon"></span>
-	            <span>Choose a category</span>
+	            <span>اختر فئة</span>
 	          </div>
 	          <div class="row">
 	            <div class="col-12 col-sm-6 mb-30 sub_cat">
 	              <select name="cat_id" class="form-control" id="category" style="display: block !important;">
-	                <option value="" class="hidden"> Select A Category </option>
+	                <option value="" class="hidden"> اختر الفئة الفرعية </option>
 	              <?php 
 	              // $db->select("proposals",array("proposal_seller_id"=>$get_seller_id,"proposal_status" => "active"));
 	              // $select_proposal = $db->query("select DISTINCT(proposal_cat_id) from proposals where proposal_seller_id = '$get_seller_id' AND proposal_status = 'active'");
@@ -104,8 +104,9 @@ $receiver_image = $row_receiver_seller->seller_image;
 	              $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id,"language_id" => $siteLanguage));
 	              $row_meta = $get_meta->fetch();
 	              $cat_title = $row_meta->cat_title;
+	              $arabic_title = $row_meta->arabic_title;
 	              ?>
-	                <option value="<?= $cat_id; ?>"> <?= $cat_title; ?> </option>
+	                <option value="<?= $cat_id; ?>"> <?= $arabic_title; ?> </option>
 	              <?php  } ?>
 	              </select>
 	            </div>
@@ -119,24 +120,25 @@ $receiver_image = $row_receiver_seller->seller_image;
 	        <div class="form-group">
 	          <div class="control-label d-flex align-items-start">
 	            <span><img src="<?= $site_url; ?>/assets/img/post-request/icon-3.png" alt="Icon"></span>
-	            <span>When would you like your Service Delivered?</span>
+	            <span>متى تريد أن تستلم خدمتك المطلوبة؟</span>
 	          </div>
 	          <div class="deliver-time d-flex flex-wrap mb-15">
 	            <?php
 	              $get_delivery_times = $db->select("delivery_times");
 	              while($row_delivery_times = $get_delivery_times->fetch()){
 	              $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
+	              $delivery_proposal_title_arabic = $row_delivery_times->delivery_proposal_title_arabic;
 	              $delivery_id = $row_delivery_times->delivery_id;
 	            ?>
 	            <label class="deliver-time-item" for="hourss<?= $delivery_id; ?>">
-	              <input id="hourss<?= $delivery_id; ?>"  value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
+	              <input id="hourss<?= $delivery_id; ?>"  value="<?= $delivery_proposal_title_arabic; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title_arabic){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
 	              <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
 	                <span class="color-icon">
 	                  <span>-</span>
 	                  <span>+</span>
 	                </span>
 	                <span class="d-flex flex-row align-items-end time">
-	                  <span><?= $delivery_proposal_title; ?></span>
+	                  <span><?= $delivery_proposal_title_arabic; ?></span>
 	                  <!-- <span>HRS</span> -->
 	                </span>
 	              </div>
@@ -150,7 +152,7 @@ $receiver_image = $row_receiver_seller->seller_image;
 	                  <span>+</span>
 	                </span>
 	                <span class="d-flex flex-row align-items-end time">
-	                  <span>Custom</span>
+	                  <span>1-30 يوم</span>
 	                  <input autofocus="autofocus" class="input-number" maxlength="2" type="text" pattern="[0-9]{2}" />
 	                </span>
 	              </div>
@@ -160,13 +162,13 @@ $receiver_image = $row_receiver_seller->seller_image;
 	        <div class="form-group">
 	          <div class="control-label d-flex align-items-start">
 	            <span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
-	            <span>What is your budget?</span>
+	            <span>ما هى ميزانيتك؟</span>
 	          </div>
-	          <input class="form-control mb-30" name="request_budget" type="text" placeholder="$ 5 Minimum" />
+	          <input class="form-control mb-30" name="request_budget" type="text" placeholder="اقل مبلغ 5 $" />
 	        </div>
 	        <div class="form-group d-flex flex-row align-items-center justify-content-between">
-	          <button class="button" name="send_request" type="submit" role="button">Send a request</button>
-	          <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+	          <button class="button" name="send_request" type="submit" role="button">ارسل طلب</button>
+	          <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">إلغاء</button>
 	        </div>
 	      </form>
 	    </div>
@@ -231,12 +233,12 @@ $(document).ready(function(){
 		if(request_description == "" || delivery_time == undefined || request_budget == ""){
 			swal({
 				type: 'warning',
-				text: 'You Must Need To Fill Out All Fields Before Submitting Offer.'
+				text: 'يجب أن تملأ جميع الحقول قبل تقديم العرض.'
 			});
 		}else{
 			$.ajax({	
 				method: "POST",
-				url: "<?php echo $site_url; ?>/conversations/insert_request",
+				url: "<?php echo $site_url; ?>/ar/conversations/insert_request",
 				data: $('#request-detail-form').serialize()
 			}).done(function(data){
 				$("#send-request-modal").modal('hide');			

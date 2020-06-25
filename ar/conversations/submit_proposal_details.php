@@ -26,6 +26,7 @@ $message = $input->post('message');
 $file = $input->post('file');
 
 $receiver_id = $input->post('receiver_id');
+$request_id = $input->post('request_id');
 
 
 
@@ -94,7 +95,7 @@ $proposal_title = $row_proposals->proposal_title;
 <input type="hidden" name="message" value="<?php echo $message; ?>">
 
 <input type="hidden" name="file" value="<?php echo $file; ?>">
-
+<input type="hidden" name="request_id" value="<?php echo $request_id ?>">
 	<div class="customer-profile mb-30">
 		<div class="d-flex align-items-start align-items-md-center pt-15 pb-15">
 			<div class="profile-img">
@@ -271,7 +272,7 @@ delivery_time = $("input[name='delivery_time']:checked").val();
 
 amount = $("input[name='amount']").val();
 
-if(description == "" || delivery_time == "" || amount == ""){
+if(description == "" || delivery_time == undefined || amount == ""){
 
 swal({
 type: 'warning',
@@ -283,7 +284,7 @@ text: 'You Must Need To Fill Out All Fields Before Submitting Offer.'
 $.ajax({
 	
 method: "POST",
-url: "<?php echo $site_url; ?>/conversations/insert_offer",
+url: "<?php echo $site_url; ?>/ar/conversations/insert_offer",
 data: $('#proposal-details-form').serialize()
 
 }).done(function(data){

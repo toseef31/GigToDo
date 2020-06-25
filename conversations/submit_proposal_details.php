@@ -285,8 +285,9 @@ delivery_time = $("input[name='delivery_time']:checked").val();
 
 amount = $("input[name='amount']").val();
 
-if(description == "" || delivery_time == "" || amount == ""){
 
+if(description == "" || delivery_time == undefined || amount == ""){
+// alert("sfsfs");
 swal({
 type: 'warning',
 text: 'You Must Need To Fill Out All Fields Before Submitting Offer.'
