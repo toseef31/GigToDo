@@ -268,7 +268,39 @@ $withdrawLimitText = "";
 
 									<?php }else{ ?>
 
-									<label class="lead pull-left withdraw-btn"> Withdraw To: </label>
+										<label class="lead pull-left withdraw-btn"> Withdraw To: </label>
+										<?php if($enable_paypal == "yes"){ ?>
+										<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#paypal_withdraw_modal">
+											<i class="fa fa-paypal"></i> Paypal Account
+										</button>
+										<?php } ?>
+										<?php if($wish_do_manual_payouts == 1 & $enable_payoneer == 1) { ?>
+										<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#payoneer_withdraw_modal">
+											<i class="fa fa-paper-plane-o"></i> Payoneer Account
+										</button>
+										<?php } ?>
+										<?php if($wish_do_manual_payouts == 1 & $enable_bank_transfer == "yes"){ ?>
+										<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#bank_account_modal">
+											<i class="fa fa-university"></i> Bank Account
+										</button>
+										<?php } ?>
+										<?php if($wish_do_manual_payouts == 1 & $enable_moneygram == "yes"){ ?>
+										<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#moneygram_modal">
+											<i class="fa fa-credit-card"></i> Moneygram
+										</button>
+										<?php } ?>
+										<?php if($enable_dusupay == "yes"){ ?>
+										<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#mobile_money_modal">
+											<i class="fa fa-mobile"></i> Mobile Money 
+										</button>
+										<?php } ?>
+										<?php if($enable_coinpayments == "yes"){ ?>
+										<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#trx_wallet_modal">
+											<i class="fa fa-bitcoin"></i> Bitcoin Wallet 
+										</button>
+										<?php } ?>
+
+									<!-- <label class="lead pull-left withdraw-btn"> Withdraw To: </label>
 									<?php if($enable_paypal == "yes"){ ?>
 									<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" <?= $withdrawLimitText; ?>>
 									<i class="fa fa-paypal"></i> Paypal Account
@@ -301,7 +333,7 @@ $withdrawLimitText = "";
 									<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" <?= $withdrawLimitText; ?>>
 										<i class="fa fa-bitcoin"></i> Bitcoin Wallet 
 									</button>
-									<?php } ?>
+									<?php } ?> -->
 
 									<?php } ?>
 								</div>
@@ -517,11 +549,13 @@ $withdrawLimitText = "";
 		</div> -->
 		
 		<div id="paypal_withdraw_modal" class="modal fade">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-dialog-centered customer-order">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title"> Withdraw/Transfer Funds To PayPal </h5>
-						<button class="close" data-dismiss="modal"><span> &times; </span></button>
+						<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+              <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png">
+            </a>
 					</div>
 					<div class="modal-body"><!-- modal-body Starts -->
 					<center><!-- center Starts -->
@@ -540,19 +574,15 @@ $withdrawLimitText = "";
 					</p>
 					<form action="<?= ($wish_do_manual_payouts == 1)?"withdraw_manual":"paypal_adaptive"; ?>" method="post">
 						<input type="hidden" name="method" value="paypal">
-						<div class="form-group row">
-							<label class="col-md-3 col-form-label font-weight-bold">Amount</label>
-							<div class="col-md-8">
-								<div class="input-group">
-									<span class="input-group-addon font-weight-bold"> $ </span>
-									<input type="number" name="amount" class="form-control input-lg" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> Minimum" required >
-								</div>
+						<div class="form-group">
+							<div class="control-label d-flex align-items-start">
+								<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
+								<span class="d-flex">Amount</span>
 							</div>
+							<input type="number" name="amount" class="form-control input-lg mb-30" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> Minimum" required >
 						</div>
-						<div class="form-group row">
-							<div class="col-md-8 offset-md-3">
-								<input type="submit" name="withdraw" value="Transfer" class="btn btn-success form-control" >
-							</div>
+						<div class="form-group">
+							<input type="submit" name="withdraw" value="Transfer" class="button">
 						</div>
 					</form>
 					<?php } ?>
@@ -565,11 +595,13 @@ $withdrawLimitText = "";
 		</div>
 	</div>
 	<div id="payoneer_withdraw_modal" class="modal fade">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-centered customer-order">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"> Withdraw/Transfer Funds To Payoneer </h5>
-					<button class="close" data-dismiss="modal"><span>&times;</span></button>
+					<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+            <img src="assets/img/seller-profile/popup-close-icon.png">
+          </a>
 				</div>
 				<div class="modal-body"><!-- modal-body Starts -->
 				<center><!-- center Starts -->
@@ -584,19 +616,15 @@ $withdrawLimitText = "";
 				</p>
 				<form action="withdraw_manual" method="post">
 					<input type="hidden" name="method" value="payoneer">
-					<div class="form-group row">
-						<label class="col-md-3 col-form-label font-weight-bold">Amount</label>
-						<div class="col-md-8">
-							<div class="input-group">
-								<span class="input-group-addon font-weight-bold"> $ </span>
-								<input type="number" name="amount" class="form-control input-lg" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> Minimum" required >
-							</div>
+					<div class="form-group">
+						<div class="control-label d-flex align-items-start">
+							<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
+							<span class="d-flex">Amount</span>
 						</div>
+						<input type="number" name="amount" class="form-control input-lg mb-30" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> Minimum" required >
 					</div>
-					<div class="form-group row">
-						<div class="col-md-8 offset-md-3">
-							<input type="submit" name="withdraw" value="Transfer" class="btn btn-success form-control" >
-						</div>
+					<div class="form-group">
+						<input type="submit" name="withdraw" value="Transfer" class="button" >
 					</div>
 				</form>
 				<?php } ?>
@@ -614,7 +642,7 @@ if($paymentGateway == 1){
 }
 ?>
 <div id="mobile_money_modal" class="modal fade"><!-- mobile_money_modal modal fade Starts -->
-<div class="modal-dialog"><!-- modal-dialog Starts -->
+<div class="modal-dialog modal-dialog-centered customer-order"><!-- modal-dialog Starts -->
 <div class="modal-content"><!-- modal-content Starts -->
 <div class="modal-header"><!-- modal-header Starts -->
 <h5 class="modal-title"> Withdraw To Mobile Money Account </h5>
@@ -657,7 +685,7 @@ if($paymentGateway == 1){
 </div><!-- modal-dialog Ends -->
 </div><!-- mobile_money_modal modal fade Ends -->
 <div id="trx_wallet_modal" class="modal fade">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered customer-order">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title"> Withdraw/Transfer Funds To Bitcoin Wallet </h5>
