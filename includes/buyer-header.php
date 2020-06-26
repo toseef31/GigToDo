@@ -114,7 +114,7 @@ $page_url = substr("$full_url", 15);
             <div class="menu-inner">
               <ul>
                 <li><a href="<?= $site_url; ?>/dashboard">Become a Seller</a></li>
-                <li><a href="javascript:void(0);">Orders</a></li>
+                <li><a href="<?= $site_url; ?>/buying_orders">Orders</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -252,7 +252,7 @@ $page_url = substr("$full_url", 15);
       <li><a href="<?php echo $site_url; ?>/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Post a Job</a></li>
       <li><a href="<?= $site_url; ?>/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Jobs</a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
+      <li><a href="<?= $site_url; ?>/buying_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="<?= $site_url; ?>/purchases"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>
       <li><a href="<?= $site_url; ?>/invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
       <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
