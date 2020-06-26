@@ -99,7 +99,6 @@
                   <?php }else{ ?>
                   <img src="<?php echo $site_url; ?>/assets/img/menu-left-logo-2.png" width="32" height="32">
                   <?php } ?>
-                  <!-- <img src="assets/img/menu-left-logo-2.png" alt=""> -->
                 </div>
                 <div class="icon">
                   <span></span>
@@ -133,130 +132,12 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <div class="mesagee-item-box notifications-dropdown">
-                <!-- <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div> -->
+                
               </div>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <div class="mesagee-item-box messages-dropdown">
-                <!-- <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div>
-                <div class="mesagee-single-item">
-                  <div class="notifiction-user-img">
-                    <img src="assets/img/user3.png" alt="">
-                  </div>
-                  <h5><span>Snazzydegrart تم التوصيل</span> طلبك</h5>
-                  <p>1 قبل شهر . <span>خدمات العلامات التجارية</span> <i class="fal fa-angle-left"></i></p>
-                  <div class="notifiction-right">
-                    <img src="assets/img/message-img.png" alt="">
-                  </div>
-                </div> -->
+                
               </div>
             </div>
           </div>
