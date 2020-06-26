@@ -325,7 +325,7 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/5.png" alt="">
+          <a href="<?= $site_url ?>/ar/selling_orders"> <img src="assets/img/icon/5.png" alt="">
             الطلبات
           </a>
         </li>

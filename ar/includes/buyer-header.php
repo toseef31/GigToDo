@@ -114,8 +114,8 @@ $page_url = substr("$full_url", 18);
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="javascript:void(0);">اتحلول لمقدم خدمة</a></li>
-                <li><a href="javascript:void(0);">الطلبات</a></li>
+                <li><a href="<?= $site_url; ?>/ar/dashboard">اتحلول لمقدم خدمة</a></li>
+                <li><a href="<?= $site_url; ?>/ar/buying_orders">الطلبات</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -255,7 +255,7 @@ $page_url = substr("$full_url", 18);
       <li><a href="<?php echo $site_url; ?>/ar/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> ضبط </a></li>
       <li><a href="<?= $site_url ?>/ar/requests/post-request.php"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> انشر وظيفة</a></li>
       <li><a href="<?= $site_url; ?>/ar/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> إدارة الوظائف </a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
+      <li><a href="<?= $site_url; ?>/ar/buying_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
       <li><a href="<?= $site_url; ?>/ar/purchases"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
       <li><a href="<?= $site_url; ?>/ar/invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>
       <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> صندوق الوارد</a></li>
