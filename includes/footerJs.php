@@ -105,6 +105,22 @@ $(document).ready(function(){
       $(".cookies_footer").fadeOut();
     });
   });
+
+  $('.curreny_convert').change(function(){
+    var value = $(this).children("option:selected").val();
+    
+    $.ajax({                   
+        type: 'POST',          
+        url: "<?php echo $site_url; ?>/includes/change_currency",
+        data: {toCurrency: value}, 
+        success: function (response) { 
+          // location.reload();
+          console.log(response);
+        }
+    });
+
+  });
+
 });
 <?php if(!isset($proposals_stylesheet)){ ?>
 $(window).scroll(function(){
