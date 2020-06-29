@@ -1,8 +1,14 @@
 <?php
 require_once("db.php");
 require_once("extra_script.php");
+require_once("change_currency.php");
 if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
-
+// if ($s_currency == 'EGP') {
+//   $toCurrency = 'EGP';
+// }else{
+//   $toCurrency = 'USD';
+// }
+ $currency_code = $_SESSION['currency'];
 if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
   $seller_user_name = $_SESSION['seller_user_name'];
@@ -25,6 +31,7 @@ if(isset($_SESSION['seller_user_name'])){
   $get_general_settings = $db->select("general_settings");   
   $row_general_settings = $get_general_settings->fetch();
   $enable_referrals = $row_general_settings->enable_referrals;
+
   $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$seller_id,"proposal_status"=>'active'));
 
   
@@ -56,6 +63,18 @@ $url.= $_SERVER['REQUEST_URI'];
 $full_url = $_SERVER['REQUEST_URI'];
 
 $page_url = substr("$full_url", 15);
+
+
+// $cur_amount = currencyConverter($toCurrency,1);
+
+// echo $toCurrency;
+
+// print_r($toCurrency);
+// echo $toCurrency;
+
+
+// echo $cur_amount;
+
 ?>
 
 <!-- Header -->
@@ -126,9 +145,9 @@ $page_url = substr("$full_url", 15);
             </div>
             <?php } ?>
             <div class="usd-inner">
-              <select name="" id="">
-                <option value="">USD</option>
-                <option value="">EGP</option>
+              <select name="" id="curreny_convert" class="curreny_convert">
+                <option value="USD" <?php if($s_currency == '$'){ echo "selected";} ?>>USD</option>
+                <option value="EGP" <?php if($s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
             <div class="message-inner">

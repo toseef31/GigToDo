@@ -54,7 +54,18 @@
 			<?php }}else{ ?>
 				<a href="<?= $site_url; ?>/login.php"><i class="fa fa-heart"></i></a>
 			<?php } ?>
-      <span><?= $s_currency; ?><?= $proposal_price; ?></span>
+      <?php 
+        if($currency_code == 'USD'){ ?>
+          <span>
+            <?= $s_currency; ?> <?= $proposal_price; ?> <?= $currency_code ?>
+          </span>
+        <?php } else{ ?>
+          <span><?= $s_currency; ?> <?= round($cur_amount * $proposal_price) ?> <?= $currency_code ?></span>
+        <?php 
+          
+          }
+        ?>
+        </span>
     </div>
   </div>
 </div>

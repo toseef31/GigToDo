@@ -3517,25 +3517,77 @@ function get_freelancer_pagination(){
 }
 /// freelancers page Functions Ends ///
 
-function convertCurrency($amount,$from_currency,$to_currency){
-  $apikey = '0f497338a0bdf644d027';
+// function convertCurrency($amount,$from_currency,$to_currency){
+//   $apikey = '0f497338a0bdf644d027';
 
-  $from_Currency = urlencode($from_currency);
-  $to_Currency = urlencode($to_currency);
-  $query =  "{$from_Currency}_{$to_Currency}";
+//   $from_Currency = urlencode($from_currency);
+//   $to_Currency = urlencode($to_currency);
+//   $query =  "{$from_Currency}_{$to_Currency}";
 
-  // change to the free URL if you're using the free version
-  $json = file_get_contents("https://api.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}");
-  $obj = json_decode($json, true);
+//   // change to the free URL if you're using the free version
+//   $json = file_get_contents("https://api.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}");
+//   $obj = json_decode($json, true);
 
-  $val = floatval($obj["$query"]);
+//   $val = floatval($obj["$query"]);
 
 
-  $total = $val * $amount;
-  return number_format($total, 2, '.', '');
-}
+//   $total = $val * $amount;
+//   return number_format($total, 2, '.', '');
+// }
 
 //uncomment to test
-//echo convertCurrency(10, 'USD', 'PHP');
+// echo convertCurrency(10, 'USD', 'PHP');
+//  function get_client_ip() {
 
+//       $ip = $_SERVER['REMOTE_ADDR'];
+
+//       $url ='http://www.geoplugin.net/json.gp?ip='.$ip;
+//       $ch = curl_init();
+//       $timeout = 30;
+//       curl_setopt($ch,CURLOPT_URL,$url);
+//       curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+//       curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+//       $data = curl_exec($ch);
+
+//       if(!curl_errno($ch)){ 
+
+//          $country = json_decode($data, true);
+//          return $country;
+
+//       }else{
+//         echo 'Curl error: ' . curl_error($ch); 
+//       }
+//       curl_close($ch);
+
+
+//     return $country;
+//   }
+
+//   function currencyConverter($toCurrency,$amount_total) {
+
+//       $from_currency = 'USD'; 
+//       $toCurrency = 'EGP';
+//       $amount_total = 10;
+//      $url = "http://free.currencyconverterapi.com/api/v5/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=0f497338a0bdf644d027";
+	  
+    
+//       $ch = curl_init();
+//       $timeout = 30;
+//       curl_setopt($ch,CURLOPT_URL,$url);
+//       curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+//       curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+//       $data = curl_exec($ch);
+
+//       if(!curl_errno($ch)){ 
+//          $amount = json_decode($data, true);
+
+//           return $amount[$from_currency.'_'.$toCurrency]['val'];
+
+//       }else{
+//         echo 'Curl error: ' . curl_error($ch); 
+//       }
+//       curl_close($ch);
+
+//   }
+//   echo currencyConverter($toCurrency,$amount_total);
 ?>
