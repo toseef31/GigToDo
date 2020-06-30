@@ -143,110 +143,12 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="mesagee-item-box notifications-dropdown">
-              <!-- <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div> -->
+              
             </div>
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="mesagee-item-box messages-dropdown">
-              <!-- <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div>
-              <div class="mesagee-single-item">
-                <div class="notifiction-user-img">
-                  <img src="assets/img/user3.png" alt="">
-                </div>
-                <h5><span>snazzydegreat delivered</span> your order</h5>
-                <p>1 month ago . <span>Branding Services</span> <i class="fal fa-angle-right"></i></p>
-                <div class="notifiction-right">
-                  <img src="assets/img/message-img.png" alt="">
-                </div>
-              </div> -->
+              
             </div>
           </div>
         </div>
