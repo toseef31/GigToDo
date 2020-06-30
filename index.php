@@ -7,6 +7,12 @@ if(strpos($_SERVER["REQUEST_URI"], 'index') !== false){
 	header("location: $site_url");
 }
 require_once("social-config.php");
+if(isset($_SESSION['currency'])){
+  $to = $_SESSION['currency'];
+  print_r($to);
+}else{
+  print_r("no session");
+}
 $site_title = $row_general_settings->site_title;
 
 ?>

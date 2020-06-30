@@ -3,13 +3,15 @@
 session_start();
 
 require_once("../includes/db.php");
-
+require_once("../includes/change_currency.php");
 if(!isset($_SESSION['seller_user_name'])){
 	
 	echo "<script>window.open('../login','_self')</script>";
 	
 }
-
+if(isset($_SESSION['currency'])){
+  $to = $_SESSION['currency'];
+}
 $login_seller_user_name = $_SESSION['seller_user_name'];
 
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
@@ -51,7 +53,7 @@ $select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id)
 $row_proposals = $select_proposals->fetch();
 
 $proposal_title = $row_proposals->proposal_title;
-
+$cur_amount = currencyConverter($to,1);
 ?>
 
 
@@ -123,7 +125,7 @@ $proposal_title = $row_proposals->proposal_title;
 				Total Amount
 			</span>
 		</div>
-		<input class="form-control mb-30" type="text" value="<?= $s_currency; ?> <?= $request_budget; ?>" placeholder="الحد الادني 5 دولار" readonly />
+		<input class="form-control mb-30" type="text" value="<?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?>" placeholder="الحد الادني 5 دولار" readonly />
 	</div>
 
 	

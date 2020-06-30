@@ -114,8 +114,9 @@ $(document).ready(function(){
         url: "<?php echo $site_url; ?>/includes/change_currency",
         data: {toCurrency: value}, 
         success: function (response) { 
-          // location.reload();
           console.log(response);
+          location.reload();
+          
         }
     });
 

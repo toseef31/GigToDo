@@ -117,7 +117,7 @@ $withdrawLimitText = "";
 					<?php }else if($seller_payouts > 0 And empty($payout_anyday)){ ?>
 					<div class="alert alert-success mt-2 text-center h6"> <!-- Alert starts -->
 					<i class="fa fa-exclamation-circle"></i>
-					You will be able to withdraw or send next payout request of (<?= $s_currency.' '.$current_balance; ?>) on the 
+					You will be able to withdraw or send next payout request of (<?php if ($to == 'USD'){ echo $to.' '; echo $current_balance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $current_balance);}else{  echo $s_currency.' '; echo $current_balance; } ?>) on the 
 					<?php
 					$interval = new DateInterval('P1M');
 					$payout_date->add($interval);
@@ -134,7 +134,7 @@ $withdrawLimitText = "";
 							</div>
 							<div class="col-12 col-md-6 align-items-end justify-content-end d-flex flex-row">
 							  <div class="purchases-title" style="font-size: 32px;">
-							  	Available For Withdrawal: <span class="font-weight-bold" style=" color: #FF0000;"> <?= $s_currency; ?> <?= $current_balance; ?> </span>
+							  	Available For Withdrawal: <span class="font-weight-bold" style=" color: #FF0000;"> 	<?php if ($to == 'USD'){ echo $to.' '; echo $current_balance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $current_balance);}else{  echo $s_currency.' '; echo $current_balance; } ?></span>
 								</div>
 							</div>
 							<!-- <div class="col-lg-6">
@@ -159,7 +159,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon5.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>Total earned <span><?= $s_currency; ?> <?= $used_purchases; ?></span></h4>
+														<h4>Total earned <span><?php if ($to == 'USD'){ echo $to.' '; echo $used_purchases;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $used_purchases);}else{  echo $s_currency.' '; echo $used_purchases; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -171,7 +171,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon6.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>Total withdrawn <span><?= $s_currency; ?> <?= $withdrawn; ?></span></h4>
+														<h4>Total withdrawn <span><?php if ($to == 'USD'){ echo $to.' '; echo $withdrawn;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $withdrawn);}else{  echo $s_currency.' '; echo $withdrawn; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -183,7 +183,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon7.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>pending for clearance <span><?= $s_currency; ?> <?= $pending_clearance; ?></span></h4>
+														<h4>pending for clearance <span><?php if ($to == 'USD'){ echo $to.' '; echo $pending_clearance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $pending_clearance);}else{  echo $s_currency.' '; echo $pending_clearance; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -195,7 +195,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon4.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>available funds <span><?= $s_currency; ?> <?= $current_balance; ?></span></h4>
+														<h4>available funds <span><?php if ($to == 'USD'){ echo $to.' '; echo $current_balance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $current_balance);}else{  echo $s_currency.' '; echo $current_balance; } ?></span></h4>
 													</div>
 												</div>
 											</div>

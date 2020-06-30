@@ -62,7 +62,15 @@
 			<?php } ?>
 		</div>
 		<div class="meta-right">
-			<span><?= $s_currency; ?><?= $proposal_price; ?></span>
+			<?php if($to == 'USD'){ ?>
+        <span>
+          <?= $to; ?> <?= $proposal_price; ?>
+        </span>
+      <?php } else{ ?>
+        <span><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></span>
+      <?php
+        }
+      ?>
 		</div>
 	</div>
 </div>

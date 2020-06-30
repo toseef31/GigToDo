@@ -2,6 +2,11 @@
   session_start();
   require_once("../includes/db.php");
   require_once("../functions/functions.php");
+  require_once("../includes/change_currency.php");
+
+  if(isset($_SESSION['currency'])){
+    $to = $_SESSION['currency'];
+  }
 
   $seller_user_name = $_SESSION['seller_user_name'];
   $select_login_seller = $db->select("sellers",array("seller_user_name" => $seller_user_name));
@@ -27,6 +32,9 @@
     $get_child = $db->select("categories_children",array('child_parent_id'=>$cat_id,'child_url'=>$input->get('cat_child_url')));
     $_SESSION['cat_child_id']= $get_child->fetch()->child_id;
   }
+$cur_amount = currencyConverter($to,1);
+// print_r($cur_amount);
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
