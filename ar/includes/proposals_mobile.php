@@ -68,7 +68,15 @@
         <div class="user-name"><a href="<?= $site_url; ?>/ar/<?= $seller_user_name; ?>" style="color: #353535;"><?= $seller_user_name; ?></a></div>
       </div>
       <div class="small-gigs-pricing d-flex flex-row">
-        <a href="javascript:void(0);"><?= $s_currency; ?><?= $proposal_price; ?></a>
+        <?php if($to == 'USD'){ ?>
+          <a href="javascript:void(0);">
+            <?= $to; ?> <?= $proposal_price; ?>
+          </a>
+        <?php } else{ ?>
+          <a href="javascript:void(0);"><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></a>
+        <?php
+          }
+        ?>
       </div>
     </div>
   </div>

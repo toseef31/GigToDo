@@ -87,7 +87,7 @@ $referral_money = $row_general_settings->referral_money;
 								</div>
 								<div class="col-12 col-md-7">
 									<div class="d-flex flex-column align-items-center">
-										<h1 class="text-center">قم بدعوة اصدقائك واحصل على 5 $</h1>
+										<h1 class="text-center">قم بدعوة اصدقائك واحصل على   <?php if ($to == 'USD'){ echo $to.' '; echo "5";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * 5);}else{  echo $s_currency.' '; echo "5"; } ?></h1>
 										<p class="text-center">احصل على خصم 20 جنيه مصرى على عملية شرائك القادمة</p>
 										<form method="POST" action="">
 											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>?referral=<?php echo $login_seller_referral; ?>">

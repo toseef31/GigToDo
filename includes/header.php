@@ -1,7 +1,12 @@
 <?php
 require_once("db.php");
 require_once("extra_script.php");
+require_once("change_currency.php");
 if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
+
+if(isset($_SESSION['currency'])){
+  $to = $_SESSION['currency'];
+}
 
 if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
@@ -54,6 +59,8 @@ $url.= $_SERVER['REQUEST_URI'];
 $full_url = $_SERVER['REQUEST_URI'];
 
 $page_url = substr("$full_url", 15);
+
+$cur_amount = currencyConverter($to,1);
 
 ?>
 <!-- <link href="<?= $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
@@ -394,9 +401,9 @@ $page_url = substr("$full_url", 15);
               </div>
               <?php } ?>
               <div class="usd-inner">
-                <select name="">
-                  <option value="USD">USD</option>
-                  <option value="EGP">EGP</option>
+                <select name="" id="curreny_convert" class="curreny_convert">
+                  <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
+                  <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
                 </select>
               </div>
               <div class="Login-button">
@@ -446,9 +453,9 @@ $page_url = substr("$full_url", 15);
           </div>
           <?php } ?>
           <div class="menu-action">
-            <select name="" id="">
-              <option value="">USD</option>
-              <option value="">EGP</option>
+            <select name="" id="curreny_convert" class="curreny_convert">
+              <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
+              <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
             </select>
           </div>
         </li>

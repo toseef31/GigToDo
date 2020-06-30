@@ -1,7 +1,7 @@
 <?php
 
 require_once("$dir/social-config.php");
-require_once("../includes/change_currency.php");
+
 if(isset($_SESSION['seller_user_name'])){
 	$login_seller_user_name = $_SESSION['seller_user_name'];
 	$select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));

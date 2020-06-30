@@ -103,7 +103,7 @@ $login_seller_id = $row_login_seller->seller_id;
                             <img src="assets/img/img/icon1.png" alt="">
                           </div>
                           <div class="purchases-text">
-                            <h4>المشتريات الكلية <span><?= $s_currency; ?> <?= $total_purchase_amount ?></span></h4>
+                            <h4>المشتريات الكلية <span><?php if ($to == 'USD'){ echo $to.' '; echo $total_purchase_amount;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $total_purchase_amount);}else{  echo $s_currency.' '; echo $total_purchase_amount; } ?></span></h4>
                           </div>
                         </div>
                       </div>
@@ -115,7 +115,7 @@ $login_seller_id = $row_login_seller->seller_id;
                             <img src="assets/img/img/icon2.png" alt="">
                           </div>
                           <div class="purchases-text">
-                            <h4>الطلبات المفعلة اللي اتباعت <span><?= $s_currency ?> <?= $active_order_price; ?></span></h4>
+                            <h4>الطلبات المفعلة اللي اتباعت <span><?php if ($to == 'USD'){ echo $to.' '; echo $active_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $active_order_price);}else{  echo $s_currency.' '; echo $active_order_price; } ?></span></h4>
                           </div>
                         </div>
                       </div>
@@ -152,7 +152,7 @@ $login_seller_id = $row_login_seller->seller_id;
                             <img src="assets/img/img/icon3.png" alt="">
                           </div>
                           <div class="purchases-text">
-                            <h4>المشتريات المكتملة <span><?= $s_currency ?> <?= $completed_order_price; ?></span></h4>
+                            <h4>المشتريات المكتملة <span><?php if ($to == 'USD'){ echo $to.' '; echo $completed_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $completed_order_price);}else{  echo $s_currency.' '; echo $completed_order_price; } ?></span></h4>
                           </div>
                         </div>
                       </div>
@@ -164,7 +164,7 @@ $login_seller_id = $row_login_seller->seller_id;
                             <img src="assets/img/img/icon4.png" alt="">
                           </div>
                           <div class="purchases-text">
-                            <h4>الرصيد الشخصي <span>0</span></h4>
+                            <h4>الرصيد الشخصي <span><?php if ($to == 'USD'){ echo $to.' '; echo "0";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * "0");}else{  echo $s_currency.' '; echo "0"; } ?></span></h4>
                           </div>
                         </div>
                       </div>

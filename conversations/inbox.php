@@ -2,8 +2,12 @@
 session_start();
 require_once("../includes/db.php");
 require_once("../functions/email.php");
+require_once("../includes/change_currency.php");
 if(!isset($_SESSION['seller_user_name'])){
   echo "<script>window.open('../login','_self');</script>";
+}
+if(isset($_SESSION['currency'])){
+  $to = $_SESSION['currency'];
 }
 $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
@@ -28,6 +32,7 @@ require("includes/inboxFunctions.php");
 
   $page_url = substr("$full_url", 15);
 
+$cur_amount = currencyConverter($to,1);
 
 ?>
 <!DOCTYPE html>

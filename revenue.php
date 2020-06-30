@@ -384,7 +384,7 @@ $withdrawLimitText = "";
 													Order Revenue (<a href="order_details?order_id=<?= $order_id; ?>" target="blank" style="color: #FF0000;"> View Order </a>)
 													<?php } ?>
 												</td>
-												<td style="text-align: right; color: #FF0000;">+<?= $s_currency; ?> <?= $amount; ?>.00</td>
+												<td style="text-align: right; color: #FF0000;">+<?php if ($to == 'USD'){ echo $to.' '; echo $amount;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $amount);}else{  echo $s_currency.' '; echo $amount; } ?>.00</td>
 											</tr>
 											<?php } ?>
 										</tbody>

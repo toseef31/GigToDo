@@ -127,7 +127,7 @@ $login_seller_id = $row_login_seller->seller_id;
 											<span class="description">
 												المشتريات الكلية
 											</span>
-											<span class="amount"><?= $s_currency; ?> <?= $total_purchase_amount ?></span>
+											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $total_purchase_amount;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $total_purchase_amount);}else{  echo $s_currency.' '; echo $total_purchase_amount; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -164,7 +164,7 @@ $login_seller_id = $row_login_seller->seller_id;
 											<span class="description">
 												خلصت
 											</span>
-											<span class="amount"><?= $s_currency ?> <?= $completed_order_price; ?></span>
+											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $completed_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $completed_order_price);}else{  echo $s_currency.' '; echo $completed_order_price; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -174,7 +174,7 @@ $login_seller_id = $row_login_seller->seller_id;
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">هيتم تقييمها و مراجعتها</span>
-											<span class="amount">egp 0</span>
+											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo "0";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * "0");}else{  echo $s_currency.' '; echo "0"; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -209,7 +209,7 @@ $login_seller_id = $row_login_seller->seller_id;
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">ملغية</span>
-											<span class="amount"><?= $s_currency ?> <?= $cancelled_order_price; ?></span>
+											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $cancelled_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $cancelled_order_price);}else{  echo $s_currency.' '; echo $cancelled_order_price; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -219,7 +219,7 @@ $login_seller_id = $row_login_seller->seller_id;
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">متأخرة</span>
-											<span class="amount">egp 0</span>
+											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo "0";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * "0");}else{  echo $s_currency.' '; echo "0"; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->

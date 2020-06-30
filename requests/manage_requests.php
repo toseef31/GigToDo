@@ -186,7 +186,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
-												<td data-label="Budget"><?php echo $s_currency; ?><?php echo $request_budget; ?></td>
+												<td data-label="Budget"><?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
 												<td data-label="Actions">
 													<div class="dropdown">
 														<a class="action-link dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -252,7 +252,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
-												<td data-label="Budget"><?php echo $s_currency; ?><?php echo $request_budget; ?></td>
+												<td data-label="Budget"><?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
 												<td data-label="Actions">
 													<div class="dropdown">
 														<a class="action-link dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -317,7 +317,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
-												<td data-label="Budget"><?php echo $s_currency; ?><?php echo $request_budget; ?></td>
+												<td data-label="Budget"><?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
 												<td data-label="Actions">
 													<div class="dropdown">
 														<a class="action-link dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -381,7 +381,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
-												<td data-label="Budget"><?php echo $s_currency; ?><?php echo $request_budget; ?></td>
+												<td data-label="Budget"><?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
 												<td data-label="Actions">
 													<div class="dropdown">
 														<a class="action-link dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

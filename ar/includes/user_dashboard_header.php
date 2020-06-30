@@ -1,7 +1,11 @@
 <?php 
   require_once("db.php"); 
   require_once("extra_script.php");
+  require_once("change_currency.php");
   if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
+  if(isset($_SESSION['currency'])){
+    $to = $_SESSION['currency'];
+  }
   if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
   $seller_user_name = $_SESSION['seller_user_name'];
@@ -48,6 +52,7 @@
   $full_url = $_SERVER['REQUEST_URI'];
 
   $page_url = substr("$full_url", 18);
+  $cur_amount = currencyConverter($to,1);
 ?>
 <style>.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
 .total-user-count.count.c-notifications-header{left: 11%;}</style>
@@ -84,9 +89,9 @@
               </div>
               <?php } ?>
               <div class="usd-inner">
-                <select name="" id="">
-                  <option value="">USD</option>
-                  <option value="">EGP</option>
+                <select name="" id="curreny_convert" class="curreny_convert">
+                  <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
+                  <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
                 </select>
               </div>
               <div class="message-inner">
@@ -191,7 +196,7 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);"> <img src="assets/img/icon/3.png" alt="">
+          <a href="<?= $site_url; ?>/ar/proposals/view_proposals"> <img src="assets/img/icon/3.png" alt="">
             الخدمات
           </a>
         </li>

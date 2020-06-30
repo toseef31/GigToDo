@@ -51,7 +51,7 @@
 				<div class="date"><?php echo $order_due; ?></div>
 			</td>
 			<td data-label="الكلية" role="column">
-				<div class="amount"><?php echo $s_currency; ?> <?php echo $order_price; ?></div>
+				<div class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $order_price);}else{  echo $s_currency.' '; echo $order_price; } ?></div>
 			</td>
 			<td data-label="الحالة" role="column">
 				<?php if ($order_status == "delivered"){ ?>

@@ -278,7 +278,7 @@
                         <td data-label="الميزانية">
                           <div class="d-flex flex-column">
                             <?php if(!empty($request_budget)){ ?> 
-                            <span><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+                            <span><?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
                             <?php }else{ ?> ----- <?php } ?>
                             <?php if($login_seller_offers == "0"){ ?>
                               <a class="send-offer send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">إرسال العرض   </a>
@@ -397,7 +397,7 @@
                         <td data-label="التسليم"><?php echo $delivery_time; ?></td>
                         <td data-label="الميزانية">
                           <div class="d-flex flex-column">
-                            <span><?php echo $s_currency; ?><?php echo $amount; ?></span>
+                            <span><?php if ($to == 'USD'){ echo $to.' '; echo $amount;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $amount);}else{  echo $s_currency.' '; echo $amount; } ?></span>
                             
                           </div>
                         </td>
@@ -410,7 +410,7 @@
                               <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
                               <?php } ?>
                             </div>
-                            <strong> <?php echo $request_seller_user_name;; ?></strong>
+                            <strong> <?php echo $request_seller_user_name; ?></strong>
                           </div>
                             <p>
                               <?php echo $request_description; ?>

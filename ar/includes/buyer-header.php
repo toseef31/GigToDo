@@ -1,7 +1,12 @@
 <?php
 require_once("db.php");
 require_once("extra_script.php");
+require_once("change_currency.php");
 if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
+
+if(isset($_SESSION['currency'])){
+  $to = $_SESSION['currency'];
+}
 
 if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
@@ -54,6 +59,9 @@ $url.= $_SERVER['REQUEST_URI'];
 $full_url = $_SERVER['REQUEST_URI'];
 
 $page_url = substr("$full_url", 18);
+
+$cur_amounts = currencyConverter($to,1);
+
 ?>
 <style>
   .ui-toolkit .text-body-larger{
@@ -127,9 +135,9 @@ $page_url = substr("$full_url", 18);
             </div>
             <?php } ?>
             <div class="usd-inner">
-              <select name="" id="">
-                <option value="">USD</option>
-                <option value="">EGP</option>
+              <select name="" id="curreny_convert" class="curreny_convert">
+                <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
+                <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
             <div class="message-inner">
@@ -258,7 +266,7 @@ $page_url = substr("$full_url", 18);
       <li><a href="<?= $site_url; ?>/ar/buying_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
       <li><a href="<?= $site_url; ?>/ar/purchases"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
       <li><a href="<?= $site_url; ?>/ar/invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>
-      <li><a href="javascript:void(0);"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> صندوق الوارد</a></li>
+      <li><a href="<?= $site_url; ?>/ar/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> صندوق الوارد</a></li>
       <li><a href="<?= $site_url ?>/ar/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> كيف تعمل</a></li>
       <li><a href="<?= $site_url ?>/ar/logout.php"> <img src="<?= $site_url; ?>/assets/img/icon/logout.png" alt=""> الخروج</a></li>
     </ul>

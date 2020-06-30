@@ -199,10 +199,43 @@
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/chartjs.min.js"></script>
+  <script type="text/javascript" src="assets/js/chart.js"></script>
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+   <script>
+   window.onload = function() {
+    
+   var chart = new CanvasJS.Chart("chartContainer", {
+    theme: "light2",
+    animationEnabled: true,
+    title: {
+      // text: "Average Composition of Magma"
+    },
+    data: [{
+      type: "doughnut",
+      indexLabel: "{symbol} - {y}",
+      yValueFormatString: "#,##0\"\"",
+      showInLegend: true,
+      legendText: "{label} : {y}",
+      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+    }]
+   });
+   chart.render();
+    
+   }
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+      demo.initChartsPages();
+    });
+  </script>
   <style>
+    .canvasjs-chart-credit{
+      display: none;
+    }
     .float-right.delete{
       position: absolute;
       left: 10px;
@@ -246,22 +279,22 @@
         <div class="col-lg-12">
           <div class="dashborad-box">
             <div class="day-item">
-              <p>اليوم <span>0 <?= $s_currency; ?></span></p>
+              <p>اليوم <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>امبارح <span>0 <?= $s_currency; ?></span></p>
+              <p>امبارح <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 7 آيام <span>0 <?= $s_currency; ?></span></p>
+              <p>آخر 7 آيام <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 30 يوم <span><?= $month_earnings; ?> <?= $s_currency; ?></span></p>
+              <p>آخر 30 يوم <span><?php if ($to == 'USD'){ echo $month_earnings.' '; echo $to;}elseif($to == 'EGP'){ echo round($cur_amount * $month_earnings).' '; echo $to;}else{ echo $month_earnings.' '; echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 365 يوم <span>0 <?= $s_currency; ?></span></p>
+              <p>آخر 365 يوم <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>كل الأوقات <span><?= $current_balance; ?> <?= $s_currency; ?></span></p>
+              <p>كل الأوقات <span><?php if ($to == 'USD'){ echo $current_balance.' '; echo $to;}elseif($to == 'EGP'){ echo round($cur_amount * $current_balance).' '; echo $to;}else{ echo $current_balance.' '; echo $s_currency; } ?></span></p>
             </div>
           </div>
         </div>
@@ -445,12 +478,12 @@
                   <a href="dashboard?n_id=<?= $notification_id; ?>">
                   <?php if(!empty($sender_image)){ ?>
                   <?php if(strpos($sender_id, "admin_") !== false){ ?>
-                    <img src="admin/admin_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                    <img src="<?= $site_url ?>/admin/admin_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
                   <?php }else{ ?>
-                    <img src="user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                    <img src="<?= $site_url ?>/user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
                   <?php } ?>
                   <?php }else{ ?>
-                  <img src="user_images/empty-image.png" width="60" height="60" class="rounded-circle">
+                  <img src="<?= $site_url ?>/user_images/empty-image.png" width="60" height="60" class="rounded-circle">
                   <?php } ?>
                   </a>
                 </div>

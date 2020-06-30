@@ -479,10 +479,10 @@
                   <?php if(strpos($sender_id, "admin_") !== false){ ?>
                     <img src="admin/admin_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
                   <?php }else{ ?>
-                    <img src="user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
+                    <img src="<?= $site_url ?>/user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
                   <?php } ?>
                   <?php }else{ ?>
-                  <img src="user_images/empty-image.png" width="60" height="60" class="rounded-circle">
+                  <img src="<?= $site_url ?>/user_images/empty-image.png" width="60" height="60" class="rounded-circle">
                   <?php } ?>
                   </a>
                 </div>
