@@ -14,7 +14,7 @@ $login_seller_state = $row_login_seller->seller_state;
 $login_seller_language = $row_login_seller->seller_language;
 $login_seller_about = $row_login_seller->seller_about;
 
-   $cur_amount = currencyConverter($to,1);
+   
 ?>
 <link href="styles/styles.css" rel="stylesheet">
 <!-- New Design -->

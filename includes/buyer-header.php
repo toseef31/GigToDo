@@ -65,7 +65,7 @@ $page_url = substr("$full_url", 15);
 
 
 $cur_amount = currencyConverter($to,1);
-// print_r($cur_amount);
+
 ?>
 
 <!-- Header -->
