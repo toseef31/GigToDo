@@ -60,7 +60,7 @@ $full_url = $_SERVER['REQUEST_URI'];
 
 $page_url = substr("$full_url", 18);
 
-$cur_amounts = currencyConverter($to,1);
+$cur_amount = currencyConverter($to,1);
 
 ?>
 <style>

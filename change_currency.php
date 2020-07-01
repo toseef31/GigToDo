@@ -17,8 +17,8 @@ $seller_user_name = $_SESSION['seller_user_name'];
       $from_currency = 'USD'; 
       $toCurrency = $toCurrency;
       $amount_total = 10;
-     $url = "http://free.currencyconverterapi.com/api/v5/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=0f497338a0bdf644d027";
-	  
+     // $url = "http://free.currencyconverterapi.com/api/v5/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=0f497338a0bdf644d027";
+	   $url = "https://free.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=e30652f740200d497a67";
     
       $ch = curl_init();
       $timeout = 30;
