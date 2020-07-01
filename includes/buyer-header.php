@@ -6,8 +6,9 @@ if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_arra
 
 if(isset($_SESSION['currency'])){
   $to = $_SESSION['currency'];
+  print_r($to);
 }
-
+print_r($_SESSION['currency']);
 if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
   $seller_user_name = $_SESSION['seller_user_name'];
