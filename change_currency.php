@@ -4,7 +4,7 @@ session_start();
 
 require_once("includes/db.php");
 
-require_once("functions/functions.php");
+// require_once("functions/functions.php");
 // if(!isset($_SESSION['seller_user_name'])){
 // 	echo "<script>window.open('../login','_self')</script>";
 // }
@@ -18,7 +18,7 @@ $seller_user_name = $_SESSION['seller_user_name'];
       $toCurrency = $toCurrency;
       $amount_total = 10;
      // $url = "http://free.currencyconverterapi.com/api/v5/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=0f497338a0bdf644d027";
-	   $url = "https://free.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=e30652f740200d497a67";
+	   $url = "https://api.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=43ff88807fc747d49fd2e3c2d76be71e";
     
       $ch = curl_init();
       $timeout = 30;

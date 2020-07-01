@@ -5,6 +5,7 @@
   if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
   if(isset($_SESSION['currency'])){
     $to = $_SESSION['currency'];
+    print_r($to);
   }
   if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
@@ -53,7 +54,8 @@
 
   $page_url = substr("$full_url", 15);
 
-  $cur_amount = currencyConverter($to,1);
+  $cur_amount = currencyConverter('EGP',1);
+  print_r($cur_amount);
 ?>
 <style>
   .activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
