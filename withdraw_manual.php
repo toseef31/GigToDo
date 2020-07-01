@@ -156,7 +156,7 @@ if(isset($_POST['withdraw'])){
 			<div class='container'>
 			<div class='box'>
 			<center>
-			<img class='logo' src='$site_url/images/$site_logo' width='200' >
+			<img class='logo' src='$site_url/images/$site_logo_image' width='200' >
 			<h2> Dear Admin $admin_name </h2>
 			<p class='lead'> You Just Received A Payout Request From <b>$login_seller_user_name</b> </p>
 			<br>
