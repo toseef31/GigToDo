@@ -1,11 +1,14 @@
-<?php 
+<?php
+session_start(); 
   require_once("db.php"); 
   require_once("extra_script.php");
   require_once("change_currency.php");
   if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
-  if(isset($_SESSION['currency'])){
+  if(isset($_SESSION['currency']) && !empty($_SESSION['currency'])){
     $to = $_SESSION['currency'];
     print_r($to);
+  }else{
+    print_r("no session");
   }
   if(isset($_SESSION['seller_user_name'])){
   require_once("seller_levels.php");
@@ -54,7 +57,7 @@
 
   $page_url = substr("$full_url", 15);
 
-  $cur_amount = currencyConverter('EGP',1);
+  $cur_amount = currencyConverter($to,1);
   print_r($cur_amount);
 ?>
 <style>

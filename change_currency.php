@@ -38,6 +38,6 @@ $seller_user_name = $_SESSION['seller_user_name'];
       curl_close($ch);
 
   }
-  $_SESSION['currency'] = $toCurrency;
+  // $_SESSION['currency'] = $toCurrency;
   // echo currencyConverter($toCurrency,$amount_total);
  

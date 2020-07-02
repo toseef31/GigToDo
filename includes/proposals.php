@@ -6,7 +6,11 @@
 	}else{
 		$enableVideo = 0;
 	}
-
+	if(isset($_SESSION['currency'])){
+		$to = $_SESSION['currency'];
+	}
+	$cur_amount = currencyConverter($to,1);
+// print_r($cur_amount.'opyyyyy aa na zraa');
 ?>
 
 

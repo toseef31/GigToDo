@@ -33,7 +33,7 @@
     $_SESSION['cat_child_id']= $get_child->fetch()->child_id;
   }
 $cur_amount = currencyConverter($to,1);
-// print_r($cur_amount);
+//print_r($cur_amount);
 
 ?>
 <!DOCTYPE html>

@@ -4,7 +4,7 @@ session_start();
 
 require_once("includes/db.php");
 
-require_once("functions/functions.php");
+// require_once("functions/functions.php");
 // if(!isset($_SESSION['seller_user_name'])){
 // 	echo "<script>window.open('../login','_self')</script>";
 // }
@@ -38,6 +38,6 @@ $seller_user_name = $_SESSION['seller_user_name'];
       curl_close($ch);
 
   }
-  $_SESSION['currency'] = $toCurrency;
+  // $_SESSION['currency'] = $toCurrency;
   // echo currencyConverter($toCurrency,$amount_total);
  

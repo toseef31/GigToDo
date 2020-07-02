@@ -14,7 +14,6 @@ require_once("db.php");
   if($toCurrency != ''){
       $_SESSION['currency'] = $toCurrency;
   }
-  echo $_SESSION['currency'];
   function currencyConverter($toCurrency,$amount_total) {
 
       $from_currency = 'USD'; 

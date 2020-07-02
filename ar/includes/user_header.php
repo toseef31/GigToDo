@@ -118,8 +118,8 @@
             <?php } ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
-                <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
-                <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
+                <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
             <div class="message-inner">

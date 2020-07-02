@@ -6,7 +6,10 @@
 	}else{
 		$enableVideo = 0;
 	}
-
+	if(isset($_SESSION['currency'])){
+		$to = $_SESSION['currency'];
+	}
+	$cur_amount = currencyConverter($to,1);
 ?>
 <div class="single-gigs mt-30 all-gigs">
 	<div class="gigs-image verified-rebon">

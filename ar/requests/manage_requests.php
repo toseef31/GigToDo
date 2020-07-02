@@ -125,8 +125,14 @@ $login_seller_id = $row_login_seller->seller_id;
 							<div class="col-12 col-md-6">
 								<nav class="list-page-nav">
 									<div class="nav nav-tabs" id="nav-tab" role="tablist">
-										<a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">نشيط <span class="badge">3</span></a>
-										<a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">متوقف <span class="badge">2</span></a>
+										<?php
+										$count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'active'));
+										?>
+										<a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">نشيط <span class="badge"><?php echo $count_requests; ?></span></a>
+										<?php
+										  $count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'pause'));
+										?>
+										<a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">متوقف <span class="badge"><?php echo $count_requests; ?></span></a>
 										<?php
                     	$count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'pending'));
                 		?>
