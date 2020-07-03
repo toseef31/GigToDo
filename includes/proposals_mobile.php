@@ -71,11 +71,13 @@
           <a href="javascript:void(0);">
             <?= $to; ?> <?= $proposal_price; ?>
           </a>
-        <?php } else{ ?>
+        <?php } elseif($to == 'EGP'){ ?>
           <a href="javascript:void(0);"><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></a>
         <?php
-          }
-        ?>
+          }else{?>
+          <a href="javascript:void(0);"><?= $s_currency; ?> <?= $proposal_price; ?></a>
+        <?php }
+      ?>
       </div>
     </div>
   </div>

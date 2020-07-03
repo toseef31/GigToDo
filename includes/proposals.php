@@ -70,10 +70,12 @@
         <span>
           <?= $to; ?> <?= $proposal_price; ?>
         </span>
-      <?php } else{ ?>
+      <?php } elseif($to == 'EGP'){ ?>
         <span><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></span>
       <?php
-        }
+        }else{?>
+        	<span><?= $s_currency; ?> <?= $proposal_price; ?></span>
+        <?php }
       ?>
 		</div>
 	</div>
