@@ -128,7 +128,7 @@ try{
 	<div class='container'>
 	<div class='box'>
 	<center>
-	<img class='logo' src='$site_url/images/$site_logo' width='100' >
+	<img class='logo' src='$site_url/images/$site_logo_image' width='100' >
 	<h2> Offer received for your request. </h2>
 	</center>
 	<hr>

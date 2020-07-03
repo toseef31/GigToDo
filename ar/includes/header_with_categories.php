@@ -1,6 +1,7 @@
 <?php
 require_once("db.php");
 require_once("extra_script.php");
+require_once("change_currency.php");
 if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
 
 if(isset($_SESSION['currency']) && !empty($_SESSION['currency'])){

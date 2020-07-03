@@ -250,7 +250,7 @@ $count_offers = $get_offers->rowCount();
 												</ul>
 												<div class="budget d-flex flex-column">
 													<span>Budget</span>
-													<span><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+													<span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
 												</div>
 											</div>
 										</div>
@@ -280,7 +280,7 @@ $count_offers = $get_offers->rowCount();
 									</div>
 									<div class="budget">
 										<span>Budget</span>
-										<span><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+										<span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
 									</div>
 								</div>
 							</div>
@@ -398,7 +398,7 @@ $count_offers = $get_offers->rowCount();
 													<a class="button button-red" id="order-button-<?php echo $offer_id; ?>"  href="javascript:void(0);">Order Now</a>
 												</div>
 												<div class="small-gigs-pricing d-flex flex-row">
-													<a href="javascript:void(0);"><?php echo $s_currency; ?><?php echo $amount; ?></a>
+													<a href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?></a>
 												</div>
 											</div>
 											<script>
@@ -482,7 +482,7 @@ $count_offers = $get_offers->rowCount();
 												</div>
 												<div class="d-flex flex-column offer-item-budget">
 													<span>Budget</span>
-													<span><?php echo $s_currency; ?><?php echo $amount; ?></span>
+													<span><?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?></span>
 												</div>
 											</div>
 											<p><?php echo $description; ?></p>

@@ -211,7 +211,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<?php echo $request_delivery; ?>
 												</td>
 												<td data-label="الميزانية">
-													<?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?>
+													<?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?>
 												</td>
 												<td data-label="الأحداث">
 													<div class="dropdown">
@@ -303,7 +303,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<?php echo $request_delivery; ?>
 												</td>
 												<td data-label="الميزانية">
-													<?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?>
+													<?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?>
 												</td>
 												<td data-label="الأحداث">
 													<div class="dropdown">
@@ -392,7 +392,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<?php echo $request_delivery; ?>
 												</td>
 												<td data-label="الميزانية">
-													<?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?>
+													<?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?>
 												</td>
 												<td data-label="الأحداث">
 													<div class="dropdown">
@@ -478,7 +478,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													<?php echo $request_delivery; ?>
 												</td>
 												<td data-label="الميزانية">
-													<?php if ($to == 'USD'){ echo $to.' '; echo $request_budget;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?>
+													<?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?>
 												</td>
 												<td data-label="الأحداث">
 													<div class="dropdown">

@@ -116,7 +116,7 @@ $withdrawLimitText = "";
 					<?php }else if($seller_payouts > 0 And empty($payout_anyday)){ ?>
 					<div class="alert alert-success mt-2 text-center h6"> <!-- Alert starts -->
 					<i class="fa fa-exclamation-circle"></i>
-					You will be able to withdraw or send next payout request of (<?php if ($to == 'USD'){ echo $to.' '; echo $current_balance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $current_balance);}else{  echo $s_currency.' '; echo $current_balance; } ?>) on the 
+					You will be able to withdraw or send next payout request of (<?php if ($to == 'EGP'){ echo $to.' '; echo $current_balance;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $current_balance,2);}else{  echo $s_currency.' '; echo $current_balance; } ?>) on the 
 					<?php
 					$interval = new DateInterval('P1M');
 					$payout_date->add($interval);
@@ -133,7 +133,7 @@ $withdrawLimitText = "";
 							</div>
 							<div class="col-12 col-md-6 align-items-end justify-content-end d-flex flex-row">
 							  <div class="purchases-title" style="font-size: 32px;">
-							  	متاح للسحب: <span class="font-weight-bold" style=" color: #FF0000;"> <?php if ($to == 'USD'){ echo $to.' '; echo $current_balance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $current_balance);}else{  echo $s_currency.' '; echo $current_balance; } ?> </span>
+							  	متاح للسحب: <span class="font-weight-bold" style=" color: #FF0000;"> <?php if ($to == 'EGP'){ echo $to.' '; echo $current_balance;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $current_balance,2);}else{  echo $s_currency.' '; echo $current_balance; } ?> </span>
 								</div>
 							</div>
 						</div>
@@ -148,7 +148,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon1.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>المشتريات الكلية <span><?php if ($to == 'USD'){ echo $to.' '; echo $used_purchases;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $used_purchases);}else{  echo $s_currency.' '; echo $used_purchases; } ?></span></h4>
+														<h4>المشتريات الكلية <span><?php if ($to == 'EGP'){ echo $to.' '; echo $used_purchases;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $used_purchases,2);}else{  echo $s_currency.' '; echo $used_purchases; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -160,7 +160,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon2.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>الطلبات المفعلة اللي اتباعت <span><?php if ($to == 'USD'){ echo $to.' '; echo $withdrawn;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $withdrawn);}else{  echo $s_currency.' '; echo $withdrawn; } ?></span></h4>
+														<h4>الطلبات المفعلة اللي اتباعت <span><?php if ($to == 'EGP'){ echo $to.' '; echo $withdrawn;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $withdrawn,2);}else{  echo $s_currency.' '; echo $withdrawn; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -172,7 +172,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon3.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>المشتريات المكتملة <span><?php if ($to == 'USD'){ echo $to.' '; echo $pending_clearance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $pending_clearance);}else{  echo $s_currency.' '; echo $pending_clearance; } ?></span></h4>
+														<h4>المشتريات المكتملة <span><?php if ($to == 'EGP'){ echo $to.' '; echo $pending_clearance;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $pending_clearance,2);}else{  echo $s_currency.' '; echo $pending_clearance; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -184,7 +184,7 @@ $withdrawLimitText = "";
 														<img src="assets/img/img/icon4.png" alt="">
 													</div>
 													<div class="purchases-text">
-														<h4>الرصيد الشخصي <span><?php if ($to == 'USD'){ echo $to.' '; echo $current_balance;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $current_balance);}else{  echo $s_currency.' '; echo $current_balance; } ?></span></h4>
+														<h4>الرصيد الشخصي <span><?php if ($to == 'EGP'){ echo $to.' '; echo $current_balance;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $current_balance,2);}else{  echo $s_currency.' '; echo $current_balance; } ?></span></h4>
 													</div>
 												</div>
 											</div>
@@ -373,7 +373,7 @@ $withdrawLimitText = "";
 													Order Revenue (<a href="order_details?order_id=<?= $order_id; ?>" target="blank" style="color: #FF0000;"> مشاهدة الطلب </a>)
 													<?php } ?>
 												</td>
-												<td style="text-align: left; color: #FF0000;">+<?php if ($to == 'USD'){ echo $to.' '; echo $amount;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $amount);}else{  echo $s_currency.' '; echo $amount; } ?>.00</td>
+												<td style="text-align: left; color: #FF0000;">+<?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?>.00</td>
 											</tr>
 											<?php } ?>
 										</tbody>

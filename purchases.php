@@ -109,7 +109,7 @@ $login_seller_id = $row_login_seller->seller_id;
                           <img src="assets/img/img/icon1.png" alt="">
                         </div>
                         <div class="purchases-text">
-                          <h4>Total Purchases <span><?php if ($to == 'USD'){ echo $to.' '; echo $total_purchase_amount;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $total_purchase_amount);}else{  echo $s_currency.' '; echo $total_purchase_amount; } ?></span></h4>
+                          <h4>Total Purchases <span><?php if ($to == 'EGP'){ echo $to.' '; echo $total_purchase_amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $total_purchase_amount,2);}else{  echo $s_currency.' '; echo $total_purchase_amount; } ?></span></h4>
                         </div>
                       </div>
                     </div>
@@ -121,7 +121,7 @@ $login_seller_id = $row_login_seller->seller_id;
                           <img src="assets/img/img/icon2.png" alt="">
                         </div>
                         <div class="purchases-text">
-                          <h4>active orders purchased <span><?php if ($to == 'USD'){ echo $to.' '; echo $active_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $active_order_price);}else{  echo $s_currency.' '; echo $active_order_price; } ?></span></h4>
+                          <h4>active orders purchased <span><?php if ($to == 'EGP'){ echo $to.' '; echo $active_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $active_order_price,2);}else{  echo $s_currency.' '; echo $active_order_price; } ?></span></h4>
                         </div>
                       </div>
                     </div>
@@ -158,7 +158,7 @@ $login_seller_id = $row_login_seller->seller_id;
                           <img src="assets/img/img/icon3.png" alt="">
                         </div>
                         <div class="purchases-text">
-                          <h4>completed purchases <span><?php if ($to == 'USD'){ echo $to.' '; echo $completed_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $completed_order_price);}else{  echo $s_currency.' '; echo $completed_order_price; } ?></span></h4>
+                          <h4>completed purchases <span><?php if ($to == 'EGP'){ echo $to.' '; echo $completed_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $completed_order_price,2);}else{  echo $s_currency.' '; echo $completed_order_price; } ?></span></h4>
                         </div>
                       </div>
                     </div>
@@ -170,7 +170,7 @@ $login_seller_id = $row_login_seller->seller_id;
                           <img src="assets/img/img/icon4.png" alt="">
                         </div>
                         <div class="purchases-text">
-                          <h4>personal balance <span><?php if ($to == 'USD'){ echo $to.' '; echo "0";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * "0");}else{  echo $s_currency.' '; echo "0"; } ?></span></h4>
+                          <h4>personal balance <span><?php if ($to == 'EGP'){ echo $to.' '; echo "0";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * "0",2);}else{  echo $s_currency.' '; echo "0"; } ?></span></h4>
                         </div>
                       </div>
                     </div>
@@ -278,7 +278,7 @@ $login_seller_id = $row_login_seller->seller_id;
                         <?php } ?>
                       </td>
                       <td style="text-align: right; color: #FF0000;">
-                        <?php 
+                        <?php  
                           if($method == "order_cancellation" or $method == "featured_proposal_declined"){
                           echo "<span class='text-success'>+$s_currency$amount.00</span>";
                           }else{

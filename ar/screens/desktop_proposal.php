@@ -85,7 +85,7 @@
                         <span>الأساسى</span>
                       </div>
                       <p><?= $p_description_1; ?></p>
-                      <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_1;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_1);}else{  echo $s_currency.' '; echo $p_price_1; } ?></a>
+                      <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></a>
                     </div>
                   </div>
                   <?php } else{ ?>
@@ -98,7 +98,7 @@
                       <span>الأساسى</span>
                     </div>
                     <p><?= $p_description_1; ?></p>
-                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_1;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_1);}else{  echo $s_currency.' '; echo $p_price_1; } ?></a>
+                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></a>
                   </div>
                   <!-- Each item -->
                   <div class="packages-item d-flex flex-column">
@@ -109,7 +109,7 @@
                       <span>القياسى</span>
                     </div>
                     <p><?= $p_description_2; ?></p>
-                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_2;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></a>
+                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_2;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_2,2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></a>
                   </div>
                   <!-- Each item -->
                   <div class="packages-item d-flex flex-column">
@@ -120,7 +120,7 @@
                       <span>بريميوم</span>
                     </div>
                     <p><?= $p_description_3; ?></p>
-                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_3;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_3);}else{  echo $s_currency.' '; echo $p_price_3; } ?></a>
+                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_3;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_3,2);}else{  echo $s_currency.' '; echo $p_price_3; } ?></a>
                   </div>
                   <!-- Each item -->
                   <?php } ?>
@@ -315,7 +315,7 @@
                       </div>
                       <?php }else{ ?>
                       <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_1;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_1);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
+                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
                       </div>
                       <?php } ?>                      
                       <!-- Each item -->
@@ -326,7 +326,7 @@
                       </div>
                       <?php }else{ ?>
                       <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_2;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></button>
+                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_2;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_2,2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></button>
                       </div>
                       <?php } ?>
                       <!-- Each item -->
@@ -336,7 +336,7 @@
                       </div>
                       <?php }else{ ?>
                       <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'USD'){ echo $to.' '; echo $p_price_3;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $p_price_3);}else{  echo $s_currency.' '; echo $p_price_3; } ?></button>
+                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_3;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_3,2);}else{  echo $s_currency.' '; echo $p_price_3; } ?></button>
                       </div>
                       <?php } ?>
                       <!-- Each item -->

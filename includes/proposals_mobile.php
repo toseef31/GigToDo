@@ -67,12 +67,12 @@
         <div class="user-name"><a href="<?= $site_url; ?>/<?= $seller_user_name; ?>" style="color: #353535;"><?= $seller_user_name; ?></a></div>
       </div>
       <div class="small-gigs-pricing d-flex flex-row">
-        <?php if($to == 'USD'){ ?>
+        <?php if($to == 'EGP'){ ?>
           <a href="javascript:void(0);">
             <?= $to; ?> <?= $proposal_price; ?>
           </a>
-        <?php } elseif($to == 'EGP'){ ?>
-          <a href="javascript:void(0);"><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></a>
+        <?php } elseif($to == 'USD'){ ?>
+          <a href="javascript:void(0);"><?= $to; ?> <?= round($cur_amount * $proposal_price,2) ?></a>
         <?php
           }else{?>
           <a href="javascript:void(0);"><?= $s_currency; ?> <?= $proposal_price; ?></a>

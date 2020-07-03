@@ -14,7 +14,7 @@ $seller_user_name = $_SESSION['seller_user_name'];
 
   function currencyConverter($toCurrency,$amount_total) {
 
-      $from_currency = 'USD'; 
+      $from_currency = 'EGP'; 
       $toCurrency = $toCurrency;
       $amount_total = 10;
      // $url = "http://free.currencyconverterapi.com/api/v5/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=0f497338a0bdf644d027";

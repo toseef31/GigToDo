@@ -4,6 +4,7 @@ require_once("../includes/db.php");
 if(!isset($_SESSION['seller_user_name'])){
 echo "<script>window.open('../login','_self')</script>";
 }
+
 $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 $row_login_seller = $select_login_seller->fetch();

@@ -16,7 +16,7 @@ require_once("db.php");
   }
   function currencyConverter($toCurrency,$amount_total) {
 
-      $from_currency = 'USD'; 
+      $from_currency = 'EGP'; 
 
       $amount_total = 10;
       // $url = "https://free.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=ultra&apiKey=43ff88807fc747d49fd2e3c2d76be71e";
