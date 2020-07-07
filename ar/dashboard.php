@@ -342,7 +342,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4><?= round($average,2); ?> <span>متوسط تكلفة الخدمة </span></h4>
+                  <h4><?php if ($to == 'EGP'){ echo round($average,2);}elseif($to == 'USD'){ echo round($cur_amount * $average,2);}else{ echo round($average,2); } ?> <span>متوسط تكلفة الخدمة </span></h4>
                 </div>
               </div>
             </div>
