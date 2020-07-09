@@ -141,11 +141,19 @@ if($seller_id == $login_seller_id){
 
 </head>
 
-<body class="is-responsive">
-<?php require_once("includes/buyer-header.php"); ?>
-<?php require_once("orderIncludes/orderDetails.php"); ?>
-<?php require_once("orderIncludes/orderStatusBar.php"); ?>
+<body class="all-content">
+  <!-- Preloader Start -->
+    <div class="proloader">
+      <div class="loader">
+        <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+      </div>
+    </div>
+    <!-- Preloader End -->
+  <?php require_once("includes/buyer-header.php"); ?>
+  <?php require_once("orderIncludes/orderDetails.php"); ?>
+  <?php require_once("orderIncludes/orderStatusBar.php"); ?>
 
+  
 <div class="container order-page mt-2">
   <div class="row">
     <div class="col-md-12">

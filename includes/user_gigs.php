@@ -54,14 +54,16 @@
 			<?php }}else{ ?>
 				<a href="<?= $site_url; ?>/login.php"><i class="fa fa-heart"></i></a>
 			<?php } ?>
-      <?php if($to == 'USD'){ ?>
+      <?php if($to == 'EGP'){ ?>
         <span>
           <?= $to; ?> <?= $proposal_price; ?>
         </span>
-      <?php } else{ ?>
-        <span><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></span>
+      <?php } elseif($to == 'USD'){ ?>
+        <span><?= $to; ?> <?= round($cur_amount * $proposal_price,2) ?></span>
       <?php
-        }
+        }else{?>
+        <span><?= $s_currency; ?> <?= $proposal_price;  ?></span>
+      <?php }
       ?>
     </div>
   </div>

@@ -6,7 +6,11 @@
 	}else{
 		$enableVideo = 0;
 	}
-
+	if(isset($_SESSION['currency'])){
+		$to = $_SESSION['currency'];
+	}
+	$cur_amount = currencyConverter($to,1);
+// print_r($cur_amount.'opyyyyy aa na zraa');
 ?>
 
 
@@ -62,14 +66,16 @@
 			<?php } ?>
 		</div>
 		<div class="meta-right">
-			<?php if($to == 'USD'){ ?>
+			<?php if($to == 'EGP'){ ?>
         <span>
           <?= $to; ?> <?= $proposal_price; ?>
         </span>
-      <?php } else{ ?>
-        <span><?= $to; ?> <?= round($cur_amount * $proposal_price) ?></span>
+      <?php } elseif($to == 'USD'){ ?>
+        <span><?= $to; ?> <?= round($cur_amount * $proposal_price,2) ?></span>
       <?php
-        }
+        }else{?>
+        	<span><?= $s_currency; ?> <?= $proposal_price; ?></span>
+        <?php }
       ?>
 		</div>
 	</div>

@@ -275,23 +275,23 @@
         <div class="col-lg-12">
           <div class="dashborad-box">
             <div class="day-item">
-              <p>Today <span>0.0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>Today <span>0.0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>Yesterday <span>0.0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>Yesterday <span>0.0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>last 7 days <span>0.0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>last 7 days <span>0.0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>last 30 days <span><?php if ($to == 'USD'){ echo $month_earnings.' '; echo $to;}elseif($to == 'EGP'){ echo round($cur_amount * $month_earnings).' '; echo $to;}else{ echo $month_earnings.' '; echo $s_currency; } ?>
+              <p>last 30 days <span><?php if ($to == 'EGP'){ echo $month_earnings.' '; echo $to;}elseif($to == 'USD'){ echo round($cur_amount * $month_earnings,2).' '; echo $to;}else{ echo $month_earnings.' '; echo $s_currency; } ?>
                 </span></p>
             </div>
             <div class="day-item">
-              <p>last 365 days <span>0.0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>last 365 days <span>0.0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>All time <span> <?php if ($to == 'USD'){ echo $current_balance.' '; echo $to;}elseif($to == 'EGP'){ echo round($cur_amount * $current_balance).' '; echo $to;}else{ echo $current_balance.' '; echo $s_currency; } ?>
+              <p>All time <span> <?php if ($to == 'EGP'){ echo $current_balance.' '; echo $to;}elseif($to == 'USD'){ echo round($cur_amount * $current_balance,2).' '; echo $to;}else{ echo $current_balance.' '; echo $s_currency; } ?>
                 </span></p>
             </div>
           </div>
@@ -340,7 +340,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4><?= round($average,2); ?> <span>Average Cost of Gigs </span></h4>
+                  <h4><?php if ($to == 'EGP'){ echo round($average,2);}elseif($to == 'USD'){ echo round($cur_amount * $average,2);}else{ echo round($average,2); } ?> <span>Average Cost of Gigs </span></h4>
                 </div>
               </div>
             </div>

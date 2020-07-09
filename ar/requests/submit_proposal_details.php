@@ -125,7 +125,7 @@ $proposal_title = $row_proposals->proposal_title;
 				الميزانية الكلية
 			</span>
 		</div>
-		<input class="form-control mb-30" type="text" value="<?= $s_currency; ?> <?= $request_budget; ?>" placeholder="الحد الادني 5 دولار" readonly />
+		<input class="form-control mb-30" type="text" value="<?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget);}else{  echo $s_currency.' '; echo $request_budget; } ?>" placeholder="الحد الادني 5 دولار" readonly />
 	</div>
 	
 
@@ -237,7 +237,7 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 		<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
 		<span>مالتكلفة الكلية</span>
 	</div>
-	<input class="form-control mb-30"  name="amount" type="text" min="5" placeholder="اقل مبلغ 5 $"  required=""/>
+	<input class="form-control mb-30"  name="amount" type="text" min="5" placeholder="اقل مبلغ  <?php if ($to == 'EGP'){ echo $to.' '; echo "80";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * 80);}else{  echo $s_currency.' '; echo "80"; } ?>"  required=""/>
 </div>
 
 <div class="form-group d-flex flex-column">

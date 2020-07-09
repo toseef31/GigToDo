@@ -279,22 +279,22 @@
         <div class="col-lg-12">
           <div class="dashborad-box">
             <div class="day-item">
-              <p>اليوم <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>اليوم <span>0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>امبارح <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>امبارح <span>0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 7 آيام <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>آخر 7 آيام <span>0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 30 يوم <span><?php if ($to == 'USD'){ echo $month_earnings.' '; echo $to;}elseif($to == 'EGP'){ echo round($cur_amount * $month_earnings).' '; echo $to;}else{ echo $month_earnings.' '; echo $s_currency; } ?></span></p>
+              <p>آخر 30 يوم <span><?php if ($to == 'EGP'){ echo $month_earnings.' '; echo $to;}elseif($to == 'USD'){ echo round($cur_amount * $month_earnings,2).' '; echo $to;}else{ echo $month_earnings.' '; echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>آخر 365 يوم <span>0 <?php if ($to == 'USD'){ echo $to;}elseif($to == 'EGP'){ echo $to;}else{ echo $s_currency; } ?></span></p>
+              <p>آخر 365 يوم <span>0 <?php if ($to == 'EGP'){ echo $to;}elseif($to == 'USD'){ echo $to;}else{ echo $s_currency; } ?></span></p>
             </div>
             <div class="day-item">
-              <p>كل الأوقات <span><?php if ($to == 'USD'){ echo $current_balance.' '; echo $to;}elseif($to == 'EGP'){ echo round($cur_amount * $current_balance).' '; echo $to;}else{ echo $current_balance.' '; echo $s_currency; } ?></span></p>
+              <p>كل الأوقات <span><?php if ($to == 'EGP'){ echo $current_balance.' '; echo $to;}elseif($to == 'USD'){ echo round($cur_amount * $current_balance,2).' '; echo $to;}else{ echo $current_balance.' '; echo $s_currency; } ?></span></p>
             </div>
           </div>
         </div>
@@ -342,7 +342,7 @@
                   <img src="assets/img/img/cal.png" alt="">
                 </div>
                 <div class="profile-cart-text">
-                  <h4><?= round($average,2); ?> <span>متوسط تكلفة الخدمة </span></h4>
+                  <h4><?php if ($to == 'EGP'){ echo round($average,2);}elseif($to == 'USD'){ echo round($cur_amount * $average,2);}else{ echo round($average,2); } ?> <span>متوسط تكلفة الخدمة </span></h4>
                 </div>
               </div>
             </div>

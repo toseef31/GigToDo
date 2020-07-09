@@ -39,6 +39,7 @@
   $dusupay_currency_code = $row_payment_settings->dusupay_currency_code;
   $dusupay_api_key = $row_payment_settings->dusupay_api_key;
   $dusupay_secret_key = $row_payment_settings->dusupay_secret_key;
+  $enable_weaccept = $row_payment_settings->enable_weaccept;
 
   $days = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30");
   
@@ -337,6 +338,54 @@
               <label class="col-md-3 control-label"></label>
               <div class="col-md-6">
                 <input type="submit" name="update_payoneer_settings" value="Update Payoneer Settings" class="btn btn-success form-control">
+              </div>
+            </div>
+            <!--- form-group row Ends --->
+          </form>
+        </div>
+        <!--- card-body Ends --->
+      </div>
+      <!--- card mb-5 Ends -->
+    </div>
+    <!--- col-lg-12 Ends --->
+  </div>
+  <!---  3 row Ends --->
+    <div class="row">
+    <!---  3 row Starts --->
+    <div class="col-lg-12">
+      <!--- col-lg-12 Starts --->
+      <div class="card mb-5">
+        <!--- card mb-5 Starts -->
+        <div class="card-header">
+          <!--- card-header Starts --->
+          <h4 class="h4">
+            <i class="fa fa-paypal"></i> Update WeAccept Settings
+          </h4>
+        </div>
+        <!--- card-header Ends --->
+        <div class="card-body">
+          <!--- card-body Starts --->
+          <form action="" method="post">
+            <!--- form Starts --->
+            <div class="form-group row">
+              <!--- form-group row Starts --->
+              <label class="col-md-3 control-label"> Enable WeAccept : </label>
+              <div class="col-md-6">
+                <select name="enable_weaccept" class="form-control" required="">
+                  <option value="yes" <?php if($enable_weaccept == 'yes'){echo "selected";} ?>> Yes </option>
+                  <option value="no" <?php if($enable_weaccept == 'no'){echo "selected";} ?>> No </option>
+                </select>
+                <!-- <small class="form-text text-muted mb-0">Allow users to withdraw using Payoneer.</small> -->
+                <!-- <small class="form-text text-muted">In order for this to work, you need to enable manual payouts in general settings</small> -->
+              </div>
+            </div>
+            <!--- form-group row Ends --->
+            <!--- form-group row Ends --->
+            <div class="form-group row">
+              <!--- form-group row Starts --->
+              <label class="col-md-3 control-label"></label>
+              <div class="col-md-6">
+                <input type="submit" name="update_weaccept_settings" value="Update WeAccept Settings" class="btn btn-success form-control">
               </div>
             </div>
             <!--- form-group row Ends --->
@@ -891,6 +940,16 @@ $(document).ready(function(){
     if($update_stripe_settings){
       $insert_log = $db->insert_log($admin_id,"payoneer_settings","","updated");   
       echo "<script>alert_success('Payoneer Settings Updated Successfully!','index?payment_settings');</script>"; 
+    } 
+  }
+
+  if(isset($_POST['update_weaccept_settings'])){
+    $data = $input->post();
+    unset($data['update_weaccept_settings']);
+    $update_stripe_settings = $db->update("payment_settings",$data);
+    if($update_stripe_settings){
+      $insert_log = $db->insert_log($admin_id,"payoneer_settings","","updated");   
+      echo "<script>alert_success('WeAccept Settings Updated Successfully!','index?payment_settings');</script>"; 
     } 
   }
 

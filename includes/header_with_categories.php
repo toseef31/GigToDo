@@ -5,8 +5,6 @@ require_once("change_currency.php");
 if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
 if(isset($_SESSION['currency'])){
   $to = $_SESSION['currency'];
-}else{
-  print_r("no session");
 }
 
 if(isset($_SESSION['seller_user_name'])){
@@ -124,8 +122,8 @@ $cur_amount = currencyConverter($to,1);
             <?php } ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
-                <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
-                <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
+                <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
             <div class="Login-button">
@@ -185,9 +183,9 @@ $cur_amount = currencyConverter($to,1);
         </div>
         <?php } ?>
         <div class="menu-action">
-          <select name="" id="">
-            <option value="">USD</option>
-            <option value="">EGP</option>
+          <select name="" id="curreny_convert" class="curreny_convert">
+            <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
+            <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
           </select>
         </div>
       </li>

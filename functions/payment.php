@@ -365,5 +365,8 @@ try
   }
 }
 /// Paystack Payment Code Ends ////
+// We Accept payment Method code
+
+
 
 }

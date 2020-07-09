@@ -1,9 +1,10 @@
-<?php 
+<?php
+session_start(); 
   require_once("db.php"); 
   require_once("extra_script.php");
   require_once("change_currency.php");
   if(!isset($_SESSION['error_array'])){ $error_array = array(); }else{ $error_array = $_SESSION['error_array']; }
-  if(isset($_SESSION['currency'])){
+  if(isset($_SESSION['currency']) && !empty($_SESSION['currency'])){
     $to = $_SESSION['currency'];
   }
   if(isset($_SESSION['seller_user_name'])){
@@ -98,8 +99,8 @@
             <?php } ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
-                <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
-                <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
+                <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
             <div class="message-inner">

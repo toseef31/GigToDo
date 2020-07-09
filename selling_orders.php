@@ -99,7 +99,7 @@ if ($used_purchases == '') {
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">Total Earned</span>
-											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $used_purchases;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $used_purchases);}else{  echo $s_currency.' '; echo $used_purchases; } ?></span>
+											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $used_purchases;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $used_purchases,2);}else{  echo $s_currency.' '; echo $used_purchases; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -123,7 +123,7 @@ if ($used_purchases == '') {
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">completed</span>
-											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $completed_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $completed_order_price);}else{  echo $s_currency.' '; echo $completed_order_price; } ?></span>
+											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $completed_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $completed_order_price,2);}else{  echo $s_currency.' '; echo $completed_order_price; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -133,7 +133,7 @@ if ($used_purchases == '') {
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">awaiting review</span>
-											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo "0";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * "0");}else{  echo $s_currency.' '; echo "0"; } ?></span>
+											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo "0";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * "0",2);}else{  echo $s_currency.' '; echo "0"; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -157,7 +157,7 @@ if ($used_purchases == '') {
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">cancelled</span>
-											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo $cancelled_order_price;}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * $cancelled_order_price);}else{  echo $s_currency.' '; echo $cancelled_order_price; } ?></span>
+											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $cancelled_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $cancelled_order_price,2);}else{  echo $s_currency.' '; echo $cancelled_order_price; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -167,7 +167,7 @@ if ($used_purchases == '') {
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">overdue</span>
-											<span class="amount"><?php if ($to == 'USD'){ echo $to.' '; echo "0";}elseif($to == 'EGP'){  echo $to.' '; echo round($cur_amount * "0");}else{  echo $s_currency.' '; echo "0"; } ?></span>
+											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo "0";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * "0",2);}else{  echo $s_currency.' '; echo "0"; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->

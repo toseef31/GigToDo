@@ -361,12 +361,12 @@ $login_seller_language = $row_login_seller->seller_language;
                             <span>
                               <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/price-icon.png" />
                             </span>
-                            <span>السعر ؟</span>
+                            <span>السعر ؟</span>&nbsp;<small>(الرجاء إدخال المبلغ EGP)</small>
                           </label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <select class="form-control">
-                                <option value="1">USD</option>
+                                <!-- <option value="1">USD</option> -->
                                 <option value="2">EGP</option>
                               </select>
                             </div>
