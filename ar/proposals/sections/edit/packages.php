@@ -14,7 +14,7 @@ $row_2 = $get_p_2->fetch();
 $get_p_3 = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance'));
 $row_3 = $get_p_3->fetch();
 
-$prices = array(5,10,15,20,25,50,60,70,80,90,100,120,130,150,170);
+$prices = array(80,160,240,320,400,800,950,1100,1300,1450,1600);
 $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 
 ?>
@@ -245,8 +245,16 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<option value="">Select</option>
 									<?php 
 										foreach ($prices as $price) {
-											$packg_price = round($cur_amount * $price);
-											echo "<option value='$packg_price'".($packg_price == $row_1->price ? "selected" : "").">$s_currency $packg_price</option>";
+											if($to == 'USD'){
+												$packg_price = round($cur_amount * $price);
+											}else{
+												$packg_price = $price;
+											}
+											if ($to == '') {
+												$to = $s_currency;
+											}
+											$pkg_price = round($cur_amount * $row_1->price);
+											echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
 										}
 									?>
 								</select>
@@ -257,8 +265,16 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<option value="">Select</option>
 									<?php 
 										foreach ($prices as $price) {
-											$packg_price = round($cur_amount * $price);
-											echo "<option value='$packg_price'".($packg_price == $row_2->price ? "selected" : "").">$s_currency $packg_price</option>";
+											if($to == 'USD'){
+												$packg_price = round($cur_amount * $price);
+											}else{
+												$packg_price = $price;
+											}
+											if ($to == '') {
+												$to = $s_currency;
+											}
+											$pkg_price = round($cur_amount * $row_2->price);
+											echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
 										}
 									?>
 								</select>
@@ -269,8 +285,16 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<option value="">Select</option>
 									<?php 
 										foreach ($prices as $price) {
-											$packg_price = round($cur_amount * $price);
-											echo "<option value='$packg_price'".($packg_price == $row_3->price ? "selected" : "").">$s_currency $packg_price</option>";
+											if($to == 'USD'){
+												$packg_price = round($cur_amount * $price);
+											}else{
+												$packg_price = $price;
+											}
+											if ($to == '') {
+												$to = $s_currency;
+											}
+											$pkg_price = round($cur_amount * $row_3->price);
+											echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
 										}
 									?>
 								</select>
