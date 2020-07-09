@@ -1,0 +1,10 @@
+{
+    "require": {
+        "stripe/stripe-php": "^5.9",
+        "paypal/rest-api-sdk-php": "*",
+        "opentok/opentok": "4.2.x",
+        "guzzlehttp/guzzle": "^6.3",
+        "yabacon/paystack-php": "^2.1",
+        "phpmailer/phpmailer": "^6.1"
+    }
+}

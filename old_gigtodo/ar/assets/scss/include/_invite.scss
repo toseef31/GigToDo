@@ -1,0 +1,149 @@
+.invite-friends{
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: none;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 60px;
+    @media (min-width: 768px){
+        padding-top: 100px;
+    }
+    @media (max-width: 767px){
+        padding-bottom: 40px;
+    }
+    h1{
+        color: white;
+        font-size: 50px;
+        @include font-Montserrat-Bold;
+        line-height: 65px;
+        margin-bottom: 15px;
+    }
+    p{
+        color: white;
+        font-size: 20px;
+        @include font-Montserrat-Medium;
+        line-height: 32px;
+        margin-bottom: 20px;
+    }
+    h6{
+        color: white;
+        font-size: 14px;
+        @include font-Montserrat-Regular;
+        line-height: 20px;
+        margin-bottom: 20px;
+        a{
+            color: white;
+            text-decoration: underline;
+        }
+    }
+    form{
+        width: 100%;
+        .input-group{
+            margin-bottom: 25px;
+            .form-control{
+                background-clip: unset;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                height: 70px;
+                padding: 15px 15px 15px 0;
+                width: 100%;
+            }
+            .input-group-prepend{
+                .input-group-text{
+                    background-color: white;
+                    border: none;
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 5px;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 5px;
+                    padding: 15px;
+                    img{
+                        min-width: 28px;
+                    }
+                }
+                button{
+                    background-color: #ff0707;
+                    border: none;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 0;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 0;
+                    color: white;
+                    font-size: 16px;
+                    @include font-Montserrat-Semibold;
+                    padding: 0 30px;
+                    text-transform: uppercase;
+                    @media (max-width: 374px){
+                        padding: 0 20px;
+                    }
+                }
+            }
+        }
+        .control-label{
+            color: #fffefe;
+            font-size: 14px;
+            @include font-Montserrat-Regular;
+            line-height: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+    }
+    .list-inline{
+        margin-bottom: 50px;
+        .list-inline-item{
+            &:not(:last-child){
+                margin-left: 13px;
+            }
+            .list-inline-link{
+                align-items: center;
+                background-color: transparent;
+                border-radius: 5px;
+                color: white;
+                display: flex;
+                flex-direction: row;
+                font-size: 20px;
+                height: 45px;
+                justify-content: center;
+                transition: all 0.3s ease-in-out 0s;
+                width: 45px;
+                &.facebook{
+                    background-color: #0d6795;
+                    &:hover{
+                        background-color: white;
+                        color: #0d6795;
+                    }
+                }
+                &.twitter{
+                    background-color: #0db3d7;
+                    &:hover{
+                        background-color: white;
+                        color: #0db3d7;
+                    }
+                }
+                &.youtube{
+                    background-color: #d22323;
+                    &:hover{
+                        background-color: white;
+                        color: #d22323;
+                    }
+                }
+                &.linkedin{
+                    background-color: #17798b;
+                    &:hover{
+                        background-color: white;
+                        color: #17798b;
+                    }
+                }
+                &.instagram{
+                    background-color: #0f486d;
+                    &:hover{
+                        background-color: white;
+                        color: #0f486d;
+                    }
+                }
+            }
+        }
+    }
+}

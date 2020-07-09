@@ -1,0 +1,147 @@
+/* XL Device :1600px. */
+@media (min-width: 1600px) and (max-width: 1920px) {
+}
+
+
+
+
+/* XL Device :1200px. */
+@media (min-width: 1200px) and (max-width: 1500px) {
+
+    .header-top span.current {
+        font-size: 12px;
+    }
+
+}
+
+/* LG Device :992px. */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+
+    .all-content.active {
+        margin-right: -590px;
+    }
+    
+    .mainmenu ul li a {
+        font-size: 13px;
+    }
+
+    .header-top span.current {
+        font-size: 12px;
+    }
+    .user-image h5 {
+        left: 0;
+        right: 90px;
+    }
+}
+
+
+/* MD Device :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .header-search-box {
+        margin-top: 15px;
+    }
+
+    .header-top {
+        padding: 20px 0;
+        border-bottom: 1px solid #E2E2E2;
+    }
+
+    .home-slide-active .owl-dots {
+        bottom: 10px;
+    }
+
+    .footer-social a {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .widget-link ul li {
+        width: 45%;
+    }
+
+}
+
+
+
+
+/* Extra small Device. */
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+
+    .header-search-box {
+        margin-top: 15px;
+    }
+
+    /*Section-title*/
+    .section-title h2 {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+
+    .product-single-item {
+        margin-top: 30px;
+    }
+
+    /*Sidebar-box*/
+    .sidebar-box,
+    .user-profile {
+        padding: 15px;
+    }
+
+    /*Footer-area*/
+    .widget-item {
+        margin-top: 30px;
+    }
+
+    .widget-item h4 {
+        margin-bottom: 20px;
+    }
+
+    .widget-item a {
+        margin-bottom: 10px;
+    }
+
+    .footer-area {
+        padding-top: 30px;
+    }
+
+    .widget-link {
+        margin-top: 30px;
+    }
+
+    .single-slide-item {
+        height: 135px;
+    }
+
+    .copyright-area .nice-select .list {
+        top: 100%;
+        bottom: auto;
+        left: 0;
+    }
+
+    .copyright {
+        text-align: right;
+    }
+
+    .widget-link {
+        text-align: right;
+    }
+
+    .product-text {
+        border-top: none;
+        text-align: right;
+    }
+
+    .home-slide-active .owl-dots {
+        bottom: 10px;
+    }
+
+
+
+
+
+
+
+}
