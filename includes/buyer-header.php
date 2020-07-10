@@ -61,8 +61,11 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 15);
+// print_r($full_url);
 
+$page_url = substr("$full_url", 1);
+// $page_url = $full_url;
+// print_r($page_url);
 
 $cur_amount = currencyConverter($to,1);
 ?>

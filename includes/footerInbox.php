@@ -76,7 +76,7 @@
               $url.= $_SERVER['REQUEST_URI'];    
               $full_url = $_SERVER['REQUEST_URI'];
               
-              $page_url = substr("$full_url", 15);
+              $page_url = substr("$full_url", 1);
             ?>
           <div>
 

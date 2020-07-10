@@ -2,6 +2,6 @@
         ini_set('display_errors', 0);
         ini_set('display_startup_errors', 0);
         @define('DB_HOST', 'localhost');
-        @define('DB_USER', 'peek');
-        @define('DB_PASS', '!peek*12&inter#');
-        @define('DB_NAME', 'gigtodo');
+        @define('DB_USER', 'remote');
+        @define('DB_PASS', 'cvjqq3acgqc3afw4');
+        @define('DB_NAME', 'site');

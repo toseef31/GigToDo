@@ -262,7 +262,7 @@ try {
 
 			$insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $sender_id, "proposal_id" => $proposal_id, "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "pending"));
 			if($insert_order){
-				$update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']))
+				$update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']));
 			}
 	    echo "<script>window.open('$site_url/conversations/inbox?single_message_id={$_SESSION['c_single_message_id']}','_self')</script>";
 	    
