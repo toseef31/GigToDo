@@ -88,9 +88,14 @@
                         <span>Basic</span>
                       </div>
                       <p><?= $p_description_1; ?></p>
-                      <a class="button button-red" href="javascript:void(0);">
+                      <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
+                      <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                      <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
+                      <input type="hidden" name="proposal_qty" value="1">
+                        <button type="submit" class="button button-red" name="add_order">
                         <?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?>
-                      </a>
+                        </button>
+                      </form>
                     </div>
                   </div>
                 <?php } else{ ?>
@@ -103,7 +108,12 @@
                       <span>Basic</span>
                     </div>
                     <p><?= $p_description_1; ?></p>
-                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></a>
+                    <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
+                      <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                      <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
+                      <input type="hidden" name="proposal_qty" value="1">
+                      <button type="submit" class="button button-red" name="add_order"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
+                    </form>
                   </div>
                   <!-- Each item -->
                   <div class="packages-item d-flex flex-column">
@@ -114,7 +124,12 @@
                       <span>Standard</span>
                     </div>
                     <p><?= $p_description_2; ?></p>
-                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_2;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_2,2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></a>
+                    <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
+                      <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                      <input type="hidden" name="package_id" value="<?= $p_id_2; ?>">
+                      <input type="hidden" name="proposal_qty" value="1">
+                      <button type="submit" class="button button-red" name="add_order"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_2;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_2,2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></button>
+                    </form>
                   </div>
                   <!-- Each item -->
                   <div class="packages-item d-flex flex-column">
@@ -125,7 +140,12 @@
                       <span>Premium</span>
                     </div>
                     <p><?= $p_description_3; ?></p>
-                    <a class="button button-red" href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_3;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_3,2);}else{  echo $s_currency.' '; echo $p_price_3; } ?></a>
+                    <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
+                      <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                      <input type="hidden" name="package_id" value="<?= $p_id_3; ?>">
+                      <input type="hidden" name="proposal_qty" value="1">
+                      <button type="submit" class="button button-red" name="add_order"><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_3;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_3,2);}else{  echo $s_currency.' '; echo $p_price_3; } ?></a>
+                    </form>
                   </div>
                   <!-- Each item -->
                 <?php } ?>
@@ -311,41 +331,52 @@
                   </div>
                   <!-- Package-item -->
                   <div class="package-item d-flex flex-row justify-content-end">
-                    <form method="post" action="../../checkout" style="display: contents;">
-                    <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
-                    <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
-                      <?php if($proposal_seller_id == @$login_seller_id){ ?>
-                      <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <a class="button button-red" href="../edit_proposal?proposal_id=<?= $proposal_id; ?>&pricing">Edit Package</a>
-                      </div>
-                      <?php }else{ ?>
-                      <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
-                      </div>
-                      <?php } ?>                      
-                      <!-- Each item -->
-                      
-                      <?php if($proposal_seller_id == @$login_seller_id){ ?>
-                      <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <a class="button button-red" href="../edit_proposal?proposal_id=<?= $proposal_id; ?>&pricing">Edit Package</a>
-                      </div>
-                      <?php }else{ ?>
-                      <div class="package-item-single d-flex align-items-center justify-content-center">
+                    <?php if($proposal_seller_id == @$login_seller_id){ ?>
+                    <div class="package-item-single d-flex align-items-center justify-content-center">
+                      <a class="button button-red" href="../edit_proposal?proposal_id=<?= $proposal_id; ?>&pricing">Edit Package</a>
+                    </div>
+                    <?php }else{ ?>
+                    <div class="package-item-single d-flex align-items-center justify-content-center">
+                      <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>" style="display: contents;">
+                        <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                        <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
+                        <input type="hidden" name="proposal_qty" value="1">
+                      <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
+                      </form>
+                    </div>
+                    <?php } ?>                      
+                    <!-- Each item -->
+                    
+                    <?php if($proposal_seller_id == @$login_seller_id){ ?>
+                    <div class="package-item-single d-flex align-items-center justify-content-center">
+                      <a class="button button-red" href="../edit_proposal?proposal_id=<?= $proposal_id; ?>&pricing">Edit Package</a>
+                    </div>
+                    <?php }else{ ?>
+                    <div class="package-item-single d-flex align-items-center justify-content-center">
+                      <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>" style="display: contents;">
+                        <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                        <input type="hidden" name="package_id" value="<?= $p_id_2; ?>">
+                        <input type="hidden" name="proposal_qty" value="1">
                         <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_2;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_2,2);}else{  echo $s_currency.' '; echo $p_price_2; } ?></button>
-                      </div>
-                      <?php } ?>
-                      <!-- Each item -->
-                      <?php if($proposal_seller_id == @$login_seller_id){ ?>
-                      <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <a class="button button-red" href="../edit_proposal?proposal_id=<?= $proposal_id; ?>&pricing">Edit Package</a>
-                      </div>
-                      <?php }else{ ?>
-                      <div class="package-item-single d-flex align-items-center justify-content-center">
-                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_3;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_3,2);}else{  echo $s_currency.' '; echo $p_price_3; } ?></button>
-                      </div>
-                      <?php } ?>
-                      <!-- Each item -->
                     </form>
+                    </div>
+                    <?php } ?>
+                    <!-- Each item -->
+                    <?php if($proposal_seller_id == @$login_seller_id){ ?>
+                    <div class="package-item-single d-flex align-items-center justify-content-center">
+                      <a class="button button-red" href="../edit_proposal?proposal_id=<?= $proposal_id; ?>&pricing">Edit Package</a>
+                    </div>
+                    <?php }else{ ?>
+                    <div class="package-item-single d-flex align-items-center justify-content-center">
+                      <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>" style="display: contents;">
+                        <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
+                        <input type="hidden" name="package_id" value="<?= $p_id_3; ?>">
+                        <input type="hidden" name="proposal_qty" value="1">
+                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_3;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_3,2);}else{  echo $s_currency.' '; echo $p_price_3; } ?></button>
+                      </form>
+                    </div>
+                    <?php } ?>
+                    <!-- Each item -->
                   </div>
                   <!-- Package-item -->
                 </div>
