@@ -10,6 +10,7 @@ $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
+$current_balance = $row_login_seller->current_balance;
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -170,7 +171,7 @@ $login_seller_id = $row_login_seller->seller_id;
                           <img src="assets/img/img/icon4.png" alt="">
                         </div>
                         <div class="purchases-text">
-                          <h4>personal balance <span><?php if ($to == 'EGP'){ echo $to.' '; echo "0";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * "0",2);}else{  echo $s_currency.' '; echo "0"; } ?></span></h4>
+                          <h4>personal balance <span><?php if ($to == 'EGP'){ echo $to.' '; echo $current_balance;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $current_balance,2);}else{  echo $s_currency.' '; echo $current_balance; } ?></span></h4>
                         </div>
                       </div>
                     </div>

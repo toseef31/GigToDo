@@ -20,7 +20,7 @@ require_once("db.php");
 
       $amount_total = 10;
       // $url = "https://free.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=ultra&apiKey=43ff88807fc747d49fd2e3c2d76be71e";
-     $url = "https://api.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=43ff88807fc747d49fd2e3c2d76be71e";
+     // $url = "https://api.currconv.com/api/v7/convert?q=".$from_currency."_".$toCurrency."&compact=y&apiKey=43ff88807fc747d49fd2e3c2d76be71e";
    
     
       $ch = curl_init();
