@@ -341,7 +341,7 @@
                         <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
                         <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
                         <input type="hidden" name="proposal_qty" value="1">
-                      <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
+                        <button class="button button-red" type="submit" name="add_order" <?= $disabled; ?>><?php if ($to == 'EGP'){ echo $to.' '; echo $p_price_1;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $p_price_1,2);}else{  echo $s_currency.' '; echo $p_price_1; } ?></button>
                       </form>
                     </div>
                     <?php } ?>                      

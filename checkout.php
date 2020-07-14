@@ -612,7 +612,7 @@ if(isset($_POST['code'])){
 							 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
 							 										<option>Select Country</option>
 							 										<?php
-                                    $get_countries = $db->select("countries");
+                                    $get_countries = $db->select("countries", array('name'=> 'Egypt'));
                                     while($row_countries = $get_countries->fetch()){
                                       $id = $row_countries->id;
                                       $name = $row_countries->name;

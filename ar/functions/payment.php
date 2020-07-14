@@ -58,8 +58,18 @@ public function paypal($data,$processing_fee){
 	$redirecturls->setReturnUrl("{$data['redirect_url']}")->setCancelUrl("{$data['cancel_url']}");
 	//Payment
 	$payment->setIntent("sale")->setPayer($payer)->setRedirectUrls($redirecturls)->setTransactions([$transaction]);
+	$payment->create($api);
+
+	//Generate Payment-id
+	$payment_id = $payment->getId();
+	$approvalUrl = $payment->getApprovalLink();
+	
+	// print_r($api);die();
+	// $payment_id = $payment->getId();
+	// print_r($approvalUrl);die();
 	try{
 		$payment->create($api);
+
 		//Generate Payment-id
 		$payment_id = $payment->getId();
 		$approvalUrl = $payment->getApprovalLink();

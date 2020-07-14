@@ -233,7 +233,7 @@ $enableVideo = 0;
 			</div>
 		</div>
 		<!-- Preloader End -->
-		<script src="//platform-api.sharethis.com/js/sharethis.js#property=5c812224d11c6a0011c485fd&product=inline-share-buttons"></script>
+		<!-- <script src="//platform-api.sharethis.com/js/sharethis.js#property=5c812224d11c6a0011c485fd&product=inline-share-buttons"></script> -->
 		<?php
 		if(isset($_SESSION['seller_user_name'])){ 
 		  if($login_user_type == 'seller'){ 

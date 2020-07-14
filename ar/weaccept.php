@@ -2,9 +2,8 @@
 
 session_start();
 
-
-require_once("../includes/db.php");
-include("../functions/processing_fee.php");
+require_once("includes/db.php");
+include("functions/processing_fee.php");
 
 if(!isset($_SESSION['seller_user_name'])){
   echo "<script>window.open('login.php','_self');</script>";
@@ -15,6 +14,7 @@ $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
 $login_seller_email = $row_login_seller->seller_email;
 $login_seller_name = $row_login_seller->seller_name;
+
 
 $select_buyer_payment_account = $db->select("seller_payment_account", array("seller_id" => $login_seller_id));
 $row_buyer_account = $select_buyer_payment_account->fetch();
@@ -115,34 +115,49 @@ try {
 		  }
 		  curl_close($ch);
 
-    // print_r($token);
+    print_r($token);
 
-	$select_offers = $db->select("messages_offers",array("offer_id" => $_SESSION['c_message_offer_id']));
-	$row_offers = $select_offers->fetch();
-	$proposal_id = $row_offers->proposal_id;
-  $delivery_time = $row_offers->delivery_time;
-  $sender_id = $row_offers->sender_id;
-	$amount = $row_offers->amount;
-	$processing_fee = processing_fee($amount);
-
-	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+	$select_proposals = $db->select("proposals",array("proposal_id" => $_SESSION['c_proposal_id']));
 	$row_proposals = $select_proposals->fetch();
-	$proposal_title = $row_proposals->proposal_title;
+	$proposal_url = $row_proposals->proposal_url;
+	$proposal_seller_id = $row_proposals->proposal_seller_id;
+
+	$processing_fee = processing_fee($_SESSION['c_sub_total']);
+
+	$get_p = $db->select("proposal_packages",array("proposal_id"=>$_SESSION['c_proposal_id']));
+	$row_p = $get_p->fetch();
+	$delivery_time = $row_p->delivery_time;
+
+	$select_proposal_seller = $db->select("sellers",array("seller_id"=>$proposal_seller_id));
+	$row_proposal_seller = $select_proposal_seller->fetch();
+	$proposal_seller_user_name = $row_proposal_seller->seller_user_name;
+	$seller_user_id = $row_proposal_seller->seller_id;
 
 	//$payment = new Payment();
 	$data = [];
-	$data['name'] = $proposal_title;
-	$data['qty'] = 1;
-	$data['price'] = $amount;
-	$data['sub_total'] = $amount;
-	$data['total'] = $amount + $processing_fee;
-  $total_amount = $data['total'] * 100;
-  // print_r($total_amount);
+	$data['name'] = $row_proposals->proposal_title;
+	$data['qty'] = $_SESSION['c_proposal_qty'];
+	$data['price'] = $_SESSION['c_proposal_price'];
+	$data['sub_total'] = $_SESSION['c_proposal_price'];
+	$gst = 3;
+	$data['total'] = $_SESSION['c_sub_total'] + $processing_fee + $gst;
+	$total_amount = $data['total'] * 100;
+  
   $order_time = date("F d, Y h:i:s ");
   $order_date = date("F d, Y");
   $merchant_order_id = rand();
 	// print_r($data['price']);die();
+	if(isset($_SESSION['c_proposal_extras'])){
+		$extras = "&proposal_extras=" . base64_encode(serialize($_SESSION['c_proposal_extras']));
+	}else{
+		$extras = "";
+	}
 	
+	if(isset($_SESSION['c_proposal_minutes'])){
+		$minutes = "proposal_minutes={$_SESSION['c_proposal_minutes']}";
+	}else{
+		$minutes = "";
+	}
 
 	//$token = weaccept();
 	//print_r($token.'sdfsdfsd');
@@ -165,7 +180,7 @@ try {
 	curl_setopt($chs, CURLOPT_POSTFIELDS, json_encode($postData2));
 	// Send the request & save response to $resp
 		$order = curl_exec($chs);
-	//print_r($order);
+	// print_r($order);
 	
 		if(!curl_errno($chs)){ 
 	     $order_data = json_decode($order, true);
@@ -210,7 +225,7 @@ try {
     "currency" => "EGP",
     "integration_id" => "3319"
 	);
-  // print_r($postData3);
+  // print_r($postData3);die();
 	curl_setopt($ch2, CURLOPT_URL, "https://accept.paymobsolutions.com/api/acceptance/payment_keys");
 	curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch2, CURLOPT_POST, 1);
@@ -221,7 +236,7 @@ try {
 	curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($postData3));
 	
 		$payment = curl_exec($ch2);
-      // print_r($payment);
+      // print_r($payment);die();
        $paymentdata = json_decode($payment, true);
        // print_r($paymentdata);
          //die;
@@ -247,7 +262,7 @@ try {
   "token" => $token,
   "payment_token" => $payToken
 );
-	/// print_r($postData4);die();
+	// print_r($postData4);
 	//echo "<script>window.open('card_frame','_self')</script>";
 	curl_setopt($ch3, CURLOPT_URL, "https://accept.paymobsolutions.com/api/acceptance/payments/pay");
 	curl_setopt($ch3, CURLOPT_RETURNTRANSFER, true);
@@ -261,14 +276,15 @@ try {
 	curl_setopt($ch3, CURLOPT_POSTFIELDS, json_encode($postData4));
 	
 		$iframe = curl_exec($ch3);
+		// print_r($iframe);die();
         $iframedata = json_decode($iframe, true);
     $redirect_path = $iframedata['data']['redirect_url'];
-  // die;
+  // print_r($iframedata);die();
 		if(!curl_errno($ch3)){
-        $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $sender_id, "proposal_id" => $proposal_id, "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "pending"));
-        if($insert_order){
-          $update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']))
-        }
+        $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $seller_user_id, "proposal_id" => $_SESSION['c_proposal_id'], "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "progress"));
+        // if($insert_order){
+        //   $update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']));
+        // }
         echo "<script>window.open('$redirect_path','_self')</script>";
 
 	      return $iframe;
@@ -278,7 +294,7 @@ try {
 	  curl_close($ch3);    
 	//return $result['id'];
 
-echo weaccept_iframe();
+// echo weaccept_iframe();
 
 } catch (Error $e) { // this will catch only Errors 
     echo $e->getMessage();
