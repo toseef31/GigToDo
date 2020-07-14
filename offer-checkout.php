@@ -50,98 +50,48 @@
 	$login_seller_id = $row_login_seller->seller_id;
 	$login_seller_email = $row_login_seller->seller_email;
 	
+
 	if(isset($_POST['add_order']) or isset($_POST['coupon_submit'])){
 
-	$_SESSION['c_proposal_id'] = $input->post('proposal_id');
-	$_SESSION['c_proposal_qty'] = $input->post('proposal_qty');
-	if(isset($_POST['package_id'])){
-		$_SESSION['c_package_id'] = $input->post('package_id');
-	}
+	$_SESSION['c_offer_id'] = $input->post('offer_id');
+	$_SESSION['c_request_id'] = $input->post('request_id');
 
-	if(isset($_SESSION['c_proposal_id'])){
-
-	$proposal_id = $_SESSION['c_proposal_id'];
-	$proposal_qty = $_SESSION['c_proposal_qty'];
-
-	if(isset($_POST['proposal_minutes'])){
-		$_SESSION['c_proposal_minutes'] = $input->post('proposal_minutes');
-		$proposal_minutes = $input->post('proposal_minutes');
-	}else{
-		$proposal_minutes = 1;
-		unset($_SESSION['c_proposal_minutes']);
-	}
-
-	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
-	$row_proposals = $select_proposals->fetch();
-
-	if(isset($_POST['package_id'])){
-		$_SESSION['c_package_id'] = $input->post('package_id');
-		$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_id"=>$input->post('package_id')));
-		$row_p = $get_p->fetch();
-		$proposal_price = $row_p->price;
-		$single_price = $row_p->price;
-		$proposal_description = $row_p->description;
-		$proposal_revision = $row_p->revisions;
-		$proposal_delivery_time = $row_p->delivery_time;
-	}else{
-		unset($_SESSION['c_package_id']);
-		$proposal_price = $row_proposals->proposal_price*$proposal_minutes;
-		$single_price = $row_proposals->proposal_price*$proposal_minutes;
-	}
-
-	$proposal_title = $row_proposals->proposal_title;
-	$proposal_seller_id = $row_proposals->proposal_seller_id;
-	$proposal_url = $row_proposals->proposal_url;
-	$proposal_img1 = $row_proposals->proposal_img1;
-
-	$select_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
-	$row_seller = $select_seller->fetch();
-	$proposal_seller_user_name = $row_seller->seller_user_name;
-	$proposal_seller_vacation = $row_seller->seller_vacation;
-
-	if($row_proposals->proposal_seller_id == $login_seller_id or $proposal_seller_vacation == "on"){
-		echo "<script>window.open('index','_self')</script>";
-	}
-
-	if(isset($_POST['proposal_extras'])){
-		$extra_price = 0;
-		$_SESSION['c_proposal_extras'] = $input->post('proposal_extras');
-		if (isset($_POST['add_order'])) {
-			$proposal_extras = $_SESSION['c_proposal_extras'];
-		}else{
-			$proposal_extras = unserialize(base64_decode($input->post('proposal_extras')));
-			$_SESSION['c_proposal_extras'] = $proposal_extras;
-		}
-		foreach($proposal_extras as $value){
-			$get_extras = $db->select("proposals_extras",array("id"=>$value));
-			$row_extras = $get_extras->fetch();
-			$extra_price += $row_extras->price;
-			$proposal_price += $row_extras->price;
-		}
-	}else{
-		unset($_SESSION['c_proposal_extras']);
-	}
-
-	$_SESSION['c_proposal_price'] = $proposal_price;
-
-	$sub_total = $proposal_price*$proposal_qty;
-
-	$_SESSION["c_sub_total"] = $sub_total;
-
-	$processing_fee = processing_fee($sub_total);
-	$total = processing_fee($sub_total)+$sub_total;
-	$gst = 3;
-	$total = $processing_fee + $sub_total + $gst;
+	if(isset($_SESSION['c_offer_id'])){
 
 	$select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
 	$row_seller_accounts = $select_seller_accounts->fetch();
 	$current_balance = $row_seller_accounts->current_balance;
 
-	if($proposal_id == @$_SESSION['r_proposal_id']){
-		$referrer_id = $_SESSION['r_referrer_id'];
-		$sel_referrer = $db->select("sellers",array("seller_id" => $referrer_id));
-		$referrer_user_name = $sel_referrer->fetch()->seller_user_name;
-	}
+	// $_SESSION['c_offer_id'] = $input->post('offer_id');
+	// $_SESSION['c_request_id'] = $input->post('request_id');
+
+	$offer_id = $input->post('offer_id');
+	$request_id = $input->post('request_id');
+
+	$select_offers = $db->select("send_offers",array("offer_id" => $offer_id));
+	$row_offers = $select_offers->fetch();
+	$proposal_id = $row_offers->proposal_id;
+	$description = $row_offers->description;
+	$delivery_time = $row_offers->delivery_time;
+	$amount = $row_offers->amount;
+
+	$processing_fee = processing_fee($amount);
+	$gst = 3;
+	$total = $amount+$processing_fee+$gst;
+
+	$get_requests = $db->select("buyer_requests",array("request_id" => $request_id));
+	$row_requests = $get_requests->fetch();
+	$request_description = $row_requests->request_description;
+
+	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+	$row_proposals = $select_proposals->fetch();
+	$proposal_title = $row_proposals->proposal_title;
+	$proposal_img1 = $row_proposals->proposal_img1;
+	$proposal_description = $row_proposals->proposal_desc;
+
+	$get_site_logo_image = $row_general_settings->site_logo;
+
+
 	$select_buyer_payment_account = $db->select("seller_payment_account", array("seller_id" => $login_seller_id));
 	$row_buyer_account = $select_buyer_payment_account->fetch();
 	$seller_account_id = $row_buyer_account->seller_id;
@@ -160,11 +110,9 @@
 	$swift_code = $row_buyer_account->swift_code;
 	$local_mobile_number = $row_buyer_account->local_mobile_number;
 	$local_email = $row_buyer_account->local_email;
-
 ?>
 <!DOCTYPE html>
-
-<html dir="rtl" lang="ar" class="ui-toolkit">
+<html lang="en" class="ui-toolkit">
 
 <head>
 	<title><?= $site_name; ?> - Checkout</title>
@@ -173,23 +121,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="<?= $site_author; ?>">
 	<!--====== Bootstrap css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
   <!--====== PreLoader css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
   <!--====== Animate css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
   <!--====== Fontawesome css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
   <!--====== Owl carousel css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
   <!--====== Nice select css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="<?= $site_url; ?>/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
   <!--====== Default css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
   <!--====== Style css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
   <!--====== Responsive css ======-->
-  <link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
 	<!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
 	<link href="styles/styles.css" rel="stylesheet">
 	<!-- <link href="styles/categories_nav_styles.css" rel="stylesheet"> -->
@@ -200,9 +150,8 @@
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="https://checkout.stripe.com/checkout.js"></script>
-	<!--====== Favicon Icon ======-->
 	<?php if(!empty($site_favicon)){ ?>
-	<link rel="shortcut icon" href="<?= $site_url; ?>/images/<?= $site_favicon; ?>" type="image/x-icon">
+	<link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
 	<?php } ?>
 	<style>
 		.stripe-submit{
@@ -250,7 +199,7 @@
 	  }
 	  #weaccept-cash-form{
 	  	margin-top: -83px;
-	  	float: right;
+	  	float: left;
 	  }
 	</style>
 </head>
@@ -338,8 +287,7 @@ if(isset($_POST['code'])){
 }
 ?>
 
-<!-- checkout bar START-->
-<main>
+	<!-- checkout bar START-->
 	<div class="checkout-bar pt-60">
 		<div class="container position-relative">
 			<div class="border"></div>
@@ -348,21 +296,21 @@ if(isset($_POST['code'])){
 					<div class="checkout-bar-area text-center">
 						<img src="assets/img/checkout/bar-icon-1.png" alt=""><br>
 						<span>1</span>
-						<p>تفاصيل الطلب</p>
+						<p>Order Details</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-4">
 					<div class="checkout-bar-area text-center">
 						<img src="assets/img/checkout/bar-icon-2.png" alt=""><br>
 						<span>2</span>
-						<p>التقييم والدفع</p>
+						<p>Review and Pay</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-4">
 					<div class="checkout-bar-area item text-center">
 						<img src="assets/img/checkout/bar-icon-3.png" alt=""><br>
 						<span>3</span>
-						<p>قدم المتطلبات بتاعتك و ابدأ اطلب</p>
+						<p>Submit Requirements and Start Order</p>
 					</div>
 				</div>
 			</div>
@@ -371,31 +319,31 @@ if(isset($_POST['code'])){
 	<!-- checkout bar END-->
 	<!-- checkout payment START-->
 	<div class="checkout-payment-area gray-bg">
-		<div class="container pb-45">
+		<div class="container  pb-45">
 			<div class="row">
 				<div class="col-12 col-lg-8">
 					<div class="checkout-payment bg-white mt-30">
-						<span>اختار طريقة الدفع المناسبة ليك</span>
+						<span>Choose your payment method</span>
 						<div class="tab-button">
 							<ul class="nav nav-pills" id="pills-tab" role="tablist">
 								<li class="nav-item">
 									<a class="nav-link active text-center" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true"><img src="assets/img/checkout/payment-tab-1.png" alt="">
-										<p>أونلاين</p>
+										<p>Online</p>
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link text-center" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false"><img src="assets/img/checkout/payment-tab-2.png" alt="">
-										<p>محفظة الموبايل</p>
+										<p>Mobile Wallet</p>
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link text-center" id="pills-3-tab" data-toggle="pill" href="#pills-3" role="tab" aria-controls="pills-3" aria-selected="false"><img src="assets/img/checkout/payment-tab-3.png" alt="">
-										<p>كاش</p>
+										<p>Cash</p>
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link text-center" id="pills-4-tab" data-toggle="pill" href="#pills-4" role="tab" aria-controls="pills-4" aria-selected="false"><img src="assets/img/checkout/payment-tab-4.png" alt="">
-										<p>محلى</p>
+										<p>Local</p>
 									</a>
 								</li>
 							</ul>
@@ -411,121 +359,120 @@ if(isset($_POST['code'])){
 										</div>
 										<div class="col-lg-7 col-md-8">
 											<div class="checkout-payment-content">
-												<h5 class="title">ازاي بيتم الدفع أونلاين؟</h5>
-												<p>ادفع على موقع منجز باستخدام الكريديت كارد، أو كرات الخصم، أو حساب الـPayPal
-													موقع منجز بيقبل أي كريديت كارد أو كروت الخصم سواء كانت دولية أو حتى محلية و دة عن طريق استخدام الفيزا أو الماستر كارد الخاصة بيك
-													من فضلك تتأكد إن البنك اللي بتتعامل معاه بيسمح بالمعاملات أونلاين
-												</p>
+												<h5 class="title">How Online Payment Works</h5>
+												<p>Pay on eMongez using a credit card, debit card or PayPal account. eMongez accepts any local or international Debit or Credit cards using Master Card and Visa. Please ensure that online transactions have been approved by your bank.</p>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="gigs-payment pt-30">
-									<ul class="radio_titme radio_style2">
-										<li class="pt-30">
-											<!-- <input type="radio" checked="" name="radio1" id="radio1">
-											<label for="radio1"><span></span><img src="assets/img/checkout/card.png" alt="">بطاقة الائتمان ولا الخصم</label>
-											<div class="row">
-												<div class="col-lg-6">
-													<div class="input-box mt-10">
-														<span>رقم البطاقة</span>
-														<input type="text">
+									<!-- <form action="#"> -->
+										<ul class="radio_titme radio_style2">
+											<li class="pt-30">
+												<!-- <input type="radio" checked="" name="method" id="radio1">
+												<label for="radio1"><span></span><img src="assets/img/checkout/card.png" alt="">Credit or debit card</label>
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="input-box mt-10">
+															<span>Card Number</span>
+															<input type="text">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="input-box mt-10">
+															<span>Name on card</span>
+															<input type="text">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="input-box mt-30">
+															<span>Expiry Date</span>
+															<input type="text">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="input-box mt-30">
+															<span>Security Code</span>
+															<input type="text">
+														</div>
 													</div>
 												</div>
-												<div class="col-lg-6">
-													<div class="input-box mt-10">
-														<span>الاسم على البطاقة</span>
-														<input type="text">
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="input-box mt-30">
-														<span>تاريخ الانتهاء</span>
-														<input type="text">
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="input-box mt-30">
-														<span>الكود السرى</span>
-														<input type="text">
-													</div>
-												</div>
-											</div>
-											<div class="input-check-area">
-												<input type="checkbox" name="checkbox5" id="checkbox1">
-												<label for="checkbox1"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a></label><br>
-												<button type="submit">الطلب</button>
-											</div> -->
-											<?php if($enable_stripe == "yes"){ ?>
-											<input type="radio" name="method" id="credit-card">
-											<label for="credit-card" class="d-inline"><span></span><img src="images/credit_cards.jpg" height="50" class="w-25">Stripe</label>
-											<?php } ?>
-											<?php if($enable_stripe == "yes"){ ?>
-												<div class="input-check-area float-left mt-0">
-											<?php require_once("stripe_config.php");
-											$stripe_total_amount = $total * 100;
-											?>
-											<form action="checkout_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
-											<input
-											type="submit"
-											class="stripe-submit"
-											value="Pay With Credit Card"
-											data-key="<?= $stripe['publishable_key']; ?>"
-											data-amount="<?= $stripe_total_amount; ?>"
-											data-currency="<?= $stripe['currency_code']; ?>"
-											data-email="<?= $login_seller_email; ?>"
-											data-name="<?= $site_name; ?>"
-											data-image="images/<?= $site_logo_image; ?>"
-											data-description="<?= $proposal_title; ?>"
-											data-allow-remember-me="false">
-											<script>
-											$(document).ready(function() {
-												$('.stripe-submit').on('click', function(event) {
-													event.preventDefault();
-													var $button = $(this),
-													$form = $button.parents('form');
-													var opts = $.extend({},$button.data(),{
-														token: function(result) {
-															$form.append($('<input>').attr({ type: 'hidden', name: 'stripeToken', value: result.id })).submit();
-														}
+												<div class="input-check-area">
+													<input type="checkbox" name="checkbox5" id="checkbox1">
+													<label for="checkbox1"><span></span>I accept the <p>terms and conditions</p></label><br>
+													<button type="submit">Order</button>
+												</div> -->
+												<?php if($enable_stripe == "yes"){ ?>
+												<input type="radio" name="method" id="credit-card">
+												<label for="credit-card" class="d-inline"><span></span><img src="images/credit_cards.jpg" height="50" class="w-25">Stripe</label>
+												<?php } ?>
+												<?php if($enable_stripe == "yes"){ ?>
+													<div class="input-check-area float-right mt-0">
+												<?php require_once("stripe_config.php");
+												$stripe_total_amount = $total * 100;
+												?>
+												<form action="requests/stripe_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
+												<input
+												type="submit"
+												class="stripe-submit"
+												value="Pay With Credit Card"
+												data-key="<?= $stripe['publishable_key']; ?>"
+												data-amount="<?= $stripe_total_amount; ?>"
+												data-currency="<?= $stripe['currency_code']; ?>"
+												data-email="<?= $login_seller_email; ?>"
+												data-name="<?= $site_name; ?>"
+												data-image="images/<?= $site_logo_image; ?>"
+												data-description="<?= $proposal_title; ?>"
+												data-allow-remember-me="false">
+												<script>
+												$(document).ready(function() {
+													$('.stripe-submit').on('click', function(event) {
+														event.preventDefault();
+														var $button = $(this),
+														$form = $button.parents('form');
+														var opts = $.extend({},$button.data(),{
+															token: function(result) {
+																$form.append($('<input>').attr({ type: 'hidden', name: 'stripeToken', value: result.id })).submit();
+															}
+														});
+														StripeCheckout.open(opts);
 													});
-													StripeCheckout.open(opts);
 												});
-											});
-											</script>
-											</form>
-											</div>
-											<?php } ?>
-										</li>
-										<li class="pt-30">
-											<?php if($enable_paypal == "yes"){ ?>
-											<input type="radio" name="method" id="paypal">
-											<label for="paypal"><span></span><img src="assets/img/checkout/paypal.png" alt="">Paypal</label>
-											<?php } ?>
-											<?php if($enable_paypal == "yes"){ ?>
-											<div class="input-check-area float-left" style="margin-top: -17px;">
-												<form action="paypal_charge" method="post" id="paypal-form" class="float-left"><!--- paypal-form Starts --->
-												 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
+												</script>
 												</form>
-											</div>
-											<?php } ?>
-										</li>
-										<li class="pt-30">
-											<?php if($current_balance >= $sub_total){ ?>
-											<input type="radio" name="method" id="shopping-balance"<?php if($current_balance >= $sub_total){ echo "checked"; }?>>
-											<label for="shopping-balance"><span></span><img src="assets/img/checkout/emongez.png" alt="">Emongez Wallet</label>
-											<?php } ?>
-											<?php if($current_balance >= $sub_total){ ?>
-											<div class="input-check-area float-left" style="margin-top: -17px;">
-												<form action="shopping_balance" method="post" id="shopping-balance-form">
-												<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
-													Emongez Wallet
-												</button>
-												</form>
-											</div>
-											<?php } ?>
-										</li>
-									</ul>
+												</div>
+												<?php } ?>
+											</li>
+											<li class="pt-30">
+												<?php if($enable_paypal == "yes"){ ?>
+												<input type="radio" name="method" id="paypal">
+												<label for="paypal"><span></span><img src="assets/img/checkout/paypal.png" alt="">Paypal</label>
+												<?php } ?>
+												<?php if($enable_paypal == "yes"){ ?>
+												<div class="input-check-area float-right" style="margin-top: -17px;">
+													<form action="requests/paypal_charge" method="post" id="paypal-form" class="float-right"><!--- paypal-form Starts --->
+													 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
+													</form>
+												</div>
+												<?php } ?>
+											</li>
+											<li class="pt-30">
+												<?php if($current_balance >= $sub_total){ ?>
+												<input type="radio" name="method" id="shopping-balance"<?php if($current_balance >= $sub_total){ echo "checked"; }?>>
+												<label for="shopping-balance"><span></span><img src="assets/img/checkout/emongez.png" alt="">Emongez Wallet</label>
+												<?php } ?>
+												<?php if($current_balance >= $sub_total){ ?>
+												<div class="input-check-area float-right" style="margin-top: -17px;">
+													<form action="../shopping_balance" method="post" id="shopping-balance-form">
+													<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
+														Emongez Wallet
+													</button>
+													</form>
+												</div>
+												<?php } ?>
+											</li>
+										</ul>
+									<!-- </form> -->
 								</div>
 							</div>
 							<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
@@ -538,11 +485,8 @@ if(isset($_POST['code'])){
 										</div>
 										<div class="col-lg-7 col-md-8">
 											<div class="checkout-payment-content">
-												<h5 class="title">ازاي بيتم الدفع عن طريق محفظة الموبايل؟</h5>
-												<p>ادفع على موقع منجز باستخدام محفظتك الإلكترونية على الموبايل
-													موفع منجز بيقبل بكل موفرين خدمة المحفظة الإلكترونية الرائدين في مصر
-													اتأكد إن محفظتك فيها المبلغ اللي محتاجه عشان تشتري.
-												لو حابب تزود المبلغ في محفظتك، من فضلك تواصل مع موفر خدمة المحفظة الخاص بيك</p>
+												<h5 class="title">How Mobile Wallet Payment Works</h5>
+												<p>Pay on eMongez using your Mobile wallet. eMongez accepts all of Egypt’s leading mobile wallet Providers. Make sure that your wallet has the needed funds for the purchase. If you would like to top up your wallet, please contact your Mobile wallet provider. </p>
 											</div>
 										</div>
 									</div>
@@ -550,19 +494,19 @@ if(isset($_POST['code'])){
 								<div class="gigs-payment pt-30">
 									<ul class="radio_titme radio_style2">
 										<li>
-											<form action="weaccept.php" method="post" id="weaccept-form">
+											<form action="requests/weaccept.php" method="post" id="weaccept-form">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
-															<span>رقم الموبايل</span>
+															<span>Mobile Number</span>
 															<input type="text" name="mobile_number" value="<?= $mobile_number; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox2">
-													<label for="checkbox2"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a></label><br>
-													<button type="submit" name="weaccept" class="button">الطلب</button>
+													<label for="checkbox2"><span></span>I accept the <p>terms and conditions</p></label><br>
+													<button type="submit" name="weaccept" class="button">Order</button>
 												</div>
 											</form>
 										</li>
@@ -579,97 +523,96 @@ if(isset($_POST['code'])){
 										</div>
 										<div class="col-lg-7 col-md-8">
 											<div class="checkout-payment-content">
-												<h5 class="title">ازاي بيتم الدفع كاش؟</h5>
-												<p>
-													اختار تحصيل الكاش من موقع منجز.
-													هي شركة توصيل رائدة في مصر هتتواصل معاك عشان تظبط تحصيل الفلوس
-													من فضلك اتأكد إن العنوان بتاعك مكتوب صح عشان تضمن تحصيل الفلوس في اليوم اللي وراه
-												</p>
+												<h5 class="title">How Cash Payment Works</h5>
+												<p>Select Cash Collection from eMongez Our Partner R2S Egypt’s leading courier will contact you to arrange Cash Collection. Please ensure that your address is entered correctly to ensure next day Cash Collection.</p>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="gigs-payment pt-30">
-									<ul class="radio_titme radio_style2">
-										<li>
-											<form id="cash_info" class="clearfix">
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="input-box mt-30">
-															<span>رقم الموبايل</span>
-															<input type="text" name="mobile_number" id="mobile_number" value="<?= $mobile_number; ?>">
+									<!-- <form action="#"> -->
+										<ul class="radio_titme radio_style2">
+											<li>
+												<form id="cash_info" class="clearfix">
+													<div class="row">
+														<div class="col-lg-12">
+															<div class="input-box mt-30">
+																<span>Mobile Number</span>
+																<input type="text" name="mobile_number" id="mobile_number" value="<?= $mobile_number; ?>">
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<div class="input-box mt-30">
+																<span>Address</span>
+																<input type="text" name="address" id="address" value="<?= $address; ?>">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30">
+																<span>Apartment Number</span>
+																<input type="text" name="apartment_number" id="apartment_number" value="<?= $apartment_number; ?>">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30">
+																<span>Floor Number</span>
+																<input type="text" name="floor_number" id="floor_number" value="<?= $floor_number; ?>">
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<div class="input-box mt-30 state_box">
+																<span>Country</span>
+							 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
+							 										<option>Select Country</option>
+							 										<?php
+                                    $get_countries = $db->select("countries", array('name'=> 'Egypt'));
+                                    while($row_countries = $get_countries->fetch()){
+                                      $id = $row_countries->id;
+                                      $name = $row_countries->name;
+                                      echo "<option value='$name'".($name == $country ? "selected" : "").">$name</option>";
+                                    }
+                                    ?>
+							 									</select>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30 state_box">
+																<span>state</span>
+																<select class="form-control wide" name="state" onChange="getCity(this.value);" id="state-list">
+																	<?php if(!empty($state)){ ?>
+																		<option selected><?= $state; ?></option>
+																	<?php } ?>
+																</select>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30 state_box">
+																<span>city</span>
+																<select class="form-control wide" name="city" required="" id="city-list">
+																	<?php if(!empty($city)){ ?>
+																		<option selected><?= $city; ?></option>
+																	<?php } ?>
+																</select>
+															</div>
 														</div>
 													</div>
-													<div class="col-lg-12">
-														<div class="input-box mt-30">
-															<span>العنوان</span>
-															<input type="text" name="address" id="address" value="<?= $address; ?>">
-														</div>
+													<div class="input-check-area">
+														<input type="checkbox" name="checkbox5" id="terms">
+														<label for="terms"><span></span>I accept the <p>terms and conditions</p>&nbsp;<small>(Please accept the terms and condition to proceed)</small></label><br>
+														<!-- <button type="submit">Order</button> -->
+														<button type="submit" name="submit_cash_info" id="edit_info" class="float-right" disabled>Edit Cash Info</button>
 													</div>
-													<div class="col-lg-6">
-														<div class="input-box mt-30">
-															<span>رقم المنزل</span>
-															<input type="text" name="apartment_number" id="apartment_number" value="<?= $apartment_number; ?>">
-														</div>
-													</div>
-													<div class="col-lg-6">
-														<div class="input-box mt-30">
-															<span>رقم الدور</span>
-															<input type="text" name="floor_number" id="floor_number" value="<?= $floor_number; ?>">
-														</div>
-													</div>
-													<div class="col-lg-12">
-														<div class="input-box mt-30 state_box">
-															<span>البلد</span>
-						 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
-						 										<option>Select Country</option>
-						 										<?php
-                                  $get_countries = $db->select("countries", array('name'=> 'Egypt'));
-                                  while($row_countries = $get_countries->fetch()){
-                                    $id = $row_countries->id;
-                                    $name = $row_countries->name;
-                                    echo "<option value='$name'".($name == $country ? "selected" : "").">$name</option>";
-                                  }
-                                  ?>
-						 									</select>
-														</div>
-													</div>
-													<div class="col-lg-6">
-														<div class="input-box mt-30 state_box">
-															<span>المدينة</span>
-															<select class="form-control wide" name="state" onChange="getCity(this.value);" id="state-list">
-																<?php if(!empty($state)){ ?>
-																	<option selected><?= $state; ?></option>
-																<?php } ?>
-															</select>
-														</div>
-													</div>
-													<div class="col-lg-6">
-														<div class="input-box mt-30 state_box">
-															<span>مدينة</span>
-															<select class="form-control wide" name="city" required="" id="city-list">
-																<?php if(!empty($city)){ ?>
-																	<option selected><?= $city; ?></option>
-																<?php } ?>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="input-check-area">
-													<input type="checkbox" name="checkbox5" id="terms">
-													<label for="terms"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a>&nbsp;<small>(يرجى قبول الشروط والأحكام للمتابعة)</small></label><br>
-													<!-- <button type="submit">الطلب</button> -->
-													<button type="submit" name="submit_cash_info" id="edit_info" class="float-left" disabled>تحرير معلومات النقدية</button>
-												</div>
-											</form>
-											<?php 
-												
-											?>
-											<form action="weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
-											<button type="submit" name="weaccept_cash" class="order-button">الطلب</button>
-											</form>
-										</li>
-									</ul>
+												</form>
+												<?php 
+													
+												?>
+												<form action="requests/weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+												<button type="submit" name="weaccept_cash" class="order-button">Order</button>
+												</form>
+											</li>
+											
+										</ul>
+									<!-- </form> -->
 								</div>
 							</div>
 							<div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab">
@@ -682,12 +625,8 @@ if(isset($_POST['code'])){
 										</div>
 										<div class="col-lg-7 col-md-8">
 											<div class="checkout-payment-content">
-												<h5 class="title">ازاي بيتم الدفع محلى ؟</h5>
-												<p>
-													ادفع على موقع منجز من خلال الشبكة الأكبر من أماكن الكاش
-													استمتع براحة الدفع في الوقت و المكان المفضل فجميع أنحاء مصر
-													ممكن تعرف أقرب مكان للكاش من خلال زيارة الموقع الخاص بموفرين الخدمة
-												</p>
+												<h5 class="title">How Local Payment Works</h5>
+												<p>Pay on eMongez through the largest network of cash points. Enjoy the convenience of paying at your preferred time and location across Egypt. You can check your nearest cash point by visiting the providers website</p>
 											</div>
 										</div>
 									</div>
@@ -695,25 +634,25 @@ if(isset($_POST['code'])){
 								<div class="gigs-payment pt-30">
 									<ul class="radio_titme radio_style2">
 										<li>
-											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk">
+											<form action="requests/weaccept_kiosk.php" method="post" id="weaccept-kiosk">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
-															<span>رقم الموبايل</span>
+															<span>Mobile Number</span>
 															<input type="text" name="local_mobile_number" value="<?= $local_mobile_number ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
-															<span>الإيميل</span>
+															<span>Email Address</span>
 															<input type="email" name="local_email" value="<?= $local_email; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox4">
-													<label for="checkbox4"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a></label><br>
-													<button type="submit" name="weaccept_valu">الطلب</button>
+													<label for="checkbox4"><span></span>I accept the <p>terms and conditions</p></label><br>
+													<button type="submit" name="weaccept_valu">Order</button>
 												</div>
 											</form>
 										</li>
@@ -726,7 +665,7 @@ if(isset($_POST['code'])){
 				<div class="col-12 col-lg-4">
 					<div class="checkout-summary mt-30">
 						<div class="summary-header">
-							الملخص
+							Summary
 						</div>
 						<div class="cummary-body">
 							<div class="summary-card d-flex flex-row align-items-start">
@@ -739,89 +678,63 @@ if(isset($_POST['code'])){
 							</div>
 							<!-- Each item -->
 							<div class="summary-card">
-								<h4>
-								كل العناصر اللي بتحتويها الباقة
-								</h4>
+								<h4>All the items included in package</h4>
 								<ul class="list-inline d-flex flex-wrap">
 									<!-- <li class="list-inline-item d-flex flex-row align-items-start">
 										<span>
 											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
 										</span>
-										<span>
-											الاستخدام التجارى
-										</span>
+										<span>Commercial Use</span>
 									</li>
 									<li class="list-inline-item d-flex flex-row align-items-start">
 										<span>
 											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
 										</span>
-										<span>
-											300 كلمة متضمنة
-										</span>
+										<span>300 Words Included</span>
 									</li> -->
 									<li class="list-inline-item d-flex flex-row align-items-start">
 										<span>
 											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
 										</span>
-										<span>
-											<?= $proposal_revision; ?> مراجعات
-										</span>
+										<span><?= $proposal_revision; ?> Revisions</span>
 									</li>
 									<!-- <li class="list-inline-item d-flex flex-row align-items-start">
 										<span>
 											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
 										</span>
-										<span>
-											الملف الأصلي
-										</span>
+										<span>Source File</span>
 									</li>
 									<li class="list-inline-item d-flex flex-row align-items-start">
 										<span>
 											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
 										</span>
-										<span>
-											ابحث عن الموضوع
-										</span>
+										<span>Topic Research</span>
 									</li> -->
 								</ul>
 							</div>
 							<!-- Each item -->
 							<div class="summary-card">
 								<div class="processing-fee d-flex flex-row justify-content-between">
-									<span>
-										رسوم التحويل
-									</span>
-									<span>
-										<?php if ($to == 'EGP'){ echo $to.' '; echo $processing_fee;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $processing_fee,2);}else{  echo $s_currency.' '; echo $processing_fee; } ?>
-									</span>
+									<span>Processing Fee</span>
+									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $processing_fee;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $processing_fee,2);}else{  echo $s_currency.' '; echo $processing_fee; } ?></span>
 								</div>
 							</div>
 							<!-- Each item -->
 							<div class="summary-card">
 								<div class="processing-fee d-flex flex-row justify-content-between">
-									<span>
-										ضريبة البضائع والخدمات
-									</span>
-									<span>
-										<?php if ($to == 'EGP'){ echo $to.' '; echo $gst;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $gst,2);}else{  echo $s_currency.' '; echo $gst; } ?>
-									</span>
+									<span>GST</span>
+									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $gst;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $gst,2);}else{  echo $s_currency.' '; echo $gst; } ?></span>
 								</div>
 							</div>
 							<!-- Each item -->
 							<div class="summary-card d-flex flex-column">
 								<div class="totoal-fee d-flex flex-row justify-content-between">
-									<span>الاجمالى</span>
-									<span>
-										<?php if ($to == 'EGP'){ echo $to.' '; echo $total;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $total,2);}else{  echo $s_currency.' '; echo $total; } ?>
-									</span>
+									<span>Total</span>
+									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $total;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $total,2);}else{  echo $s_currency.' '; echo $total; } ?></span>
 								</div>
 								<div class="delivery-time d-flex flex-row justify-content-between">
-									<span>
-										اجمالى وقت التسليم
-									</span>
-									<span>
-										<?= $proposal_delivery_time; ?>
-									</span>
+									<span>Total Delivery Time</span>
+									<span><?= $proposal_delivery_time; ?> Days</span>
 								</div>
 							</div>
 							<!-- Each item -->
@@ -832,11 +745,12 @@ if(isset($_POST['code'])){
 			</div>
 		</div>
 	</div>
-</main>
-<!-- checkout payment END-->
+	<!-- checkout payment END-->
 
-<!-- 
-<div class="container mt-5 mb-5">
+
+
+
+<!-- <div class="container mt-5 mb-5">
 	<div class="row">
 		<div class="col-md-7">
 			<div class="row">
@@ -902,7 +816,7 @@ if(isset($_POST['code'])){
 
 							<?php 
 							if($enable_2checkout == "yes"){ 
-								//require_once("plugins/paymentGateway/paymentMethod1.php");
+								require_once("plugins/paymentGateway/paymentMethod1.php");
 							} 
 							?>
 
@@ -1070,6 +984,7 @@ if(isset($_POST['code'])){
 </div> -->
 <script>
 $(document).ready(function(){	
+	$('#paypal-form').hide();
 <?php if($current_balance >= $sub_total){ ?>	
 $('.total-price').html('<?= $s_currency; ?><?= $sub_total; ?>');
 $('.processing-fee').hide();
@@ -1078,6 +993,7 @@ $('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
 $('.processing-fee').show();
 <?php } ?>
 <?php if($current_balance >= $sub_total){ ?>
+	$('#paypal-form').hide();
 $('#payza-form').hide();
 $('#mobile-money-form').hide();
 $('#coinpayments-form').hide();

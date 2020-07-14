@@ -3,8 +3,8 @@
 // print_r('expression');
 
 
-require_once("../includes/db.php");
-include("../functions/processing_fee.php");
+require_once("includes/db.php");
+include("functions/processing_fee.php");
 
 if(!isset($_SESSION['seller_user_name'])){
   echo "<script>window.open('login.php','_self');</script>";
@@ -191,12 +191,12 @@ try {
     "order_id" => $order_data['id'],
     "billing_data" => [
         "apartment" => $apartment_number, 
-        "email" => $login_seller_email, 
+        "email" => $local_email, 
         "floor" => $floor_number, 
         "first_name" => $login_seller_name, 
-        "street" => $mobile_number, 
+        "street" => 'abc', 
         "building" => "abc", 
-        "phone_number" => $mobile_number, 
+        "phone_number" => $local_mobile_number, 
         "shipping_method" => "PKG", 
         "postal_code" => "abc", 
         "city" => $city, 
@@ -259,14 +259,15 @@ try {
 	
 		$iframe = curl_exec($ch3);
 		$iframedata = json_decode($iframe, true);
+		$redirect_url = "$site_url/weaccept_order?checkout_seller_id=$login_seller_id&proposal_id={$_SESSION['c_proposal_id']}&proposal_qty={$_SESSION['c_proposal_qty']}&proposal_price={$_SESSION['c_sub_total']}$extras&$minutes";
 		// print_r($iframedata);die();
 		if(!curl_errno($ch3)){
 
-			$insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $sender_id, "proposal_id" => $proposal_id, "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "pending"));
-			if($insert_order){
-				$update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']));
-			}
-	     echo "<script>window.open('$site_url/conversations/inbox?single_message_id={$_SESSION['c_single_message_id']}','_self')</script>";
+			// $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $sender_id, "proposal_id" => $proposal_id, "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "pending"));
+			// if($insert_order){
+			// 	$update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']));
+			// }
+	     echo "<script>window.open('$redirect_url','_self')</script>";
 	      return $iframe;
 	  }else{
 	    echo 'Curl error: ' . curl_error($ch3); 

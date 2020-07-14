@@ -395,7 +395,12 @@ $count_offers = $get_offers->rowCount();
 											<div class="small-gigs-item-footer d-flex flex-row justify-content-between align-items-center">
 												<div class="d-flex flex-row justify-content-lg-end">
 													<a class="button button-transparent" href="javascript:void(0);" onclick="hideOffer(<?= $offer_id; ?>)">Remove Offer</a>
-													<a class="button button-red" id="order-button-<?php echo $offer_id; ?>"  href="javascript:void(0);">Order Now</a>
+													<form method="post" action="../offer-checkout" id="offer<?= $offer_id; ?>">
+														<input type="hidden" name="request_id" value="<?= $request_id; ?>">
+														<input type="hidden" name="offer_id" value="<?= $offer_id; ?>">
+														<input type="hidden" name="proposal_qty" value="1">
+														<button class="button button-red" name="add_order">Order Now</button>
+													</form>
 												</div>
 												<div class="small-gigs-pricing d-flex flex-row">
 													<a href="javascript:void(0);"><?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?></a>
@@ -502,7 +507,12 @@ $count_offers = $get_offers->rowCount();
 												<div class="col-12 col-lg-6">
 													<div class="d-flex flex-row justify-content-lg-end">
 														<a class="button button-transparent" href="javascript:void(0);" onclick="hideOffer(<?= $offer_id; ?>)">Remove Offer</a>
-														<a class="button button-red" id="order-button-desktop-<?php echo $offer_id; ?>" href="javascript:void(0);">Order Now</a>
+														<form method="post" action="../offer-checkout" id="offer<?= $offer_id; ?>">
+															<input type="hidden" name="request_id" value="<?= $request_id; ?>">
+															<input type="hidden" name="offer_id" value="<?= $offer_id; ?>">
+															<input type="hidden" name="proposal_qty" value="1">
+															<button class="button button-red" name="add_order">Order Now</button>
+														</form>
 													</div>
 												</div>
 											</div>

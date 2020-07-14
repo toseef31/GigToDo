@@ -98,6 +98,7 @@
 	$row_seller = $select_seller->fetch();
 	$proposal_seller_user_name = $row_seller->seller_user_name;
 	$proposal_seller_vacation = $row_seller->seller_vacation;
+	$login_seller_account_number = $row_login_seller->seller_m_account_number;
 
 	if($row_proposals->proposal_seller_id == $login_seller_id or $proposal_seller_vacation == "on"){
 		echo "<script>window.open('index','_self')</script>";
@@ -506,15 +507,17 @@ if(isset($_POST['code'])){
 												<?php } ?>
 											</li>
 											<li class="pt-30">
-												<?php if($enable_paypal == "yes"){ ?>
-												<input type="radio" name="method" id="weacceptWallet">
-												<label for="weacceptWallet"><span></span><img src="assets/img/checkout/emongez.png" alt="">Emongez Wallet</label>
+												<?php if($current_balance >= $sub_total){ ?>
+												<input type="radio" name="method" id="shopping-balance"<?php if($current_balance >= $sub_total){ echo "checked"; }?>>
+												<label for="shopping-balance"><span></span><img src="assets/img/checkout/emongez.png" alt="">Emongez Wallet</label>
 												<?php } ?>
-												<?php if($enable_weaccept == "yes"){ ?>
+												<?php if($current_balance >= $sub_total){ ?>
 												<div class="input-check-area float-right" style="margin-top: -17px;">
-													<form action="weaccept.php" method="post" id="weaccept-form"><!--- paypal-form Starts --->
-													<button type="submit" name="weaccept" class="button">We Accept Wallet</button>
-													</form><!--- paypal-form Ends --->
+													<form action="shopping_balance" method="post" id="shopping-balance-form">
+													<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
+														Emongez Wallet
+													</button>
+													</form>
 												</div>
 												<?php } ?>
 											</li>
@@ -539,25 +542,25 @@ if(isset($_POST['code'])){
 									</div>
 								</div>
 								<div class="gigs-payment pt-30">
-									<form action="#">
-										<ul class="radio_titme radio_style2">
-											<li>
+									<ul class="radio_titme radio_style2">
+										<li>
+											<form action="weaccept.php" method="post" id="weaccept-form">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Mobile Number</span>
-															<input type="text">
+															<input type="text" name="mobile_number" value="<?= $mobile_number; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox2">
 													<label for="checkbox2"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit">Order</button>
+													<button type="submit" name="weaccept" class="button">Order</button>
 												</div>
-											</li>
-										</ul>
-									</form>
+											</form>
+										</li>
+									</ul>
 								</div>
 							</div>
 							<div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab">
@@ -612,7 +615,7 @@ if(isset($_POST['code'])){
 							 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
 							 										<option>Select Country</option>
 							 										<?php
-                                    $get_countries = $db->select("countries");
+                                    $get_countries = $db->select("countries", array('name'=> 'Egypt'));
                                     while($row_countries = $get_countries->fetch()){
                                       $id = $row_countries->id;
                                       $name = $row_countries->name;
@@ -679,31 +682,31 @@ if(isset($_POST['code'])){
 									</div>
 								</div>
 								<div class="gigs-payment pt-30">
-									<form action="#">
-										<ul class="radio_titme radio_style2">
-											<li>
+									<ul class="radio_titme radio_style2">
+										<li>
+											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Mobile Number</span>
-															<input type="text">
+															<input type="text" name="local_mobile_number" value="<?= $local_mobile_number ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Email Address</span>
-															<input type="email">
+															<input type="email" name="local_email" value="<?= $local_email; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox4">
 													<label for="checkbox4"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit">Order</button>
+													<button type="submit" name="weaccept_valu">Order</button>
 												</div>
-											</li>
-										</ul>
-									</form>
+											</form>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -1048,10 +1051,10 @@ $('#paypal-form').hide();
 $('#paystack-form').hide();
 $('#credit-card-form').hide();
 $('#2checkout-form').hide();
-$('#weaccept-form').hide();
+$('#weaccept-form').show();
 $('#weaccept-cash').hide();
 $('#weaccept-valu').hide();
-$('#weaccept-kiosk').hide();
+$('#weaccept-kiosk').show();
 <?php }else{ ?>
 $('#shopping-balance-form').hide();
 <?php } ?>	
@@ -1070,10 +1073,10 @@ $('#mobile-money-form').hide();
 $('#payza-form').hide();
 $('#coinpayments-form').hide();
 $('#paystack-form').hide();
-$('#weaccept-form').hide();
+$('#weaccept-form').show();
 $('#weaccept-cash').hide();
 $('#weaccept-valu').hide();
-$('#weaccept-kiosk').hide();
+$('#weaccept-kiosk').show();
 <?php }elseif($enable_paypal == "no" and $enable_stripe == "yes"){ ?>
 $('#2checkout-form').hide();
 $('#coinpayments-form').hide();
@@ -1108,10 +1111,10 @@ $('#shopping-balance').click(function(){
 	$('#payza-form').hide();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').show();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#paypal').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1124,10 +1127,10 @@ $('#paypal').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#credit-card').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1140,10 +1143,10 @@ $('#credit-card').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#2checkout').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1156,10 +1159,10 @@ $('#2checkout').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#mobile-money').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1172,10 +1175,10 @@ $('#mobile-money').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#coinpayments').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1188,10 +1191,10 @@ $('#coinpayments').click(function(){
 	$('#paystack-form').hide();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#paystack').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1204,10 +1207,10 @@ $('#paystack').click(function(){
 	$('#paystack-form').show();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#payza').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1220,10 +1223,10 @@ $('#payza').click(function(){
 	$('#paystack-form').hide();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#weacceptWallet').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1239,7 +1242,7 @@ $('#weacceptWallet').click(function(){
 	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#weacceptCash').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1252,10 +1255,10 @@ $('#weacceptCash').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').show();
 	$('#weaccept-valu').hide();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#weacceptValU').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1268,10 +1271,10 @@ $('#weacceptValU').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').show();
-	$('#weaccept-kiosk').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#weacceptKiosk').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -1284,7 +1287,7 @@ $('#weacceptKiosk').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
-	$('#weaccept-form').hide();
+	$('#weaccept-form').show();
 	$('#weaccept-cash').hide();
 	$('#weaccept-valu').hide();
 	$('#weaccept-kiosk').show();

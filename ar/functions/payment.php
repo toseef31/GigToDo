@@ -33,7 +33,7 @@ public function paypal($data,$processing_fee){
 	global $site_url;
 	$get_payment_settings = $db->select("payment_settings");
 	$row_payment_settings = $get_payment_settings->fetch();
-	$paypal_currency_code = $row_payment_settings->paypal_currency_code;;
+	$paypal_currency_code = $row_payment_settings->paypal_currency_code;
 	$api = $this->paypal_api_setup();
 	$payer = new PayPal\Api\Payer();
 	$item1 = new PayPal\Api\Item();

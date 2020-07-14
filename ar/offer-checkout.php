@@ -52,96 +52,43 @@
 	
 	if(isset($_POST['add_order']) or isset($_POST['coupon_submit'])){
 
-	$_SESSION['c_proposal_id'] = $input->post('proposal_id');
-	$_SESSION['c_proposal_qty'] = $input->post('proposal_qty');
-	if(isset($_POST['package_id'])){
-		$_SESSION['c_package_id'] = $input->post('package_id');
-	}
+	$_SESSION['c_offer_id'] = $input->post('offer_id');
+	$_SESSION['c_request_id'] = $input->post('request_id');
 
-	if(isset($_SESSION['c_proposal_id'])){
-
-	$proposal_id = $_SESSION['c_proposal_id'];
-	$proposal_qty = $_SESSION['c_proposal_qty'];
-
-	if(isset($_POST['proposal_minutes'])){
-		$_SESSION['c_proposal_minutes'] = $input->post('proposal_minutes');
-		$proposal_minutes = $input->post('proposal_minutes');
-	}else{
-		$proposal_minutes = 1;
-		unset($_SESSION['c_proposal_minutes']);
-	}
-
-	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
-	$row_proposals = $select_proposals->fetch();
-
-	if(isset($_POST['package_id'])){
-		$_SESSION['c_package_id'] = $input->post('package_id');
-		$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_id"=>$input->post('package_id')));
-		$row_p = $get_p->fetch();
-		$proposal_price = $row_p->price;
-		$single_price = $row_p->price;
-		$proposal_description = $row_p->description;
-		$proposal_revision = $row_p->revisions;
-		$proposal_delivery_time = $row_p->delivery_time;
-	}else{
-		unset($_SESSION['c_package_id']);
-		$proposal_price = $row_proposals->proposal_price*$proposal_minutes;
-		$single_price = $row_proposals->proposal_price*$proposal_minutes;
-	}
-
-	$proposal_title = $row_proposals->proposal_title;
-	$proposal_seller_id = $row_proposals->proposal_seller_id;
-	$proposal_url = $row_proposals->proposal_url;
-	$proposal_img1 = $row_proposals->proposal_img1;
-
-	$select_seller = $db->select("sellers",array("seller_id" => $proposal_seller_id));
-	$row_seller = $select_seller->fetch();
-	$proposal_seller_user_name = $row_seller->seller_user_name;
-	$proposal_seller_vacation = $row_seller->seller_vacation;
-
-	if($row_proposals->proposal_seller_id == $login_seller_id or $proposal_seller_vacation == "on"){
-		echo "<script>window.open('index','_self')</script>";
-	}
-
-	if(isset($_POST['proposal_extras'])){
-		$extra_price = 0;
-		$_SESSION['c_proposal_extras'] = $input->post('proposal_extras');
-		if (isset($_POST['add_order'])) {
-			$proposal_extras = $_SESSION['c_proposal_extras'];
-		}else{
-			$proposal_extras = unserialize(base64_decode($input->post('proposal_extras')));
-			$_SESSION['c_proposal_extras'] = $proposal_extras;
-		}
-		foreach($proposal_extras as $value){
-			$get_extras = $db->select("proposals_extras",array("id"=>$value));
-			$row_extras = $get_extras->fetch();
-			$extra_price += $row_extras->price;
-			$proposal_price += $row_extras->price;
-		}
-	}else{
-		unset($_SESSION['c_proposal_extras']);
-	}
-
-	$_SESSION['c_proposal_price'] = $proposal_price;
-
-	$sub_total = $proposal_price*$proposal_qty;
-
-	$_SESSION["c_sub_total"] = $sub_total;
-
-	$processing_fee = processing_fee($sub_total);
-	$total = processing_fee($sub_total)+$sub_total;
-	$gst = 3;
-	$total = $processing_fee + $sub_total + $gst;
+	if(isset($_SESSION['c_offer_id'])){
 
 	$select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
 	$row_seller_accounts = $select_seller_accounts->fetch();
 	$current_balance = $row_seller_accounts->current_balance;
 
-	if($proposal_id == @$_SESSION['r_proposal_id']){
-		$referrer_id = $_SESSION['r_referrer_id'];
-		$sel_referrer = $db->select("sellers",array("seller_id" => $referrer_id));
-		$referrer_user_name = $sel_referrer->fetch()->seller_user_name;
-	}
+	// $_SESSION['c_offer_id'] = $input->post('offer_id');
+	// $_SESSION['c_request_id'] = $input->post('request_id');
+
+	$offer_id = $input->post('offer_id');
+	$request_id = $input->post('request_id');
+
+	$select_offers = $db->select("send_offers",array("offer_id" => $offer_id));
+	$row_offers = $select_offers->fetch();
+	$proposal_id = $row_offers->proposal_id;
+	$description = $row_offers->description;
+	$delivery_time = $row_offers->delivery_time;
+	$amount = $row_offers->amount;
+
+	$processing_fee = processing_fee($amount);
+	$gst = 3;
+	$total = $amount+$processing_fee+$gst;
+
+	$get_requests = $db->select("buyer_requests",array("request_id" => $request_id));
+	$row_requests = $get_requests->fetch();
+	$request_description = $row_requests->request_description;
+
+	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+	$row_proposals = $select_proposals->fetch();
+	$proposal_title = $row_proposals->proposal_title;
+	$proposal_img1 = $row_proposals->proposal_img1;
+	$proposal_description = $row_proposals->proposal_desc;
+
+	$get_site_logo_image = $row_general_settings->site_logo;
 	$select_buyer_payment_account = $db->select("seller_payment_account", array("seller_id" => $login_seller_id));
 	$row_buyer_account = $select_buyer_payment_account->fetch();
 	$seller_account_id = $row_buyer_account->seller_id;
@@ -465,7 +412,7 @@ if(isset($_POST['code'])){
 											<?php require_once("stripe_config.php");
 											$stripe_total_amount = $total * 100;
 											?>
-											<form action="checkout_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
+											<form action="requests/checkout_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
 											<input
 											type="submit"
 											class="stripe-submit"
@@ -504,7 +451,7 @@ if(isset($_POST['code'])){
 											<?php } ?>
 											<?php if($enable_paypal == "yes"){ ?>
 											<div class="input-check-area float-left" style="margin-top: -17px;">
-												<form action="paypal_charge" method="post" id="paypal-form" class="float-left"><!--- paypal-form Starts --->
+												<form action="requests/paypal_charge" method="post" id="paypal-form" class="float-left"><!--- paypal-form Starts --->
 												 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
 												</form>
 											</div>
@@ -517,7 +464,7 @@ if(isset($_POST['code'])){
 											<?php } ?>
 											<?php if($current_balance >= $sub_total){ ?>
 											<div class="input-check-area float-left" style="margin-top: -17px;">
-												<form action="shopping_balance" method="post" id="shopping-balance-form">
+												<form action="../shopping_balance" method="post" id="shopping-balance-form">
 												<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
 													Emongez Wallet
 												</button>
@@ -550,7 +497,7 @@ if(isset($_POST['code'])){
 								<div class="gigs-payment pt-30">
 									<ul class="radio_titme radio_style2">
 										<li>
-											<form action="weaccept.php" method="post" id="weaccept-form">
+											<form action="requests/weaccept.php" method="post" id="weaccept-form">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
@@ -665,7 +612,7 @@ if(isset($_POST['code'])){
 											<?php 
 												
 											?>
-											<form action="weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+											<form action="requests/weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
 											<button type="submit" name="weaccept_cash" class="order-button">الطلب</button>
 											</form>
 										</li>
@@ -695,7 +642,7 @@ if(isset($_POST['code'])){
 								<div class="gigs-payment pt-30">
 									<ul class="radio_titme radio_style2">
 										<li>
-											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk">
+											<form action="requests/weaccept_kiosk.php" method="post" id="weaccept-kiosk">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
