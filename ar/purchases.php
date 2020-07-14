@@ -263,6 +263,9 @@ $login_seller_id = $row_login_seller->seller_id;
                           <?php }elseif($method == "paystack"){ ?>
                           Payment for purchase with paystack
                           (<a href="order_details?order_id=<?php echo $order_id; ?>" style=" color: #FF0000;"> View Order </a>)
+                          <?php }elseif($method == "weaccept"){ ?>
+                          Payment for purchase with weaccept
+                          (<a href="order_details?order_id=<?php echo $order_id; ?>" style=" color: #FF0000;"> View Order </a>)
                           <?php }elseif($method == "featured_proposal_declined"){ ?>
                           Your featured proposal is declined so it feature listing fee is refunded to your shopping balance.
                           (<a href="<?php echo $site_url; ?>/view_proposals.php" style=" color: #FF0000;"> View Proposals </a>)

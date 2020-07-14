@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once("includes/db.php");
-include("functions/processing_fee.php");
+require_once("../includes/db.php");
+include("../functions/processing_fee.php");
 
 if(!isset($_SESSION['seller_user_name'])){
   echo "<script>window.open('login.php','_self');</script>";
@@ -279,7 +279,7 @@ try {
 		// print_r($iframe);die();
         $iframedata = json_decode($iframe, true);
     // $redirect_path = $iframedata['data']['redirect_url'];
-        $redirect_url = "$site_url/weaccept_order?checkout_seller_id=$login_seller_id&proposal_id={$_SESSION['c_proposal_id']}&proposal_qty={$_SESSION['c_proposal_qty']}&proposal_price={$_SESSION['c_sub_total']}$extras&$minutes";
+    $redirect_url = "$site_url/weaccept_order?view_offers=1&offer_id={$_SESSION['c_offer_id']}";
   // print_r($iframedata);die();
 		if(!curl_errno($ch3)){
         // $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $seller_user_id, "proposal_id" => $_SESSION['c_proposal_id'], "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "progress"));

@@ -258,7 +258,7 @@ try {
   "token" => $token,
   "payment_token" => $payToken
 );
-	 print_r($postData4);
+	 // print_r($postData4);
 	//echo "<script>window.open('card_frame','_self')</script>";
 	curl_setopt($ch3, CURLOPT_URL, "https://accept.paymobsolutions.com/api/acceptance/payments/pay");
 	curl_setopt($ch3, CURLOPT_RETURNTRANSFER, true);
@@ -273,14 +273,15 @@ try {
 	
 		$iframe = curl_exec($ch3);
 		$iframedata = json_decode($iframe, true);
+		$redirect_url = "$site_url/weaccept_order?checkout_seller_id=$login_seller_id&proposal_id={$_SESSION['c_proposal_id']}&proposal_qty={$_SESSION['c_proposal_qty']}&proposal_price={$_SESSION['c_sub_total']}$extras&$minutes";
 		// print_r($iframedata);
 		if(!curl_errno($ch3)){
 
-			$insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $seller_user_id, "proposal_id" => $_SESSION['c_proposal_id'], "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "progress"));
+			// $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $seller_user_id, "proposal_id" => $_SESSION['c_proposal_id'], "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "progress"));
 			// if($insert_order){
 			// 	$update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']));
 			// }
-	    echo "<script>window.open('$site_url/buying_orders','_self')</script>";
+	    echo "<script>window.open('$redirect_url','_self')</script>";
 	    
 	      return $iframe;
 	  }else{
