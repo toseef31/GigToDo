@@ -463,7 +463,7 @@ if(isset($_POST['code'])){
 												<?php } ?>
 												<?php if($current_balance >= $sub_total){ ?>
 												<div class="input-check-area float-right" style="margin-top: -17px;">
-													<form action="../shopping_balance" method="post" id="shopping-balance-form">
+													<form action="shopping_balance" method="post" id="shopping-balance-form">
 													<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
 														Emongez Wallet
 													</button>

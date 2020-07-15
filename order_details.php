@@ -81,7 +81,7 @@ if($seller_id == $login_seller_id){
   <link rel="shortcut icon" href="<?= $site_url; ?>/images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
   <!--====== Bootstrap css ======-->
-  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet"> -->
   <!--====== PreLoader css ======-->
   <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
   <!--====== Animate css ======-->
@@ -100,13 +100,13 @@ if($seller_id == $login_seller_id){
   <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
   <!--====== Responsive css ======-->
   <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
-  <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
+  <link href="styles/bootstrap.css" rel="stylesheet">
   <link href="styles/fontawesome-stars.css" rel="stylesheet">
   <!-- <link href="styles/custom.css" rel="stylesheet">  -->
   <!-- Custom css code from modified in admin panel --->
   <link href="styles/styles.css" rel="stylesheet">
-  <link href="styles/proposalStyles.css" rel="stylesheet">
-  <link href="styles/user_nav_styles.css" rel="stylesheet">
+  <!-- <link href="styles/proposalStyles.css" rel="stylesheet"> -->
+  <!-- <link href="styles/user_nav_styles.css" rel="stylesheet"> -->
   <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="styles/owl.carousel.css" rel="stylesheet">
   <link href="styles/owl.theme.default.css" rel="stylesheet">

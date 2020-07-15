@@ -33,6 +33,32 @@ $request_child_title = $row_meta->child_title;
 $get_offers = $db->select("send_offers",array("request_id" => $request_id, "status" => 'active'));
 $count_offers = $get_offers->rowCount();
 
+
+$online_sellers = array();
+$delivery_time = array();
+$seller_level = array();
+$seller_language = array();
+if(isset($_GET['online_sellers'])){
+  foreach($_GET['online_sellers'] as $value){
+    $online_sellers[$value] = $value;
+  }
+}
+if(isset($_GET['delivery_time'])){
+  foreach($_GET['delivery_time'] as $value){
+    $delivery_time[$value] = $value;
+  }
+}
+if(isset($_GET['seller_level'])){
+  foreach($_GET['seller_level'] as $value){
+    $seller_level[$value] = $value;
+  }
+}
+if(isset($_GET['seller_language'])){
+  foreach($_GET['seller_language'] as $value){
+    $seller_language[$value] = $value;
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -77,7 +103,24 @@ $count_offers = $get_offers->rowCount();
 	<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script src="https://checkout.stripe.com/checkout.js"></script>
-
+	<style>
+		.offer-item-user-image  .active{
+			width: 12px;
+	    height: 12px;
+	    -webkit-border-radius: 50%;
+	    -moz-border-radius: 50%;
+	    border-radius: 50%;
+	    display: inline-block;
+	    background-color: #91ca2c;
+	    border: 2px solid #fff;
+	    position: absolute;
+	    top: 5px;
+	    right: 7px;
+		}
+		.price_section .irs.irs--flat:nth-child(2){
+			display: none;
+		}
+	</style>
 </head>
 <body class="all-content">
 <?php require_once("../includes/buyer-header.php"); ?>
@@ -116,8 +159,9 @@ $count_offers = $get_offers->rowCount();
 											</span>
 											<span>Price</span>
 										</div>
-										<div class="offer-sidebar-body">
+										<div class="offer-sidebar-body price_section">
 											<input id="price" type="text" name="" value="" class="irs-hidden-input" tabindex="-1" readonly="">
+											<input type="hidden" id="price_range" name="">
 										</div>
 									</div>
 									<!-- Each item -->
@@ -135,8 +179,8 @@ $count_offers = $get_offers->rowCount();
 												</div>
 												<div class="status-switch">
 													<div class="md_switch">
-														<input class="switch" checked id="switch-1" type="checkbox">
-														<label for="switch-1"></label>
+														<input class="switch" value="any" checked id="any" type="checkbox">
+														<label for="any"></label>
 													</div>
 												</div>
 											</div>
@@ -147,8 +191,8 @@ $count_offers = $get_offers->rowCount();
 												</div>
 												<div class="status-switch">
 													<div class="md_switch">
-														<input class="switch" id="switch-2" type="checkbox">
-														<label for="switch-2"></label>
+														<input class="switch" value="online" id="online" type="checkbox">
+														<label for="online"></label>
 													</div>
 												</div>
 											</div>
@@ -159,8 +203,8 @@ $count_offers = $get_offers->rowCount();
 												</div>
 												<div class="status-switch">
 													<div class="md_switch">
-														<input class="switch" id="switch-3" type="checkbox">
-														<label for="switch-3"></label>
+														<input class="switch" value="offline" id="offline" type="checkbox">
+														<label for="offline"></label>
 													</div>
 												</div>
 											</div>
@@ -177,8 +221,12 @@ $count_offers = $get_offers->rowCount();
 										</div>
 										<div class="offer-sidebar-body">
 											<ul class="radio_titme radio_style2">
+												<li>
+												  <input type="radio" name="radio_titme" checked="" id="anytime" class="get_delivery_time" value="anytime">
+												  <label for="anytime"><span></span>Any</label>
+												</li>
 												<?php
-												  $get_offers_time = $db->query("select delivery_time from send_offers where request_id=:request_id AND status='active'",array("request_id"=>$request_id));
+												  $get_offers_time = $db->query("select DISTINCT delivery_time from send_offers where request_id=:request_id AND status='active'",array("request_id"=>$request_id));
 												  
 												  while($row_delivery_time = $get_offers_time->fetch()){
 												  $delivery_time = $row_delivery_time->delivery_time;
@@ -186,12 +234,12 @@ $count_offers = $get_offers->rowCount();
 												  if(!empty($delivery_time)){
 												?>
 												<li>
-												  <input type="radio" name="radio_titme" checked="" id="time<?php echo $delivery_id; ?>" class="get_delivery_time" value="<?php echo $delivery_time; ?>" <?php if(isset($delivery_time[$delivery_id])){ echo "checked"; } ?> >
-												  <label for="time<?php echo $delivery_id; ?>"><span></span><?php echo $delivery_time; ?></label>
+												  <input type="radio" name="radio_titme" id="time<?php echo $delivery_time; ?>" class="get_delivery_time" value="<?php echo $delivery_time; ?>">
+												  <label for="time<?php echo $delivery_time; ?>"><span></span><?php echo $delivery_time; ?></label>
 												</li>
 												<?php }} ?>
 
-												<li>
+												<!-- <li>
 													<input type="radio" checked="" name="radio1" id="radio1">
 													<label for="radio1"><span></span>Up To 24 Hours (Urgent)</label>
 												</li>
@@ -206,7 +254,7 @@ $count_offers = $get_offers->rowCount();
 												<li>
 													<input type="radio" name="radio1" id="radio4">
 													<label for="radio4"><span></span>Any</label>
-												</li>
+												</li> -->
 											</ul>
 										</div>
 									</div>
@@ -362,11 +410,17 @@ $count_offers = $get_offers->rowCount();
 															<a href="javascript:void(0);"><?php echo $description; ?></a>
 														</h3>
 														<div class="d-flex flex-row align-items-center">
-															<div class="offer-item-user-image">
+															<div class="offer-item-user-image position-relative">
 																<?php if(!empty($sender_image)){ ?>
 							                  <img src="../user_images/<?php echo $sender_image; ?>" class="rounded-circle" >
+							                  <?php if($sender_status == "online"){ ?>
+							                  <span class="active"></span>
+							                	<?php } ?>
 							                  <?php }else{ ?>
 							                  <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+							                  <?php if($sender_status == "online"){ ?>
+							                  <span class="active"></span>
+							                	<?php } ?>
 								                <?php } ?>
 															</div>
 															<div class="offer-item-user-content d-flex flex-column justify-content-start">
@@ -427,7 +481,7 @@ $count_offers = $get_offers->rowCount();
 							</div>
 							<!-- Small gigs item for mobile -->
 							<div class="row d-none d-lg-flex">
-								<div class="col-12">
+								<div class="col-12" id="offers-data">
 									<?php if($count_offers == "0"){ ?>
 									<div class="offer-items d-flex flex-wrap rounded-0 mb-3">
 										<div class="card-body">
@@ -468,12 +522,18 @@ $count_offers = $get_offers->rowCount();
 										<div class="offer-item-content d-flex flex-column">
 											<div class="d-flex flex-row align-items-start justify-content-between">
 												<div class="d-flex flex-row align-items-center">
-													<div class="offer-item-user-image">
+													<div class="offer-item-user-image position-relative">
 														<?php if(!empty($sender_image)){ ?>
-					                  <img src="../user_images/<?php echo $sender_image; ?>" class="rounded-circle" >
-					                  <?php }else{ ?>
-					                  <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
-						                <?php } ?>
+								            <img src="../user_images/<?php echo $sender_image; ?>" class="rounded-circle" >
+								            <?php if($sender_status == "online"){ ?>
+								            <span class="active"></span>
+								          	<?php } ?>
+								            <?php }else{ ?>
+								            <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+								              <?php if($sender_status == "online"){ ?>
+								              <span class="active"></span>
+								            	<?php } ?>
+								            <?php } ?>
 													</div>
 													<div class="offer-item-user-content d-flex flex-column justify-content-start">
 														<span class="user-name"><?php echo $sender_user_name; ?></span>
@@ -517,19 +577,6 @@ $count_offers = $get_offers->rowCount();
 												</div>
 											</div>
 											<!-- Row -->
-											<script>
-							          $("#order-button-desktop-<?php echo $offer_id; ?>").click(function(){
-							            request_id = "<?php echo $request_id; ?>";
-							            offer_id = "<?php echo $offer_id; ?>";
-							            $.ajax({
-							              method: "POST",
-							              url: "offer_submit_order",
-							              data: {request_id: request_id, offer_id: offer_id}
-							            }).done(function(data){
-							               $("#append-modal").html(data);
-							            });	
-							          });
-						          </script>
 										</div>
 									</div>
 									<!-- Each item -->
@@ -659,13 +706,74 @@ $count_offers = $get_offers->rowCount();
 		</div>
 	</div>
 </div> -->
-
 <div id="append-modal"></div>
+<script src="<?= $site_url; ?>/assets/js/ion.rangeSlider.min.js"></script>
 <script>
 	function hideOffer(id){
 		$('.offer-'+id).remove();
 	}
+
+	$('.get_delivery_time').click(function(){
+	var time = $(this).val();
+	var request_id = "<?php echo $request_id; ?>";
+
+	$('#offers-data').html("");
+	$.ajax({
+	url:"offers",
+	method:"POST",
+	data:{time:time, request_id:request_id},
+	success:function(data){
+	$('#offers-data').html(data);
+	}
+	});
+	});
+
+	$('.switch').click(function(){
+	var status = $(this).val();
+	var request_id = "<?php echo $request_id; ?>";
+	
+	$('#offers-data').html("");
+	$.ajax({
+	url:"status_offer",
+	method:"POST",
+	data:{status:status, request_id:request_id},
+	success:function(data){
+	$('#offers-data').html(data);
+	}
+	});
+	});
+
+	$("#price").ionRangeSlider({
+	  min: 0,
+	  max: 300,
+	  from: 1,
+	  prefix: "EGP",
+	  hide_min_max:false,
+	  onChange: function(data) {
+	      
+	      var base_url = '<?php echo $site_url; ?>';
+	      var request_id = "<?php echo $request_id; ?>";
+	      $('#price_range').val(data.from);
+	      $('#offers-data').html("");
+	      var price = $('#price_range').val();
+	      // alert(price);
+	      $.ajax({
+	        url:"price_offer",
+	        method:"POST",
+	        data:{price:price,  request_id:request_id},
+	        success:function(data){
+	          console.log(data);
+	        $('#category_proposals').html('');  
+	        
+	        $('#offers-data').html(data); 
+	      }
+	      });
+	    }
+	});
+
+
 </script>
+
 <?php require_once("../includes/footer.php"); ?>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("includes/db.php");
+require_once("social-config.php");
 require_once("functions/functions.php");
 
 if(isset($_SESSION['seller_user_name'])){
@@ -282,9 +283,9 @@ if(isset($_SESSION['seller_user_name'])){
               <?php if($_SESSION['seller_user_name'] == $get_seller_user_name){ ?>
                 <div class="profile-verifi-content profile-verifi-2 pt-20">
                   <ul>
-                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="facebook"><i class="fab fa-facebook-f"></i> Connect</span></li>
+                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> Connect</span></li>
                     <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> Connect</span></li>
-                    <li><i class="fab fa-google"></i> Google Connected <span class="google"><i class="fab fa-google"></i> Connect</span></li>
+                    <li><i class="fab fa-google"></i> Google Connected <span class="google" onclick="window.location = '<?php echo $gLoginURL ?>';"><i class="fab fa-google"></i> Connect</span></li>
                     <li><i class="fa fa-envelope"></i> Email Verified <span class="verify">Verify</span></li>
                     <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="check"><i class="fa fa-check"></i></span></li>
                   </ul>

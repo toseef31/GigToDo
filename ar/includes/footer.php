@@ -114,7 +114,7 @@
           $link_title = $row_footer_links->link_title;
           $link_url = $row_footer_links->link_url;
           ?>
-          <a href="<?= $link_url; ?>"><?= $link_title; ?></a>
+          <a href="<?= $site_url?>/ar<?= $link_url; ?>"><?= $link_title; ?></a>
           <?php } ?>
         </div>
       </div>
