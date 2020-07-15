@@ -138,9 +138,14 @@
 					<a class="withdraw-offer" type="button" href="delete_offer?offer_id=<?php echo $offer_id_msg; ?>">Withdraw offer</a>
 					<?php }else{ ?>
 					<!-- <button class="cancel-offer" id="cancel-offer-<?= $message_offer_id; ?>" type="button">no thanks</button> -->
-					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="accepte-offer  float-right">
-					Order Now 
-					</button>
+					<form method="post" action="../order-checkout" id="offers<?= $offer_id; ?>">
+						<input type="hidden" name="single_message_id" value="<?= $message_group_id; ?>">
+						<input type="hidden" name="offer_id" value="<?= $message_offer_id; ?>">
+						<input type="hidden" name="proposal_qty" value="1">
+						<button class="accepte-offer  float-right"  name="add_order">
+						Order Now 
+						</button>
+					</form>
 					<script>
 					$("#accept-offer-<?php echo $message_offer_id; ?>").click(function(){
 						single_message_id = "<?php echo $message_group_id; ?>";

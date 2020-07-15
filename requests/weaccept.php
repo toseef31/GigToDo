@@ -115,7 +115,12 @@ try {
 		  }
 		  curl_close($ch);
 
-    print_r($token);
+    // print_r($token);
+	$select_offers = $db->select("send_offers",array("offer_id" => $_SESSION['c_offer_id']));
+	$row_offers = $select_offers->fetch();
+	$proposal_id = $row_offers->proposal_id;
+	$amount = $row_offers->amount;
+	$processing_fee = processing_fee($amount);
 
 	$select_proposals = $db->select("proposals",array("proposal_id" => $_SESSION['c_proposal_id']));
 	$row_proposals = $select_proposals->fetch();
@@ -137,10 +142,10 @@ try {
 	$data = [];
 	$data['name'] = $row_proposals->proposal_title;
 	$data['qty'] = $_SESSION['c_proposal_qty'];
-	$data['price'] = $_SESSION['c_proposal_price'];
-	$data['sub_total'] = $_SESSION['c_proposal_price'];
+	$data['price'] = $amount;
+	$data['sub_total'] = $amount;
 	$gst = 3;
-	$data['total'] = $_SESSION['c_sub_total'] + $processing_fee + $gst;
+	$data['total'] = $amount + $processing_fee + $gst;
 	$total_amount = $data['total'] * 100;
   
   $order_time = date("F d, Y h:i:s ");

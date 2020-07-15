@@ -115,11 +115,9 @@ try {
 
     // print_r($token);
 
-	$select_offers = $db->select("messages_offers",array("offer_id" => $_SESSION['c_message_offer_id']));
+	$select_offers = $db->select("send_offers",array("offer_id" => $_SESSION['c_offer_id']));
 	$row_offers = $select_offers->fetch();
 	$proposal_id = $row_offers->proposal_id;
-  $delivery_time = $row_offers->delivery_time;
-  $sender_id = $row_offers->sender_id;
 	$amount = $row_offers->amount;
 	$processing_fee = processing_fee($amount);
 
@@ -129,11 +127,12 @@ try {
 
 	//$payment = new Payment();
 	$data = [];
-	$data['name'] = $proposal_title;
-	$data['qty'] = 1;
+	$data['name'] = $row_proposals->proposal_title;
+	$data['qty'] = $_SESSION['c_proposal_qty'];
 	$data['price'] = $amount;
 	$data['sub_total'] = $amount;
-	$data['total'] = $amount + $processing_fee;
+	$gst = 3;
+	$data['total'] = $amount + $processing_fee + $gst;
   $total_amount = $data['total'] * 100;
 	//print_r($data['total']);
 	$order_time = date("F d, Y h:i:s ");

@@ -60,7 +60,7 @@ if(isset($_GET["view_offers"])){
 	$_SESSION['offer_id'] = $input->get('offer_id');
 	$_SESSION['offer_buyer_id'] = $login_seller_id;
 	
-  if($type == "featured_listing"){
+  	if($type == "featured_listing"){
   	echo "<script>window.open('$site_url/proposals/featured_proposal','_self')</script>";
 	}elseif($type == "orderExtendTime"){
 		return true;
@@ -73,8 +73,15 @@ if(isset($_GET["view_offers"])){
 
 if(isset($_GET['message_offer_id'])){
 	
-$payment = new Payment();
-
-$payment->paypal_execute("message_offer");
+	$_SESSION['message_offer_id'] = $input->get('message_offer_id');
+	$_SESSION['message_offer_buyer_id'] = $login_seller_id;
+  	
+	if($type == "featured_listing"){
+	echo "<script>window.open('$site_url/proposals/featured_proposal','_self')</script>";
+	}elseif($type == "orderExtendTime"){
+		return true;
+  	}else{
+	  	echo "<script>window.open('$site_url/order','_self')</script>";
+	}
 
 }

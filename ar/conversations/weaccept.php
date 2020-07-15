@@ -261,14 +261,16 @@ try {
 	curl_setopt($ch3, CURLOPT_POSTFIELDS, json_encode($postData4));
 	
 		$iframe = curl_exec($ch3);
-        $iframedata = json_decode($iframe, true);
-    $redirect_path = $iframedata['data']['redirect_url'];
+    $iframedata = json_decode($iframe, true);
+    $redirect_path= "$site_url/ar/weaccept_order?message_offer_id={$_SESSION['c_message_offer_id']}";
+    // $redirect_path = $iframedata['data']['redirect_url'];
   // die;
 		if(!curl_errno($ch3)){
-        $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $sender_id, "proposal_id" => $proposal_id, "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "pending"));
-        if($insert_order){
-          $update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']));
-        }
+
+        // $insert_order =$db->insert("orders", array("order_number" => $order_data['id'], "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "order_description" => '', "buyer_id" => $login_seller_id, "seller_id" => $sender_id, "proposal_id" => $proposal_id, "order_price" => $data['price'], "order_qty" => $data['qty'], "order_fee" => $processing_fee, "order_active" => "yes", "complete_time"=> '', "order_status" => "pending"));
+        // if($insert_order){
+        //   $update_message_offer =$db->update("messages_offers", array("status" => "accepted"),array("offer_id"=>$_SESSION['c_message_offer_id']))
+        // }
         echo "<script>window.open('$redirect_path','_self')</script>";
 
 	      return $iframe;
