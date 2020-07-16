@@ -162,7 +162,9 @@
 	$local_email = $row_buyer_account->local_email;
 
 
-	$order_id = $input->get('order_id');
+	$order_id = $_SESSION['order_id'];
+
+	print_r($order_id."idddd");
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">

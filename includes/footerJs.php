@@ -22,6 +22,10 @@ if(isset($_SESSION['seller_user_name'])){
 
   <!--====== Nicescroll js ======-->
   <script src="<?= $site_url; ?>/assets/js/jquery.nicescroll.min.js"></script>
+  <!--====== Cound Down Timer js ======-->
+  <script src="<?= $site_url; ?>/assets/js/jquery.flipper-responsive.js"></script>
+  <!--====== Readmore js ======-->
+  <script src="<?= $site_url; ?>/assets/js/readmore.min.js"></script>
   <script>
     $(function() {
       $(".mesagee-item-box").niceScroll({
@@ -122,7 +126,7 @@ $(document).ready(function(){
     });
 
   });
-
+  
 });
 <?php if(!isset($proposals_stylesheet)){ ?>
 $(window).scroll(function(){

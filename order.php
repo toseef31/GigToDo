@@ -379,6 +379,8 @@ if(isset($_SESSION['checkout_seller_id'])){
 	unset($_SESSION['proposal_minutes']);
 	unset($_SESSION['method']);
 
+	$_SESSION['order_id'] = $insert_order_id;
+
 	echo "
 	<script>
 	swal({
@@ -390,7 +392,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	}
 	}).then(function(){
 	  // Read more about handling dismissals
-	  window.open('checkout?order_id=$insert_order_id','_self')
+	  window.open('checkout','_self')
 	});
 	</script>";
 		
