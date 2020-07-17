@@ -31,6 +31,9 @@ $login_seller_wallet = $row_login_seller->seller_wallet;
 $login_seller_enable_sound = $row_login_seller->enable_sound;
 $login_seller_verification = $row_login_seller->seller_verification;
 $login_seller_occuption = $row_login_seller->occuption;
+$gmail_verification = $row_login_seller->gmail_verification;
+$fb_verification = $row_login_seller->fb_verification;
+$seller_verification = $row_login_seller->seller_verification;
 
 $get_seller_lang = explode(',', $row_login_seller->seller_language);
 
@@ -695,16 +698,25 @@ $years = range(1910,date("Y"));
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-facebook-f"></i></span>
                             <span>
-                              الفيس بوك
+                              بالفيس بوك
                             </span>
-                            <span class="mr-auto d-flex flex-row align-items-center facebook">
+                            <?php if($fb_verification == 0){ ?>
+                            <span class="mr-auto d-flex flex-row align-items-center facebook" onclick="window.location='<?php echo $fLoginURL ?>';">
                               <span><i class="fab fa-facebook-f"></i></span>
                               <span>
                                 متصل
                               </span>
                             </span>
+                            <?php }else{ ?>
+                            <span class="mr-auto d-flex flex-row align-items-center payment">
+                              <span><i class="fal fa-check"></i></span>
+                              <span>
+                                اتحققنا منه
+                              </span>
+                            </span>
+                            <?php } ?>
                           </div>
-                          <div class="profile-verification-item d-flex flex-row">
+                          <!-- <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-linkedin-in"></i></span>
                             <span>LinkedIn</span>
                             <span class="mr-auto d-flex flex-row align-items-center linkedin">
@@ -713,27 +725,45 @@ $years = range(1910,date("Y"));
                                 متصل
                               </span>
                             </span>
-                          </div>
+                          </div> -->
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-google"></i></span>
                             <span>Google</span>
-                            <span class="mr-auto d-flex flex-row align-items-center google">
+                            <?php if($gmail_verification == 0){ ?>
+                            <span class="mr-auto d-flex flex-row align-items-center google" onclick="window.location = '<?php echo $gLoginURL ?>';">
                               <span><i class="fab fa-google"></i></span>
                               <span>
                                 متصل
                               </span>
                             </span>
+                            <?php }else{ ?>
+                            <span class="mr-auto d-flex flex-row align-items-center payment">
+                              <span><i class="fal fa-check"></i></span>
+                              <span>
+                                اتحققنا منه
+                              </span>
+                            </span>
+                            <?php } ?>
                           </div>
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fas fa-envelope"></i></span>
                             <span>
-                              الإيميل
+                              اتحققنا
                             </span>
+                            <?php if($seller_verification != 'ok'){ ?>
                             <span class="mr-auto d-flex flex-row align-items-center email">
                               <span>
                                 اتحقق
                               </span>
                             </span>
+                            <?php }else{ ?>
+                            <span class="mr-auto d-flex flex-row align-items-center payment">
+                              <span><i class="fal fa-check"></i></span>
+                              <span>
+                                اتحققنا منه
+                              </span>
+                            </span>
+                            <?php } ?>
                           </div>
                           <div class="profile-verification-item d-flex flex-row">
                             <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>

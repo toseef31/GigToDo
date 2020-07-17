@@ -26,6 +26,7 @@
 	}
 
 	$enable_stripe = $row_payment_settings->enable_stripe;
+	$enable_weaccept = $row_payment_settings->enable_weaccept;
 	$enable_payza = $row_payment_settings->enable_payza;
 	$payza_test = $row_payment_settings->payza_test;
 	$payza_currency_code = $row_payment_settings->payza_currency_code;
@@ -79,6 +80,9 @@
 		$row_p = $get_p->fetch();
 		$proposal_price = $row_p->price;
 		$single_price = $row_p->price;
+		$proposal_description = $row_p->description;
+		$proposal_revision = $row_p->revisions;
+		$proposal_delivery_time = $row_p->delivery_time;
 	}else{
 		unset($_SESSION['c_package_id']);
 		$proposal_price = $row_proposals->proposal_price*$proposal_minutes;
@@ -94,6 +98,7 @@
 	$row_seller = $select_seller->fetch();
 	$proposal_seller_user_name = $row_seller->seller_user_name;
 	$proposal_seller_vacation = $row_seller->seller_vacation;
+	$login_seller_account_number = $row_login_seller->seller_m_account_number;
 
 	if($row_proposals->proposal_seller_id == $login_seller_id or $proposal_seller_vacation == "on"){
 		echo "<script>window.open('index','_self')</script>";
@@ -125,7 +130,8 @@
 	$_SESSION["c_sub_total"] = $sub_total;
 
 	$processing_fee = processing_fee($sub_total);
-	$total = processing_fee($sub_total)+$sub_total;
+	$gst = 3;
+	$total = $processing_fee + $sub_total + $gst;
 
 	$select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
 	$row_seller_accounts = $select_seller_accounts->fetch();
@@ -136,35 +142,121 @@
 		$sel_referrer = $db->select("sellers",array("seller_id" => $referrer_id));
 		$referrer_user_name = $sel_referrer->fetch()->seller_user_name;
 	}
+	$select_buyer_payment_account = $db->select("seller_payment_account", array("seller_id" => $login_seller_id));
+	$row_buyer_account = $select_buyer_payment_account->fetch();
+	$seller_account_id = $row_buyer_account->seller_id;
+	$mobile_number = $row_buyer_account->mobile_number;
+	$address = $row_buyer_account->address;
+	$apartment_number = $row_buyer_account->apartment_number;
+	$floor_number = $row_buyer_account->floor_number;
+	$country = $row_buyer_account->country;
+	$state = $row_buyer_account->state;
+	$city = $row_buyer_account->city;
+	$card_number = $row_buyer_account->card_number;
+	$card_name = $row_buyer_account->card_name;
+	$account_full_name = $row_buyer_account->account_full_name;
+	$iban = $row_buyer_account->iban;
+	$bank_name_address = $row_buyer_account->bank_name_address;
+	$swift_code = $row_buyer_account->swift_code;
+	$local_mobile_number = $row_buyer_account->local_mobile_number;
+	$local_email = $row_buyer_account->local_email;
 
 ?>
 <!DOCTYPE html>
-
 <html lang="en" class="ui-toolkit">
 
 <head>
-<title><?= $site_name; ?> - Checkout</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="<?= $site_author; ?>">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-<link href="styles/bootstrap.css" rel="stylesheet">
-<link href="styles/styles.css" rel="stylesheet">
-<link href="styles/categories_nav_styles.css" rel="stylesheet">
-<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
-<link href="styles/owl.carousel.css" rel="stylesheet">
-<link href="styles/owl.theme.default.css" rel="stylesheet">
-<link href="styles/sweat_alert.css" rel="stylesheet">
-<script type="text/javascript" src="js/sweat_alert.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script src="https://checkout.stripe.com/checkout.js"></script>
-<?php if(!empty($site_favicon)){ ?>
-<link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
-<?php } ?>
+	<title><?= $site_name; ?> - Checkout</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="<?= $site_author; ?>">
+	<!--====== Bootstrap css ======-->
+  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="<?= $site_url; ?>/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+	<!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
+	<link href="styles/styles.css" rel="stylesheet">
+	<!-- <link href="styles/categories_nav_styles.css" rel="stylesheet"> -->
+	<!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
+	<link href="styles/owl.carousel.css" rel="stylesheet">
+	<link href="styles/owl.theme.default.css" rel="stylesheet">
+	<link href="styles/sweat_alert.css" rel="stylesheet">
+	<script type="text/javascript" src="js/sweat_alert.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="https://checkout.stripe.com/checkout.js"></script>
+	<?php if(!empty($site_favicon)){ ?>
+	<link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
+	<?php } ?>
+	<style>
+		.stripe-submit{
+			border: 1px solid #ff0707;
+	    background: #ff0707;
+	    color: #fff;
+	    text-transform: uppercase;
+	    padding: 0 50px;
+	    line-height: 50px;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	    border-radius: 6px;
+	    font-weight: 600;
+	    margin-bottom: 30px;
+	    cursor: pointer;
+	    -webkit-transition: .4s;
+	    -o-transition: .4s;
+	    -moz-transition: .4s;
+	    transition: .4s;
+		}
+		#state-list , #city-list, #country{
+      height: 54px;
+      display: block !important;
+    }
+    .state_box .nice-select{
+      display: none !important;
+    }
+    .order-button{
+			border: 1px solid #ff0707;
+	    background: #ff0707;
+	    color: #fff;
+	    text-transform: uppercase;
+	    padding: 0 50px;
+	    line-height: 50px;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	    border-radius: 6px;
+	    font-weight: 600;
+	    margin-bottom: 30px;
+	    cursor: pointer;
+	    -webkit-transition: .4s;
+	    -o-transition: .4s;
+	    -moz-transition: .4s;
+	    transition: .4s;
+	  }
+	  #weaccept-cash-form{
+	  	margin-top: -83px;
+	  	float: left;
+	  }
+	</style>
 </head>
-<body class="is-responsive">
+<body class="all-content">
 <?php
-require_once("includes/header.php");
+require_once("includes/buyer-header.php");
 if($seller_verification != "ok"){
 echo "
 <div class='alert alert-danger rounded-0 mt-0 text-center'>
@@ -239,12 +331,480 @@ if(isset($_POST['code'])){
 		}
 		$sub_total = $proposal_price * $proposal_qty;
 		$processing_fee = processing_fee($sub_total);
-		$total = $processing_fee + $sub_total;
+		$gst = 3;
+		$total = $processing_fee + $sub_total + $gst;
 		$coupon_usage = "not_valid";
 	}
 }
 ?>
-<div class="container mt-5 mb-5">
+
+	<!-- checkout bar START-->
+	<div class="checkout-bar pt-60">
+		<div class="container position-relative">
+			<div class="border"></div>
+			<div class="row no-gutters">
+				<div class="col-lg-4 col-4">
+					<div class="checkout-bar-area text-center">
+						<img src="assets/img/checkout/bar-icon-1.png" alt=""><br>
+						<span>1</span>
+						<p>Order Details</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-4">
+					<div class="checkout-bar-area text-center">
+						<img src="assets/img/checkout/bar-icon-2.png" alt=""><br>
+						<span>2</span>
+						<p>Review and Pay</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-4">
+					<div class="checkout-bar-area item text-center">
+						<img src="assets/img/checkout/bar-icon-3.png" alt=""><br>
+						<span>3</span>
+						<p>Submit Requirements and Start Order</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- checkout bar END-->
+	<!-- checkout payment START-->
+	<div class="checkout-payment-area gray-bg">
+		<div class="container  pb-45">
+			<div class="row">
+				<!-- Step 2 Start -->
+				<div class="col-12 col-lg-8" id="pay_tab">
+					<div class="checkout-payment bg-white mt-30">
+						<span>Choose your payment method</span>
+						<div class="tab-button">
+							<ul class="nav nav-pills" id="pills-tab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active text-center" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true"><img src="assets/img/checkout/payment-tab-1.png" alt="">
+										<p>Online</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-center" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false"><img src="assets/img/checkout/payment-tab-2.png" alt="">
+										<p>Mobile Wallet</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-center" id="pills-3-tab" data-toggle="pill" href="#pills-3" role="tab" aria-controls="pills-3" aria-selected="false"><img src="assets/img/checkout/payment-tab-3.png" alt="">
+										<p>Cash</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-center" id="pills-4-tab" data-toggle="pill" href="#pills-4" role="tab" aria-controls="pills-4" aria-selected="false"><img src="assets/img/checkout/payment-tab-4.png" alt="">
+										<p>Local</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+								<div class="checkout-payment-area">
+									<div class="row">
+										<div class="col-lg-5 col-md-4">
+											<div class="payment-thumb">
+												<img src="assets/img/checkout/payment-box-1.jpg" alt="">
+											</div>
+										</div>
+										<div class="col-lg-7 col-md-8">
+											<div class="checkout-payment-content">
+												<h5 class="title">How Online Payment Works</h5>
+												<p>Pay on eMongez using a credit card, debit card or PayPal account. eMongez accepts any local or international Debit or Credit cards using Master Card and Visa. Please ensure that online transactions have been approved by your bank.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="gigs-payment pt-30">
+									<!-- <form action="#"> -->
+										<ul class="radio_titme radio_style2">
+											<li class="pt-30">
+												<!-- <input type="radio" checked="" name="method" id="radio1">
+												<label for="radio1"><span></span><img src="assets/img/checkout/card.png" alt="">Credit or debit card</label>
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="input-box mt-10">
+															<span>Card Number</span>
+															<input type="text">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="input-box mt-10">
+															<span>Name on card</span>
+															<input type="text">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="input-box mt-30">
+															<span>Expiry Date</span>
+															<input type="text">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="input-box mt-30">
+															<span>Security Code</span>
+															<input type="text">
+														</div>
+													</div>
+												</div>
+												<div class="input-check-area">
+													<input type="checkbox" name="checkbox5" id="checkbox1">
+													<label for="checkbox1"><span></span>I accept the <p>terms and conditions</p></label><br>
+													<button type="submit">Order</button>
+												</div> -->
+												<?php if($enable_stripe == "yes"){ ?>
+												<input type="radio" name="method" id="credit-card">
+												<label for="credit-card" class="d-inline"><span></span><img src="images/credit_cards.jpg" height="50" class="w-25">Stripe</label>
+												<?php } ?>
+												<?php if($enable_stripe == "yes"){ ?>
+													<div class="input-check-area float-right mt-0">
+												<?php require_once("stripe_config.php");
+												$stripe_total_amount = $total * 100;
+												?>
+												<form action="checkout_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
+												<input
+												type="submit"
+												class="stripe-submit"
+												value="Pay With Credit Card"
+												data-key="<?= $stripe['publishable_key']; ?>"
+												data-amount="<?= $stripe_total_amount; ?>"
+												data-currency="<?= $stripe['currency_code']; ?>"
+												data-email="<?= $login_seller_email; ?>"
+												data-name="<?= $site_name; ?>"
+												data-image="images/<?= $site_logo_image; ?>"
+												data-description="<?= $proposal_title; ?>"
+												data-allow-remember-me="false">
+												<script>
+												$(document).ready(function() {
+													$('.stripe-submit').on('click', function(event) {
+														event.preventDefault();
+														var $button = $(this),
+														$form = $button.parents('form');
+														var opts = $.extend({},$button.data(),{
+															token: function(result) {
+																$form.append($('<input>').attr({ type: 'hidden', name: 'stripeToken', value: result.id })).submit();
+															}
+														});
+														StripeCheckout.open(opts);
+													});
+												});
+												</script>
+												</form>
+												</div>
+												<?php } ?>
+											</li>
+											<li class="pt-30">
+												<?php if($enable_paypal == "yes"){ ?>
+												<input type="radio" name="method" id="paypal">
+												<label for="paypal"><span></span><img src="assets/img/checkout/paypal.png" alt="">Paypal</label>
+												<?php } ?>
+												<?php if($enable_paypal == "yes"){ ?>
+												<div class="input-check-area float-right" style="margin-top: -17px;">
+													<form action="paypal_charge" method="post" id="paypal-form" class="float-right"><!--- paypal-form Starts --->
+													 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
+													</form>
+												</div>
+												<?php } ?>
+											</li>
+											<li class="pt-30">
+												<?php if($current_balance >= $sub_total){ ?>
+												<input type="radio" name="method" id="shopping-balance"<?php if($current_balance >= $sub_total){ echo "checked"; }?>>
+												<label for="shopping-balance"><span></span><img src="assets/img/checkout/emongez.png" alt="">Emongez Wallet</label>
+												<?php } ?>
+												<?php if($current_balance >= $sub_total){ ?>
+												<div class="input-check-area float-right" style="margin-top: -17px;">
+													<form action="shopping_balance" method="post" id="shopping-balance-form">
+													<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
+														Emongez Wallet
+													</button>
+													</form>
+												</div>
+												<?php } ?>
+											</li>
+										</ul>
+									<!-- </form> -->
+								</div>
+							</div>
+							<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+								<div class="checkout-payment-area">
+									<div class="row">
+										<div class="col-lg-5 col-md-4">
+											<div class="payment-thumb-2">
+												<img src="assets/img/checkout/payment-box.jpg" alt="">
+											</div>
+										</div>
+										<div class="col-lg-7 col-md-8">
+											<div class="checkout-payment-content">
+												<h5 class="title">How Mobile Wallet Payment Works</h5>
+												<p>Pay on eMongez using your Mobile wallet. eMongez accepts all of Egypt’s leading mobile wallet Providers. Make sure that your wallet has the needed funds for the purchase. If you would like to top up your wallet, please contact your Mobile wallet provider. </p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="gigs-payment pt-30">
+									<ul class="radio_titme radio_style2">
+										<li>
+											<form action="weaccept.php" method="post" id="weaccept-form">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="input-box mt-30">
+															<span>Mobile Number</span>
+															<input type="text" name="mobile_number" value="<?= $mobile_number; ?>">
+														</div>
+													</div>
+												</div>
+												<div class="input-check-area">
+													<input type="checkbox" name="checkbox5" id="checkbox2">
+													<label for="checkbox2"><span></span>I accept the <p>terms and conditions</p></label><br>
+													<button type="submit" name="weaccept" class="button">Order</button>
+												</div>
+											</form>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab">
+								<div class="checkout-payment-area">
+									<div class="row">
+										<div class="col-lg-5 col-md-4">
+											<div class="payment-thumb-2">
+												<img src="assets/img/checkout/payment-box--2.jpg" alt="">
+											</div>
+										</div>
+										<div class="col-lg-7 col-md-8">
+											<div class="checkout-payment-content">
+												<h5 class="title">How Cash Payment Works</h5>
+												<p>Select Cash Collection from eMongez Our Partner R2S Egypt’s leading courier will contact you to arrange Cash Collection. Please ensure that your address is entered correctly to ensure next day Cash Collection.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="gigs-payment pt-30">
+									<!-- <form action="#"> -->
+										<ul class="radio_titme radio_style2">
+											<li>
+												<form id="cash_info" class="clearfix">
+													<div class="row">
+														<div class="col-lg-12">
+															<div class="input-box mt-30">
+																<span>Mobile Number</span>
+																<input type="text" name="mobile_number" id="mobile_number" value="<?= $mobile_number; ?>">
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<div class="input-box mt-30">
+																<span>Address</span>
+																<input type="text" name="address" id="address" value="<?= $address; ?>">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30">
+																<span>Apartment Number</span>
+																<input type="text" name="apartment_number" id="apartment_number" value="<?= $apartment_number; ?>">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30">
+																<span>Floor Number</span>
+																<input type="text" name="floor_number" id="floor_number" value="<?= $floor_number; ?>">
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<div class="input-box mt-30 state_box">
+																<span>Country</span>
+							 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
+							 										<option>Select Country</option>
+							 										<?php
+                                    $get_countries = $db->select("countries", array('name'=> 'Egypt'));
+                                    while($row_countries = $get_countries->fetch()){
+                                      $id = $row_countries->id;
+                                      $name = $row_countries->name;
+                                      echo "<option value='$name'".($name == $country ? "selected" : "").">$name</option>";
+                                    }
+                                    ?>
+							 									</select>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30 state_box">
+																<span>state</span>
+																<select class="form-control wide" name="state" onChange="getCity(this.value);" id="state-list">
+																	<?php if(!empty($state)){ ?>
+																		<option selected><?= $state; ?></option>
+																	<?php } ?>
+																</select>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="input-box mt-30 state_box">
+																<span>city</span>
+																<select class="form-control wide" name="city" required="" id="city-list">
+																	<?php if(!empty($city)){ ?>
+																		<option selected><?= $city; ?></option>
+																	<?php } ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="input-check-area">
+														<input type="checkbox" name="checkbox5" id="terms">
+														<label for="terms"><span></span>I accept the <p>terms and conditions</p>&nbsp;<small>(Please accept the terms and condition to proceed)</small></label><br>
+														<!-- <button type="submit">Order</button> -->
+														<button type="submit" name="submit_cash_info" id="edit_info" class="float-right" disabled>Edit Cash Info</button>
+													</div>
+												</form>
+												<?php 
+													
+												?>
+												<form action="weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+												<button type="submit" name="weaccept_cash" class="order-button">Order</button>
+												</form>
+											</li>
+											
+										</ul>
+									<!-- </form> -->
+								</div>
+							</div>
+							<div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab">
+								<div class="checkout-payment-area">
+									<div class="row">
+										<div class="col-lg-5 col-md-4">
+											<div class="payment-thumb-2">
+												<img src="assets/img/checkout/payment-box--3.jpg" alt="">
+											</div>
+										</div>
+										<div class="col-lg-7 col-md-8">
+											<div class="checkout-payment-content">
+												<h5 class="title">How Local Payment Works</h5>
+												<p>Pay on eMongez through the largest network of cash points. Enjoy the convenience of paying at your preferred time and location across Egypt. You can check your nearest cash point by visiting the providers website</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="gigs-payment pt-30">
+									<ul class="radio_titme radio_style2">
+										<li>
+											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="input-box mt-30">
+															<span>Mobile Number</span>
+															<input type="text" name="local_mobile_number" value="<?= $local_mobile_number ?>">
+														</div>
+													</div>
+													<div class="col-lg-12">
+														<div class="input-box mt-30">
+															<span>Email Address</span>
+															<input type="email" name="local_email" value="<?= $local_email; ?>">
+														</div>
+													</div>
+												</div>
+												<div class="input-check-area">
+													<input type="checkbox" name="checkbox5" id="checkbox4">
+													<label for="checkbox4"><span></span>I accept the <p>terms and conditions</p></label><br>
+													<button type="submit" name="weaccept_valu">Order</button>
+												</div>
+											</form>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Step 2 End -->
+				<!-- Step 3 end -->
+				<div class="col-12 col-lg-4">
+					<div class="checkout-summary mt-30">
+						<div class="summary-header">
+							Summary
+						</div>
+						<div class="cummary-body">
+							<div class="summary-card d-flex flex-row align-items-start">
+								<div class="image">
+									<img src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1; ?>" alt="">
+								</div>
+								<div class="text">
+									<p><?= $proposal_description; ?></p>
+								</div>
+							</div>
+							<!-- Each item -->
+							<div class="summary-card">
+								<h4>All the items included in package</h4>
+								<ul class="list-inline d-flex flex-wrap">
+									<!-- <li class="list-inline-item d-flex flex-row align-items-start">
+										<span>
+											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
+										</span>
+										<span>Commercial Use</span>
+									</li>
+									<li class="list-inline-item d-flex flex-row align-items-start">
+										<span>
+											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
+										</span>
+										<span>300 Words Included</span>
+									</li> -->
+									<li class="list-inline-item d-flex flex-row align-items-start">
+										<span>
+											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
+										</span>
+										<span><?= $proposal_revision; ?> Revisions</span>
+									</li>
+									<!-- <li class="list-inline-item d-flex flex-row align-items-start">
+										<span>
+											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
+										</span>
+										<span>Source File</span>
+									</li>
+									<li class="list-inline-item d-flex flex-row align-items-start">
+										<span>
+											<img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
+										</span>
+										<span>Topic Research</span>
+									</li> -->
+								</ul>
+							</div>
+							<!-- Each item -->
+							<div class="summary-card">
+								<div class="processing-fee d-flex flex-row justify-content-between">
+									<span>Processing Fee</span>
+									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $processing_fee;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $processing_fee,2);}else{  echo $s_currency.' '; echo $processing_fee; } ?></span>
+								</div>
+							</div>
+							<!-- Each item -->
+							<div class="summary-card">
+								<div class="processing-fee d-flex flex-row justify-content-between">
+									<span>GST</span>
+									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $gst;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $gst,2);}else{  echo $s_currency.' '; echo $gst; } ?></span>
+								</div>
+							</div>
+							<!-- Each item -->
+							<div class="summary-card d-flex flex-column">
+								<div class="totoal-fee d-flex flex-row justify-content-between">
+									<span>Total</span>
+									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $total;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $total,2);}else{  echo $s_currency.' '; echo $total; } ?></span>
+								</div>
+								<div class="delivery-time d-flex flex-row justify-content-between">
+									<span>Total Delivery Time</span>
+									<span><?= $proposal_delivery_time; ?> Days</span>
+								</div>
+							</div>
+							<!-- Each item -->
+						</div>
+					</div>
+					<!-- Checkout summary -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- checkout payment END-->
+
+
+
+
+<!-- <div class="container mt-5 mb-5">
 	<div class="row">
 		<div class="col-md-7">
 			<div class="row">
@@ -467,7 +1027,7 @@ if(isset($_POST['code'])){
 					Proposal's Total: <span class="float-right total-price"><?= $s_currency; ?><?= $total; ?></span>
 					</h5>
 					<hr>
-			    <?php include("checkoutPayMethods.php"); ?>          
+			    <?php //include("checkoutPayMethods.php"); ?>          
 				</div>
 				<?php if($proposal_id == @$_SESSION['r_proposal_id']){ ?>
 				<div class="card-footer">Referred By : <b><?= $referrer_user_name; ?></b></div>
@@ -475,9 +1035,10 @@ if(isset($_POST['code'])){
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <script>
 $(document).ready(function(){	
+	$('#paypal-form').hide();
 <?php if($current_balance >= $sub_total){ ?>	
 $('.total-price').html('<?= $s_currency; ?><?= $sub_total; ?>');
 $('.processing-fee').hide();
@@ -486,6 +1047,7 @@ $('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
 $('.processing-fee').show();
 <?php } ?>
 <?php if($current_balance >= $sub_total){ ?>
+	$('#paypal-form').hide();
 $('#payza-form').hide();
 $('#mobile-money-form').hide();
 $('#coinpayments-form').hide();
@@ -493,6 +1055,10 @@ $('#paypal-form').hide();
 $('#paystack-form').hide();
 $('#credit-card-form').hide();
 $('#2checkout-form').hide();
+$('#weaccept-form').show();
+$('#weaccept-cash').hide();
+$('#weaccept-valu').hide();
+$('#weaccept-kiosk').show();
 <?php }else{ ?>
 $('#shopping-balance-form').hide();
 <?php } ?>	
@@ -511,6 +1077,10 @@ $('#mobile-money-form').hide();
 $('#payza-form').hide();
 $('#coinpayments-form').hide();
 $('#paystack-form').hide();
+$('#weaccept-form').show();
+$('#weaccept-cash').hide();
+$('#weaccept-valu').hide();
+$('#weaccept-kiosk').show();
 <?php }elseif($enable_paypal == "no" and $enable_stripe == "yes"){ ?>
 $('#2checkout-form').hide();
 $('#coinpayments-form').hide();
@@ -545,6 +1115,10 @@ $('#shopping-balance').click(function(){
 	$('#payza-form').hide();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').show();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#paypal').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -557,6 +1131,10 @@ $('#paypal').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#credit-card').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -569,6 +1147,10 @@ $('#credit-card').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#2checkout').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -581,6 +1163,10 @@ $('#2checkout').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#mobile-money').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -593,6 +1179,10 @@ $('#mobile-money').click(function(){
 	$('#coinpayments-form').hide();
 	$('#paystack-form').hide();
 	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#coinpayments').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -605,6 +1195,10 @@ $('#coinpayments').click(function(){
 	$('#paystack-form').hide();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#paystack').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -617,6 +1211,10 @@ $('#paystack').click(function(){
 	$('#paystack-form').show();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
 $('#payza').click(function(){
 	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
@@ -629,7 +1227,142 @@ $('#payza').click(function(){
 	$('#paystack-form').hide();
 	$('#paypal-form').hide();
 	$('#shopping-balance-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
 });
+$('#weacceptWallet').click(function(){
+	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
+	$('.processing-fee').show();
+	$('#mobile-money-form').hide();
+	$('#credit-card-form').hide();
+	$('#2checkout-form').hide();
+	$('#paypal-form').hide();
+	$('#shopping-balance-form').hide();
+	$('#coinpayments-form').hide();
+	$('#paystack-form').hide();
+	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
+});
+$('#weacceptCash').click(function(){
+	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
+	$('.processing-fee').show();
+	$('#mobile-money-form').hide();
+	$('#credit-card-form').hide();
+	$('#2checkout-form').hide();
+	$('#paypal-form').hide();
+	$('#shopping-balance-form').hide();
+	$('#coinpayments-form').hide();
+	$('#paystack-form').hide();
+	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').show();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
+});
+$('#weacceptValU').click(function(){
+	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
+	$('.processing-fee').show();
+	$('#mobile-money-form').hide();
+	$('#credit-card-form').hide();
+	$('#2checkout-form').hide();
+	$('#paypal-form').hide();
+	$('#shopping-balance-form').hide();
+	$('#coinpayments-form').hide();
+	$('#paystack-form').hide();
+	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').show();
+	$('#weaccept-kiosk').show();
+});
+$('#weacceptKiosk').click(function(){
+	$('.total-price').html('<?= $s_currency; ?><?= $total; ?>');
+	$('.processing-fee').show();
+	$('#mobile-money-form').hide();
+	$('#credit-card-form').hide();
+	$('#2checkout-form').hide();
+	$('#paypal-form').hide();
+	$('#shopping-balance-form').hide();
+	$('#coinpayments-form').hide();
+	$('#paystack-form').hide();
+	$('#payza-form').hide();
+	$('#weaccept-form').show();
+	$('#weaccept-cash').hide();
+	$('#weaccept-valu').hide();
+	$('#weaccept-kiosk').show();
+});
+});
+$(document).on("click","#terms",function(){
+    if($(this).prop("checked") == true){
+    	$('#edit_info').prop('disabled', false);
+    }
+    else if($(this).prop("checked") == false){
+    	$('#edit_info').prop('disabled', true);
+    }
+});
+function getState(val) {
+  $.ajax({
+    type: "POST",
+    url: "get-state",
+    data:'country_name='+val,
+    beforeSend: function() {
+      $("#state-list").addClass("loader");
+    },
+    success: function(data){
+      // console.log(data);
+      $("#state-list").html(data);
+      $('#city-list').find('option[value]').remove();
+      $("#state-list").removeClass("loader");
+    }
+  });
+}
+function getCity(val) {
+  // alert(val);
+  $.ajax({
+    type: "POST",
+    url: "get-city",
+    data:'state_name='+val,
+    beforeSend: function() {
+      $("#city-list").addClass("loader");
+    },
+    success: function(data){
+      $("#city-list").html(data);
+      $("#city-list").removeClass("loader");
+    }
+  });
+}
+$('#cash_info').submit(function(e){
+
+	e.preventDefault();
+	var mobile_number =$('#mobile_number').val();
+	var address =$('#address').val();
+	var apartment_number =$('#apartment_number').val();
+	var floor_number =$('#floor_number').val();
+	var country =$('#country').val();
+	var state =$('#state-list').val();
+	var city =$('#city-list').val();
+		var obj = [mobile_number, address, apartment_number,floor_number,country,state,city ];
+	var myJSON = obj;
+	$.ajax({
+		url : 'edit_cash_info.php?data='+myJSON,
+		type : 'get',
+	
+ 	}).done(function(data){
+
+        $('#wait').removeClass("loader");
+        if(data == "error"){
+          swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
+
+        }else{
+          swal({type: 'success',text: 'Changes Saved.'});
+        }
+
+      });
 });
 </script>
 <?php } ?>

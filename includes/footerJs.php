@@ -22,6 +22,10 @@ if(isset($_SESSION['seller_user_name'])){
 
   <!--====== Nicescroll js ======-->
   <script src="<?= $site_url; ?>/assets/js/jquery.nicescroll.min.js"></script>
+  <!--====== Cound Down Timer js ======-->
+  <script src="<?= $site_url; ?>/assets/js/jquery.flipper-responsive.js"></script>
+  <!--====== Readmore js ======-->
+  <script src="<?= $site_url; ?>/assets/js/readmore.min.js"></script>
   <script>
     $(function() {
       $(".mesagee-item-box").niceScroll({
@@ -56,24 +60,24 @@ if(isset($_SESSION['seller_user_name'])){
       from: 1,
       prefix: "$",
       hide_min_max:false,
-      onChange: function(data) {
-          // alert(data.from);
-          var base_url = '<?php echo $site_url; ?>';
-          $('#price_range').val(data.from);
+      // onChange: function(data) {
+      //     // alert(data.from);
+      //     var base_url = '<?php echo $site_url; ?>';
+      //     $('#price_range').val(data.from);
           
-          var price = $('#price_range').val();
-          $.ajax({
-            url:base_url + "/category_load?zAction=get_search_price_proposals",
-            method:"POST",
-            data:{price:price},
-            success:function(data){
-              console.log(data);
-            $('#category_proposals').html('');  
+      //     var price = $('#price_range').val();
+      //     $.ajax({
+      //       url:base_url + "/category_load?zAction=get_search_price_proposals",
+      //       method:"POST",
+      //       data:{price:price},
+      //       success:function(data){
+      //         console.log(data);
+      //       $('#category_proposals').html('');  
             
-            $('#category_proposals').html(data); 
-          }
-          });
-        }
+      //       $('#category_proposals').html(data); 
+      //     }
+      //     });
+      //   }
     });
     $('.filter-results').on('click', function(){
       $('.gigs-sidebar').addClass('open-mobile');
@@ -122,7 +126,7 @@ $(document).ready(function(){
     });
 
   });
-
+  
 });
 <?php if(!isset($proposals_stylesheet)){ ?>
 $(window).scroll(function(){

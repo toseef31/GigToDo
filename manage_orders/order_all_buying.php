@@ -56,7 +56,7 @@
 			<td data-label="Status" role="column">
 				<?php if ($order_status == "delivered"){ ?>
 				<a class="button button-red" href="javascript:void(0);"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active"){ ?>
+				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
 					<a class="button button-limerick" href="javascript:void(0);">In Progress</a>
 				<?php }elseif($order_status == "completed"){ ?>
 					<a class="button button-yellow" href="javascript:void(0);"><?php echo ucwords($order_status); ?></a>

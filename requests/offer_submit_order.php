@@ -242,7 +242,7 @@ $get_site_logo_image = $row_general_settings->site_logo;
                 <br>
               <?php } ?>
                <?php if($enable_paypal == "yes"){ ?>
-				<form action="paypal_charge" method="post" id="paypal-form"><!--- paypal-form Starts --->
+				<form action="requests/paypal_charge" method="post" id="paypal-form"><!--- paypal-form Starts --->
 					<button type="submit" name="paypal" class="btn btn-success">Pay With Paypal</button>
 				</form><!--- paypal-form Ends --->
                <?php } ?>

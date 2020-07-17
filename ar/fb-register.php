@@ -61,86 +61,85 @@ if($check_seller_email > 0){
 <script src="js/jquery.min.js"></script>
 </head>
 
-<body class="is-responsive">
+<body class="all-content">
 
-<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/header-top.php"); ?>
 
-<div class="container mt-5"><!--- container mt-5 Starts -->
+<div class="container-fluid login-signup"><!--- container mt-5 Starts -->
 
-<div class="row justify-content-center"><!--- row justify-content-center Starts -->
+	<div class="login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
 
-<div class="col-lg-5 col-md-7"><!--- col-lg-5 col-md-7 Starts -->
+		<div><!--- col-lg-5 col-md-7 Starts -->
 
-<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
+			<div class="box-login mt-4 login-with-credentials"><!--- box-login mt-4 Starts -->
+				<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
+				<img class="logo" src="<?php echo $_SESSION['userData']['picture']['url'] ?>">
 
-<div class="box-login mt-4"><!--- box-login mt-4 Starts -->
+				<?php 
 
-<img class="logo" src="<?php echo $_SESSION['userData']['picture']['url'] ?>">
+				$form_errors = Flash::render("fb_errors");
 
-<?php 
+				if(is_array($form_errors)){
 
-$form_errors = Flash::render("fb_errors");
+					?>
 
-if(is_array($form_errors)){
+					<div class="alert alert-danger mt-2"><!--- alert alert-danger Starts --->
 
-?>
+						<ul class="list-unstyled mb-0">
+							<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+								<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
+							<?php } ?>
+						</ul>
 
-<div class="alert alert-danger mt-2"><!--- alert alert-danger Starts --->
+					</div><!--- alert alert-danger Ends --->
+				<?php } ?>
 
-<ul class="list-unstyled mb-0">
-<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
-<?php } ?>
-</ul>
+				<form action="" method="post"><!-- form Starts -->
 
-</div><!--- alert alert-danger Ends --->
-<?php } ?>
+					<div class="form-group"><!-- form-group Starts -->
 
-<form action="" method="post"><!-- form Starts -->
+						<label class="form-control-label font-weight-bold"> الاسم الكامل </label>
 
-<div class="form-group"><!-- form-group Starts -->
+						<input type="text" class="form-control" name="name" value="<?php echo $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'] ?>" placeholder="Enter Your Full Name" required>
 
-<label class="form-control-label font-weight-bold"> Full Name </label>
-
-<input type="text" class="form-control" name="name" value="<?php echo $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'] ?>" placeholder="Enter Your Full Name" required>
-
-</div><!-- form-group Ends -->
+					</div><!-- form-group Ends -->
 
 
-<div class="form-group"><!-- form-group Starts -->
+					<div class="form-group"><!-- form-group Starts -->
 
-<label class="form-control-label font-weight-bold"> Username </label>
+						<label class="form-control-label font-weight-bold"> اسم المستخدم </label>
 
-<input type="text" class="form-control" name="u_name" placeholder="Enter Your Username" required>
+						<input type="text" class="form-control" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" required>
 
-<small class="form-text text-muted">
+						<small class="form-text text-muted">
 
-Note: Usernames cannot be changed once an account is registered.
+							ملاحظة: لا يمكن تغيير أسماء المستخدمين بمجرد تسجيل الحساب.
 
-</small>
+						</small>
 
-</div><!-- form-group Ends -->
+					</div><!-- form-group Ends -->
 
 
 
-<div class="form-group"><!-- form-group Starts -->
+					<div class="form-group"><!-- form-group Starts -->
 
-<label class="form-control-label font-weight-bold"> Email </label>
+						<label class="form-control-label font-weight-bold"> البريد الإلكتروني </label>
 
-<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
+						<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
 
-</div><!-- form-group Ends -->
+					</div><!-- form-group Ends -->
 
+					<div class="form-group">
+						<input type="submit" name="continue" class="login-button" value="استمر">
+					</div>
 
-<input type="submit" name="continue" class="btn btn-success btn-block" value="Continue">
+				</form><!--- form Ends -->
 
-</form><!--- form Ends -->
+			</div><!-- text-center mt-3 Ends -->
 
-</div><!-- text-center mt-3 Ends -->
+		</div><!--- box-login mt-4 Ends -->
 
-</div><!--- box-login mt-4 Ends -->
-
-</div><!--- col-lg-5 col-md-7 Ends -->
+	</div><!--- col-lg-5 col-md-7 Ends -->
 
 </div><!--- row justify-content-center Ends -->
 
@@ -215,7 +214,7 @@ if(isset($_POST['continue'])){
 	}else{
 		
 		if($check_seller_email > 0){
-			
+			$update_fb_status = $db->update("sellers",array("fb_verification" => 1),array("seller_email" => $email));
 		echo "
 		
 		<script>
@@ -236,7 +235,7 @@ if(isset($_POST['continue'])){
 		$verification_code = "ok";
 						
 
-		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online',"fb_verification" => 1));
 		
 		$regsiter_seller_id = $db->lastInsertId();
 		

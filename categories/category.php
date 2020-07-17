@@ -969,6 +969,32 @@ $cur_amount = currencyConverter($to,1);
 
   });
 
+  $("#price").ionRangeSlider({
+    min: 0,
+    max: 300,
+    from: 1,
+    prefix: "$",
+    hide_min_max:false,
+    onChange: function(data) {
+        // alert(data.from);
+        var base_url = '<?php echo $site_url; ?>';
+        $('#price_range').val(data.from);
+        
+        var price = $('#price_range').val();
+        $.ajax({
+          url:base_url + "../category_load?zAction=get_search_price_proposals",
+          method:"POST",
+          data:{price:price},
+          success:function(data){
+            console.log(data);
+          $('#category_proposals').html('');  
+          
+          $('#category_proposals').html(data); 
+        }
+        });
+      }
+  });
+
  
 
 

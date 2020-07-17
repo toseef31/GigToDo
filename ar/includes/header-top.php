@@ -89,12 +89,14 @@ $cur_amount = currencyConverter($to,1);
               </select>
             </div>
             <?php } ?>
+            <?php if($currency_switcher == 1){ ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
                 <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
+            <?php } ?>
             <div class="Login-button d-none d-lg-flex">
               <a href="login.php">تسجيل الدخول</a>
               <a href="register.php">نضم الان</a>
