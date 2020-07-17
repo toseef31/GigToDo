@@ -75,6 +75,7 @@
 	$description = $row_offers->description;
 	$delivery_time = $row_offers->delivery_time;
 	$amount = $row_offers->amount;
+	$sub_total = $amount*1;
 	$gst = 3;
 	$processing_fee = processing_fee($amount);
 	$total = $amount+$processing_fee+$gst;

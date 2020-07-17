@@ -76,6 +76,10 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$proposal_qty = $_SESSION['proposal_qty'];
 	$payment_method = $_SESSION['method'];
 
+	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
+	$row_p = $get_p->fetch();
+	$delivery_time = $row_p->delivery_time;
+	
 	$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposal = $select_proposal->fetch();
 	$proposal_title = $row_proposal->proposal_title;
@@ -85,11 +89,11 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$buyer_instruction = $row_proposal->buyer_instruction;
 	$proposal_seller_id = $row_proposal->proposal_seller_id;
 	$delivery_id = $row_proposal->delivery_id;
-
+	
 	$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
 	$row_delivery_time = $select_delivery_time->fetch();
 	$delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
-
+	
 	$add_days = intval($delivery_proposal_title);
 	date_default_timezone_set("UTC");
 	$order_date = date("F d, Y");
@@ -102,7 +106,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$order_status = "progress";
 	}
 
-	$order_values = array("order_number" => $order_number,"order_duration" => $delivery_proposal_title,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_active" => 'yes',"order_status" => $order_status);
+	$order_values = array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_active" => 'yes',"order_status" => $order_status);
 
 	if($videoPlugin == 1){
 		if(isset($_SESSION['proposal_minutes'])){
@@ -390,7 +394,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	}
 	}).then(function(){
 	  // Read more about handling dismissals
-	  window.open('checkout?order_id=$insert_order_id','_self')
+	  window.open('order_details?order_id=$insert_order_id','_self')
 	});
 	</script>";
 		
@@ -889,7 +893,7 @@ if(isset($_SESSION['offer_id'])){
 	}).then(function(){
 	if (
 	// Read more about handling dismissals
-	window.open('offer-checkout?order_id=$insert_order_id','_self')
+	window.open('order_details?order_id=$insert_order_id','_self')
 	) {
 	console.log('Order submitted!')
 	}
@@ -1255,7 +1259,7 @@ echo "
 
 alert('Your order has been placed successfully, thank you.');
 
-window.open('order-checkout?order_id=$insert_order_id','_self');
+window.open('order_details?order_id=$insert_order_id','_self');
 
 </script>";
 
