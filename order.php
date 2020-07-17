@@ -383,6 +383,8 @@ if(isset($_SESSION['checkout_seller_id'])){
 	unset($_SESSION['proposal_minutes']);
 	unset($_SESSION['method']);
 
+	$_SESSION['order_id'] = $insert_order_id;
+
 	echo "
 	<script>
 	swal({
@@ -394,7 +396,9 @@ if(isset($_SESSION['checkout_seller_id'])){
 	}
 	}).then(function(){
 	  // Read more about handling dismissals
-	  window.open('order_details?order_id=$insert_order_id','_self')
+
+	  window.open('checkout2?order_id=$insert_order_id','_self')
+
 	});
 	</script>";
 		
@@ -893,7 +897,9 @@ if(isset($_SESSION['offer_id'])){
 	}).then(function(){
 	if (
 	// Read more about handling dismissals
-	window.open('order_details?order_id=$insert_order_id','_self')
+
+	window.open('offer-checkout2?order_id=$insert_order_id','_self')
+
 	) {
 	console.log('Order submitted!')
 	}
@@ -1259,7 +1265,9 @@ echo "
 
 alert('Your order has been placed successfully, thank you.');
 
-window.open('order_details?order_id=$insert_order_id','_self');
+
+window.open('order-checkout2?order_id=$insert_order_id','_self');
+
 
 </script>";
 

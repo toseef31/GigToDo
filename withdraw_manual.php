@@ -193,7 +193,7 @@ if(isset($_POST['withdraw'])){
 	
 	}else{
 	
-		echo "<script>alert('Minimum withdrawal amount is $$withdrawal_limit Dollars.');</script>";
+		echo "<script>alert('Minimum withdrawal amount is $withdrawal_limit Dollars.');</script>";
 			
 		echo "<script>window.open('revenue','_self')</script>";
 		

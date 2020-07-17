@@ -65,322 +65,336 @@ $n_date = date("F d, Y");
 
 ?>
 
+
+
 <?php if($status == "message"){ ?>
-
-<div class="
-
-<?php 
-
-if($sender_id == $login_seller_id){
-	
-echo "message-div-hover";
-	
-}else{
-	
-echo "message-div";
-	
-}
-
-?>"><!--- message-div Starts --->
+<!-- <div class="
+  <?php
+  if($sender_id == $login_seller_id){
     
-<?php if(!empty($seller_image)){ ?>
-
-<img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-
-<?php }else{ ?>
-
-<img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-
-<?php } ?>
-
-<h5>
-
-<a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
-
-</h5>
-
-<p class="message-desc">
-
-<?php echo $message; ?>
-
-<?php if(!empty($file)){ ?>
-
-<a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-
-<i class="fa fa-download"></i> <?php echo $file; ?>
-
-</a>
-
-<?php }else{ ?>
-
-
-<?php } ?>
-
-</p>
-
-<p class="text-right text-muted mb-0" style="font-size: 14px;"> 
-
-<?php echo $date; ?> 
-
-
-<?php if($login_seller_id != $sender_id){ ?>
-
-<?php if($login_seller_id == $buyer_id){ ?>
-
-| <a href="#" data-toggle="modal" data-target="#report-modal" class="text-muted"><i class="fa fa-flag"></i> Report</a> 
-
-<?php }else{ ?>
-
-| <a href="#" data-toggle="modal" data-target="#report-modal" class="text-muted"><i class="fa fa-flag"></i> Report</a> 
-
-<?php } ?>
-
-<?php } ?>
-
-</p>
-
-</div><!--- message-div Ends --->
-
-
-<?php }elseif($status == "delivered"){ ?>
-
-<?php
-
-$remain = $order_complete_time->diff(new DateTime());
-
-if($remain->d < 1){ $remain->d = 1; }
-
-?>
-
-<div class="card mt-4">
-
- <div class="card-body">
-
- 	<h5 class="text-center"><i class="fa fa-archive"></i> Order Delivered</h5>
-
-  <?php if($seller_id == $login_seller_id){ ?>
-  <p class="text-center font-weight-bold pb-0">The buyer has <?php echo $remain->d; ?> day(s) to complete/respond to this order, otherwise it will be automatically marked as completed.</p>
-  <?php } else { ?>
-
-   <p class="text-center font-weight-bold pb-0">You have <?php echo $remain->d; ?> day(s) to complete/respond to this order, otherwise it will be automatically marked as completed.</p>
+  echo "message-div-hover";
+    
+  }else{
+    
+  echo "message-div";
+    
+  }
+  ?>">
   
-  <?php } ?>
-
- </div>
-
-</div>
-
-<div class="
-
-<?php 
-
-if($sender_id == $login_seller_id){
-	
-echo "message-div-hover";
-	
-}else{
-	
-echo "message-div";
-	
-}
-
-?>
-
-"><!--- message-div Starts --->
-
-<?php if(!empty($seller_image)){ ?>
-
-    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-
-        <?php }else{ ?>
-
-    <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-
-<?php } ?>
-    
-<h5>
-
-<a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
-
-</h5>
-
-<p class="message-desc">
-
-<?php echo $message; ?>
-
-<?php if(!empty($file)){ ?>
-
-<a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-
-<i class="fa fa-download"></i> <?php echo $file; ?>
-
-</a>
-
-<?php }else{ ?>
-
-
-<?php } ?>
-
-</p>
-
-<p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
-
-</div><!--- message-div Ends --->
-
-<?php if($order_status == "delivered"){ ?>
-
-<?php if($buyer_id == $login_seller_id){ ?>
-<center class="pb-4 mt-4"><!-- mb-4 mt-4 Starts --->
-<form method="post">
-<button name="complete" type="submit" class="btn btn-success">
-Accept & Review Order
-</button>
-&nbsp;&nbsp;&nbsp;
-<button type="button" data-toggle="modal" data-target="#revision-request-modal" class="btn btn-success">
-Request A Revision
-</button>
-</form>
-<?php 
-if(isset($_POST['complete'])){
-  require_once("orderIncludes/orderComplete.php");
-}
-?>
-</center><!-- mb-4 mt-4 Ends --->
-<?php } ?>
-
-<?php } ?>
-
-<?php }elseif($status == "revision"){ ?>
-<div class="card mt-4">
-  <div class="card-body">
-    <h5 class="text-center"><i class="fa fa-pencil-square-o"></i> Revison Requested By <?php echo $seller_user_name; ?> </h5>
-  </div>
-</div>
-<div class="
-<?php 
-
-if($sender_id == $login_seller_id){
-	
-echo "message-div-hover";
-	
-}else{
-	
-echo "message-div";
-	
-}
-
-?>"><!--- message-div Starts --->
-<?php if(!empty($seller_image)){ ?>
+  <?php if(!empty($seller_image)){ ?>
   <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-    <?php }else{ ?>
+  <?php }else{ ?>
   <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-<?php } ?>
-    
-<h5><a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a></h5>
-
-<p class="message-desc">
-
-<?php echo $message; ?>
-
-<?php if(!empty($file)){ ?>
-
-<a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-
-<i class="fa fa-download"></i> <?php echo $file; ?>
-
-</a>
-
-<?php }else{ ?>
-
-
-<?php } ?>
-
-</p>
-
-<p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
-
-</div><!--- message-div Ends --->
-
-
-<?php }elseif($status == "cancellation_request"){ ?>
-
-<div class="card mt-4">
-  <div class="card-body">
-    <h5 class="text-center"><i class="fa fa-trash-o"></i> Cancellation Requested By <?php echo $seller_user_name; ?> </h5>
-  </div>
-</div>
-
-
-<div class="
-
-<?php 
-
-if($sender_id == $login_seller_id){
-	
-echo "message-div-hover";
-	
-}else{
-	
-echo "message-div";
-	
-}
-
-?>"><!--- message-div Starts --->
-
-<?php if(!empty($seller_image)){ ?>
-
-    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-
+  <?php } ?>
+  <h5>
+  <a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
+  </h5>
+  <p class="message-desc">
+    <?php echo $message; ?>
+    <?php if(!empty($file)){ ?>
+    <a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
+      <i class="fa fa-download"></i> <?php echo $file; ?>
+    </a>
+    <?php }else{ ?>
+    <?php } ?>
+  </p>
+  <p class="text-right text-muted mb-0" style="font-size: 14px;">
+    <?php echo $date; ?>
+    <?php if($login_seller_id != $sender_id){ ?>
+    <?php if($login_seller_id == $buyer_id){ ?>
+    | <a href="#" data-toggle="modal" data-target="#report-modal" class="text-muted"><i class="fa fa-flag"></i> Report</a>
+    <?php }else{ ?>
+    | <a href="#" data-toggle="modal" data-target="#report-modal" class="text-muted"><i class="fa fa-flag"></i> Report</a>
+    <?php } ?>
+    <?php } ?>
+  </p>
+  </div> -->
+  <div class="message-content-card-item d-flex flex-column">
+    <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+      <div class="image-icon">
+        <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+      </div>
+      <?php 
+      $remain = $order_complete_time->diff(new DateTime());
+      if($remain->d < 1){ $remain->d = 1; }
+      ?> 
+      <h5 class="text-center">Order Requirements</h5>
+      <p>This order will be marked as complete in <?php echo $remain->d; ?> days.</p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+      <div class="user-image">
+        <?php if(!empty($seller_image)){ ?>
+        <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>"  width="60" height="60" class="message-image" />
         <?php }else{ ?>
-
+          <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+        <?php } ?>
+      </div>
+      <div class="messages-text d-flex flex-column">
+        <div class="username d-flex flex-row align-items-start justify-content-between">
+          <span><?php echo $seller_user_name; ?></span>
+          <span class="timestamp"><?php echo $date; ?></span>
+        </div>
+        <p><?php echo $message; ?></p>
+        <?php if(!empty($file)){ ?>
+        <h5>Delivered Files</h5>
+        <div class="file-attachment d-flex flex-row align-items-center">
+          <span><i class="fas fa-arrow-circle-down"></i></span>
+          <a href="order_files/<?php echo $file; ?>" download><span class="file-name"><?php echo $file; ?></span></a>
+          <!-- <span>(602kb)</span> -->
+        </div>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+  <?php }elseif($status == "delivered"){ ?>
+  <!-- <?php
+  $remain = $order_complete_time->diff(new DateTime());
+  if($remain->d < 1){ $remain->d = 1; }
+  ?>
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="text-center"><i class="fa fa-archive"></i> Order Delivered</h5>
+      <?php if($seller_id == $login_seller_id){ ?>
+      <p class="text-center font-weight-bold pb-0">The buyer has <?php echo $remain->d; ?> day(s) to complete/respond to this order, otherwise it will be automatically marked as completed.</p>
+      <?php } else { ?>
+      <p class="text-center font-weight-bold pb-0">You have <?php echo $remain->d; ?> day(s) to complete/respond to this order, otherwise it will be automatically marked as completed.</p>
+      
+      <?php } ?>
+    </div>
+  </div>
+  <div class="
+    <?php
+    if($sender_id == $login_seller_id){
+      
+    echo "message-div-hover";
+      
+    }else{
+      
+    echo "message-div";
+      
+    }
+    ?>
+    ">
+    <?php if(!empty($seller_image)){ ?>
+    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
+    <?php }else{ ?>
     <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-
-<?php } ?>
+    <?php } ?>
     
-<h5>
+    <h5>
+    <a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
+    </h5>
+    <p class="message-desc">
+      <?php echo $message; ?>
+      <?php if(!empty($file)){ ?>
+      <a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
+        <i class="fa fa-download"></i> <?php echo $file; ?>
+      </a>
+      <?php }else{ ?>
+      <?php } ?>
+    </p>
+    <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
+    </div>
+    <?php if($order_status == "delivered"){ ?>
+    <?php if($buyer_id == $login_seller_id){ ?>
+    <center class="pb-4 mt-4">
+    <form method="post">
+      <button name="complete" type="submit" class="btn btn-success">
+      Accept & Review Order
+      </button>
+      &nbsp;&nbsp;&nbsp;
+      <button type="button" data-toggle="modal" data-target="#revision-request-modal" class="btn btn-success">
+      Request A Revision
+      </button>
+    </form>
+    <?php
+    if(isset($_POST['complete'])){
+    //require_once("orderIncludes/orderComplete.php");
+    }
+    ?>
+    </center>
+    <?php } ?>
+    <?php } ?> -->
+      <?php
+      $remain = $order_complete_time->diff(new DateTime());
+      if($remain->d < 1){ $remain->d = 1; }
+      ?>
+    <div class="message-content-card-item d-flex flex-column">
+      <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+        <div class="image-icon">
+          <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+        </div>
+        <h5 class="text-center">Order Delivered</h5>
+        <?php if($seller_id == $login_seller_id){ ?>
+        <p class="text-center font-weight-bold pb-0">The buyer has <?php echo $remain->d; ?> day(s) to complete/respond to this order, otherwise it will be automatically marked as completed.</p>
+        <?php } else { ?>
+        <p class="text-center font-weight-bold pb-0">You have <?php echo $remain->d; ?> day(s) to complete/respond to this order, otherwise it will be automatically marked as completed.</p>
+        
+        <?php } ?>
+      </div>
+      <div class="d-flex flex-row align-items-start">
+        <div class="user-image">
+          <?php if(!empty($seller_image)){ ?>
+          <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>"  width="60" height="60" class="message-image" />
+          <?php }else{ ?>
+            <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+          <?php } ?>
+        </div>
+        <div class="messages-text d-flex flex-column">
+          <div class="username d-flex flex-row align-items-start justify-content-between">
+            <span><?php echo $seller_user_name; ?></span>
+            <span class="timestamp"><?php echo $date; ?></span>
+          </div>
+          <p><?php echo $message; ?></p>
+          <?php if(!empty($file)){ ?>
+          <h5>Delivered Files</h5>
+          <div class="file-attachment d-flex flex-row align-items-center">
+            <span><i class="fas fa-arrow-circle-down"></i></span>
+            <a href="order_files/<?php echo $file; ?>" download><span class="file-name"><?php echo $file; ?></span></a>
+            <!-- <span>(602kb)</span> -->
+          </div>
+          <?php } ?>
+          <?php if($order_status == "delivered"){ ?>
+          <?php if($buyer_id == $login_seller_id){ ?>
+          <div class="d-flex flex-wrap justify-content-start">
+            <form method="post">
+              <button type="button" data-toggle="modal" data-target="#revision-request-modal" class="d-flex flex-row align-items-center justify-content-center button button-white" href="javascript:void(0);">Request Revision</button>
+              <button name="complete" type="submit" class="d-flex flex-row align-items-center justify-content-center button button-red">Accept & Review Order</button>
+            </form>
+            <?php
+            if(isset($_POST['complete'])){
+              require_once("orderIncludes/orderComplete.php");
+            }
+            ?>
+          </div>
+          <?php } ?>
+          <?php } ?>
+        </div>
+      </div>
 
-<a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
+    </div>
+    <?php }elseif($status == "revision"){ ?>
+      <div class="message-content-card-item d-flex flex-column">
+        <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+          <div class="image-icon">
+            <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+          </div>
+          <?php 
+          $remain = $order_complete_time->diff(new DateTime());
+          if($remain->d < 1){ $remain->d = 1; }
+          ?> 
+          <h5 class="text-center">Revison Request</h5>
+          <p><i class="fa fa-pencil-square-o"></i> Revison Requested By <?php echo $seller_user_name; ?></p>
+        </div>
+        <div class="d-flex flex-row align-items-start">
+          <div class="user-image">
+            <?php if(!empty($seller_image)){ ?>
+            <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>"  width="60" height="60" class="message-image" />
+            <?php }else{ ?>
+              <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+            <?php } ?>
+          </div>
+          <div class="messages-text d-flex flex-column">
+            <div class="username d-flex flex-row align-items-start justify-content-between">
+              <span><?php echo $seller_user_name; ?></span>
+              <span class="timestamp"><?php echo $date; ?></span>
+            </div>
+            <p><?php echo $message; ?></p>
+            <?php if(!empty($file)){ ?>
+            <h5>Delivered Files</h5>
+            <div class="file-attachment d-flex flex-row align-items-center">
+              <span><i class="fas fa-arrow-circle-down"></i></span>
+              <a href="order_files/<?php echo $file; ?>" download><span class="file-name"><?php echo $file; ?></span></a>
+              <!-- <span>(602kb)</span> -->
+            </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
 
-</h5>
+    <!-- <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="text-center"><i class="fa fa-pencil-square-o"></i> Revison Requested By <?php echo $seller_user_name; ?> </h5>
+      </div>
+    </div>
+    <div class="
+      <?php
+      if($sender_id == $login_seller_id){
+        
+      echo "message-div-hover";
+        
+      }else{
+        
+      echo "message-div";
+        
+      }
+      ?>">
+      <?php if(!empty($seller_image)){ ?>
+      <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
+      <?php }else{ ?>
+      <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
+      <?php } ?>
+      
+      <h5><a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a></h5>
+      <p class="message-desc">
+        <?php echo $message; ?>
+        <?php if(!empty($file)){ ?>
+        <a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
+          <i class="fa fa-download"></i> <?php echo $file; ?>
+        </a>
+        <?php }else{ ?>
+        <?php } ?>
+      </p>
+      <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
+      </div> -->
 
-<p class="message-desc">
+      <?php }elseif($status == "cancellation_request"){ ?>
+        <div class="message-content-card-item d-flex flex-column">
+          <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+            <div class="image-icon">
+              <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+            </div>
+            <?php 
+            $remain = $order_complete_time->diff(new DateTime());
+            if($remain->d < 1){ $remain->d = 1; }
+            ?> 
+            <h5 class="text-center">Cancellation Request</h5>
+            <p><i class="fa fa-trash-o"></i> Cancellation Requested By <?php echo $seller_user_name; ?></p>
+          </div>
+          <div class="d-flex flex-row align-items-start">
+            <div class="user-image">
+              <?php if(!empty($seller_image)){ ?>
+              <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>"  width="60" height="60" class="message-image" />
+              <?php }else{ ?>
+                <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+              <?php } ?>
+            </div>
+            <div class="messages-text d-flex flex-column">
+              <div class="username d-flex flex-row align-items-start justify-content-between">
+                <span><?php echo $seller_user_name; ?></span>
+                <span class="timestamp"><?php echo $date; ?></span>
+              </div>
+              <p><?php echo $message; ?></p>
+              <?php if(!empty($file)){ ?>
+              <h5>Delivered Files</h5>
+              <div class="file-attachment d-flex flex-row align-items-center">
+                <span><i class="fas fa-arrow-circle-down"></i></span>
+                <a href="order_files/<?php echo $file; ?>" download><span class="file-name"><?php echo $file; ?></span></a>
+                <!-- <span>(602kb)</span> -->
+              </div>
+              <?php } ?>
+              <?php if($sender_id == $login_seller_id){ ?>
+              <?php }else{ ?>
+              <div class="d-flex flex-wrap justify-content-start mt-15">
+                <form method="post">
+                  <button name="decline_request" class="align-items-center justify-content-center button button-white" href="javascript:void(0);">Decline Request</button>
+                  <button name="accept_request" class=" align-items-center justify-content-center button button-red">Accept Request</button>
+                </form>
+              </div>
+             
 
-<?php echo $message; ?>
 
-<?php if(!empty($file)){ ?>
-
-<a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-
-<i class="fa fa-download"></i> <?php echo $file; ?>
-
-</a>
-
-<?php }else{ ?>
-
-
-<?php } ?>
-
-</p>
-
-
-<?php if($sender_id == $login_seller_id){ ?>
-
-
-
-<?php }else{ ?>
-
-
-<form class="mb-2" method="post">
-
-		<center>
-
-			<button name="accept_request" class="btn btn-success btn-sm">Accept Request</button>
-
-			<button name="decline_request" class="btn btn-success btn-sm">Decline Request</button>
-
-	   </center>
-
-	</form>
+      
 
 <?php
 
@@ -694,254 +708,270 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
 
 <?php } ?>
 
-<p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
+<!-- <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p> -->
 
-</div><!--- message-div Ends --->
+      </div>
+    </div>
+  </div>
+<!--- message-div Ends --->
 
 
 <?php }elseif($status == "decline_cancellation_request"){ ?>
 
-
-<div class="card mt-4">
-
-   <div class="card-body">
-
-   	<h5 class="text-center"><i class="fa fa-trash-o"></i> Cancellation Request Declined By <?php echo $seller_user_name; ?></h5>
-
-   </div>
-
-
-</div>
-
-
-
-<div class="
-
-<?php 
-
-if($sender_id == $login_seller_id){
-	
-echo "message-div-hover";
-	
-}else{
-	
-echo "message-div";
-	
-}
-
-?>
-
-"><!--- message-div Starts --->
-
-<?php if(!empty($seller_image)){ ?>
-
-    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-
+  <div class="message-content-card-item d-flex flex-column">
+    <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+      <div class="image-icon">
+        <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+      </div>
+      <?php 
+      $remain = $order_complete_time->diff(new DateTime());
+      if($remain->d < 1){ $remain->d = 1; }
+      ?> 
+      <h5 class="text-center">Request Declined</h5>
+      <p><i class="fa fa-trash-o"></i> Cancellation Request Declined By <?php echo $seller_user_name; ?></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+      <div class="user-image">
+        <?php if(!empty($seller_image)){ ?>
+        <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>"  width="60" height="60" class="message-image" />
         <?php }else{ ?>
+          <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+        <?php } ?>
+      </div>
+      <div class="messages-text d-flex flex-column">
+        <div class="username d-flex flex-row align-items-start justify-content-between">
+          <span><?php echo $seller_user_name; ?></span>
+          <span class="timestamp"><?php echo $date; ?></span>
+        </div>
+        <p><?php echo $message; ?></p>
+        <?php if(!empty($file)){ ?>
+        <h5>Delivered Files</h5>
+        <div class="file-attachment d-flex flex-row align-items-center">
+          <span><i class="fas fa-arrow-circle-down"></i></span>
+          <a href="order_files/<?php echo $file; ?>" download><span class="file-name"><?php echo $file; ?></span></a>
+          <!-- <span>(602kb)</span> -->
+        </div>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+  <div class="message-content-card-item d-flex flex-column">
+    <div class="d-flex flex-wrap justify-content-start mt-15">
+      <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i>
+        Cancellation Request Declined By <?php echo $receiver_name; ?>
+      </h5>
+    </div>
+  </div>
 
-    <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-
-<?php } ?>
-    
-<h5>
-
-<a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
-
-</h5>
-
-<p class="message-desc">
-
-<?php echo $message; ?>
-
-<?php if(!empty($file)){ ?>
-
-<a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-
-<i class="fa fa-download"></i> <?php echo $file; ?>
-
-</a>
-
-<?php }else{ ?>
-
-
-<?php } ?>
-
-</p>
-
-
-<p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
-
-</div><!--- message-div Ends --->
-
-<div class="order-status-message"><!--- order-status-message Starts --->
-
-<i class="fa fa-times fa-3x text-danger"></i>
-
-
-<h5 class="text-danger">
-
-Cancellation Request Declined By <?php echo $receiver_name; ?>
-
-</h5>
-
-</div><!--- order-status-message Ends --->
-
-<?php }elseif($status == "accept_cancellation_request"){ ?>
-
-<div class="card mt-4">
-
-   <div class="card-body">
-
-   	<h5 class="text-center"><i class="fa fa-trash-o"></i> Cancellation Request By <?php echo $seller_user_name; ?></h5>
-
-   </div>
-
-
-</div>
-
-
-
-<div class="
-
-<?php 
-
-if($sender_id == $login_seller_id){
-	
-echo "message-div-hover";
-	
-}else{
-	
-echo "message-div";
-	
-}
-
-?>
-
-"><!--- message-div Starts --->
-
-<?php if(!empty($seller_image)){ ?>
-
+  <!-- <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="text-center"><i class="fa fa-trash-o"></i> Cancellation Request Declined By <?php echo $seller_user_name; ?></h5>
+    </div>
+  </div>
+  <div class="
+    <?php
+    if($sender_id == $login_seller_id){
+      
+    echo "message-div-hover";
+      
+    }else{
+      
+    echo "message-div";
+      
+    }
+    ?>
+    ">
+    <?php if(!empty($seller_image)){ ?>
     <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-
-        <?php }else{ ?>
-
+    <?php }else{ ?>
     <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-
-<?php } ?>
+    <?php } ?>
     
-<h5>
+    <h5>
+    <a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
+    </h5>
+    <p class="message-desc">
+      <?php echo $message; ?>
+      <?php if(!empty($file)){ ?>
+      <a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
+        <i class="fa fa-download"></i> <?php echo $file; ?>
+      </a>
+      <?php }else{ ?>
+      <?php } ?>
+    </p>
+    <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
+    </div>
+    <div class="order-status-message">
+    <i class="fa fa-times fa-3x text-danger"></i>
+    <h5 class="text-danger">
+    Cancellation Request Declined By <?php echo $receiver_name; ?>
+    </h5>
+    </div> -->
+    <?php }elseif($status == "accept_cancellation_request"){ ?>
 
-<a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
-
-</h5>
-
-<p class="message-desc">
-
-<?php echo $message; ?>
-
-<?php if(!empty($file)){ ?>
-
-<a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-
-<i class="fa fa-download"></i> <?php echo $file; ?>
-
-</a>
-
-<?php }else{ ?>
-
-
-<?php } ?>
-
-</p>
-
-
-<p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
-
-</div><!--- message-div Ends --->
-
-
-<?php if($seller_id == $login_seller_id){ ?>
-
-<div class="order-status-message"><!-- order-status-message Starts --->
-
-<i class="fa fa-times fa-3x text-danger"></i>
-
-<h5 class="text-danger"> Order Cancelled By Mutual Agreement. </h5>
-
-<p>
-
-Order Was Cancelled By A Mutual Agreement Between You and Your Buyer. <br>
-
-Funds have been refunded to buyer's account.
-
-</p>
-
-</div><!-- order-status-message Ends --->
-
-<?php }else{ ?>
-
-<div class="order-status-message"><!-- order-status-message Starts --->
-
-<i class="fa fa-times fa-3x text-danger"></i>
-
-<h5 class="text-danger"> Order Cancelled By Mutual Agreement. </h5>
-
-<p>
-
-Order was cancelled by a mutual agreement between you and your seller.<br>
-
-The order funds have been refunded to your Shopping Balance.
-
-</p>
-
-</div><!-- order-status-message Ends --->
-
-
-<?php } ?>
-
-
-<?php }elseif($status == "cancelled_by_customer_support"){ ?>
-
-
-<?php if($seller_id == $login_seller_id){ ?>
-
-
-<div class="order-status-message"><!-- order-status-message Starts --->
-
-<i class="fa fa-times fa-3x text-danger"></i>
-
-<h5 class="text-danger"> Order Cancelled By Admin. </h5>
-
-<p>
-
-Payment For This Order Was Refunded To Buyer's Shopping Balance. <br>
-
-For Any Further Assistance, Please Contact Our <a href="/customer_support.php" class="link"> 
-
-    Customer Support.</a>
-</p>
-
-</div><!-- order-status-message Ends --->
+    <div class="message-content-card-item d-flex flex-column">
+      <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+        <div class="image-icon">
+          <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+        </div>
+        <?php 
+        $remain = $order_complete_time->diff(new DateTime());
+        if($remain->d < 1){ $remain->d = 1; }
+        ?> 
+        <h5 class="text-center">Cancellation Request</h5>
+        <p><i class="fa fa-trash-o"></i> Cancellation Request By <?php echo $seller_user_name; ?></p>
+      </div>
+      <div class="d-flex flex-row align-items-start">
+        <div class="user-image">
+          <?php if(!empty($seller_image)){ ?>
+          <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>"  width="60" height="60" class="message-image" />
+          <?php }else{ ?>
+            <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+          <?php } ?>
+        </div>
+        <div class="messages-text d-flex flex-column">
+          <div class="username d-flex flex-row align-items-start justify-content-between">
+            <span><?php echo $seller_user_name; ?></span>
+            <span class="timestamp"><?php echo $date; ?></span>
+          </div>
+          <p><?php echo $message; ?></p>
+          <?php if(!empty($file)){ ?>
+          <h5>Delivered Files</h5>
+          <div class="file-attachment d-flex flex-row align-items-center">
+            <span><i class="fas fa-arrow-circle-down"></i></span>
+            <a href="order_files/<?php echo $file; ?>" download><span class="file-name"><?php echo $file; ?></span></a>
+            <!-- <span>(602kb)</span> -->
+          </div>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+    <?php if($seller_id == $login_seller_id){ ?>
+    <div class="message-content-card-item d-flex flex-column">
+      <div class="d-flex flex-wrap justify-content-start mt-15">
+        <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i> Order Cancelled By Mutual Agreement. </h5>
+        <p>
+        Order Was Cancelled By A Mutual Agreement Between You and Your Buyer. <br>
+        Funds have been refunded to buyer's account.
+        </p>
+      </div>
+    </div>
+    <?php }else{ ?>
+    <div class="message-content-card-item d-flex flex-column">
+      <div class="d-flex flex-wrap justify-content-start mt-15">
+        <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i> Order Cancelled By Mutual Agreement. </h5>
+        <p>
+          Order was cancelled by a mutual agreement between you and your seller.<br>
+          The order funds have been refunded to your Shopping Balance.
+        </p>
+      </div>
+    </div>
+    <?php } ?>
 
 
-<?php }else{ ?>
+    <!-- <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="text-center"><i class="fa fa-trash-o"></i> Cancellation Request By <?php echo $seller_user_name; ?></h5>
+      </div>
+    </div>
+    <div class="
+      <?php
+      if($sender_id == $login_seller_id){
+        
+      echo "message-div-hover";
+        
+      }else{
+        
+      echo "message-div";
+        
+      }
+      ?>
+      ">
+      <?php if(!empty($seller_image)){ ?>
+      <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
+      <?php }else{ ?>
+      <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
+      <?php } ?>
+      
+      <h5>
+      <a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
+      </h5>
+      <p class="message-desc">
+        <?php echo $message; ?>
+        <?php if(!empty($file)){ ?>
+        <a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
+          <i class="fa fa-download"></i> <?php echo $file; ?>
+        </a>
+        <?php }else{ ?>
+        <?php } ?>
+      </p>
+      <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
+      </div>
+      <?php if($seller_id == $login_seller_id){ ?>
+      <div class="order-status-message">
+      <i class="fa fa-times fa-3x text-danger"></i>
+      <h5 class="text-danger"> Order Cancelled By Mutual Agreement. </h5>
+      <p>
+        Order Was Cancelled By A Mutual Agreement Between You and Your Buyer. <br>
+        Funds have been refunded to buyer's account.
+      </p>
+      </div>
+      <?php }else{ ?>
+      <div class="order-status-message">
+      <i class="fa fa-times fa-3x text-danger"></i>
+      <h5 class="text-danger"> Order Cancelled By Mutual Agreement. </h5>
+      <p>
+        Order was cancelled by a mutual agreement between you and your seller.<br>
+        The order funds have been refunded to your Shopping Balance.
+      </p>
+      </div>
+      <?php } ?> -->
+
+      <?php }elseif($status == "cancelled_by_customer_support"){ ?>
+
+      <?php if($seller_id == $login_seller_id){ ?>
+      <div class="message-content-card-item d-flex flex-column">
+        <div class="d-flex flex-wrap justify-content-start mt-15">
+          <h5 class="text-danger">Order Cancelled By Admin. </h5>
+          <p>
+          Payment For This Order Was Refunded To Buyer's Shopping Balance. <br>
+          For Any Further Assistance, Please Contact Our <a href="/customer_support.php" class="link">
+          Customer Support.</a>
+          </p>
+        </div>
+      </div>
+      <?php }else{ ?>
+      <div class="message-content-card-item d-flex flex-column">
+        <div class="d-flex flex-wrap justify-content-start mt-15">
+          <h5 class="text-danger">Order Cancelled By Customer Support. </h5>
+          <p>
+            Payment For This Order Has Been Refunded To Your
+        <a href="revenue.php" class="link"> Shopping balance. </a>.
+          </p>
+        </div>
+      </div>
+      <?php } ?>
 
 
-<div class="order-status-message"><!-- order-status-message Starts --->
-
-<i class="fa fa-times fa-3x text-danger"></i>
-
-<h5 class="text-danger"> Order Cancelled By Customer Support. </h5>
-
-<p>
-
-Payment For This Order Has Been Refunded To Your
-
-<a href="revenue.php" class="link"> Shopping balance. </a>.
-
-</p>
-
-</div><!-- order-status-message Ends --->
+      <!-- <?php if($seller_id == $login_seller_id){ ?>
+      <div class="order-status-message">
+      <i class="fa fa-times fa-3x text-danger"></i>
+      <h5 class="text-danger"> Order Cancelled By Admin. </h5>
+      <p>
+        Payment For This Order Was Refunded To Buyer's Shopping Balance. <br>
+        For Any Further Assistance, Please Contact Our <a href="/customer_support.php" class="link">
+        Customer Support.</a>
+      </p>
+      </div>
+      <?php }else{ ?>
+      <div class="order-status-message">
+      <i class="fa fa-times fa-3x text-danger"></i>
+      <h5 class="text-danger"> Order Cancelled By Customer Support. </h5>
+      <p>
+        Payment For This Order Has Been Refunded To Your
+        <a href="revenue.php" class="link"> Shopping balance. </a>.
+      </p>
+      </div> -->
 
 <?php } ?>
 
