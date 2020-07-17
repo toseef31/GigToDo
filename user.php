@@ -14,6 +14,10 @@ if(isset($_SESSION['seller_user_name'])){
   $login_seller_name = $row_login_seller->seller_name;
   $login_user_name = $row_login_seller->seller_user_name;
   $login_seller_offers = $row_login_seller->seller_offers;
+  $gmail_verification = $row_login_seller->gmail_verification;
+  $fb_verification = $row_login_seller->fb_verification;
+  $seller_verification = $row_login_seller->seller_verification;
+
   $relevant_requests = $row_general_settings->relevant_requests;
 
   if(isset($_GET['delete_language'])){
@@ -76,6 +80,10 @@ $get_seller_lang = explode(',', $row_seller->seller_language);
 $get_seller_rating = $row_seller->seller_rating;
 $get_seller_register_date = $row_seller->seller_register_date;
 $get_seller_recent_delivery = $row_seller->seller_recent_delivery;
+
+$gmail_verification = $row_seller->gmail_verification;
+$fb_verification = $row_seller->fb_verification;
+$seller_verification = $row_seller->seller_verification;
 
 $get_seller_status = $row_seller->seller_status;
 $select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$get_seller_id)); 
@@ -283,21 +291,45 @@ if(isset($_SESSION['seller_user_name'])){
               <?php if($_SESSION['seller_user_name'] == $get_seller_user_name){ ?>
                 <div class="profile-verifi-content profile-verifi-2 pt-20">
                   <ul>
+                    <?php if($fb_verification == 0){ ?>
                     <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> Connect</span></li>
-                    <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> Connect</span></li>
+                    <?php }else{ ?>
+                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } ?>
+                    <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> Connect</span></li> -->
+                    <?php if($gmail_verification == 0){ ?>
                     <li><i class="fab fa-google"></i> Google Connected <span class="google" onclick="window.location = '<?php echo $gLoginURL ?>';"><i class="fab fa-google"></i> Connect</span></li>
+                    <?php }else{ ?>
+                    <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } ?>
+                    <?php if($seller_verification != 'ok'){ ?>
                     <li><i class="fa fa-envelope"></i> Email Verified <span class="verify">Verify</span></li>
+                    <?php }else{ ?>
+                    <li><i class="fa fa-envelope"></i> Email Verified <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } ?>
                     <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="check"><i class="fa fa-check"></i></span></li>
                   </ul>
                 </div>
               <?php }else { ?>
-                <div class="profile-verifi-content pt-20">
+                <div class="profile-verifi-content profile-verifi-2 pt-20">
                   <ul>
-                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span><i class="fa fa-check"></i></span></li>
-                    <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span><i class="fa fa-check"></i></span></li>
-                    <li><i class="fab fa-google"></i> Google Connected <span><i class="fa fa-check"></i></span></li>
-                    <li><i class="fa fa-envelope"></i> Email Verified <span><i class="fa fa-check"></i></span></li>
-                    <li><i class="fas fa-dollar-sign"></i> Payment Verified <span><i class="fa fa-check"></i></span></li>
+                    <?php if($fb_verification == 0){ ?>
+                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> Connect</span></li>
+                    <?php }else{ ?>
+                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } ?>
+                    <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> Connect</span></li> -->
+                    <?php if($gmail_verification == 0){ ?>
+                    <li><i class="fab fa-google"></i> Google Connected <span class="google" onclick="window.location = '<?php echo $gLoginURL ?>';"><i class="fab fa-google"></i> Connect</span></li>
+                    <?php }else{ ?>
+                    <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } ?>
+                    <?php if($seller_verification != 'ok'){ ?>
+                    <li><i class="fa fa-envelope"></i> Email Verified <span class="verify">Verify</span></li>
+                    <?php }else{ ?>
+                    <li><i class="fa fa-envelope"></i> Email Verified <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } ?>
+                    <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="check"><i class="fa fa-check"></i></span></li>
                   </ul>
                 </div>
             <?php } } ?>

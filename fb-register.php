@@ -96,7 +96,7 @@ if($check_seller_email > 0){
 
 <?php require_once("includes/header-top.php"); ?>
 
-<div class="container mt-5 login-signup"><!--- container mt-5 Starts -->
+<div class="container-fluid login-signup"><!--- container mt-5 Starts -->
 	<div class="login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
 		<div><!--- col-lg-5 col-md-7 Starts -->
 			<div class="box-login mt-4 login-with-credentials"><!--- box-login mt-4 Starts -->
@@ -209,7 +209,7 @@ if(isset($_POST['continue'])){
 	}else{
 		
 		if($check_seller_email > 0){
-			
+			$update_fb_status = $db->update("sellers",array("fb_verification" => 1),array("seller_email" => $email));
 		echo "
 		
 		<script>
@@ -230,7 +230,7 @@ if(isset($_POST['continue'])){
 		$verification_code = "ok";
 						
 
-		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online',"fb_verification" => 1));
 		
 		$regsiter_seller_id = $db->lastInsertId();
 		

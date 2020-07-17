@@ -2,6 +2,7 @@
 session_start();
 require_once("includes/db.php");
 require_once("functions/functions.php");
+require_once("social-config.php");
 
 if(isset($_SESSION['seller_user_name'])){
   $login_seller_user_name = $_SESSION['seller_user_name'];
@@ -12,6 +13,10 @@ if(isset($_SESSION['seller_user_name'])){
   $login_seller_name = $row_login_seller->seller_name;
   $login_user_name = $row_login_seller->seller_user_name;
   $login_seller_offers = $row_login_seller->seller_offers;
+  $gmail_verification = $row_login_seller->gmail_verification;
+  $fb_verification = $row_login_seller->fb_verification;
+  $seller_verification = $row_login_seller->seller_verification;
+
   $relevant_requests = $row_general_settings->relevant_requests;
 
   if(isset($_GET['delete_language'])){
@@ -38,6 +43,12 @@ if(isset($_SESSION['seller_user_name'])){
 
 $get_seller_user_name = $input->get('user_name');
 $select_seller = $db->query("select * from sellers where seller_user_name=:u_name AND NOT seller_status='deactivated' AND NOT seller_status='block-ban'",array("u_name"=>$get_seller_user_name));
+$row_select_seller = $select_seller->fetch();
+$gmail_verification = $row_select_seller->gmail_verification;
+$fb_verification = $row_select_seller->fb_verification;
+$seller_verification = $row_select_seller->seller_verification;
+
+
 $count_seller = $select_seller->rowCount();
 if($count_seller == 0){
   echo "<script>window.open('index?not_available','_self');</script>";
@@ -227,33 +238,51 @@ $count_requests = $get_requests->rowCount();
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><i class="fab fa-facebook-f"></i></span>
                       <span>Facebook</span>
-                      <span class="ml-auto d-flex flex-row align-items-center facebook">
+                      <?php if($fb_verification == 0){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center facebook" onclick="window.location='<?php echo $fLoginURL ?>';">
                         <span><i class="fab fa-facebook-f"></i></span>
                         <span>Connect</span>
                       </span>
+                      <?php }else{ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center payment">
+                        <span><i class="fal fa-check"></i></span>
+                      </span>
+                      <?php } ?>
                     </div>
-                    <div class="buyer-sidebar-body-item d-flex flex-row">
+                    <!-- <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><i class="fab fa-linkedin-in"></i></span>
                       <span>LinkedIn</span>
                       <span class="ml-auto d-flex flex-row align-items-center linkedin">
                         <span><i class="fab fa-linkedin-in"></i></span>
                         <span>Connect</span>
                       </span>
-                    </div>
+                    </div> -->
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><i class="fab fa-google"></i></span>
                       <span>Google</span>
-                      <span class="ml-auto d-flex flex-row align-items-center google">
+                      <?php if($gmail_verification == 0){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center google" onclick="window.location = '<?php echo $gLoginURL ?>';">
                         <span><i class="fab fa-google"></i></span>
                         <span>Connect</span>
                       </span>
+                      <?php }else{ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center payment">
+                        <span><i class="fal fa-check"></i></span>
+                      </span>
+                      <?php } ?>
                     </div>
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><i class="fas fa-envelope"></i></span>
                       <span>Email</span>
+                      <?php if($seller_verification != 'ok'){ ?>
                       <span class="ml-auto d-flex flex-row align-items-center email">
                         <span>Verify</span>
                       </span>
+                      <?php }else{ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center payment">
+                        <span><i class="fal fa-check"></i></span>
+                      </span>
+                      <?php } ?>
                     </div>
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
@@ -266,32 +295,53 @@ $count_requests = $get_requests->rowCount();
                 <?php } else { ?>
                   <div class="buyer-sidebar-card-body">
                     <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fab fa-facebook-f"></i></span>
+                      <span><i class="fab fa-facebook-f"></i></span>
                       <span>Facebook</span>
+                      <?php if($fb_verification == 0){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center facebook">
+                        <span><i class="fab fa-facebook-f"></i></span>
+                        <span>Connect</span>
+                      </span>
+                      <?php }else{ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php } ?>
                     </div>
-                    <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fab fa-linkedin-in"></i></span>
+                    <!-- <div class="buyer-sidebar-body-item d-flex flex-row">
+                      <span><i class="fab fa-linkedin-in"></i></span>
                       <span>LinkedIn</span>
-                      <span class="ml-auto d-flex flex-row align-items-center payment">
-                        <span><i class="fal fa-check"></i></span>
+                      <span class="ml-auto d-flex flex-row align-items-center linkedin">
+                        <span><i class="fab fa-linkedin-in"></i></span>
+                        <span>Connect</span>
                       </span>
-                    </div>
+                    </div> -->
                     <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fab fa-google"></i></span>
+                      <span><i class="fab fa-google"></i></span>
                       <span>Google</span>
+                      <?php if($gmail_verification == 0){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center google">
+                        <span><i class="fab fa-google"></i></span>
+                        <span>Connect</span>
+                      </span>
+                      <?php }else{ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php } ?>
                     </div>
                     <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fas fa-envelope"></i></span>
+                      <span><i class="fas fa-envelope"></i></span>
                       <span>Email</span>
+                      <?php if($seller_verification != 'ok'){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center email">
+                        <span>Verify</span>
+                      </span>
+                      <?php }else{ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php } ?>
                     </div>
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
@@ -304,32 +354,53 @@ $count_requests = $get_requests->rowCount();
                 <?php } } else{?>
                   <div class="buyer-sidebar-card-body">
                     <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fab fa-facebook-f"></i></span>
+                      <span><i class="fab fa-facebook-f"></i></span>
                       <span>Facebook</span>
+                      <?php if($fb_verification == 0){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center facebook">
+                        <span><i class="fab fa-facebook-f"></i></span>
+                        <span>Connect</span>
+                      </span>
+                      <?php }else{ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php } ?>
                     </div>
-                    <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fab fa-linkedin-in"></i></span>
+                    <!-- <div class="buyer-sidebar-body-item d-flex flex-row">
+                      <span><i class="fab fa-linkedin-in"></i></span>
                       <span>LinkedIn</span>
-                      <span class="ml-auto d-flex flex-row align-items-center payment">
-                        <span><i class="fal fa-check"></i></span>
+                      <span class="ml-auto d-flex flex-row align-items-center linkedin">
+                        <span><i class="fab fa-linkedin-in"></i></span>
+                        <span>Connect</span>
                       </span>
-                    </div>
+                    </div> -->
                     <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fab fa-google"></i></span>
+                      <span><i class="fab fa-google"></i></span>
                       <span>Google</span>
+                      <?php if($gmail_verification == 0){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center google">
+                        <span><i class="fab fa-google"></i></span>
+                        <span>Connect</span>
+                      </span>
+                      <?php }else{ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php } ?>
                     </div>
                     <div class="buyer-sidebar-body-item d-flex flex-row">
-                      <span class="completed"><i class="fas fa-envelope"></i></span>
+                      <span><i class="fas fa-envelope"></i></span>
                       <span>Email</span>
+                      <?php if($seller_verification != 'ok'){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center email">
+                        <span>Verify</span>
+                      </span>
+                      <?php }else{ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php } ?>
                     </div>
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
