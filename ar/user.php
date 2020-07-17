@@ -2,6 +2,7 @@
 session_start();
 require_once("includes/db.php");
 require_once("functions/functions.php");
+require_once("social-config.php");
 
 if(isset($_SESSION['seller_user_name'])){
   $login_seller_user_name = $_SESSION['seller_user_name'];
@@ -13,6 +14,9 @@ if(isset($_SESSION['seller_user_name'])){
   $login_user_name = $row_login_seller->seller_user_name;
   $login_seller_offers = $row_login_seller->seller_offers;
   $relevant_requests = $row_general_settings->relevant_requests;
+  $gmail_verification = $row_login_seller->gmail_verification;
+  $fb_verification = $row_login_seller->fb_verification;
+  $seller_verification = $row_login_seller->seller_verification;
 
   if(isset($_GET['delete_language'])){
     $delete_language_id = $input->get('delete_language');
@@ -68,6 +72,9 @@ $get_seller_level = $row_seller->seller_level;
 $get_seller_rating = $row_seller->seller_rating;
 $get_seller_register_date = $row_seller->seller_register_date;
 $get_seller_recent_delivery = $row_seller->seller_recent_delivery;
+$gmail_verification = $row_seller->gmail_verification;
+$fb_verification = $row_seller->fb_verification;
+$seller_verification = $row_seller->seller_verification;
 
 $get_seller_status = $row_seller->seller_status;
 $select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$get_seller_id)); 
@@ -270,15 +277,52 @@ if(isset($_SESSION['seller_user_name'])){
             <div class="profile-title">
               <h4 class="title"><img src="assets/img/seller-profile/icon-2.png" alt="icon"> التحقق</h4>
             </div>
+            <?php if(isset($_SESSION['seller_user_name'])){ ?>
+              <?php if($_SESSION['seller_user_name'] == $get_seller_user_name){ ?>
             <div class="profile-verifi-content profile-verifi-2 pt-20">
               <ul>
-                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="facebook"><i class="fab fa-facebook-f"></i> اتصال</span></li>
-                <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> اتصال</span></li>
+                <?php if($fb_verification == 0){ ?>
+                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> اتصال</span></li>
+                <?php }else{ ?>
+                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="check"><i class="fa fa-check"></i></span></li>
+                <?php } ?>
+                <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> اتصال</span></li> -->
+                <?php if($gmail_verification == 0){ ?>
                 <li><i class="fab fa-google"></i> Google Connected <span class="google"><i class="fab fa-google"></i> اتصال</span></li>
+                <?php }else{ ?>
+                <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                <?php } ?>
+                <?php if($seller_verification != 'ok'){ ?>
                 <li><i class="fa fa-envelope"></i> الإيميل <span class="verify">تأكيد</span></li>
+                <?php }else{ ?>
+                <li><i class="fa fa-envelope"></i> الإيميل <span class="check"><i class="fa fa-check"></i></span></li>
+                <?php } ?>
                 <li><i class="fas fa-dollar-sign"></i> اتحققنا من الدفع <span class="check"><i class="fa fa-check"></i></span></li>
               </ul>
             </div>
+            <?php }else { ?>
+            <div class="profile-verifi-content profile-verifi-2 pt-20">
+              <ul>
+                <?php if($fb_verification == 0){ ?>
+                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="facebook"><i class="fab fa-facebook-f"></i> اتصال</span></li>
+                <?php }else{ ?>
+                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="check"><i class="fa fa-check"></i></span></li>
+                <?php } ?>
+                <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> اتصال</span></li> -->
+                <?php if($gmail_verification == 0){ ?>
+                <li><i class="fab fa-google"></i> Google Connected <span class="google" onclick="window.location = '<?php echo $gLoginURL ?>';"><i class="fab fa-google"></i> اتصال</span></li>
+                <?php }else{ ?>
+                <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                <?php } ?>
+                <?php if($seller_verification != 'ok'){ ?>
+                <li><i class="fa fa-envelope"></i> الإيميل <span class="verify">تأكيد</span></li>
+                <?php }else{ ?>
+                <li><i class="fa fa-envelope"></i> الإيميل <span class="check"><i class="fa fa-check"></i></span></li>
+                <?php } ?>
+                <li><i class="fas fa-dollar-sign"></i> اتحققنا من الدفع <span class="check"><i class="fa fa-check"></i></span></li>
+              </ul>
+            </div>
+            <?php } } ?>
           </div>
         </div>
         <div class="col-lg-8">
