@@ -99,7 +99,7 @@ if($seller_id == $login_seller_id){
 
 <!DOCTYPE html>
 
-<html lang="en" class="ui-toolkit">
+<html dir="rtl" lang="ar" class="ui-toolkit">
 
 <head>
   <title><?= $site_name; ?> - Resolution Select Issue</title>
@@ -113,25 +113,25 @@ if($seller_id == $login_seller_id){
   <link rel="shortcut icon" href="<?= $site_url; ?>/images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
   <!--====== Bootstrap css ======-->
-  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
   <!--====== PreLoader css ======-->
-  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
   <!--====== Animate css ======-->
-  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
   <!--====== Fontawesome css ===-->
-  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
   <!--====== Owl carousel css ======-->
-  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
   <!--====== Nice select css ======-->
-  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
   <!--====== Range Slider css ======-->
-  <link href="<?= $site_url; ?>/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
   <!--====== Default css ======-->
-  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
   <!--====== Style css ======-->
-  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
   <!--====== Responsive css ======-->
-  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
   <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
   <link href="styles/fontawesome-stars.css" rel="stylesheet">
   <!-- <link href="styles/custom.css" rel="stylesheet">  -->
@@ -197,8 +197,8 @@ if($seller_id == $login_seller_id){
           <div class="container">
             <div class="row">
               <div class="col-12">
-                <h1 class="page-heading">Resolution Center</h1>
-                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Buyer With Regards To Your Order.</p>
+                <h1 class="page-heading">مركز الحلول</h1>
+                <p class="page-paragraph">أهلا بيك ، تقدر تحل مشكلتكالمتعلقة بطلبك مع المشتري.</p>
               </div>
             </div>
             <!-- Row -->
@@ -210,15 +210,15 @@ if($seller_id == $login_seller_id){
                       <div class="resolution-steps wide d-flex flex-row justify-content-between">
                         <div class="resolution-step-item active">
                           <span class="step">1</span>
-                          <span class="text">Select Issue</span>
+                          <span class="text">اختار المشكلات</span>
                         </div>
                         <div class="resolution-step-item" id="step-2">
                           <span class="step">2</span>
-                          <span class="text">Submit Resolution</span>
+                          <span class="text">تاكيد  اختار </span>
                         </div>
                         <div class="resolution-step-item" id="step-3" style="display: none;">
                           <span class="step">3</span>
-                          <span class="text">Submit</span>
+                          <span class="text">تاكيد</span>
                         </div>
                       </div>
                     </div>
@@ -226,42 +226,44 @@ if($seller_id == $login_seller_id){
                   <!-- Row -->
                   <div class="row" id="seller_select_issue">
                     <div class="col-12">
-                      <h4>What issues are you having with this order?</h4>
+                      <h4>
+                      إيه المشكلات اللي قابلتلك مع الطلب ده؟
+                    </h4>
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Due to personal/technical reasons, I can not complete the work">
-                          <label class="custom-control-label" for="customRadio1">Due to personal/technical reasons, I can not complete the work</label>
+                          <label class="custom-control-label" for="customRadio1">لأسباب شخصية \ تقنية , مش هقدر أكمل العمل</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="The buyer requested work, which is not offered in this Gig">
-                          <label class="custom-control-label" for="customRadio2">The buyer requested work, which is not offered in this Gig</label>
+                          <label class="custom-control-label" for="customRadio2">طلب المشتري شئ مش متوفر في الخدمة دي</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="I’m not able to do this job">
-                          <label class="custom-control-label" for="customRadio3">I’m not able to do this job</label>
+                          <label class="custom-control-label" for="customRadio3">مش هقدرأعمل الوظيفة دي</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="The buyer will order again">
-                          <label class="custom-control-label" for="customRadio4">The buyer will order again</label>
+                          <label class="custom-control-label" for="customRadio4">المشتري هيعيد الطلب مره أخرى</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio5" name="customRadio_seller" class="custom-control-input" value="The buyer is not responding">
-                          <label class="custom-control-label" for="customRadio5">The buyer is not responding</label>
+                          <label class="custom-control-label" for="customRadio5">المشتري لا يستجيب</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio6" name="customRadio_seller" class="custom-control-input" value="I didn’t recieve enough information from the buyer">
-                          <label class="custom-control-label" for="customRadio6">I didn’t recieve enough information from the buyer</label>
+                          <label class="custom-control-label" for="customRadio6">مستلمتش معلومات كافية من المشتري</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio7" name="customRadio_seller" class="custom-control-input" value="We couldn’t agree on the price">
-                          <label class="custom-control-label" for="customRadio7">We couldn’t agree on the price</label>
+                          <label class="custom-control-label" for="customRadio7">قدرناش نتفق علىالسعر</label>
                         </div>
                         <!-- Each item -->
                         <!-- <div class="custom-control custom-radio">
@@ -271,7 +273,7 @@ if($seller_id == $login_seller_id){
                           <!-- Each item -->
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
-                          <button id="continue_seller_issue"  class="button button-red">Continue</button>
+                          <button id="continue_seller_issue"  class="button button-red">أستمر</button>
                         </div>
                       </div>
                       <?php 
@@ -321,7 +323,7 @@ if($seller_id == $login_seller_id){
                             <span><i class="far fa-long-arrow-left"></i></span>
                             <span>GO Back</span>
                           </button>
-                          <button class="button button-red" type="submit" role="button">Continue</button>
+                          <button class="button button-red" type="submit" role="button">أستمر</button>
                         </div>
                       </form>
                       
@@ -344,20 +346,21 @@ if($seller_id == $login_seller_id){
                           </select>
                           <label class="bottom-label">The order should be delivered by <strong>Sep 13, 2017</strong></label>
                         </div> -->
-                        <h4>Explain why you would like to cancel the order</h4>
+                        <h4>اشرح سبب رغبتك في إلغاء الطلب</h4>
                         <div class="form-group d-flex flex-column">
                           <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <div class="form-group">
-                          <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
+                          <p class="mb-0">Iإذا وجدت نفسك تستخدم هذه الأداة لمعظم طلباتك 
+، ففكر في تغيير الوقت الأصلي للطلب</p>
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
                             <span><i class="far fa-long-arrow-left"></i></span>
-                            <span>GO Back</span>
+                            <span>رجوع</span>
                           </button>
-                          <button class="button button-red" type="submit" name="submit_request_seller">Send</button>
+                          <button class="button button-red" type="submit" name="submit_request_seller">إرسال</button>
                         </div>
                       </form>
                       <?php 
@@ -390,13 +393,13 @@ if($seller_id == $login_seller_id){
               <div class="col-12 col-lg-4">
                 <div class="checkout-summary">
                   <div class="summary-header">
-                    Summary
+                    ملخص
                   </div>
                   <div class="cummary-body">
                     <div class="summary-card d-flex flex-row align-items-start">
                       <div class="image">
                         <?php if ($proposal_img1 != '') { ?>
-                          <img src="proposals/proposal_files/<?= $proposal_img1; ?>">
+                          <img src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1; ?>">
                         <?php }else{ ?>
                         <img src="assets/img/checkout/summary-thumb.jpg" alt="">
                         <?php } ?>
@@ -407,38 +410,38 @@ if($seller_id == $login_seller_id){
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
-                      <h4>All the items included in package</h4>
+                      <h4>كل الخدمات المتضمنة في الطلب</h4>
                       <ul class="list-inline d-flex flex-wrap">
                         <li class="list-inline-item d-flex flex-row align-items-start">
                           <span>
                             <img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
                           </span>
-                          <span><?= $revisions ?> Revisions</span>
+                          <span><?= $revisions ?> مراجعات</span>
                         </li>
                       </ul>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
                       <div class="processing-fee d-flex flex-row justify-content-between">
-                        <span>Processing Fee</span>
+                        <span>رسوم التحويل</span>
                         <span><?= $order_fee; ?></span>
                       </div>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
                       <div class="processing-fee d-flex flex-row justify-content-between">
-                        <span>No GST</span>
+                        <span>لا يوجد رمز ترويجي</span>
                         <span>&nbsp;</span>
                       </div>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card d-flex flex-column">
                       <div class="totoal-fee d-flex flex-row justify-content-between">
-                        <span>Total</span>
+                        <span>كلي</span>
                         <span><?= $s_currency; ?> <?= $total ?></span>
                       </div>
                       <div class="delivery-time d-flex flex-row justify-content-between">
-                        <span>Total Delivery Time</span>
+                        <span>الوقت الكامل للتوصيل</span>
                         <span><?= $delivery_time; ?></span>
                       </div>
                     </div>
@@ -461,8 +464,8 @@ if($seller_id == $login_seller_id){
           <div class="container">
             <div class="row">
               <div class="col-12">
-                <h1 class="page-heading">Resolution Center</h1>
-                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Buyer With Regards To Your Order.</p>
+                <h1 class="page-heading">مركز الحلول</h1>
+                <p class="page-paragraph">أهلا بيك ، تقدر تحل مشكلتكالمتعلقة بطلبك مع المشتري.</p>
               </div>
             </div>
             <!-- Row -->
@@ -474,15 +477,15 @@ if($seller_id == $login_seller_id){
                       <div class="resolution-steps wide d-flex flex-row justify-content-between">
                         <div class="resolution-step-item active">
                           <span class="step">1</span>
-                          <span class="text">Select Issue</span>
+                          <span class="text">اختار المشكلات</span>
                         </div>
                         <div class="resolution-step-item" id="buyer-submit">
                           <span class="step">2</span>
-                          <span class="text">Submit Resolution</span>
+                          <span class="text">تاكيد  اختار </span>
                         </div>
                         <div class="resolution-step-item" style="display: none;">
                           <span class="step">3</span>
-                          <span class="text">Submit</span>
+                          <span class="text">تاكيد</span>
                         </div>
                       </div>
                     </div>
@@ -490,37 +493,37 @@ if($seller_id == $login_seller_id){
                   <!-- Row -->
                   <div class="row" id="buyer_select_issue">
                     <div class="col-12">
-                      <h4>What issues are you having with this order?</h4>
+                      <h4>إيه المشكلات اللي قابلتلك مع الطلب ده؟</h4>
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Due to personal/technical reasons">
-                          <label class="custom-control-label" for="customRadio1">Due to personal/technical reasons, I can not complete the work</label>
+                          <label class="custom-control-label" for="customRadio1">لأسباب شخصية \ تقنية , مش هقدر أكمل العمل</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="The buyer requested work, which is not offered in this Gig">
-                          <label class="custom-control-label" for="customRadio2">The buyer requested work, which is not offered in this Gig</label>
+                          <label class="custom-control-label" for="customRadio2">طلب المشتري شئ مش متوفر في الخدمة دي</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="I’m not able to do this job">
-                          <label class="custom-control-label" for="customRadio3">I’m not able to do this job</label>
+                          <label class="custom-control-label" for="customRadio3">مش هقدرأعمل الوظيفة دي</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="The buyer will order again">
-                          <label class="custom-control-label" for="customRadio4">The buyer will order again</label>
+                          <label class="custom-control-label" for="customRadio4">المشتري هيعيد الطلب مره أخرى</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="The buyer is not responding">
-                          <label class="custom-control-label" for="customRadio5">The buyer is not responding</label>
+                          <label class="custom-control-label" for="customRadio5">المشتري لا يستجيب</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio6" name="customRadio_buyer" class="custom-control-input" value="I didn’t recieve enough information from the buyer">
-                          <label class="custom-control-label" for="customRadio6">I didn’t recieve enough information from the buyer</label>
+                          <label class="custom-control-label" for="customRadio6">مستلمتش معلومات كافية من المشتري</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
@@ -535,7 +538,7 @@ if($seller_id == $login_seller_id){
                           <!-- Each item -->
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
-                          <button class="button button-red" role="button" id="continue_buyer_issue">Continue</button>
+                          <button class="button button-red" role="button" id="continue_buyer_issue">أستمر</button>
                         </div>
                       </div>
                       
@@ -564,7 +567,7 @@ if($seller_id == $login_seller_id){
                             <span><i class="far fa-long-arrow-left"></i></span>
                             <span>GO Back</span>
                           </button>
-                          <button class="button button-red" type="submit" role="button">Continue</button>
+                          <button class="button button-red" type="submit" role="button">أستمر</button>
                         </div>
                       </form>
                       
@@ -587,20 +590,21 @@ if($seller_id == $login_seller_id){
                           </select>
                           <label class="bottom-label">The order should be delivered by <strong>Sep 13, 2017</strong></label>
                         </div> -->
-                        <h4>Explain why you would like to cancel the order</h4>
+                        <h4>اشرح سبب رغبتك في إلغاء الطلب</h4>
                         <div class="form-group d-flex flex-column">
                           <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <div class="form-group">
-                          <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
+                          <p class="mb-0">إذا وجدت نفسك تستخدم هذه الأداة لمعظم طلباتك 
+، ففكر في تغيير الوقت الأصلي للطلب</p>
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
                             <span><i class="far fa-long-arrow-left"></i></span>
-                            <span>GO Back</span>
+                            <span>Gرجوع</span>
                           </button>
-                          <button class="button button-red" type="submit" name="submit_request_buyer">Send</button>
+                          <button class="button button-red" type="submit" name="submit_request_buyer">إرسال</button>
                         </div>
                       </form>
                       <?php 
@@ -633,13 +637,13 @@ if($seller_id == $login_seller_id){
               <div class="col-12 col-lg-4">
                 <div class="checkout-summary">
                   <div class="summary-header">
-                    Summary
+                    ملخص
                   </div>
                   <div class="cummary-body">
                     <div class="summary-card d-flex flex-row align-items-start">
                       <div class="image">
                         <?php if ($proposal_img1 != '') { ?>
-                          <img src="proposals/proposal_files/<?= $proposal_img1; ?>">
+                          <img src="<?= $site_url; ?>/proposals/proposal_files/<?= $proposal_img1; ?>">
                         <?php }else{ ?>
                         <img src="assets/img/checkout/summary-thumb.jpg" alt="">
                         <?php } ?>
@@ -650,38 +654,38 @@ if($seller_id == $login_seller_id){
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
-                      <h4>All the items included in package</h4>
+                      <h4>كل الخدمات المتضمنة في الطلب</h4>
                       <ul class="list-inline d-flex flex-wrap">
                         <li class="list-inline-item d-flex flex-row align-items-start">
                           <span>
                             <img class="img-fluid d-block" src="assets/img/checkout/check-icon.png" />
                           </span>
-                          <span><?= $revisions ?> Revisions</span>
+                          <span><?= $revisions ?> مراجعات</span>
                         </li>
                       </ul>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
                       <div class="processing-fee d-flex flex-row justify-content-between">
-                        <span>Processing Fee</span>
+                        <span>رسوم التحويل</span>
                         <span><?= $order_fee; ?></span>
                       </div>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
                       <div class="processing-fee d-flex flex-row justify-content-between">
-                        <span>No GST</span>
+                        <span>لا يوجد ضريبة للسلع والخدمات</span>
                         <span>&nbsp;</span>
                       </div>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card d-flex flex-column">
                       <div class="totoal-fee d-flex flex-row justify-content-between">
-                        <span>Total</span>
+                        <span>كلي</span>
                         <span><?= $s_currency; ?> <?= $total ?></span>
                       </div>
                       <div class="delivery-time d-flex flex-row justify-content-between">
-                        <span>Total Delivery Time</span>
+                        <span>الوقت الكامل للتوصيل</span>
                         <span><?= $delivery_time ?></span>
                       </div>
                     </div>
