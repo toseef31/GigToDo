@@ -161,10 +161,6 @@
 	$local_mobile_number = $row_buyer_account->local_mobile_number;
 	$local_email = $row_buyer_account->local_email;
 
-
-	$order_id = $_SESSION['order_id'];
-
-	print_r($order_id."idddd");
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -361,7 +357,6 @@ if(isset($_POST['code'])){
 						<p>Review and Pay</p>
 					</div>
 				</div>
-				<?php if($order_id == ''){ ?>
 				<div class="col-lg-4 col-4">
 					<div class="checkout-bar-area item text-center">
 						<img src="assets/img/checkout/bar-icon-3.png" alt=""><br>
@@ -369,15 +364,6 @@ if(isset($_POST['code'])){
 						<p>Submit Requirements and Start Order</p>
 					</div>
 				</div>
-				<?php }else{ ?>
-				<div class="col-lg-4 col-4">
-          <div class="checkout-bar-area text-center">
-            <img src="assets/img/checkout/bar-icon-3.2.png" alt=""><br>
-            <span>3</span>
-            <p>Submit Requirements and Start Order</p>
-          </div>
-      	</div>
-      	<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -386,7 +372,6 @@ if(isset($_POST['code'])){
 	<div class="checkout-payment-area gray-bg">
 		<div class="container  pb-45">
 			<div class="row">
-				<?php if($order_id == ''){ ?>
 				<!-- Step 2 Start -->
 				<div class="col-12 col-lg-8" id="pay_tab">
 					<div class="checkout-payment bg-white mt-30">
@@ -729,53 +714,7 @@ if(isset($_POST['code'])){
 						</div>
 					</div>
 				</div>
-				<?php } ?>
 				<!-- Step 2 End -->
-				<!-- Step 3 start -->
-				<?php if($order_id != ''){ ?>
-				<div class="col-12 col-lg-8" id="submit_requirement">
-          <div class="checkout-requirement-area bg-white mt-30">
-              <div class="checkout-requirement-title">
-                  <h4 class="title">Submit Requirements to Start Your Order</h4>
-              </div>
-              <div class="checkout-requirement-content pb-35">
-                  <span>The seller needs the following information to start working on your order:</span>
-                  <p>1. what industry does this order relate to? (optional)</p>
-                  <select>
-                      <option data-display="Select Answer">Select Answer</option>
-                      <option value="1">Keva</option>
-                      <option value="2">Linda</option>
-                      <option value="3">Karishma</option>
-                      <option value="4">Mohini</option>
-                  </select>
-              </div>
-              <div class="checkout-requirement-content-2">
-                  <span>2. hello your royal awesomeness!</span>
-                  <p class="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  <div class="checkout-requirement-textarea">
-                      <span>1st order?</span>
-                      <p>Please let us know your first name and a few words about you if you want! (optional)</p>
-                      <textarea name="#" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
-                      <div class="pusrchase-form d-flex justify-content-between align-items-center">
-                          <div class="attach-file">
-                              <input type="file" id="file">
-                              <label for="file"><img src="assets/img/post-request/attach.png" alt="">Attach File</label>
-                              <span class="max-size">Max Size 30MB</span>
-                          </div>
-                          <div class="chars-max">
-                              <p class="text">0/2500 Chars Max</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="checkout-requirement-content-3">
-                  <span>3. Instructions</span>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  <button type="submit">submit</button>
-              </div>
-          </div>
-      </div>
-    	<?php } ?>
 				<!-- Step 3 end -->
 				<div class="col-12 col-lg-4">
 					<div class="checkout-summary mt-30">
