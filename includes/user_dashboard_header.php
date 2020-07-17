@@ -97,12 +97,14 @@ session_start();
               </select>
             </div>
             <?php } ?>
+            <?php if($currency_switcher == 1){ ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
                 <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
               </select>
             </div>
+            <?php } ?>
             <div class="message-inner">
               <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt="">
                 <!-- <span class="total-user-count count c-messages-header"></span> -->

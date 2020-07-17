@@ -60,6 +60,7 @@ if(empty(DB_HOST) and empty(DB_USER) and empty(DB_NAME)){
 	$enable_maintenance_mode = $row_general_settings->enable_maintenance_mode;
 	$enable_referrals = $row_general_settings->enable_referrals;
 	$language_switcher = $row_general_settings->language_switcher;
+	$currency_switcher = $row_general_settings->currency_switcher;
 
 	$get_currencies = $db->select("currencies",array( "id" => $site_currency));
 	$row_currencies = $get_currencies->fetch();

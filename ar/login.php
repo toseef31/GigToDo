@@ -255,12 +255,12 @@ if(isset($_SESSION['seller_user_name'])){
     							</span>
     							<span>  الدخول عن طريق  Facebook</span>
     						</a>
-    						<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $linkLoginURL; ?>'">
+    						<!-- <a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $linkLoginURL; ?>'">
     							<span>
     								<i class="fab fa-linkedin-in"></i>
     							</span>
     							<span>تسجيل الدخول ب linkedin</span>
-    						</a>
+    						</a> -->
     						<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $gLoginURL ?>';">
     							<span>
     								<i class="fab fa-google"></i>

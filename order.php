@@ -76,9 +76,6 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$proposal_qty = $_SESSION['proposal_qty'];
 	$payment_method = $_SESSION['method'];
 
-	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
-	$row_p = $get_p->fetch();
-	$delivery_time = $row_p->delivery_time;
 	
 	$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposal = $select_proposal->fetch();
@@ -90,6 +87,12 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$proposal_seller_id = $row_proposal->proposal_seller_id;
 	$delivery_id = $row_proposal->delivery_id;
 	
+
+	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
+	$row_p = $get_p->fetch();
+	$delivery_time = $row_p->delivery_time;
+
+
 	$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
 	$row_delivery_time = $select_delivery_time->fetch();
 	$delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
