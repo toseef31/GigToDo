@@ -99,12 +99,12 @@ if(isset($_SESSION['seller_user_name'])){
 								</span>
 								<span>Sign up with Facebook</span>
 							</a>
-							<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
+							<!-- <a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
 								<span>
 									<i class="fab fa-linkedin-in"></i>
 								</span>
 								<span>Sign up with Linkedin</span>
-							</a>
+							</a> -->
 							<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?= $gLoginURL ?>';">
 								<span>
 									<i class="fab fa-google"></i>

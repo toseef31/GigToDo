@@ -253,12 +253,12 @@ if(isset($_SESSION['seller_user_name'])){
 							</span>
 							<span>Login with Facebook</span>
 						</a>
-						<a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
+						<!-- <a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
 							<span>
 								<i class="fab fa-linkedin-in"></i>
 							</span>
 							<span>Login with Linkedin</span>
-						</a>
+						</a> -->
 						<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $gLoginURL ?>';">
 							<span>
 								<i class="fab fa-google"></i>
