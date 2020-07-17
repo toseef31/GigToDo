@@ -176,12 +176,14 @@
             </select>
           </div>
           <?php } ?>
+          <?php if($currency_switcher == 1){ ?>
           <div>
-            <select name="" id="">
-              <option value="">USD</option>
-              <option value="">EGP</option>
+            <select name="" id="" class="curreny_convert">
+              <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
+              <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?>>EGP</option>
             </select>
           </div>
+          <?php } ?>
           <div>
             <p><?= $db->select("general_settings")->fetch()->site_copyright; ?></p>
           </div>

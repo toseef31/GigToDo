@@ -86,6 +86,10 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$proposal_seller_id = $row_proposal->proposal_seller_id;
 	$delivery_id = $row_proposal->delivery_id;
 
+	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
+	$row_p = $get_p->fetch();
+	$delivery_time = $row_p->delivery_time;
+
 	$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
 	$row_delivery_time = $select_delivery_time->fetch();
 	$delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
@@ -102,7 +106,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$order_status = "progress";
 	}
 
-	$order_values = array("order_number" => $order_number,"order_duration" => $delivery_proposal_title,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_active" => 'yes',"order_status" => $order_status);
+	$order_values = array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_active" => 'yes',"order_status" => $order_status);
 
 	if($videoPlugin == 1){
 		if(isset($_SESSION['proposal_minutes'])){

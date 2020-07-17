@@ -356,38 +356,48 @@ require_once("includes/db.php");
 									<div class="blog-categories d-flex flex-column">
 										<div class="blog-categories-header">Categories</div>
 										<div class="blog-categories-lists d-flex flex-column">
-											<a class="blog-categories-item" href="javascript:void(0);">Digital Marketing (9)</a>
-											<a class="blog-categories-item" href="javascript:void(0);">Web & Mobile Design (8)</a>
+											<?php
+											  $get_cats = $db->select("article_cat",array("language_id" => $siteLanguage));
+											  while($row_cats = $get_cats->fetch()){
+											  $article_cat_id = $row_cats->article_cat_id;
+											  $article_cat_title = $row_cats->article_cat_title;
+											?>
+											<a class="blog-categories-item" href="javascript:void(0);"> <?php echo $article_cat_title; ?></a>
+											<?php } ?>
+											<!-- <a class="blog-categories-item" href="javascript:void(0);">Web & Mobile Design (8)</a>
 											<a class="blog-categories-item" href="javascript:void(0);">Desktop Software Development (5)</a>
 											<a class="blog-categories-item" href="javascript:void(0);">Writing & Translation (4)</a>
 											<a class="blog-categories-item" href="javascript:void(0);">Graphics & Design (3)</a>
 											<a class="blog-categories-item" href="javascript:void(0);">Video & Animation (1)</a>
-											<a class="blog-categories-item" href="javascript:void(0);">Uncategorized (3)</a>
+											<a class="blog-categories-item" href="javascript:void(0);">Uncategorized (3)</a> -->
 										</div>
 									</div>
 									<div class="blog-recent-posts d-flex flex-column">
 										<div class="blog-recent-posts-header">Recent Post</div>
 										<div class="blog-recent-posts-body d-flex flex-column">
-											<a class="blog-recent-posts-item d-flex flex-row" href="javascript:void(0);">
+											<?php 
+												$get_articles = $db->select("knowledge_bank");
+												while($row_articles = $get_articles->fetch()){
+												$article_id = $row_articles->article_id;
+												$article_url = $row_articles->article_url;
+												$article_heading = $row_articles->article_heading;
+												$article_body = $row_articles->article_body;
+												$right_image = $row_articles->right_image;
+												$top_image = $row_articles->top_image;
+												$bottom_image = $row_articles->bottom_image;
+												if($lang_dir == "right"){
+												  $floatRight = "float-right";
+												}else{
+												  $floatRight = "float-left";
+												}
+											?>
+											<a class="blog-recent-posts-item d-flex flex-row" href="article/<?php echo $article_url; ?>">
 												<div class="image">
-													<img alt="7 tips ensure a remarkable job application in social media" class="img-fluid d-block" src="https://loremflickr.com/768/688/beach,girl" />
+													<img alt="7 tips ensure a remarkable job application in social media" class="img-fluid d-block" src="<?= $site_url; ?>/article/article_images/<?= $top_image; ?>" />
 												</div>
-												<div class="text">7 tips ensure a remarkable job application in social media</div>
+												<div class="text"><?= $article_heading ?></div>
 											</a>
-											<!-- Each item -->
-											<a class="blog-recent-posts-item d-flex flex-row" href="javascript:void(0);">
-												<div class="image">
-													<img alt="8 mobile UI design tips for a better user experience" class="img-fluid d-block" src="https://loremflickr.com/768/688/beach,girl" />
-												</div>
-												<div class="text">8 mobile UI design tips for a better user experience</div>
-											</a>
-											<!-- Each item -->
-											<a class="blog-recent-posts-item d-flex flex-row" href="javascript:void(0);">
-												<div class="image">
-													<img alt="A look inside Zellene Guanlao's colorful work & illustration process" class="img-fluid d-block" src="https://loremflickr.com/768/688/beach,girl" />
-												</div>
-												<div class="text">A look inside Zellene Guanlao's colorful work & illustration process</div>
-											</a>
+											<?php } ?>
 											<!-- Each item -->
 										</div>
 									</div>

@@ -61,86 +61,86 @@ if($check_seller_email > 0){
 <script src="js/jquery.min.js"></script>
 </head>
 
-<body class="is-responsive">
+<body class="all-content">
 
-<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/header-top.php"); ?>
 
-<div class="container mt-5"><!--- container mt-5 Starts -->
+<div class="container mt-5 login-signup"><!--- container mt-5 Starts -->
 
-<div class="row justify-content-center"><!--- row justify-content-center Starts -->
+	<div class="row justify-content-center login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
 
-<div class="col-lg-5 col-md-7"><!--- col-lg-5 col-md-7 Starts -->
+		<div class="col-lg-5 col-md-7"><!--- col-lg-5 col-md-7 Starts -->
 
-<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
+			<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
 
-<div class="box-login mt-4"><!--- box-login mt-4 Starts -->
+			<div class="box-login mt-4 login-with-credentials"><!--- box-login mt-4 Starts -->
 
-<img class="logo" src="<?php echo $_SESSION['userData']['picture']['url'] ?>">
+				<img class="logo" src="<?php echo $_SESSION['userData']['picture']['url'] ?>">
 
-<?php 
+				<?php 
 
-$form_errors = Flash::render("fb_errors");
+				$form_errors = Flash::render("fb_errors");
 
-if(is_array($form_errors)){
+				if(is_array($form_errors)){
 
-?>
+					?>
 
-<div class="alert alert-danger mt-2"><!--- alert alert-danger Starts --->
+					<div class="alert alert-danger mt-2"><!--- alert alert-danger Starts --->
 
-<ul class="list-unstyled mb-0">
-<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
-<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
-<?php } ?>
-</ul>
+						<ul class="list-unstyled mb-0">
+							<?php $i = 0; foreach ($form_errors as $error) { $i++; ?>
+								<li class="list-unstyled-item"><?php echo $i ?>. <?php echo ucfirst($error); ?></li>
+							<?php } ?>
+						</ul>
 
-</div><!--- alert alert-danger Ends --->
-<?php } ?>
+					</div><!--- alert alert-danger Ends --->
+				<?php } ?>
 
-<form action="" method="post"><!-- form Starts -->
+				<form action="" method="post"><!-- form Starts -->
 
-<div class="form-group"><!-- form-group Starts -->
+					<div class="form-group"><!-- form-group Starts -->
 
-<label class="form-control-label font-weight-bold"> Full Name </label>
+						<label class="form-control-label font-weight-bold"> الاسم الكامل </label>
 
-<input type="text" class="form-control" name="name" value="<?php echo $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'] ?>" placeholder="Enter Your Full Name" required>
+						<input type="text" class="form-control" name="name" value="<?php echo $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'] ?>" placeholder="Enter Your Full Name" required>
 
-</div><!-- form-group Ends -->
-
-
-<div class="form-group"><!-- form-group Starts -->
-
-<label class="form-control-label font-weight-bold"> Username </label>
-
-<input type="text" class="form-control" name="u_name" placeholder="Enter Your Username" required>
-
-<small class="form-text text-muted">
-
-Note: Usernames cannot be changed once an account is registered.
-
-</small>
-
-</div><!-- form-group Ends -->
+					</div><!-- form-group Ends -->
 
 
+					<div class="form-group"><!-- form-group Starts -->
 
-<div class="form-group"><!-- form-group Starts -->
+						<label class="form-control-label font-weight-bold"> اسم المستخدم </label>
 
-<label class="form-control-label font-weight-bold"> Email </label>
+						<input type="text" class="form-control" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" required>
 
-<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
+						<small class="form-text text-muted">
 
-</div><!-- form-group Ends -->
+							ملاحظة: لا يمكن تغيير أسماء المستخدمين بمجرد تسجيل الحساب.
+
+						</small>
+
+					</div><!-- form-group Ends -->
 
 
-<input type="submit" name="continue" class="btn btn-success btn-block" value="Continue">
 
-</form><!--- form Ends -->
+					<div class="form-group"><!-- form-group Starts -->
 
-</div><!-- text-center mt-3 Ends -->
+						<label class="form-control-label font-weight-bold"> البريد الإلكتروني </label>
 
-</div><!--- box-login mt-4 Ends -->
+						<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
 
-</div><!--- col-lg-5 col-md-7 Ends -->
+					</div><!-- form-group Ends -->
+
+
+					<input type="submit" name="continue" class="btn btn-success btn-block" value="استمر">
+
+				</form><!--- form Ends -->
+
+			</div><!-- text-center mt-3 Ends -->
+
+		</div><!--- box-login mt-4 Ends -->
+
+	</div><!--- col-lg-5 col-md-7 Ends -->
 
 </div><!--- row justify-content-center Ends -->
 

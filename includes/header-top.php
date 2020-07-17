@@ -90,12 +90,14 @@ $cur_amount = currencyConverter($to,1);
                 </select>
               </div>
               <?php } ?>
+              <?php if($currency_switcher == 1){ ?>
               <div class="usd-inner">
                 <select name="" id="curreny_convert" class="curreny_convert">
                   <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                   <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
                 </select>
               </div>
+              <?php } ?>
               <div class="Login-button d-none d-lg-flex">
                 <a href="<?= $site_url; ?>/login.php">Login</a>
                 <a href="<?= $site_url; ?>/register.php">Join Now</a>
@@ -142,12 +144,14 @@ $cur_amount = currencyConverter($to,1);
             </select>
           </div>
           <?php } ?>
+          <?php if($currency_switcher == 1){ ?>
           <div class="menu-action">
             <select name="" id="curreny_convert" class="curreny_convert">
               <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
               <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
             </select>
           </div>
+          <?php } ?>
         </li>
         <li class="mb-20">
           <a class="button login-button" href="<?= $site_url ?>/login.php">Login</a>
