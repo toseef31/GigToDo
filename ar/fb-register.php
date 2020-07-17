@@ -67,14 +67,12 @@ if($check_seller_email > 0){
 
 <div class="container mt-5 login-signup"><!--- container mt-5 Starts -->
 
-	<div class="row justify-content-center login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
+	<div class="login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
 
-		<div class="col-lg-5 col-md-7"><!--- col-lg-5 col-md-7 Starts -->
-
-			<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
+		<div><!--- col-lg-5 col-md-7 Starts -->
 
 			<div class="box-login mt-4 login-with-credentials"><!--- box-login mt-4 Starts -->
-
+				<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
 				<img class="logo" src="<?php echo $_SESSION['userData']['picture']['url'] ?>">
 
 				<?php 
@@ -131,9 +129,10 @@ if($check_seller_email > 0){
 
 					</div><!-- form-group Ends -->
 
-
-					<input type="submit" name="continue" class="btn btn-success btn-block" value="استمر">
-
+					<div class="form-group">
+						<input type="submit" name="continue" class="login-button" value="استمر">
+					</div>
+					
 				</form><!--- form Ends -->
 
 			</div><!-- text-center mt-3 Ends -->

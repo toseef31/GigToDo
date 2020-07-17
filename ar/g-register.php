@@ -63,10 +63,10 @@ if($check_seller_email > 0){
 <body class="is-responsive">
 <?php require_once("includes/header-top.php"); ?>
 <div class="container mt-5 login-signup"><!--- container mt-5 Starts -->
-	<div class="row justify-content-center login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
-		<div class="col-lg-5 col-md-7"><!--- col-lg-5 col-md-7 Starts -->
-			<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
+	<div class="login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
+		<div><!--- col-lg-5 col-md-7 Starts -->
 			<div class="box-login mt-4 login-with-credentials"><!--- box-login mt-4 Starts -->
+				<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
 				<img class="logo img-fluid" src="<?= $_SESSION['picture']; ?>">
 				<?php 
 				$form_errors = Flash::render("g_errors");
@@ -96,7 +96,9 @@ if($check_seller_email > 0){
 						<label class="form-control-label font-weight-bold"> البريد الإلكتروني </label>
 						<input type="email" class="form-control" disabled name="email" value="<?= $_SESSION['email'] ?>" placeholder="Enter Your Email" required>
 					</div><!-- form-group Ends -->
-					<input type="submit" name="continue" class="btn btn-success btn-block" value="استمر">
+					<div class="form-group">
+						<input type="submit" name="continue" class="login-button" value="استمر">
+					</div>
 				</form><!--- form Ends -->
 			</div><!-- text-center mt-3 Ends -->
 		</div><!--- box-login mt-4 Ends -->

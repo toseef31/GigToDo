@@ -97,10 +97,10 @@ if($check_seller_email > 0){
 <?php require_once("includes/header-top.php"); ?>
 
 <div class="container mt-5 login-signup"><!--- container mt-5 Starts -->
-	<div class="row justify-content-center login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
-		<div class="col-lg-5 col-md-7"><!--- col-lg-5 col-md-7 Starts -->
-			<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
+	<div class="login-signup-wrapper login-wrapper"><!--- row justify-content-center Starts -->
+		<div><!--- col-lg-5 col-md-7 Starts -->
 			<div class="box-login mt-4 login-with-credentials"><!--- box-login mt-4 Starts -->
+				<h2 class="text-center"> Continue To <?php echo $site_name; ?> </h2>
 				<img class="logo" src="<?php echo $_SESSION['userData']['picture']['url'] ?>">
 				<?php
 				$form_errors = Flash::render("fb_errors");
@@ -130,7 +130,9 @@ if($check_seller_email > 0){
 						<label class="form-control-label font-weight-bold"> Email </label>
 						<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
 					</div><!-- form-group Ends -->
-					<input type="submit" name="continue" class="login-button" value="Continue">
+					<div class="form-group">
+						<input type="submit" name="continue" class="login-button" value="Continue">
+					</div>
 				</form><!--- form Ends -->
 			</div><!-- text-center mt-3 Ends -->
 		</div><!--- box-login mt-4 Ends -->
