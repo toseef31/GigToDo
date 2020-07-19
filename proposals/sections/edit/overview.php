@@ -203,10 +203,10 @@ $child_title = $row_meta->child_title;
                         </ul>
                         <div class="tab-content" id="myTabContent">
                           <div class="tab-pane fade show active" id="english" role="tabpanel" aria-labelledby="english-tab">
-                            <textarea rows="6" class="form-control text-count" name="proposal_desc" placeholder="I need...."><?php echo $d_proposal_desc; ?></textarea>
+                            <textarea rows="6" class="form-control text-count" name="buyer_instruction" placeholder="I need...."><?php echo $d_buyer_instruction; ?></textarea>
                           </div>
                           <div class="tab-pane fade" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
-                            <textarea dir="rtl" rows="6" class="form-control text-count" name="proposal_desc" placeholder="أدخل متطلبات الخدمة"><?php echo $d_proposal_desc; ?></textarea>
+                            <textarea dir="rtl" rows="6" class="form-control text-count" name="buyer_instruction" placeholder="أدخل متطلبات الخدمة"><?php echo $d_buyer_instruction; ?></textarea>
                           </div>
                         </div>
                       </div>
@@ -214,9 +214,9 @@ $child_title = $row_meta->child_title;
                       <div class="d-flex flex-column">
                         <label class="bottom-label">Answer Type:</label>
                         <div class="d-flex flex-row mt-10 mb-10">
-                          <select class="form-control wide">
-                            <option value="1">Free Text</option>
-                            <option value="2">Complex Text</option>
+                          <select class="form-control wide" name="answer_type">
+                            <option value="Free Text" <?php if($d_answer_type == "Free Text"){echo "selected";} ?>>Free Text</option>
+                            <option value="Complex Text" <?php if($d_answer_type == "Complex Text"){echo "selected";} ?>>Complex Text</option>
                           </select>
                         </div>
                         <div class="d-flex flex-row">

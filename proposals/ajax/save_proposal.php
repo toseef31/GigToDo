@@ -45,11 +45,11 @@ $data = $input->post();
 $data['proposal_date'] = date("F d, Y");
 unset($data['proposal_id']);
 
-if(isset($_POST['proposal_desc'])){
+// if(isset($_POST['proposal_desc'])){
 
-	$data['proposal_desc'] = removeJava($_POST['proposal_desc'],"<div><iframe><br><a><b><i><u><span><img><h1><h2><h3><h4><h5><h6><p><ul><ol><li>");
+// 	$data['proposal_desc'] = removeJava($_POST['proposal_desc'],"<div><iframe><br><a><b><i><u><span><img><h1><h2><h3><h4><h5><h6><p><ul><ol><li>");
 
-}
+// }
 
 if(isset($_POST['proposal_video'])){
 
@@ -62,7 +62,12 @@ if(isset($_POST['proposal_video'])){
 
 }
 
-if(isset($_POST['proposal_desc']) and @empty($_POST['proposal_desc'])){
+// if(isset($_POST['proposal_desc']) and @empty($_POST['proposal_desc'])){
+
+// 	$error = "error";
+
+// }
+if(isset($_POST['buyer_instruction']) and @empty($_POST['buyer_instruction'])){
 
 	$error = "error";
 

@@ -137,10 +137,10 @@ $child_arabic_title = $row_meta->child_arabic_title;
 										</ul>
 										<div class="tab-content" id="myTabContent">
 											<div class="tab-pane fade" id="english" role="tabpanel" aria-labelledby="english-tab">
-												<textarea rows="6" class="form-control" name="proposal_desc" placeholder="I need...."><?php echo $d_proposal_desc; ?></textarea>
+												<textarea rows="6" class="form-control" name="buyer_instruction" placeholder="I need...."><?php echo $d_buyer_instruction; ?></textarea>
 											</div>
 											<div class="tab-pane fade show active" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
-												<textarea dir="rtl" rows="6" name="proposal_desc" class="form-control" placeholder="أدخل متطلبات الخدمة"><?php echo $d_proposal_desc; ?></textarea>
+												<textarea dir="rtl" rows="6" name="buyer_instruction" class="form-control" placeholder="أدخل متطلبات الخدمة"><?php echo $d_buyer_instruction; ?></textarea>
 											</div>
 										</div>
 									</div>

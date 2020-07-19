@@ -44,7 +44,7 @@
 	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposals = $select_proposals->fetch();
 	$buyer_instruction = $row_proposals->buyer_instruction;
-
+	$answer_type = $row_proposals->answer_type;
 	
 	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
 	$row_p = $get_p->fetch();
@@ -168,11 +168,14 @@ require_once("includes/buyer-header.php");?>
             	<div class="checkout-requirement-title">
             	    <h4 class="title">قدم متطلباتك وابدأ اطلب</h4>
             	</div>
+            	<?php if ($answer_type == 'Complex Text'){ ?>
             	<div class="checkout-requirement-content pb-35">
             	    <span>مقدم الخدمة محتاج المعلومات دي عشان يبدأ يشتغل على طلبك:</span>
             	    <p>1- ايه هو مجال الشغل؟ (اختيارى)</p>
             	    <input type="text" name="order_industry" class="form-control">
             	</div>
+            	<?php } ?>
+            	<?php if ($answer_type == 'Free Text'){ ?>
             	<div class="checkout-requirement-content-2">
             	    <span>2. مرحبا بك الذهول الملكي!</span>
             	    <p class="text">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد</p>
@@ -192,6 +195,7 @@ require_once("includes/buyer-header.php");?>
             	        </div> -->
             	    </div>
             	</div>
+            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3- التعليمات</span>
             	    <p><?= $buyer_instruction ?></p>

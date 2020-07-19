@@ -44,6 +44,7 @@
 	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposals = $select_proposals->fetch();
 	$buyer_instruction = $row_proposals->buyer_instruction;
+	$answer_type = $row_proposals->answer_type;
 
 	
 	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
@@ -168,11 +169,14 @@ require_once("includes/buyer-header.php");?>
             	<div class="checkout-requirement-title">
             	    <h4 class="title">Submit Requirements to Start Your Order</h4>
             	</div>
+            	<?php if ($answer_type == 'Complex Text'){ ?>
             	<div class="checkout-requirement-content pb-35">
             	    <span>The seller needs the following information to start working on your order:</span>
             	    <p>1. what industry does this order relate to? (optional)</p>
             	    <input type="text" name="order_industry" class="form-control">
             	</div>
+            	<?php } ?>
+            	<?php if ($answer_type == 'Free Text'){ ?>
             	<div class="checkout-requirement-content-2">
             	    <span>2. hello your royal awesomeness!</span>
             	    <p class="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
@@ -192,6 +196,7 @@ require_once("includes/buyer-header.php");?>
             	        </div> -->
             	    </div>
             	</div>
+            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3. Instructions</span>
             	    <p><?= $buyer_instruction ?></p>
