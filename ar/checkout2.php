@@ -45,6 +45,7 @@
 	$row_proposals = $select_proposals->fetch();
 	$buyer_instruction = $row_proposals->buyer_instruction;
 	$answer_type = $row_proposals->answer_type;
+
 	
 	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
 	$row_p = $get_p->fetch();
@@ -168,6 +169,7 @@ require_once("includes/buyer-header.php");?>
             	<div class="checkout-requirement-title">
             	    <h4 class="title">قدم متطلباتك وابدأ اطلب</h4>
             	</div>
+
             	
             	<!-- <div class="checkout-requirement-content pb-35">
             	    <span>مقدم الخدمة محتاج المعلومات دي عشان يبدأ يشتغل على طلبك:</span>
@@ -175,6 +177,7 @@ require_once("includes/buyer-header.php");?>
             	    <input type="text" name="order_industry" class="form-control">
             	</div> -->
             	
+
             	<div class="checkout-requirement-content-2">
             	    <span>1. مرحبا بك الذهول الملكي!</span>
             	    <p class="text"><?= $buyer_instruction ?></p>
@@ -198,6 +201,7 @@ require_once("includes/buyer-header.php");?>
             	  		<?php } ?>
             	    </div>
             	</div>
+            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3- التعليمات</span>
             	    <p><?= $buyer_instruction ?></p>

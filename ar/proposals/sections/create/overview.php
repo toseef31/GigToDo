@@ -421,7 +421,9 @@ if(isset($_POST['submit'])){
 
       $data['proposal_title'] = $input->post('proposal_title');
       $data['buyer_instruction'] = $input->post('buyer_instruction');
+
       $data['answer_type'] = $input->post('answer_type');
+
       $data['proposal_cat_id'] = $input->post('proposal_cat_id');
       $data['proposal_child_id'] = $input->post('proposal_child_id');
       // $data['proposal_tags'] = $input->post('proposal_tags');

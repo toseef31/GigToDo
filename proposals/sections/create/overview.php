@@ -184,7 +184,9 @@ if (empty($form_data)) {
       <div class="d-flex flex-row mt-10 mb-10">
         <select class="form-control wide" name="answer_type">
           <option value="Free Text">Free Text</option>
+
           <option value="Attachment">Attachment</option>
+
         </select>
       </div>
       <div class="d-flex flex-row">

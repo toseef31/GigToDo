@@ -33,6 +33,7 @@ $d_delivery_id = $row_proposal->delivery_id;
 $d_proposal_enable_referrals = $row_proposal->proposal_enable_referrals;
 $d_proposal_referral_money = $row_proposal->proposal_referral_money;
 $d_proposal_status = $row_proposal->proposal_status;
+$d_answer_type = $row_proposal->answer_type;
 if($d_proposal_price == 0){
 $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
 $package_price = $get_p_1->fetch()->price;

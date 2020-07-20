@@ -63,7 +63,11 @@
 				<?php }elseif($order_status == "cancelled"){ ?>
 					<a class="button button-white" href="order_details?order_id=<?= $order_id; ?>">ملغية</a>
 				<?php }elseif($order_status == "pending"){ ?>
+
 					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>">قيد الانتظار</a>
+				<?php }elseif($order_status == "cancellation requested"){ ?>
+					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">إلغاء الطلب</a>
+
 				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>
 					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">متأخرة</a>
 				<?php } ?>

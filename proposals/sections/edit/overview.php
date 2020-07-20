@@ -202,11 +202,13 @@ $child_title = $row_meta->child_title;
                           </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
+
                           <div class="tab-pane fade" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
                             <textarea dir="rtl" rows="6" class="form-control text-count" name="buyer_instruction" placeholder="أدخل متطلبات الخدمة"><?php echo $d_buyer_instruction; ?></textarea>
                           </div>
                           <div class="tab-pane fade show active" id="english" role="tabpanel" aria-labelledby="english-tab">
                             <textarea rows="6" class="form-control text-count" name="buyer_instruction" placeholder="I need...."><?php echo $d_buyer_instruction; ?></textarea>
+
                           </div>
                         </div>
                       </div>
@@ -215,8 +217,10 @@ $child_title = $row_meta->child_title;
                         <label class="bottom-label">Answer Type:</label>
                         <div class="d-flex flex-row mt-10 mb-10">
                           <select class="form-control wide" name="answer_type">
+
                             <option value="Free Text" <?php if($d_answer_type == 'Free Text'){echo "selected";} ?>>Free Text</option>
                             <option value="Attachment" <?php if($d_answer_type == 'Attachment'){echo "selected";} ?>>Attachment</option>
+
                           </select>
                         </div>
                         <div class="d-flex flex-row">

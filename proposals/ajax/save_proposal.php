@@ -64,6 +64,7 @@ if(isset($_POST['proposal_video'])){
 
 // if(isset($_POST['proposal_desc']) and @empty($_POST['proposal_desc'])){
 
+
 // 	$error = "error";
 
 // }

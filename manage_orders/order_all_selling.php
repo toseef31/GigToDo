@@ -53,13 +53,20 @@
 			</td>
 			<td data-label="Status" role="column">
 				<?php if ($order_status == "delivered"){ ?>
+
 				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">In Progress</a>
+
 				<?php }elseif($order_status == "completed"){ ?>
 					<a class="button button-yellow" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($order_status == "cancelled"){ ?>
+
 					<a class="button button-white" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
+
+				<?php }elseif($order_status == "cancellation requested"){ ?>
+					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">Cancel Request</a>
+
 				<?php }elseif($order_status == "pending"){ ?>
 					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>

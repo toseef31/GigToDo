@@ -168,7 +168,7 @@ require_once("includes/buyer-header.php");?>
             	<div class="checkout-requirement-title">
             	    <h4 class="title">Submit Requirements to Start Your Order</h4>
             	</div>
-            	
+
             	<div class="checkout-requirement-content-2">
             	    <span>2. hello your royal awesomeness!</span>
             	    <p class="text"><?= $buyer_instruction ?></p>
@@ -192,6 +192,7 @@ require_once("includes/buyer-header.php");?>
             	  		<?php } ?>
             	    </div>
             	</div>
+            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3. Instructions</span>
             	    <p><?= $buyer_instruction ?></p>
