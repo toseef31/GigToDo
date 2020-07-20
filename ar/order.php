@@ -29,9 +29,31 @@ if(
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="<?php echo $site_author; ?>">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-	<link href="styles/bootstrap.css" rel="stylesheet">
-	<link href="styles/styles.css" rel="stylesheet">
+	<?php if(!empty($site_favicon)){ ?>
+	<link rel="shortcut icon" href="<?= $site_url; ?>/images/<?= $site_favicon; ?>" type="image/x-icon">
+	<?php } ?>
+	<!--====== Bootstrap css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
+	<!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
+	<!-- <link href="styles/styles.css" rel="stylesheet"> -->
 	<link href="styles/categories_nav_styles.css" rel="stylesheet">
 	<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
 	<link href="styles/owl.carousel.css" rel="stylesheet">

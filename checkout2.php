@@ -44,6 +44,7 @@
 	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposals = $select_proposals->fetch();
 	$buyer_instruction = $row_proposals->buyer_instruction;
+	$answer_type = $row_proposals->answer_type;
 
 	
 	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
@@ -164,34 +165,43 @@ require_once("includes/buyer-header.php");?>
 				<!-- Step 3 start -->
 				<div class="col-12 col-lg-8" id="submit_requirement">
           <div class="checkout-requirement-area bg-white mt-30">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
             	<div class="checkout-requirement-title">
             	    <h4 class="title">Submit Requirements to Start Your Order</h4>
             	</div>
-            	<div class="checkout-requirement-content pb-35">
+
+            	
+            	<!-- <div class="checkout-requirement-content pb-35">
             	    <span>The seller needs the following information to start working on your order:</span>
             	    <p>1. what industry does this order relate to? (optional)</p>
             	    <input type="text" name="order_industry" class="form-control">
-            	</div>
+            	</div> -->
+            	
+
             	<div class="checkout-requirement-content-2">
             	    <span>2. hello your royal awesomeness!</span>
-            	    <p class="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+            	    <p class="text"><?= $buyer_instruction ?></p>
             	    <div class="checkout-requirement-textarea">
-            	        <span>1st order?</span>
-            	        <p>Please let us know your first name and a few words about you if you want! (optional)</p>
-            	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
-            	        <!-- <div class="pusrchase-form d-flex justify-content-between align-items-center">
-            	            <div class="attach-file">
-            	                <input type="file" id="file">
-            	                <label for="file"><img src="assets/img/post-request/attach.png" alt="">Attach File</label>
-            	                <span class="max-size">Max Size 30MB</span>
-            	            </div>
-            	            <div class="chars-max">
-            	                <p class="text">0/2500 Chars Max</p>
-            	            </div>
-            	        </div> -->
+          	        <span>1st order?</span>
+          	        <?php if ($answer_type == 'Free Text') { ?>
+          	        <p>Please let us know your first name and a few words about you if you want! (optional)</p>
+          	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
+          	      	<?php } ?>
+          	        <?php if ($answer_type == 'Attachment') { ?>
+          	        <div class="pusrchase-form d-flex justify-content-between align-items-center mt-15">
+          	            <div class="attach-file">
+          	                <input type="file" id="file" name="order_require_file">
+          	                <label for="file"><img src="assets/img/post-request/attach.png" alt="">Attach File</label>
+          	                <span class="max-size">Max Size 30MB</span>
+          	            </div>
+          	            <!-- <div class="chars-max">
+          	                <p class="text">0/2500 Chars Max</p>
+          	            </div> -->
+          	        </div>
+            	  		<?php } ?>
             	    </div>
             	</div>
+            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3. Instructions</span>
             	    <p><?= $buyer_instruction ?></p>
@@ -200,10 +210,27 @@ require_once("includes/buyer-header.php");?>
             </form>
             <?php 
               if(isset($_POST['submit_requirement'])){
-                $order_industry = $input->post('order_industry');
+                // $order_industry = $input->post('order_industry');
                 $order_description = $input->post('order_description');
+
+                $order_require_file = $_FILES['order_require_file']['name'];
+                // print_r($order_require_file);die();
+                $order_require_file_tmp = $_FILES['order_require_file']['tmp_name'];
                 
-                $update_order = $db->update("orders",array("order_industry" => $order_industry, "order_description" => $order_description),array("order_id" => $order_id));
+                $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+                $file_extension = pathinfo($order_require_file, PATHINFO_EXTENSION);
+                if(!empty($order_require_file)){
+                  if(!in_array($file_extension,$allowed)){
+                    echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+                    echo "<script>window.open('checkout2?order_id=$order_id','_self')</script>";
+                    exit();
+                  }
+                  $order_require_file = pathinfo($order_require_file, PATHINFO_FILENAME);
+                  $order_require_file = $order_require_file."_".time().".$file_extension";
+                  move_uploaded_file($order_require_file_tmp,"order_files/$order_require_file");
+                }
+                
+                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
                 if($update_order){
                 	echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
                 }

@@ -6,21 +6,44 @@ use PHPMailer\PHPMailer\Exception;
 <?php if($seller_id == $login_seller_id){ ?>
 <div id="deliver-order-modal" class="modal fade">
   <!--- deliver-order-modal Starts --->
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered customer-order">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"> Deliver Your Order Now </h5>
-        <button class="close" data-dismiss="modal"> <span>&times;</span> </button>
+      <div class="modal-header align-items-center">
+        <h5 class="modal-title"> سلم الشغل الجاهز </h5>
+        <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+          <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
+        </a>
       </div>
       <div class="modal-body">
         <form method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label class="font-weight-bold" > Message </label>
-            <textarea name="delivered_message" placeholder="Type Your Message Here..." class="form-control mb-2"></textarea>
+            <div class="d-flex flex-row">
+              <label class="mb-0 button d-flex flex-row align-items-center justify-content-center" for="uploadFile">
+                <input type="file" id="uploadFile" hidden name="delivered_file">
+                <span class="mr-3">
+                  <i class="fal fa-paperclip"></i>
+                </span>
+                <span>حمل الشغل</span>
+              </label>
+              <div id="file_name" class="d-flex flex-row align-items-center justify-content-center" style="padding-right: 15px;"></div>
+            </div>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-start mb-30 mt-15">
+                <span class="max-size">اقصى حجم 150 ميجا بايت</span>
+                <span class="chars-max"><!-- Max Size 150mb --></span>
+            </div>
           </div>
-          <div class="form-group clearfix">
-            <input type="file" name="delivered_file" class="mt-1">
-            <input type="submit" name="submit_delivered" value="Deliver Order" class="btn btn-success float-right">
+          <div class="form-group">
+            <label class="control-label d-flex align-items-start"> اوصف رسالتك </label>
+            <textarea name="delivered_message" placeholder="اكتب النص هنا..." class="form-control deliver_msg" rows="5"></textarea>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-end mb-30 mt-15">
+              <span class="chars-max"><span class="deliverCount">0</span>/2500 حرف</span>
+            </div>
+          </div>
+          <div class="form-group d-flex flex-row align-items-center justify-content-between">
+            <!-- <input type="file" name="delivered_file" class="mt-1"> -->
+            <button type="submit" name="submit_delivered" class="button">سلم الشغل</button>
+            <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">إلغاء</button>
+            <!-- <input type="submit" name="submit_delivered" value="Deliver Order" class="btn btn-success float-right"> -->
           </div>
         </form>
         <?php
@@ -34,7 +57,7 @@ use PHPMailer\PHPMailer\Exception;
             echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
             echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
           }else{
-            move_uploaded_file($d_file_tmp,"order_files/$d_file");
+            move_uploaded_file($d_file_tmp,"../order_files/$d_file");
             $last_update_date = date("h:m: M d Y");
             $update_messages = $db->update("order_conversations",array("status" => "message"),array("order_id" => $order_id,"status" => "delivered"));
             $insert_delivered_message = $db->insert("order_conversations",array("order_id" => $order_id,"sender_id" => $seller_id,"message" => $d_message,"file" => $d_file,"date" => $last_update_date,"status" => "delivered"));
@@ -139,20 +162,27 @@ use PHPMailer\PHPMailer\Exception;
 </div>
 <?php }elseif($buyer_id == $login_seller_id){ ?>
 <div id="revision-request-modal" class="modal fade">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered customer-order">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"> Submit Your Revision Request Here </h5>
-        <button class="close" data-dismiss="modal"> <span>&times;</span> </button>
+      <div class="modal-header align-items-center">
+        <h5 class="modal-title"> أرسل طلب المراجعة الخاص بك هنا </h5>
+        <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+          <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
+        </a>
       </div>
       <div class="modal-body">
         <form method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label class="font-weight-bold" > Request Message </label>
-            <textarea name="revison_message" placeholder="Type Your Message Here..." class="form-control mb-2" required=""></textarea>
+            <label class="control-label d-flex align-items-start" > طلب رسالة </label>
+            <textarea name="revison_message" placeholder="اكتب النص هنا..." class="form-control revision_msg" required=""></textarea>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-end mb-30 mt-15">
+              <span class="chars-max"><span class="revision_count">0</span>/2500 حرف</span>
+            </div>
           </div>
           <div class="form-group clearfix">
-            <input type="file" name="revison_file" class="mt-1">
+            <button type="submit" name="submit_revison" class="button">سلم الشغل</button>
+            <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">إلغاء</button>
+            <!-- <input type="file" name="revison_file" class="mt-1"> -->
             <input type="submit" name="submit_revison" value="Submit Request" class="btn btn-success float-right">
           </div>
         </form>
@@ -167,7 +197,7 @@ use PHPMailer\PHPMailer\Exception;
           echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
           echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
           }else{
-          move_uploaded_file($revison_file_tmp,"order_files/$revison_file");
+          move_uploaded_file($revison_file_tmp,"../order_files/$revison_file");
           $last_update_date = date("h:i: M d, Y");
           $update_messages = $db->update("order_conversations",array("status"=>"message"),array("order_id" => $order_id,"status" => "delivered"));
           $insert_revision_message = $db->insert("order_conversations",array("order_id"=>$order_id,"sender_id"=>$buyer_id,"message"=>$revison_message,"file"=>$revison_file,"date"=>$last_update_date,"status" =>"revision"));

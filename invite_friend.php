@@ -90,7 +90,7 @@ $referral_money = $row_general_settings->referral_money;
 										<h1 class="text-center">Invite Friends & Get <?php if ($to == 'EGP'){ echo $to.' '; echo "81";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * 81);}else{  echo $s_currency.' '; echo "81"; } ?></h1>
 										<p class="text-center">Get <?php if ($to == 'EGP'){ echo "20".' ';echo $to;}elseif($to == 'USD'){ echo round($cur_amount * 20).' '; echo $to;}else{ echo "20".' '; echo $s_currency; } ?> off on your next purchase</p>
 										<form method="POST" action="">
-											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>?referral=<?php echo $login_seller_referral; ?>">
+											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>">
 											<div class="input-group flex-nowrap flex-row">
 												<div class="input-group-prepend">
 													<div class="input-group-text">

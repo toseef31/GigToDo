@@ -90,7 +90,7 @@ $referral_money = $row_general_settings->referral_money;
 										<h1 class="text-center">قم بدعوة اصدقائك واحصل على   <?php if ($to == 'EGP'){ echo $to.' '; echo "80";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * 80);}else{  echo $s_currency.' '; echo "80"; } ?></h1>
 										<p class="text-center">احصل على خصم 20 جنيه مصرى على عملية شرائك القادمة</p>
 										<form method="POST" action="">
-											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>?referral=<?php echo $login_seller_referral; ?>">
+											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>/ar/register?referral=<?php echo $login_seller_referral; ?>">
 											<div class="input-group flex-nowrap flex-row">
 												<div class="input-group-prepend">
 													<div class="input-group-text">

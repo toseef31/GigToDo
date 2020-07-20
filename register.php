@@ -330,7 +330,7 @@ if(isset($_SESSION['seller_user_name'])){
 
 				      $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
 				  		$seller_meta = $get_seller->fetch();
-				  		print_r($seller_meta->account_type);
+				  		// print_r($seller_meta->account_type);
 				  		if($seller_meta->account_type == 'buyer'){
 
 		           

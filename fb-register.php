@@ -130,6 +130,28 @@ if($check_seller_email > 0){
 						<label class="form-control-label font-weight-bold"> Email </label>
 						<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
 					</div><!-- form-group Ends -->
+					<div class="row">
+						<div class="col-12">
+							<label class="control-label">ACCOUNT TYPE</label>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label for="customRadio1" class="custom-control custom-radio">
+									<input type="radio" hidden id="customRadio1" name="account_type" class="custom-control-input" value="buyer">
+									<div class="custom-control-label">Buyer</div>
+								</label>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label for="customRadio2" class="custom-control custom-radio">
+									<input type="radio" hidden id="customRadio2" name="account_type" class="custom-control-input" value="seller">
+									<div class="custom-control-label">Seller</div>
+								</label>
+							</div>
+						</div>
+					</div>
+					<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['account_type']); ?></span>
 					<div class="form-group">
 						<input type="submit" name="continue" class="login-button" value="Continue">
 					</div>
@@ -147,9 +169,10 @@ if(isset($_POST['continue'])){
 
 	$rules = array(
 	"name" => "required",
-	"u_name" => "required");
+	"u_name" => "required",
+	"account_type" => "required");
 
-	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.");
+	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","account_type" => "Account type Is Required.");
 
 	$val = new Validator($_POST,$rules,$messages);
 
@@ -167,6 +190,7 @@ if(isset($_POST['continue'])){
 	$name = $input->post('name');
 	
 	$u_name = $input->post('u_name');
+	$account_type = $input->post('account_type');
 
 	$email = $_SESSION['userData']['email'];
 		
@@ -230,7 +254,7 @@ if(isset($_POST['continue'])){
 		$verification_code = "ok";
 						
 
-		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online',"fb_verification" => 1));
+		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"account_type" => $account_type,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online',"fb_verification" => 1));
 		
 		$regsiter_seller_id = $db->lastInsertId();
 		
@@ -245,26 +269,47 @@ if(isset($_POST['continue'])){
 					unset($_SESSION['userData']);
 					unset($_SESSION['access_token']);
 					
+					$get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));
+					$seller_meta = $get_seller->fetch();
+					// print_r($seller_meta->account_type);
+					if($seller_meta->account_type == 'buyer'){
+
 					echo "
-					
-		        <script>
-		  
-		           swal({
-		          
-		          type: 'success',
-		          text: 'Hey $u_name, welcome onboard. ',
-		          timer: 2000,
-		          onOpen: function(){
-		          swal.showLoading()
-		          }
-		          }).then(function(){
 
-		            // Read more about handling dismissals
-		            window.open('$site_url','_self')
+						<script>
 
-		        })
+						swal({
+							type: 'success',
+							text: 'Hey $u_name, welcome. ',
+							timer: 2000,
+							onOpen: function(){
+								swal.showLoading()
+							}
+						}).then(function(){
 
-		        </script>";
+						// Read more about handling dismissals
+						window.open('$site_url','_self')
+						});
+						</script>";
+					}else{
+						echo "
+
+						<script>
+
+						swal({
+							type: 'success',
+							text: 'Hey $u_name, welcome. ',
+							timer: 2000,
+							onOpen: function(){
+								swal.showLoading()
+							}
+						}).then(function(){
+
+						// Read more about handling dismissals
+						window.open('$site_url/dashboard','_self')
+						});
+						</script>";
+					}
 					
 				}
 		}

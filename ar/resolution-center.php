@@ -232,38 +232,23 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Due to personal/technical reasons, I can not complete the work">
-                          <label class="custom-control-label" for="customRadio1">لأسباب شخصية \ تقنية , مش هقدر أكمل العمل</label>
+                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Buyer is not responding">
+                          <label class="custom-control-label" for="customRadio1">المشتري لا يستجيب</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="The buyer requested work, which is not offered in this Gig">
-                          <label class="custom-control-label" for="customRadio2">طلب المشتري شئ مش متوفر في الخدمة دي</label>
+                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="Buyer is extremely rude">
+                          <label class="custom-control-label" for="customRadio2">المشتري وقح للغاية.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="I’m not able to do this job">
-                          <label class="custom-control-label" for="customRadio3">مش هقدرأعمل الوظيفة دي</label>
+                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="Buyer requested that I cancel this order.">
+                          <label class="custom-control-label" for="customRadio3">طلب المشتري أن ألغي هذا الطلب.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="The buyer will order again">
-                          <label class="custom-control-label" for="customRadio4">المشتري هيعيد الطلب مره أخرى</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio5" name="customRadio_seller" class="custom-control-input" value="The buyer is not responding">
-                          <label class="custom-control-label" for="customRadio5">المشتري لا يستجيب</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio6" name="customRadio_seller" class="custom-control-input" value="I didn’t recieve enough information from the buyer">
-                          <label class="custom-control-label" for="customRadio6">مستلمتش معلومات كافية من المشتري</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio7" name="customRadio_seller" class="custom-control-input" value="We couldn’t agree on the price">
-                          <label class="custom-control-label" for="customRadio7">قدرناش نتفق علىالسعر</label>
+                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="Buyer expects more than what this proposal can offer.">
+                          <label class="custom-control-label" for="customRadio4">يتوقع المشتري أكثر مما يمكن أن يقدمه هذا الاقتراح.</label>
                         </div>
                         <!-- Each item -->
                         <!-- <div class="custom-control custom-radio">
@@ -497,45 +482,30 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Due to personal/technical reasons">
-                          <label class="custom-control-label" for="customRadio1">لأسباب شخصية \ تقنية , مش هقدر أكمل العمل</label>
+                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Seller is not responding">
+                          <label class="custom-control-label" for="customRadio1">البائع لا يستجيب</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="The buyer requested work, which is not offered in this Gig">
-                          <label class="custom-control-label" for="customRadio2">طلب المشتري شئ مش متوفر في الخدمة دي</label>
+                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="Seller is extremely rude">
+                          <label class="custom-control-label" for="customRadio2">البائع وقح للغاية</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="I’m not able to do this job">
-                          <label class="custom-control-label" for="customRadio3">مش هقدرأعمل الوظيفة دي</label>
+                          <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="Order does meet requirements">
+                          <label class="custom-control-label" for="customRadio3">يفي النظام بالمتطلبات</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="The buyer will order again">
-                          <label class="custom-control-label" for="customRadio4">المشتري هيعيد الطلب مره أخرى</label>
+                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="Seller asked me to cancel">
+                          <label class="custom-control-label" for="customRadio4">طلب مني البائع الإلغاء</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="The buyer is not responding">
-                          <label class="custom-control-label" for="customRadio5">المشتري لا يستجيب</label>
+                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="Seller cannot do required task">
+                          <label class="custom-control-label" for="customRadio5">لا يمكن للبائع القيام بالمهمة المطلوبة</label>
                         </div>
                         <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio6" name="customRadio_buyer" class="custom-control-input" value="I didn’t recieve enough information from the buyer">
-                          <label class="custom-control-label" for="customRadio6">مستلمتش معلومات كافية من المشتري</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio7" name="customRadio_buyer" class="custom-control-input" value="We couldn’t agree on the price">
-                          <label class="custom-control-label" for="customRadio7">We couldn’t agree on the price</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio8" name="customRadio_buyer" class="custom-control-input" value="other">
-                          <label class="custom-control-label" for="customRadio8">Other</label>
-                        </div>
-                          <!-- Each item -->
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button button-red" role="button" id="continue_buyer_issue">أستمر</button>

@@ -16,6 +16,7 @@ if(isset($_SESSION['seller_user_name'])){
   $gmail_verification = $row_login_seller->gmail_verification;
   $fb_verification = $row_login_seller->fb_verification;
   $seller_verification = $row_login_seller->seller_verification;
+  $login_seller_paypal_email = $row_login_seller->seller_paypal_email;
 
   $relevant_requests = $row_general_settings->relevant_requests;
 
@@ -47,6 +48,7 @@ $row_select_seller = $select_seller->fetch();
 $gmail_verification = $row_select_seller->gmail_verification;
 $fb_verification = $row_select_seller->fb_verification;
 $seller_verification = $row_select_seller->seller_verification;
+$seller_paypal_email = $row_select_seller->seller_paypal_email;
 
 
 $count_seller = $select_seller->rowCount();
@@ -56,6 +58,13 @@ if($count_seller == 0){
 
 $get_requests = $db->select("buyer_requests",array("seller_id" => $seller_id,"request_status" => "active"),"DESC");                      
 $count_requests = $get_requests->rowCount();
+
+$select_seller_payments = $db->select("seller_payment_account", array("seller_id" => $login_seller_id));
+$count_account = $select_seller_payments->rowCount();
+
+
+$select_seller_payments = $db->select("seller_payment_account", array("seller_id" => $select_seller_id));
+$count_account = $select_seller_payments->rowCount();
 
 ?>
 <!DOCTYPE html>
@@ -287,9 +296,15 @@ $count_requests = $get_requests->rowCount();
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
                       <span>Payment</span>
+                      <?php if ($count_account > 0 or $login_seller_paypal_email != ''){ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php }elseif($count_account == 0 and $login_seller_paypal_email == ''){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings')">
+                        <span>Verify</span>
+                      </span>
+                      <?php } ?>
                     </div>
                   </div>
                 <?php } else { ?>
@@ -346,9 +361,17 @@ $count_requests = $get_requests->rowCount();
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
                       <span>Payment</span>
+                      <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php }elseif($count_account == 0 and $seller_paypal_email == ''){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center email">
+                        <span>
+                          اتحقق
+                        </span>
+                      </span>
+                      <?php } ?>
                     </div>
                   </div>
                 <?php } } else{?>
@@ -405,9 +428,15 @@ $count_requests = $get_requests->rowCount();
                     <div class="buyer-sidebar-body-item d-flex flex-row">
                       <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
                       <span>Payment</span>
+                      <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                       <span class="ml-auto d-flex flex-row align-items-center payment">
                         <span><i class="fal fa-check"></i></span>
                       </span>
+                      <?php }elseif($count_account == 0 and $seller_paypal_email == ''){ ?>
+                      <span class="ml-auto d-flex flex-row align-items-center email">
+                        <span>Verify</span>
+                      </span>
+                      <?php } ?>
                     </div>
                   </div>
                 <?php } ?>

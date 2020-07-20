@@ -84,6 +84,8 @@ $get_seller_recent_delivery = $row_seller->seller_recent_delivery;
 $gmail_verification = $row_seller->gmail_verification;
 $fb_verification = $row_seller->fb_verification;
 $seller_verification = $row_seller->seller_verification;
+$seller_paypal_email = $row_seller->seller_paypal_email;
+$seller_payoneer_email = $row_seller->seller_payoneer_email;
 
 $get_seller_status = $row_seller->seller_status;
 $select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$get_seller_id)); 
@@ -307,7 +309,12 @@ if(isset($_SESSION['seller_user_name'])){
                     <?php }else{ ?>
                     <li><i class="fa fa-envelope"></i> Email Verified <span class="check"><i class="fa fa-check"></i></span></li>
                     <?php } ?>
+                    <?php if($seller_paypal_email != '' or $seller_payoneer_email != ''){ ?>
                     <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } elseif($seller_paypal_email == '' and $seller_payoneer_email == ''){ ?>
+                    <li onclick="window.open('settings?account_settings');"><i class="fas fa-dollar-sign"></i> Payment Verified <span class="verify">Verify</span></li>
+                    <?php } ?>
+                    
                   </ul>
                 </div>
               <?php }else { ?>
@@ -329,7 +336,11 @@ if(isset($_SESSION['seller_user_name'])){
                     <?php }else{ ?>
                     <li><i class="fa fa-envelope"></i> Email Verified <span class="check"><i class="fa fa-check"></i></span></li>
                     <?php } ?>
+                    <?php if($seller_paypal_email != '' or $seller_payoneer_email != ''){ ?>
                     <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="check"><i class="fa fa-check"></i></span></li>
+                    <?php } elseif($seller_paypal_email == '' and $seller_payoneer_email == ''){ ?>
+                    <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="verify">Verify</span></li>
+                    <?php } ?>
                   </ul>
                 </div>
             <?php } } ?>

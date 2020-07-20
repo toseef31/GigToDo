@@ -44,11 +44,11 @@ $proposal_id = strip_tags($input->post('proposal_id'));
 $data = $input->post();
 unset($data['proposal_id']);
 
-if(isset($_POST['proposal_desc'])){
+// if(isset($_POST['proposal_desc'])){
 
-	$data['proposal_desc'] = removeJava($_POST['proposal_desc'],"<div><iframe><br><a><b><i><u><span><img><h1><h2><h3><h4><h5><h6><p><ul><ol><li>");
+// 	$data['proposal_desc'] = removeJava($_POST['proposal_desc'],"<div><iframe><br><a><b><i><u><span><img><h1><h2><h3><h4><h5><h6><p><ul><ol><li>");
 
-}
+// }
 
 if(isset($_POST['proposal_video'])){
 
@@ -61,11 +61,12 @@ if(isset($_POST['proposal_video'])){
 
 }
 
-if(isset($_POST['proposal_desc']) and @empty($_POST['proposal_desc'])){
+// if(isset($_POST['proposal_desc']) and @empty($_POST['proposal_desc'])){
 
-	$error = "error";
 
-}
+// 	$error = "error";
+
+// }
 
 if(isset($_POST['proposal_img1']) and @empty($_POST['proposal_img1'])){
 
