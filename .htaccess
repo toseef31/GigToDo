@@ -1,4 +1,3 @@
-
 RewriteEngine On
 Options -Indexes
 <IfModule mod_headers.c>
@@ -26,5 +25,4 @@ RewriteRule (.*) https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} !=localhost
 RewriteCond %{HTTP_HOST} ^www\.
-
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
