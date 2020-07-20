@@ -149,13 +149,13 @@ if (empty($form_data)) {
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="english" role="tabpanel" aria-labelledby="english-tab">
-          <textarea rows="6" class="form-control" name="proposal_desc" placeholder="I need...."></textarea>
+          <textarea rows="6" class="form-control" name="buyer_instruction" placeholder="I need...."></textarea>
         </div>
         <div class="tab-pane fade show active" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
-          <textarea dir="rtl" rows="6" class="form-control" name="proposal_desc" placeholder="أدخل متطلبات الخدمة"></textarea>
+          <textarea dir="rtl" rows="6" class="form-control" name="buyer_instruction" placeholder="أدخل متطلبات الخدمة"></textarea>
         </div>
       </div>
-      <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_desc']); ?></span>
+      <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['buyer_instruction']); ?></span>
     </div>
     <label class="bottom-label text-right">
       <span class="descCount">0</span>-2500 حرف بحد أقصى
@@ -165,9 +165,9 @@ if (empty($form_data)) {
         نوع الإجابة :
       </label>
       <div class="d-flex flex-row mt-10 mb-10">
-        <select class="form-control wide">
-          <option value="1">كتابة حرة</option>
-          <option value="2">نص مركب</option>
+        <select class="form-control wide" name="answer_type">
+          <option value="Free Text">كتابة حرة</option>
+          <option value="Attachment">نص مركب</option>
         </select>
       </div>
       <div class="d-flex flex-row">
@@ -356,8 +356,7 @@ if(isset($_POST['submit'])){
   $rules = array(
   "proposal_title" => "required",
   "proposal_cat_id" => "required",
-  "proposal_child_id" => "required",
-  "proposal_desc" => "required");
+  "proposal_child_id" => "required");
 
   $messages = array("proposal_title" => "يرجى إدخال عنوان الخدمة","proposal_cat_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_desc" => "الرجاء إدخال متطلبات الخدمة","proposal_child_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_img1"=>"صورة الاقتراح 1 مطلوبة.", "delivery_id" => "الرجاء تحديد وقت التسليم");
   $val = new Validator($_POST,$rules,$messages);
@@ -421,7 +420,8 @@ if(isset($_POST['submit'])){
       unset($data['submit']);
 
       $data['proposal_title'] = $input->post('proposal_title');
-      $data['proposal_desc'] = $input->post('proposal_desc');
+      $data['buyer_instruction'] = $input->post('buyer_instruction');
+      $data['answer_type'] = $input->post('answer_type');
       $data['proposal_cat_id'] = $input->post('proposal_cat_id');
       $data['proposal_child_id'] = $input->post('proposal_child_id');
       // $data['proposal_tags'] = $input->post('proposal_tags');

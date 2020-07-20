@@ -17,6 +17,7 @@ if(isset($_SESSION['seller_user_name'])){
   $gmail_verification = $row_login_seller->gmail_verification;
   $fb_verification = $row_login_seller->fb_verification;
   $seller_verification = $row_login_seller->seller_verification;
+  $login_seller_paypal_email = $row_login_seller->seller_paypal_email;
 
   if(isset($_GET['delete_language'])){
     $delete_language_id = $input->get('delete_language');
@@ -43,17 +44,28 @@ if(isset($_SESSION['seller_user_name'])){
 $get_seller_user_name = $input->get('user_name');
 $select_seller = $db->query("select * from sellers where seller_user_name=:u_name AND NOT seller_status='deactivated' AND NOT seller_status='block-ban'",array("u_name"=>$get_seller_user_name));
 $row_select_seller = $select_seller->fetch();
+$select_seller_id = $row_select_seller->seller_id;
 $gmail_verification = $row_select_seller->gmail_verification;
 $fb_verification = $row_select_seller->fb_verification;
 $seller_verification = $row_select_seller->seller_verification;
+$seller_paypal_email = $row_select_seller->seller_paypal_email;
 
 $count_seller = $select_seller->rowCount();
 if($count_seller == 0){
   echo "<script>window.open('index?not_available','_self');</script>";
 }
 
-$get_requests = $db->select("buyer_requests",array("seller_id" => $seller_id,"request_status" => "active"),"DESC");                      
+$get_requests = $db->select("buyer_requests",array("seller_id" => $select_seller_id,"request_status" => "active"),"DESC");                      
 $count_requests = $get_requests->rowCount();
+
+$select_seller_payments = $db->select("seller_payment_account", array("seller_id" => $login_seller_id));
+$count_account = $select_seller_payments->rowCount();
+
+
+$select_seller_payments = $db->select("seller_payment_account", array("seller_id" => $select_seller_id));
+$count_account = $select_seller_payments->rowCount();
+
+
 
 ?>
 <!DOCTYPE html>
@@ -312,9 +324,17 @@ $count_requests = $get_requests->rowCount();
                     <span>
                       اتحققنا من الدفع
                     </span>
+                    <?php if ($count_account > 0 or $login_seller_paypal_email != ''){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
+                    <?php }elseif($count_account == 0 and $login_seller_paypal_email == ''){ ?>
+                    <span class="mr-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings')">
+                      <span>
+                        اتحقق
+                      </span>
+                    </span>
+                    <?php } ?>
                   </div>
                 </div>
                 <?php } else { ?>
@@ -385,9 +405,20 @@ $count_requests = $get_requests->rowCount();
                     <span>
                       اتحققنا من الدفع
                     </span>
+                    <!-- <span class="mr-auto d-flex flex-row align-items-center payment">
+                      <span><i class="fal fa-check"></i></span>
+                    </span> -->
+                    <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
+                    <?php }elseif($count_account == 0 and $seller_paypal_email == ''){ ?>
+                    <span class="mr-auto d-flex flex-row align-items-center email">
+                      <span>
+                        اتحقق
+                      </span>
+                    </span>
+                    <?php } ?>
                   </div>
                 </div>
                 <?php } } else{?>
@@ -458,9 +489,17 @@ $count_requests = $get_requests->rowCount();
                     <span>
                       اتحققنا من الدفع
                     </span>
+                    <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
+                    <?php }elseif($count_account == 0 and $seller_paypal_email == ''){ ?>
+                    <span class="mr-auto d-flex flex-row align-items-center email">
+                      <span>
+                        اتحقق
+                      </span>
+                    </span>
+                    <?php } ?>
                   </div>
                 </div>
                 <?php } ?>

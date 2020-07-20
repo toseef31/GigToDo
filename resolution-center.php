@@ -230,38 +230,23 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Due to personal/technical reasons, I can not complete the work">
-                          <label class="custom-control-label" for="customRadio1">Due to personal/technical reasons, I can not complete the work</label>
+                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Buyer is not responding">
+                          <label class="custom-control-label" for="customRadio1">Buyer is not responding</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="The buyer requested work, which is not offered in this Gig">
-                          <label class="custom-control-label" for="customRadio2">The buyer requested work, which is not offered in this Gig</label>
+                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="Buyer is extremely rude">
+                          <label class="custom-control-label" for="customRadio2">Buyer is extremely rude.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="I’m not able to do this job">
-                          <label class="custom-control-label" for="customRadio3">I’m not able to do this job</label>
+                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="Buyer requested that I cancel this order.">
+                          <label class="custom-control-label" for="customRadio3">Buyer requested that I cancel this order.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="The buyer will order again">
-                          <label class="custom-control-label" for="customRadio4">The buyer will order again</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio5" name="customRadio_seller" class="custom-control-input" value="The buyer is not responding">
-                          <label class="custom-control-label" for="customRadio5">The buyer is not responding</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio6" name="customRadio_seller" class="custom-control-input" value="I didn’t recieve enough information from the buyer">
-                          <label class="custom-control-label" for="customRadio6">I didn’t recieve enough information from the buyer</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio7" name="customRadio_seller" class="custom-control-input" value="We couldn’t agree on the price">
-                          <label class="custom-control-label" for="customRadio7">We couldn’t agree on the price</label>
+                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="Buyer expects more than what this proposal can offer.">
+                          <label class="custom-control-label" for="customRadio4">Buyer expects more than what this proposal can offer.</label>
                         </div>
                         <!-- Each item -->
                         <!-- <div class="custom-control custom-radio">
@@ -349,9 +334,9 @@ if($seller_id == $login_seller_id){
                           <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
-                        </div>
+                        </div> -->
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
                             <span><i class="far fa-long-arrow-left"></i></span>
@@ -462,7 +447,7 @@ if($seller_id == $login_seller_id){
             <div class="row">
               <div class="col-12">
                 <h1 class="page-heading">Resolution Center</h1>
-                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Buyer With Regards To Your Order.</p>
+                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Seller With Regards To Your Order.</p>
               </div>
             </div>
             <!-- Row -->
@@ -494,45 +479,30 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Due to personal/technical reasons">
-                          <label class="custom-control-label" for="customRadio1">Due to personal/technical reasons, I can not complete the work</label>
+                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Seller is not responding">
+                          <label class="custom-control-label" for="customRadio1">Seller is not responding.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="The buyer requested work, which is not offered in this Gig">
-                          <label class="custom-control-label" for="customRadio2">The buyer requested work, which is not offered in this Gig</label>
+                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="Seller is extremely rude">
+                          <label class="custom-control-label" for="customRadio2">Seller is extremely rude</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="I’m not able to do this job">
-                          <label class="custom-control-label" for="customRadio3">I’m not able to do this job</label>
+                          <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="Order does meet requirements">
+                          <label class="custom-control-label" for="customRadio3">Order does meet requirements</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="The buyer will order again">
-                          <label class="custom-control-label" for="customRadio4">The buyer will order again</label>
+                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="Seller asked me to cancel">
+                          <label class="custom-control-label" for="customRadio4">Seller asked me to cancel</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="The buyer is not responding">
-                          <label class="custom-control-label" for="customRadio5">The buyer is not responding</label>
+                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="Seller cannot do required task">
+                          <label class="custom-control-label" for="customRadio5">Seller cannot do required task</label>
                         </div>
                         <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio6" name="customRadio_buyer" class="custom-control-input" value="I didn’t recieve enough information from the buyer">
-                          <label class="custom-control-label" for="customRadio6">I didn’t recieve enough information from the buyer</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio7" name="customRadio_buyer" class="custom-control-input" value="We couldn’t agree on the price">
-                          <label class="custom-control-label" for="customRadio7">We couldn’t agree on the price</label>
-                        </div>
-                        <!-- Each item -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio8" name="customRadio_buyer" class="custom-control-input" value="other">
-                          <label class="custom-control-label" for="customRadio8">Other</label>
-                        </div>
-                          <!-- Each item -->
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button button-red" role="button" id="continue_buyer_issue">Continue</button>

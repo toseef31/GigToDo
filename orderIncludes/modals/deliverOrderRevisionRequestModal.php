@@ -6,21 +6,44 @@ use PHPMailer\PHPMailer\Exception;
 <?php if($seller_id == $login_seller_id){ ?>
 <div id="deliver-order-modal" class="modal fade">
   <!--- deliver-order-modal Starts --->
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered customer-order">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header align-items-center">
         <h5 class="modal-title"> Deliver Your Order Now </h5>
-        <button class="close" data-dismiss="modal"> <span>&times;</span> </button>
+        <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+          <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
+        </a>
       </div>
       <div class="modal-body">
         <form method="post" enctype="multipart/form-data">
+          <!-- <input type="file" name="delivered_file" class="mt-1"> -->
           <div class="form-group">
-            <label class="font-weight-bold" > Message </label>
-            <textarea name="delivered_message" placeholder="Type Your Message Here..." class="form-control mb-2"></textarea>
+            <div class="d-flex flex-row">
+              <label class="mb-0 button d-flex flex-row align-items-center justify-content-center" for="uploadFile">
+                <input type="file" id="uploadFile" hidden name="delivered_file">
+                <span class="mr-3">
+                  <i class="fal fa-paperclip"></i>
+                </span>
+                <span>Upload Work</span>
+              </label>
+              <div id="file_name" class="d-flex flex-row align-items-center justify-content-center" style="padding-left: 15px;"></div>
+            </div>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-start mb-30 mt-15">
+                <span class="max-size">Max Size 150MB</span>
+                <span class="chars-max"><!-- Max Size 150mb --></span>
+            </div>
           </div>
-          <div class="form-group clearfix">
-            <input type="file" name="delivered_file" class="mt-1">
-            <input type="submit" name="submit_delivered" value="Deliver Order" class="btn btn-success float-right">
+          <div class="form-group">
+            <label class="control-label d-flex align-items-start">Describe your message</label>
+            <textarea name="delivered_message" placeholder="Type Your Message Here..." class="form-control deliver_msg" rows="5"></textarea>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-end mb-30 mt-15">
+              <span class="chars-max"><span class="deliverCount">0</span>/2500 Chars Max</span>
+            </div>
+          </div>
+          <div class="form-group d-flex flex-row align-items-center justify-content-between">
+            <button type="submit" name="submit_delivered" class="button">Deliver Work</button>
+            <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <!-- <input type="submit" name="submit_delivered" value="Deliver Order" class="btn btn-success float-right"> -->
           </div>
         </form>
         <?php
@@ -139,22 +162,49 @@ use PHPMailer\PHPMailer\Exception;
 </div>
 <?php }elseif($buyer_id == $login_seller_id){ ?>
 <div id="revision-request-modal" class="modal fade">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered customer-order">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header align-items-center">
         <h5 class="modal-title"> Submit Your Revision Request Here </h5>
-        <button class="close" data-dismiss="modal"> <span>&times;</span> </button>
+        <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
+          <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
+        </a>
       </div>
       <div class="modal-body">
         <form method="post" enctype="multipart/form-data">
+          <!-- <input type="file" name="revison_file" class="mt-1"> -->
           <div class="form-group">
-            <label class="font-weight-bold" > Request Message </label>
-            <textarea name="revison_message" placeholder="Type Your Message Here..." class="form-control mb-2" required=""></textarea>
+            <div class="d-flex flex-row">
+              <label class="mb-0 button d-flex flex-row align-items-center justify-content-center" for="uploadFile_revise">
+                <input type="file" id="uploadFile_revise" hidden name="revison_file">
+                <span class="mr-3">
+                  <i class="fal fa-paperclip"></i>
+                </span>
+                <span>Upload Work</span>
+              </label>
+              <div id="file_name_revise" class="d-flex flex-row align-items-center justify-content-center" style="padding-left: 15px;"></div>
+            </div>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-start mb-30 mt-15">
+                <span class="max-size-revise">Max Size 150MB</span>
+                <span class="chars-max"><!-- Max Size 150mb --></span>
+            </div>
           </div>
-          <div class="form-group clearfix">
-            <input type="file" name="revison_file" class="mt-1">
+          <div class="form-group">
+            <label class="control-label d-flex align-items-start"> Request Message </label>
+            <textarea name="revison_message" placeholder="Type Your Message Here..." class="form-control revision_msg" required="" rows="5"></textarea>
+            <div class="bottom-label d-flex flex-row align-items-center justify-content-end mb-30 mt-15">
+              <span class="chars-max"><span class="revision_count">0</span>/2500 Chars Max</span>
+            </div>
+          </div>
+          <div class="form-group d-flex flex-row align-items-center justify-content-between">
+            <button type="submit" name="submit_revison" class="button">Submit Request</button>
+            <button class="button-close" type="button" role="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <!-- <input type="submit" name="submit_delivered" value="Deliver Order" class="btn btn-success float-right"> -->
+          </div>
+          <!-- <div class="form-group clearfix">
+            
             <input type="submit" name="submit_revison" value="Submit Request" class="btn btn-success float-right">
-          </div>
+          </div> -->
         </form>
         <?php
           if(isset($_POST['submit_revison'])){

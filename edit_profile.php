@@ -35,6 +35,7 @@ $gmail_verification = $row_login_seller->gmail_verification;
 $fb_verification = $row_login_seller->fb_verification;
 $seller_verification = $row_login_seller->seller_verification;
 
+
 $get_seller_lang = explode(',', $row_login_seller->seller_language);
 
 $select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
@@ -770,10 +771,17 @@ $years = range(1910,date("Y"));
                           <div class="profile-verification-item d-flex flex-row">
                             <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
                             <span>Payment</span>
+                            <?php if($login_seller_paypal_email != '' or $login_seller_payoneer_email != ''){ ?>
                             <span class="ml-auto d-flex flex-row align-items-center payment">
                               <span><i class="fal fa-check"></i></span>
                               <span>Verified</span>
                             </span>
+                            <?php } elseif($login_seller_paypal_email == '' and $login_seller_payoneer_email == ''){ ?>
+                              <span class="ml-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings');">
+                                <!-- <span><i class="fal fa-check"></i></span> -->
+                                <span>Verify</span>
+                              </span>
+                            <?php } ?>
                           </div>
                         </div>
                       </div>

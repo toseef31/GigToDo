@@ -71,6 +71,8 @@ $bank_name_address = $row_seller_payment->bank_name_address;
 $swift_code = $row_seller_payment->swift_code;
 $local_mobile_number = $row_seller_payment->local_mobile_number;
 $local_email = $row_seller_payment->local_email;
+
+$count_account = $select_seller_payment->rowCount();
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -346,10 +348,20 @@ $local_email = $row_seller_payment->local_email;
 													<div class="profile-verification-item d-flex flex-row">
 														<span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
 														<span>Payment</span>
+														<?php if ($count_account > 0 or $login_seller_paypal_email != ''){ ?>
 														<span class="ml-auto d-flex flex-row align-items-center payment">
+														  <span><i class="fal fa-check"></i></span>
+														  <span>Verified</span>
+														</span>
+														<?php }elseif($count_account == 0 and $login_seller_paypal_email == ''){ ?>
+														<span class="ml-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings')">
+														  <span>Verify</span>
+														</span>
+														<?php } ?>
+														<!-- <span class="ml-auto d-flex flex-row align-items-center payment">
 															<span><i class="fal fa-check"></i></span>
 															<span>Verified</span>
-														</span>
+														</span> -->
 													</div>
 												</div>
 											</div>

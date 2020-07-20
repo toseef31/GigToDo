@@ -37,8 +37,9 @@ $order_number = $row_orders->order_number;
 $proposal_id = $row_orders->proposal_id;
 $order_status = $row_orders->order_status;
 $complete_time = $row_orders->complete_time;
-$order_industry = $row_orders->order_industry;
+$order_require_file = $row_orders->order_require_file;
 $order_description = $row_orders->order_description;
+
 
 
 if($videoPlugin == 1){
@@ -123,7 +124,15 @@ if($seller_id == $login_seller_id){
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
-
+  <style>
+  .file-attachment span i {
+    color: #ff0707;
+    font-size: 20px;
+  }
+  .file-attachment span.file-name {
+      color: #ff0707;
+  }
+  </style>
   <script>
   function alert_success(text,url){
     swal({
@@ -189,7 +198,7 @@ if($seller_id == $login_seller_id){
                           <li class="list-inline-item">Buyer: <a href="profile?user_name=<?= $buyer_user_name; ?>"><?= ucfirst($buyer_user_name); ?></a></li>
                           <li class="list-inline-item">Order Number: #<?= $order_number; ?></li>
                           <li class="list-inline-item"><?= $order_date; ?></li>
-                          <li class="list-inline-item">Processing Fee: <?= $s_currency.' '.$order_fee; ?></li>
+                          <!-- <li class="list-inline-item">Processing Fee: <?= $s_currency.' '.$order_fee; ?></li> -->
                         </ul>
                       </div>
                     </div>
@@ -214,14 +223,19 @@ if($seller_id == $login_seller_id){
                     <div class="collapse show" id="showHide">
                       <div class="order-require-body">
                         <div class="order-require-items">
-                          <div class="order-require-item">
+                          <!-- <div class="order-require-item">
                             <h4>1. What industry does this order relate to? (Optional)</h4>
                             <p><?= $order_industry; ?></p>
-                          </div>
+                          </div> -->
                           <!-- Each item -->
                           <div class="order-require-item">
-                            <h4>2. Kindly send your business details here.</h4>
+                            <h4>1. Kindly send your business details here.</h4>
                             <p><?= $order_description; ?></p>
+                            <div class="file-attachment d-flex flex-row align-items-center">
+                              <span><i class="fas fa-arrow-circle-down"></i></span>
+                              <a href="order_files/<?php echo $order_require_file; ?>" download><span class="file-name"><?php echo $order_require_file; ?></span></a>
+                              <!-- <span>(602kb)</span> -->
+                            </div>
                           </div>
                           <!-- Each item -->
                         </div>
@@ -394,14 +408,19 @@ if($seller_id == $login_seller_id){
                   <div class="collapse show" id="showHide">
                     <div class="order-require-body">
                       <div class="order-require-items">
-                        <div class="order-require-item">
+                        <!-- <div class="order-require-item">
                           <h4>1. What industry does this order relate to? (Optional)</h4>
                           <p><?= $order_industry; ?></p>
-                        </div>
+                        </div> -->
                         <!-- Each item -->
                         <div class="order-require-item">
-                          <h4>2. Kindly send your business details here.</h4>
+                          <h4>1. Kindly send your business details here.</h4>
                           <p><?= $order_description; ?></p>
+                          <div class="file-attachment d-flex flex-row align-items-center">
+                            <span><i class="fas fa-arrow-circle-down"></i></span>
+                            <a href="order_files/<?php echo $order_require_file; ?>" download><span class="file-name"><?php echo $order_require_file; ?></span></a>
+                            <!-- <span>(602kb)</span> -->
+                          </div>
                         </div>
                         <!-- Each item -->
                       </div>
@@ -657,6 +676,50 @@ data-video-session-time="<?= $videoSessionTime; ?>"
       boxShadow:true
 
     });
+  });
+  $(".deliver_msg").keydown(function(){
+    var textarea = $(".deliver_msg").val();
+    $(".deliverCount").text(textarea.length);  
+  });
+  $(".revision_msg").keydown(function(){
+    var textarea = $(".revision_msg").val();
+    $(".revision_count").text(textarea.length);  
+  });
+
+  $('#uploadFile').change(function(e) {
+    var i = $(this).prev('label').clone();
+    var file = $('#uploadFile')[0].files[0].name;
+    var fileName = e.target.files[0].name;
+    
+    $('#file_name').html('<span>'+file+'</span>');
+    $(this).prev('label').text(file);
+  });
+  $('#uploadFile').bind('change', function() {
+    var totalSize = this.files[0].size;
+    var totalSizeMb = totalSize  / Math.pow(1024,2);
+   
+    $('.max-size').text(totalSizeMb.toFixed(2) + " MB");
+    if(totalSizeMb > 150){
+     alert("File size must not be more than 150 MB")
+    }
+  });
+  
+  $('#uploadFile_revise').change(function(e) {
+    var i = $(this).prev('label').clone();
+    var file = $('#uploadFile_revise')[0].files[0].name;
+    var fileName = e.target.files[0].name;
+    
+    $('#file_name_revise').html('<span>'+file+'</span>');
+    $(this).prev('label').text(file);
+  });
+  $('#uploadFile_revise').bind('change', function() {
+    var totalSize = this.files[0].size;
+    var totalSizeMb = totalSize  / Math.pow(1024,2);
+   
+    $('.max-size-revise').text(totalSizeMb.toFixed(2) + " MB");
+    if(totalSizeMb > 150){
+     alert("File size must not be more than 150 MB")
+    }
   });
 </script>
 <?php require_once("includes/footer.php"); ?>

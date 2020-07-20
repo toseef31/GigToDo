@@ -55,17 +55,17 @@
 			</td>
 			<td data-label="الحالة" role="column">
 				<?php if ($order_status == "delivered"){ ?>
-				<a class="button button-red" href="javascript:void(0);"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active"){ ?>
-					<a class="button button-limerick" href="javascript:void(0);">جاري التنفيذ</a>
+				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
+				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
+					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">جاري التنفيذ</a>
 				<?php }elseif($order_status == "completed"){ ?>
-					<a class="button button-yellow" href="javascript:void(0);">منجز</a>
+					<a class="button button-yellow" href="order_details?order_id=<?= $order_id; ?>">منجز</a>
 				<?php }elseif($order_status == "cancelled"){ ?>
-					<a class="button button-white" href="javascript:void(0);">ملغية</a>
+					<a class="button button-white" href="order_details?order_id=<?= $order_id; ?>">ملغية</a>
 				<?php }elseif($order_status == "pending"){ ?>
-					<a class="button button-darkgray" href="javascript:void(0);">قيد الانتظار</a>
+					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>">قيد الانتظار</a>
 				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>
-					<a class="button button-lochmara" href="javascript:void(0);">متأخرة</a>
+					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">متأخرة</a>
 				<?php } ?>
 			</td>
 		</tr>

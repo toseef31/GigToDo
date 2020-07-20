@@ -770,12 +770,21 @@ $years = range(1910,date("Y"));
                             <span>
                               الدفع
                             </span>
+                            <?php if($login_seller_paypal_email != '' or $login_seller_payoneer_email != ''){ ?>
                             <span class="mr-auto d-flex flex-row align-items-center payment">
                               <span><i class="fal fa-check"></i></span>
                               <span>
                                 اتحققنا منه
                               </span>
                             </span>
+                            <?php } elseif($login_seller_paypal_email == '' and $login_seller_payoneer_email == ''){ ?>
+                              <span class="mr-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings');">
+                                <!-- <span><i class="fal fa-check"></i></span> -->
+                                <span>
+                                اتحقق
+                              </span>
+                              </span>
+                            <?php } ?>
                           </div>
                         </div>
                       </div>

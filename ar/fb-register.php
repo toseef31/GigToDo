@@ -118,6 +118,7 @@ if($check_seller_email > 0){
 						</small>
 
 					</div><!-- form-group Ends -->
+					<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 
 
 
@@ -128,6 +129,28 @@ if($check_seller_email > 0){
 						<input type="email" class="form-control" disabled name="email" value="<?php echo $_SESSION['userData']['email'] ?>" placeholder="Enter Your Email" required>
 
 					</div><!-- form-group Ends -->
+					<div class="row">
+						<div class="col-12">
+							<label class="control-label">نوع الحساب</label>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label for="customRadio1" class="custom-control custom-radio">
+									<input type="radio" hidden id="customRadio1" name="accountType" class="custom-control-input" value="buyer">
+									<div class="custom-control-label">مشترى</div>
+								</label>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label for="customRadio2" class="custom-control custom-radio">
+									<input type="radio" hidden id="customRadio2" name="accountType" class="custom-control-input" value="seller">
+									<div class="custom-control-label">بائع</div>
+								</label>
+							</div>
+						</div>
+						<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['accountType']); ?></span>
+					</div>
 
 					<div class="form-group">
 						<input type="submit" name="continue" class="login-button" value="استمر">
@@ -152,9 +175,10 @@ if(isset($_POST['continue'])){
 
 	$rules = array(
 	"name" => "required",
-	"u_name" => "required");
+	"u_name" => "required",
+	"accountType" => "required");
 
-	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.");
+	$messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.", "accountType" => "نوع الحساب مطلوب.");
 
 	$val = new Validator($_POST,$rules,$messages);
 
@@ -172,7 +196,7 @@ if(isset($_POST['continue'])){
 	$name = $input->post('name');
 	
 	$u_name = $input->post('u_name');
-
+	$account_type = $input->post('accountType');
 	$email = $_SESSION['userData']['email'];
 		
 	$url = $_SESSION['userData']['picture']['url'];
@@ -235,7 +259,7 @@ if(isset($_POST['continue'])){
 		$verification_code = "ok";
 						
 
-		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online',"fb_verification" => 1));
+		$insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"account_type" => $account_type,"seller_image" => $image,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online',"fb_verification" => 1));
 		
 		$regsiter_seller_id = $db->lastInsertId();
 		
@@ -250,26 +274,48 @@ if(isset($_POST['continue'])){
 			unset($_SESSION['userData']);
 			unset($_SESSION['access_token']);
 			
-			echo "
+	    $get_seller = $db->select("sellers",array("seller_id" => $regsiter_seller_id));		
+			$seller_meta = $get_seller->fetch();
+			//print_r($seller_meta); die();
+			if($seller_meta->account_type == 'buyer'){
 			
-            <script>
-      
-                   swal({
-                  
-                  type: 'success',
-                  text: 'Hey $u_name, welcome onboard. ',
-                  timer: 2000,
-                  onOpen: function(){
-                  swal.showLoading()
-                  }
-                  }).then(function(){
+			echo "
+        <script>
+          swal({
+            type: 'success',
+            text: 'Hey $u_name, welcome. ',
+            timer: 2000,
+            onOpen: function(){
+            	swal.showLoading()
+            }
+          }).then(function(){
+          
+            // Read more about handling dismissals
+            window.open('$site_url/ar/','_self')
 
-                    // Read more about handling dismissals
-                    window.open('$site_url','_self')
-
-                })
-
-            </script>";
+          });
+        </script>";
+      }else{
+      	echo "
+      	<script>
+      	swal({
+      	type: 'success',
+      	text: 'سجلت بنجاح! مرحبًا بكم على متن   $name. ',
+      	timer: 6000,
+      	onOpen: function(){
+      	swal.showLoading()
+      	}
+      	}).then(function(){
+      	if (
+      	// Read more about handling dismissals
+      	window.open('$site_url/ar/dashboard','_self')
+      	) {
+      	console.log('Successful Registration')
+      	}
+      	})
+      	</script>
+      	";
+      }
 			
 		}
 			

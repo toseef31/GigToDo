@@ -44,7 +44,7 @@
 	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposals = $select_proposals->fetch();
 	$buyer_instruction = $row_proposals->buyer_instruction;
-
+	$answer_type = $row_proposals->answer_type;
 	
 	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
 	$row_p = $get_p->fetch();
@@ -164,32 +164,32 @@ require_once("includes/buyer-header.php");?>
 				<!-- Step 3 start -->
 				<div class="col-12 col-lg-8" id="submit_requirement">
           <div class="checkout-requirement-area bg-white mt-30">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
             	<div class="checkout-requirement-title">
             	    <h4 class="title">قدم متطلباتك وابدأ اطلب</h4>
             	</div>
-            	<div class="checkout-requirement-content pb-35">
-            	    <span>مقدم الخدمة محتاج المعلومات دي عشان يبدأ يشتغل على طلبك:</span>
-            	    <p>1- ايه هو مجال الشغل؟ (اختيارى)</p>
-            	    <input type="text" name="order_industry" class="form-control">
-            	</div>
+            	
             	<div class="checkout-requirement-content-2">
             	    <span>2. مرحبا بك الذهول الملكي!</span>
-            	    <p class="text">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد</p>
+            	    <p class="text"><?= $buyer_instruction ?></p>
             	    <div class="checkout-requirement-textarea">
-            	        <span>هل دة طلبك الاول؟</span>
-            	        <p>خلينا نعرف اسمك الأول و شوية معلومات عنك لو حابب ! (اختيارى)</p>
-            	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
-            	        <!-- <div class="pusrchase-form d-flex justify-content-between align-items-center">
-            	            <div class="attach-file">
-            	                <input type="file" id="file">
-            	                <label for="file"><img src="assets/img/post-request/attach.png" alt="">Attach File</label>
-            	                <span class="max-size">Max Size 30MB</span>
-            	            </div>
-            	            <div class="chars-max">
-            	                <p class="text">0/2500 Chars Max</p>
-            	            </div>
-            	        </div> -->
+          	        <span>هل دة طلبك الاول؟</span>
+            	    	<?php if ($answer_type == 'Free Text') { ?>
+          	        <p>خلينا نعرف اسمك الأول و شوية معلومات عنك لو حابب ! (اختيارى)</p>
+          	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
+          	        <?php } ?>
+          	        <?php if ($answer_type == 'Attachment') { ?>
+          	        <div class="pusrchase-form d-flex justify-content-between align-items-center">
+          	            <div class="attach-file">
+          	                <input type="file" id="file" name="order_require_file">
+          	                <label for="file"><img src="assets/img/post-request/attach.png" alt="">Attach File</label>
+          	                <span class="max-size">Max Size 30MB</span>
+          	            </div>
+          	            <!-- <div class="chars-max">
+          	                <p class="text">0/2500 Chars Max</p>
+          	            </div> -->
+          	        </div>
+            	  		<?php } ?>
             	    </div>
             	</div>
             	<div class="checkout-requirement-content-3">
@@ -200,10 +200,27 @@ require_once("includes/buyer-header.php");?>
             </form>
             <?php 
               if(isset($_POST['submit_requirement'])){
-                $order_industry = $input->post('order_industry');
+                // $order_industry = $input->post('order_industry');
                 $order_description = $input->post('order_description');
+
+                $order_require_file = $_FILES['order_require_file']['name'];
+                // print_r($order_require_file);die();
+                $order_require_file_tmp = $_FILES['order_require_file']['tmp_name'];
                 
-                $update_order = $db->update("orders",array("order_industry" => $order_industry, "order_description" => $order_description),array("order_id" => $order_id));
+                $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+                $file_extension = pathinfo($order_require_file, PATHINFO_EXTENSION);
+                if(!empty($order_require_file)){
+                  if(!in_array($file_extension,$allowed)){
+                    echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+                    echo "<script>window.open('checkout2?order_id=$order_id','_self')</script>";
+                    exit();
+                  }
+                  $order_require_file = pathinfo($order_require_file, PATHINFO_FILENAME);
+                  $order_require_file = $order_require_file."_".time().".$file_extension";
+                  move_uploaded_file($order_require_file_tmp,"../order_files/$order_require_file");
+                }
+                
+                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
                 if($update_order){
                 	echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
                 }
