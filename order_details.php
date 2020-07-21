@@ -492,7 +492,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                         <!-- Each item -->
                         <div class="order-require-item">
                           <h4>1. <?= $buyer_instruction; ?></h4>
-                          <?php if($order_description == ''){ ?>
+                          <?php if($order_description != ''){ ?>
                           <p><?= $order_description ?></p>
                           <?php } ?>
                           <?php if(!empty($order_require_file)){ ?>
