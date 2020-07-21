@@ -45,6 +45,7 @@
 	$row_proposals = $select_proposals->fetch();
 	$buyer_instruction = $row_proposals->buyer_instruction;
 	$answer_type = $row_proposals->answer_type;
+	$answer_mandatory = $row_proposals->answer_mandatory;
 
 	
 	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
@@ -229,7 +230,11 @@ require_once("includes/buyer-header.php");?>
                   move_uploaded_file($order_require_file_tmp,"order_files/$order_require_file");
                 }
                 
-                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
+                if($answer_mandatory == 'on' and ($order_require_file == '' and $order_description == '')){
+                	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
+                }else{
+                	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress'),array("order_id" => $order_id));
+                }
                 if($update_order){
                 	echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
                 }
