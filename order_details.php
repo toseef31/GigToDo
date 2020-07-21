@@ -559,7 +559,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                                   move_uploaded_file($order_require_file_tmp,"order_files/$order_require_file");
                                 }
                                 
-                                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => "progress"),array("order_id" => $order_id));
+                                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress'),array("order_id" => $order_id));
                                 if($update_order){
                                   echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
                                 }

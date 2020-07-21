@@ -18,7 +18,7 @@
       <div class="message-sender-area">
         <?php if($buyer_id == $login_seller_id AND $order_status == "pending" ){ ?>
         <div class="float-left pt-2">
-          <span class="font-weight-bold text-danger"> الاستجابة حتى يتمكن البائع من بدء طلبك. </span>
+          <!-- <span class="font-weight-bold text-danger"> الاستجابة حتى يتمكن البائع من بدء طلبك. </span> -->
         </div>
         <?php } ?>
         <form id="insert-message-form">
