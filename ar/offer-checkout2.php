@@ -174,7 +174,7 @@ require_once("includes/buyer-header.php");?>
             	    <p class="text"><?= $buyer_instruction ?></p>
             	    <div class="checkout-requirement-textarea">
           	        <span>هل دة طلبك الاول؟</span>
-            	    	<?php if ($answer_type == 'Free Text') { ?>
+            	    <?php if ($answer_type == 'Free Text') { ?>
           	        <p>خلينا نعرف اسمك الأول و شوية معلومات عنك لو حابب ! (اختيارى)</p>
           	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
           	        <?php } ?>
@@ -192,7 +192,6 @@ require_once("includes/buyer-header.php");?>
             	  		<?php } ?>
             	    </div>
             	</div>
-            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3- التعليمات</span>
             	    <p><?= $buyer_instruction ?></p>

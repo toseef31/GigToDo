@@ -63,18 +63,13 @@
 				<?php }elseif($order_status == "cancelled"){ ?>
 					<a class="button button-white" href="order_details?order_id=<?php echo $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($order_status == "pending"){ ?>
-<<<<<<< HEAD
-					<a class="button button-darkgray" href="javascript:void(0);"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "cancellation requested"){ ?>
-					<a class="button button-red" href="javascript:void(0);">Cancel Request</a>
-=======
 
 					<a class="button button-darkgray" href="order_details?order_id=<?php echo $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 
 				<?php }elseif($order_status == "cancellation requested"){ ?>
 					<a class="button button-red" href="order_details?order_id=<?php echo $order_id; ?>">Cancel Request</a>
 
->>>>>>> 0264da6c4fffad495220ec039b0644a33a05fbc3
+
 				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>
 					<a class="button button-lochmara" href="order_details?order_id=<?php echo $order_id; ?>">overdue</a>
 				<?php } ?>
