@@ -230,11 +230,13 @@ if($seller_id == $login_seller_id){
                           <div class="order-require-item">
                             <h4>2-من فضلك ابعت تفاصيل شغلك هنا</h4>
                             <p><?= $order_description; ?></p>
+                            <?php if(empty($order_require_file)){ ?>
                             <div class="file-attachment d-flex flex-row align-items-center">
                               <span><i class="fas fa-arrow-circle-down"></i></span>
                               <a href="order_files/<?php echo $order_require_file; ?>" download><span class="file-name"><?php echo $order_require_file; ?></span></a>
                               <!-- <span>(602kb)</span> -->
                             </div>
+                            <?php } ?>
                           </div>
                           <!-- Each item -->
                         </div>
