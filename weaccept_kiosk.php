@@ -115,25 +115,31 @@ try {
 
     // print_r($token);
 
-	$select_offers = $db->select("messages_offers",array("offer_id" => $_SESSION['c_message_offer_id']));
-	$row_offers = $select_offers->fetch();
-	$proposal_id = $row_offers->proposal_id;
-  $delivery_time = $row_offers->delivery_time;
-  $sender_id = $row_offers->sender_id;
-	$amount = $row_offers->amount;
-	$processing_fee = processing_fee($amount);
-
-	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+	$select_proposals = $db->select("proposals",array("proposal_id" => $_SESSION['c_proposal_id']));
 	$row_proposals = $select_proposals->fetch();
-	$proposal_title = $row_proposals->proposal_title;
+	$proposal_url = $row_proposals->proposal_url;
+	$proposal_seller_id = $row_proposals->proposal_seller_id;
+
+	$processing_fee = processing_fee($_SESSION['c_sub_total']);
+
+	$get_p = $db->select("proposal_packages",array("proposal_id"=>$_SESSION['c_proposal_id']));
+	$row_p = $get_p->fetch();
+	$delivery_time = $row_p->delivery_time;
+
+
+	$select_proposal_seller = $db->select("sellers",array("seller_id"=>$proposal_seller_id));
+	$row_proposal_seller = $select_proposal_seller->fetch();
+	$proposal_seller_user_name = $row_proposal_seller->seller_user_name;
+	$seller_user_id = $row_proposal_seller->seller_id;
 
 	//$payment = new Payment();
 	$data = [];
-	$data['name'] = $proposal_title;
+	$data['name'] = $row_proposals->proposal_title;;
 	$data['qty'] = 1;
-	$data['price'] = $amount;
-	$data['sub_total'] = $amount;
-	$data['total'] = $amount + $processing_fee;
+	$data['price'] = $_SESSION['c_proposal_price'];
+	$data['sub_total'] = $_SESSION['c_proposal_price'];
+	$gst = 3;
+	$data['total'] = $amount + $processing_fee + $gst;
   $total_amount = $data['total'] * 100;
 	//print_r($data['total']);
 	$order_time = date("F d, Y h:i:s ");
