@@ -193,7 +193,6 @@ require_once("includes/buyer-header.php");?>
             	  		<?php } ?>
             	    </div>
             	</div>
-            	<?php } ?>
             	<div class="checkout-requirement-content-3">
             	    <span>3- التعليمات</span>
             	    <p><?= $buyer_instruction ?></p>
