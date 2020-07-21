@@ -56,9 +56,12 @@ $referral_money = $row_general_settings->referral_money;
 		<!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
 		<!-- <link href="styles/custom.css" rel="stylesheet"> -->
 		<!-- Custom css code from modified in admin panel --->
+		<link href="styles/sweat_alert.css" rel="stylesheet">
+		<link href="styles/animate.css" rel="stylesheet">
 		<link href="styles/styles.css" rel="stylesheet">
 		<link href="styles/user_nav_styles.css" rel="stylesheet">
 		<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+		<script type="text/javascript" src="js/sweat_alert.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 	</head>
 	<body class="all-content">
@@ -272,7 +275,24 @@ $referral_money = $row_general_settings->referral_money;
 		$email_addresses = $input->post('email_addresses');	
 		$username = $login_seller_name;
 
+		$check_seller_email = $db->count("sellers",array("seller_email" => $email_addresses));
+		
+		if($check_seller_email > 0){
+
+			echo "<script>
+				swal({
+				type: 'warning',
+				html: $('<div>').text('Opps! User with this email already register. Please try different one.'),
+				animation: false,
+				customClass: 'animated tada'
+				}).then(function(){
+				window.open('invite_friend','_self')
+				});
+				</script>";
+		}else{
+
 		inviteEmail($email_addresses,$referral_link,$username);
+		}
 	}
 ?>
 		<?php require_once("includes/footer.php"); ?>

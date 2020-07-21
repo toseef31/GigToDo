@@ -38,6 +38,8 @@ if(isset($_SESSION['seller_user_name'])){
   <script src="<?= $site_url; ?>/assets/js/jquery.nice-select.min.js"></script>
   <script src="<?= $site_url; ?>/assets/js/tagsinput.js"></script>
   <script src="<?= $site_url; ?>/assets/js/ion.rangeSlider.min.js"></script>
+  <!--====== Rateyo js ======-->
+  <script src="<?= $site_url; ?>/assets/js/jquery.rateyo.min.js"></script>
   <!--====== Main js ======-->
   <script src="<?= $site_url; ?>/assets/js/main.js"></script>
 <!-- End New Design -->

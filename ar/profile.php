@@ -339,24 +339,17 @@ $count_account = $select_seller_payments->rowCount();
                 </div>
                 <?php } else { ?>
                 <div class="buyer-sidebar-card-body">
+                  <?php if($fb_verification != 0){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span class="completed"><i class="fab fa-facebook-f"></i></span>
                     <span>
                       بالفيس بوك
                     </span>
-                    <?php if($fb_verification == 0){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center facebook">
-                      <span><i class="fab fa-facebook-f"></i></span>
-                      <span>
-                        متصل
-                      </span>
-                    </span>
-                    <?php }else{ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
                   <!-- <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><i class="fab fa-linkedin-in"></i></span>
                     <span>LinkedIn</span>
@@ -367,80 +360,51 @@ $count_account = $select_seller_payments->rowCount();
                       </span>
                     </span>
                   </div> -->
+                  <?php if($gmail_verification != 0){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span class="completed"><i class="fab fa-google"></i></span>
                     <span>Google</span>
-                    <?php if($gmail_verification == 0){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center google">
-                      <span><i class="fab fa-google"></i></span>
-                      <span>
-                        متصل
-                      </span>
-                    </span>
-                    <?php }else{ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
+                  <?php if($seller_verification != 'ok'){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span class="completed"><i class="fas fa-envelope"></i></span>
                     <span>
                       اتحققنا
                     </span>
-                    <?php if($seller_verification != 'ok'){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center email">
-                      <span>
-                        اتحقق
-                      </span>
-                    </span>
-                    <?php }else{ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
+                  <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
                     <span>
                       اتحققنا من الدفع
                     </span>
-                    <!-- <span class="mr-auto d-flex flex-row align-items-center payment">
-                      <span><i class="fal fa-check"></i></span>
-                    </span> -->
-                    <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php }elseif($count_account == 0 and $seller_paypal_email == ''){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center email">
-                      <span>
-                        اتحقق
-                      </span>
-                    </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
                 </div>
                 <?php } } else{?>
                 <div class="buyer-sidebar-card-body">
+                  <?php if($fb_verification != 0){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span class="completed"><i class="fab fa-facebook-f"></i></span>
                     <span>
                       بالفيس بوك
                     </span>
-                    <?php if($fb_verification == 0){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center facebook">
-                      <span><i class="fab fa-facebook-f"></i></span>
-                      <span>
-                        متصل
-                      </span>
-                    </span>
-                    <?php }else{ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
                   <!-- <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><i class="fab fa-linkedin-in"></i></span>
                     <span>LinkedIn</span>
@@ -451,56 +415,37 @@ $count_account = $select_seller_payments->rowCount();
                       </span>
                     </span>
                   </div> -->
+                  <?php if($gmail_verification != 0){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span class="completed"><i class="fab fa-google"></i></span>
                     <span>Google</span>
-                    <?php if($gmail_verification == 0){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center google">
-                      <span><i class="fab fa-google"></i></span>
-                      <span>
-                        متصل
-                      </span>
-                    </span>
-                    <?php }else{ ?>
-                    <span class="ml-auto d-flex flex-row align-items-center payment">
+                    <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
+                  <?php if($seller_verification != 'ok'){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span class="completed"><i class="fas fa-envelope"></i></span>
                     <span>
                       اتحققنا
                     </span>
-                    <?php if($seller_verification != 'ok'){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center email">
-                      <span>
-                        اتحقق
-                      </span>
-                    </span>
-                    <?php }else{ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
+                  <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/payment-verified-icon.png" /></span>
                     <span>
                       اتحققنا من الدفع
                     </span>
-                    <?php if ($count_account > 0 or $seller_paypal_email != ''){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center payment">
                       <span><i class="fal fa-check"></i></span>
                     </span>
-                    <?php }elseif($count_account == 0 and $seller_paypal_email == ''){ ?>
-                    <span class="mr-auto d-flex flex-row align-items-center email">
-                      <span>
-                        اتحقق
-                      </span>
-                    </span>
-                    <?php } ?>
                   </div>
+                  <?php } ?>
                 </div>
                 <?php } ?>
               </div>

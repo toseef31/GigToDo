@@ -310,26 +310,18 @@ if(isset($_SESSION['seller_user_name'])){
             <?php }else { ?>
             <div class="profile-verifi-content profile-verifi-2 pt-20">
               <ul>
-                <?php if($fb_verification == 0){ ?>
-                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="facebook"><i class="fab fa-facebook-f"></i> اتصال</span></li>
-                <?php }else{ ?>
+                <?php if($fb_verification != 0){ ?>
                 <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
                 <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> اتصال</span></li> -->
-                <?php if($gmail_verification == 0){ ?>
-                <li><i class="fab fa-google"></i> Google Connected <span class="google" onclick="window.location = '<?php echo $gLoginURL ?>';"><i class="fab fa-google"></i> اتصال</span></li>
-                <?php }else{ ?>
+                <?php if($gmail_verification != 0){ ?>
                 <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
-                <?php if($seller_verification != 'ok'){ ?>
-                <li><i class="fa fa-envelope"></i> الإيميل <span class="verify">تأكيد</span></li>
-                <?php }else{ ?>
+                <?php if($seller_verification == 'ok'){ ?>
                 <li><i class="fa fa-envelope"></i> الإيميل <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
                 <?php if($seller_paypal_email != '' or $seller_payoneer_email != ''){ ?>
                 <li><i class="fas fa-dollar-sign"></i> اتحققنا من الدفع <span class="check"><i class="fa fa-check"></i></span></li>
-                <?php } elseif($seller_paypal_email == '' and $seller_payoneer_email == ''){ ?>
-                <li><i class="fas fa-dollar-sign"></i> اتحققنا من الدفع <span class="verify">تأكيد</span></li>
                 <?php } ?>
               </ul>
             </div>

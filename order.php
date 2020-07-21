@@ -342,7 +342,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	</table>
 	<br>
 	<center>
-	<a href='$site_url/order_details?order_id=$insert_order_id' class='btn'>
+	<a href='$site_url/checkout2?order_id=$insert_order_id' class='btn'>
 	View Your Order
 	</a>
 	</center>
@@ -396,7 +396,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 
 	}else{
 			
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"date"=>$order_date,"method"=>$payment_method));
+	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
 
 	}
 
@@ -867,7 +867,7 @@ if(isset($_SESSION['offer_id'])){
 	</table>
 	<br>
 	<center>
-	<a href='$site_url/order_details?order_id=$insert_order_id' class='btn'>
+	<a href='$site_url/offer-checkout2?order_id=$insert_order_id' class='btn'>
 	View Your Order
 	</a>
 	</center>
@@ -901,7 +901,7 @@ if(isset($_SESSION['offer_id'])){
 	if($payment_method == "shopping_balance"){
 	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$order_price,"date"=>$order_date,"method"=>$payment_method));
 	}else{
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"date"=>$order_date,"method"=>$payment_method));
+	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
 	}
 
 	$insert_notification = $db->insert("notifications",array("receiver_id"=>$proposal_seller_id,"sender_id"=>$login_seller_id,"order_id"=>$insert_order_id,"reason"=>"order","date"=>$order_date,"status"=>"unread"));
@@ -1210,7 +1210,7 @@ margin-bottom:20px;
 <br>
 <center>
 
-<a href='$site_url/order_details?order_id=$insert_order_id' class='btn'>
+<a href='$site_url/order-checkout2?order_id=$insert_order_id' class='btn'>
 
 View Your Order
 
@@ -1270,7 +1270,7 @@ $insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"
 
 }else{
 		
-$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"date"=>$order_date,"method"=>$payment_method));
+$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
 
 }
 

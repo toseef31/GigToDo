@@ -172,7 +172,7 @@ if (empty($form_data)) {
       </div>
       <div class="d-flex flex-row">
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <input type="checkbox" class="custom-control-input" id="customCheck1" name="answer_mandatory">
           <label class="custom-control-label" for="customCheck1">
             إجابة أجبارية
           </label>
@@ -423,6 +423,7 @@ if(isset($_POST['submit'])){
       $data['buyer_instruction'] = $input->post('buyer_instruction');
 
       $data['answer_type'] = $input->post('answer_type');
+      $data['answer_mandatory'] = $input->post('answer_mandatory');
 
       $data['proposal_cat_id'] = $input->post('proposal_cat_id');
       $data['proposal_child_id'] = $input->post('proposal_child_id');

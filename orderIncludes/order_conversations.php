@@ -31,7 +31,7 @@ $buyer_id = $row_orders->buyer_id;
 $order_price = $row_orders->order_price;
 $order_status = $row_orders->order_status;
 $order_complete_time = new DateTime($row_orders->complete_time);
-
+$i = 0;
 $get_order_conversations =  $db->select("order_conversations",array("order_id" => $order_id));
 
 while($row_order_conversations = $get_order_conversations->fetch()){
@@ -62,9 +62,8 @@ if($seller_id == $login_seller_id){
 
 $last_update_date = date("h:i: M d, Y");
 $n_date = date("F d, Y");
-
+$i++;
 ?>
-
 
 
 <?php if($status == "message"){ ?>
@@ -111,15 +110,17 @@ $n_date = date("F d, Y");
   </div> -->
   <div class="message-content-card-item d-flex flex-column">
     <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
+      <!-- <?php if($i == 1){?>
       <div class="image-icon">
         <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
       </div>
       <?php 
       $remain = $order_complete_time->diff(new DateTime());
       if($remain->d < 1){ $remain->d = 1; }
-      ?> 
+      ?>
       <h5 class="text-center">Order Requirements</h5>
       <p>This order will be marked as complete in <?php echo $remain->d; ?> days.</p>
+      <?php } ?> -->
     </div>
     <div class="d-flex flex-row align-items-start">
       <div class="user-image">
@@ -257,7 +258,7 @@ $n_date = date("F d, Y");
           <?php if($order_status == "delivered"){ ?>
           <?php if($buyer_id == $login_seller_id){ ?>
           <div class="d-flex flex-wrap justify-content-start">
-            <form method="post">
+            <form method="post" style="display: contents;">
               <button type="button" data-toggle="modal" data-target="#revision-request-modal" class="d-flex flex-row align-items-center justify-content-center button button-white" href="javascript:void(0);">Request Revision</button>
               <button name="complete" type="submit" class="d-flex flex-row align-items-center justify-content-center button button-red">Accept & Review Order</button>
             </form>
@@ -352,13 +353,13 @@ $n_date = date("F d, Y");
         <div class="message-content-card-item d-flex flex-column">
           <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
             <div class="image-icon">
-              <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+              <i class="fal fa-exclamation-circle"></i>
             </div>
             <?php 
             $remain = $order_complete_time->diff(new DateTime());
             if($remain->d < 1){ $remain->d = 1; }
             ?> 
-            <h5 class="text-center">Cancellation Request</h5>
+            <h5 class="text-center">Order Request</h5>
             <p><i class="fa fa-trash-o"></i> Cancellation Requested By <?php echo $seller_user_name; ?></p>
           </div>
           <div class="d-flex flex-row align-items-start">
@@ -375,6 +376,7 @@ $n_date = date("F d, Y");
                 <span class="timestamp"><?php echo $date; ?></span>
               </div>
               <p><?php echo $message; ?></p>
+              
               <?php if(!empty($file)){ ?>
               <h5>Delivered Files</h5>
               <div class="file-attachment d-flex flex-row align-items-center">
@@ -383,14 +385,43 @@ $n_date = date("F d, Y");
                 <!-- <span>(602kb)</span> -->
               </div>
               <?php } ?>
-              <?php if($sender_id == $login_seller_id){ ?>
-              <?php }else{ ?>
-              <div class="d-flex flex-wrap justify-content-start mt-15">
-                <form method="post">
-                  <button name="decline_request" class="align-items-center justify-content-center button button-white" href="javascript:void(0);">Decline Request</button>
-                  <button name="accept_request" class=" align-items-center justify-content-center button button-red">Accept Request</button>
-                </form>
+              <div class="extend-delivery">
+                <h6><?php echo $seller_user_name; ?> has requested to cancel the order.</h6>
+                <!-- <p>
+                  Please respond within the next 4 days,<br />or the request will be automatically withdrawn.
+                </p> -->
+                <!-- <table class="table">
+                  <thead>
+                    <tr role="row">
+                      <th role="column">Item</th>
+                      <th role="column">Quantity</th>
+                      <th role="column">Duration</th>
+                      <th role="column">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr role="row">
+                      <td data-label="Item" role="column">Extended Delivery</td>
+                      <td data-label="Quantity" role="column">1</td>
+                      <td data-label="Duration" role="column">3 days</td>
+                      <td data-label="Amount" role="column">No Change</td>
+                    </tr>
+                  </tbody>
+                </table> -->
+                <div class="d-flex flex-row justify-content-center">
+                  <!-- <div class="respond">you responded to Spxmac’s request</div> -->
+                </div>
+                <!-- <p>20:04 April 18, 2018</p> -->
+                <?php if($sender_id == $login_seller_id){ ?>
+                <?php }else{ ?>
+                <div class="d-flex flex-wrap justify-content-center mt-15">
+                  <form method="post">
+                    <button name="decline_request" class="align-items-center justify-content-center button button-white" href="javascript:void(0);">Decline Request</button>
+                    <button name="accept_request" class=" align-items-center justify-content-center button button-red">Accept Request</button>
+                  </form>
+                </div>
               </div>
+              
              
 
 
@@ -728,7 +759,7 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
       if($remain->d < 1){ $remain->d = 1; }
       ?> 
       <h5 class="text-center">Request Declined</h5>
-      <p><i class="fa fa-trash-o"></i> Cancellation Request Declined By <?php echo $seller_user_name; ?></p>
+      <p>You rejected <?php echo $seller_user_name; ?> offer for resolution</p>
     </div>
     <div class="d-flex flex-row align-items-start">
       <div class="user-image">
@@ -752,16 +783,44 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
           <!-- <span>(602kb)</span> -->
         </div>
         <?php } ?>
+        <div class="extend-delivery">
+          <h6><?php echo $seller_user_name; ?> has requested to cancel the order.</h6>
+          <!-- <p>
+            Please respond within the next 4 days,<br />or the request will be automatically withdrawn.
+          </p> -->
+          <!-- <table class="table">
+            <thead>
+              <tr role="row">
+                <th role="column">Item</th>
+                <th role="column">Quantity</th>
+                <th role="column">Duration</th>
+                <th role="column">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row">
+                <td data-label="Item" role="column">Extended Delivery</td>
+                <td data-label="Quantity" role="column">1</td>
+                <td data-label="Duration" role="column">3 days</td>
+                <td data-label="Amount" role="column">No Change</td>
+              </tr>
+            </tbody>
+          </table> -->
+          <div class="d-flex flex-row justify-content-center">
+            <div class="respond">Cancellation Request Declined By <?php echo $receiver_name; ?></div>
+          </div>
+          <!-- <p>20:04 April 18, 2018</p> -->
+        </div>
       </div>
     </div>
   </div>
-  <div class="message-content-card-item d-flex flex-column">
+  <!-- <div class="message-content-card-item d-flex flex-column">
     <div class="d-flex flex-wrap justify-content-start mt-15">
       <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i>
         Cancellation Request Declined By <?php echo $receiver_name; ?>
       </h5>
     </div>
-  </div>
+  </div> -->
 
   <!-- <div class="card mt-4">
     <div class="card-body">
@@ -812,14 +871,10 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
     <div class="message-content-card-item d-flex flex-column">
       <div class="d-flex flex-column align-items-center justify-content-center message-requirements">
         <div class="image-icon">
-          <img class="img-fluid d-block" src="assets/img/order/box-icon.png" />
+          <img class="img-fluid d-block" src="assets/img/order/accepted-icon.png" />
         </div>
-        <?php 
-        $remain = $order_complete_time->diff(new DateTime());
-        if($remain->d < 1){ $remain->d = 1; }
-        ?> 
-        <h5 class="text-center">Cancellation Request</h5>
-        <p><i class="fa fa-trash-o"></i> Cancellation Request By <?php echo $seller_user_name; ?></p>
+        <h5 class="text-center">Resoultion Accepted</h5>
+        <p>You accepted <?php echo $seller_user_name; ?> offer for resolution.</p>
       </div>
       <div class="d-flex flex-row align-items-start">
         <div class="user-image">
@@ -843,30 +898,59 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
             <!-- <span>(602kb)</span> -->
           </div>
           <?php } ?>
+          <div class="extend-delivery">
+            <h6><?php echo $seller_user_name; ?> has requested to cancel the order.</h6>
+            <!-- <p>
+              Please respond within the next 4 days,<br />or the request will be automatically withdrawn.
+            </p> -->
+            <!-- <table class="table">
+              <thead>
+                <tr role="row">
+                  <th role="column">Item</th>
+                  <th role="column">Quantity</th>
+                  <th role="column">Duration</th>
+                  <th role="column">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row">
+                  <td data-label="Item" role="column">Extended Delivery</td>
+                  <td data-label="Quantity" role="column">1</td>
+                  <td data-label="Duration" role="column">3 days</td>
+                  <td data-label="Amount" role="column">No Change</td>
+                </tr>
+              </tbody>
+            </table> -->
+            <div class="d-flex flex-row justify-content-center">
+              <?php if($seller_id == $login_seller_id){ ?>
+              <div class="message-content-card-item d-flex flex-column">
+                <div class="d-flex flex-wrap justify-content-center mt-15 respond" style="height: auto;">
+                  <h5 class="text-danger"><i class="fa fa-times fa-2x text-danger"></i> Order Cancelled By Mutual Agreement. </h5>
+                  <p>
+                  Order Was Cancelled By A Mutual Agreement Between You and Your Buyer. <br>
+                  Funds have been refunded to buyer's account.
+                  </p>
+                </div>
+              </div>
+              <?php }else{ ?>
+              <div class="message-content-card-item d-flex flex-column">
+                <div class="d-flex flex-wrap justify-content-center mt-15 respond" style="height: auto;">
+                  <h5 class="text-danger"><i class="fa fa-times fa-2x text-danger"></i> Order Cancelled By Mutual Agreement. </h5>
+                  <p>
+                    Order was cancelled by a mutual agreement between you and your seller.<br>
+                    The order funds have been refunded to your Shopping Balance.
+                  </p>
+                </div>
+              </div>
+              <?php } ?>
+              <!-- <div class="respond">Cancellation Request Declined By <?php echo $receiver_name; ?></div> -->
+            </div>
+            <!-- <p>20:04 April 18, 2018</p> -->
+          </div>
         </div>
       </div>
     </div>
-    <?php if($seller_id == $login_seller_id){ ?>
-    <div class="message-content-card-item d-flex flex-column">
-      <div class="d-flex flex-wrap justify-content-start mt-15">
-        <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i> Order Cancelled By Mutual Agreement. </h5>
-        <p>
-        Order Was Cancelled By A Mutual Agreement Between You and Your Buyer. <br>
-        Funds have been refunded to buyer's account.
-        </p>
-      </div>
-    </div>
-    <?php }else{ ?>
-    <div class="message-content-card-item d-flex flex-column">
-      <div class="d-flex flex-wrap justify-content-start mt-15">
-        <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i> Order Cancelled By Mutual Agreement. </h5>
-        <p>
-          Order was cancelled by a mutual agreement between you and your seller.<br>
-          The order funds have been refunded to your Shopping Balance.
-        </p>
-      </div>
-    </div>
-    <?php } ?>
+    
 
 
     <!-- <div class="card mt-4">
