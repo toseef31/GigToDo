@@ -502,7 +502,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                             <!-- <span>(602kb)</span> -->
                           </div>
                           <?php } ?>
-                          <?php if($order_description == '' or $order_require_file == ''){ ?>
+                          <?php if($order_description == '' and $order_require_file == ''){ ?>
                             <form method="post" enctype="multipart/form-data">
                               <!-- <div class="checkout-requirement-title">
                               <h4 class="title">Submit Requirements to Start
@@ -551,7 +551,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                                 if(!empty($order_require_file)){
                                   if(!in_array($file_extension,$allowed)){
                                     echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
-                                    echo "<script>window.open('checkout2?order_id=$order_id','_self')</script>";
+                                    echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
                                     exit();
                                   }
                                   $order_require_file = pathinfo($order_require_file, PATHINFO_FILENAME);
@@ -559,7 +559,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                                   move_uploaded_file($order_require_file_tmp,"order_files/$order_require_file");
                                 }
                                 
-                                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
+                                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => "progress"),array("order_id" => $order_id));
                                 if($update_order){
                                   echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
                                 }
@@ -725,7 +725,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                     </div>
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
-                      <?php if($order_status != 'delivered'){ ?>
+                      <?php if($order_status == 'delivered'){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
@@ -738,7 +738,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                     </div>
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
-                      <?php if($order_status != 'completed'){ ?>
+                      <?php if($order_status == 'completed'){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
