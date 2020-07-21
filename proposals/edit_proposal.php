@@ -23,6 +23,7 @@ $d_proposal_price = $row_proposal->proposal_price;
 $d_proposal_desc = $row_proposal->proposal_desc;
 $d_buyer_instruction = $row_proposal->buyer_instruction;
 $d_answer_type = $row_proposal->answer_type;
+$d_answer_mandatory = $row_proposal->answer_mandatory;
 $d_proposal_tags = $row_proposal->proposal_tags;
 $d_proposal_video = htmlspecialchars($row_proposal->proposal_video);
 $d_proposal_img1 = $row_proposal->proposal_img1;

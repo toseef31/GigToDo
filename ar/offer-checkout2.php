@@ -170,12 +170,14 @@ require_once("includes/buyer-header.php");?>
             	</div>
 
             	<div class="checkout-requirement-content-2">
-            	    <span>2. مرحبا بك الذهول الملكي!</span>
-            	    <p class="text"><?= $buyer_instruction ?></p>
+            	    <span>1. <?= $buyer_instruction ?></span>
+            	    <!-- <p class="text"><?= $buyer_instruction ?></p> -->
             	    <div class="checkout-requirement-textarea">
-          	        <span>هل دة طلبك الاول؟</span>
-            	    <?php if ($answer_type == 'Free Text') { ?>
-          	        <p>خلينا نعرف اسمك الأول و شوية معلومات عنك لو حابب ! (اختيارى)</p>
+
+          	        <!-- <span>هل دة طلبك الاول؟</span> -->
+            	    	<?php if ($answer_type == 'Free Text') { ?>
+          	        <!-- <p>خلينا نعرف اسمك الأول و شوية معلومات عنك لو حابب ! (اختيارى)</p> -->
+
           	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
           	        <?php } ?>
           	        <?php if ($answer_type == 'Attachment') { ?>
@@ -193,8 +195,8 @@ require_once("includes/buyer-header.php");?>
             	    </div>
             	</div>
             	<div class="checkout-requirement-content-3">
-            	    <span>3- التعليمات</span>
-            	    <p><?= $buyer_instruction ?></p>
+            	   <!--  <span>3- التعليمات</span>
+            	    <p><?= $buyer_instruction ?></p> -->
             	    <button type="submit" name="submit_requirement">التقديم</button>
             	</div>
             </form>

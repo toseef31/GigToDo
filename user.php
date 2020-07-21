@@ -320,26 +320,18 @@ if(isset($_SESSION['seller_user_name'])){
               <?php }else { ?>
                 <div class="profile-verifi-content profile-verifi-2 pt-20">
                   <ul>
-                    <?php if($fb_verification == 0){ ?>
-                    <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> Connect</span></li>
-                    <?php }else{ ?>
+                    <?php if($fb_verification != 0){ ?>
                     <li><i class="fab fa-facebook-f"></i> Facebook Connected <span class="check"><i class="fa fa-check"></i></span></li>
                     <?php } ?>
                     <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> Connect</span></li> -->
-                    <?php if($gmail_verification == 0){ ?>
-                    <li><i class="fab fa-google"></i> Google Connected <span class="google" onclick="window.location = '<?php echo $gLoginURL ?>';"><i class="fab fa-google"></i> Connect</span></li>
-                    <?php }else{ ?>
+                    <?php if($gmail_verification != 0){ ?>
                     <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
                     <?php } ?>
-                    <?php if($seller_verification != 'ok'){ ?>
-                    <li><i class="fa fa-envelope"></i> Email Verified <span class="verify">Verify</span></li>
-                    <?php }else{ ?>
+                    <?php if($seller_verification == 'ok'){ ?>
                     <li><i class="fa fa-envelope"></i> Email Verified <span class="check"><i class="fa fa-check"></i></span></li>
                     <?php } ?>
                     <?php if($seller_paypal_email != '' or $seller_payoneer_email != ''){ ?>
                     <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="check"><i class="fa fa-check"></i></span></li>
-                    <?php } elseif($seller_paypal_email == '' and $seller_payoneer_email == ''){ ?>
-                    <li><i class="fas fa-dollar-sign"></i> Payment Verified <span class="verify">Verify</span></li>
                     <?php } ?>
                   </ul>
                 </div>

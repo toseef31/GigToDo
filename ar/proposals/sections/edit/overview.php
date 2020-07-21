@@ -159,7 +159,7 @@ $child_arabic_title = $row_meta->child_arabic_title;
 										</div>
 										<div class="d-flex flex-row">
 											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<input type="checkbox" class="custom-control-input" name="answer_mandatory" id="customCheck1" <?php if($d_answer_mandatory == 'on'){echo "checked";} ?>>
 												<label class="custom-control-label" for="customCheck1">
 													إجابة أجبارية
 												</label>

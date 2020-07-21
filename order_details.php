@@ -41,6 +41,10 @@ $order_require_file = $row_orders->order_require_file;
 $order_description = $row_orders->order_description;
 
 
+$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+$row_proposals = $select_proposals->fetch();
+$buyer_instruction = $row_proposals->buyer_instruction;
+$answer_type = $row_proposals->answer_type;
 
 if($videoPlugin == 1){
   require_once("plugins/videoPlugin/order_details.php");  
@@ -67,6 +71,27 @@ if($seller_id == $login_seller_id){
 }else{
   $receiver_id = $seller_id;
 }
+/// Select Order Seller Details ///
+$select_seller = $db->select("sellers",array("seller_id" => $seller_id));
+$row_seller = $select_seller->fetch();
+$order_seller_level = $row_seller->seller_level;
+
+// select seller_payment_settings 
+$seller_payment_settings = $db->select("seller_payment_settings",["level_id"=>$order_seller_level])->fetch();
+$seller_comission_percentage = $seller_payment_settings->commission_percentage;
+// make function getPercentOfNumber()
+if(!function_exists("getPercentOfNumber")){
+  function getPercentOfNumber($amount, $percentage){
+    $calculate_percentage = ($percentage / 100 ) * $amount ;
+    return $amount-$calculate_percentage;
+  }
+}
+
+// getting seller price
+$seller_price = getPercentOfNumber($order_price, $seller_comission_percentage);
+
+$get_buyer_reviews = $db->select("buyer_reviews",array("order_id"=>$order_id));
+$count_buyer_reviews = $get_buyer_reviews->rowCount();
 ?>
 
 <!DOCTYPE html>
@@ -131,6 +156,25 @@ if($seller_id == $login_seller_id){
   }
   .file-attachment span.file-name {
       color: #ff0707;
+  }
+  .checkout-requirement-content-3 button {
+      border: 1px solid #ff0707;
+      background: #ff0707;
+      color: #fff;
+      text-transform: uppercase;
+      padding: 0 50px;
+      line-height: 50px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-bottom: 50px;
+      cursor: pointer;
+      -webkit-transition: .4s;
+      -o-transition: .4s;
+      -moz-transition: .4s;
+      transition: .4s;
+      float: right;
   }
   </style>
   <script>
@@ -229,9 +273,11 @@ if($seller_id == $login_seller_id){
                           </div> -->
                           <!-- Each item -->
                           <div class="order-require-item">
-                            <h4>1. Kindly send your business details here.</h4>
-                            <p><?= $order_description; ?></p>
-                            <?php if(empty($order_require_file)){ ?>
+                            <h4>1. <?= $buyer_instruction; ?></h4>
+                            <?php if($order_description == ''){ ?>
+                            <p><?= $order_description ?></p>
+                            <?php } ?>
+                            <?php if(!empty($order_require_file)){ ?>
                             <div class="file-attachment d-flex flex-row align-items-center">
                               <span><i class="fas fa-arrow-circle-down"></i></span>
                               <a href="order_files/<?php echo $order_require_file; ?>" download><span class="file-name"><?php echo $order_require_file; ?></span></a>
@@ -250,7 +296,7 @@ if($seller_id == $login_seller_id){
                 <!-- Count down timer -->
                 
                 <div class="order-message-card">
-                  <div class="message-content-card">
+                  <div class="message-content-card" id="order-conversations">
                     <?php require_once("orderIncludes/order_conversations.php"); ?>
                     <!-- <div class="message-content-card-item d-flex flex-column">
                       <div class="d-flex flex-row align-items-start">
@@ -310,7 +356,7 @@ if($seller_id == $login_seller_id){
                       </div>
                     </div> -->
                     <!-- Each item -->
-                    <?php require_once("orderIncludes/orderDeliverButton.php"); ?>
+                    
                     <!-- <div class="message-content-card-item d-flex flex-column">
                       <div class="d-flex flex-wrap justify-content-center">
                         <a class="d-flex flex-row align-items-center justify-content-center button button-red" data-toggle="modal" href="#exampleModalCenter">Deliver Now</a>
@@ -318,6 +364,33 @@ if($seller_id == $login_seller_id){
                     </div> -->
                     <!-- Each item -->
                   </div>
+                  <div class="message-content-card">
+                    
+                  <?php require_once("orderIncludes/orderDeliverButton.php"); ?>
+                  </div>
+                  <?php 
+                    if($order_status == "completed"){ ?>
+                      <div id="order-status-bar" class="text-white" style="background-color: #ff0707 !important;">
+                        <div class="row">
+                        <!--  <div class="col-md-10 offset-md-1"> -->
+                          <div class="container">
+                          <div class="col-md-10 offset-md-1"> 
+                            <?php if($seller_id == $login_seller_id){ ?>
+                            <h5 class="float-left mt-2">
+                              <i class="fa fa-lg fa-check-circle"></i> Order Delivered. You Earned <?= $s_currency; ?><?= $seller_price; ?>
+                            </h5>
+                            <h5 class="float-right mt-2">Status: Completed</h5>
+                          <?php }elseif($buyer_id == $login_seller_id){ ?>
+                            <h5 class="float-left mt-2">
+                              <i class="fa fa-lg fa-check-circle"></i> Delivery Submitted
+                            </h5>
+                            <h5 class="float-right mt-2">Status: Completed</h5>
+                          <?php } ?>
+                          </div>
+                          </div>
+                         </div>
+                    </div>
+                  <?php } ?>
                   <!-- Message content card -->
                   <?php require_once("orderIncludes/insertMessageBox.php"); ?>
                   <!-- <div class="message-sender-area">
@@ -342,6 +415,7 @@ if($seller_id == $login_seller_id){
                 </div>
                 <!-- Order message card -->
               </div>
+              <?php if($order_status == "pending" or $order_status == "progress" or $order_status == "delivered" or $order_status == "revision requested"){ ?>
               <div class="col-12 col-lg-4">
                 <div class="order-affix">
                   <div class="order-resolution-card">
@@ -353,6 +427,7 @@ if($seller_id == $login_seller_id){
                   <!-- Order resolution card -->
                 </div>
               </div>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -416,13 +491,81 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <!-- Each item -->
                         <div class="order-require-item">
-                          <h4>1. Kindly send your business details here.</h4>
-                          <p><?= $order_description; ?></p>
+                          <h4>1. <?= $buyer_instruction; ?></h4>
+                          <?php if($order_description == ''){ ?>
+                          <p><?= $order_description ?></p>
+                          <?php } ?>
+                          <?php if(!empty($order_require_file)){ ?>
                           <div class="file-attachment d-flex flex-row align-items-center">
                             <span><i class="fas fa-arrow-circle-down"></i></span>
                             <a href="order_files/<?php echo $order_require_file; ?>" download><span class="file-name"><?php echo $order_require_file; ?></span></a>
                             <!-- <span>(602kb)</span> -->
                           </div>
+                          <?php } ?>
+                          <?php if($order_description == '' or $order_require_file == ''){ ?>
+                            <form method="post" enctype="multipart/form-data">
+                              <!-- <div class="checkout-requirement-title">
+                              <h4 class="title">Submit Requirements to Start
+                              Your Order</h4> </div> -->
+
+                              <div class="checkout-requirement-content-2">
+                                <!-- <span>1. <?= $buyer_instruction ?></span> -->
+                                <!-- <p class="text"><?= $buyer_instruction ?></p> -->
+                                <div class="checkout-requirement-textarea">
+                                  <!-- <span>1st order?</span> -->
+                                  <?php if ($answer_type == 'Free Text') { ?>
+                                  <!-- <p>Please let us know your first name and a few words about you if you want! (optional)</p> -->
+                                  <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..." class="form-control"></textarea>
+                                  <?php } ?>
+                                  <?php if ($answer_type == 'Attachment') { ?>
+                                  <div class="pusrchase-form d-flex justify-content-between align-items-center">
+                                      <div class="attach-file">
+                                          <input type="file" id="file" name="order_require_file">
+                                          <label for="file"><img src="assets/img/post-request/attach.png" alt="">Attach File</label>
+                                          <span class="max-size">Max Size 30MB</span>
+                                      </div>
+                                      <!-- <div class="chars-max">
+                                          <p class="text">0/2500 Chars Max</p>
+                                      </div> -->
+                                  </div>
+                                  <?php } ?>
+                                </div>
+                              </div>
+                              <div class="checkout-requirement-content-3 mt-15">
+                                  <!-- <span>3. Instructions</span>
+                                  <p><?= $buyer_instruction ?></p> -->
+                                  <button type="submit" name="submit_requirement">submit</button>
+                              </div>
+                            </form>
+                            <?php 
+                              if(isset($_POST['submit_requirement'])){
+                                // $order_industry = $input->post('order_industry');
+                                $order_description = $input->post('order_description');
+
+                                $order_require_file = $_FILES['order_require_file']['name'];
+                                // print_r($order_require_file);die();
+                                $order_require_file_tmp = $_FILES['order_require_file']['tmp_name'];
+                                
+                                $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','pdf','docx','txt');
+                                $file_extension = pathinfo($order_require_file, PATHINFO_EXTENSION);
+                                if(!empty($order_require_file)){
+                                  if(!in_array($file_extension,$allowed)){
+                                    echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+                                    echo "<script>window.open('checkout2?order_id=$order_id','_self')</script>";
+                                    exit();
+                                  }
+                                  $order_require_file = pathinfo($order_require_file, PATHINFO_FILENAME);
+                                  $order_require_file = $order_require_file."_".time().".$file_extension";
+                                  move_uploaded_file($order_require_file_tmp,"order_files/$order_require_file");
+                                }
+                                
+                                $update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
+                                if($update_order){
+                                  echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
+                                }
+                              }
+                            ?>
+                          <?php } ?>
                         </div>
                         <!-- Each item -->
                       </div>
@@ -436,7 +579,7 @@ if($seller_id == $login_seller_id){
               <!-- Count down timer -->
               
               <div class="order-message-card">
-                <div class="message-content-card">
+                <div class="message-content-card"  id="order-conversations">
                   <?php require_once("orderIncludes/order_conversations.php"); ?>
                   <!-- Each item -->
                   <!-- <div class="message-content-card-item d-flex flex-column">
@@ -486,8 +629,38 @@ if($seller_id == $login_seller_id){
                     </div>
                   </div> -->
                   <!-- Each item -->
-                  <?php require_once("orderIncludes/orderDeliverButton.php"); ?>
                 </div>
+                <div class="message-content-card">
+                <?php require_once("orderIncludes/orderDeliverButton.php"); ?>
+                </div>
+                <?php 
+                  if($count_buyer_reviews == 0){
+                    if($order_status == "completed"){
+                      echo "<script>window.open('$site_url/order-review?order_id=$order_id', '_self')</script>";
+                    } 
+                  }else{
+                ?>
+                <div id="order-status-bar" class="text-white" style="background-color: #ff0707 !important;">
+                  <div class="row">
+                  <!--  <div class="col-md-10 offset-md-1"> -->
+                    <div class="container">
+                    <div class="col-md-10 offset-md-1"> 
+                      <?php if($seller_id == $login_seller_id){ ?>
+                      <h5 class="float-left mt-2">
+                        <i class="fa fa-lg fa-check-circle"></i> Order Delivered. You Earned <?= $s_currency; ?><?= $seller_price; ?>
+                      </h5>
+                      <h5 class="float-right mt-2">Status: Completed</h5>
+                    <?php }elseif($buyer_id == $login_seller_id){ ?>
+                      <h5 class="float-left mt-2">
+                        <i class="fa fa-lg fa-check-circle"></i> Delivery Submitted
+                      </h5>
+                      <h5 class="float-right mt-2">Status: Completed</h5>
+                    <?php } ?>
+                    </div>
+                    </div>
+                   </div>
+              </div>
+              <?php } ?>
                 <!-- Message content card -->
                 <?php require_once("orderIncludes/insertMessageBox.php"); ?>
                 <!-- <div class="message-sender-area">
@@ -523,31 +696,57 @@ if($seller_id == $login_seller_id){
                       <div class="order-process-text">Placed Order</div>
                     </div>
                     <!-- Each item -->
+                    
                     <div class="order-process-item d-flex flex-row align-items-center">
+                      <?php if($order_description != '' or $order_require_file != ''){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
+                      <?php }else{ ?>
+                      <div class="order-process-icon">
+                        <i class="fas fa-circle"></i>
+                      </div>
+                      <?php } ?>
                       <div class="order-process-text">Provide Requirements</div>
                     </div>
+                    
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
+                      <?php if($order_description != '' or $order_require_file != ''){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
+                      <?php }else{ ?>
+                      <div class="order-process-icon">
+                        <i class="fas fa-circle"></i>
+                      </div>
+                      <?php } ?>
                       <div class="order-process-text">Order in Progress</div>
                     </div>
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
+                      <?php if($order_status != 'delivered'){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
+                      <?php }else{ ?>
+                      <div class="order-process-icon">
+                        <i class="fas fa-circle"></i>
+                      </div>
+                      <?php } ?>
                       <div class="order-process-text">Review The Delivery</div>
                     </div>
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
+                      <?php if($order_status != 'completed'){ ?>
+                      <div class="order-process-icon">
+                        <i class="fal fa-check"></i>
+                      </div>
+                      <?php }else{ ?>
                       <div class="order-process-icon">
                         <i class="fas fa-circle"></i>
                       </div>
+                      <?php } ?>
                       <div class="order-process-text">Order Complete</div>
                     </div>
                     <!-- Each item -->
@@ -555,12 +754,14 @@ if($seller_id == $login_seller_id){
                   <p>Your order is completed! We hope you got everything you needed.</p>
                 </div>
                 <!-- Order process card -->
+                <?php if($order_status == "pending" or $order_status == "progress" or $order_status == "delivered" or $order_status == "revision requested"){ ?>
                 <div class="order-resolution-card">
                   <div class="order-resolution-text">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>Having issues with your order? Visit the<br /><a href="resolution-center?order_id=<?= $order_id ?>">Resolution Center</a></p>
                   </div>
                 </div>
+                <?php } ?>
                 <!-- Order resolution card -->
               </div>
             </div>

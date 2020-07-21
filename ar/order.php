@@ -391,7 +391,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 
 	}else{
 			
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"date"=>$order_date,"method"=>$payment_method));
+	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
 
 	}
 
@@ -894,7 +894,7 @@ if(isset($_SESSION['offer_id'])){
 	if($payment_method == "shopping_balance"){
 	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$order_price,"date"=>$order_date,"method"=>$payment_method));
 	}else{
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"date"=>$order_date,"method"=>$payment_method));
+	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
 	}
 
 	$insert_notification = $db->insert("notifications",array("receiver_id"=>$proposal_seller_id,"sender_id"=>$login_seller_id,"order_id"=>$insert_order_id,"reason"=>"order","date"=>$order_date,"status"=>"unread"));
@@ -1263,7 +1263,7 @@ $insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"
 
 }else{
 		
-$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"date"=>$order_date,"method"=>$payment_method));
+$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
 
 }
 

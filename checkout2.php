@@ -179,12 +179,12 @@ require_once("includes/buyer-header.php");?>
             	
 
             	<div class="checkout-requirement-content-2">
-            	    <span>2. hello your royal awesomeness!</span>
-            	    <p class="text"><?= $buyer_instruction ?></p>
+            	    <span>1. <?= $buyer_instruction ?></span>
+            	    <!-- <p class="text"><?= $buyer_instruction ?></p> -->
             	    <div class="checkout-requirement-textarea">
-          	        <span>1st order?</span>
+          	        <!-- <span>1st order?</span> -->
           	        <?php if ($answer_type == 'Free Text') { ?>
-          	        <p>Please let us know your first name and a few words about you if you want! (optional)</p>
+          	        <!-- <p>Please let us know your first name and a few words about you if you want! (optional)</p> -->
           	        <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..."></textarea>
           	      	<?php } ?>
           	        <?php if ($answer_type == 'Attachment') { ?>
@@ -202,8 +202,8 @@ require_once("includes/buyer-header.php");?>
             	    </div>
             	</div>
             	<div class="checkout-requirement-content-3">
-            	    <span>3. Instructions</span>
-            	    <p><?= $buyer_instruction ?></p>
+            	    <!-- <span>3. Instructions</span>
+            	    <p><?= $buyer_instruction ?></p> -->
             	    <button type="submit" name="submit_requirement">submit</button>
             	</div>
             </form>
