@@ -492,7 +492,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                         <!-- Each item -->
                         <div class="order-require-item">
                           <h4>1. <?= $buyer_instruction; ?></h4>
-                          <?php if($order_description == ''){ ?>
+                          <?php if($order_description != ''){ ?>
                           <p><?= $order_description ?></p>
                           <?php } ?>
                           <?php if(!empty($order_require_file)){ ?>
@@ -502,7 +502,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                             <!-- <span>(602kb)</span> -->
                           </div>
                           <?php } ?>
-                          <?php if($order_description == '' or $order_require_file == ''){ ?>
+                          <?php if($order_description == '' and $order_require_file == ''){ ?>
                             <form method="post" enctype="multipart/form-data">
                               <!-- <div class="checkout-requirement-title">
                               <h4 class="title">Submit Requirements to Start
