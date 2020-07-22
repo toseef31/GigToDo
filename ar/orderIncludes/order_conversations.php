@@ -835,58 +835,7 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
       </div>
     </div>
   </div>
-  <!-- <div class="message-content-card-item d-flex flex-column">
-    <div class="d-flex flex-wrap justify-content-start mt-15">
-      <h5 class="text-danger"><i class="fa fa-times fa-3x text-danger"></i>
-        Cancellation Request Declined By <?php echo $receiver_name; ?>
-      </h5>
-    </div>
-  </div> -->
-
-  <!-- <div class="card mt-4">
-    <div class="card-body">
-      <h5 class="text-center"><i class="fa fa-trash-o"></i> Cancellation Request Declined By <?php echo $seller_user_name; ?></h5>
-    </div>
-  </div>
-  <div class="
-    <?php
-    if($sender_id == $login_seller_id){
-      
-    echo "message-div-hover";
-      
-    }else{
-      
-    echo "message-div";
-      
-    }
-    ?>
-    ">
-    <?php if(!empty($seller_image)){ ?>
-    <img src="<?php echo $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="50" height="50" class="message-image">
-    <?php }else{ ?>
-    <img src="<?php echo $site_url; ?>/user_images/empty-image.png" width="50" height="50" class="message-image">
-    <?php } ?>
-    
-    <h5>
-    <a href="#" class="seller-buyer-name"> <?php echo $seller_user_name; ?> </a>
-    </h5>
-    <p class="message-desc">
-      <?php echo $message; ?>
-      <?php if(!empty($file)){ ?>
-      <a href="order_files/<?php echo $file; ?>" class="d-block mt-2 ml-1" download>
-        <i class="fa fa-download"></i> <?php echo $file; ?>
-      </a>
-      <?php }else{ ?>
-      <?php } ?>
-    </p>
-    <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p>
-    </div>
-    <div class="order-status-message">
-    <i class="fa fa-times fa-3x text-danger"></i>
-    <h5 class="text-danger">
-    Cancellation Request Declined By <?php echo $receiver_name; ?>
-    </h5>
-    </div> -->
+  
     <?php }elseif($status == "accept_cancellation_request"){ ?>
 
     <div class="message-content-card-item d-flex flex-column">

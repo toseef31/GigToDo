@@ -716,6 +716,10 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
+                      <?php }elseif($order_status == 'progress'){ ?>
+                      <div class="order-process-icon">
+                        <i class="fal fa-check"></i>
+                      </div>
                       <?php }else{ ?>
                       <div class="order-process-icon">
                         <i class="fas fa-circle"></i>

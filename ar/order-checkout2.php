@@ -222,8 +222,10 @@ require_once("includes/buyer-header.php");?>
                   $order_require_file = $order_require_file."_".time().".$file_extension";
                   move_uploaded_file($order_require_file_tmp,"../order_files/$order_require_file");
                 }
-                if($answer_mandatory == 'on' and ($order_require_file == '' and $order_description == '')){
+                if($answer_mandatory == 'on' and $order_require_file == '' and $order_description == ''){
                 	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description),array("order_id" => $order_id));
+                }elseif($answer_mandatory == '' and $order_require_file == '' and $order_description == ''){
+                	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress'),array("order_id" => $order_id));
                 }else{
                 	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress'),array("order_id" => $order_id));
                 }
