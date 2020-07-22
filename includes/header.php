@@ -388,7 +388,7 @@ $cur_amount = currencyConverter($to,1);
             <div class="header-right d-flex align-items-center justify-content-end">
               <div class="menu-inner">
                 <ul>
-                  <li><a href="<?= $site_url; ?>/requests/post-request.php"><?= $lang['post_request'];?></a></li>
+                  <li><a href="<?= $site_url; ?>/requests/post-request.php">Post a Job</a></li>
                   <li><a href="<?= $site_url; ?>/how-it-works.php">How it Works</a></li>
                 </ul>
               </div>
