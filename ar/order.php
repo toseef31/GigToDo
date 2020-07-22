@@ -107,6 +107,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$buyer_instruction = $row_proposal->buyer_instruction;
 	$proposal_seller_id = $row_proposal->proposal_seller_id;
 	$delivery_id = $row_proposal->delivery_id;
+	
 
 	if($delivery_id == ''){
 		$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
