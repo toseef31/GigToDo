@@ -108,15 +108,20 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$proposal_seller_id = $row_proposal->proposal_seller_id;
 	$delivery_id = $row_proposal->delivery_id;
 
-	$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
-	$row_p = $get_p->fetch();
-	$delivery_time = $row_p->delivery_time;
+	if($delivery_id == ''){
+		$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
+		$row_p = $get_p->fetch();
+		$delivery_time = $row_p->delivery_time;
+		$add_days = intval($delivery_time);
+	}else{
+		$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
+		$row_delivery_time = $select_delivery_time->fetch();
+		$delivery_time = $row_delivery_time->delivery_proposal_title;
+		$add_days = intval($delivery_time);
+	}
+	
 
-	$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
-	$row_delivery_time = $select_delivery_time->fetch();
-	$delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
-
-	$add_days = intval($delivery_proposal_title);
+	
 	date_default_timezone_set("UTC");
 	$order_date = date("F d, Y");
 	$date_time = date("M d, Y H:i:s");
@@ -720,7 +725,7 @@ if(isset($_SESSION['offer_id'])){
 	$buyer_instruction = $row_proposal->buyer_instruction;
 	$proposal_seller_id = $row_proposal->proposal_seller_id;
 
-	$add_days = intval($delivery_proposal_title);
+	$add_days = intval($delivery_time);
 	date_default_timezone_set("UTC");
 	$order_date = date("F d, Y");
 	$date_time = date("M d, Y H:i:s");
@@ -967,7 +972,7 @@ $proposal_seller_id = $row_proposal->proposal_seller_id;
 
 
 
-$add_days = intval($delivery_proposal_title);
+$add_days = intval($delivery_time);
 
 date_default_timezone_set("UTC");
 
