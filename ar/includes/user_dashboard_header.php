@@ -55,7 +55,7 @@
   $cur_amount = currencyConverter($to,1);
 ?>
 <style>.activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
-.total-user-count.count.c-notifications-header{left: 11%;}</style>
+.total-user-count.count.c-notifications-header{left: -8px;top: -7px;}</style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
 
@@ -91,13 +91,14 @@
               <?php if($currency_switcher == 1){ ?>
               <div class="usd-inner">
                 <select name="" id="curreny_convert" class="curreny_convert">
-                  <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                   <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                  <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 </select>
               </div>
               <?php } ?>
-              <div class="message-inner">
-                <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
+              <div class="message-inner position-relative">
+                <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt="">
+                  <span class="total-user-count count c-notifications-header"></span></a>
               </div>
               <div class="menubar d-flex flex-row align-items-center">
                 <div class="image">

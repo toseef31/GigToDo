@@ -36,7 +36,7 @@
 
 
   <button class="filter-results" type="button" role="button">
-    <img src="assets/img/gigs/filter.png" alt="" />Filter by
+    <img src="<?= $site_url; ?>/assets/img/gigs/filter.png" alt="" />Filter by
   </button>
   <div class="gigs-sidebar">
     <h2 class="results-title">

@@ -95,7 +95,7 @@ if($seller_id == $login_seller_id){
 }else{
   $receiver_id = $seller_id;
 }
-
+// print_r($receiver_id);
 $get_buyer_reviews = $db->select("buyer_reviews",array("order_id"=>$order_id));
 $count_buyer_reviews = $get_buyer_reviews->rowCount();
 $row_buyer_reviews = $get_buyer_reviews->fetch();
@@ -264,6 +264,7 @@ $buyer_image = $row_buyer->seller_image;
                         <h4>What was it like working with this seller?</h4>
                       </div>
                       <form method="POST">
+                        
                         <input type="hidden" name="buyer_rating">
                         <input type="hidden" name="communication_rating">
                         <input type="hidden" name="service_rating">
@@ -310,11 +311,11 @@ $buyer_image = $row_buyer->seller_image;
 
                       $date = date("M d Y");
 
-                      $insert_review = $db->insert("buyer_reviews",array("proposal_id"=>$proposal_id,"order_id"=>$order_id,"review_buyer_id"=>$buyer_id,"buyer_rating"=>$rating,"communication_rating"=>$communication_rating,"service_rating"=>$service_rating,"recommend_rating"=>$recommend_rating,"buyer_review"=>$review,"review_seller_id"=>$seller_id,"review_date"=>$date));
+                      $insert_review = $db->insert("buyer_reviews",array("proposal_id"=>$proposal_id,"order_id"=>$order_id,"review_buyer_id"=>$buyer_id,"buyer_rating"=>$rating,"communication_rating"=>$communication_rating,"service_rating"=>$service_rating,"recommend_rating"=>$recommend_rating,"buyer_review"=>$review,"review_seller_id"=>$receiver_id,"review_date"=>$date));
 
                       $last_update_date = date("F d, Y");
 
-                      $insert_notification = $db->insert("notifications",array("receiver_id" => $seller_id,"sender_id" => $buyer_id,"order_id" => $order_id,"reason" => "buyer_order_review","date" => $last_update_date,"status" => "unread"));
+                      $insert_notification = $db->insert("notifications",array("receiver_id" => $receiver_id,"sender_id" => $buyer_id,"order_id" => $order_id,"reason" => "buyer_order_review","date" => $last_update_date,"status" => "unread"));
 
                       $ratings = array();
 
@@ -345,7 +346,7 @@ $buyer_image = $row_buyer->seller_image;
                       }else{
 
                       $review_rating = $order_seller_rating+7; if($review_rating > 100){ $review_rating = 100; }
-                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$seller_id'");  
+                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$receiver_id'");  
 
                       }
 
@@ -357,14 +358,14 @@ $buyer_image = $row_buyer->seller_image;
                       }else{
 
                       $review_rating = $order_seller_rating+2; if($review_rating > 100){ $review_rating = 100; }
-                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$seller_id'");  
+                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$receiver_id'");  
 
                       }
 
                       }elseif($rating == "3"){
 
                       $review_rating = $order_seller_rating-3; if($review_rating < 0){ $review_rating = 0; }
-                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$seller_id'");  
+                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$receiver_id'");  
 
                       }elseif($rating == "2"){
 
@@ -374,7 +375,7 @@ $buyer_image = $row_buyer->seller_image;
                       }elseif($rating == "1"){
 
                       $review_rating = $order_seller_rating-7; if($review_rating < 0){ $review_rating = 0; }
-                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$seller_id'");  
+                      $update_seller_rating = $db->query("update sellers set seller_rating=$review_rating where seller_id='$receiver_id'");  
 
                       }
 

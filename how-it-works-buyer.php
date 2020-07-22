@@ -62,7 +62,7 @@
             <div class="how-it-work-banner-content d-flex flex-column justify-content-center align-items-center">
               <h3 class="how-title">How It Works</h3>
               <div class="d-flex flex-row justify-content-between">
-                <a href="<?= $site_url; ?>/requests/post-request.php" class="how-btn">Post a Request</a>
+                <a href="<?= $site_url; ?>/requests/post-request.php" class="how-btn">Post A Job</a>
               </div>
             </div>
           </div>

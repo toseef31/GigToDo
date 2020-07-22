@@ -399,8 +399,8 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
               <?php if($currency_switcher == 1){ ?>
               <div class="usd-inner">
                 <select name="" id="curreny_convert" class="curreny_convert">
-                  <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                   <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                  <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 </select>
               </div>
               <?php } ?>
@@ -452,8 +452,8 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
           <?php } ?>
           <div class="menu-action">
             <select name="" id="curreny_convert" class="curreny_convert">
-              <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
               <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+              <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
             </select>
           </div>
         </li>

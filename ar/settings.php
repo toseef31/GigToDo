@@ -697,7 +697,7 @@ $count_account = $select_seller_payment->rowCount();
 															</div>
 														</div>
 														<!-- Each item -->
-														<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<!-- <div class="notification-item d-flex flex-row align-items-center justify-content-between">
 															<span>
 																خدماتى
 															</span>
@@ -705,7 +705,7 @@ $count_account = $select_seller_payment->rowCount();
 																<input type="checkbox" name="my_gigs" class="custom-control-input" id="customCheck5" <?php if($login_seller_my_gigs == 'on'){ echo "checked";} ?>>
 																<label class="custom-control-label" for="customCheck5">&nbsp;</label>
 															</div>
-														</div>
+														</div> -->
 														<!-- Each item -->
 														<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 															<span>
@@ -717,7 +717,7 @@ $count_account = $select_seller_payment->rowCount();
 															</div>
 														</div>
 														<!-- Each item -->
-														<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+														<!-- <div class="notification-item d-flex flex-row align-items-center justify-content-between">
 															<span>
 																لدوس
 															</span>
@@ -725,7 +725,7 @@ $count_account = $select_seller_payment->rowCount();
 																<input type="checkbox" name="to_dos" class="custom-control-input" id="customCheck7" <?php if($login_seller_to_dos == 'on'){ echo "checked";} ?>>
 																<label class="custom-control-label" for="customCheck7">&nbsp;</label>
 															</div>
-														</div>
+														</div> -->
 														<!-- Each item -->
 													</div>
 													<div class="form-group d-flex flex-row justify-content-end mb-0">

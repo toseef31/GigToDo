@@ -276,10 +276,18 @@ $login_seller_id = $row_login_seller->seller_id;
                         </td>
                         <td style="text-align: left; color: #FF0000;">
                           <?php 
-                            if($method == "order_cancellation" or $method == "featured_proposal_declined"){
-                            echo "<span class='text-success'>+$s_currency$amount.00</span>";
+                            if ($to == 'EGP'){ 
+                              $price = $to.' '.$amount.'.00';
+                            }elseif($to == 'USD'){
+                             $price = $to.' '.round($cur_amount * $amount,2);
                             }else{
-                            echo "-$s_currency$amount.00";
+                              $price = $s_currency.' '.$amount.'.00'; 
+                            } 
+                            
+                            if($method == "order_cancellation" or $method == "featured_proposal_declined"){
+                            echo "<span class='text-success'>+$price</span>";
+                            }else{
+                            echo "-$price";
                             }
                           ?>
                         </td>

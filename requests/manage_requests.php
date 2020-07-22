@@ -87,7 +87,7 @@ $login_seller_id = $row_login_seller->seller_id;
 							<h1 class="list-page-title">Manage Jobs</h1>
 						</div>
 						<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
-							<a class="button button-red" href="post-request">post a request</a>
+							<a class="button button-red" href="post-request">Post A Job</a>
 						</div>
 					</div>
 					<!-- Row -->

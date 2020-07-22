@@ -113,9 +113,9 @@
 
 ?>
 <div class="message-body-header d-flex flex-wrap align-items-center justify-content-between">
-	<p class="user-status d-flex flex-column bg-white <?php echo $statusClass; ?>">
+	<p class="user-status d-flex flex-column bg-white <?php echo $statusClass; ?> closeMsg">
 		<?php if ($seller_account_type == "seller") { ?>
-		<a href="<?= $site_url; ?>/<?= $seller_user_name; ?>" style="display: contents;">
+		<!-- <a href="<?= $site_url; ?>/<?= $seller_user_name; ?>" style="display: contents;"> -->
 			<i class="fal fa-angle-left"></i>
 			<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
 			<?php if (check_status($seller_id) == "Online") { ?>
@@ -123,9 +123,9 @@
 			<?php }else{ ?>
 				<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
 			<?php } ?>
-		</a>
+		<!-- </a> -->
 		<?php }else{ ?>
-			<a href="<?= $site_url; ?>/profile?user_name=<?= $seller_user_name; ?>" style="display: contents;">
+			<!-- <a href="<?= $site_url; ?>/profile?user_name=<?= $seller_user_name; ?>" style="display: contents;"> -->
 				<i class="fal fa-angle-left"></i>
 				<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
 				<?php if (check_status($seller_id) == "Online") { ?>
@@ -133,7 +133,7 @@
 				<?php }else{ ?>
 					<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
 				<?php } ?>
-			</a>
+			<!-- </a> -->
 		<?php } ?>
 	</p>
 	<p class="float-right">
@@ -164,7 +164,7 @@
 
 		<?php } ?>
 		
-		<div class="dropdown float-right d-block d-sm-block d-md-none mt-2">
+		<div class="dropdown float-right d-none mt-2">
 			
 			<a class="dropdown-toggle closeMsgIcon" href="#" role="button" data-toggle="dropdown">
 				

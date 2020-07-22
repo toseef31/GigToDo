@@ -199,6 +199,34 @@
 	  	margin-top: -83px;
 	  	float: right;
 	  }
+	  @media(max-width: 767px){
+	  	.input-check-area{
+	  		float: none !important;
+	  	}
+	  	#credit-card-form, #shopping-balance-form, #paypal-form{
+	  		margin-top: 14px !important; 
+	  		float: none !important;
+	  	}
+	  	#credit-card-form button, #shopping-balance-form button, #paypal-form button{
+	  		margin-bottom: 0;
+	  		width: 100%;
+	  	}
+	  	.stripe-submit{
+	  		margin-bottom: 0;
+	  		width: 100%;
+	  	}
+	  	#edit_info{
+	  		width: 100% !important;
+	  		float: none !important;
+	  	}
+	  	#weaccept-cash-form {
+	  	    margin-top: 0px;
+	  	    float: none !important;
+	  	}
+	  	.order-button{
+	  		width: 100%;
+	  	}
+	  }
 	</style>
 </head>
 <body class="all-content">
@@ -450,8 +478,8 @@ if(isset($_POST['code'])){
 											<label for="paypal"><span></span><img src="assets/img/checkout/paypal.png" alt="">Paypal</label>
 											<?php } ?>
 											<?php if($enable_paypal == "yes"){ ?>
-											<div class="input-check-area float-left" style="margin-top: -17px;">
-												<form action="requests/paypal_charge" method="post" id="paypal-form" class="float-left"><!--- paypal-form Starts --->
+											<div class="input-check-area float-left mt-0">
+												<form action="requests/paypal_charge" method="post" id="paypal-form" class="float-left" style="margin-top: -17px;"><!--- paypal-form Starts --->
 												 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
 												</form>
 											</div>
@@ -463,8 +491,8 @@ if(isset($_POST['code'])){
 											<label for="shopping-balance"><span></span><img src="assets/img/checkout/emongez.png" alt="">Emongez Wallet</label>
 											<?php } ?>
 											<?php if($current_balance >= $sub_total){ ?>
-											<div class="input-check-area float-left" style="margin-top: -17px;">
-												<form action="../shopping_balance" method="post" id="shopping-balance-form">
+											<div class="input-check-area float-left mt-0">
+												<form action="../shopping_balance" method="post" id="shopping-balance-form" style="margin-top: -17px;">
 												<button class="button" type="submit" name="checkout_submit_order" onclick="return confirm('Are you sure you want to pay for this with your shopping balance?')">
 													Emongez Wallet
 												</button>

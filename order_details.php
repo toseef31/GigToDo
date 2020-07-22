@@ -729,7 +729,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                     </div>
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
-                      <?php if($order_status == 'delivered'){ ?>
+                      <?php if($order_status == 'delivered' or $order_status == 'completed'){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>

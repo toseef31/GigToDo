@@ -27,7 +27,7 @@ echo "<script>window.open('login','_self');</script>";
     }
   ?>  
   <li>
-    <a href="index?view_proposals"> <i class="menu-icon fa fa-table"></i>Proposals/Services
+    <a href="index?view_proposals"> <i class="menu-icon fa fa-table"></i>Services
     <?php if(!$count_proposals == 0){ ?>
     <span class="badge badge-success"><?php echo $count_proposals ?></span>
     <?php } ?>
@@ -71,7 +71,7 @@ echo "<script>window.open('login','_self');</script>";
       </ul>
   </li>
   <li>
-     <a href="index?buyer_requests"> <i class="menu-icon fa fa-table"></i>Buyer Requests
+     <a href="index?buyer_requests"> <i class="menu-icon fa fa-table"></i>Jobs
       <?php if(!$count_requests == 0){ ?>
       <span class="badge badge-success"><?php echo $count_requests; ?></span>
       <?php } ?>
