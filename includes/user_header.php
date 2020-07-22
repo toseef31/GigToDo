@@ -57,6 +57,7 @@
 ?>
 <style>
   .total-user-count.count.c-notifications-header{right: 10%;}
+  @media(max-width: 768px){.total-user-count.count.c-notifications-header{top: -8px;right: 4px;}}
 </style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -79,8 +80,8 @@
         </div>
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex align-items-center justify-content-end">
-            <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message.png" alt=""></a>
+            <div class="message-inner position-relative">
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -102,8 +103,8 @@
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="<?= $site_url; ?>/requests/buyer_requests">Buyer Request</a></li>
-                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Gigs</a></li>
+                <li><a href="<?= $site_url; ?>/requests/buyer_requests">Jobs</a></li>
+                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Services</a></li>
                 <li><a href="<?= $site_url; ?>/dashboard">Dashboard</a></li>
               </ul>
             </div>
@@ -118,8 +119,8 @@
             <?php if($currency_switcher == 1){ ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
-                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
               </select>
             </div>
             <?php } ?>
@@ -213,9 +214,9 @@
       <li><a href="<?php echo $site_url; ?>/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="<?= $site_url; ?>/assets/img/icon/1.png" alt=""> Profile</a></li>
       <li><a href="<?= $site_url ?>/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="<?= $site_url; ?>/assets/img/icon/12.png" alt=""> Dashboard </a></li>
-      <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Gigs</a></li>
-      <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a Gig</a></li>
-      <li><a href="<?= $site_url; ?>/requests/buyer_requests"> <img src="<?= $site_url; ?>/assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
+      <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Services</a></li>
+      <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a service</a></li>
+      <li><a href="<?= $site_url; ?>/requests/buyer_requests"> <img src="<?= $site_url; ?>/assets/img/icon/14.png" alt=""> Jobs</a></li>
       <li><a href="<?= $site_url ?>/selling_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="<?= $site_url ?>/revenue"> <img src="<?= $site_url; ?>/assets/img/icon/15.png" alt=""> Revenue</a></li>
       <li><a href="<?= $site_url; ?>/portfolio"> <img src="<?= $site_url; ?>/assets/img/icon/16.png" alt=""> Portfolio</a></li>

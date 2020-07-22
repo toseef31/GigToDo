@@ -20,7 +20,7 @@ $login_seller_language = $row_login_seller->seller_language;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--====== Title ======-->
-  <title><?php echo $site_name; ?> - Post a Gigs</title>
+  <title><?php echo $site_name; ?> - Post A Service</title>
   <!--====== Favicon Icon ======-->
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
@@ -317,7 +317,7 @@ $login_seller_language = $row_login_seller->seller_language;
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  <h2>Post a Gig</h2>
+                  <h2>Post A Service</h2>
                 </div>
               </div>
               <div class="row">
@@ -487,7 +487,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                             <p>
-                              Set a few gig requirements for your buyers to complete. This will ensure that you have all the necessary information before you begin working on a project.
+                              Set a few service requirements for your buyers to complete. This will ensure that you have all the necessary information before you begin working on a project.
                             </p>
                           </div>
                         </div>
@@ -604,7 +604,7 @@ $login_seller_language = $row_login_seller->seller_language;
                           <img alt="Post a gig" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/postagig.png" />
                         </div>
                         <div class="howitwork-list-content">
-                          <h3>1. Post A Gig</h3>
+                          <h3>1. Post A Service</h3>
                           <p>Create and customise services so that buyers can understand clearly the services you provide in order to meet their requirements.</p>
                         </div>
                       </div>
@@ -625,7 +625,7 @@ $login_seller_language = $row_login_seller->seller_language;
                         </div>
                         <div class="howitwork-list-content">
                           <h3>3. Work</h3>
-                          <p>Once you finish your gig, deliver your awesome work on our platform for your client to approve.</p>
+                          <p>Once you finish your services, deliver your awesome work on our platform for your client to approve.</p>
                         </div>
                       </div>
                       <!-- How it work each item -->
@@ -654,7 +654,7 @@ $login_seller_language = $row_login_seller->seller_language;
               <div class="row">
                 <div class="col-12">
                   <div class="publish-gig-wrapper">
-                    <div class="publish-gig-header text-center">Publish a Gig</div>
+                    <div class="publish-gig-header text-center">Post a Service</div>
                     <div class="publish-gig-body">
                      
                       <div class="d-flex flex-column">

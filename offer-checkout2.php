@@ -123,6 +123,7 @@
 	<?php if(!empty($site_favicon)){ ?>
 	<link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
 	<?php } ?>
+	
 </head>
 <body class="all-content">
 <?php

@@ -58,7 +58,7 @@ session_start();
 ?>
 <style>
   .activate-email-class #send-email{background-color: #ff0707; border-color: #ff0707;}
-  .total-user-count.count.c-notifications-header{right: 13%;}
+  .total-user-count.count.c-notifications-header{right: 13%;top: -6px;}
 </style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -85,8 +85,8 @@ session_start();
             <div class="menu-inner">
               <ul>
                 <li><a href="<?= $site_url; ?>/dashboard">Dashboard</a></li>
-                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Gigs</a></li>
-                <li><a href="<?= $site_url; ?>/requests/buyer_requests">Buyer Request</a></li>
+                <li><a href="<?= $site_url; ?>/proposals/view_proposals">Services</a></li>
+                <li><a href="<?= $site_url; ?>/requests/buyer_requests">Jobs</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -100,12 +100,12 @@ session_start();
             <?php if($currency_switcher == 1){ ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
-                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
               </select>
             </div>
             <?php } ?>
-            <div class="message-inner">
+            <div class="message-inner position-relative">
               <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?php echo $site_url; ?>/assets/img/message-2.png" alt="">
                 <!-- <span class="total-user-count count c-messages-header"></span> -->
                 <span class="total-user-count count c-notifications-header"></span>
@@ -199,7 +199,7 @@ session_start();
       <li><a href="<?php echo $site_url; ?>/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="assets/img/icon/1.png" alt=""> Profile</a></li>
       <li><a href="<?= $site_url; ?>/settings?account_settings"> <img src="assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="assets/img/icon/12.png" alt=""> Dashboard </a></li>
-      <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="assets/img/icon/3.png" alt=""> Gigs</a></li>
+      <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="assets/img/icon/3.png" alt=""> Services</a></li>
       <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="assets/img/icon/13.png" alt=""> Post a Gig</a></li>
       <li><a href="<?= $site_url; ?>/requests/buyer_requests"> <img src="assets/img/icon/14.png" alt=""> Buyers Requests</a></li>
       <li><a href="<?= $site_url ?>/selling_orders"> <img src="assets/img/icon/5.png" alt=""> Orders</a></li>

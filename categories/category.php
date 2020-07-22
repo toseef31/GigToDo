@@ -995,6 +995,12 @@ $cur_amount = currencyConverter($to,1);
       }
   });
 
+  $('.filter-results').on('click', function(){
+    $('.offer-sidebar').addClass('open-mobile');
+  });
+  $('#backtomain').on('click', function(){
+    $(this).parents('.offer-sidebar').removeClass('open-mobile');
+  });
  
 
 

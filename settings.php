@@ -624,21 +624,24 @@ $count_account = $select_seller_payment->rowCount();
 													</div>
 													<!-- Each item -->
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
-														<span>Buyer Requests</span>
+														<span>Jobs</span>
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" name="buyer_request" class="custom-control-input" id="customCheck4" <?php if($login_seller_buyer_request == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck4">&nbsp;</label>
 														</div>
 													</div>
 													<!-- Each item -->
+													<?php if($login_user_type == 'seller'){ ?>
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
-														<span>My Gigs</span>
+														<span>Services</span>
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" name="my_gigs" class="custom-control-input" id="customCheck5" <?php if($login_seller_my_gigs == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck5">&nbsp;</label>
 														</div>
 													</div>
+													<?php } ?>
 													<!-- Each item -->
+													<?php if($login_user_type != 'seller'){ ?>
 													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>My Account</span>
 														<div class="custom-control custom-checkbox">
@@ -646,14 +649,15 @@ $count_account = $select_seller_payment->rowCount();
 															<label class="custom-control-label" for="customCheck6">&nbsp;</label>
 														</div>
 													</div>
+													<?php } ?>
 													<!-- Each item -->
-													<div class="notification-item d-flex flex-row align-items-center justify-content-between">
+													<!-- <div class="notification-item d-flex flex-row align-items-center justify-content-between">
 														<span>To-dos</span>
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" name="to_dos" class="custom-control-input" id="customCheck7" <?php if($login_seller_to_dos == 'on'){ echo "checked";} ?>>
 															<label class="custom-control-label" for="customCheck7">&nbsp;</label>
 														</div>
-													</div>
+													</div> -->
 													<!-- Each item -->
 												</div>
 												<div class="form-group d-flex flex-row justify-content-end mb-0">

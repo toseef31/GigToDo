@@ -44,9 +44,9 @@
 
 
 	if(check_status($seller_id) == "Online"){
-		$statusClass = "class='text-success font-weight-bold'";
+		$statusClass = " font-weight-bold active";
 	}else{	
-		$statusClass = "style='color:#868e96; font-weight:bold;'"; 
+		$statusClass = "text-muted font-weight-bold"; 
 	}
 
 	$date = date("M d, h:i A");
@@ -114,27 +114,27 @@
 ?>
 
 	<div class="message-body-header d-flex flex-wrap align-items-center justify-content-between">
-		<p class="user-status d-flex flex-column bg-white <?php echo $statusClass; ?>">
+		<p class="user-status d-flex flex-column bg-white <?php echo $statusClass; ?> closeMsg">
 			<?php if ($seller_account_type == "seller") { ?>
-			<a href="<?= $site_url; ?>/ar/<?= $seller_user_name; ?>" style="display: contents;">
-				<i class="fal fa-angle-left"></i>
+			<!-- <a href="<?= $site_url; ?>/ar/<?= $seller_user_name; ?>" style="display: contents;"> -->
+				<i class="fal fa-angle-right"></i>
 				<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
 				<?php if (check_status($seller_id) == "Online") { ?>
 					<span class="text-success">Online</span>
 				<?php }else{ ?>
 					<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
 				<?php } ?>
-			</a>
+			<!-- </a> -->
 			<?php }else{ ?>
-				<a href="<?= $site_url; ?>/ar/profile?user_name=<?= $seller_user_name; ?>" style="display: contents;">
-					<i class="fal fa-angle-left"></i>
+				<!-- <a href="<?= $site_url; ?>/ar/profile?user_name=<?= $seller_user_name; ?>" style="display: contents;"> -->
+					<i class="fal fa-angle-right"></i>
 					<span class="username"><?php echo ucfirst(strtolower($seller_user_name)); ?></span>
 					<?php if (check_status($seller_id) == "Online") { ?>
 						<span class="text-success">Online</span>
 					<?php }else{ ?>
 						<span class="timestamp">Last seen <?php echo $date; ?> ago</span>
 					<?php } ?>
-				</a>
+				<!-- </a> -->
 			<?php } ?>
 		</p>
 		<p class="float-right">
@@ -165,7 +165,7 @@
 
 			<?php } ?>
 			
-			<div class="dropdown float-right d-block d-sm-block d-md-none mt-2">
+			<div class="dropdown float-right d-none mt-2">
 				
 				<a class="dropdown-toggle closeMsgIcon" href="#" role="button" data-toggle="dropdown">
 					

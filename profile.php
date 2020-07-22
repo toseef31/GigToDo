@@ -415,7 +415,7 @@ $count_account = $select_seller_payments->rowCount();
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
                 <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                 <div class="managerequest">
-                  <h3>Manage Request</h3>
+                  <h3>Manage Jobs</h3>
                   <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
                     <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                       <span>Show</span>
@@ -603,7 +603,7 @@ $count_account = $select_seller_payments->rowCount();
 
                     ?>
                     <div class="managerequest">
-                      <h3>Manage Request</h3>
+                      <h3>Manage Jobs</h3>
                       <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
                         <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                           <span>Category</span>

@@ -133,9 +133,17 @@
 							سحب العرض
 						</a>
 					<?php }else{ ?>
-					<button id="accept-offer-<?php echo $message_offer_id; ?>" class="accepte-offer float-right">
+					<!-- <button id="accept-offer-<?php echo $message_offer_id; ?>" class="accepte-offer float-right">
 					اقبل العرض 
-					</button>
+					</button> -->
+					<form method="post" action="../order-checkout" id="offers<?= $offer_id; ?>">
+						<input type="hidden" name="single_message_id" value="<?= $message_group_id; ?>">
+						<input type="hidden" name="offer_id" value="<?= $message_offer_id; ?>">
+						<input type="hidden" name="proposal_qty" value="1">
+						<button class="accepte-offer  float-right"  name="add_order">
+						قبل العرض 
+						</button>
+					</form>
 					<script>
 					$("#accept-offer-<?php echo $message_offer_id; ?>").click(function(){
 						single_message_id = "<?php echo $message_group_id; ?>";

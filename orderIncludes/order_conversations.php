@@ -740,7 +740,7 @@ echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
 <?php } ?>
 
 <!-- <p class="text-right text-muted mb-0"> <?php echo $date; ?> </p> -->
-
+  </div>
       </div>
     </div>
   </div>

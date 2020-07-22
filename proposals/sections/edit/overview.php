@@ -52,7 +52,7 @@ $child_title = $row_meta->child_title;
                         <span>
                           <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/create-gig-icon.png" />
                         </span>
-                        <span>Gig Title</span>
+                        <span>service title</span>
                       </label>
                       <input class="form-control" type="text" name="proposal_title" value="<?= $d_proposal_title; ?>" placeholder="I can..." />
                       <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_title']); ?></small>
@@ -180,7 +180,7 @@ $child_title = $row_meta->child_title;
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>
-                          Choosing a relevant category and subcategory for your gig will give you the best possible chance of securing buyers. If you perform services that cut across multiple categories, you can break them up into multiple gigs.
+                          Choosing a relevant category and subcategory for your service will give you the best possible chance of securing buyers. If you perform services that cut across multiple categories, you can break them up into multiple gigs.
                         </p>
                       </div>
                     </div>
@@ -234,7 +234,7 @@ $child_title = $row_meta->child_title;
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>
-                          Set a few gig requirements for your buyers to complete. This will ensure that you have all the necessary information before you begin working on a project.  Choose between free text fields, and file attachment fields for your buyers to complete.
+                          Set a few service requirements for your buyers to complete. This will ensure that you have all the necessary information before you begin working on a project.  Choose between free text fields, and file attachment fields for your buyers to complete.
                         </p>
                       </div>
                     </div>
@@ -391,10 +391,10 @@ $child_title = $row_meta->child_title;
             <div class="howitwork-list d-flex flex-column">
               <div class="howitwork-list-item d-flex flex-row align-items-start">
                 <div class="howitwork-list-icon">
-                  <img alt="Post a gig" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/postagig.png" />
+                  <img alt="Post a Service" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/postagig.png" />
                 </div>
                 <div class="howitwork-list-content">
-                  <h3>1. Post A Gig</h3>
+                  <h3>1. Post a Service</h3>
                   <p>Create and customise services so that buyers can understand clearly the services you provide in order to meet their requirements.</p>
                 </div>
               </div>
@@ -415,7 +415,7 @@ $child_title = $row_meta->child_title;
                 </div>
                 <div class="howitwork-list-content">
                   <h3>3. Work</h3>
-                  <p>Once you finish your gig, deliver your awesome work on our platform for your client to approve.</p>
+                  <p>Once you finish your service, deliver your awesome work on our platform for your client to approve.</p>
                 </div>
               </div>
               <!-- How it work each item -->

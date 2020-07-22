@@ -16,7 +16,7 @@ if (empty($form_data)) {
       <span>
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/create-gig-icon.png" />
       </span>
-      <span>Gig Title</span>
+      <span>service title</span>
     </label>
     <input class="form-control" type="text" name="proposal_title" value="" placeholder="I will create company logo and company..." />
     <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_title']); ?></span>
