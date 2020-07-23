@@ -1,10 +1,16 @@
 <?php
 	@session_start();
 	require_once("../../includes/db.php");
+	require_once("../../includes/change_currency.php");
+	
+	if(isset($_SESSION['currency'])){
+	  $to = $_SESSION['currency'];
+	}
 	if(!isset($_SESSION['seller_user_name'])){
 		echo "<script>window.open('../../login','_self')</script>";
 	}
-
+	$cur_amount = currencyConverter($to,1);
+	
 	$login_seller_user_name = $_SESSION['seller_user_name'];
 	$select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 	$row_login_seller = $select_login_seller->fetch();
@@ -108,7 +114,7 @@
 			<div class="messages-text d-flex flex-column">
 				<div class="offer-title-price d-flex flex-row align-items-center justify-content-between">
 					<span class="title"><?php echo $proposal_title; ?></span>
-					<span class="price"><?php echo $s_currency; ?><?php echo $amount; ?></span>
+					<span class="price"><?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?></span>
 				</div>
 				<div class="offer-summary"><?php echo $description; ?></div>
 				<h5>عرضك بيضم:</h5>
@@ -188,7 +194,7 @@
 				<div class="messages-text d-flex flex-column">
 					<div class="offer-title-price d-flex flex-row align-items-center justify-content-between">
 						<span class="title"><?php echo $request_description; ?></span>
-						<span class="price"><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+						<span class="price"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
 					</div>
 					<!-- <div class="offer-summary"><?php echo $description; ?></div> -->
 					<h5>عرضك بيضم:</h5>

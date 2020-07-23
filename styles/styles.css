@@ -2292,7 +2292,7 @@ font-size:22px;
 .user-status {
 	background:url(../images/user-background-cover.jpg);
 	padding:5px 15px 15px 15px;
-	color:#fff;
+	/*color:#fff;*/
 }
 .user-status ul li {
 	padding-right:30px;
