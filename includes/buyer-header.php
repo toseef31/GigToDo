@@ -66,7 +66,9 @@ $page_url = substr("$full_url", 15);
 
 $cur_amount = currencyConverter($to,1);
 ?>
-
+<style>
+  @media(max-width: 768px){.total-user-count.count.c-notifications-header{right: 2px;top: -8px;}}
+</style>
 <!-- Header -->
 <header>
   <div class="header-top">
@@ -79,8 +81,8 @@ $cur_amount = currencyConverter($to,1);
         </div>
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex align-items-center justify-content-end">
-            <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
+            <div class="message-inner position-relative">
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -137,8 +139,8 @@ $cur_amount = currencyConverter($to,1);
             <?php if($currency_switcher == 1){ ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert"><?= $to ?>
-                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
               </select>
             </div>
             <?php } ?>
@@ -194,7 +196,7 @@ $cur_amount = currencyConverter($to,1);
             </div>
           </div>
         </div>
-        <div class="notification-setting">
+        <!-- <div class="notification-setting">
           <div class="row align-items-center">
             <div class="col-6">
               <div class="noti-option-icon">
@@ -206,7 +208,7 @@ $cur_amount = currencyConverter($to,1);
               <a href="javascript:void(0);" class="see-all-noti">See All In Notification ></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- Message box end -->
     </div>

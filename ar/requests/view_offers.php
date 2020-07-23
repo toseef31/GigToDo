@@ -72,7 +72,7 @@ $count_offers = $get_offers->rowCount();
 	<!-- <link href="../styles/bootstrap.css" rel="stylesheet">
 	<link href="../styles/custom.css" rel="stylesheet"> --> 
 	<!-- Custom css code from modified in admin panel --->
-	<!-- <link href="../styles/styles.css" rel="stylesheet"> -->
+	<link href="../styles/styles.css" rel="stylesheet">
 	<link href="../styles/user_nav_styles.css" rel="stylesheet">
 	<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -328,7 +328,7 @@ $count_offers = $get_offers->rowCount();
 							</div>
 							<!-- Row -->
 							<div class="all-gigs-small">
-								<div class="row">
+								<div class="row" id="offers-data-mobile">
 									<?php if($count_offers == "0"){ ?>
 									<div class="col-12 rounded-0 mb-3">
 										<div class="card-body">
@@ -683,6 +683,7 @@ $count_offers = $get_offers->rowCount();
 	data:{time:time, request_id:request_id},
 	success:function(data){
 	$('#offers-data').html(data);
+	$('#offers-data-mobile').html(data);
 	}
 	});
 	});
@@ -698,6 +699,7 @@ $count_offers = $get_offers->rowCount();
 	data:{status:status, request_id:request_id},
 	success:function(data){
 	$('#offers-data').html(data);
+	$('#offers-data-mobile').html(data);
 	}
 	});
 	});
@@ -721,13 +723,20 @@ $count_offers = $get_offers->rowCount();
 	        method:"POST",
 	        data:{price:price,  request_id:request_id},
 	        success:function(data){
-	          console.log(data);
+	          // console.log(data);
 	        $('#category_proposals').html('');  
 	        
 	        $('#offers-data').html(data); 
+	        $('#offers-data-mobile').html(data);
 	      }
 	      });
 	    }
+	});
+	$('.filter-results').on('click', function(){
+		$('.offer-sidebar').addClass('open-mobile');
+	});
+	$('#backtomain').on('click', function(){
+		$(this).parents('.offer-sidebar').removeClass('open-mobile');
 	});
 
 </script>

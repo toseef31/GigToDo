@@ -39,7 +39,7 @@
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
   <head>
-    <title><?php echo $site_name; ?> - Recent Buyer Requests.</title>
+    <title><?php echo $site_name; ?> - Recent jobs.</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -106,10 +106,10 @@
         <div class="container">
           <div class="row align-items-start">
             <div class="col-12 col-sm-6">
-              <h1 class="list-page-title">Buyer Requests</h1>
+              <h1 class="list-page-title">Jobs</h1>
             </div>
             <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
-              <a class="button button-red" href="../proposals/create_proposal">post a gig</a>
+              <a class="button button-red" href="../proposals/create_proposal">Post A Service</a>
             </div>
           </div>
           <!-- Row -->
@@ -191,7 +191,7 @@
                     <thead>
                       <tr role="row">
                         <th role="column">Buyer</th>
-                        <th role="column">Request</th>
+                        <th role="column">Job</th>
                         <th role="column">Offers</th>
                         <th role="column">Delivery</th>
                         <th role="column">Budget</th>
@@ -317,7 +317,7 @@
                         <!-- <th role="column">Offers</th> -->
                         <th role="column">Delivery</th>
                         <th role="column">Budget</th>
-                        <th role="column">Request</th>
+                        <th role="column">Job</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -462,7 +462,7 @@
         <h1>
         <div class="col-md-3 float-right">
           <div class="input-group">
-            <input type="text" id="search-input"  placeholder="Search Buyer Requests" class="form-control" >
+            <input type="text" id="search-input"  placeholder="Search jobs" class="form-control" >
             <span class="input-group-btn">
             <button class="btn btn-success"> <i class="fa fa-search"></i> </button>
             </span>
@@ -509,7 +509,7 @@
         <div class="tab-content mt-4">
           <div id="active-requests" class="tab-pane fade show active">
             <div class="table-responsive box-table">
-              <h3 class="float-left ml-2 mt-3 mb-3"> Buyer Requests </h3>
+              <h3 class="float-left ml-2 mt-3 mb-3"> jobs </h3>
               <select  class="form-control float-right sort-by mt-3 mb-3 mr-3">
                 <option value="all"> All Subcategories </option>
                 <?php

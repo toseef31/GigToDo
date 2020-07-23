@@ -83,10 +83,10 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col-12 col-sm-6">
-							<h1 class="list-page-title">List Of Gigs</h1>
+							<h1 class="list-page-title">Services</h1>
 						</div>
 						<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
-							<a class="button button-red" href="create_proposal">Create a New Gig</a>
+							<a class="button button-red" href="create_proposal">Create a new service</a>
 						</div>
 					</div>
 					<!-- Row -->

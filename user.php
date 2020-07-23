@@ -435,7 +435,7 @@ if(isset($_SESSION['seller_user_name'])){
 
           <div class="profile-gigs mt-30">
             <div class="profile-title-2">
-              <h3 class="title">Gigs </h3>
+              <h3 class="title">Services </h3>
             </div>
             <div class="all-gigs-small mt-30">
               <div class="row">
@@ -623,23 +623,54 @@ if(isset($_SESSION['seller_user_name'])){
                   <?php 
                     $select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$get_seller_id)); 
                     $count_reviews = $select_buyer_reviews->rowCount();
+
                     if(!$count_reviews == 0){
                       $rattings = array();
+                      $communication_rate = array();
+                      $service_rate = array();
+                      $recommend_rate = array();
                       while($row_buyer_reviews = $select_buyer_reviews->fetch()){
                         $buyer_rating = $row_buyer_reviews->buyer_rating;
+                        $communication_rating = $row_buyer_reviews->communication_rating;
+                        $service_rating = $row_buyer_reviews->service_rating;
+                        $recommend_rating = $row_buyer_reviews->recommend_rating;
+
                         array_push($rattings,$buyer_rating);
+                        array_push($communication_rate,$communication_rating);
+                        array_push($service_rate,$service_rating);
+                        array_push($recommend_rate,$recommend_rating);
                       }
                       $total = array_sum($rattings);
+                      $total_communication = array_sum($communication_rate);
+                      $total_service = array_sum($service_rate);
+                      $total_recommend = array_sum($recommend_rate);
+
+
                       @$average = $total/count($rattings);
-                      $average_rating = substr($average ,0,1);
+                      $average_rating = substr($average ,0,3);
+                      
+                      @$average_communication = $total_communication/count($communication_rate);
+                      $average_rating_communi = substr($average_communication ,0,3);
+                      
+                      @$average_service = $total_service/count($service_rate);
+                      $average_rating_service = substr($average_service ,0,3);
+                      
+                      @$average_recommend = $total_recommend/count($recommend_rate);
+                      $average_rating_recomd = substr($average_recommend ,0,3);
                     }else{
                      $average = "0";  
                      $average_rating = "0";
+                     $average_communication = "0";  
+                     $average_rating_communi = "0";
+                     $average_service = "0";  
+                     $average_rating_service = "0";
+                     $average_recommend = "0";  
+                     $average_rating_recomd = "0";
                     }
                   ?>
                   <span><i class="fa fa-star"></i> <?= $average_rating ?></span> (<?= $count_reviews; ?>)</h5>
               </div>
-              <div class="review-dropdown mt-10 clearfix">
+              <!-- <div class="review-dropdown mt-10 clearfix">
                 <select>
                   <option value="0">Most Recent</option>
                   <option value="1">Most Recent 01</option>
@@ -647,30 +678,30 @@ if(isset($_SESSION['seller_user_name'])){
                   <option value="3">Most Recent 03</option>
                   <option value="4">Most Recent 04</option>
                 </select>
-              </div>
+              </div> -->
             </div>
-            <!-- <div class="review-communication pt-20">
+            <div class="review-communication pt-20">
               <div class="row no-gutters">
                 <div class="col-md-4">
                   <div class="single-communication mt-15">
                     <h5 class="title">Seller communication leval</h5>
-                    <span><i class="fa fa-star"></i> 5</span>
+                    <span><i class="fa fa-star"></i> <?= $average_rating_communi ?></span>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="single-communication mt-15">
                     <h5 class="title">Recommend to a friend</h5>
-                    <span><i class="fa fa-star"></i> 4.9</span>
+                    <span><i class="fa fa-star"></i> <?= $average_rating_service ?></span>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="single-communication mt-15">
                     <h5 class="title">Service as described</h5>
-                    <span><i class="fa fa-star"></i> 5</span>
+                    <span><i class="fa fa-star"></i> <?= $average_rating_service ?></span>
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
             <div class="review-comment pt-30">
               <ul>
                 <?php 
@@ -693,7 +724,7 @@ if(isset($_SESSION['seller_user_name'])){
 
                     $total = array_sum($rattings);
                     @$average = $total/count($rattings);
-                    $average_rating = substr($average ,0,1);
+                    $average_rating = substr($average ,0,3);
                   
                   if(!$count_reviews == 0){
                 ?>
@@ -710,7 +741,7 @@ if(isset($_SESSION['seller_user_name'])){
                       <h6 class="comment-name"><?= $buyer_name; ?> 
                         <span>
                         <?php
-                          for($seller_i=0; $seller_i<$average_rating; $seller_i++){
+                          for($seller_i=0; $seller_i<$buyer_rating; $seller_i++){
                             echo " <i class='fa fa-star'></i> ";
                           }
                           for($seller_i=$average_rating; $seller_i<5; $seller_i++){
@@ -725,9 +756,9 @@ if(isset($_SESSION['seller_user_name'])){
                 </li>
               <?php } } ?>
               </ul>
-              <div class="review-more mt-25">
+              <!-- <div class="review-more mt-25">
                 <a href="javascript:void(0);">+ Show More</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

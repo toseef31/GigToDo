@@ -2,6 +2,11 @@
 session_start();
 require_once("includes/db.php");
 
+$login_seller_user_name = $_SESSION['seller_user_name'];
+$select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+$row_login_seller = $select_login_seller->fetch();
+$login_seller_id = $row_login_seller->seller_id;
+$login_seller_type = $row_login_seller->account_type;
 ?>
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" class="ui-toolkit">
@@ -56,7 +61,17 @@ require_once("includes/db.php");
 	</style>
 	</head>
 	<body class="all-content">
-		<?php require_once("includes/header-top.php"); ?>
+		<?php
+	    if(!isset($_SESSION['seller_user_name'])){
+	      require_once("includes/header_with_categories.php");
+	    }else{
+	    	if($login_seller_type == 'buyer'){
+	      	require_once("includes/buyer-header.php");
+	    	}else{
+	    		require_once("includes/user_header.php");
+	    	}
+	    } 
+	  ?>
 		<!-- Preloader Start -->
 		<div class="proloader">
 			<div class="loader">

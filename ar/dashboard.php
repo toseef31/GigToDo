@@ -17,9 +17,35 @@
   $login_seller_image = $row_login_seller->seller_image;
   $login_seller_payouts = $row_login_seller->seller_payouts;
   $login_seller_view = $row_login_seller->profile_views;
+  $login_seller_cover = $row_login_seller->seller_cover_image;
+  $login_seller_image = $row_login_seller->seller_image;
+  $login_seller_country = $row_login_seller->seller_country;
+  $login_seller_state = $row_login_seller->seller_state;
+  $login_seller_language = $row_login_seller->seller_language;
+  $login_seller_about = $row_login_seller->seller_about;
   if(empty($login_seller_country)){
     $login_seller_country = "&nbsp;";
   }
+
+  $request_cat_ids = array();
+  // $select_proposals = $db->query("select DISTINCT proposal_child_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
+  $select_proposals = $db->query("select DISTINCT proposal_cat_id from proposals where proposal_seller_id='$login_seller_id' and proposal_status='active'");
+  while($row_proposals = $select_proposals->fetch()){
+   $proposal_cat_id = $row_proposals->proposal_cat_id;
+   array_push($request_cat_ids, $proposal_cat_id);
+  }
+  
+  $where_cat_id = array();
+  foreach($request_cat_ids as $cat_id){
+   $where_cat_id[] = "cat_id=" . $cat_id; 
+  }
+  
+  if(count($where_cat_id) > 0){
+   $requests_query = " and (" . implode(" or ", $where_cat_id) . ")";
+   $child_cats_query = "(" . implode(" or ", $where_cat_id) . ")";
+  }
+  $relevant_requests = $row_general_settings->relevant_requests;
+
 
   $select_seller_accounts = $db->select("seller_accounts",array("seller_id" => $login_seller_id));
   $row_seller_accounts = $select_seller_accounts->fetch();
@@ -183,7 +209,7 @@
 
   <!--====== Style css ======-->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="assets/css/style2.css" rel="stylesheet">
   <!--====== Responsive css ======-->
   <link href="assets/css/responsive.css" rel="stylesheet">
   <!-- <link href="styles/bootstrap.css" rel="stylesheet">
@@ -260,6 +286,9 @@
     .messge-noti-box::-webkit-scrollbar-thumb:hover {
       background: rgb(255, 7, 7);
     }
+    .attachment a {
+        color: #ff0707;
+    }
   </style>
 </head>
 <body class="all-content">
@@ -304,9 +333,136 @@
   <div class="profile-chart-area mb-30">
     <div class="container">
       <div class="row">
-        <div class="col-12 col-lg-8">
+        
+        <div class="col-12">
+          
+        </div>
+        <div class="col-12 col-md-4 d-flex flex-row">
+          <div class="userprofile d-flex flex-column">
+            <div class="userprofile-header d-flex flex-row align-items-center">
+              <div class="userprofile-logo">
+                <?php if(!empty($login_seller_image)){ ?>
+                <img src="<?= $site_url; ?>/user_images/<?= $login_seller_image; ?>" alt="">
+                <?php }else{ ?>
+                <img src="<?= $site_url; ?>/assets/img/user1.png"  class="img-fluid rounded-circle mb-3">
+                <?php } ?>
+              </div>
+              <div class="userprofile-text d-flex flex-column">
+                <span>مرحبا بك مرة اخري</span>
+                <span class="username"><?= ucfirst(strtolower($login_seller_user_name)); ?></span>
+              </div>
+            </div>
+            <div class="userprofile-progress d-flex flex-column">
+              <span>أنشئ حسابك</span>
+              <div class="userprofile-progressbar">
+                <?php if ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 35%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">35%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <?php } elseif ($login_seller_cover == '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image == '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language == '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about == '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                <?php } elseif ($login_seller_cover != '' && $login_seller_state != '' && $login_seller_country != '' && $login_seller_image != '' && $login_seller_about != '' && $login_seller_language != '0') {  ?>
+                  <div class="userprofile-progressbar-inner" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                <?php } ?>
+                <!-- <div class="progress-bar" role="progressbar" style="width: 19%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div> -->
+              </div>
+              <!-- <div class="userprofile-progressbar">
+                <div class="userprofile-progressbar-inner" style="max-width: 19%;">19%</div>
+              </div> -->
+            </div>
+            <div class="userprofile-footer d-flex flex-column">
+              <a class="userprofile-button d-flex flex-row align-items-center justify-content-center" href="<?= $site_url; ?>/ar/proposals/create_proposal">أضف خدمة</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 col-md-8">
           <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-12 col-sm-6">
               <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg1.png);">
                 <div class="profile-cart-icon">
                   <img src="assets/img/img/user.png" alt="">
@@ -316,7 +472,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-12 col-sm-6">
               <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg2.png);">
                 <div class="profile-cart-icon">
                   <img src="assets/img/img/clip.png" alt="">
@@ -326,7 +482,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-12 col-sm-6">
               <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg3.png);">
                 <div class="profile-cart-icon">
                   <img src="assets/img/img/filter.png" alt="">
@@ -336,7 +492,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-12 col-sm-6">
               <div class="profile-chart-item" style="background-image: url(assets/img/img/dash-bg4.png);">
                 <div class="profile-cart-icon">
                   <img src="assets/img/img/cal.png" alt="">
@@ -348,272 +504,381 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-4">
-          <div class="all-project-chart">
-            <h2>المشاريع كلها</h2>
-            <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-            if($count_orders == 0){
-            ?>
-            <img src="assets/img/img/all-chart2.png" alt="">
-            <?php }else{ ?>
-            <div id="chartContainer" style="height: 250px; width: 100%;"></div>
-            <?php } ?>
-            <!-- <img src="assets/img/img/all-chart.png" alt=""> -->
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  <div class="dash-chart-area pb-50">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-lg-6">
-          <div class="message-notification">
-            <div class="message-title">
-              <?php
-                $select_all_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty'");
-                $count_all_inbox_sellers = $select_all_inbox_sellers->rowCount();
-              ?>
-              الرسايل والإشعارات
-            </div>
-            <div class="messge-noti-box">
-              <?php
-              
-              if($count_all_inbox_sellers == 0){
-              echo "<h5 class='text-center mb-3'> No Messages. </h5>";
-              }
-
-              $select_inbox_sellers = $db->query("select * from inbox_sellers where (receiver_id='$login_seller_id' or sender_id='$login_seller_id') AND NOT message_status='empty' order by 1 DESC LIMIT 0,4");
-              while($row_inbox_sellers = $select_inbox_sellers->fetch()){
-
-              $inbox_seller_id = $row_inbox_sellers->inbox_seller_id;
-              $message_group_id = $row_inbox_sellers->message_group_id;
-              $sender_id = $row_inbox_sellers->sender_id;
-              $receiver_id = $row_inbox_sellers->receiver_id;
-              $message_id = $row_inbox_sellers->message_id;
-
-              /// Ids
-              if($login_seller_id == $sender_id){
-              $sender_id = $receiver_id;
-              }else{
-              $sender_id = $sender_id;
-              }
-
-              /// Select Sender Information
-              $select_sender = $db->select("sellers",array("seller_id" => $sender_id));
-              $row_sender = $select_sender->fetch();
-              $sender_user_name = $row_sender->seller_user_name;
-              $sender_image = $row_sender->seller_image;
-
-              $select_inbox_message = $db->select("inbox_messages",array("message_id" => $message_id));
-              $row_inbox_message = $select_inbox_message->fetch();
-              $message_desc = strip_tags($row_inbox_message->message_desc);
-              $message_date = $row_inbox_message->message_date;
-              $message_status = $row_inbox_message->message_status;
-
-              if($message_desc == ""){
-                $message_desc = "Sent you an offer";
-              }
-
-              if($message_status == 'unread'){ 
-                if($login_seller_id == $receiver_id){
-                  $msgClass = "header-message-div-unread"; 
-                }else{ 
-                  $msgClass = "header-message-div"; 
-                } 
-              }else{ 
-                $msgClass = "header-message-div"; 
-              }
-
-              ?>
-              <div class="messge-item <?= $msgClass; ?>">
-                <div class="msg-logo">
-                  <a href="conversations/inbox?single_message_id=<?= $message_group_id; ?>">
-                  <?php if(!empty($sender_image)){ ?>
-                    <img src="<?= $site_url; ?>/user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
-                  <?php }else{ ?>
-                    <img src="assets/img/img/logoogo.png" width="60" height="60" class="rounded-circle">
-                  <?php } ?>
-                  </a>
-                </div>
-                <div class="msg-text">
-                  <h5><?= $sender_user_name; ?> <span>أهلا بالعالم</span></h5>
-                  <p class="text-muted date"><i class="fal fa-clock"></i> <?= $message_date; ?></p>
-                  <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= $message_desc; ?></p>
-                </div>
-              </div>
-              <?php } ?>
-              <?php
-                $count_notifications = $db->count("notifications",array("receiver_id" => $login_seller_id));
-                if($count_notifications == 0){
-                  echo "<h5 class='text-center mb-3'> No Notifications Are Available </h5>";
-                }
-                
-                $get_notifications = $db->query("select * from notifications where receiver_id='$login_seller_id' order by 1 DESC limit 0,5");
-                while($row_notifications = $get_notifications->fetch()){
-                $notification_id = $row_notifications->notification_id;
-                $sender_id = $row_notifications->sender_id;
-                $order_id = $row_notifications->order_id;
-                $reason = $row_notifications->reason;
-                $date = $row_notifications->date;
-                $status = $row_notifications->status;
-
-                // Select Sender Details
-                $select_sender = $db->select("sellers",array("seller_id" => $sender_id));
-                $row_sender = $select_sender->fetch();
-                $sender_user_name = @$row_sender->seller_user_name;
-                $sender_image = @$row_sender->seller_image;
-                if(strpos($sender_id,'admin') !== false){
-                  $admin_id = trim($sender_id, "admin_");
-                  $get_admin = $db->select("admins",array("admin_id" => $admin_id));
-                  $sender_user_name = "Admin";
-                  $sender_image = $get_admin->fetch()->admin_image;
-                }
-              ?>
-              <div class="messge-item <?php if($status == "unread"){ echo "header-message-div-unread"; }else{ echo "header-message-div"; } ?>">
-                <a href="dashboard?delete_notification=<?= $notification_id; ?>" class="float-right delete text-danger">
-                <i class="fa fa-times-circle fa-lg"></i>  
-                </a>
-                <div class="msg-logo">
-                  <a href="dashboard?n_id=<?= $notification_id; ?>">
-                  <?php if(!empty($sender_image)){ ?>
-                  <?php if(strpos($sender_id, "admin_") !== false){ ?>
-                    <img src="<?= $site_url ?>/admin/admin_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
-                  <?php }else{ ?>
-                    <img src="<?= $site_url ?>/user_images/<?= $sender_image; ?>" width="60" height="60" class="rounded-circle">
-                  <?php } ?>
-                  <?php }else{ ?>
-                  <img src="<?= $site_url ?>/user_images/empty-image.png" width="60" height="60" class="rounded-circle">
-                  <?php } ?>
-                  </a>
-                </div>
-                <div class="msg-text">
-                  <a href="dashboard?n_id=<?= $notification_id; ?>">
-                    <h5><?= $sender_user_name; ?></h5>
-                    <p class="text-muted date"><i class="fal fa-clock"></i> <?= $date; ?></p>
-                    <p class="message text-truncate"><i class="fas fa-external-link-alt"></i> <?= include("includes/comp/notification_reasons.php"); ?></p>
-                  </a>
-                </div>
-              </div>
-              <?php } ?>
-              <!-- <div class="messge-item">
-                <div class="msg-logo">
-                  <img src="assets/img/img/logoogo.png" alt="">
-                </div>
-                <div class="msg-text">
-                  <h5>ابعت  رسالة <span>أهلا بالعالم</span></h5>
-                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
-                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
-                </div>
-              </div>
-              <div class="messge-item">
-                <div class="msg-logo">
-                  <img src="assets/img/img/logoogo.png" alt="">
-                </div>
-                <div class="msg-text">
-                  <h5>ابعت  رسالة <span>أهلا بالعالم</span></h5>
-                  <p><i class="fal fa-clock"></i> 03-02-2016</p>
-                  <p><i class="fas fa-external-link-alt"></i> Hello World</p>
-                </div>
-              </div> -->
-            </div>
+  <section class="container-fluid list-page">
+    <div class="row">
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col-12 col-sm-6">
+            <h1 class="list-page-title">
+              طلب المشتري
+            </h1>
+          </div>
+          <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
+            <a class="button button-red" href="../proposals/create_proposal">
+              انشر خدمة
+            </a>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
-          <div class="income-chart">
-            <div class="income-chart-title">
-              <h5>فرز الدخل بالتاريخ</h5>
-              <ul class="nav" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#altime" role="tab" aria-controls="home" aria-selected="true">كل الوقت</a>
+        <!-- Row -->
+        <div class="list-page-filter">
+          <div class="row flex-md-row-reverse">
+            <div class="col-12 col-md-6">
+              <select id="sub-category" class="form-control float-left sort-by">
+                <option value="all"> All Categories </option>
+                <?php
+                  if(count($where_cat_id) > 0){
+                  $get_c_cats = $db->query("select * from categories where ".$child_cats_query);
+                  while($row_c_cats = @$get_c_cats->fetch()){
+                  $cat_id = $row_c_cats->cat_id;
+                  $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
+                  $row_meta = $get_meta->fetch();
+                  $cat_title = $row_meta->cat_title;
+                  $arabic_title = $row_meta->arabic_title;
+                  echo "<option value='$cat_id'> $arabic_title </option>";
+                  }
+                  }
+                  ?>
+              </select>
+              <!-- <ul class="pagination">
+                <li class="pagination-item">
+                  <a class="pagination-link" href="javascript:void(0);">
+                    <i class="fal fa-angle-right"></i>
+                  </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#lastyear" role="tab" aria-controls="profile" aria-selected="false">السنة اللي فاتت</a>
+                <li class="pagination-item">
+                  <a class="pagination-link" href="javascript:void(0);">1</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#last30day" role="tab" aria-controls="contact" aria-selected="false">آخر 30 يوم </a>
+                <li class="pagination-item">
+                  <div class="pagination-status d-flex flex-row align-items-center">
+                    <span>Of</span>
+                    <span>1</span>
+                  </div>
                 </li>
-              </ul>
+                <li class="pagination-item">
+                  <a class="pagination-link" href="javascript:void(0);">
+                    <i class="fal fa-angle-left"></i>
+                  </a>
+                </li>
+              </ul> -->
             </div>
-            <div class="income-chart-box">
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="altime" role="tabpanel" aria-labelledby="home-tab">
-                 <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-                  if($count_orders == 0){
-                  ?>
-                  <img src="assets/img/img/income-chart3.png" alt="">
-                <?php }else{ ?>
-                  <img src="assets/img/img/income-chart1.png" alt="">
-                  <?php } ?>
+            <div class="col-12 col-md-6">
+              <nav class="list-page-nav">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">نشيط <span class="badge">
+                    <?php 
+                      $i_requests = 0;
+                      $i_send_offers = 0;
+                      if($relevant_requests == "no"){ $requests_query = ""; }
+                      if(!empty($requests_query) or $relevant_requests == "no"){
+                      $get_requests = $db->query("select * from buyer_requests where request_status='active'" . $requests_query . " AND NOT seller_id='$login_seller_id' order by request_id DESC");
+                      while($row_requets = $get_requests->fetch()){
+                      $request_id = $row_requets->request_id;
+                      $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
+                      if($count_offers == 1){
+                      $i_send_offers++;
+                      }
+                      $i_requests++;
+                      }
+                      }
+                    ?>
+                    <?php echo $i_requests-$i_send_offers; ?>
+                  </span></a>
+                  <?php $count_offers = $db->count("send_offers",array("sender_id" => $login_seller_id)); ?>
+                  <a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">ابعت عرض <span class="badge"><?php echo $count_offers; ?></span></a>
                 </div>
-                <div class="tab-pane fade" id="lastyear" role="tabpanel" aria-labelledby="profile-tab">
-                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-                  if($count_orders == 0){
-                  ?>
-                  <img src="assets/img/img/income-chart3.png" alt="">
-                <?php }else{ ?>
-                  <img src="assets/img/img/income-chart1.png" alt="">
-                  <?php } ?>
-                </div>
-                <div class="tab-pane fade" id="last30day" role="tabpanel" aria-labelledby="contact-tab">
-                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-                  if($count_orders == 0){
-                  ?>
-                  <img src="assets/img/img/income-chart3.png" alt="">
-                <?php }else{ ?>
-                  <img src="assets/img/img/income-chart1.png" alt="">
-                  <?php } ?>
-                </div>
+              </nav>
+            </div>
+          </div>
+          <!-- Row -->
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="active-tab">
+                <table class="table managerequest-table limerick" cellpadding="0" cellspacing="0" border="0">
+                  <thead>
+                    <tr role="row">
+                      <th role="column">
+                        المشترى
+                      </th>
+                      <th role="column">
+                        الطلب
+                      </th>
+                      <th role="column">العروض</th>
+                      <th role="column">
+                        التسليم
+                      </th>
+                      <th role="column">
+                        الميزانية
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="load-data">
+                    <?php 
+                      if(!empty($requests_query) or $relevant_requests == "no"){
+                      $select_requests = $db->query("select * from buyer_requests where request_status='active'".$requests_query." AND NOT seller_id='$login_seller_id' order by 1 DESC");
+                      $count_requests = $select_requests->rowCount();
+                      while($row_requests = $select_requests->fetch()){
+                      $request_id = $row_requests->request_id;
+                      $seller_id = $row_requests->seller_id;
+                      $cat_id = $row_requests->cat_id;
+                      $child_id = $row_requests->child_id;
+                      $request_title = $row_requests->request_title;
+                      $request_description = $row_requests->request_description;
+                      $delivery_time = $row_requests->delivery_time;
+                      $request_budget = $row_requests->request_budget;
+                      $request_file = $row_requests->request_file;
+                      $request_date = $row_requests->request_date;
+                      $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
+                      $row_meta = $get_meta->fetch();
+                      $cat_title = $row_meta->cat_title;
+                      $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+                      $row_meta = $get_meta->fetch();
+                      $child_title = $row_meta->child_title;
+                      $select_request_seller = $db->select("sellers",array("seller_id" => $seller_id));
+                      $row_request_seller = $select_request_seller->fetch();
+                      $request_seller_user_name = $row_request_seller->seller_user_name;
+                      $request_seller_image = $row_request_seller->seller_image;
+                      $count_send_offers = $db->count("send_offers",array("request_id" => $request_id));
+                      $count_offers = $db->count("send_offers",array("request_id" => $request_id,"sender_id" => $login_seller_id));
+                      if($count_offers == 0){
+                      ?>
+                    <tr role="row">
+                      <td data-label="المشترى">
+                        <div class="d-flex flex-column align-items-center">
+                          <div class="buyer-image">
+                            <?php if(!empty($request_seller_image)){ ?>
+                            <img alt class="img-fluid d-block request-img rounded-circle" src="<?= $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" />
+                            <?php }else{ ?>
+                            <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+                            <?php } ?>
+                          </div>
+                          <div class="buyer-id"><?php echo $request_seller_user_name; ?></div>
+                          <span><?php echo $request_date; ?></span>
+                        </div>
+                      </td>
+                      <td data-label="الطلب">
+                        <p><?php echo $request_description; ?></p>
+                        <div class="attachment d-flex flex-row align-items-center">
+                          <?php if(!empty($request_file)){ ?>
+                          <a href="<?= $site_url; ?>/requests/request_files/<?php echo $request_file; ?>" download>
+                          <span><i class="fal fa-paperclip"></i></span> <span><?php echo $request_file; ?></span>
+                          </a>
+                          <?php } ?>
+                        </div>
+                        <div class="tags">
+                          <a href="javascript:void(0);" class="taga-item"><?php echo $cat_title; ?></a>
+                          <a href="javascript:void(0);" class="taga-item"><?php echo $child_title; ?></a>
+                        </div>
+                      </td>
+                      <td data-label="العروض">
+                        <div class="offers-button">
+                          <?php echo $count_send_offers; ?> عروض
+                        </div>
+                      </td>
+                      <td data-label="التسليم">
+                        <?php echo $delivery_time; ?>
+                      </td>
+                      <td data-label="الميزانية">
+                        <div class="d-flex flex-column">
+                          <?php if(!empty($request_budget)){ ?> 
+                          <span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
+                          <?php }else{ ?> ----- <?php } ?>
+                          <?php if($login_seller_offers == "0"){ ?>
+                            <a class="send-offer send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">إرسال العرض   </a>
+                          <!-- <button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">Send Offer</button> -->
+                          <?php }else{ ?>
+                            <a class="send-offer send_button_<?php echo $request_id; ?>">إرسال العرض   </a>
+                          <!-- <button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>">Send Offer</button> -->
+                          <?php } ?>
+                        </div>
+                      </td>
+                      <script>
+                        $(".remove_request_<?php echo $request_id; ?>").click(function(event){
+                        event.preventDefault();
+                        $("#request_tr_<?php echo $request_id; ?>").fadeOut().remove();
+                        });
+                        <?php if($login_seller_offers == "0"){ ?>
+                        <?php }else{ ?>
+                        $(".send_button_<?php echo $request_id; ?>").click(function(){
+                        request_id = "<?php echo $request_id; ?>";
+                        $.ajax({
+                        method: "POST",
+                        url: "requests/send_offer_modal",
+                        data: {request_id: request_id}
+                        })
+                        .done(function(data){
+                        $(".append-modal").html(data);
+                        });
+                        });
+                        <?php } ?>
+                      </script>
+                    </tr>
+                    <?php } } } ?>
+                  </tbody>
+                </table>
+                <?php
+                  if(empty($count_requests)){
+                  echo"<center><h3 class='pb-4 pt-4'><i class='fa fa-frown-o'></i> لا توجد طلبات تطابق أي من مقترحاتك / خدماتك حتى الآن!</h3></center>";
+                  }
+                ?>
+              </div>
+              <div class="tab-pane fade" id="nav-paused" role="tabpanel" aria-labelledby="paused-tab">
+                <table class="table managerequest-table selective-yellow" cellpadding="0" cellspacing="0" border="0">
+                  <thead>
+                    <tr role="row">
+                      <th role="column" style="display: none;">
+                        تاجر
+                      </th>
+                      <th role="column">عرض</th>
+                      <!-- <th role="column">العروض</th> -->
+                      <th role="column">
+                        التسليم
+                      </th>
+                      <th role="column">
+                        الميزانية
+                      </th>
+                      <th role="column">
+                        الطلب
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      $select_offers = $db->select("send_offers",array("sender_id"=>$login_seller_id),"DESC");
+                      $count_offers = $select_offers->rowCount();
+                      while($row_offers = $select_offers->fetch()){
+                      $request_id = $row_offers->request_id;
+                      $proposal_id = $row_offers->proposal_id;
+                      $description = $row_offers->description;
+                      $delivery_time = $row_offers->delivery_time;
+                      $amount = $row_offers->amount;
+                      $select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+                      $row_proposals = $select_proposals->fetch();
+                      $proposal_title = @$row_proposals->proposal_title;
+                      $get_requests = $db->select("buyer_requests",array("request_id"=>$request_id));
+                      $row_requests = $get_requests->fetch();
+                      $request_id = $row_requests->request_id;
+                      $seller_id = $row_requests->seller_id;
+                      $cat_id = $row_requests->cat_id;
+                      $child_id = $row_requests->child_id;
+                      $request_title = $row_requests->request_title;
+                      $request_description = $row_requests->request_description;
+                      $get_meta = $db->select("cats_meta",array("cat_id" => $cat_id, "language_id" => $siteLanguage));
+                      $row_meta = $get_meta->fetch();
+                      $cat_title = $row_meta->cat_title;
+                      $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+                      $row_meta = $get_meta->fetch();
+                      $child_title = $row_meta->child_title;
+                      $select_request_seller = $db->select("sellers",array("seller_id" => $seller_id));
+                      $row_request_seller = $select_request_seller->fetch();
+                      $request_seller_user_name = $row_request_seller->seller_user_name;
+                      $request_seller_image = $row_request_seller->seller_image;
+                    ?>
+                    <tr role="row">
+                      <td data-label="المشترى  " style="display: none;">
+                        <div class="d-flex flex-column align-items-center">
+                          <div class="buyer-image">
+                            <?php if(!empty($login_seller_image)){ ?>
+                            <img alt class="img-fluid d-block request-img rounded-circle" src="<?= $site_url; ?>/user_images/<?php echo $login_seller_image; ?>" />
+                            <?php }else{ ?>
+                            <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+                            <?php } ?>
+                          </div>
+                          <div class="buyer-id"><?php echo $login_seller_user_name; ?></div>
+                          <!-- <span><?php echo $request_date; ?></span> -->
+                        </div>
+                      </td>
+                      <td data-label="الطلب">
+                        <p><?php echo $description; ?></p>
+                        
+                      </td>
+                      <!-- <td data-label="العروض">
+                        <div class="offers-button">
+                          4 عروض
+                        </div>
+                      </td> -->
+                      <td data-label="التسليم"><?php echo $delivery_time; ?></td>
+                      <td data-label="الميزانية">
+                        <div class="d-flex flex-column">
+                          <span><?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?></span>
+                          
+                        </div>
+                      </td>
+                      <td data-label="لمشترى ">
+                        <div class="d-flex flex-column align-items-center">
+                          <div class="buyer-image">
+                            <?php if(!empty($request_seller_image)){ ?>
+                            <img alt class="img-fluid d-block request-img rounded-circle" src="<?= $site_url; ?>/user_images/<?php echo $request_seller_image; ?>" />
+                            <?php }else{ ?>
+                            <img alt class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+                            <?php } ?>
+                          </div>
+                          <strong> <?php echo $request_seller_user_name; ?></strong>
+                        </div>
+                          <p>
+                            <?php echo $request_description; ?>
+                          </p>
+                          <div class="attachment d-flex flex-row">
+                          <?php if(!empty($request_file)){ ?>
+                          <a href="<?= $site_url; ?>/requests/request_files/<?php echo $request_file; ?>" download>
+                          <span><i class="fal fa-paperclip"></i></span> <span><?php echo $request_file; ?></span>
+                          </a>
+                          <?php } ?>
+                          <!-- <span><i class="fal fa-paperclip"></i></span>
+                          <span>attatchme...jpg</span>
+                          <span>(1048KB)</span> -->
+                        </div>
+                        <div class="tags">
+                          <a href="javascript:void(0);" class="taga-item"><?php echo $cat_title; ?></a>
+                          <a href="javascript:void(0);" class="taga-item"><?php echo $child_title; ?></a>
+                        </div>
+                        
+                      </td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                <?php
+                  if($count_offers == 0){
+                  echo"<center><h3 class='pb-4 pt-4'><i class='fa fa-meh-o'></i> لم ترسل أي عروض حتى الآن!</h3></center>";
+                  }
+                ?>
               </div>
             </div>
           </div>
-          <div class="income-chart border-top-none border-bottom-1">
-            <div class="income-chart-title">
-              <h5>المشاريع المكتملة</h5>
-              <ul class="nav" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#altime2" role="tab" aria-controls="home" aria-selected="true">كل الوقت</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#lastyear2" role="tab" aria-controls="profile" aria-selected="false">السنة اللي فاتت</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#last30day2" role="tab" aria-controls="contact" aria-selected="false">آخر 30 يوم</a>
-                </li>
-              </ul>
-            </div>
-            <div class="income-chart-box">
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="altime2" role="tabpanel" aria-labelledby="home-tab">
-                 <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-                  if($count_orders == 0){
-                  ?>
-                  <img src="assets/img/img/income-chart3.png" alt="">
-                  <?php }else{ ?>
-                  <img src="assets/img/img/income-chart2.png" alt="">
-                  <?php } ?>
-                </div>
-                <div class="tab-pane fade" id="lastyear2" role="tabpanel" aria-labelledby="profile-tab">
-                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-                  if($count_orders == 0){
-                  ?>
-                  <img src="assets/img/img/income-chart3.png" alt="">
-                <?php }else{ ?>
-                  <img src="assets/img/img/income-chart2.png" alt="">
-                  <?php } ?>
-                </div>
-                <div class="tab-pane fade" id="last30day2" role="tabpanel" aria-labelledby="contact-tab">
-                  <?php $count_orders = $db->count("orders",array("seller_id" => $login_seller_id)); 
-                  if($count_orders == 0){
-                  ?>
-                  <img src="assets/img/img/income-chart3.png" alt="">
-                <?php }else{ ?>
-                  <img src="assets/img/img/income-chart2.png" alt="">
-                  <?php } ?>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 d-flex flex-row justify-content-end">
+            <a class="offer-left" href="javascript:void(0);">
+              <span><i class="fas fa-exclamation-circle"></i></span>
+              <span>
+                <?php echo $login_seller_offers; ?> عروض موجودة النهاردة
+              </span>
+            </a>
           </div>
+        </div>
+        <!-- Row -->
+      </div>
+    </div>
+    <!-- Row -->
+  </section>
+  <div class="append-modal"></div>
+  <div id="quota-finish" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title h5"><i class="fa fa-frown-o fa-move-up"></i> Request Quota Reached</h5>
+          <button class="close" data-dismiss="modal"> &times; </button>
+        </div>
+        <div class="modal-body">
+          <center>
+            <h5>You can only send a max of 10 offers per day. Today you've maxed out. Try again tomorrow. </h5>
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -875,6 +1140,35 @@
   </div>
 </div>
 </div> -->
+<script>
+  $(document).ready(function(){
+  $('#search-input').keyup(function(){
+  var search = $(this).val();
+  $('#load-data').html("");
+  $.ajax({
+  url:"requests/load_search_data",
+  method:"POST",
+  data:{search:search},
+  success:function(data){
+    console.log(data);
+  $('#load-data').html(data);
+  }
+  });
+  });
+  $('#sub-category').change(function(){
+  var cat_id = $(this).val();
+  $('#load-data').html("");
+  $.ajax({
+  url:"requests/load_category_data",
+  method:"POST",
+  data:{cat_id:cat_id},
+  success:function(data){
+  $('#load-data').html(data);
+  }
+  });
+  });
+  });
+</script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <?php require_once("includes/footer.php"); ?>
 </body>

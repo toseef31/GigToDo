@@ -297,7 +297,7 @@ $login_seller_language = $row_login_seller->seller_language;
                         <img alt="Post a gig" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/postagig.png" />
                       </div>
                       <div class="howitwork-list-content">
-                        <h3>1. Post A Gig</h3>
+                        <h3>1. Post A Service</h3>
                         <p>Create and customise services so that buyers can understand clearly the services you provide in order to meet their requirements.</p>
                       </div>
                     </div>
@@ -318,7 +318,7 @@ $login_seller_language = $row_login_seller->seller_language;
                       </div>
                       <div class="howitwork-list-content">
                         <h3>3. Work</h3>
-                        <p>Once you finish your gig, deliver your awesome work on our platform for your client to approve.</p>
+                        <p>Once you finish your service, deliver your awesome work on our platform for your client to approve.</p>
                       </div>
                     </div>
                     <!-- How it work each item -->

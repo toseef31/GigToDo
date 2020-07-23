@@ -388,7 +388,7 @@ $cur_amount = currencyConverter($to,1);
             <div class="header-right d-flex align-items-center justify-content-end">
               <div class="menu-inner">
                 <ul>
-                  <li><a href="<?= $site_url; ?>/requests/post-request.php"><?= $lang['post_request'];?></a></li>
+                  <li><a href="<?= $site_url; ?>/requests/post-request.php">Post a Job</a></li>
                   <li><a href="<?= $site_url; ?>/how-it-works.php">How it Works</a></li>
                 </ul>
               </div>
@@ -403,8 +403,8 @@ $cur_amount = currencyConverter($to,1);
               <?php if($currency_switcher == 1){ ?>
               <div class="usd-inner">
                 <select name="" id="curreny_convert" class="curreny_convert">
-                  <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                   <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                  <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 </select>
               </div>
               <?php } ?>
@@ -440,7 +440,7 @@ $cur_amount = currencyConverter($to,1);
     <div class="canvs-menu">
       <ul class="d-flex flex-column">
         <li>
-          <a href="<?= $site_url; ?>/requests/post-request.php">Post A Request</a>
+          <a href="<?= $site_url; ?>/requests/post-request.php">Post A Job</a>
         </li>
         <li>
           <a href="<?= $site_url; ?>/how-it-works.php">How it Works</a>
@@ -457,8 +457,8 @@ $cur_amount = currencyConverter($to,1);
           <?php if($currency_switcher == 1){ ?>
           <div class="menu-action">
             <select name="" id="curreny_convert" class="curreny_convert">
-              <option value="USD" <?php if($to == 'USD' && $s_currency == '$'){ echo "selected";} ?>>USD</option>
-              <option value="EGP" <?php if($to == 'EGP' && $s_currency == 'EGP'){ echo "selected";} ?> >EGP</option>
+              <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+              <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
             </select>
           </div>
           <?php } ?>

@@ -203,7 +203,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="javascript:void(0);" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>
@@ -295,7 +295,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="javascript:void(0);" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>
@@ -384,7 +384,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="javascript:void(0);" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>
@@ -470,7 +470,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="javascript:void(0);" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>

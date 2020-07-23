@@ -64,6 +64,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 		<script src="../js/ie.js"></script>
 		<script type="text/javascript" src="../js/sweat_alert.js"></script>
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<link href="<?= $site_url; ?>/assets/css/select2.min.css" rel="stylesheet" />
 		<style>
 			.gig-category .nice-select:nth-Child(2){
 				display: none;
@@ -212,6 +213,19 @@ $relevant_requests = $row_general_settings->relevant_requests;
 			}*/
 			.bootstrap-tagsinput.focus{
 				border-color: #ff0707 !important;
+			}
+			.select2.select2-container:last-Child{
+			  display: none;
+			}
+			.select2-container{
+			  width: 100% !important;
+			}
+			.select2-container .select2-selection--multiple{
+			  min-height: 54px;
+			}
+			.select2-container--default .select2-selection--multiple .select2-selection__choice{
+			  margin-top: 10px;
+			  padding: 5px 10px;
 			}
 			@media(min-width: 767px){
 				.page-height{
@@ -590,7 +604,18 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<span>What skills are required?</span>
 												</label>
 												<div class="postarequest-tags">
-													<input type="text" name="skills_required" data-role="tagsinput" value="">
+													<!-- <input type="text" name="skills_required" data-role="tagsinput" value=""> -->
+													<select class="wide form-control language js-example-basic-multiple" multiple name="skills_required[]" required="">
+													  <option value=""> Select Skill </option>
+													  <?php 
+													    $get_seller_skills = $db->select("seller_skills");
+													    while($row_seller_skills = $get_seller_skills->fetch()){
+													    $skill_id = $row_seller_skills->skill_id;
+													    $skill_title = $row_seller_skills->skill_title;
+													  ?>
+													  <option value="<?php echo $skill_title; ?>"> <?php echo $skill_title; ?> </option>
+													<?php } ?>
+													</select>
 												</div>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['skills_required']); ?></span>
 												<div class="popup">
@@ -607,7 +632,18 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<span>Languages</span>
 												</label>
 												<div class="postarequest-tags">
-													<input type="text" name="languages" data-role="tagsinput" value="">
+													<!-- <input type="text" name="languages" data-role="tagsinput" value=""> -->
+													<select name="languages[]" class="form-control wide language js-example-basic-multiple" multiple>
+													  <option class="hidden"> Select Language </option>
+													  <?php 
+													    $get_languages = $db->select("seller_languages");
+													    while($row_languages = $get_languages->fetch()){
+													    $language_id = $row_languages->language_id;
+													    $language_title = $row_languages->language_title;
+													    ?>
+													  <option value="<?php echo $language_title; ?>"> <?php echo $language_title; ?> </option>
+													  <?php } ?>
+													</select>
 												</div>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['languages']); ?></span>
 												<div class="popup">
@@ -802,18 +838,24 @@ $relevant_requests = $row_general_settings->relevant_requests;
 				$('.gig-category-tag').removeClass('tag-selected');
 				$('.gig-category-item').find('input[type="radio"]').prop('checked', false);
 			});
-			$('.deliver-time-item[for="days30"]').on('click', function(){
-				$('.input-number').focus();
-			});
+			
 			$(".gig-category-select").on('click', function(){
 				var cat_class = $(this).parents('.cat_item-content').attr("data-id");
 					$(".gig-category-tags").removeAttr('class').addClass('gig-category-tags '+cat_class);
 					// $('.gig-category-tags').addClass(cat_class);
 			});
+			$('.deliver-time-item[for="days30"]').on('click', function(){
+				$('.input-number').focus();
+			});
+			$('.input-number').keyup(function(){
+				var custom_btn = $('.input-number').val();
+				$('#days30').val(custom_btn);
+			});
 		});
 	</script>
 <script>
 $(document).ready(function(){
+	$('.js-example-basic-multiple').select2();
 	$('.h-2').css("visibility", "hidden");
 	$('.h-3').css("visibility", "hidden");
 	$('.h-4').css("visibility", "hidden");
@@ -1067,8 +1109,10 @@ if(isset($_POST['submit'])){
 							$delivery_time = $input->post('delivery_time');
 
 							echo "You have selected :" .$delivery_time;
-							$skills_required = $input->post('skills_required');
-							$languages = $input->post('languages');
+							// $skills_required = $input->post('skills_required');
+							$skills_required = implode(',', $input->post('skills_required'));
+							$languages = implode(',', $input->post('languages'));
+							// $languages = $input->post('languages');
 							// $request_file = $_FILES['request_file']['name'];
 							
 							$countfiles = count($_FILES['request_file']['name']);
@@ -1256,8 +1300,10 @@ if(isset($_POST['submit'])){
 									$delivery_time = $input->post('delivery_time');
 
 									echo "You have selected :" .$delivery_time;
-									$skills_required = $input->post('skills_required');
-									$languages = $input->post('languages');
+									// $skills_required = $input->post('skills_required');
+									$skills_required = implode(',', $input->post('skills_required'));
+									// $languages = $input->post('languages');
+									$languages = implode(',', $input->post('languages'));
 									// $request_file = $_FILES['request_file']['name'];
 									
 									$countfiles = count($_FILES['request_file']['name']);
@@ -1347,8 +1393,10 @@ if(isset($_POST['submit'])){
 			$delivery_time = $input->post('delivery_time');
 
 			echo "You have selected :" .$delivery_time;
-			$skills_required = $input->post('skills_required');
-			$languages = $input->post('languages');
+			// $skills_required = $input->post('skills_required');
+			$skills_required = implode(',', $input->post('skills_required'));
+			// $languages = $input->post('languages');
+			$languages = implode(',', $input->post('languages'));
 			// $request_file = $_FILES['request_file']['name'];
 			// $request_file_tmp = $_FILES['request_file']['tmp_name'];
 			$request_date = date("F d, Y");

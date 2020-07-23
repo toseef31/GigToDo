@@ -98,7 +98,7 @@ if(isset($_GET['seller_language'])){
 	<!-- <link href="../styles/bootstrap.css" rel="stylesheet">
 	<link href="../styles/custom.css" rel="stylesheet"> --> 
 	<!-- Custom css code from modified in admin panel --->
-	<!-- <link href="../styles/styles.css" rel="stylesheet"> -->
+	<link href="../styles/styles.css" rel="stylesheet">
 	<link href="../styles/user_nav_styles.css" rel="stylesheet">
 	<link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -363,7 +363,7 @@ if(isset($_GET['seller_language'])){
 							</div>
 							<!-- Row -->
 							<div class="all-gigs-small">
-								<div class="row">
+								<div class="row" id="offers-data-mobile">
 									<?php if($count_offers == "0"){ ?>
 									<div class="col-12 rounded-0 mb-3">
 										<div class="card-body">
@@ -724,9 +724,11 @@ if(isset($_GET['seller_language'])){
 	data:{time:time, request_id:request_id},
 	success:function(data){
 	$('#offers-data').html(data);
+	$('#offers-data-mobile').html(data);
 	}
 	});
 	});
+
 
 	$('.switch').click(function(){
 	var status = $(this).val();
@@ -739,6 +741,7 @@ if(isset($_GET['seller_language'])){
 	data:{status:status, request_id:request_id},
 	success:function(data){
 	$('#offers-data').html(data);
+	$('#offers-data-mobile').html(data);
 	}
 	});
 	});
@@ -762,13 +765,20 @@ if(isset($_GET['seller_language'])){
 	        method:"POST",
 	        data:{price:price,  request_id:request_id},
 	        success:function(data){
-	          console.log(data);
-	        $('#category_proposals').html('');  
+	          // console.log(data);
+	        $('#offers-data').html('');  
 	        
 	        $('#offers-data').html(data); 
+	        $('#offers-data-mobile').html(data);
 	      }
 	      });
 	    }
+	});
+	$('.filter-results').on('click', function(){
+		$('.offer-sidebar').addClass('open-mobile');
+	});
+	$('#backtomain').on('click', function(){
+		$(this).parents('.offer-sidebar').removeClass('open-mobile');
 	});
 
 

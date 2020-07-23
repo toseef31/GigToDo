@@ -58,6 +58,7 @@
 ?>
 <style>
   .total-user-count.count.c-notifications-header{left: 9%;}
+  @media(max-width: 768px){.total-user-count.count.c-notifications-header{top: -8px;left: -8px;}}
 </style>
 <link href="<?php echo $site_url; ?>/styles/scoped_responsive_and_nav.css" rel="stylesheet">
 <link href="<?php echo $site_url; ?>/styles/vesta_homepage.css" rel="stylesheet">
@@ -80,8 +81,8 @@
         </div>
         <div class="col-6 d-block d-lg-none">
           <div class="header-right d-flex align-items-center justify-content-end">
-            <div class="message-inner">
-              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""></a>
+            <div class="message-inner position-relative">
+              <a class="message-inner-toggle" href="javascript:void(0);"><img src="<?= $site_url; ?>/assets/img/message.png" alt=""><span class="total-user-count count c-notifications-header"></span></a>
             </div>
             <div class="menubar d-flex flex-row align-items-center">
               <div class="image">
@@ -119,8 +120,8 @@
             <?php if($currency_switcher == 1){ ?>
             <div class="usd-inner">
               <select name="" id="curreny_convert" class="curreny_convert">
-                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
                 <option value="EGP" <?php if($to == 'EGP'){ echo "selected";} ?> >EGP</option>
+                <option value="USD" <?php if($to == 'USD'){ echo "selected";} ?>>USD</option>
               </select>
             </div>
             <?php } ?>
@@ -177,7 +178,7 @@
             </div>
           </div>
         </div>
-        <div class="notification-setting">
+        <!-- <div class="notification-setting">
           <div class="row align-items-center">
             <div class="col-4 d-flex flex-row justify-content-end">
               <div class="noti-option-icon">
@@ -189,7 +190,7 @@
               <a href="javascript:void(0);" class="see-all-noti">رؤية كل شيء في الإعلام ></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- Message box end -->
     </div>

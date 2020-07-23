@@ -415,7 +415,7 @@ $count_account = $select_seller_payments->rowCount();
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
                 <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
                 <div class="managerequest">
-                  <h3>Manage Request</h3>
+                  <h3>Manage Jobs</h3>
                   <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
                     <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                       <span>Show</span>
@@ -496,14 +496,14 @@ $count_account = $select_seller_payments->rowCount();
                             </div>
                           </td>
                           <td data-label="Offers">
-                            <div class="offers-button"><?php echo $count_offers; ?> offers</div>
+                            <div class="offers-button"><a href="requests/view_offers?request_id=<?php echo $request_id; ?>" class="offers-button"><?php echo $count_offers; ?> offers</a></div>
                           </td>
                           <td data-label="Delivery"><?= $delivery_time; ?> Days</td>
                           
                           <td data-label="Budget">
                             <div class="d-flex flex-column">
                               <?php if(!empty($request_budget)){ ?>
-                              <span><?php echo $s_currency; ?><?php echo $request_budget; ?></span>
+                              <span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
                               <?php }else{ ?>
                               <span> ----- </span>
                               <?php } ?>
@@ -603,7 +603,7 @@ $count_account = $select_seller_payments->rowCount();
 
                     ?>
                     <div class="managerequest">
-                      <h3>Manage Request</h3>
+                      <h3>Manage Jobs</h3>
                       <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
                         <!-- <div class="managerequest-status d-flex flex-row align-items-center">
                           <span>Category</span>
@@ -712,7 +712,7 @@ $count_account = $select_seller_payments->rowCount();
                               <td data-label="Budget">
                                 <div class="d-flex flex-column">
                                   <?php if(!empty($request_budget)){ ?>
-                                  <span><?= $s_currency; ?><?= $request_budget; ?></span>
+                                  <span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
                                   <?php }else{ ?><span> ----- </span><?php } ?>
                                   <?php if($login_seller_offers == "0"){ ?>
                                   <a class="send-offer send_button_<?= $request_id; ?>" data-toggle="modal" data-target="#quota-finish">Send offer</a>

@@ -364,21 +364,21 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                   </div>
                   <?php 
                     if($order_status == "completed"){ ?>
-                      <div id="order-status-bar" class="text-white" style="background-color: #ff0707 !important;">
+                      <div id="order-status-bar" class="text-white" style="background-color: #ff0707 !important; color: white;">
                         <div class="row">
                         <!--  <div class="col-md-10 offset-md-1"> -->
                           <div class="container">
                           <div class="col-md-10 offset-md-1"> 
                             <?php if($seller_id == $login_seller_id){ ?>
-                            <h5 class="float-left mt-2">
+                            <h5 class="float-left mt-2 text-white">
                               <i class="fa fa-lg fa-check-circle"></i> Order Delivered. You Earned <?= $s_currency; ?><?= $seller_price; ?>
                             </h5>
                             <h5 class="float-right mt-2">Status: Completed</h5>
                           <?php }elseif($buyer_id == $login_seller_id){ ?>
-                            <h5 class="float-left mt-2">
+                            <h5 class="float-left mt-2 text-white">
                               <i class="fa fa-lg fa-check-circle"></i> Delivery Submitted
                             </h5>
-                            <h5 class="float-right mt-2">Status: Completed</h5>
+                            <h5 class="float-right mt-2 text-white">Status: Completed</h5>
                           <?php } ?>
                           </div>
                           </div>
@@ -636,15 +636,15 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                       <div class="container">
                       <div class="col-md-10 offset-md-1"> 
                         <?php if($seller_id == $login_seller_id){ ?>
-                        <h5 class="float-left mt-2">
+                        <h5 class="float-left mt-2 text-white">
                           <i class="fa fa-lg fa-check-circle"></i> Order Delivered. You Earned <?= $s_currency; ?><?= $seller_price; ?>
                         </h5>
                         <h5 class="float-right mt-2">Status: Completed</h5>
                       <?php }elseif($buyer_id == $login_seller_id){ ?>
-                        <h5 class="float-left mt-2">
+                        <h5 class="float-left mt-2 text-white">
                           <i class="fa fa-lg fa-check-circle"></i> Delivery Submitted
                         </h5>
-                        <h5 class="float-right mt-2">Status: Completed</h5>
+                        <h5 class="float-right mt-2 text-white">Status: Completed</h5>
                       <?php } ?>
                       </div>
                       </div>
@@ -708,6 +708,10 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
+                      <?php }elseif($order_status == 'progress'){ ?>
+                      <div class="order-process-icon">
+                        <i class="fal fa-check"></i>
+                      </div>
                       <?php }else{ ?>
                       <div class="order-process-icon">
                         <i class="fas fa-circle"></i>
@@ -719,7 +723,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                     </div>
                     <!-- Each item -->
                     <div class="order-process-item d-flex flex-row align-items-center">
-                      <?php if($order_status == 'delivered'){ ?>
+                      <?php if($order_status == 'delivered' or $order_status == 'completed'){ ?>
                       <div class="order-process-icon">
                         <i class="fal fa-check"></i>
                       </div>
