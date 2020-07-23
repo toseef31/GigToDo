@@ -3,16 +3,17 @@
 session_start();
 require_once("includes/db.php");
 
-if(!isset($_SESSION['seller_user_name'])){
+// if(!isset($_SESSION['seller_user_name'])){
 	
-	echo "<script>window.open('login','_self')</script>";
+// 	echo "<script>window.open('login','_self')</script>";
 	
-}
+// }
 
 $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
+$login_seller_type = $row_login_seller->account_type;
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -61,7 +62,17 @@ $login_seller_id = $row_login_seller->seller_id;
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 <body class="all-content">
-	<?php require_once("includes/buyer-header.php"); ?>
+	<?php
+    if(!isset($_SESSION['seller_user_name'])){
+      require_once("includes/header_with_categories.php");
+    }else{
+    	if($login_seller_type == 'buyer'){
+      	require_once("includes/buyer-header.php");
+    	}else{
+    		require_once("includes/user_header.php");
+    	}
+    } 
+  ?>
 
 	<!-- Preloader Start -->
 	<div class="proloader">
@@ -78,13 +89,13 @@ $login_seller_id = $row_login_seller->seller_id;
 							<p>
 								<span>We take your data privacy seriously. This policy explains what information we collect, why we collect it and how we use that information. We store user or your information securely and will never share it with anyone. You can change your preferences at any time.</span>
 								<span><a href="/">eMongez</a> or “we” are the administrator of our websites and mobile applications, which collect information in order to provide better services to all of our users and/or you. This may include some information that can identify you, but this is not sensitive. This policy aims to help you understand the terms and conditions that govern the collection and use of such information.</span>
-								<span>This policy applies to: <a href="/">eMongez</a> hereinafter referred to as “Website”.</span>
-								<span>“Website” or “Platform” shall mean and include <a href="/">eMongez</a>, permitted mobile application, any successor website/applications, any website of the emongez’s affiliates or any other channel facilitated and permitted by emongez;</span>
+								<span>This policy applies to: <a href="http://www.emongez.com/">eMongez</a> hereinafter referred to as “Website”.</span>
+								<span>“Website” or “Platform” shall mean and include <a href="http://www.emongez.com/">eMongez</a>, permitted mobile application, any successor website/applications, any website of the emongez’s affiliates or any other channel facilitated and permitted by emongez;</span>
 							</p>
 							<h3>1. Who we are</h3>
 							<p>
-								<span><a href="/">www.eMongez.com</a> is an online platform for users to buy and Sell the skills in the manner of Services. Under this, the Seller shall sell Services and the Buyer shall buy Services through the Website. The Services are offered to the Users through various modes which may include issue of coupons and vouchers that can be redeemed for various Services.</span>
-								<span>www.emongez.com is an online platform for users to buy and sell the skills in the manner of Services. Under this, the Seller shall sell Services and Buyer buy Services through the Website.</span>
+								<span><a href="http://www.emongez.com/">www.eMongez.com</a> is an online platform for users to buy and Sell the skills in the manner of Services. Under this, the Seller shall sell Services and the Buyer shall buy Services through the Website. The Services are offered to the Users through various modes which may include issue of coupons and vouchers that can be redeemed for various Services.</span>
+								<span><a href="http://www.emongez.com/">www.emongez.com</a> is an online platform for users to buy and sell the skills in the manner of Services. Under this, the Seller shall sell Services and Buyer buy Services through the Website.</span>
 								<span>The Services are offered to the Users through various modes, which may include issue of coupons and vouchers that can be redeemed for various Services.</span>
 								<span>What information we may collect</span>
 								<span>Personal identifiable information</span>

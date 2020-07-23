@@ -106,7 +106,7 @@
         <div class="container">
           <div class="row align-items-start">
             <div class="col-12 col-sm-6">
-              <h1 class="list-page-title">jobs</h1>
+              <h1 class="list-page-title">Jobs</h1>
             </div>
             <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
               <a class="button button-red" href="../proposals/create_proposal">Post A Service</a>

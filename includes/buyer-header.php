@@ -196,7 +196,7 @@ $cur_amount = currencyConverter($to,1);
             </div>
           </div>
         </div>
-        <div class="notification-setting">
+        <!-- <div class="notification-setting">
           <div class="row align-items-center">
             <div class="col-6">
               <div class="noti-option-icon">
@@ -208,7 +208,7 @@ $cur_amount = currencyConverter($to,1);
               <a href="javascript:void(0);" class="see-all-noti">See All In Notification ></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- Message box end -->
     </div>

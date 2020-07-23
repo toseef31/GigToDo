@@ -3,16 +3,17 @@
 session_start();
 require_once("includes/db.php");
 
-if(!isset($_SESSION['seller_user_name'])){
+// if(!isset($_SESSION['seller_user_name'])){
 	
-	echo "<script>window.open('login','_self')</script>";
+// 	echo "<script>window.open('login','_self')</script>";
 	
-}
+// }
 
 $login_seller_user_name = $_SESSION['seller_user_name'];
 $select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
 $row_login_seller = $select_login_seller->fetch();
 $login_seller_id = $row_login_seller->seller_id;
+$login_seller_type = $row_login_seller->account_type;
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -61,7 +62,17 @@ $login_seller_id = $row_login_seller->seller_id;
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 <body class="all-content">
-	<?php require_once("includes/buyer-header.php"); ?>
+	<?php
+    if(!isset($_SESSION['seller_user_name'])){
+      require_once("includes/header_with_categories.php");
+    }else{
+    	if($login_seller_type == 'buyer'){
+      	require_once("includes/buyer-header.php");
+    	}else{
+    		require_once("includes/user_header.php");
+    	}
+    } 
+  ?>
 
 	<!-- Preloader Start -->
 	<div class="proloader">

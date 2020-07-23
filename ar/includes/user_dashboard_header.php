@@ -149,7 +149,7 @@
               </div>
             </div>
           </div>
-          <div class="notification-setting">
+          <!-- <div class="notification-setting">
             <div class="row align-items-center">
               <div class="col-4 d-flex flex-row justify-content-end">
                 <div class="noti-option-icon">
@@ -161,7 +161,7 @@
                 <a href="javascript:void(0);" class="see-all-noti">رؤية كل شيء في الإعلام ></a>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- Message box end -->
       </div>

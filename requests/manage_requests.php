@@ -183,7 +183,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
@@ -249,7 +249,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
@@ -314,7 +314,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
@@ -378,7 +378,7 @@ $login_seller_id = $row_login_seller->seller_id;
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="javascript:void(0);" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>

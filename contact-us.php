@@ -1,8 +1,31 @@
 <?php
 
 session_start();
-require_once("includes/db.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
+// Load Composer's autoloader
+require "vendor/autoload.php";
+require_once("includes/db.php");
+require_once("social-config.php");
+$login_seller_user_name = $_SESSION['seller_user_name'];
+$select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
+$row_login_seller = $select_login_seller->fetch();
+$login_seller_id = $row_login_seller->seller_id;
+$login_seller_type = $row_login_seller->account_type;
+$login_seller_email = $row_login_seller->seller_email;
+$login_seller_user_name = $row_login_seller->seller_user_name;
+
+
+$recaptcha_site_key = $row_general_settings->recaptcha_site_key;
+$recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
+
+if ($lang_dir == "right") {
+  $floatRight = "float-right";
+} else {
+  $floatRight = "float-left";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -50,11 +73,22 @@ require_once("includes/db.php");
 	<link href="styles/owl.theme.default.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<style>
-		.select-error .nice-select{display: none;}.select-error select{display: block;}
+		.select-error .nice-select{display: none;}
+		#relevantSubject{display: block !important;}
 	</style>
 </head>
 <body class="all-content">
-	<?php require_once("includes/header-top.php"); ?>
+	<?php
+    if(!isset($_SESSION['seller_user_name'])){
+      require_once("includes/header_with_categories.php");
+    }else{
+    	if($login_seller_type == 'buyer'){
+      	require_once("includes/buyer-header.php");
+    	}else{
+    		require_once("includes/user_header.php");
+    	}
+    } 
+  ?>
 
 	<!-- Preloader Start -->
 	<div class="proloader">
@@ -64,7 +98,7 @@ require_once("includes/db.php");
 	</div>
 	<!-- Preloader End -->
 	<!-- Main content -->
-			<main class="emongez-content-main">
+		<main class="emongez-content-main">
 			<section class="container-fluid contactus">
 				<div class="row">
 					<div class="container">

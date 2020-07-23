@@ -49,6 +49,9 @@ require_once("functions/functions.php");
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+  <style>
+    #sub-cat .nice-select{display: none;}#sub-cat #sub-category{height: 45px;}
+  </style>
 </head>
 <body class="all-content">
 
@@ -426,6 +429,36 @@ function clearLanguage(){
   $('.get_seller_language').prop('checked',false); 
   get_search_proposals(); 
 }
+
+$("#sub-category").hide();
+
+$("#category").change(function(){
+  var base_url = '<?php echo $site_url;  ?>';
+  
+ $("#sub-category").show();  
+ var category_id = $(this).val();
+ 
+ $('.cat_hide').addClass('d-none');
+ $('#sub-cat').addClass('d-block');
+ $.ajax({
+ url:base_url+"/categories/fetch_subcategory",
+ method:"POST",
+ data:{category_id:category_id},
+ success:function(data){
+  console.log(data);
+ $('#sub-category').html(data);
+ }
+ });
+
+});
+
+$('.filter-results').on('click', function(){
+  $('.offer-sidebar').addClass('open-mobile');
+});
+$('#backtomain').on('click', function(){
+  $(this).parents('.offer-sidebar').removeClass('open-mobile');
+});
+
 </script>
 </body>
 </html>

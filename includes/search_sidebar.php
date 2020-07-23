@@ -34,7 +34,70 @@
 ?>
 
 <!-- New Design Start -->
+<button class="filter-results" type="button" role="button">
+  <img src="<?= $site_url; ?>/assets/img/gigs/filter.png" alt="" />Filter by
+</button>
 <div class="gigs-sidebar">
+  <div class="gigs-sidebar-filter">
+    <div class="gigs-sidebar-title">
+      <h4 class="title"><img src="<?= $site_url; ?>/assets/img/gigs/filter.png" alt="">Filter by</h4>
+    </div>
+    <div class="gigs-filter-content ">
+      <div class="single-filter clearfix">
+        <select id="category" name="cat_value">
+          <?php
+            $get_proposals = $db->query("select DISTINCT proposal_cat_id from proposals where proposal_title like :proposal_title AND proposal_status='active'",array(":proposal_title"=>$s_value));
+            while($row_proposals = $get_proposals->fetch()){
+            $proposal_cat_id = $row_proposals->proposal_cat_id;
+            $get_meta = $db->select("cats_meta",array("cat_id"=>$proposal_cat_id,"language_id"=>$siteLanguage));
+            $category_title = @$get_meta->fetch()->cat_title;
+            if(!empty($category_title)){
+          ?>
+          
+          <option value="<?php echo $proposal_cat_id; ?>" <?php
+          if($cat_id == @$_SESSION['cat_id']){ echo "selected"; }
+          if($cat_id == @$child_parent_id){ echo "selected"; }
+          ?> ><?= $category_title; ?></option>
+          <?php } }?>
+        </select>
+      </div>
+      <div class="single-filter clearfix cat_hide">
+        <select id="cat_<?php echo $page_cat_id; ?>" onChange="window.location.href=this.value">
+          <?php
+            $get_child_cat = $db->select("categories_children",array("child_parent_id" => $proposal_cat_id));
+            while($row_child_cat = $get_child_cat->fetch()){
+
+              $child_id = $row_child_cat->child_id;
+              $child_url = $row_child_cat->child_url;
+              $get_meta = $db->select("child_cats_meta",array("child_id" => $child_id, "language_id" => $siteLanguage));
+              $row_meta = $get_meta->fetch();
+              $child_title = $row_meta->child_title;
+              if(!empty($child_title)){
+          ?>
+          <option <?php if($child_id == @$_SESSION['cat_child_id']){ echo "selected"; } ?> value="<?php echo $site_url; ?>/categories/<?php echo $cat_page_url; ?>/<?php echo $child_url; ?>"><?php echo $child_title; ?></option>
+          <?php } } ?>
+        </select>
+        
+      </div>
+      <div class="single-filter clearfix d-none" id="sub-cat">
+        <select id="sub-category" class="form-control" onChange="window.location.href=this.value">
+          
+        </select>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="gigs-sidebar-price">
+    <div class="gigs-sidebar-title">
+      <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/price.png" alt="">Price</h4>
+    </div>
+    <div class="gigs-price-content ">
+      <input id="price" type="text" name="price_slider" value="" class="irs-hidden-input" tabindex="-1" readonly="">
+      <input type="hidden" id="price_range" name="">
+    </div>
+  </div>
+
   <div class="gigs-sidebar-status">
     <div class="gigs-sidebar-title">
       <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/status.png" alt="">Status</h4>
@@ -52,9 +115,9 @@
     </div>
   </div>
 
-  <div class="gigs-sidebar-titme">
+  <!-- <div class="gigs-sidebar-titme">
     <div class="gigs-sidebar-title">
-      <h4 class="title"><!-- <img src="<?= $site_url;?>/assets/img/gigs/time.png" alt=""> -->Categories</h4>
+      <h4 class="title"></h4>
     </div>
     <div class="gigs-titme-content pt-20">
       <ul class="radio_titme radio_style2">
@@ -73,7 +136,7 @@
         <?php }} ?>
       </ul>
     </div>
-  </div>
+  </div> -->
 
   <div class="gigs-sidebar-titme">
     <div class="gigs-sidebar-title">
@@ -95,6 +158,20 @@
         </li>
         <?php }} ?>
       </ul>
+    </div>
+  </div>
+  <div class="gigs-sidebar-search">
+    <div class="gigs-sidebar-title">
+      <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/keyword.png" alt="">Keywords</h4>
+    </div>
+    <div class="gigs-search-content mt-20">
+      <input type="search" id="keyword" onkeyup="getgig()" placeholder="Search by Keywords">
+    </div>
+  </div>
+  
+  <div class="gigs-sidebar-button">
+    <div class="gigs-button-content">
+      <button>Update Search</button>
     </div>
   </div>
 </div>
