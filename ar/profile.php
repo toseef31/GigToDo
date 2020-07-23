@@ -575,8 +575,8 @@ $count_account = $select_seller_payments->rowCount();
                         </td>
                         <td data-label="العروض">
                           <div class="offers-button">
-                            <?= $count_send_offers; ?> عروض
-                          </div>
+                           <a class="offers-button" href="requests/view_offers?request_id=<?php echo $request_id; ?>"> <?= $count_send_offers; ?> عروض
+                          </a></div>
                         </td>
                         <td data-label="التسليم">
                           <?= $delivery_time; ?>
@@ -584,7 +584,7 @@ $count_account = $select_seller_payments->rowCount();
                         <td data-label="الميزانية">
                           <div class="d-flex flex-column">
                             <?php if(!empty($request_budget)){ ?>
-                            <span><?= $s_currency; ?><?= $request_budget; ?></span>
+                            <span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
                             <?php }else{ ?>
                             <span> ----- </span>
                             <?php } ?>
@@ -821,7 +821,7 @@ $count_account = $select_seller_payments->rowCount();
                             <td data-label="الميزانية">
                               <div class="d-flex flex-column">
                                 <?php if(!empty($request_budget)){ ?>
-                                  <span><?= $s_currency; ?><?= $request_budget; ?></span>
+                                  <span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
                                   <?php }else{ ?><span> ----- </span><?php } ?>
                                 <?php if($login_seller_offers == "0"){ ?>
                                 <a class="send-offer" data-toggle="modal" data-toggle="modal" data-target="#quota-finish">

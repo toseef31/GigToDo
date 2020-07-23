@@ -61,7 +61,7 @@ $child_title = $row_meta->child_title;
                       <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
-                        <p>Create a catchy title that captivates viewers. Using well known keywords in your title will help your gig stand out in the eyes of buyers. Try to do some research beforehand on top performing keywords in your industry. This will help you come up with a catchy and relevant title.</p>
+                        <p>Create a catchy title that captivates viewers. Using well known keywords in your title will help your service stand out in the eyes of buyers. Try to do some research beforehand on top performing keywords in your industry. This will help you come up with a catchy and relevant title.</p>
                       </div>
                     </div>
                     <div class="form-group">
@@ -180,7 +180,7 @@ $child_title = $row_meta->child_title;
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>
-                          Choosing a relevant category and subcategory for your service will give you the best possible chance of securing buyers. If you perform services that cut across multiple categories, you can break them up into multiple gigs.
+                          Choosing a relevant category and subcategory for your service will give you the best possible chance of securing buyers. If you perform services that cut across multiple categories, you can break them up into multiple services.
                         </p>
                       </div>
                     </div>
@@ -313,7 +313,7 @@ $child_title = $row_meta->child_title;
                           <?php } ?>
                           </select>
                         </div>
-                          <small>If enabled, other users can promote your proposal by sharing it on different platforms.</small>
+                          <small>If enabled, other users can promote your service by sharing it on different platforms.</small>
                           <small class="form-text text-danger"><?php echo ucfirst(@$form_errors['proposal_enable_referrals']); ?></small>
                       </div>
                     </div>
@@ -324,9 +324,9 @@ $child_title = $row_meta->child_title;
                         <label class="bottom-label">Promotion Commission: </label>
                         <div class="d-flex flex-row mt-10 mb-10">
                           <input type="number" name="proposal_referral_money" class="form-control" min="1" value="<?php echo @$form_data['proposal_referral_money']; ?>" placeholder="Figure should be in percentage e.g 20">
-                          <small>Figure should be in percentage. E.g 20 is the same as 20% from the sale of this proposal.</small>
+                          <small>Figure should be in percentage. E.g 20 is the same as 20% from the sale of this service.</small>
                           <br>
-                          <small> When another user promotes your proposal, how much would you like that user to get from the sale? (in percentage) </small>
+                          <small> When another user promotes your service, how much would you like that user to get from the sale? (in percentage) </small>
                         </div>
                       </div>
                     </div>

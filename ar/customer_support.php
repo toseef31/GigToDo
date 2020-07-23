@@ -17,6 +17,7 @@
   $login_seller_id = $row_login_seller->seller_id;
   $login_seller_email = $row_login_seller->seller_email;
   $login_seller_user_name = $row_login_seller->seller_user_name;
+  $login_seller_type = $row_login_seller->account_type;
   }
   $recaptcha_site_key = $row_general_settings->recaptcha_site_key;
   $recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
@@ -37,15 +38,37 @@
   <meta name="description" content="<?php echo $site_desc; ?>">
   <meta name="keywords" content="<?php echo $site_keywords; ?>">
   <meta name="author" content="<?php echo $site_author; ?>">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
-  <link href="styles/bootstrap.css" rel="stylesheet">
-  <link href="styles/custom.css" rel="stylesheet">
+  <!--====== Bootstrap css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--====== PreLoader css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/preloader.css" rel="stylesheet">
+  <!--====== Animate css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/animate.min.css" rel="stylesheet">
+  <!--====== Fontawesome css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/fontawesome.min.css" rel="stylesheet">
+  <!--====== Owl carousel css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/nice-select.css" rel="stylesheet">
+  <!--====== Nice select css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/tagsinput.css" rel="stylesheet">
+  <!--====== Range Slider css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <!--====== Default css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/default.css" rel="stylesheet">
+  <!--====== Style css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/style.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/assets/css/style1.css" rel="stylesheet">
+  <!--====== Responsive css ======-->
+  <link href="<?= $site_url; ?>/ar/assets/css/responsive.css" rel="stylesheet">
+  <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
+  <!-- <link href="styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
   <link href="styles/styles.css" rel="stylesheet">
-  <link href="styles/categories_nav_styles.css" rel="stylesheet">
-  <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
+  <!-- <link href="styles/categories_nav_styles.css" rel="stylesheet"> -->
+  <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
   <link href="styles/sweat_alert.css" rel="stylesheet">
-  <script type="text/javascript" src="js/ie.js"></script>
+  <!-- <script type="text/javascript" src="js/ie.js"></script> -->
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script src='https://www.google.com/recaptcha/api.js'></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -55,7 +78,17 @@
   <?php } ?>
 </head>
 <body class="is-responsive">
-  <?php require_once("includes/header.php"); ?>
+  <?php
+    if(!isset($_SESSION['seller_user_name'])){
+      require_once("includes/header_with_categories.php");
+    }else{
+      if($login_seller_type == 'buyer'){
+        require_once("includes/buyer-header.php");
+      }else{
+        require_once("includes/user_header.php");
+      }
+    } 
+  ?>
   <div class="container pb-4">
     <!-- Container starts -->
     <div class="row">

@@ -32,7 +32,7 @@ $select_seller = $db->select("sellers",array("seller_id" => $seller_id));
 $row_seller = $select_seller->fetch();
 $seller_account_type = $row_seller->account_type;
 $seller_image = $row_seller->seller_image;
-$seller_user_name = $row_seller->seller_user_name;
+$user_name = $row_seller->seller_user_name;
 $seller_level = $row_seller->seller_level;
 $seller_vacation = $row_seller->seller_vacation;
 $seller_country = $row_seller->seller_country;
@@ -62,7 +62,7 @@ $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$lo
 				<?php if($seller_account_type == "seller"){ ?>
 				<div class="d-flex flex-column align-items-center justify-content-center">
 					<div class="message-about-user">
-						<a href="<?= $site_url; ?>/ar/<?= $seller_user_name; ?>">
+						<a href="<?= $site_url; ?>/ar/<?= $user_name; ?>">
 							<?php if(!empty($seller_image)){ ?>
 							<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
 							<?php }else{ ?>
@@ -70,12 +70,12 @@ $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$lo
 							<?php } ?>
 						</a>
 					</div>
-					<div class="username"><a href="<?= $site_url; ?>/<?= $seller_user_name; ?>" style="color: #1b1b1b;"><?= ucfirst($seller_user_name); ?></a></div>
+					<div class="username"><a href="<?= $site_url; ?>/<?= $user_name; ?>" style="color: #1b1b1b;"><?= ucfirst($user_name); ?></a></div>
 				</div>
 				<?php }else{ ?>
 				<div class="d-flex flex-column align-items-center justify-content-center">
 					<div class="message-about-user">
-						<a href="<?= $site_url; ?>/ar/profile?user_name=<?= $seller_user_name; ?>">
+						<a href="<?= $site_url; ?>/ar/profile?user_name=<?= $user_name; ?>">
 							<?php if(!empty($seller_image)){ ?>
 							<img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" width="80" class="rounded-circle">
 							<?php }else{ ?>
@@ -83,7 +83,7 @@ $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$lo
 							<?php } ?>
 						</a>
 					</div>
-					<div class="username"><a href="<?= $site_url; ?>/profile?user_name=<?= $seller_user_name; ?>" style="color: #1b1b1b;"><?= ucfirst($seller_user_name); ?></a></div>
+					<div class="username"><a href="<?= $site_url; ?>/profile?user_name=<?= $user_name; ?>" style="color: #1b1b1b;"><?= ucfirst($user_name); ?></a></div>
 				</div>
 				<?php } ?>
 			</div>

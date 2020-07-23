@@ -469,7 +469,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                             <p>
-                              Choosing a relevant category and subcategory for your gig will give you the best possible chance of securing buyers.
+                              Choosing a relevant category and subcategory for your service will give you the best possible chance of securing buyers.
                             </p>
                           </div>
                         </div>
@@ -665,7 +665,7 @@ $login_seller_language = $row_login_seller->seller_language;
                         </div> -->
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
-                          <label class="control-label" for="lname">User Name</label>
+                          <label class="control-label" for="lname">Create User Name</label>
                           <input class="form-control" id="lname" name="u_name" type="text" />
                           <?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
                           <?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
@@ -673,7 +673,7 @@ $login_seller_language = $row_login_seller->seller_language;
                         </div>
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
-                          <label class="control-label" for="password">Password</label>
+                          <label class="control-label" for="password">Create Password</label>
                           <input class="form-control" id="password" name="pass" type="password" />
                         </div>
                         <!-- Each item -->
