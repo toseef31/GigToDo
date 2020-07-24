@@ -23,14 +23,14 @@
   $recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
 
   if ($lang_dir == "right") {
-    $floatRight = "float-right";
-  } else {
     $floatRight = "float-left";
+  } else {
+    $floatRight = "float-right";
   }
 
 ?>
 <!DOCTYPE html>
-<html lang="en" class="ui-toolkit">
+<html dir="rtl" lang="ar" class="ui-toolkit">
 <head>
   <title><?php echo $site_name; ?> - Customer Support</title>
   <meta charset="utf-8">
@@ -64,7 +64,7 @@
   <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
   <!-- <link href="styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
-  <link href="styles/styles.css" rel="stylesheet">
+  <link href="<?= $site_url; ?>/ar/styles/styles.css" rel="stylesheet">
   <!-- <link href="styles/categories_nav_styles.css" rel="stylesheet"> -->
   <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
   <link href="styles/sweat_alert.css" rel="stylesheet">
@@ -74,10 +74,23 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <?php if(!empty($site_favicon)){ ?>
-  <link rel="shortcut icon" href="images/<?php echo $site_favicon; ?>" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= $site_url; ?>/images/<?php echo $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
+  <style>
+    .select-error .nice-select.form-control{display: none !important;}
+    #relevantSubject{display: block !important;}
+    .user_role .nice-select{display: none;}
+    .user_role select{display: block !important;}
+  </style>
 </head>
-<body class="is-responsive">
+<body class="all-content">
+  <!-- Preloader Start -->
+  <div class="proloader">
+    <div class="loader">
+      <img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+    </div>
+  </div>
+  <!-- Preloader End -->
   <?php
     if(!isset($_SESSION['seller_user_name'])){
       require_once("includes/header_with_categories.php");
@@ -89,8 +102,143 @@
       }
     } 
   ?>
-  <div class="container pb-4">
-    <!-- Container starts -->
+  <main class="emongez-content-main">
+    
+    <section class="container-fluid contactus">
+      <div class="row">
+        <?php
+          $get_contact_support = $db->select("contact_support");
+          $row_contact_support = $get_contact_support->fetch();
+          $contact_email = $row_contact_support->contact_email;
+          $get_meta = $db->select("contact_support_meta",array('language_id' => 2));
+          $row_meta = $get_meta->fetch();
+          $contact_heading = $row_meta->contact_heading;
+          $contact_desc = $row_meta->contact_desc;
+        ?>
+        <div class="col-md-12 mt-4">
+          <?php if(!isset($_SESSION['seller_user_name'])){ ?>
+          <div class="alert alert-warning rounded-0">
+            <p class="lead mt-1 mb-1 text-center">
+              <strong>Sorry!</strong> You can't submit a support request without logging in first. If you have a general question, please email us at <?php echo $contact_email; ?>.
+            </p>
+          </div>
+          <?php } ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-12 col-md-7">
+              <div class="contactus-form">
+                <h1><?php echo $contact_heading; ?></h1>
+                <p class="text-muted pt-1"><?php echo $contact_desc; ?></p>
+                <form class="d-flex flex-column" method="POST" enctype="multipart/form-data">
+                  <div class="form-group select-error">
+                    <label class="control-label" for="relevantSubject">حدد موضوع الاستفسار ذي الصلة</label>
+                    <select class="form-control select_tag" name="enquiry_type" id="relevantSubject">
+                      <option value="" url="customer_support">حدد موضوع الاستفسار</option>
+                      <?php
+                        $get_enquiry_types = $db->select("enquiry_types");
+                        while($row_enquiry_types = $get_enquiry_types->fetch()){
+                          $enquiry_id = $row_enquiry_types->enquiry_id;
+                          $enquiry_title = $row_enquiry_types->enquiry_title;
+                          echo "<option value='$enquiry_id' ".(@$_GET['enquiry_id'] == $enquiry_id ? "selected " : "") ."url='customer_support?enquiry_id=$enquiry_id'>
+                          $enquiry_title
+                          </option>";
+                        }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="subject">موضوع</label>
+                    <input type="text" name="subject" required="" id="subject" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="message">رسالة</label>
+                    <textarea class="form-control" id="message" name="message" rows="7"></textarea>
+                  </div>
+                  <?php if($_GET['enquiry_id'] == 1 or $_GET['enquiry_id'] == 2){ ?>
+                  <div class="form-group">
+                    <label class="<?= $floatRight ?>">رقم الأمر *</label>
+                    <input type="text" class="form-control" name="order_number" required="">
+                  </div>
+                  <div class="form-group user_role">
+                    <label class="<?= $floatRight ?>">دور المستخدم *</label>
+                    <select name="user_role" class="form-control" required>
+                      <option value="" class="hidden">حدد دور المستخدم</option>
+                      <option value="Buyer">مشتر</option>
+                      <option value="Seller">تاجر</option>
+                    </select>
+                  </div>
+                  <?php } ?>
+                  <div class="form-group">
+                    <label class="control-label" for="attachment">المرفق</label>
+                    <input type="file" name="file" id="attachment" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label>يرجى التحقق من أنك جزء من الإنسانية.</label>
+                    <div class="g-recaptcha" data-sitekey="<?php echo $recaptcha_site_key; ?>"></div>
+                  </div>
+                  <div class="form-group">
+                    <button class="contactus-form-button" type="submit" role="button">تقديم الطلب</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-12 col-md-7 col-lg-4">
+              <div class="contact-location">
+                <h2>نحن دائما هنا اساعدك!</h2>
+                <div class="address-item d-flex flex-row">
+                  <div class="icon">
+                    <img alt="Address" class="img-fluid d-block" src="assets/img/contact/map-marker.png" />
+                  </div>
+                  <div class="text">
+                    <h4>عنوان</h4>
+                    <h5>مصر</h5>
+                    <address>
+                      4 ش جهينة الدقى الدقى الجيزة<br />
+                      محافظة 12311 مصر
+                    </address>
+                    <h5>أستراليا</h5>
+                    <address>
+                      1409/200 شارع سبنسر نيو 200 ،<br />
+                      ملبورن VIC 3000
+                    </address>
+                  </div>
+                </div>
+                <!-- Each item -->
+                <div class="address-item d-flex flex-row">
+                  <div class="icon">
+                    <img alt="Email" class="img-fluid d-block" src="assets/img/contact/mail-icon.png" />
+                  </div>
+                  <div class="text">
+                    <h4>البريد الإلكتروني</h4>
+                    <p><a href="mailto:emongez@emongez.com">emongez@emongez.com</a></p>
+                  </div>
+                </div>
+                <!-- Each item -->
+              </div>
+            </div>
+          </div>
+          <!-- Row -->
+          <div class="row">
+            <div class="col-12">
+              <div class="contactus-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.970234789631!2d31.21043481569234!3d30.037711781884774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145846d4ecbeb8f5%3A0xd00525dc3aa4c477!2s4%20Johayna%20St%2C%20Ad%20Doqi%20A%2C%20Dokki%2C%20Giza%20Governorate%2012311%2C%20Egypt!5e0!3m2!1sen!2sbd!4v1592425184858!5m2!1sen!2sbd" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+              </div>
+            </div>
+          </div>
+          <!-- Row -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+
+
+  <!-- <div class="container pb-4">
     <div class="row">
       <?php
         $get_contact_support = $db->select("contact_support");
@@ -180,7 +328,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Container ends -->
   <?php
     if(isset($_POST['submit'])){
@@ -386,7 +534,7 @@
     <div class='container'>
     <div class='box'>
     <center>
-    <img class='logo' src='$site_url/images/logo.png' width='100' >
+    <img class='logo' src='<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>' width='100' >
     <h2> Hello Admin! </h2>
     <h2> This message has been sent from the customer support form. </h2>
     </center>
@@ -485,7 +633,7 @@
         <div class='container'>
         <div class='box'>
         <center>
-        <img src='$site_url/images/logo.png' width='100'>
+        <img src='<?= $site_url; ?>/images/ar/<?= $site_arabic_logo; ?>' width='100'>
         <h3> Hello $login_seller_user_name, </h3>
         <p class='lead'> Thank you for contacting us. </p>
         <hr>

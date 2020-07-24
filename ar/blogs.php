@@ -51,11 +51,16 @@ $login_seller_type = $row_login_seller->account_type;
 		<!-- <link href="styles/custom.css" rel="stylesheet">  -->
 		<!-- Custom css code from modified in admin panel --->
 		<link href="<?= $site_url; ?>/ar/styles/styles.css" rel="stylesheet">
-		<link href="styles/user_nav_styles.css" rel="stylesheet">
-		<link href="font_awesome/css/font-awesome.css" rel="stylesheet">
-		<link href="styles/owl.carousel.css" rel="stylesheet">
-		<link href="styles/owl.theme.default.css" rel="stylesheet">
+		<!-- <link href="styles/user_nav_styles.css" rel="stylesheet"> -->
+		<!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
+		<!-- <link href="styles/owl.carousel.css" rel="stylesheet"> -->
+		<!-- <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
 		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<style>
+			.blog-list-item-image{height: 420px;overflow: hidden;}
+			.blog-recent-posts-item .image{height: 80px; overflow: hidden;}
+			@media(max-width: 768px){.blog-list-item-image{height: 187px;overflow: hidden;}}
+		</style>
 	</head>
 	<body class="all-content">
 		<?php
@@ -83,41 +88,73 @@ $login_seller_type = $row_login_seller->account_type;
 					<div class="container">
 						<div class="row">
 							<div class="col-12 col-md-8">
+								<?php 
+									
+									 $get_articles = $db->select("knowledge_bank", array("language_id" => 2));
+									 while($row_articles = $get_articles->fetch()){
+									 $article_id = $row_articles->article_id;
+									 $article_url = $row_articles->article_url;
+									 $cat_id = $row_articles->cat_id;
+									 $article_heading = $row_articles->article_heading;
+									 $article_body = $row_articles->article_body;
+									 $right_image = $row_articles->right_image;
+									 $top_image = $row_articles->top_image;
+									 $bottom_image = $row_articles->bottom_image;
+									 $posted_date  = $row_articles->posted_date;
+									 $timee = $posted_date;
+									 $day = date("d", strtotime($posted_date));
+									 $month = date("F", strtotime($posted_date));
+
+									 $article_categories = $db->select("article_cat",array("article_cat_id" => $cat_id));
+									 $cat_title = $article_categories->fetch()->article_cat_title;
+								?>
 								<div class="blog-list-item d-flex flex-column">
 									<div class="blog-list-item-image d-flex flex-column">
-										<a class="d-block" href="javascript:void(0);">
-											<img alt="Successful marketing stories" class="img-fluid d-block" src="https://loremflickr.com/1024/500/beach,girl" />
+										<a class="d-block" href="article/<?php echo $article_url; ?>">
+											<img alt="Successful marketing stories" class="img-fluid d-block" src="<?= $site_url ?>/article/article_images/<?= $top_image ?>" />
 										</a>
 									</div>
 									<div class="blog-list-item-content d-flex flex-row">
 										<div class="blog-list-item-date">
 											<div class="date d-flex flex-column">
-												<span>15</span>
-												<span>Jan</span>
+												<span><?= $day ?></span>
+												<span><?= $month ?></span>
 											</div>
 										</div>
 										<div class="blog-list-item-text d-flex flex-column">
 											<div class="blog-author-item d-flex flex-wrap">
 												<div class="blog-author--item d-flex flex-row">
 													<span><i class="fal fa-user"></i></span>
-													<span>بقلم جون دو</span>
+													<span>بقلم   Admin</span>
 												</div>
 												<!-- Each item -->
 												<div class="blog-author--item d-flex flex-row">
 													<span><i class="fal fa-folder"></i></span>
-													<span>الكتابة والترجمة</span>
+													<span><?= $cat_title ?></span>
 												</div>
 												<!-- Each item -->
 												<div class="blog-author--item d-flex flex-row">
 													<span><i class="fal fa-clock"></i></span>
-													<span>4 سبتمبر 2019</span>
+													<span><?= $posted_date; ?></span>
 												</div>
 												<!-- Each item -->
 											</div>
 											<div class="blog-list-item-description">
-												<h2><a href="javascript:void(0);">قصص تسويقية ناجحة</a></h2>
-												<div class="description">هنا العديد من الاختلافات في مقاطع لوريم إيبسوم المتاحة ، لكن الغالبية عانت من تغيير في شكل ما ، من خلال الفكاهة المحقونة ، أو الكلمات العشوائية التي لا تبدو حتى قابلة للتصديق قليلاً. إذا كنت ستستخدم مقطعًا ، فأنت بحاجة إلى التأكد من عدم وجود أي شيء محرج مخفي في منتصف النص. تميل جميع المولدات على الإنترنت إلى تكرار قطع محددة مسبقًا حسب الضرورة ، مما يجعل هذا أول مولد حقيقي على الإنترنت.</div>
-												<a class="continue-button d-flex flex-row align-items-center" href="javascript:void(0);">
+												<h2><a href="article/<?php echo $article_id; ?>"><?= $article_heading ?></a></h2>
+												<?php 
+												  $string = strip_tags($article_body);
+												  if (strlen($string) > 500) {
+												      // truncate string
+												      $stringCut = substr($string, 0, 500);
+												      $endPoint = strrpos($stringCut, ' ');
+												      //if the string doesn't contain any space then it will cut without word basis.
+												      $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+												      $string .= '....';
+												  }
+												  // echo $string;
+												?>
+												<div class="description"><?= $string ?></div>
+												<a class="continue-button d-flex flex-row align-items-center" href="article/<?php echo $article_id; ?>">
 													<span>Continue</span>
 													<span><i class="fal fa-long-arrow-left"></i></span>
 												</a>
@@ -125,223 +162,9 @@ $login_seller_type = $row_login_seller->account_type;
 										</div>
 									</div>
 								</div>
+								<?php } ?>
 								<!-- Each item -->
-								<div class="blog-list-item d-flex flex-column">
-									<div class="blog-list-item-image d-flex flex-column">
-										<a class="d-block" href="javascript:void(0);">
-											<img alt="7 tips ensure a remarkable job application in social media" class="img-fluid d-block" src="https://loremflickr.com/1024/500/beach,girl" />
-										</a>
-									</div>
-									<div class="blog-list-item-content d-flex flex-row">
-										<div class="blog-list-item-date">
-											<div class="date d-flex flex-column">
-												<span>15</span>
-												<span>Jan</span>
-											</div>
-										</div>
-										<div class="blog-list-item-text d-flex flex-column">
-											<div class="blog-author-item d-flex flex-wrap">
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-user"></i></span>
-													<span>بقلم جون دو</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-folder"></i></span>
-													<span>الكتابة والترجمة</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-clock"></i></span>
-													<span>4 سبتمبر 2019</span>
-												</div>
-												<!-- Each item -->
-											</div>
-											<div class="blog-list-item-description">
-												<h2><a href="javascript:void(0);">7 نصائح تضمن تقديم طلب عمل رائع في وسائل التواصل الاجتماعي</a></h2>
-												<div class="description">هنا العديد من الاختلافات في مقاطع لوريم إيبسوم المتاحة ، لكن الغالبية عانت من تغيير في شكل ما ، من خلال الفكاهة المحقونة ، أو الكلمات العشوائية التي لا تبدو حتى قابلة للتصديق قليلاً. إذا كنت ستستخدم مقطعًا ، فأنت بحاجة إلى التأكد من عدم وجود أي شيء محرج مخفي في منتصف النص. تميل جميع المولدات على الإنترنت إلى تكرار قطع محددة مسبقًا حسب الضرورة ، مما يجعل هذا أول مولد حقيقي على الإنترنت.</div>
-												<a class="continue-button d-flex flex-row align-items-center" href="javascript:void(0);">
-													<span>Continue</span>
-													<span><i class="fal fa-long-arrow-left"></i></span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Each item -->
-								<div class="blog-list-item d-flex flex-column">
-									<div class="blog-list-item-image d-flex flex-column">
-										<a class="d-block" href="javascript:void(0);">
-											<img alt="8 mobile UI design tips for a better user experience" class="img-fluid d-block" src="https://loremflickr.com/1024/500/beach,girl" />
-										</a>
-									</div>
-									<div class="blog-list-item-content d-flex flex-row">
-										<div class="blog-list-item-date">
-											<div class="date d-flex flex-column">
-												<span>15</span>
-												<span>Jan</span>
-											</div>
-										</div>
-										<div class="blog-list-item-text d-flex flex-column">
-											<div class="blog-author-item d-flex flex-wrap">
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-user"></i></span>
-													<span>بقلم جون دو</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-folder"></i></span>
-													<span>الكتابة والترجمة</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-clock"></i></span>
-													<span>4 سبتمبر 2019</span>
-												</div>
-												<!-- Each item -->
-											</div>
-											<div class="blog-list-item-description">
-												<h2><a href="javascript:void(0);">8 نصائح لتصميم واجهة مستخدم متنقلة للحصول على تجربة مستخدم أفضل</a></h2>
-												<div class="description">هنا العديد من الاختلافات في مقاطع لوريم إيبسوم المتاحة ، لكن الغالبية عانت من تغيير في شكل ما ، من خلال الفكاهة المحقونة ، أو الكلمات العشوائية التي لا تبدو حتى قابلة للتصديق قليلاً. إذا كنت ستستخدم مقطعًا ، فأنت بحاجة إلى التأكد من عدم وجود أي شيء محرج مخفي في منتصف النص. تميل جميع المولدات على الإنترنت إلى تكرار قطع محددة مسبقًا حسب الضرورة ، مما يجعل هذا أول مولد حقيقي على الإنترنت.</div>
-												<a class="continue-button d-flex flex-row align-items-center" href="javascript:void(0);">
-													<span>Continue</span>
-													<span><i class="fal fa-long-arrow-left"></i></span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Each item -->
-								<div class="blog-list-item d-flex flex-column">
-									<div class="blog-list-item-image d-flex flex-column">
-										<a class="d-block" href="javascript:void(0);">
-											<img alt="A look inside Zellene Guanlao's colorful work & illustration process" class="img-fluid d-block" src="https://loremflickr.com/1024/500/beach,girl" />
-										</a>
-									</div>
-									<div class="blog-list-item-content d-flex flex-row">
-										<div class="blog-list-item-date">
-											<div class="date d-flex flex-column">
-												<span>15</span>
-												<span>Jan</span>
-											</div>
-										</div>
-										<div class="blog-list-item-text d-flex flex-column">
-											<div class="blog-author-item d-flex flex-wrap">
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-user"></i></span>
-													<span>بقلم جون دو</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-folder"></i></span>
-													<span>الكتابة والترجمة</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-clock"></i></span>
-													<span>4 سبتمبر 2019</span>
-												</div>
-												<!-- Each item -->
-											</div>
-											<div class="blog-list-item-description">
-												<h2><a href="javascript:void(0);">نظرة داخل العمل والتوضيحات الملونة ل Zellene Guanlaoمعالجة</a></h2>
-												<div class="description">هنا العديد من الاختلافات في مقاطع لوريم إيبسوم المتاحة ، لكن الغالبية عانت من تغيير في شكل ما ، من خلال الفكاهة المحقونة ، أو الكلمات العشوائية التي لا تبدو حتى قابلة للتصديق قليلاً. إذا كنت ستستخدم مقطعًا ، فأنت بحاجة إلى التأكد من عدم وجود أي شيء محرج مخفي في منتصف النص. تميل جميع المولدات على الإنترنت إلى تكرار قطع محددة مسبقًا حسب الضرورة ، مما يجعل هذا أول مولد حقيقي على الإنترنت.</div>
-												<a class="continue-button d-flex flex-row align-items-center" href="javascript:void(0);">
-													<span>Continue</span>
-													<span><i class="fal fa-long-arrow-left"></i></span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Each item -->
-								<div class="blog-list-item d-flex flex-column">
-									<div class="blog-list-item-image d-flex flex-column">
-										<a class="d-block" href="javascript:void(0);">
-											<img alt="10 helpful mini-tutorials to quickly boost your design skills" class="img-fluid d-block" src="https://loremflickr.com/1024/500/beach,girl" />
-										</a>
-									</div>
-									<div class="blog-list-item-content d-flex flex-row">
-										<div class="blog-list-item-date">
-											<div class="date d-flex flex-column">
-												<span>15</span>
-												<span>Jan</span>
-											</div>
-										</div>
-										<div class="blog-list-item-text d-flex flex-column">
-											<div class="blog-author-item d-flex flex-wrap">
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-user"></i></span>
-													<span>بقلم جون دو</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-folder"></i></span>
-													<span>الكتابة والترجمة</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-clock"></i></span>
-													<span>4 سبتمبر 2019</span>
-												</div>
-												<!-- Each item -->
-											</div>
-											<div class="blog-list-item-description">
-												<h2><a href="javascript:void(0);">10 دروس مصغرة مفيدة لتعزيز مهارات التصميم الخاصة بك بسرعة</a></h2>
-												<div class="description">هنا العديد من الاختلافات في مقاطع لوريم إيبسوم المتاحة ، لكن الغالبية عانت من تغيير في شكل ما ، من خلال الفكاهة المحقونة ، أو الكلمات العشوائية التي لا تبدو حتى قابلة للتصديق قليلاً. إذا كنت ستستخدم مقطعًا ، فأنت بحاجة إلى التأكد من عدم وجود أي شيء محرج مخفي في منتصف النص. تميل جميع المولدات على الإنترنت إلى تكرار قطع محددة مسبقًا حسب الضرورة ، مما يجعل هذا أول مولد حقيقي على الإنترنت.</div>
-												<a class="continue-button d-flex flex-row align-items-center" href="javascript:void(0);">
-													<span>Continue</span>
-													<span><i class="fal fa-long-arrow-left"></i></span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Each item -->
-								<div class="blog-list-item d-flex flex-column">
-									<div class="blog-list-item-image d-flex flex-column">
-										<a class="d-block" href="javascript:void(0);">
-											<img alt="Create a compelling graphic design portfolio that lands work" class="img-fluid d-block" src="https://loremflickr.com/1024/500/beach,girl" />
-										</a>
-									</div>
-									<div class="blog-list-item-content d-flex flex-row">
-										<div class="blog-list-item-date">
-											<div class="date d-flex flex-column">
-												<span>15</span>
-												<span>Jan</span>
-											</div>
-										</div>
-										<div class="blog-list-item-text d-flex flex-column">
-											<div class="blog-author-item d-flex flex-wrap">
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-user"></i></span>
-													<span>بقلم جون دو</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-folder"></i></span>
-													<span>الكتابة والترجمة</span>
-												</div>
-												<!-- Each item -->
-												<div class="blog-author--item d-flex flex-row">
-													<span><i class="fal fa-clock"></i></span>
-													<span>4 سبتمبر 2019</span>
-												</div>
-												<!-- Each item -->
-											</div>
-											<div class="blog-list-item-description">
-												<h2><a href="javascript:void(0);">إنشاء محفظة تصميم رسومي مقنعة عمل الأراضي</a></h2>
-												<div class="description">هنا العديد من الاختلافات في مقاطع لوريم إيبسوم المتاحة ، لكن الغالبية عانت من تغيير في شكل ما ، من خلال الفكاهة المحقونة ، أو الكلمات العشوائية التي لا تبدو حتى قابلة للتصديق قليلاً. إذا كنت ستستخدم مقطعًا ، فأنت بحاجة إلى التأكد من عدم وجود أي شيء محرج مخفي في منتصف النص. تميل جميع المولدات على الإنترنت إلى تكرار قطع محددة مسبقًا حسب الضرورة ، مما يجعل هذا أول مولد حقيقي على الإنترنت.</div>
-												<a class="continue-button d-flex flex-row align-items-center" href="javascript:void(0);">
-													<span>Continue</span>
-													<span><i class="fal fa-long-arrow-left"></i></span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Each item -->
-								<div class="blog-pagination">
+								<!-- <div class="blog-pagination">
 									<ul class="pagination">
 										<li class="page-item previous disabled">
 											<a class="page-link" href="javascript:void(0);" tabindex="-1" aria-disabled="true"><i class="fal fa-angle-right"></i></a>
@@ -365,45 +188,53 @@ $login_seller_type = $row_login_seller->account_type;
 											<a class="page-link" href="javascript:void(0);"><i class="fal fa-angle-left"></i></a>
 										</li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 							<!-- Column 1 -->
 							<div class="col-12 col-md-4">
 								<div class="blog-categories d-flex flex-column">
 									<div class="blog-categories-header">التصنيفات</div>
 									<div class="blog-categories-lists d-flex flex-column">
-										<a class="blog-categories-item" href="javascript:void(0);">(9) التسويق الرقمي</a>
-										<a class="blog-categories-item" href="javascript:void(0);">(8) تصميم الويب والجوال</a>
-										<a class="blog-categories-item" href="javascript:void(0);">(5) تطوير برامج سطح المكتب</a>
-										<a class="blog-categories-item" href="javascript:void(0);">(4) الكتابة والترجمة </a>
-										<a class="blog-categories-item" href="javascript:void(0);">(3) الرسومات والتصميم</a>
-										<a class="blog-categories-item" href="javascript:void(0);">(1) فيديو ورسوم متحركة</a>
-										<a class="blog-categories-item" href="javascript:void(0);">(3) غير مصنف</a>
+										<?php
+										  $get_cats = $db->select("article_cat",array("language_id" => 2));
+										  while($row_cats = $get_cats->fetch()){
+										  $article_cat_id = $row_cats->article_cat_id;
+										  $article_cat_title = $row_cats->article_cat_title;
+
+										   $count_categories = $db->select("knowledge_bank", array("cat_id" => $article_cat_id));
+										   $count_article = $count_categories->rowCount();
+										?>
+										<a class="blog-categories-item" href="javascript:void(0);"><?php echo $article_cat_title; ?> (<?= $count_article ?>)</a>
+										<?php } ?>
 									</div>
 								</div>
 								<div class="blog-recent-posts d-flex flex-column">
 									<div class="blog-recent-posts-header">المنشور الاخير</div>
 									<div class="blog-recent-posts-body d-flex flex-column">
-										<a class="blog-recent-posts-item d-flex flex-row" href="javascript:void(0);">
+										<?php 
+											$get_articles = $db->query("select * from knowledge_bank where language_id=2 order by 1 DESC LIMIT 0,3");
+											// $get_articles = $db->select("knowledge_bank", array("language_id" => 1));
+											while($row_articles = $get_articles->fetch()){
+											$article_id = $row_articles->article_id;
+											$article_url = $row_articles->article_url;
+											$article_heading = $row_articles->article_heading;
+											$article_body = $row_articles->article_body;
+											$right_image = $row_articles->right_image;
+											$top_image = $row_articles->top_image;
+											$bottom_image = $row_articles->bottom_image;
+											if($lang_dir == "right"){
+											  $floatRight = "float-right";
+											}else{
+											  $floatRight = "float-left";
+											}
+										?>
+										<a class="blog-recent-posts-item d-flex flex-row" href="article/<?php echo $article_id; ?>">
 											<div class="image">
-												<img alt="7 tips ensure a remarkable job application in social media" class="img-fluid d-block" src="https://loremflickr.com/768/688/beach,girl" />
+												<img alt="7 tips ensure a remarkable job application in social media" class="img-fluid d-block" src="<?= $site_url; ?>/article/article_images/<?= $top_image; ?>" />
 											</div>
-											<div class="text">7 نصائح تضمن رائعةطلب وظيفة في المجال الاجتماعيوسائل الإعلام</div>
+											<div class="text"><?= $article_heading ?></div>
 										</a>
-										<!-- Each item -->
-										<a class="blog-recent-posts-item d-flex flex-row" href="javascript:void(0);">
-											<div class="image">
-												<img alt="8 mobile UI design tips for a better user experience" class="img-fluid d-block" src="https://loremflickr.com/768/688/beach,girl" />
-											</div>
-											<div class="text">8 نصائح لتصميم واجهة مستخدم متنقلة تجربة مستخدم أفضل</div>
-										</a>
-										<!-- Each item -->
-										<a class="blog-recent-posts-item d-flex flex-row" href="javascript:void(0);">
-											<div class="image">
-												<img alt="A look inside Zellene Guanlao's colorful work & illustration process" class="img-fluid d-block" src="https://loremflickr.com/768/688/beach,girl" />
-											</div>
-											<div class="text">نظرة داخل زلينأعمال Guanlao الملونة وعملية التوضيح</div>
-										</a>
+										<?php } ?>
 										<!-- Each item -->
 									</div>
 								</div>

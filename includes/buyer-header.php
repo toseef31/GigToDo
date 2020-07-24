@@ -124,7 +124,7 @@ $cur_amount = currencyConverter($to,1);
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="<?= $site_url; ?>/dashboard">Become a Seller</a></li>
+                <li><a href="<?= $site_url; ?>/freelancers">Freelancers</a></li>
                 <li><a href="<?= $site_url; ?>/buying_orders">Orders</a></li>
               </ul>
             </div>
