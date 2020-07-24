@@ -134,7 +134,7 @@
               <div class="contactus-form">
                 <h1><?php echo $contact_heading; ?></h1>
                 <p class="text-muted pt-1"><?php echo $contact_desc; ?></p>
-                <form action="index.html" class="d-flex flex-column" method="POST">
+                <form class="d-flex flex-column" method="POST">
                   <div class="form-group select-error">
                     <label class="control-label" for="relevantSubject">select relevant inquiry subject</label>
                     <select class="form-control select_tag" name="enquiry_type" id="relevantSubject">
