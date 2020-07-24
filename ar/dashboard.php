@@ -342,7 +342,7 @@
             <div class="userprofile-header d-flex flex-row align-items-center">
               <div class="userprofile-logo">
                 <?php if(!empty($login_seller_image)){ ?>
-                <img src="<?= $site_url; ?>/user_images/<?= $login_seller_image; ?>" alt="">
+                <img src="<?= $site_url; ?>/user_images/<?= $login_seller_image; ?>" class="img-fluid rounded-circle" alt="">
                 <?php }else{ ?>
                 <img src="<?= $site_url; ?>/assets/img/user1.png"  class="img-fluid rounded-circle mb-3">
                 <?php } ?>

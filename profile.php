@@ -45,6 +45,7 @@ if(isset($_SESSION['seller_user_name'])){
 $get_seller_user_name = $input->get('user_name');
 $select_seller = $db->query("select * from sellers where seller_user_name=:u_name AND NOT seller_status='deactivated' AND NOT seller_status='block-ban'",array("u_name"=>$get_seller_user_name));
 $row_select_seller = $select_seller->fetch();
+$select_seller_id = $row_select_seller->seller_id;
 $gmail_verification = $row_select_seller->gmail_verification;
 $fb_verification = $row_select_seller->fb_verification;
 $seller_verification = $row_select_seller->seller_verification;
@@ -587,7 +588,7 @@ $count_account = $select_seller_payments->rowCount();
 
                     if(!empty($query_where) or $relevant_requests == "no"){
                     
-                    $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
+                    $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND seller_id='$select_seller_id' order by request_id DESC LIMIT 0,5");
                     $requests_count = 0;
                     while($row_requests = $select_requests->fetch()){
                         $request_id = $row_requests->request_id;
@@ -655,7 +656,7 @@ $count_account = $select_seller_payments->rowCount();
                           </thead>
                           <tbody>
                             <?php
-                              $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
+                              $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND seller_id='$select_seller_id' order by request_id DESC LIMIT 0,5");
                               while($row_requests = $select_requests->fetch()){
                               $request_id = $row_requests->request_id;
                               $seller_id = $row_requests->seller_id;

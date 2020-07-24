@@ -672,7 +672,7 @@ $count_account = $select_seller_payments->rowCount();
 
                   if(!empty($query_where) or $relevant_requests == "no"){
                   
-                  $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
+                  $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND seller_id='$select_seller_id' order by request_id DESC LIMIT 0,5");
                   $requests_count = 0;
                   while($row_requests = $select_requests->fetch()){
                       $request_id = $row_requests->request_id;
@@ -756,7 +756,7 @@ $count_account = $select_seller_payments->rowCount();
                         </thead>
                         <tbody>
                           <?php
-                            $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND NOT seller_id='$login_seller_id' order by request_id DESC LIMIT 0,5");
+                            $select_requests =  $db->query("select * from buyer_requests where request_status='active'". $query_where ." AND seller_id='$select_seller_id' order by request_id DESC LIMIT 0,5");
                             while($row_requests = $select_requests->fetch()){
                             $request_id = $row_requests->request_id;
                             $seller_id = $row_requests->seller_id;
