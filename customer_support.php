@@ -17,6 +17,7 @@
   $login_seller_id = $row_login_seller->seller_id;
   $login_seller_email = $row_login_seller->seller_email;
   $login_seller_user_name = $row_login_seller->seller_user_name;
+  $login_seller_type = $row_login_seller->account_type;
   }
   $recaptcha_site_key = $row_general_settings->recaptcha_site_key;
   $recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
