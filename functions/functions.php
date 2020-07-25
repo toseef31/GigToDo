@@ -3359,6 +3359,18 @@ function freelancersQueryWhere($type){
 		}
 	}
 
+	if(isset($_REQUEST['seller_category'])){
+		$i = 0;
+		foreach($_REQUEST['seller_category'] as $value){
+			$i++;
+			if($value != 0){
+				$where_language[] = "seller_language=:seller_language_$i";
+				$values["seller_language_$i"] = $value;
+				$where_path .= "seller_language[]=" . $value . "&";
+			}
+		}
+	}
+
 	$query_where = "where";
 	if(count($where_online)>0){
 		$query_where .= addAnd($query_where)." (" . implode(" or ",$where_online) . ")";
@@ -3390,12 +3402,13 @@ function get_freelancers(){
 	global $lang;
 	global $siteLanguage;
 	global $s_currency;
+	global $site_url;
 
 	$query_where = freelancersQueryWhere("query_where");
 	$where_path = freelancersQueryWhere("where_path");
 	$values = freelancersQueryWhere("values");
 
-	$per_page = 5;
+	$per_page = 12;
 	if(isset($_GET['page'])){
 		$page = $input->get('page');
 	}else{
@@ -3461,12 +3474,13 @@ function get_freelancer_pagination(){
 	global $input;
 	global $lang;
 	global $s_currency;
+	global $site_url;
 
 	$query_where = freelancersQueryWhere("query_where");
 	$where_path = freelancersQueryWhere("where_path");
 	$values = freelancersQueryWhere("values");
 
-	$per_page = 5;
+	$per_page = 12;
 
 	if(!empty($where_path)){
 		$query = "select DISTINCT sellers.* from sellers JOIN proposals ON sellers.seller_id=proposals.proposal_seller_id and proposals.proposal_status='active' $query_where";
@@ -3488,18 +3502,18 @@ function get_freelancer_pagination(){
 
 	echo "
 	<li class='page-item'>
-	<a class='page-link' href='?page=1&$where_path'>{$lang['pagination']['first_page']}</a>
+	<a class='page-link' href='?page=1&$where_path'><i class='fal fa-angle-left'></i></a>
 	</li>";
 
   echo "<li class='page-item ".(1 == $page ? "active" : "")."'><a class='page-link' href='?page=1&$where_path'>1</a></li>";
   
-  $i = max(2, $page - 5);
+  $i = max(2, $page - 12);
   
   if($i > 2){
     echo "<li class='page-item' href='#'><a class='page-link'>...</a></li>";
   }
   
-  for(; $i < min($page + 6, $total_pages); $i++) {
+  for(; $i < min($page + 12, $total_pages); $i++) {
   	echo "<li class='page-item"; if($i == $page){ echo " active "; } echo "'><a href='?page=$i&$where_path' class='page-link'>".$i."</a></li>";
   }
 
@@ -3513,7 +3527,7 @@ function get_freelancer_pagination(){
 
 	echo "	
 	<li class='page-item'>
-	<a class='page-link' href='?page=$total_pages&$where_path'>{$lang['pagination']['last_page']}</a>
+	<a class='page-link' href='?page=$total_pages&$where_path'><i class='fal fa-angle-right'></i></a>
 	</li>";
 }
 /// freelancers page Functions Ends ///

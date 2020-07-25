@@ -3149,6 +3149,8 @@ function get_tag_pagination(){
 	global $input;
 	global $lang;
 	global $s_currency;
+	global $site_url;
+
 	$online_sellers = array();
 	if(isset($_SESSION['tag'])){
 	$tag = $_SESSION['tag'];
@@ -3382,12 +3384,13 @@ function get_freelancers(){
 	global $lang;
 	global $siteLanguage;
 	global $s_currency;
+	global $site_url;
 
 	$query_where = freelancersQueryWhere("query_where");
 	$where_path = freelancersQueryWhere("where_path");
 	$values = freelancersQueryWhere("values");
 
-	$per_page = 5;
+	$per_page = 12;
 	if(isset($_GET['page'])){
 		$page = $input->get('page');
 	}else{
@@ -3453,12 +3456,13 @@ function get_freelancer_pagination(){
 	global $input;
 	global $lang;
 	global $s_currency;
+	global $site_url;
 
 	$query_where = freelancersQueryWhere("query_where");
 	$where_path = freelancersQueryWhere("where_path");
 	$values = freelancersQueryWhere("values");
 
-	$per_page = 5;
+	$per_page = 12;
 
 	if(!empty($where_path)){
 		$query = "select DISTINCT sellers.* from sellers JOIN proposals ON sellers.seller_id=proposals.proposal_seller_id and proposals.proposal_status='active' $query_where";
@@ -3480,12 +3484,12 @@ function get_freelancer_pagination(){
 
 	echo "
 	<li class='page-item'>
-	<a class='page-link' href='?page=1&$where_path'>{$lang['pagination']['first_page']}</a>
+	<a class='page-link' href='?page=1&$where_path'><i class='fal fa-angle-right'></i></a>
 	</li>";
 
   echo "<li class='page-item ".(1 == $page ? "active" : "")."'><a class='page-link' href='?page=1&$where_path'>1</a></li>";
   
-  $i = max(2, $page - 5);
+  $i = max(2, $page - 12);
   
   if($i > 2){
     echo "<li class='page-item' href='#'><a class='page-link'>...</a></li>";
@@ -3505,7 +3509,7 @@ function get_freelancer_pagination(){
 
 	echo "	
 	<li class='page-item'>
-	<a class='page-link' href='?page=$total_pages&$where_path'>{$lang['pagination']['last_page']}</a>
+	<a class='page-link' href='?page=$total_pages&$where_path'><i class='fal fa-angle-left'></i></a>
 	</li>";
 }
 /// freelancers page Functions Ends ///

@@ -29,7 +29,26 @@ if(isset($_GET['seller_language'])){
 
 ?>
 
-<div class="card border-success mb-3">
+<div class="search-results-categories">
+	<div class="search-categories-header">تصفية حسب الفئة</div>
+	<div class="search-categories-body">
+		<?php
+		$select_categories = $db->select("categories");
+		while($row_categories = $select_categories->fetch()){
+			$cat_id = $row_categories->cat_id;
+			
+			$select_cats_meta = $db->select('cats_meta', array("cat_id" => $cat_id));
+		// $cat_title = $select_cats_meta->fetch()->cat_title;
+		$arabic_title = $select_cats_meta->fetch()->arabic_title;
+
+		if (!empty($arabic_title)) {
+		?>
+		<a class="search-categories-item d-flex flex-row align-items-center" href="javascript:void(0);" data-id="<?= $cat_id ?>"><?= $arabic_title; ?></a>
+		<?php } } ?>
+	</div>
+</div>
+
+<div class="card border-success mb-3" style="border-color: #ff0707 !important;">
 	<div class="card-body pb-2 pt-3 <?=($lang_dir == "right" ? 'text-right':'')?>">
 		<ul class="nav flex-column">
 			<li class="nav-item checkbox checkbox-success">
@@ -43,8 +62,8 @@ if(isset($_GET['seller_language'])){
 	</div>
 </div>
 
-<div class="card border-success mb-3">
-	<div class="card-header bg-success">
+<div class="card border-success mb-3" style="border-color: #ff0707 !important;">
+	<div class="card-header bg-success" style="background-color: #ff0707 !important;">
 		<h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> text-white h5">Seller Location</h3>
 		<button class="btn btn-secondary btn-sm <?=($lang_dir == "right" ? 'float-left':'float-right')?> clear_seller_country clearlink" onclick="clearCountry()">
 			<?php echo $lang['sidebar']['clear_filter']; ?>
@@ -70,7 +89,7 @@ if(isset($_GET['seller_language'])){
 	</div>
 </div>
 
-<div class="card border-success mb-3">
+<!-- <div class="card border-success mb-3">
 	<div class="card-header bg-success">
 		<h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> text-white h5"><?php echo $lang['sidebar']['seller_level']; ?></h3>
 		<button class="btn btn-secondary btn-sm <?=($lang_dir == "right" ? 'float-left':'float-right')?> clear_seller_level clearlink" onclick="clearLevel()">
@@ -125,4 +144,4 @@ if(isset($_GET['seller_language'])){
       <?php }}} ?>
 		</ul>
 	</div>
-</div>
+</div> -->

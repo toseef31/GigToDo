@@ -7,9 +7,7 @@ if(!isset($_SESSION['admin_email'])){
 echo "<script>window.open('login','_self');</script>";
 
 }else{
-  $get_general_settings = $db->select("general_settings");   
-  $row_general_settings = $get_general_settings->fetch();
-  $site_url = $row_general_settings->site_url;
+
 ?>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
@@ -310,23 +308,23 @@ echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
 
 if(!empty($right_image)){
   $right_image = pathinfo($right_image, PATHINFO_FILENAME);
-  $right_image = $right_image.".$file_extension";
+  $right_image = $right_image."".time().".$file_extension";
   move_uploaded_file($right_image_tmp, "../article/article_images/$right_image");
 }
 
 if(!empty($top_image)){
   $top_image = pathinfo($top_image, PATHINFO_FILENAME);
-  $top_image = $top_image.".$file_extension";
+  $top_image = $top_image."".time().".$file_extension";
   move_uploaded_file($top_image_tmp, "../article/article_images/$top_image");
 }
 
 if(!empty($bottom_image)){
   $bottom_image = pathinfo($bottom_image, PATHINFO_FILENAME);
-  $bottom_image = $bottom_image.".$file_extension";
+  $bottom_image = $bottom_image."".time().".$file_extension";
   move_uploaded_file($bottom_image_tmp, "../article/article_images/$bottom_image");
 }
-$posted_date = date()
-$insert_article = $db->insert("knowledge_bank",array("language_id" => $adminLanguage,"cat_id"=>$cat_id,"article_url"=>$article_url,"article_heading"=>$article_heading,"article_body"=>$article_body,"right_image"=>$right_image,"top_image"=>$top_image,"bottom_image"=>$bottom_image,"article_status"=>$article_status));
+$posted_date = date("F d, Y");
+$insert_article = $db->insert("knowledge_bank",array("language_id" => $adminLanguage,"cat_id"=>$cat_id,"article_url"=>$article_url,"article_heading"=>$article_heading,"article_body"=>$article_body,"right_image"=>$right_image,"top_image"=>$top_image,"bottom_image"=>$bottom_image,"article_status"=>$article_status,"posted_date" => $posted_date));
 
 if($insert_article){
 
