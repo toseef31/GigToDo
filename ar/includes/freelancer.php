@@ -1,4 +1,47 @@
-<div class="col-md-12">
+<div class="col-12 col-sm-6 col-md-4">
+  <div class="search-results-card d-flex flex-column align-items-center">
+    <div class="user-image">
+    	<?php if(!empty($seller_image)){ ?>
+    	<img src="<?= $site_url; ?>/user_images/<?php echo $seller_image; ?>" width="100" class="rounded-circle img-fluid d-block">
+    	<?php }else{ ?>
+    	<img class="img-fluid d-block" src="<?= $site_url; ?>/user_images/empty-image.png" />
+    	<?php } ?>
+    </div>
+    
+    <div class="user-name d-flex flex-row align-items-center <?php if(check_status($seller_id) == 'Online'){ echo "online";} ?>"><?php echo $seller_user_name; ?></div>
+    <div class="locatons-categories d-flex flex-wrap align-items-center">
+      <div class="search-results-card-categories d-flex flex-row align-items-center">
+        <span>
+          <img alt="User Icon" class="img-fluid d-block" src="assets/img/search/user-icon.png" />
+        </span>
+        <span>Digital Marketing</span>
+      </div>
+      <div class="search-results-card-locations d-flex flex-row align-items-center">
+        <span>
+          <img alt="Map Marker Icon" class="img-fluid d-block" src="assets/img/search/map-marker-icon.png" />
+        </span>
+        <span><?php echo $seller_country; ?></span>
+      </div>
+    </div>
+    <div class="search-results-profile-ratings d-flex flex-row align-items-center justify-content-center">
+    	<?php
+    	for($seller_i=0; $seller_i<$average_rating; $seller_i++){
+    	  echo " <span><i class='fa fa-star' style='color: #ffa320;'></i></span> ";
+    	}
+    	for($seller_i=$average_rating; $seller_i<5; $seller_i++){
+    	  echo " <span><i class='fa fa-star-o'></i></span> ";
+    	}
+    	?>
+    	<!-- <h4 class="mb-1"><?php printf("%.1f", $average); ?>/<small class="text-muted font-weight-normal">5</small></h4>
+    	<a>(<?php echo $count_reviews; ?> Reviews)</a> -->
+    </div>
+    <div class="search-results-card-action d-flex flex-row align-items-center justify-content-center">
+      <a class="d-flex flex-row align-items-center justify-content-center view-button" href="<?php echo $seller_user_name; ?>">اعرض الصفحة</a>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="col-md-12">
 <div class="card card-body mb-4 freelancerBox">
 	<figure class="wt-userlistingimg">
 		<?php if(!empty($seller_image)){ ?>
@@ -97,4 +140,4 @@
 		$(this).addClass("d-none");
 	});
 </script>
-</div>
+</div> -->

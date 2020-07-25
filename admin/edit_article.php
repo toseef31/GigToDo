@@ -3,10 +3,6 @@
 if(!isset($_SESSION['admin_email'])){
 echo "<script>window.open('login','_self');</script>";
 }else{
-  $get_general_settings = $db->select("general_settings");   
-  $row_general_settings = $get_general_settings->fetch();
-  $site_url = $row_general_settings->site_url;
-
     $edit_id = $input->get('edit_article');
     $get_articles = $db->select("knowledge_bank",array("article_id" => $edit_id));
     if($get_articles->rowCount() == 0){
@@ -222,27 +218,26 @@ if($val->run() == false){
   if(empty($right_image)){
     $right_image = $r_image;
   }else{
-
-
     $right_image = pathinfo($right_image, PATHINFO_FILENAME);
-    $right_image = $right_image.".$right_extension";
+    $right_image = $right_image."".time().".$right_extension";
     move_uploaded_file($right_image_tmp, "../article/article_images/$right_image");
   }
   if(empty($top_image)){
     $top_image = $t_image;
   }else{
     $top_image = pathinfo($top_image, PATHINFO_FILENAME);
-    $top_image = $top_image.".$top_extension";
+    $top_image = $top_image."".time().".$top_extension";
     move_uploaded_file($top_image_tmp, "../article/article_images/$top_image");
   }
   if(empty($bottom_image)){
     $bottom_image = $b_image;
   }else{
     $bottom_image = pathinfo($bottom_image, PATHINFO_FILENAME);
-    $bottom_image = $bottom_image.".$bottom_extension";
+    $bottom_image = $bottom_image."".time().".$bottom_extension";
     move_uploaded_file($bottom_image_tmp, "../article/article_images/$bottom_image");
   }
-  $update_article = $db->update("knowledge_bank",array("cat_id"=>$cat_id,"article_heading"=>$article_heading,"article_body"=>$article_body,"right_image"=>$right_image,"top_image"=>$top_image,"bottom_image"=>$bottom_image,"article_status"=>$article_status),array("article_id"=>$edit_id));
+  $posted_date = date("F d, Y");
+  $update_article = $db->update("knowledge_bank",array("cat_id"=>$cat_id,"article_heading"=>$article_heading,"article_body"=>$article_body,"right_image"=>$right_image,"top_image"=>$top_image,"bottom_image"=>$bottom_image,"article_status"=>$article_status,"posted_date" => $posted_date),array("article_id"=>$edit_id));
   if($update_article){
     $insert_log = $db->insert_log($admin_id,"article",$edit_id,"updated");
     echo "<script>alert('Article Updated successfully.');</script>";
