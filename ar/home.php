@@ -50,6 +50,7 @@ $slide_image = $row_slides->slide_image;
 </div>
 <!-- end main -->
 <!-- Truster by section starts-->
+<?php if($trusted_companies == 1){ ?>
 <div class="trusted-by-section padding-top padding-bottom bg-gray">
   <div class="container">
     <div class="section-header">
@@ -74,6 +75,7 @@ $slide_image = $row_slides->slide_image;
     </ul>
   </div>
 </div>
+<?php } ?>
 <!-- Truster by section ends-->
 <!-- Get Started Section Starts -->
 <div class="get-started padding-bottom padding-top">

@@ -635,6 +635,18 @@ $videoPlugin = $core->checkPlugin("videoPlugin");
 	if(isset($_GET['edit_article_cat'])){
 	include("edit_article_cat.php");
 	}
+	if(isset($_GET['insert_testimonials'])){
+		include("insert_testimonials.php");
+	}
+	if(isset($_GET['view_testimonials'])){
+		include("view_testimonials.php");
+	}
+	if(isset($_GET['delete_testimonial'])){
+		include("delete_testimonials.php");
+	}
+	if(isset($_GET['edit_testimonial'])){
+		include("edit_testimonials.php");
+	}
 	if(isset($_GET['change_language'])){
 	include("change_language.php");
 	}

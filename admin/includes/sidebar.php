@@ -228,6 +228,17 @@ echo "<script>window.open('login','_self');</script>";
   </ul>
   </li>
   <li class="menu-item-has-children dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Testimonials"> 
+  <i class="menu-icon fa fa-language"></i> Testimonials
+  </a>
+  <ul class="sub-menu children dropdown-menu">
+  <li>
+  <i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?insert_testimonials">Insert Testimonials</a>
+  </li>
+  <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?view_testimonials"> View Testimonials</a></li>
+  </ul>
+  </li>
+  <li class="menu-item-has-children dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Seller Skills"> <i class="menu-icon fa fa-users"></i> Admins</a>
     <ul class="sub-menu children dropdown-menu">
       <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?admin_logs"> Admin Logs</a></li>
