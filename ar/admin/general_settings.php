@@ -52,6 +52,7 @@ $order_auto_complete = $row_general_settings->order_auto_complete;
 $wish_do_manual_payouts = $row_general_settings->wish_do_manual_payouts;
 $language_switcher = $row_general_settings->language_switcher;
 $currency_switcher = $row_general_settings->currency_switcher;
+$trusted_companies = $row_general_settings->trusted_companies;
 
 require 'updateHtaccess.php';
 require 'timezones.php';
@@ -295,6 +296,18 @@ Enter the complete url. Ex: https://www.GigToDo.com
   <select name="currency_switcher" class="form-control" required="">
     <option value="1" <?php if($currency_switcher == 1){ echo "selected"; } ?>> Yes </option>
     <option value="0" <?php if($currency_switcher == 0){ echo "selected"; } ?>> No </option>
+  </select>
+  </div>
+</div>
+</div><!--- form-group row Ends --->
+<div class="form-group row"><!--- form-group row Starts --->
+<label class="col-md-3 control-label"> Show Trusted By Companies: </label>
+<div class="col-md-6">
+  <div class="input-group">
+  <span class="input-group-addon"><b><i class="fa fa-link" aria-hidden="true"></i></b></span>
+  <select name="trusted_companies" class="form-control" required="">
+    <option value="1" <?php if($trusted_companies == 1){ echo "selected"; } ?>> Yes </option>
+    <option value="0" <?php if($trusted_companies == 0){ echo "selected"; } ?>> No </option>
   </select>
   </div>
 </div>
@@ -822,7 +835,8 @@ if(isset($_POST['general_settings_update'])){
   $currency_switcher = $input->post('currency_switcher');
 	$site_copyright = $input->post('site_copyright');
   $site_timezone = $input->post('site_timezone');
-	$site_currency = $input->post('site_currency');
+  $site_currency = $input->post('site_currency');
+	$trusted_companies = $input->post('trusted_companies');
 	$recaptcha_site_key = $input->post('recaptcha_site_key');
 	$recaptcha_secret_key = $input->post('recaptcha_secret_key');
 	$jwplayer_code = $input->post('jwplayer_code');
@@ -859,7 +873,7 @@ if(isset($_POST['general_settings_update'])){
 		move_uploaded_file($site_logo_tmp,"../images/$site_logo");
 		move_uploaded_file($site_logo_image_tmp,"../images/$site_logo_image");
 
-		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"currency_switcher" => $currency_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
+		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"currency_switcher" => $currency_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"trusted_companies" => $trusted_companies,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
 
 		if($update_general_settings){
 			$insert_log = $db->insert_log($admin_id,"general_settings","","updated");

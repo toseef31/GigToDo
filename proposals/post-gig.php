@@ -659,10 +659,7 @@ $login_seller_language = $row_login_seller->seller_language;
                      
                       <div class="d-flex flex-column">
                         <input type="hidden" name="email" value="<?= $user_email; ?>">
-                        <!-- <div class="form-group d-flex flex-column">
-                          <label class="control-label" for="fname">First Name</label>
-                          <input class="form-control" id="fname" name="name" type="text" />
-                        </div> -->
+                       
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
                           <label class="control-label" for="lname">Create User Name</label>
@@ -711,7 +708,7 @@ if(isset($_POST['publish'])){
   "u_name" => "required",
   "pass" => "required");
 
-  $messages = array("name" => "Full Name Is Required.","u_name" => "User Name Is Required.","pass" => "Password Is Required.");
+  $messages = array("u_name" => "User Name Is Required.","pass" => "Password Is Required.");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){
@@ -721,10 +718,10 @@ if(isset($_POST['publish'])){
     echo "<script>window.open('post-gig#publish_section','_self')</script>";
   }else{
     $error_array = array();
-    $name = strip_tags($input->post('name'));
-    $name = strip_tags($name);
-    $name = ucfirst(strtolower($name));
-    $_SESSION['name']= $name;
+    // $name = strip_tags($input->post('name'));
+    // $name = strip_tags($name);
+    // $name = ucfirst(strtolower($name));
+    // $_SESSION['name']= $name;
     $u_name = strip_tags($input->post('u_name'));
     $u_name = strip_tags($u_name);
     $_SESSION['u_name']= $u_name;
@@ -758,7 +755,7 @@ if(isset($_POST['publish'])){
         $verification_code = "ok";
       }
       $encrypted_password = password_hash($pass, PASSWORD_DEFAULT);
-      $insert_seller = $db->insert("sellers",array("seller_name" => $name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online'));
+      $insert_seller = $db->insert("sellers",array("seller_name" => $u_name,"seller_user_name" => $u_name,"seller_email" => $email,"seller_pass" => $encrypted_password,"account_type" => $accountType,"seller_country"=>$country,"seller_level" => 1,"seller_recent_delivery" => 'none',"seller_rating" => 100,"seller_offers" => 10,"seller_referral" => $referral_code,"seller_ip" => $ip,"seller_verification" => $verification_code,"seller_vacation" => 'off',"seller_register_date" => $regsiter_date,"seller_status" => 'online','landing_email' => $email));
 
       $regsiter_seller_id = $db->lastInsertId();
 

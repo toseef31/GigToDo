@@ -20,14 +20,21 @@
               ?>
               <li class="top-nav-item align-items-center text-center" 
                 data-linkable="true" data-ui="top-nav-category-link" data-node-id="c-<?php echo $cat_id; ?>">
-                <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>">
+                <?php if($subcategories_switcher == 0){ ?>
+                <a href="<?php echo $site_url; ?>/category/<?php echo $cat_url; ?>">
                 <?php echo @$cat_title; ?>
                 </a>
+                <?php }else{ ?>
+                  <a href="<?php echo $site_url; ?>/categories/<?php echo $cat_url; ?>">
+                <?php echo @$cat_title; ?>
+                </a>
+                <?php } ?>
               </li>
               <?php } ?>
             </ul>
           </div>
         </div>
+        <?php if($subcategories_switcher == 1){ ?>
         <div class="position-absolute col-xs-12 col-centered z-index-4">
           <div>
             <?php
@@ -118,6 +125,7 @@
             <?php } ?>
           </div>
         </div>
+        <?php } ?>
       </div>
     </div>
   </div>

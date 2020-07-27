@@ -50,6 +50,7 @@ $slide_image = $row_slides->slide_image;
 </div>
 <!-- end main -->
 <!-- Truster by section starts-->
+<?php if($trusted_companies == 1){ ?>
 <div class="trusted-by-section padding-top padding-bottom bg-gray">
   <div class="container">
     <div class="section-header">
@@ -74,6 +75,7 @@ $slide_image = $row_slides->slide_image;
     </ul>
   </div>
 </div>
+<?php } ?>
 <!-- Truster by section ends-->
 <!-- Get Started Section Starts -->
 <div class="get-started padding-bottom padding-top">
@@ -100,7 +102,11 @@ $slide_image = $row_slides->slide_image;
       ?>
       <div class="started-item">
         <div class="started-inner">
+          <?php if ($subcategories_switcher == 0) { ?>
+          <a href="category/<?php echo $cat_url; ?>">
+          <?php }else{ ?>
           <a href="categories/<?= $cat_url ?>">
+          <?php } ?>  
             <div class="started-thumb">
               <img src="<?= $site_url; ?>/assets/img/category/<?= $cat_image; ?>" alt="category">
             </div>
@@ -115,7 +121,11 @@ $slide_image = $row_slides->slide_image;
               </div>
             </div>
           </a>
+          <?php if ($subcategories_switcher == 0) { ?>
+          <a href="category/<?php echo $cat_url; ?>">
+          <?php }else{ ?>
           <a href="categories/<?= $cat_url ?>">
+          <?php } ?>
             <div class="started-hover-content d-flex flex-wrap justify-content-center align-items-center">
               <div class="content text-center">
                 <h6 class="sub-title text-white"><?= $arabic_title; ?></h6>
@@ -299,19 +309,46 @@ $slide_image = $row_slides->slide_image;
           <div class="client-slider-wrapper">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
+                <?php
+                $get_testimonials = $db->select("testimonials");
+                $i = 0;
+                while($row_testimonials = $get_testimonials->fetch()){
+                $testimonial_id = $row_testimonials->testimonial_id;
+                
+                $name = $row_testimonials->name;
+                $designation = $row_testimonials->designation;
+                $description = $row_testimonials->description;
+                $image = $row_testimonials->image;
+                ?>
                 <div class="carousel-item active">
                   <div class="client-item">
                     <div class="client-thumb">
+                      <?php if(!empty($image)){?>
+                      <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" alt="client">
+                      <?php }else{ ?>
                       <img src="assets/img/client/01.png" alt="client">
+                      <?php } ?>
                     </div>
                     <div class="client-content">
-                      <h5 class="title">مصطفى عزيز</h5>
-                      <span class="sub-title">– تاجر إلكتروني</span>
-                      <p>
-                      إني أكون قادر أدفع بالعملة المحلية وألاقي كاتب إعلاني عنده المهارات اللغوية المطلوبة كان كافي بالنسبالي. أنا سعيد جدا بالنسخة اللي استلمتها، والموضوع كان سهل جدا أنا دوست بس على زرار. موصى به بشدة!"</p>
+                      <h5 class="title"><?= $name ?></h5>
+                      <span class="sub-title">– <strong><?= $designation; ?></strong></span>
+                      <?php 
+                        $string = $description;
+                        if (strlen($string) > 520) {
+                            // truncate string
+                            $stringCut = substr($string, 0, 520);
+                            $endPoint = strrpos($stringCut, ' ');
+                            //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                            $string .= '....';
+                        }
+                        // echo $string;
+                      ?>
+                      <p><?= $string; ?></p>
                     </div>
                   </div>
                 </div>
+                <?php } ?>
                 <div class="carousel-item">
                   <div class="client-item">
                     <div class="client-thumb">

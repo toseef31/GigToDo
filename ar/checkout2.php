@@ -38,7 +38,11 @@
 	$order_desc = $row_orders->order_description;
 	$order_status = $row_orders->order_status;
 	$total = $order_price+$order_fee;
+	$order_duration = intval($row_orders->order_duration);
 
+	date_default_timezone_set("UTC");
+	$date_time = date("M d, Y H:i:s");
+	$order_time = date("M d, Y H:i:s", strtotime($date_time . " + $order_duration days"));
 
 
 	$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
@@ -234,7 +238,7 @@ require_once("includes/buyer-header.php");?>
                 }elseif($answer_mandatory == '' and $order_require_file == '' and $order_description == ''){
                 	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress'),array("order_id" => $order_id));
                 }else{
-                	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress'),array("order_id" => $order_id));
+                	$update_order = $db->update("orders",array("order_require_file" => $order_require_file, "order_description" => $order_description, "order_status" => 'progress',"order_time" => $order_time),array("order_id" => $order_id));
                 }
                 if($update_order){
                 	echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
