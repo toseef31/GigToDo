@@ -214,7 +214,7 @@ echo "<script>window.open('login','_self');</script>";
   </li>
   <li class="menu-item-has-children dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Seller Skills"> 
-  <i class="menu-icon fa fa-book"></i> Knowledge Bank
+  <i class="menu-icon fa fa-book"></i> Blogs
   </a>
           <ul class="sub-menu children dropdown-menu">
           <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?insert_article_cat"> Insert Article Category</a></li>
