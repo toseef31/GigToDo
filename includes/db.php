@@ -62,6 +62,7 @@ if(empty(DB_HOST) and empty(DB_USER) and empty(DB_NAME)){
 	$language_switcher = $row_general_settings->language_switcher;
 	$currency_switcher = $row_general_settings->currency_switcher;
 	$trusted_companies = $row_general_settings->trusted_companies;
+	$subcategories_switcher = $row_general_settings->subcategories_switcher;
 
 	$get_currencies = $db->select("currencies",array( "id" => $site_currency));
 	$row_currencies = $get_currencies->fetch();

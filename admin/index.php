@@ -235,6 +235,9 @@ $videoPlugin = $core->checkPlugin("videoPlugin");
 	if(isset($_GET['mail_settings'])){
 	include("mail_settings.php");
 	}
+	if(isset($_GET['view_email'])){
+	include("view_email.php");
+	}
 	if(isset($_GET['app_update'])){
 	include("app_update.php");
 	}

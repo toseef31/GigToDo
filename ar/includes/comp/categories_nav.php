@@ -23,14 +23,21 @@
               ?>
               <li class="top-nav-item pt-xs-1 pb-xs-1 align-items-center text-center" 
                 data-linkable="true" data-ui="top-nav-category-link" data-node-id="c-<?php echo $cat_id; ?>">
+                <?php if($subcategories_switcher == 0){ ?>
+                <a href="<?php echo $site_url; ?>/ar/category/<?php echo $cat_url; ?>">
+                  <?php echo @$arabic_title; ?>
+                </a>
+                <?php }else{ ?>
                 <a href="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>">
                 <?php echo @$arabic_title; ?>
                 </a>
+                <?php } ?>
               </li>
               <?php } ?>
             </ul>
           </div>
         </div>
+        <?php if($subcategories_switcher == 1){ ?>
         <div class="position-absolute col-xs-12 col-centered z-index-4">
           <div>
             <?php
@@ -126,6 +133,7 @@
             <?php } ?>
           </div>
         </div>
+        <?php } ?>
       </div>
     </div>
   </div>

@@ -30,6 +30,7 @@ if(isset($_SESSION['seller_user_name'])){
   $get_general_settings = $db->select("general_settings");   
   $row_general_settings = $get_general_settings->fetch();
   $enable_referrals = $row_general_settings->enable_referrals;
+  $subcategories_switcher = $row_general_settings->subcategories_switcher;
 
   $count_active_proposals = $db->count("proposals",array("proposal_seller_id"=>$seller_id,"proposal_status"=>'active'));
 

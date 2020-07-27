@@ -18,6 +18,13 @@ echo "<script>window.open('login','_self');</script>";
       <li><i class="fa  fa-arrow-circle-right"></i><a href="index?app_update">Application Update</a></li>
     </ul>
   </li>
+  <li class="menu-item-has-children dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings"> <i class="menu-icon fa fa-cog"></i> Landing Page</a>
+    <ul class="sub-menu children dropdown-menu">
+      <li><i class="fa  fa-arrow-circle-right"></i><a href="index?view_email">Emails</a></li>
+      <!-- <li><i class="fa  fa-arrow-circle-right"></i><a href="index">Photos</a></li> -->
+    </ul>
+  </li>
   <li>
     <a href="index?plugins"> <i class="menu-icon fa fa-plug" aria-hidden="true"></i> Plugins</a>
   </li>
