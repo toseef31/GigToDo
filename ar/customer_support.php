@@ -158,9 +158,7 @@
                       <option value="">حدد موضوع الاستفسار</option>
                       <option value="4">
                           الإبلاغ عن خطأ
-                          </option>";
-                        }
-                      ?>
+                          </option>
                     </select>
                   </div>
                   <?php } ?>
