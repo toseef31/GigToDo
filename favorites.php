@@ -123,7 +123,7 @@ $login_seller_image = $row_login_seller->seller_image;
           </div>
         </div>
         <!-- Favourite gigs header -->
-        <div class="favourite-gigs-social d-flex flex-wrap align-items-center justify-content-end">
+        <div class="favourite-gigs-social d-none flex-wrap align-items-center justify-content-end">
           <a class="favourite-gigs-social-item facebook" href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
           <a class="favourite-gigs-social-item twitter" href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
           <a class="favourite-gigs-social-item linkedin" href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a>

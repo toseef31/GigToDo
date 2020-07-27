@@ -3,7 +3,7 @@
 if(!isset($_SESSION['admin_email'])){
 echo "<script>window.open('login','_self');</script>";
 }else{
-    $edit_id = $input->get('edit_testimonial');
+    $edit_id = $input->get('edit_testimonial_seller');
     print_r($edit_id);
     $get_testimonials = $db->select("testimonials",array("testimonial_id" => $edit_id));
     if($get_testimonials->rowCount() == 0){
@@ -64,11 +64,11 @@ echo "<script>window.open('login','_self');</script>";
   <?php } ?>
     <div class="card">
       <div class="card-header">
-        <h4 class="h4">Edit Testimonial</h4>
+        <h4 class="h4">Edit Testimonial Seller</h4>
       </div>
       <div class="card-body card-block">
         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-          <input type="hidden" name="testimonial_type" value="buyer">
+          <input type="hidden" name="testimonial_type" value="seller">
           <div class="row form-group">
             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name</label></div>
             <div class="col-12 col-md-9"><input value="<?php echo $name; ?>" type="text" id="text-input" name="name" class="form-control"></div>
@@ -93,7 +93,7 @@ echo "<script>window.open('login','_self');</script>";
            <?php if(!empty($m_image)){ ?>
               <img src="../testimonial/testimonial_images/<?php echo $m_image; ?>" width="70" height="55">
               <br>
-              <a href="index?edit_testimonial=<?= $testimonial_id; ?>&delete_image=image" class="btn btn-sm btn-danger mt-2"><i class="fa fa-trash"></i> Remove Image</a>
+              <a href="index?edit_testimonial_seller=<?= $testimonial_id; ?>&delete_image=image" class="btn btn-sm btn-danger mt-2"><i class="fa fa-trash"></i> Remove Image</a>
             <?php }else{ ?>
               <img src="../article/article_images/No-image.jpg" width="70" height="55">
             <?php } ?>
@@ -133,7 +133,6 @@ $('textarea').summernote({
         placeholder: 'Start Typing Here...',
         height: 150
       });
-
 $image_crop = $('#image_demo').croppie({
     enableExif: true,
     viewport: {
@@ -246,7 +245,7 @@ if($val->run() == false){
   if($update_testimonial){
     $insert_log = $db->insert_log($admin_id,"testimonial",$testimonial_id,"updated");
     echo "<script>alert('Testimonial Updated successfully.');</script>";
-    echo "<script>window.open('index?view_testimonials','_self');</script>";
+    echo "<script>window.open('index?view_testimonials_seller','_self');</script>";
   }
   }
 }

@@ -97,6 +97,19 @@ echo "<script>window.open('login','_self');</script>";
 
                         </div>
                         <!--- form-group row Ends --->
+                        <div class="form-group row">
+                            <!--- form-group row Starts --->
+
+                            <label class="col-md-3 control-label"> Enquiry Type Title Arabic : </label>
+
+                            <div class="col-md-6">
+
+                                <input type="text" name="enquiry_title_arabic" class="form-control" required>
+
+                            </div>
+
+                        </div>
+                        <!--- form-group row Ends --->
 
 
                         <div class="form-group row">
@@ -137,6 +150,7 @@ if(isset($_POST['submit'])){
 $rules = array("enquiry_title" => "required");
 
 $messages = array("enquiry_title" => "Enquiry Type Title Is Required.");
+$messages = array("enquiry_title_arabic" => "Enquiry Type Title Arabic Is Required.");
 
 $val = new Validator($_POST,$rules,$messages);
 

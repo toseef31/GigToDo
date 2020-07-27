@@ -70,6 +70,7 @@
     <!-- <script src="js/ie.js"></script> -->
     <script type="text/javascript" src="js/sweat_alert.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style>.legal-page p span {display: inline;}</style>
   </head>
   <body class="all-content">
     <!-- Preloader Start -->
@@ -94,26 +95,24 @@
       <section class="container-fluid legal-page">
         <div class="row">
           <div class="container">
-            <h3>Terms & Conditions</h3>
+            <!-- <h3>Terms & Conditions</h3>
             <p>
               <span>This Agreement was last revised on June 17, 2019.</span>
               <span>eMongez Welcomes you.</span>
               <span>We provide you access to our services through our “Website” (defined below) subject to the following Terms of Service, which may be updated by us from time to time without notice to you.</span>
               <span>By browsing the public areas or by accessing and using the Website, you acknowledge that you have read, understood, and agree to be legally bound by the terms and conditions of these Terms of Service and the terms and conditions of our Privacy Policy, which are hereby incorporated by reference (collectively, this “Agreement”).  If you do not agree to any of these terms, then please do not use the Website.</span>
-            </p>
-            <h3>Let’s do some Introduction!!!</h3>
-            <ul class="list-style">
-              <li>Acceptance. By using the Website or Services in any manner, you are bound by these Terms of Service, as well as the terms of the Agreement identified above. If you do not agree to the Terms, then do not use the Website or Services. If you are accepting these Terms on behalf of a company, organization, government, or other legal entity, you represent and warrant that
-                <ul>
-                  <li>you are authorized to do so,</li>
-                  <li>the entity agrees to be legally bound by the Terms, and</li>
-                  <li>neither you nor the entity are barred from using the Services or accepting the Terms under the laws of the applicable jurisdiction.</li>
-                </ul>
-              </li>
-              <li>Scope. These Terms govern your use of the Website and the Services. Except as otherwise specified, these Terms do not apply to Third-Party Products or Services, which are governed by their own terms of service.</li>
-              <li>Eligibility: Certain Service of the Website is not available to minors under the age of 13 or to any users suspended or removed from the system by us for any reason. Additionally, users are prohibited from selling, trading, or otherwise transferring their accounts to another party.</li>
-            </ul>
-            <h3>How can we serve you?</h3>
+            </p> -->
+            <?php
+              $get_terms = $db->query("select * from terms where language_id=1");
+              while($row_terms = $get_terms->fetch()){
+                  $term_title = $row_terms->term_title;
+                  $term_link = $row_terms->term_link;
+                  $term_description = $row_terms->term_description;
+              ?>
+            <h3><?= $term_title; ?></h3>
+            <?= $term_description; ?>
+            <?php } ?>
+            <!-- <h3>How can we serve you?</h3>
             <p>
               <span><a href="http://www.emongez.com/">www.eMongez.com</a> is an online platform for users to buy and Sell the skills in the manner of Services. Under this, the Seller shall sell Services and the Buyer shall buy Services through the Website. The Services are offered to the Users through various modes which may include issue of coupons and vouchers that can be redeemed for various Services.</span>
             </p>
@@ -343,7 +342,7 @@
             <h3>Assignment</h3>
             <p>
               <span>The Company shall have the right to assign/transfer these presents to any third party including its holding company, subsidiaries, affiliates, associates and group companies, without any consent of the User.</span>
-            </p>
+            </p> -->
             <h3>Contact Information</h3>
             <p>
               <span>If you have any questions about these Terms, please contact us at <a href="mailto:support@eMongez.com">Support@eMongez.com</a>.</span>
@@ -413,7 +412,7 @@
                 </div>
                 <?php } ?>
                 <?php
-                  $get_terms = $db->query("select * from terms where language_id='$siteLanguage' LIMIT 1,$count_terms");
+                  $get_terms = $db->query("select * from terms where language_id='$siteLanguage'");
                   while($row_terms = $get_terms->fetch()){
                       $term_title = $row_terms->term_title;
                       $term_link = $row_terms->term_link;

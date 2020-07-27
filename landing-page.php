@@ -317,45 +317,46 @@
             <div class="client-slider-wrapper">
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+                  <?php
+                  $get_testimonials = $db->select("testimonials", array('testimonial_type' => 'seller'));
+                  $i = 0;
+                  while($row_testimonials = $get_testimonials->fetch()){
+                  $testimonial_id = $row_testimonials->testimonial_id;
+                  
+                  $name = $row_testimonials->name;
+                  $designation = $row_testimonials->designation;
+                  $description = $row_testimonials->description;
+                  $image = $row_testimonials->image;
+                  ?>
+                  <div class="carousel-item <?php if($i == 0){echo "active";} ?>">
                     <div class="client-item">
                       <div class="client-thumb">
+                        <?php if(!empty($image)){?>
+                        <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" style="min-height: 100%" alt="client">
+                        <?php }else{ ?>
                         <img src="assets/img/client/01.png" alt="client">
+                        <?php } ?>
                       </div>
                       <div class="client-content">
-                        <h5 class="title">Abdul Rafiq</h5>
-                        <span class="sub-title">— Copywriter </span>
-                        <p>
-                           “I’ve always wanted to try freelancing but found it hard to find a platform I trust. The minute I got my first client I knew I’d found the right place to showcase my copywriting skills to sellers in the local region.” </p>
+                        <h5 class="title"><?= $name ?></h5>
+                        <span class="sub-title">— <strong><?= $designation; ?></strong> </span>
+                        <?php 
+                          $string = $description;
+                          if (strlen($string) > 520) {
+                              // truncate string
+                              $stringCut = substr($string, 0, 520);
+                              $endPoint = strrpos($stringCut, ' ');
+                              //if the string doesn't contain any space then it will cut without word basis.
+                              $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                              $string .= '....';
+                          }
+                          // echo $string;
+                        ?>
+                        <p><?= $string; ?></p>
                       </div>
                     </div>
                   </div>
-                  <div class="carousel-item">
-                    <div class="client-item">
-                      <div class="client-thumb">
-                        <img src="assets/img/client/01.png" alt="client">
-                      </div>
-                      <div class="client-content">
-                        <h5 class="title">Scott Jones</h5>
-                        <span class="sub-title">— Graphic Designer </span>
-                        <p>“Design has always been my passion, and I thought I’d have to spend 40 years of my career working for a large company with little flexibility. Now I freelancer full-time and get to pick and choose my projects!” </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="client-item">
-                      <div class="client-thumb">
-                        <img src="assets/img/client/01.png" alt="client">
-                      </div>
-                      <div class="client-content">
-                        <h5 class="title">Sara Thompson
-
-                        </h5>
-                        <span class="sub-title">— Tech Specialist  </span>
-                        <p>“I need flexibility in my working hours, so for me freelancing has been a life changer. I can work when I want, I can connect with as many clients as I want, and I get new enquiries all the time. I can’t believe it!” </p>
-                      </div>
-                    </div>
-                  </div>
+                  <?php $i++; } ?>
                 </div>
                 <a class="nav-button carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>

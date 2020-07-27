@@ -8,7 +8,7 @@ echo "<script>window.open('login','_self');</script>";
   <div class="col-sm-4">
     <div class="page-header float-left">
       <div class="page-title">
-        <h1><i class="menu-icon fa fa-book"></i> View Testimonials</h1>
+        <h1><i class="menu-icon fa fa-book"></i> View Testimonials Seller</h1>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@ echo "<script>window.open('login','_self');</script>";
                 <th>Name</th>
                 <th>Designation</th>
                 <th>Image</th>
-                <th>Type</th>
+                <th>type</th>
                 <th>Testimonial's Action</th>
               </tr>
             </thead>
@@ -54,7 +54,7 @@ echo "<script>window.open('login','_self');</script>";
               
               <?php
               
-              $get_testimonials = $db->select("testimonials", array('testimonial_type' => 'buyer'));
+              $get_testimonials = $db->select("testimonials", array('testimonial_type' => 'seller'));
               while($row_testimonials = $get_testimonials->fetch()){
               $testimonial_id = $row_testimonials->testimonial_id;
               
@@ -71,10 +71,10 @@ echo "<script>window.open('login','_self');</script>";
                 <td><?php echo $image; ?></td>
                 <td><?php echo $testimonial_type; ?></td>
                 <td>
-                  <a href="index?edit_testimonial=<?php echo $testimonial_id; ?>" class="text-success">
+                  <a href="index?edit_testimonial_seller=<?php echo $testimonial_id; ?>" class="text-success">
                     Edit
                   </a> |
-                  <a href="index?delete_testimonial=<?php echo $testimonial_id; ?>" class="text-success">
+                  <a href="index?delete_testimonial_seller=<?php echo $testimonial_id; ?>" class="text-success">
                     Delete
                   </a>
                 </td>

@@ -317,44 +317,47 @@
             <div class="client-slider-wrapper">
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+                  <?php
+                  $get_testimonials = $db->select("testimonials",array('testimonial_type' => 'seller'));
+                  $i = 0;
+                  while($row_testimonials = $get_testimonials->fetch()){
+                  $testimonial_id = $row_testimonials->testimonial_id;
+                  
+                  $name = $row_testimonials->name;
+                  $designation = $row_testimonials->designation;
+                  $description = $row_testimonials->description;
+                  $image = $row_testimonials->image;
+                  ?>
+                  <div class="carousel-item <?php if($i == 0){echo "active";} ?>">
                     <div class="client-item">
                       <div class="client-thumb">
+                        <?php if(!empty($image)){?>
+                        <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" style="min-height: 100%" alt="client">
+                        <?php }else{ ?>
                         <img src="assets/img/client/01.png" alt="client">
+                        <?php } ?>
                       </div>
                       <div class="client-content">
-                        <h5 class="title">مصطفى عزيز</h5>
-                        <span class="sub-title">– تاجر إلكتروني</span>
-                        <p>
-                        إني أكون قادر أدفع بالعملة المحلية وألاقي كاتب إعلاني عنده المهارات اللغوية المطلوبة كان كافي بالنسبالي. أنا سعيد جدا بالنسخة اللي استلمتها، والموضوع كان سهل جدا أنا دوست بس على زرار. موصى به بشدة!"</p>
+                        <h5 class="title"><?= $name ?></h5>
+                        <span class="sub-title">– <strong><?= $designation; ?></strong></span>
+                        <?php 
+                          $string = $description;
+                          if (strlen($string) > 520) {
+                              // truncate string
+                              $stringCut = substr($string, 0, 520);
+                              $endPoint = strrpos($stringCut, ' ');
+                              //if the string doesn't contain any space then it will cut without word basis.
+                              $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                              $string .= '....';
+                          }
+                          // echo $string;
+                        ?>
+                        <p><?= $string; ?></p>
                       </div>
                     </div>
                   </div>
-                  <div class="carousel-item">
-                    <div class="client-item">
-                      <div class="client-thumb">
-                        <img src="assets/img/client/01.png" alt="client">
-                      </div>
-                      <div class="client-content">
-                        <h5 class="title">لويس تايسون</h5>
-                        <span class="sub-title">– صاحب بيزنس أونلاين</span>
-                        <p>"كنت محتاج مساعدة إني أغير العلامة التجارية للبيزنس بتاعي من جديد بس مكنتش عارف أقدر أعمل لوجو جديد فين. بصة سريعة في منجز عرفتني على عشرات من مصممين الجرافيك الشاطرين. اخترت الشخص اللي فضلته، ولو قلت أني كنت في غاية السعادة بالنتائج هيكون قليل!"</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="client-item">
-                      <div class="client-thumb">
-                        <img src="assets/img/client/01.png" alt="client">
-                      </div>
-                      <div class="client-content">
-                        <h5 class="title">هانا توماس
-                        </h5>
-                        <span class="sub-title">– رائدة أعمال تقنية</span>
-                        <p>"أنا بكبر البيزنس بتاعي حاليا وكنت محتاجة أعين متخصص تقني أقدر أعتمد عليه. الفريلانسر اللي لقيته كان مفيد جدا ومكنتش هقدر أعمل اللي كنت عايزاه من غيره. شكرا، منجز، خليت الموضوع يتحقق!"</p>
-                      </div>
-                    </div>
-                  </div>
+                  <?php $i++; } ?>
+
                 </div>
                 <a class="nav-button carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>

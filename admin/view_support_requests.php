@@ -149,6 +149,7 @@ $count_enquiry_support_tickets = $db->count("support_tickets",array("enquiry_id"
                     $subject = $row_support_tickets->subject;
 
                     $status = $row_support_tickets->status;
+                    $email = $row_support_tickets->email;
 
                     $enquiry_id = $row_support_tickets->enquiry_id;
 
@@ -179,11 +180,15 @@ $count_enquiry_support_tickets = $db->count("support_tickets",array("enquiry_id"
                         <td>
                             <?php echo $sender_user_name; ?>
                         </td>
-
+                        <?php if($email != Null){ ?>
+                        <td>
+                            <?php echo $email; ?>
+                        </td>
+                        <?php }else{ ?>
                         <td>
                             <?php echo $sender_email; ?>
                         </td>
-
+                        <?php } ?>
                         <td>
                             <?php echo $subject; ?>
                         </td>

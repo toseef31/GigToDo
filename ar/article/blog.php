@@ -7,7 +7,7 @@
   
   // print($article_url);
   // print_r($id);
-  $get_articles = $db->select("knowledge_bank",array("article_id"=>$article_url));
+  $get_articles = $db->select("knowledge_bank",array("article_url"=>$article_url));
   $row_articles = $get_articles->fetch();
   $article_id = $row_articles->article_id;
   $article_heading = $row_articles->article_heading;
@@ -171,7 +171,7 @@
                     </div>
                     <!-- Each item -->
                   </div>
-                  <div class="blog-signle-social d-flex flex-wrap align-items-center">
+                  <div class="blog-signle-social d-none flex-wrap align-items-center" style="display: none;">
                     <a class="blog-signle-social-item facebook" href="javascript:void(0);">
                       <i class="fab fa-facebook-f"></i>
                       <span class="counter">02</span>
