@@ -118,7 +118,7 @@
           $contact_heading = $row_meta->contact_heading;
           $contact_desc = $row_meta->contact_desc;
         ?>
-        <div class="col-md-12 mt-4">
+        <!-- <div class="col-md-12 mt-4">
           <?php if(!isset($_SESSION['seller_user_name'])){ ?>
           <div class="alert alert-warning rounded-0">
             <p class="lead mt-1 mb-1 text-center">
@@ -126,7 +126,7 @@
             </p>
           </div>
           <?php } ?>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="container">
@@ -136,6 +136,7 @@
                 <h1><?php echo $contact_heading; ?></h1>
                 <p class="text-muted pt-1"><?php echo $contact_desc; ?></p>
                 <form class="d-flex flex-column" method="POST" enctype="multipart/form-data">
+                  <?php if(isset($_SESSION['seller_user_name'])){ ?>
                   <div class="form-group select-error">
                     <label class="control-label" for="relevantSubject">select relevant inquiry subject</label>
                     <select class="form-control select_tag" name="enquiry_type" id="relevantSubject">
@@ -152,7 +153,25 @@
                       ?>
                     </select>
                   </div>
-                 
+                  <?php }else{ ?>
+                  <div class="form-group select-error">
+                    <label class="control-label" for="relevantSubject">select relevant inquiry subject</label>
+                    <select class="form-control" name="enquiry_type" id="relevantSubject">
+                      <option value="">Select Inquiry Subject</option>
+                      <option value="4">
+                          Report A Bug
+                          </option>";
+                        }
+                      ?>
+                    </select>
+                  </div>
+                  <?php } ?>
+                  <?php if(!isset($_SESSION['seller_user_name'])){ ?>
+                  <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    <input type="text" name="email" required="" id="email" class="form-control" />
+                  </div>
+                  <?php } ?>
                   <div class="form-group">
                     <label class="control-label" for="subject">Subject</label>
                     <input type="text" name="subject" required="" id="subject" class="form-control" />
@@ -337,22 +356,323 @@
   <?php
     if(isset($_POST['submit'])){
     if(!isset($_SESSION['seller_user_name'])){
-    echo "
-     <script>
-    swal({
-      type: 'warning',
-      text: 'Opps! You need to be logged in to submit support requests.',
-      timer: 6000,
-        onOpen: function(){
-      swal.showLoading()
+      $secret_key = "$recaptcha_secret_key";
+      $response = $input->post('g-recaptcha-response');
+      $remote_ip = $_SERVER['REMOTE_ADDR'];
+      $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$response&remoteip=$remote_ip");
+      $result = json_decode($url, TRUE);
+      if($result["success"] == 1 ){
+      $enquiry_type = $input->post('enquiry_type');
+      $subject = $input->post('subject');
+      $email = $input->post('email');
+      $message = $input->post('message');
+      if($enquiry_type == 1 or $enquiry_type == 2){
+        $order_number = $input->post('order_number');
+        $order_rule = $input->post('user_role');
+      }else{
+        $order_number = "";
+       $order_rule = "";
       }
-      }).then(function(){
-        // Read more about handling dismissals
-        window.open('login.php','_self')
-      });
-    </script>
-    ";
-    exit();
+      $file = $_FILES['file']['name'];
+      $file_tmp = $_FILES['file']['tmp_name'];
+      $allowed = array('jpeg','jpg','gif','png','tif','avi','mpeg','mpg','mov','rm','3gp','flv','mp4', 'zip','rar','mp3','wav','txt');
+      $file_extension = pathinfo($file, PATHINFO_EXTENSION);
+      if(!in_array($file_extension,$allowed) & !empty($file)){
+      echo "<script>alert('Your File Format Extension Is Not Supported.')</script>";
+      }else{
+      $file = pathinfo($file, PATHINFO_FILENAME);
+      $file = $file."_".time().".$file_extension";
+      move_uploaded_file($file_tmp , "ticket_files/$file");
+      $date = date("h:i M d, Y");
+      $insert_support_ticket = $db->insert("support_tickets",array("enquiry_id" => $enquiry_type,"sender_id" => $login_seller_id,"subject" => $subject,"message" => $message,"order_number" => $order_number,"order_rule" => $order_rule,"attachment" => $file,"date" => $date,"status" => 'open'));
+      if($insert_support_ticket){
+        $get_enquiry_types = $db->select("enquiry_types",array("enquiry_id" => $enquiry_id));
+        $row_enquiry_types = $get_enquiry_types->fetch();
+        $enquiry_title = $row_enquiry_types->enquiry_title;
+
+        $ticket_id = $db->lastInsertId();
+
+        $get_support_ticket = $db->select("enquiry_types", array("enquiry_id" => $ticket_id));
+        $row_support_ticket = $get_support_ticket->fetch();
+        $email = $row_support_ticket->email;
+        // Send Email To Admin Code Starts
+
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+
+        if($enable_smtp == "yes"){
+        $mail->isSMTP();
+        $mail->Host = $s_host;
+        $mail->Port = $s_port;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = $s_secure;
+        $mail->Username = $s_username;
+        $mail->Password = $s_password;
+        }
+        
+        $mail->setFrom($contact_email,$site_name);
+        $mail->addAddress($contact_email);
+        $mail->addReplyTo($login_seller_email);
+        $mail->isHTML(true);
+
+        $mail->Subject = $subject;
+
+        if(!empty($file)){
+        $mail->Body = "
+        <html>
+        <head>
+        <style>
+        .container {
+          background: rgb(238, 238, 238);
+          padding: 80px;
+        }
+        @media only screen and (max-device-width: 690px) {
+        .container {
+        background: rgb(238, 238, 238);
+        width:100%;
+        padding:1px;
+        }
+        }
+        .box {
+          background: #fff;
+          margin: 0px 0px 30px;
+          padding: 8px 20px 20px 20px;
+          border:1px solid #e6e6e6;
+          box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);      
+        }
+        hr{
+          margin-top:20px;
+          margin-bottom:20px;
+          border:1px solid #eee;
+        }
+        .table {
+          max-width:100%;
+          background-color:#fff;
+          margin-bottom:20px;
+        }
+        .table thead tr th {
+          border:1px solid #ddd;
+          font-weight:bolder;
+          padding:10px;
+        }
+        .table tbody tr td {
+          border:1px solid #ddd;
+          padding:10px;
+        }
+        </style>
+        </head>
+        <body class='is-responsive'>
+        <div class='container'>
+        <div class='box'>
+        <center>
+        <img class='logo' src='$site_url/images/logo.png' width='100' >
+        <h2> Hello  Admin!</h2>
+        <h2> This message has been sent from the customer support form. </h2>
+        </center>
+        <hr>
+        <table class='table'>
+        <thead>
+        <tr>
+        <th> Enquiry Type </th>
+        <th> Email Address </th>
+        <th> Subject </th>
+        <th> Message </th>
+        <th> Attachment </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td> $enquiry_title </td>
+        <td> $$email </td>
+        <td> $subject </td>
+        <td> $message </td>
+        <td> '$file' </td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        </div>
+        </body>
+        </html>
+        ";
+        }else{
+        $mail->Body = "
+        <html>
+        <head>
+        <style>
+        .container {
+          background: rgb(238, 238, 238);
+          padding: 80px;
+        }
+        @media only screen and (max-device-width: 690px) {
+        .container {
+          background: rgb(238, 238, 238);
+        width:100%;
+        padding:1px;
+        }
+        }
+        .box {
+          background: #fff;
+          margin: 0px 0px 30px;
+          padding: 8px 20px 20px 20px;
+          border:1px solid #e6e6e6;
+          box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);      
+        }
+        hr{
+          margin-top:20px;
+          margin-bottom:20px;
+          border:1px solid #eee;
+        }
+        .table {
+        max-width:100%; 
+        background-color:#fff;
+        margin-bottom:20px;
+        }
+        .table thead tr th {
+          border:1px solid #ddd;
+          font-weight:bolder;
+          padding:10px;
+        }
+        .table tbody tr td {
+          border:1px solid #ddd;
+          padding:10px;
+        }
+        </style>
+        </head>
+        <body class='is-responsive'>
+        <div class='container'>
+        <div class='box'>
+        <center>
+        <img class='logo' src='$site_url/images/logo.png' width='100' >
+        <h2> Hello Admin! </h2>
+        <h2> This message has been sent from the customer support form. </h2>
+        </center>
+        <hr>
+        <table class='table'>
+        <thead>
+        <tr>
+        <th> Enquiry Type </th>
+        <th> Email Address </th>
+        <th> Subject </th>
+        <th> Message </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td> $enquiry_title </td>
+        <td> $$email </td>
+        <td> $subject </td>
+        <td> $message </td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        </div>
+        </body>
+        </html>
+        ";
+        }
+
+        $mail->send();
+
+        }catch(Exception $e){
+            
+        }
+        // Send Email To Admin Code Ends
+
+        /// Send Email To Sender Code Starts 
+
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+         
+            if($enable_smtp == "yes"){
+            $mail->isSMTP();
+            $mail->Host = $s_host;
+            $mail->Port = $s_port;
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = $s_secure;
+            $mail->Username = $s_username;
+            $mail->Password = $s_password;
+            }
+            
+            $mail->setFrom($contact_email,$site_name);
+            $mail->addAddress($login_seller_email);
+            $mail->addReplyTo($contact_email,$site_name);
+            $mail->isHTML(true);
+
+            $mail->Subject = "Message has been received.";
+            $mail->Body = "
+            <html>
+            <head>
+            <style>
+            .container {
+              background: rgb(238, 238, 238);
+              padding: 80px;
+            }
+            @media only screen and (max-device-width: 690px) {
+            .container {
+              background: rgb(238, 238, 238);
+            width:100%;
+            padding:1px;
+            }
+            }
+            .box {
+              background: #fff;
+              margin: 0px 0px 30px;
+              padding: 8px 20px 20px 20px;
+              border:1px solid #e6e6e6;
+              box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);      
+            }
+            hr{
+              margin-top:20px;
+              margin-bottom:20px;
+              border:1px solid #eee;
+            }
+            .lead {
+              font-size:16px;
+            }
+            </style>
+            </head>
+            <body class='is-responsive'>
+            <div class='container'>
+            <div class='box'>
+            <center>
+            <img src='$site_url/images/logo.png' width='100'>
+            <h3> Hello $login_seller_user_name, </h3>
+            <p class='lead'> Thank you for contacting us. </p>
+            <hr>
+            <p class='lead'>
+            A customer repressentative will be in touch with you shortly.
+            </p>
+            </center>
+            </div>
+            </div>
+            </body>
+            </html>";
+
+            $mail->send();
+
+        }catch(Exception $e){
+        
+        }
+
+        /// Send Email To Sender Code Ends  
+        echo "
+        <script>
+        swal({
+          type: 'success',
+          text: 'Message submitted successfully!',
+          timer: 6000,
+        })
+        </script>
+        ";
+      }
+    }
+  }
     }else{
     $secret_key = "$recaptcha_secret_key";
     $response = $input->post('g-recaptcha-response');

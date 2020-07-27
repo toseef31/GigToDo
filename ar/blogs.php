@@ -90,7 +90,7 @@ $login_seller_type = $row_login_seller->account_type;
 							<div class="col-12 col-md-8">
 								<?php 
 									
-									 $get_articles = $db->select("knowledge_bank", array("language_id" => 2));
+									 $get_articles = $db->select("knowledge_bank", array("language_id" => 1));
 									 while($row_articles = $get_articles->fetch()){
 									 $article_id = $row_articles->article_id;
 									 $article_url = $row_articles->article_url;
@@ -140,7 +140,7 @@ $login_seller_type = $row_login_seller->account_type;
 												<!-- Each item -->
 											</div>
 											<div class="blog-list-item-description">
-												<h2><a href="article/<?php echo $article_id; ?>"><?= $article_heading ?></a></h2>
+												<h2><a href="article/<?php echo $article_url; ?>"><?= $article_heading ?></a></h2>
 												<?php 
 												  $string = strip_tags($article_body);
 												  if (strlen($string) > 500) {
@@ -154,7 +154,7 @@ $login_seller_type = $row_login_seller->account_type;
 												  // echo $string;
 												?>
 												<div class="description"><?= $string ?></div>
-												<a class="continue-button d-flex flex-row align-items-center" href="article/<?php echo $article_id; ?>">
+												<a class="continue-button d-flex flex-row align-items-center" href="article/<?php echo $article_url; ?>">
 													<span>Continue</span>
 													<span><i class="fal fa-long-arrow-left"></i></span>
 												</a>

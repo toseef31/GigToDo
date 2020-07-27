@@ -177,7 +177,7 @@
                     </div>
                     <!-- Each item -->
                   </div>
-                  <div class="blog-signle-social d-flex flex-wrap align-items-center">
+                  <div class="blog-signle-social d-none flex-wrap align-items-center">
                     <a class="blog-signle-social-item facebook" href="javascript:void(0);">
                       <i class="fab fa-facebook-f"></i>
                       <span class="counter">02</span>

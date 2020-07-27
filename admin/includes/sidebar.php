@@ -236,13 +236,24 @@ echo "<script>window.open('login','_self');</script>";
   </li>
   <li class="menu-item-has-children dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Testimonials"> 
-  <i class="menu-icon fa fa-language"></i> Testimonials
+  <i class="menu-icon fa fa-language"></i> Testimonials Buyer
   </a>
   <ul class="sub-menu children dropdown-menu">
   <li>
   <i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?insert_testimonials">Insert Testimonials</a>
   </li>
   <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?view_testimonials"> View Testimonials</a></li>
+  </ul>
+  </li>
+  <li class="menu-item-has-children dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Testimonials"> 
+  <i class="menu-icon fa fa-language"></i> Testimonials Seller
+  </a>
+  <ul class="sub-menu children dropdown-menu">
+  <li>
+  <i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?insert_testimonials_seller">Insert Testimonials</a>
+  </li>
+  <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="index?view_testimonials_seller"> View Testimonials</a></li>
   </ul>
   </li>
   <li class="menu-item-has-children dropdown">

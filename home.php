@@ -345,7 +345,7 @@ $slide_image = $row_slides->slide_image;
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <?php
-            $get_testimonials = $db->select("testimonials");
+            $get_testimonials = $db->select("testimonials", array('testimonial_type' => 'buyer'));
             $i = 0;
             while($row_testimonials = $get_testimonials->fetch()){
             $testimonial_id = $row_testimonials->testimonial_id;
@@ -359,7 +359,7 @@ $slide_image = $row_slides->slide_image;
               <div class="client-item">
                 <div class="client-thumb">
                   <?php if(!empty($image)){?>
-                  <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" alt="client">
+                  <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" style="min-height: 100%" alt="client">
                   <?php }else{ ?>
                   <img src="assets/img/client/01.png" alt="client">
                   <?php } ?>

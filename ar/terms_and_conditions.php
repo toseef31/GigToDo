@@ -80,7 +80,17 @@
       <section class="container-fluid legal-page">
         <div class="row">
           <div class="container">
-            <h3>الشروط و الأحكام</h3>
+            <?php
+              $get_terms = $db->query("select * from terms where language_id=2");
+              while($row_terms = $get_terms->fetch()){
+                  $term_title = $row_terms->term_title;
+                  $term_link = $row_terms->term_link;
+                  $term_description = $row_terms->term_description;
+              ?>
+            <h3><?= $term_title; ?></h3>
+            <?= $term_description; ?>
+            <?php } ?>
+            <!-- <h3>الشروط و الأحكام</h3>
             <p>
               <span>الاتفاقية اتراجعت آخر مرة يوم 17 يونيو 2019</span>
               <span>موقع منجز بيرحب بيك</span>
@@ -353,7 +363,7 @@
             <h3>مهمة</h3>
             <p>
               <span>يحق للشركة تعيين / نقل هذه الهدايا إلى أي طرف ثالث بما في ذلك الشركة القابضة والشركات التابعة والشركات التابعة والزميلة وشركات المجموعة ، دون أي موافقة من المستخدم.</span>
-            </p>
+            </p> -->
             <h3>معلومات التواصل</h3>
             <p>
               <span>لو عندك أي أسئلة عن الشروط دي، من فضلك اتواص معانا عن طريق الإيميل <a href="mailto:Support@eMongez.com">Support@eMongez.com</a>.</span>

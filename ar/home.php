@@ -310,7 +310,7 @@ $slide_image = $row_slides->slide_image;
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <?php
-                $get_testimonials = $db->select("testimonials");
+                $get_testimonials = $db->select("testimonials",array('testimonial_type' => 'buyer'));
                 $i = 0;
                 while($row_testimonials = $get_testimonials->fetch()){
                 $testimonial_id = $row_testimonials->testimonial_id;
@@ -320,11 +320,11 @@ $slide_image = $row_slides->slide_image;
                 $description = $row_testimonials->description;
                 $image = $row_testimonials->image;
                 ?>
-                <div class="carousel-item active">
+                <div class="carousel-item <?php if($i == 0){echo "active";} ?>">
                   <div class="client-item">
                     <div class="client-thumb">
                       <?php if(!empty($image)){?>
-                      <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" alt="client">
+                      <img src="<?= $site_url; ?>/testimonial/testimonial_images/<?= $image; ?>" style="min-height: 100%" alt="client">
                       <?php }else{ ?>
                       <img src="assets/img/client/01.png" alt="client">
                       <?php } ?>
@@ -348,32 +348,7 @@ $slide_image = $row_slides->slide_image;
                     </div>
                   </div>
                 </div>
-                <?php } ?>
-                <div class="carousel-item">
-                  <div class="client-item">
-                    <div class="client-thumb">
-                      <img src="assets/img/client/01.png" alt="client">
-                    </div>
-                    <div class="client-content">
-                      <h5 class="title">لويس تايسون</h5>
-                      <span class="sub-title">– صاحب بيزنس أونلاين</span>
-                      <p>"كنت محتاج مساعدة إني أغير العلامة التجارية للبيزنس بتاعي من جديد بس مكنتش عارف أقدر أعمل لوجو جديد فين. بصة سريعة في منجز عرفتني على عشرات من مصممين الجرافيك الشاطرين. اخترت الشخص اللي فضلته، ولو قلت أني كنت في غاية السعادة بالنتائج هيكون قليل!"</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="client-item">
-                    <div class="client-thumb">
-                      <img src="assets/img/client/01.png" alt="client">
-                    </div>
-                    <div class="client-content">
-                      <h5 class="title">هانا توماس
-                      </h5>
-                      <span class="sub-title">– رائدة أعمال تقنية</span>
-                      <p>"أنا بكبر البيزنس بتاعي حاليا وكنت محتاجة أعين متخصص تقني أقدر أعتمد عليه. الفريلانسر اللي لقيته كان مفيد جدا ومكنتش هقدر أعمل اللي كنت عايزاه من غيره. شكرا، منجز، خليت الموضوع يتحقق!"</p>
-                    </div>
-                  </div>
-                </div>
+                <?php $i++; } ?>
               </div>
               <a class="nav-button carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <i class="fa fa-angle-left" aria-hidden="true"></i>

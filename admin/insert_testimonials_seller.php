@@ -21,7 +21,7 @@ echo "<script>window.open('login','_self');</script>";
     <div class="page-header float-right">
       <div class="page-title">
         <ol class="breadcrumb text-right">
-          <li class="active">Insert Testimonial</li>
+          <li class="active">Insert Testimonial Seller</li>
         </ol>
       </div>
     </div>
@@ -53,7 +53,7 @@ echo "<script>window.open('login','_self');</script>";
         </div>
         <div class="card-body card-block">
           <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-            <input type="hidden" name="testimonial_type" value="buyer">
+            <input type="hidden" name="testimonial_type" value="seller">
             <div class="row form-group">
               <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name</label></div>
               <div class="col-12 col-md-9"><input type="text" id="text-input" name="name" class="form-control" required=""><small class="form-text text-muted"></small></div>
@@ -85,7 +85,6 @@ echo "<script>window.open('login','_self');</script>";
     </div>
   </div>
 </div>
-
 <div id="insertimageModal" class="modal" role="dialog">
   <div class="modal-dialog modal-lg">
   <div class="modal-content">
@@ -108,7 +107,6 @@ $('textarea').summernote({
 placeholder: 'Start Typing Here...',
 height: 150
 });
-
 $image_crop = $('#image_demo').croppie({
     enableExif: true,
     viewport: {
@@ -168,7 +166,6 @@ $image_crop = $('#image_demo').croppie({
       });
     });
     });
-
 </script>
 <?php
 if(isset($_POST['submit'])){
@@ -229,7 +226,7 @@ return strip_tags($dom->saveHTML(),"<div><iframe><br><a><b><i><u><span><img><h1>
 
   echo "<script>alert('Testimonial inserted successfully.');</script>";
 
-  echo "<script>window.open('index?view_testimonials','_self');</script>";
+  echo "<script>window.open('index?view_testimonials_seller','_self');</script>";
 
   }
   }

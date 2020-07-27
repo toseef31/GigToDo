@@ -65,6 +65,8 @@ $videoPlugin = $core->checkPlugin("videoPlugin");
 	<link rel="stylesheet" href="assets/css/flag-icon.min.css">
 	<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
 	<link rel="stylesheet" href="assets/scss/style.css">
+	<link href="<?= $site_url ?>/styles/croppie.css" rel="stylesheet">
+	
 	<?php if(!empty($site_favicon)){ ?>
 	<link rel="shortcut icon" href="../images/<?= $site_favicon; ?>" type="image/x-icon">
 	<?php } ?>
@@ -73,6 +75,7 @@ $videoPlugin = $core->checkPlugin("videoPlugin");
 	<script type="text/javascript" src="assets/js/ie.js"></script>
 	<script type="text/javascript" src="assets/js/sweat_alert.js"></script>
 	<script src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="<?= $site_url ?>/js/croppie.js"></script>
 	<script>
 	
 	function alert_error(text){
@@ -650,6 +653,18 @@ $videoPlugin = $core->checkPlugin("videoPlugin");
 	if(isset($_GET['edit_testimonial'])){
 		include("edit_testimonials.php");
 	}
+	if(isset($_GET['insert_testimonials_seller'])){
+		include("insert_testimonials_seller.php");
+	}
+	if(isset($_GET['view_testimonials_seller'])){
+		include("view_testimonials_seller.php");
+	}
+	if(isset($_GET['delete_testimonial_seller'])){
+		include("delete_testimonials_seller.php");
+	}
+	if(isset($_GET['edit_testimonial_seller'])){
+		include("edit_testimonials_seller.php");
+	}
 	if(isset($_GET['change_language'])){
 	include("change_language.php");
 	}
@@ -714,7 +729,7 @@ $(document).ready(function(){
 });
 </script>
 </div><!-- Right Panel -->
-
+<!-- <script type="text/javascript" src="<?= $site_url; ?>/js/croppie.js"></script> -->
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/plugins.js"></script>
 </body>
