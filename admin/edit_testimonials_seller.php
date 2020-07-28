@@ -12,8 +12,11 @@ echo "<script>window.open('login','_self');</script>";
     $row_testimonials = $get_testimonials->fetch();
     $testimonial_id = $row_testimonials->testimonial_id;
     $name = $row_testimonials->name;
+    $arabic_name = $row_testimonials->arabic_name;
     $designation = $row_testimonials->designation;
+    $arabic_designation = $row_testimonials->arabic_designation;
     $description = $row_testimonials->description;
+    $arabic_description = $row_testimonials->arabic_description;
     $m_image = $row_testimonials->image;
     if(isset($_GET['delete_image'])){
     $remove_image = $input->get("delete_image");
@@ -74,15 +77,28 @@ echo "<script>window.open('login','_self');</script>";
             <div class="col-12 col-md-9"><input value="<?php echo $name; ?>" type="text" id="text-input" name="name" class="form-control"></div>
           </div>
           <div class="row form-group">
+            <div class="col col-md-3"><label for="text-input-arabic" class=" form-control-label">Arabic Name</label></div>
+            <div class="col-12 col-md-9"><input value="<?php echo $arabic_name; ?>" type="text" id="text-input" name="arabic_name" class="form-control"></div>
+          </div>
+          <div class="row form-group">
             <div class="col col-md-3"><label for="select" class=" form-control-label">Designation</label></div>
             <div class="col-12 col-md-9">
               <input value="<?php echo $designation; ?>" type="text" id="text-input" name="designation" class="form-control">
             </div>
           </div>
+          <div class="row form-group">
+            <div class="col col-md-3"><label for="text-designation-arabic" class=" form-control-label"> Arabic Designation</label></div>
+            <div class="col-12 col-md-9"><input type="text" id="text-designation-arabic" name="arabic_designation" class="form-control" value="<?php echo $arabic_designation; ?>" required=""><small class="form-text text-muted"></small></div>
+          </div>
           <!--- form-group row Ends --->
           <div class="row form-group">
             <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
             <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="19" placeholder="Start Typing Here..." class="form-control"><?php echo $description; ?></textarea></div>
+          </div>
+          <div class="row form-group">
+            <div class="col col-md-3"><label for="textarea-input-arabic" class=" form-control-label">Arabic Description</label></div>
+            
+            <div class="col-12 col-md-9"><textarea name="arabic_description" id="textarea-input-arabic" rows="9" placeholder="Start Typing Here..." class="form-control"><?php echo $arabic_description; ?></textarea></div>
           </div>
           <div class="row form-group">
             <div class="col col-md-3">
@@ -129,7 +145,7 @@ echo "<script>window.open('login','_self');</script>";
   </div>
 </div>
 <script>
-$('textarea').summernote({
+$('#textarea-input').summernote({
         placeholder: 'Start Typing Here...',
         height: 150
       });
@@ -199,9 +215,12 @@ $rules = array(
 "name" => "required",
 "designation" => "required",
 "description" => "required",
+"arabic_name" => "required",
+"arabic_designation" => "required",
+"arabic_description" => "required",
 "image" => "required");
 
-$messages = array("name" => "You must need to write name.", "description" => "You must need to add description", "designation" => "You must need to add designation", "image" => "please upload image");
+$messages = array("name" => "You must need to write name.", "description" => "You must need to add description", "designation" => "You must need to add designation","arabic_name" => "You must need to write name.", "arabic_description" => "You must need to add description", "arabic_designation" => "You must need to add designation", "image" => "please upload image");
 $val = new Validator($_POST,$rules,$messages);
 if($val->run() == false){
   Flash::add("form_errors",$val->get_all_errors());
@@ -222,9 +241,12 @@ if($val->run() == false){
   return htmlspecialchars_decode($strip); 
   }
   $name = $input->post('name');
+  $arabic_name = $input->post('arabic_name');
   $testimonial_type = $input->post('testimonial_type');
   $designation = $input->post('designation');
+  $arabic_designation = $input->post('arabic_designation');
   $description = removeJava($_POST['description']);
+  $arabic_description = $_POST['arabic_description'];
 
   $image = $_FILES['image']['name'];
   $image_tmp = $_FILES['image']['tmp_name'];
@@ -241,7 +263,7 @@ if($val->run() == false){
     move_uploaded_file($image_tmp, "../testimonial/testimonial_images/$image");
   }
   $posted_date = date("F d, Y");
-  $update_testimonial = $db->update("testimonials",array("name"=>$name,"testimonial_type"=>$testimonial_type,"designation"=>$designation,"description"=>$description,"image"=>$image),array("testimonial_id"=>$testimonial_id));
+  $update_testimonial = $db->update("testimonials",array("name"=>$name,"arabic_name"=>$arabic_name,"testimonial_type"=>$testimonial_type,"designation"=>$designation,"arabic_designation"=>$arabic_designation,"description"=>$description,"arabic_description"=>$arabic_description,"image"=>$image),array("testimonial_id"=>$testimonial_id));
   if($update_testimonial){
     $insert_log = $db->insert_log($admin_id,"testimonial",$testimonial_id,"updated");
     echo "<script>alert('Testimonial Updated successfully.');</script>";

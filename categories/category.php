@@ -869,7 +869,7 @@ $cur_amount = currencyConverter($to,1);
       $.ajax({
        method:"post",  
        data: {keyword:keyword},  
-       url: url_plus + "../category_load?zAction=get_search_proposals",  
+       url: url_plus + "../category_load?zAction=get_search_proposals_sidebar",  
        success:function(data){
        // console.log(data);  
        

@@ -4,7 +4,7 @@ require_once("includes/db.php");
 require_once("functions/functions.php");
 ?>
 <!DOCTYPE html>
-<html lang="en" class="ui-toolkit">
+<html dir="rtl" lang="ar" class="ui-toolkit">
 <head>
 <title> <?= $site_name; ?> - Freelancers </title>
 <meta name="description" content="">

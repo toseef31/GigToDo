@@ -18,6 +18,7 @@ if(isset($_POST["image"])){
 	  $image = $image."".time().".$image_extension";
 	  move_uploaded_file($image_tmp, "../testimonial/testimonial_images/$image");
 	}
+	}
 
 }
 

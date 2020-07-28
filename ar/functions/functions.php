@@ -228,9 +228,7 @@ $get_proposals = $db->query("select * from proposals " . $query_where . $where_l
 $count_proposals = $get_proposals->rowCount();
 if($count_proposals == 0){
 echo"
-<div class='col-md-12'>
-<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> لم نعثر على أي مقترحات / خدمات مطابقة لهذا البحث </h1>
-</div>
+<script>window.open('search-none.php','_self')</script>
 ";
 }
 
@@ -3407,6 +3405,82 @@ function get_freelancers(){
 		$query = "select DISTINCT sellers.* from sellers JOIN proposals ON sellers.seller_id=proposals.proposal_seller_id and proposals.proposal_status='active' $where_limit";
 		$sellers = $db->query($query);
 	}
+
+	$sellersCount = 0;
+	while($seller = $sellers->fetch()){
+		$sellersCount++;
+		$seller_id = $seller->seller_id;
+		$seller_user_name = $seller->seller_user_name;
+		$seller_name = $seller->seller_name;
+		$seller_headline = $seller->seller_headline;
+		$seller_about = $seller->seller_about;
+		$seller_image = $seller->seller_image;
+		$seller_email = $seller->seller_email;
+		$seller_level = $seller->seller_level;
+		$seller_register_date = $seller->seller_register_date;
+		$seller_recent_delivery = $seller->seller_recent_delivery;
+		$seller_country = $seller->seller_country;
+		$seller_status = $seller->seller_status;
+		$level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
+
+		$select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$seller_id)); 
+		$count_reviews = $select_buyer_reviews->rowCount();
+		if(!$count_reviews == 0){
+		  $rattings = array();
+		  while($row_buyer_reviews = $select_buyer_reviews->fetch()){
+		    $buyer_rating = $row_buyer_reviews->buyer_rating;
+		    array_push($rattings,$buyer_rating);
+		  }
+		  $total = array_sum($rattings);
+		  @$average = $total/count($rattings);
+		  $average_rating = substr($average ,0,1);
+		}else{
+		 $average = "0";  
+		 $average_rating = "0";
+		}
+		require("includes/freelancer.php");
+	}
+	if($sellersCount == 0){
+		echo"
+		<div class='col-md-12'>
+		<h1 class='text-center mt-4'><i class='fa fa-meh-o'></i> We haven't found any freelancers matching that search </h1>
+		</div>
+		";
+	}
+}
+
+function get_search_freelancers(){
+	global $db;
+	global $input;
+	global $lang;
+	global $siteLanguage;
+	global $s_currency;
+	global $site_url;
+
+	$query_where = freelancersQueryWhere("query_where");
+	$where_path = freelancersQueryWhere("where_path");
+	$values = freelancersQueryWhere("values");
+	$search_query = $_SESSION['search_query'];
+
+	$s_value = "$search_query";
+
+	$per_page = 12;
+	if(isset($_GET['page'])){
+		$page = $input->get('page');
+	}else{
+		$page = 1;
+	}
+
+	$start_from = ($page-1) * $per_page;
+	$where_limit = " order by seller_level DESC LIMIT $per_page OFFSET $start_from";
+
+	// if(!empty($where_path)){
+		$query = "select DISTINCT sellers.* from sellers JOIN proposals ON sellers.seller_id=proposals.proposal_seller_id and proposals.proposal_status='active' and sellers.seller_user_name like '$s_value%'$where_limit";
+		$sellers = $db->query($query,$values);
+	// }else{
+	// 	$query = "select DISTINCT sellers.* from sellers JOIN proposals ON sellers.seller_id=proposals.proposal_seller_id and proposals.proposal_status='active' $where_limit";
+	// 	$sellers = $db->query($query);
+	// }
 
 	$sellersCount = 0;
 	while($seller = $sellers->fetch()){
