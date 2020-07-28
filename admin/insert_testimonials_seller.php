@@ -120,6 +120,7 @@ $image_crop = $('#image_demo').croppie({
     }    
     });
   function crop(data){
+    alert(data);
     var reader = new FileReader();
     reader.onload = function (event) {
       $image_crop.croppie('bind',{
@@ -132,7 +133,7 @@ $image_crop = $('#image_demo').croppie({
     $('#insertimageModal').modal('show');
     $('input[type=hidden][name=img_type]').val($(data).attr('name'));
   }
-  $(document).on('change','input[type=file]:not(#cover)', function(){
+  $(document).on('change','input[type=file]', function(){
   var size = $(this)[0].files[0].size; 
   var ext = $(this).val().split('.').pop().toLowerCase();
   if($.inArray(ext,['jpeg','jpg','gif','png']) == -1){
@@ -144,6 +145,7 @@ $image_crop = $('#image_demo').croppie({
   });
   $('.crop_image').click(function(event){
     var getUrl = '<?php echo $site_url; ?>';
+    alert(getUrl);
   $('#wait').addClass("loader");
   var name = $('input[type=hidden][name=img_type]').val();
     $image_crop.croppie('result', {
@@ -151,7 +153,7 @@ $image_crop = $('#image_demo').croppie({
       size: 'viewport'
     }).then(function(response){
       $.ajax({
-        url:"crop_upload",
+        url:getUrl+"/crop_upload",
         type: "POST",
         data:{image: response, name: $('input[type=file][name='+ name +']').val().replace(/C:\\fakepath\\/i, '') },
         success:function(data){
