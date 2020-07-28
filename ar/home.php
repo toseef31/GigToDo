@@ -43,7 +43,7 @@ $slide_image = $row_slides->slide_image;
       if (isset($_POST['search'])) {
           $search_query = $input->post('search_query');
           $_SESSION['search_query'] = $search_query;
-          echo "<script>window.open('$site_url/search.php','_self')</script>";
+          echo "<script>window.open('$site_url/ar/search.php','_self')</script>";
       }
     ?>
   </div>
@@ -316,8 +316,11 @@ $slide_image = $row_slides->slide_image;
                 $testimonial_id = $row_testimonials->testimonial_id;
                 
                 $name = $row_testimonials->name;
+                $arabic_name = $row_testimonials->arabic_name;
                 $designation = $row_testimonials->designation;
+                $arabic_designation = $row_testimonials->arabic_designation;
                 $description = $row_testimonials->description;
+                $arabic_description = $row_testimonials->arabic_description;
                 $image = $row_testimonials->image;
                 ?>
                 <div class="carousel-item <?php if($i == 0){echo "active";} ?>">
@@ -330,10 +333,10 @@ $slide_image = $row_slides->slide_image;
                       <?php } ?>
                     </div>
                     <div class="client-content">
-                      <h5 class="title"><?= $name ?></h5>
-                      <span class="sub-title">– <strong><?= $designation; ?></strong></span>
+                      <h5 class="title"><?= $arabic_name ?></h5>
+                      <span class="sub-title">– <strong><?= $arabic_designation; ?></strong></span>
                       <?php 
-                        $string = $description;
+                        $string = $arabic_description;
                         if (strlen($string) > 520) {
                             // truncate string
                             $stringCut = substr($string, 0, 520);

@@ -10,7 +10,7 @@
 		$to = $_SESSION['currency'];
 	}
 	$cur_amount = currencyConverter($to,1);
-// print_r($cur_amount.'opyyyyy aa na zraa');
+	// print_r($cur_amount.'opyyyyy aa na zraa');
 ?>
 
 

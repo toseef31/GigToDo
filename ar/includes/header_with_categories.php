@@ -102,7 +102,7 @@ $cur_amount = currencyConverter($to,1);
               if (isset($_POST['search'])) {
                   $search_query = $input->post('search_query');
                   $_SESSION['search_query'] = $search_query;
-                  echo "<script>window.open('$site_url/search.php','_self')</script>";
+                  echo "<script>window.open('$site_url/ar/search.php','_self')</script>";
               }
             ?>
           </div>

@@ -205,7 +205,7 @@ $enableVideo = 0;
 		<link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
 		<!-- <link href="../../styles/custom.css" rel="stylesheet">  -->
 		<!-- Custom css code from modified in admin panel --->
-		<!-- <link href="../../styles/styles.css" rel="stylesheet"> -->
+		<link href="../../styles/styles.css" rel="stylesheet">
 		<!-- <link href="../../styles/proposalStyles.css" rel="stylesheet"> -->
 		<?php
 		if($deviceType == "phone"){

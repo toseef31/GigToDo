@@ -59,14 +59,27 @@ echo "<script>window.open('login','_self');</script>";
               <div class="col-12 col-md-9"><input type="text" id="text-input" name="name" class="form-control" required=""><small class="form-text text-muted"></small></div>
             </div>
             <div class="row form-group">
+              <div class="col col-md-3"><label for="text-input-arabic" class=" form-control-label">Arabic Name</label></div>
+              <div class="col-12 col-md-9"><input type="text" id="text-input-arabic" name="arabic_name" class="form-control" required=""><small class="form-text text-muted"></small></div>
+            </div>
+            <div class="row form-group">
               <div class="col col-md-3"><label for="text-designation" class=" form-control-label">Designation</label></div>
               <div class="col-12 col-md-9"><input type="text" id="text-designation" name="designation" class="form-control" required=""><small class="form-text text-muted"></small></div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-md-3"><label for="text-designation-arabic" class=" form-control-label"> Arabic Designation</label></div>
+              <div class="col-12 col-md-9"><input type="text" id="text-designation-arabic" name="arabic_designation" class="form-control" required=""><small class="form-text text-muted"></small></div>
             </div>
             <!--- form-group row Ends --->
             <div class="row form-group">
               <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
               
               <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9" placeholder="Start Typing Here..." class="form-control"></textarea></div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-md-3"><label for="textarea-input-arabic" class=" form-control-label">Arabic Description</label></div>
+              
+              <div class="col-12 col-md-9"><textarea name="arabic_description" id="textarea-input-arabic" rows="9" placeholder="Start Typing Here..." class="form-control"></textarea></div>
             </div>
             
             <div class="row form-group">
@@ -103,7 +116,7 @@ echo "<script>window.open('login','_self');</script>";
   </div>
 </div>
 <script>
-$('textarea').summernote({
+$('#textarea-input').summernote({
 placeholder: 'Start Typing Here...',
 height: 150
 });
@@ -175,9 +188,12 @@ $rules = array(
 "name" => "required",
 "designation" => "required",
 "description" => "required",
+"arabic_name" => "required",
+"arabic_designation" => "required",
+"arabic_description" => "required",
 "image" => "required");
 
-$messages = array("name" => "You must need to write name.", "description" => "You must need to add description", "designation" => "You must need to add designation", "image" => "please upload image");
+$messages = array("name" => "You must need to write name.", "description" => "You must need to add description", "designation" => "You must need to add designation","arabic_name" => "You must need to write name.", "arabic_description" => "You must need to add description", "arabic_designation" => "You must need to add designation", "image" => "please upload image");
 
 $val = new Validator($_POST,$rules,$messages);
 if($val->run() == false){
@@ -200,9 +216,12 @@ if ($node->hasAttribute($attr)){ $node->removeAttribute($attr);  }
 return strip_tags($dom->saveHTML(),"<div><iframe><br><a><b><i><u><span><img><h1><h2><h3><h4><h5><h6><p><ul><ol><li>");
   }
   $name = $input->post('name');
+  $arabic_name = $input->post('arabic_name');
   $testimonial_type = $input->post('testimonial_type');
   $designation = $input->post('designation');
+  $arabic_designation = $input->post('arabic_designation');
   $description = removeJava($_POST['description']);
+  $arabic_description = $_POST['arabic_description'];
 
   $image = $_FILES['image']['name'];
   $image_tmp = $_FILES['image']['tmp_name'];
@@ -219,7 +238,7 @@ return strip_tags($dom->saveHTML(),"<div><iframe><br><a><b><i><u><span><img><h1>
     move_uploaded_file($image_tmp, "../testimonial/testimonial_images/$image");
   }
   $posted_date = date("F d, Y");
-  $insert_testimonial = $db->insert("testimonials",array("name"=>$name,"testimonial_type"=>$testimonial_type,"designation"=>$designation,"description"=>$description,"image"=>$image));
+  $insert_testimonial = $db->insert("testimonials",array("name"=>$name,"arabic_name"=>$arabic_name,"testimonial_type"=>$testimonial_type,"designation"=>$designation,"arabic_designation"=>$arabic_designation,"description"=>$description,"arabic_description"=>$arabic_description,"image"=>$image));
   if($insert_testimonial){
 
   $insert_id = $db->lastInsertId();
