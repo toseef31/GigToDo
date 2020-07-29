@@ -173,6 +173,7 @@ $slide_image = $row_slides->slide_image;
 </div>
 <!-- Work Section Ends  -->
 <!-- Payment getway -->
+<?php if($payment_option == 1){ ?>
 <div class="payment-system padding-bottom padding-top bg-white">
   <div class="container">
     <div class="section-header">
@@ -298,6 +299,7 @@ $slide_image = $row_slides->slide_image;
     <!-- Payment wrapper -->
   </div>
 </div>
+<?php } ?>
 <!-- Payment getway -->
 <!-- Client Section -->
 <section class="client-section" style="background:url(assets/img/client/01.jpg);">

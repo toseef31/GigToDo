@@ -2,6 +2,7 @@
   if(isset($_SESSION['cat_id'])){
   $session_cat_id = $_SESSION['cat_id'];  
   }
+  $child_parent_id = $session_cat_id;
   if(isset($_SESSION['cat_child_id'])){
     $session_cat_child_id = $_SESSION['cat_child_id'];  
     $get_child_cats = $db->select("categories_children",array("child_id" => $session_cat_child_id));
@@ -87,7 +88,7 @@
                 $child_arabic_title = $row_meta->child_arabic_title;
                 if(!empty($child_arabic_title)){
             ?>
-            <option <?php if($child_id == @$_SESSION['cat_child_id']){ echo "selected"; } ?> value="<?php echo $site_url; ?>/categories/<?php echo $cat_page_url; ?>/<?php echo $child_url; ?>"><?php echo $child_arabic_title; ?></option>
+            <option <?php if($child_id == @$_SESSION['cat_child_id']){ echo "selected"; } ?> value="<?php echo $site_url; ?>/ar/categories/<?php echo $cat_url; ?>/<?php echo $child_url; ?>"><?php echo $child_arabic_title; ?></option>
             <?php } } ?>
           </select>
         </div>

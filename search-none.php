@@ -93,7 +93,7 @@ $login_seller_type = $row_login_seller->account_type;
 									<h2>No Service Found For Your Search</h2>
 									<p>Try a new search or get a free quote for your project from our community of freelancers.</p>
 									<div class="d-flex flex-row justify-content-center">
-										<a class="empty-search-results-button d-flex flex-row align-items-center justify-content-center" href="javascript:void(0);">Search for Freelancers</a>
+										<a class="empty-search-results-button d-flex flex-row align-items-center justify-content-center" href="search-freelancers">Search for Freelancers</a>
 									</div>
 								</div>
 								<center class="pb-5 pt-5">

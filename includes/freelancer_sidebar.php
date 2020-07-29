@@ -39,7 +39,7 @@ if(isset($_GET['seller_language'])){
 		$cat_title = $select_cats_meta->fetch()->cat_title;
 		if (!empty($cat_title)) {
 		?>
-		<a class="search-categories-item d-flex flex-row align-items-center" href="javascript:void(0);" data-id="<?= $cat_id ?>"><?= $cat_title; ?></a>
+		<a class="search-categories-item d-flex flex-row align-items-center" onclick="get_cat_freelancers(<?= $cat_id ?>)" href="javascript:void(0);" data-id="<?= $cat_id ?>"><?= $cat_title; ?></a>
 		<?php } } ?>
 	</div>
 </div>

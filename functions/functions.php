@@ -3631,6 +3631,7 @@ function get_freelancers(){
 		$seller_recent_delivery = $seller->seller_recent_delivery;
 		$seller_country = $seller->seller_country;
 		$seller_status = $seller->seller_status;
+		$occuption = $seller->occuption;
 		$level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
 
 		$select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$seller_id)); 
@@ -3706,6 +3707,7 @@ function get_search_freelancers(){
 		$seller_recent_delivery = $seller->seller_recent_delivery;
 		$seller_country = $seller->seller_country;
 		$seller_status = $seller->seller_status;
+		$occuption = $seller->occuption;
 		$level_title = $db->select("seller_levels_meta",array("level_id"=>$seller_level,"language_id"=>$siteLanguage))->fetch()->title;
 
 		$select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$seller_id)); 
