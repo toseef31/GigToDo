@@ -315,7 +315,7 @@ require_once("social-config.php");
             </script>";
             // array_push($error_array, "Email has already been taken. Try logging in instead.");
           }else{
-
+            $insert_email = $db->insert("landing_email", array("email" => $email));
             echo "<script>
             swal({
             type: 'success',
