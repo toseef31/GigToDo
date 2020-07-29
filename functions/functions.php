@@ -1,7 +1,6 @@
 <?php
 require_once("$dir/social-config.php");
 require_once("$dir/HttpRequest.php");
-require_once("$dir/includes/change_currency.php");
 
 if(isset($_SESSION['seller_user_name'])){
 	$login_seller_user_name = $_SESSION['seller_user_name'];
@@ -467,7 +466,7 @@ $show_favorite_class = "proposal-favorite dil1";
 }else{
 $show_favorite_class = "proposal-unfavorite dil";
 }
-// die();
+
 ?>
 <div class="col-lg-4 col-sm-6">
 <?php require("includes/proposals.php"); ?>
