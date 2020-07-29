@@ -3,11 +3,13 @@
   $session_cat_id = $_SESSION['cat_id'];  
   
   }
+  $child_parent_id = $session_cat_id;
   if(isset($_SESSION['cat_child_id'])){
     $session_cat_child_id = $_SESSION['cat_child_id'];  
     $get_child_cats = $db->select("categories_children",array("child_id" => $session_cat_child_id));
     $child_parent_id = $get_child_cats->fetch()->child_parent_id;
   }
+  // print_r($child_parent_id);
   $online_sellers = array();
   $delivery_time = array();
   $seller_level = array();

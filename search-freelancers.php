@@ -259,14 +259,15 @@ require_once("functions/functions.php");
       }  
     });
   }
-  function get_cat_freelancer(id){
+  function get_cat_freelancers(id){
     var cat_id = id;
-    alert(cat_id);
+    
     $.ajax({  
-      url:"freelancer_load",  
+      url:"get_category_freelancer",  
       method:"POST",  
-      data: sPath+'zAction=get_freelancers',  
+      data: {cat_id:cat_id},  
       success:function(data){
+        console.log(data);
       $('#freelancers').html('');  
       $('#freelancers').html(data); 
       $('#wait').removeClass("loader");

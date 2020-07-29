@@ -62,6 +62,7 @@ $language_switcher = $row_general_settings->language_switcher;
 $currency_switcher = $row_general_settings->currency_switcher;
 $trusted_companies = $row_general_settings->trusted_companies;
 $subcategories_switcher = $row_general_settings->subcategories_switcher;
+$payment_option = $row_general_settings->payment_option;
 
 require 'updateHtaccess.php';
 require 'timezones.php';
@@ -366,13 +367,25 @@ Enter the complete url. Ex: https://www.GigToDo.com
 </div>
 </div><!--- form-group row Ends --->
 <div class="form-group row"><!--- form-group row Starts --->
-<label class="col-md-3 control-label"> Show SubCategories Switcher: </label>
+<label class="col-md-3 control-label"> Show SubCategories: </label>
 <div class="col-md-6">
   <div class="input-group">
   <span class="input-group-addon"><b><i class="fa fa-link" aria-hidden="true"></i></b></span>
   <select name="subcategories_switcher" class="form-control" required="">
     <option value="1" <?php if($subcategories_switcher == 1){ echo "selected"; } ?>> Yes </option>
     <option value="0" <?php if($subcategories_switcher == 0){ echo "selected"; } ?>> No </option>
+  </select>
+  </div>
+</div>
+</div><!--- form-group row Ends --->
+<div class="form-group row"><!--- form-group row Starts --->
+<label class="col-md-3 control-label"> Show Payment Option: </label>
+<div class="col-md-6">
+  <div class="input-group">
+  <span class="input-group-addon"><b><i class="fa fa-link" aria-hidden="true"></i></b></span>
+  <select name="payment_option" class="form-control" required="">
+    <option value="1" <?php if($payment_option == 1){ echo "selected"; } ?>> Yes </option>
+    <option value="0" <?php if($payment_option == 0){ echo "selected"; } ?>> No </option>
   </select>
   </div>
 </div>
@@ -926,6 +939,7 @@ if(isset($_POST['general_settings_update'])){
   $currency_switcher = $input->post('currency_switcher');
   $trusted_companies = $input->post('trusted_companies');
   $subcategories_switcher = $input->post('subcategories_switcher');
+  $payment_option = $input->post('payment_option');
 	$site_copyright = $input->post('site_copyright');
   $site_timezone = $input->post('site_timezone');
 	$site_currency = $input->post('site_currency');
@@ -986,7 +1000,7 @@ if(isset($_POST['general_settings_update'])){
     move_uploaded_file($site_arabic_logo_tmp,"../images/ar/$site_arabic_logo");
     move_uploaded_file($arabic_sticky_logo_tmp,"../images/ar/$arabic_sticky_logo");
 
-		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_sticky_logo" => $site_sticky_logo,"site_arabic_logo" => $site_arabic_logo,"site_arabic_sticky_logo" => $arabic_sticky_logo,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"currency_switcher" => $currency_switcher,"trusted_companies" => $trusted_companies,"subcategories_switcher" => $subcategories_switcher,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
+		$update_general_settings = $db->update("general_settings",array("site_title" => $site_title,"site_www" => $site_www,"site_name" => $site_name,"site_favicon" => $site_favicon,"site_logo_type" => $site_logo_type,"site_logo_text" => $site_logo_text,"site_logo_image" => $site_logo_image,"site_sticky_logo" => $site_sticky_logo,"site_arabic_logo" => $site_arabic_logo,"site_arabic_sticky_logo" => $arabic_sticky_logo,"site_logo" => $site_logo,"site_desc" => $site_desc,"site_keywords" => $site_keywords,"site_author" => $site_author,"site_url" => $site_url,"site_email_address" => $site_email_address,"language_switcher" => $language_switcher,"currency_switcher" => $currency_switcher,"trusted_companies" => $trusted_companies,"subcategories_switcher" => $subcategories_switcher,"payment_option" => $payment_option,"site_copyright" => $site_copyright,"site_timezone"=>$site_timezone,"site_currency" => $site_currency,"recaptcha_site_key" => $recaptcha_site_key,"recaptcha_secret_key" => $recaptcha_secret_key,"jwplayer_code" => $jwplayer_code,"approve_proposals" => $approve_proposals,"enable_referrals" => $enable_referrals,"knowledge_bank" => $knowledge_bank,"referral_money" => $referral_money,"enable_maintenance_mode"=>$enable_maintenance_mode,"order_auto_complete" => $order_auto_complete,"wish_do_manual_payouts" => $wish_do_manual_payouts));
 
 		if($update_general_settings){
 			$insert_log = $db->insert_log($admin_id,"general_settings","","updated");

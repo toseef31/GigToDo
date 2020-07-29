@@ -67,7 +67,7 @@
   <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
   <!-- <link href="styles/custom.css" rel="stylesheet"> -->
   <!-- Custom css code from modified in admin panel --->
-  <!-- <link href="styles/styles.css" rel="stylesheet"> -->
+  <link href="styles/styles.css" rel="stylesheet">
   <!-- <link href="styles/categories_nav_styles.css" rel="stylesheet"> -->
   <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
   <link href="styles/sweat_alert.css" rel="stylesheet">
@@ -158,11 +158,9 @@
                     <label class="control-label" for="relevantSubject">select relevant inquiry subject</label>
                     <select class="form-control" name="enquiry_type" id="relevantSubject">
                       <option value="">Select Inquiry Subject</option>
-                      <option value="4">
-                          Report A Bug
-                          </option>";
-                        }
-                      ?>
+                      <option value="4">Report A Bug</option>
+                      <option value="5">General Enquiry</option>
+                        
                     </select>
                   </div>
                   <?php } ?>
@@ -384,7 +382,7 @@
       $file = $file."_".time().".$file_extension";
       move_uploaded_file($file_tmp , "ticket_files/$file");
       $date = date("h:i M d, Y");
-      $insert_support_ticket = $db->insert("support_tickets",array("enquiry_id" => $enquiry_type,"sender_id" => $login_seller_id,"subject" => $subject,"message" => $message,"order_number" => $order_number,"order_rule" => $order_rule,"attachment" => $file,"date" => $date,"status" => 'open'));
+      $insert_support_ticket = $db->insert("support_tickets",array("enquiry_id" => $enquiry_type,"sender_id" => $login_seller_id,"subject" => $subject,"message" => $message,"order_number" => $order_number,"order_rule" => $order_rule,"attachment" => $file,"date" => $date,"status" => 'open', "email" => $email));
       if($insert_support_ticket){
         $get_enquiry_types = $db->select("enquiry_types",array("enquiry_id" => $enquiry_id));
         $row_enquiry_types = $get_enquiry_types->fetch();
