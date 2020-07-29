@@ -62,10 +62,10 @@ echo "<script>window.open('login','_self');</script>";
                                 <!--- tbody Starts --->
                                 <?php
                                 $i = 0;
-                                $get_seller_email = $db->query("select landing_email from sellers where landing_email != 'Null'");
-                                while($row_seller_email = $get_seller_email->fetch()){
-                                $seller_id = $row_seller_email->seller_id;
-                                $landing_email = $row_seller_email->landing_email;
+                                $get_email = $db->select("landing_email");
+                                while($row_email = $get_email->fetch()){
+                                $id = $row_email->id;
+                                $landing_email = $row_email->email;
                                 $i++;
                                 ?>
                                 <tr>
