@@ -871,22 +871,22 @@ if(isset($_POST['publish'])){
                 if($enable_referrals == "no"){ 
                 $data['proposal_enable_referrals'] = "no"; 
                 }
-                $graphic_img = array("Graphic-Designing.jpg", "Graphic-Designing-1.png", "Graphic-Designing-2.jpg", "Graphic-Designing-3.jpg");
+                $graphic_img = array("Graphic.png", "Graphic-1.png", "Graphic-2.png", "Graphic-3.png", "Graphic-4.png", "Graphic-5.png");
                 $random_graphic=array_rand($graphic_img);
 
-                $digital_img = array("digital-marketing.jpg", "digital_marketing-1.jpg", "digital-marketing-2.png", "digital-marketing-3.jpg");
+                $digital_img = array("digital.png", "digital-1.png", "digital-2.png", "digital-3.png");
                 $random_digital=array_rand($digital_img);
 
-                $writing_img = array("writing-and-translation.jpg", "writing-and-translation-1.jpg", "writing-and-translation-2.jpg", "writing-and-translation-3.jpg");
+                $writing_img = array("writing.png", "writing-1.png", "writing-2.png", "writing-3.png");
                 $writing_digital=array_rand($writing_img);
 
-                $video_img = array("video-sound.jpg", "video-sound-1.jpg", "video-sound-2.jpg", "video-sound-3.jpg");
+                $video_img = array("video.png", "video-1.png", "video-2.png", "video-3.png", "video-4.png");
                 $video_digital=array_rand($video_img);
 
-                $tech_img = array("programing-tech.png", "programming-tech-1.jpeg", "programming-tech-2.jpg", "programming-tech-3.jpg");
+                $tech_img = array("programing.png", "programming-1.png", "programming-2.png", "programming-3.png", "programming-4.png");
                 $tech_digital=array_rand($tech_img);
 
-                $business_img = array("business.jpeg", "business-1.jpg", "Business-2.jpg", "business-3.jpg");
+                $business_img = array("business.png", "business-1.png", "business-2.png", "business-3.png", "business-4.png");
                 $business_digital=array_rand($business_img);
 
                 if($data['proposal_cat_id'] == 1){
