@@ -500,7 +500,7 @@ $login_seller_language = $row_login_seller->seller_language;
                           </label>
                           <div class="deliver-time d-flex flex-wrap">
                             <?php
-                            $get_delivery_times = $db->select("delivery_times");
+                            $get_delivery_times = $db->select("delivery_times",array("type" => ''));
                             while($row_delivery_times = $get_delivery_times->fetch()){
                             $delivery_id = $row_delivery_times->delivery_id;
                             $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
@@ -520,7 +520,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             </label>
                             <?php } ?>
                             <label class="deliver-time-item" for="days30">
-                              <input id="days30" type="radio" name="delivery_id" class="time_select" hidden  />
+                              <input id="days30" type="radio" name="custom_delivery" class="time_select" hidden  />
                               <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                                 <span class="color-icon">
                                   <span>-</span>
@@ -694,11 +694,11 @@ $login_seller_language = $row_login_seller->seller_language;
   
 <?php 
 
-function insertPackages($proposal_id){
+function insertPackages($proposal_id, $price, $time){
   global $db;
-  $insertPackage1 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Basic',"price"=>5));
-  $insertPackage2 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Standard',"price"=>10));
-  $insertPackage3 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance',"price"=>15));
+  $insertPackage1 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Basic',"price"=>$price,"delivery_time"=>$time,"revisions"=>1));
+  $insertPackage2 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Standard',"price"=>10,"delivery_time"=>1,"revisions"=>1));
+  $insertPackage3 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance',"price"=>15,"delivery_time"=>1,"revisions"=>1));
   if($insertPackage3){return true;}
 }
 
@@ -853,8 +853,6 @@ if(isset($_POST['publish'])){
 
                 $data = array();
 
-
-
                 // var_dump($data);die;
                 // unset($data['submit']);
                 $data['proposal_title'] = $input->post('proposal_title');
@@ -863,8 +861,17 @@ if(isset($_POST['publish'])){
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
                 // $data['proposal_tags'] = $input->post('proposal_tags');
                 $data['proposal_price'] = $input->post('proposal_price');
+
+                $custom_delivery = $input->post('custom_delivery');
+                if($custom_delivery != ''){
+                  $insert_time = $db->insert('delivery_times',array('delivery_proposal_title'=>$custom_delivery.' Days', 'delivery_title'=>$custom_delivery.' Days', 'type'=>'custom'));
+                  if($insert_time){
+                    $insert_delivery_id = $db->lastInsertId();
+                    $data['delivery_id'] = $insert_delivery_id;
+                  }
+                }else{
                 $data['delivery_id'] = $input->post('delivery_id');
-                
+                }
                 $data['proposal_url'] = $sanitize_url;
                 $data['proposal_seller_id'] = $regsiter_seller_id;
                 $data['proposal_featured'] = "no";
@@ -906,7 +913,7 @@ if(isset($_POST['publish'])){
                 }
                 $data['level_id'] = '1';
                 $data['language_id'] = '1';
-                $data['proposal_status'] = "pending";
+                $data['proposal_status'] = "active";
 // var_dump($data);die;
                 $insert_proposal = $db->insert("proposals",$data);
 
@@ -919,9 +926,15 @@ if(isset($_POST['publish'])){
                   }else{
                     $redirect = "pricing";
                   }
-
-                  insertPackages($proposal_id);
-
+                  $get_price = $db->select("proposals", array('proposal_id'=>$proposal_id));
+                  $row_price = $get_price->fetch();
+                  $proposal_price = $row_price->proposal_price; 
+                  $delivery_id = $row_price->delivery_id;
+                  $get_time = $db->select("delivery_times",array("delivery_id"=>$delivery_id));
+                  $row_time = $get_time->fetch();
+                  $delivery_proposal_title = $row_time->delivery_proposal_title;
+                  insertPackages($proposal_id,$proposal_price,$delivery_proposal_title);
+                  
                   echo "<script>
                   swal({
                   type: 'success',

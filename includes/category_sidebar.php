@@ -152,6 +152,25 @@
             <label for="time<?php echo $delivery_id; ?>"><span></span><?php echo $delivery_title; ?></label>
           </li>
           <?php }} ?>
+          <?php
+            if(isset($_SESSION['cat_id'])){
+              $get_proposals = $db->query("select DISTINCT proposal_id from proposals where proposal_cat_id=:cat_id AND proposal_status='active'",array("cat_id"=>$session_cat_id));
+            }elseif(isset($_SESSION['cat_child_id'])){
+              $get_proposals = $db->query("select DISTINCT proposal_id from proposals where proposal_child_id=:child_id AND proposal_status='active'",array("child_id"=>$session_cat_child_id));
+            }
+            while($row_proposals = $get_proposals->fetch()){
+            $proposal_id = $row_proposals->proposal_id;
+            $select_delivery_time = $db->select("proposal_packages",array('proposal_id' => $proposal_id));
+            $delivery_title = @$select_delivery_time->fetch()->delivery_time;
+            $select_time = $db->select("delivery_times",array('delivery_title' => $delivery_title));
+            $delivery_id = @$select_time->fetch()->delivery_id;
+            if(!empty($delivery_title)){
+          ?>
+          <li>
+            <input type="radio" name="radio_titme" checked="" id="time<?php echo $delivery_id; ?>" class="get_delivery_time" value="<?php echo $delivery_id; ?>" <?php if(isset($delivery_time[$delivery_id])){ echo "checked"; } ?> >
+            <label for="time<?php echo $delivery_id; ?>"><span></span><?php echo $delivery_title; ?> Days</label>
+          </li>
+          <?php }} ?>
         </ul>
       </div>
     </div>
@@ -249,7 +268,7 @@
     </div>
   </div>
 
-<!-- <div class="card border-success mb-3">
+<div class="card border-success mb-3">
   <div class="card-header bg-success">
     <h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> h5 text-white"><?php echo $lang['sidebar']['categories']; ?></h3>
   </div>
@@ -408,4 +427,4 @@
       <?php }} ?>
     </ul>
   </div>
-</div> -->
+</div>
