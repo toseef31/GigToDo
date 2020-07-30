@@ -898,7 +898,7 @@ while($row_proposals = $get_proposals->fetch()){
 $proposal_id = $row_proposals->proposal_id;
 $proposal_title = $row_proposals->proposal_title;
 $proposal_price = $row_proposals->proposal_price;
-if($proposal_price == 0){
+if($proposal_price == ''){
 $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
 $proposal_price = $get_p_1->fetch()->price;
 }
@@ -1074,7 +1074,7 @@ while($row_proposals = $get_proposals->fetch()){
 $proposal_id = $row_proposals->proposal_id;
 $proposal_title = $row_proposals->proposal_title;
 $proposal_price = $row_proposals->proposal_price;
-if($proposal_price == 0){
+if($proposal_price == ''){
 $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
 $proposal_price = $get_p_1->fetch()->price;
 }
