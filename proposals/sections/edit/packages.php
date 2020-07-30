@@ -14,11 +14,15 @@ $row_2 = $get_p_2->fetch();
 $get_p_3 = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance'));
 $row_3 = $get_p_3->fetch();
 
-$prices = array(80,160,240,320,400,800,950,1100,1300,1450,1600);
-$revisions = array(0,1,2,3,4,5,6,7,8,9,10);
+$prices = range(100,10000,50);
+// $prices = array(100,150,200,250,300,350,400,450,500,550,600,700);
+$revisions = array(1,2,3,4,5,6,7,8,9,10);
 // print_r($cur_amount);
 ?>
-
+<style>
+	.package-item-single select{display: block !important;}
+	.package-item-single .nice-select{display: none !important;}
+</style>
 <!-- Packages -->
 		<section class="container-fluid packages" style="display: block;">
 			<div class="row">
@@ -150,6 +154,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 											echo "<option value='$rev'".($rev == $row_1->revisions ? "selected" : "").">$rev</option>";
 										}
 										?>
+										<option>Unlimited</option>
 										</select>
 									</div>
 									<!-- Each item -->
@@ -160,6 +165,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 											echo "<option value='$rev'".($rev == $row_2->revisions ? "selected" : "").">$rev</option>";
 										}
 										?>
+										<option>Unlimited</option>
 										</select>
 									</div>
 									<!-- Each item -->
@@ -170,6 +176,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 											echo "<option value='$rev'".($rev == $row_3->revisions ? "selected" : "").">$rev</option>";
 										}
 										?>
+										<option>Unlimited</option>
 										</select>
 									</div>
 									<!-- Each item -->
@@ -233,9 +240,12 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<!-- <input type="number" min='5' required name="proposal_packages[1][price]" form="pricing-form" value="<?= $row_1->price; ?>" class="form-control"> -->
 										<select class="form-control wide" name="proposal_packages[1][price]" form="pricing-form">
-											<option value="">Select</option>
-											<?php 
+											<!-- <option value="">Select</option> -->
+												<?php 
 												foreach ($prices as $price) {
+													if($intial < $max){
+														$intial +=50;
+													}
 													if($to == 'USD'){
 														$packg_price = round($cur_amount * $price);
 													}else{
@@ -245,7 +255,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 														$to = $s_currency;
 													}
 													$pkg_price = round($cur_amount * $row_1->price);
-													echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
+													echo "<option value='$price'".($packg_price == $row_1->price ? "selected" : "").">$to $packg_price</option>";
 												}
 											?>
 										</select>
@@ -253,7 +263,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<!-- Each item -->
 									<div class="package-item-single">
 										<select class="form-control wide" name="proposal_packages[2][price]" form="pricing-form">
-											<option value="">Select</option>
+											<!-- <option value="">Select</option> -->
 											<?php 
 												foreach ($prices as $price) {
 													if($to == 'USD'){
@@ -273,7 +283,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<!-- Each item -->
 									<div class="package-item-single">
 										<select class="form-control wide" name="proposal_packages[3][price]" form="pricing-form">
-											<option value="">Select</option>
+											<!-- <option value="">Select</option> -->
 											<?php 
 												foreach ($prices as $price) {
 													if($to == 'USD'){
@@ -288,6 +298,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 													echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
 												}
 											?>
+											
 										</select>
 									</div>
 									<!-- Each item -->

@@ -115,11 +115,11 @@
                       </div>
                       <?php } ?>
                       </div><!--- col-md-3 Ends --->
-                      <div class="popup">
+                      <!-- <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>Using high quality, informational photos will help your buyers visualize the services you have to offer. The minimum image dimensions are 800px wide X 450px height</p>
-                      </div>
+                      </div> -->
                     </div><!--- row gallery Ends --->
                     <!-- <hr> -->
                     <!-- <p class="text-right mb-0">
@@ -160,7 +160,7 @@
                           <input type='hidden' name='proposal_video' value='<?= $d_proposal_video; ?>' id='v_file'> 
                         </div>
                       </div><!--- col-md-3 Ends --->
-                      <div class="popup">
+                      <!-- <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>
@@ -168,7 +168,7 @@
                           <strong>Valid formats are mp4, avi, m4v</strong><br />
                           <strong>Maximum file size is 25MB</strong>
                         </p>
-                      </div>
+                      </div> -->
                     </div>
                     <!--- row gallery Ends --->
                     <!-- <div class="row gallery form-group">

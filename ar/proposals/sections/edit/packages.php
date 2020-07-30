@@ -14,8 +14,9 @@ $row_2 = $get_p_2->fetch();
 $get_p_3 = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance'));
 $row_3 = $get_p_3->fetch();
 
-$prices = array(80,160,240,320,400,800,950,1100,1300,1450,1600);
-$revisions = array(0,1,2,3,4,5,6,7,8,9,10);
+$prices = range(100,10000,50);
+// $prices = array(80,160,240,320,400,800,950,1100,1300,1450,1600);
+$revisions = array(1,2,3,4,5,6,7,8,9,10);
 
 ?>
 
@@ -162,6 +163,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 										echo "<option value='$rev'".($rev == $row_1->revisions ? "selected" : "").">$rev</option>";
 									}
 									?>
+									<option>غير محدود</option>
 								</select>
 							</div>
 							<!-- Each item -->
@@ -172,6 +174,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									echo "<option value='$rev'".($rev == $row_2->revisions ? "selected" : "").">$rev</option>";
 								}
 								?>
+								<option>غير محدود</option>
 								</select>
 							</div>
 							<!-- Each item -->
@@ -182,6 +185,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									echo "<option value='$rev'".($rev == $row_3->revisions ? "selected" : "").">$rev</option>";
 								}
 								?>
+								<option>غير محدود</option>
 								</select>
 							</div>
 							<!-- Each item -->
@@ -242,7 +246,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 							<!-- Each item -->
 							<div class="package-item-single">
 								<select class="form-control wide" name="proposal_packages[1][price]" form="pricing-form">
-									<option value="">Select</option>
+									<!-- <option value="">Select</option> -->
 									<?php 
 										foreach ($prices as $price) {
 											if($to == 'USD'){
@@ -262,7 +266,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 							<!-- Each item -->
 							<div class="package-item-single">
 								<select class="wide" name="proposal_packages[2][price]" form="pricing-form">
-									<option value="">Select</option>
+									<!-- <option value="">Select</option> -->
 									<?php 
 										foreach ($prices as $price) {
 											if($to == 'USD'){
@@ -282,7 +286,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 							<!-- Each item -->
 							<div class="package-item-single">
 								<select class="wide" name="proposal_packages[3][price]" form="pricing-form">
-									<option value="">Select</option>
+									<!-- <option value="">Select</option> -->
 									<?php 
 										foreach ($prices as $price) {
 											if($to == 'USD'){

@@ -15,7 +15,8 @@ if(isset($_POST["proposal_id"])){
 $proposal_id = strip_tags($input->post('proposal_id'));
 
 $packages = $input->post('proposal_packages');
-
+// $proposal_price $input->post('proposal_packages[1][price]');
+// $update_p = $db->update("proposals",array("proposal_price"=>$proposal_price),array("proposal_id"=>$proposal_id));
 foreach ($packages as $key => $package) {
   
   $package_id = $package['package_id'];

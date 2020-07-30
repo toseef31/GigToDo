@@ -1292,19 +1292,21 @@ global $login_seller_id;
 global $videoPlugin;
 global $site_url;
 
-$search_query = $input->post('price');
-// print_r($search_query);
 $online_sellers = array();
+$search_query = $input->post('price');
 $s_value = $search_query;
 
-// if(isset($_SESSION['cat_id'])){
-// $session_cat_id = $_SESSION['cat_id'];
-// $get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_cat_id=:cat_id AND proposal_status='active'",array("cat_id"=>$session_cat_id));
-// }elseif(isset($_SESSION['cat_child_id'])){
-// $session_cat_child_id = $_SESSION['cat_child_id'];
-// $get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_child_id=:child_id AND proposal_status='active'",array("child_id"=>$session_cat_child_id));
-// }
-$get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_price like :proposal_price AND proposal_status='active'",array(":proposal_price"=>$s_value));
+if(isset($_SESSION['cat_id'])){
+$session_cat_id = $_SESSION['cat_id'];
+$get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_cat_id=:cat_id AND proposal_price=$search_query AND proposal_status='active' AND proposal_price=$s_value",array("cat_id"=>$session_cat_id));
+}elseif(isset($_SESSION['cat_child_id'])){
+$session_cat_child_id = $_SESSION['cat_child_id'];
+$get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_child_id=:child_id AND proposal_price=$search_query AND proposal_status='active' AND proposal_price=$s_value",array("child_id"=>$session_cat_child_id));
+}else{
+$get_proposals = $db->query("select DISTINCT proposal_seller_id from proposals where proposal_price=$search_query AND proposal_status='active'");
+
+// $get_proposals = "select DISTINCT proposals.* from proposals JOIN proposal_packages ON proposals.proposal_id=proposal_packages.proposal_id or proposals.proposal_price=$search_query or proposal_packages.price=$search_query and proposals.proposal_status='active'";
+}
 while($row_proposals = $get_proposals->fetch()){
 	
 	$proposal_seller_id = $row_proposals->proposal_seller_id;
@@ -1372,8 +1374,19 @@ if(isset($_REQUEST['seller_language'])){
 		}
 	}
 }
-$values['proposal_price'] = $s_value;
-$query_where = "where proposal_title like :proposal_price AND proposal_status='active' ";
+// $values['proposal_price'] = $s_value;
+// if(isset($_SESSION['cat_id'])){
+// $query_where = "where proposal_price=$search_query AND proposal_cat_id=:cat_id AND proposal_status='active' AND proposal_price=:$s_value ";
+// }elseif(isset($_SESSION['cat_child_id'])){
+// $query_where = "where proposal_price=$search_query AND proposal_child_id=:child_id AND proposal_status='active' AND proposal_price=:$s_value ";
+// }else{
+	$query_where = "where proposal_price=$search_query AND proposal_status='active' ";
+
+// if(isset($_SESSION['cat_id'])){
+// $values['cat_id'] = $session_cat_id;
+// }elseif(isset($_SESSION['cat_child_id'])){
+// $values['child_id'] = $session_cat_child_id;
+// }
 if(count($where_online)>0){
 	$query_where .= " and (" . implode(" or ",$where_online) . ")";
 }
@@ -1395,10 +1408,16 @@ if(isset($_GET['page'])){
 }else{
 	$page = 1;
 }
+
 $start_from = ($page-1) * $per_page;
 $where_limit = " order by proposal_featured='yes' DESC LIMIT :limit OFFSET :offset";
+
+
+// or proposals.proposal_price=$search_query or proposal_packages.price=$search_query
 $get_proposals = $db->query("select * from proposals " . $query_where . $where_limit,$values,array("limit"=>$per_page,"offset"=>$start_from));
+// print_r($get_proposals);
 $count_proposals = $get_proposals->rowCount();
+
 if($count_proposals == 0){
 echo"
 <div class='col-md-12'>
@@ -1408,11 +1427,10 @@ echo"
 }
 
 while($row_proposals = $get_proposals->fetch()){
-
 $proposal_id = $row_proposals->proposal_id;
 $proposal_title = $row_proposals->proposal_title;
 $proposal_price = $row_proposals->proposal_price;
-if($proposal_price == 0){
+if($proposal_price == ''){
 $get_p_1 = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
 $proposal_price = $get_p_1->fetch()->price;
 }
