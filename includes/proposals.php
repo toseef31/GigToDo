@@ -65,6 +65,21 @@
 				<a href="<?= $site_url; ?>/ar/login.php"><i class="fa fa-heart"></i></a>
 			<?php } ?>
 		</div>
+		<?php if($proposal_main_price != ''){ ?>
+		<div class="meta-right">
+			<?php if($to == 'EGP'){ ?>
+        <span>
+          <?= $to; ?> <?= $proposal_main_price; ?>
+        </span>
+      <?php } elseif($to == 'USD'){ ?>
+        <span><?= $to; ?> <?= round($cur_amount * $proposal_main_price,2) ?></span>
+      <?php
+        }else{?>
+        	<span><?= $s_currency; ?> <?= $proposal_main_price; ?></span>
+        <?php }
+      ?>
+		</div>
+		<?php }else{ ?>
 		<div class="meta-right">
 			<?php if($to == 'EGP'){ ?>
         <span>
@@ -78,6 +93,7 @@
         <?php }
       ?>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 <!-- <div class="proposal-card-base mp-proposal-card"> -->
