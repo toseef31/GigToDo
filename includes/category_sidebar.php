@@ -158,10 +158,11 @@
             }elseif(isset($_SESSION['cat_child_id'])){
               $get_proposals = $db->query("select DISTINCT proposal_id from proposals where proposal_child_id=:child_id AND proposal_status='active'",array("child_id"=>$session_cat_child_id));
             }
-            while($row_proposals = $get_proposals->fetch()){
+            $row_proposals = $get_proposals->fetch();
             $proposal_id = $row_proposals->proposal_id;
-            $select_delivery_time = $db->select("proposal_packages",array('proposal_id' => $proposal_id));
-            $delivery_title = @$select_delivery_time->fetch()->delivery_time;
+            $select_delivery_time = $db->query("select DISTINCT delivery_time from proposal_packages where proposal_id=$proposal_id");
+            while($row_delivery_time = $select_delivery_time->fetch()){
+            $delivery_title = $row_delivery_time->delivery_time;
             $select_time = $db->select("delivery_times",array('delivery_title' => $delivery_title));
             $delivery_id = @$select_time->fetch()->delivery_id;
             if(!empty($delivery_title)){
@@ -268,7 +269,7 @@
     </div>
   </div>
 
-<div class="card border-success mb-3">
+<!-- <div class="card border-success mb-3">
   <div class="card-header bg-success">
     <h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> h5 text-white"><?php echo $lang['sidebar']['categories']; ?></h3>
   </div>
@@ -428,3 +429,4 @@
     </ul>
   </div>
 </div>
+ -->
