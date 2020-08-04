@@ -239,7 +239,7 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                     <div class="order-gig-detail">
                       <div class="order-gig-detail-title d-flex flex-row justify-content-between">
                         <span class="title"><?= $proposal_title; ?></span>
-                        <span class="price"><?= $s_currency.$order_price; ?>.00</span>
+                        <span class="price"><?php if ($to == 'EGP'){ echo $to; echo $order_price;}elseif($to == 'USD'){  echo $to; echo round($cur_amount * $order_price);}else{  echo $s_currency; echo $order_price; } ?></span>
                       </div>
                       <div class="order-gig-expand">
                         <ul class="list-inline d-flex flex-wrap">
@@ -457,14 +457,14 @@ $count_buyer_reviews = $get_buyer_reviews->rowCount();
                   <div class="order-gig-detail">
                     <div class="order-gig-detail-title d-flex flex-row justify-content-between">
                       <span class="title"><?= $proposal_title; ?></span>
-                      <span class="price"><?= $s_currency.$order_price; ?>.00</span>
+                      <span class="price"><?php if ($to == 'EGP'){ echo $to; echo $order_price;}elseif($to == 'USD'){  echo $to; echo round($cur_amount * $order_price);}else{  echo $s_currency; echo $order_price; } ?></span>
                     </div>
                     <div class="order-gig-expand">
                       <ul class="list-inline d-flex flex-wrap">
                         <li class="list-inline-item">Seller: <a href="<?= $seller_user_name; ?>"><?= ucfirst($seller_user_name); ?></a></li>
                         <li class="list-inline-item">Order Number: #<?= $order_number; ?></li>
                         <li class="list-inline-item"><?= $order_date; ?></li>
-                        <li class="list-inline-item">Processing Fee: <?= $s_currency.' '.$order_fee; ?></li>
+                        <li class="list-inline-item">Processing Fee: <?php if ($to == 'EGP'){ echo $to.' '; echo $order_fee;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $order_fee);}else{  echo $s_currency.' '; echo $order_fee; } ?></li>
                       </ul>
                     </div>
                   </div>

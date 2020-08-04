@@ -480,7 +480,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             </span>
                             <span>What do you need from the buyer to get started?</span>
                           </label>
-                          <textarea rows="6" id="proposal_desc" class="form-control text-count" name="proposal_desc" placeholder="I need...." required=""></textarea>
+                          <textarea rows="6" id="proposal_desc" class="form-control text-count" name="buyer_instruction" placeholder="I need...." required=""></textarea>
                           <label class="bottom-label text-right"><span class="descCount">0</span>/2500 Chars Max</label>
                           <span class="form-text text-danger" id="desc_error">you need to write description</span>
                           <div class="popup">
@@ -856,7 +856,7 @@ if(isset($_POST['publish'])){
                 // var_dump($data);die;
                 // unset($data['submit']);
                 $data['proposal_title'] = $input->post('proposal_title');
-                $data['proposal_desc'] = $input->post('proposal_desc');
+                $data['buyer_instruction'] = $input->post('buyer_instruction');
                 $data['proposal_cat_id'] = $input->post('proposal_cat_id');
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
                 // $data['proposal_tags'] = $input->post('proposal_tags');
