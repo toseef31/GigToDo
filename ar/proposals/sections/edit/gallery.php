@@ -505,10 +505,14 @@ $(document).ready(function(){
       break;
     }
   };
-
+  var url = '<?php echo $site_url ?>';
+  function pageRedirect() {
+    window.location.replace(url+"/ar/proposals/view_proposals");
+  } 
   <?php if($d_proposal_status != "draft"){ ?>
   $("#gallery_form").on('submit', function(event){
     $('#previewProposal').removeClass("d-none");
+    setTimeout(pageRedirect(), 15000);
   });
   <?php } ?>
 

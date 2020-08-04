@@ -27,7 +27,18 @@
 						$proposal_title = $row_proposals->proposal_title;
 		$proposal_img1 = $row_proposals->proposal_img1;
 		$today_date = date("F d, Y");
-		
+		// if($order_due < $today_date){
+		// 	$update_order = $db->update("orders",array("order_status"=>'overdue'),array("buyer_id"=>$login_seller_id));
+		// }
+
+  $new_date_today = strtotime($today_date);
+   
+  $date1 = date('Y-m-d',$new_date_today);
+
+  $new_date_order = strtotime($order_due);
+   
+  $date2 = date('Y-m-d',$new_date_order);
+ 
 		?>
 		<tr role="row">
 			<td data-label="Description" role="column">
@@ -56,20 +67,20 @@
 			<td data-label="Status" role="column">
 				<?php if ($order_status == "delivered"){ ?>
 				<a class="button button-red" href="order_details?order_id=<?php echo $order_id; ?>"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
+				<?php }elseif($order_status == "progress" && $date1 <= $date2){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?php echo $order_id; ?>">In Progress</a>
 				<?php }elseif($order_status == "completed"){ ?>
 					<a class="button button-yellow" href="order_details?order_id=<?php echo $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($order_status == "cancelled"){ ?>
 					<a class="button button-white" href="order_details?order_id=<?php echo $order_id; ?>"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "pending"){ ?>
+				<?php }elseif($order_status == "pending" && $date1 < $date2){ ?>
 
 					<a class="button button-darkgray" href="order_details?order_id=<?php echo $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 
 				<?php }elseif($order_status == "cancellation requested"){ ?>
 					<a class="button button-red" href="order_details?order_id=<?php echo $order_id; ?>">Cancel Request</a>
 
-				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>
+				<?php }elseif($date1 > $date2 && $order_status == 'progress' or $order_status == 'pending'){ ?>
 					<a class="button button-lochmara" href="order_details?order_id=<?php echo $order_id; ?>">overdue</a>
 				<?php } ?>
 			</td>
