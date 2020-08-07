@@ -115,11 +115,11 @@
                       </div>
                       <?php } ?>
                       </div><!--- col-md-3 Ends --->
-                      <div class="popup">
+                      <!-- <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>Using high quality, informational photos will help your buyers visualize the services you have to offer. The minimum image dimensions are 800px wide X 450px height</p>
-                      </div>
+                      </div> -->
                     </div><!--- row gallery Ends --->
                     <!-- <hr> -->
                     <!-- <p class="text-right mb-0">
@@ -157,10 +157,10 @@
                             <i class="fa fa-trash fa-2x delete-video" title="<?= $lang['proposals']['remove_video']; ?>"></i>
                           </span>
                           <?php } ?>
-                          <input type='hidden' name='proposal_video' value='<?= $d_proposal_video; ?>' id='v_file'> 
                         </div>
+                        <input type="hidden" name="proposal_video" value="<?= $d_proposal_video; ?>" id="v_file"> 
                       </div><!--- col-md-3 Ends --->
-                      <div class="popup">
+                      <!-- <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                         <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                         <p>
@@ -168,7 +168,7 @@
                           <strong>Valid formats are mp4, avi, m4v</strong><br />
                           <strong>Maximum file size is 25MB</strong>
                         </p>
-                      </div>
+                      </div> -->
                     </div>
                     <!--- row gallery Ends --->
                     <!-- <div class="row gallery form-group">
@@ -425,10 +425,14 @@ $(document).ready(function(){
       break;
     }
   };
-
+  var url = '<?php echo $site_url ?>';
+  function pageRedirect() {
+    window.location.replace(url+"/proposals/view_proposals");
+  }
   <?php if($d_proposal_status != "draft"){ ?>
   $("#gallery_form").on('submit', function(event){
     $('#previewProposal').removeClass("d-none");
+     setTimeout(pageRedirect(), 15000);
   });
   <?php } ?>
 
@@ -541,6 +545,7 @@ $(document).ready(function(){
           cache:false,
           processData:false,
         }).done(function(data){
+          console.log(data);
           $("#v_file").val(data);
           span.removeClass('chose').html("<i class='fa fa-video-camera fa-2x mb-2'></i><br>"+data+"<i class='fa fa-trash fa-2x delete-video'></i>");
         });

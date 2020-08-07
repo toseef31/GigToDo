@@ -17,6 +17,7 @@ if(isset($_SESSION['seller_user_name'])){
   $gmail_verification = $row_login_seller->gmail_verification;
   $fb_verification = $row_login_seller->fb_verification;
   $seller_verification = $row_login_seller->seller_verification;
+  $occuption = $row_login_seller->occuption;
 
   $relevant_requests = $row_general_settings->relevant_requests;
 
@@ -86,6 +87,7 @@ $fb_verification = $row_seller->fb_verification;
 $seller_verification = $row_seller->seller_verification;
 $seller_paypal_email = $row_seller->seller_paypal_email;
 $seller_payoneer_email = $row_seller->seller_payoneer_email;
+$occuption = $row_seller->occuption;
 
 $get_seller_status = $row_seller->seller_status;
 $select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$get_seller_id)); 
@@ -237,6 +239,7 @@ if(isset($_SESSION['seller_user_name'])){
                     ?>
                   <li><span>(<?= $count_reviews; ?>) Reviews)</span></li>
                 </ul>
+                <p class="mb-0 mt-3"><?= $occuption; ?></p>
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
                   <?php if($_SESSION['seller_user_name'] != $get_seller_user_name){ ?>
                     <ul class="profile-btn pt-20">

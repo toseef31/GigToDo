@@ -230,6 +230,22 @@ require_once("functions/functions.php");
     });
   }
 
+  function get_cat_freelancers(id){
+    var cat_id = id;
+    
+    $.ajax({  
+      url:"get_category_freelancer",  
+      method:"POST",  
+      data: {cat_id:cat_id},  
+      success:function(data){
+        console.log(data);
+      $('#freelancers').html('');  
+      $('#freelancers').html(data); 
+      $('#wait').removeClass("loader");
+      }  
+    });
+  }
+
   $('.get_online_sellers').click(function(){ 
    get_freelancers(); 
   });

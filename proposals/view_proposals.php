@@ -92,7 +92,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 					<!-- Row -->
 					<div class="list-page-filter">
 						<div class="row flex-md-row-reverse">
-							<div class="col-12 col-md-6">
+							<div class="col-12 col-md-5">
 								<ul class="pagination">
 									<li class="pagination-item">
 										<a class="pagination-link" href="javascript:void(0);">
@@ -115,7 +115,7 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 									</li>
 								</ul>
 							</div>
-							<div class="col-12 col-md-6">
+							<div class="col-12 col-md-7">
 								<nav class="list-page-nav">
 									<div class="nav nav-tabs" id="nav-tab" role="tablist">
 										<?php
@@ -130,6 +130,10 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'draft'));
 										?>
 										<a class="nav-item nav-link deep-sky-blue" id="draft-tab" data-toggle="tab" href="#nav-draft" role="tab" aria-controls="nav-draft" aria-selected="false">Draft <span class="badge"><?php echo $count_proposals; ?></span></a>
+		                <?php
+											$count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'pending'));
+		                ?>
+										<a class="nav-item nav-link selective-yellow" id="pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="false">Pending <span class="badge"><?php echo $count_proposals; ?></span></a>
 										<?php
 									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'modification'));
 										?>
@@ -627,6 +631,168 @@ $login_seller_vacation = $row_login_seller->seller_vacation;
 										<?php
 										 if($count_proposals == 0){
 										   echo "<center><h3 class='pt-4 pb-4'><i class='fa fa-smile-o'></i> You currently have no gig in draft.</h3></center>";
+										 }
+										?>
+										<!-- Each item -->
+									</div>
+									<!-- Gigs list end -->
+								</div>
+								<div class="tab-pane fade" id="nav-pending" role="tabpanel" aria-labelledby="pending-tab">
+									<div class="all-gigs-small">
+										<div class="row">
+                      <?php
+												$select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'pending'));
+												$count_proposals = $select_proposals->rowCount();
+                        while($row_proposals = $select_proposals->fetch()){
+                        $proposal_id = $row_proposals->proposal_id;
+                        $proposal_title = $row_proposals->proposal_title;
+                        $proposal_views = $row_proposals->proposal_views;
+                        $proposal_price = $row_proposals->proposal_price;
+                        $proposals_rating = $row_proposals->proposal_rating;
+                      	$proposal_status = $row_proposals->proposal_status;
+                      	$proposal_date = $row_proposals->proposal_date;
+												if($proposal_price == 0){
+												$get_p = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+												$proposal_price = $get_p->fetch()->price;
+												}
+                        $proposal_img1 = $row_proposals->proposal_img1;
+                        $proposal_url = $row_proposals->proposal_url;
+                        $proposal_featured = $row_proposals->proposal_featured;
+												$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
+                      ?>
+											<div class="col-12">
+												<div class="small-gigs-item selective-yellow d-flex flex-column">
+													<div class="small-gigs-item-header d-flex justify-content-between">
+														<div class="small-gigs-image">
+															<img class="img-fluid d-block" src="../proposals/proposal_files/<?= $proposal_img1 ?>" width="100" height="109" />
+														</div>
+														<div class="small-gigs-content d-flex justify-content-between">
+															<div class="content d-flex flex-column justify-content-between">
+																<h3 class="title">
+																	<a href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>"><?= $proposal_title; ?></a>
+																</h3>
+																<ul class="list-inline">
+																	<li class="list-inline-item"><?= $proposal_date; ?></li>
+																	<li class="list-inline-item">Reviews (<?= $proposal_rating; ?>)</li>
+																</ul>
+															</div>
+															<div class="icon d-flex flex-row">
+																<div class="dropdown">
+																	<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<i class="far fa-cog"></i>
+																	</a>
+																	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+																		<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a>
+																		<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">Delete</a>
+																		<a class="dropdown-item" href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>">Preview</a>
+																		<a class="dropdown-item" href="edit_proposal?proposal_id=<?php echo $proposal_id; ?>">Edit</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="small-gigs-item-footer d-flex flex-column">
+														<div class="d-flex flex-wrap gigs-status">
+															<div class="gig-status-item d-flex flex-column">
+																<span>Page Views</span>
+																<span><?php echo $proposal_views; ?></span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Sales</span>
+																<span><?php echo $count_orders; ?></span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Cancellations</span>
+																<span>0</span>
+															</div>
+															<div class="gig-status-item d-flex flex-column">
+																<span>Status</span>
+																<span><?php echo $proposal_status; ?></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<?php } ?>
+											<?php
+											 if($count_proposals == 0){
+											   echo "<center><h3 class='pt-4 pb-4'><i class='fa fa-smile-o'></i> You currently have no gig in pending.</h3></center>";
+											 }
+											?>
+											<!-- Each item -->
+										</div>
+									</div>
+									<!-- Small gigs item for mobile -->
+									<div class="gigs-list d-none d-lg-flex flex-column">
+                    <?php
+											$select_proposals = $db->select("proposals",array("proposal_seller_id"=>$login_seller_id,"proposal_status"=>'pending'));
+											$count_proposals = $select_proposals->rowCount();
+                      while($row_proposals = $select_proposals->fetch()){
+                      $proposal_id = $row_proposals->proposal_id;
+                      $proposal_title = $row_proposals->proposal_title;
+                      $proposal_views = $row_proposals->proposal_views;
+                      $proposal_price = $row_proposals->proposal_price;
+                      $proposals_rating = $row_proposals->proposal_rating;
+                    	$proposal_status = $row_proposals->proposal_status;
+                    	$proposal_date = $row_proposals->proposal_date;
+											if($proposal_price == 0){
+											$get_p = $db->select("proposal_packages",array("proposal_id" => $proposal_id,"package_name" => "Basic"));
+											$proposal_price = $get_p->fetch()->price;
+											}
+                      $proposal_img1 = $row_proposals->proposal_img1;
+                      $proposal_url = $row_proposals->proposal_url;
+                      $proposal_featured = $row_proposals->proposal_featured;
+											$count_orders = $db->count("orders",array("proposal_id"=>$proposal_id));
+                    ?>
+										<div class="gig-item selective-yellow d-flex flex-wrap align-items-start">
+											<div class="gig-item-image">
+												<img alt="" class="img-fluid d-block" src="../proposals/proposal_files/<?= $proposal_img1 ?>" width="85" height="92" style="height: 92px" />
+											</div>
+											<div class="gig-item-content d-flex flex-column">
+												<div class="d-flex flex-row justify-content-between">
+													<div class="title-info">
+														<h4><?= $proposal_title; ?></h4>
+														<ul class="list-inline">
+															<li class="list-inline-item">Created On: <?= $proposal_date; ?></li>
+															<li class="list-inline-item">Reviews (<?= $proposals_rating; ?>)</li>
+														</ul>
+													</div>
+													<div class="dropdown">
+														<a class="dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="far fa-cog"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-1">
+															<a class="dropdown-item" href="pause_proposal?proposal_id=<?php echo $proposal_id; ?>">Pause</a>
+															<a class="dropdown-item" href="delete_proposal?proposal_id=<?php echo $proposal_id; ?>">Delete</a>
+															<a class="dropdown-item" href="<?php echo $login_seller_user_name; ?>/<?php echo $proposal_url; ?>">Preview</a>
+															<a class="dropdown-item" href="edit_proposal?proposal_id=<?php echo $proposal_id; ?>">Edit</a>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex flex-wrap gigs-status">
+													<div class="gig-status-item d-flex flex-column">
+														<span>Page Views</span>
+														<span><?php echo $proposal_views; ?></span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Sales</span>
+														<span><?php echo $count_orders; ?></span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Cancellations</span>
+														<span>0</span>
+													</div>
+													<div class="gig-status-item d-flex flex-column">
+														<span>Status</span>
+														<span><?php echo $proposal_status; ?></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<?php } ?>
+										<?php
+										 if($count_proposals == 0){
+										   echo "<center><h3 class='pt-4 pb-4'><i class='fa fa-smile-o'></i> You currently have no gig in pending.</h3></center>";
 										 }
 										?>
 										<!-- Each item -->

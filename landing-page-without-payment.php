@@ -79,6 +79,7 @@ require_once("social-config.php");
     </div>
     <!-- Banner Section  Ends-->
     <!-- Truster by section starts-->
+    <?php if($trusted_companies == 1){ ?>
     <div class="trusted-by-section padding-top padding-bottom bg-gray">
       <div class="container">
         <div class="section-header">
@@ -105,6 +106,7 @@ require_once("social-config.php");
         </ul>
       </div>
     </div>
+    <?php } ?>
     <!-- Truster by section ends-->
     <!-- Get Started Section Starts -->
     <div class="get-started padding-bottom padding-top">
@@ -315,7 +317,7 @@ require_once("social-config.php");
             </script>";
             // array_push($error_array, "Email has already been taken. Try logging in instead.");
           }else{
-
+            $insert_email = $db->insert("landing_email", array("email" => $email));
             echo "<script>
             swal({
             type: 'success',

@@ -14,7 +14,7 @@
         <span>
           <img alt="User Icon" class="img-fluid d-block" src="assets/img/search/user-icon.png" />
         </span>
-        <span>Digital Marketing</span>
+        <span><?= $occuption ?></span>
       </div>
       <div class="search-results-card-locations d-flex flex-row align-items-center">
         <span>

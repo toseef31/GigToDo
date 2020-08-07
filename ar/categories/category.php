@@ -10,6 +10,8 @@
   $login_seller_name = $row_login_seller->seller_name;
   $login_user_name = $row_login_seller->seller_user_name;
   
+  $cat_page_url = $input->get('cat_url');
+  
   if(isset($_GET['cat_url'])){
     unset($_SESSION['cat_child_id']);
     $get_cat = $db->select("categories",array('cat_url' => $input->get('cat_url')));

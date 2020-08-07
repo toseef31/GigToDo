@@ -480,9 +480,26 @@ $login_seller_language = $row_login_seller->seller_language;
                             </span>
                             <span>What do you need from the buyer to get started?</span>
                           </label>
-                          <textarea rows="6" id="proposal_desc" class="form-control text-count" name="proposal_desc" placeholder="I need...." required=""></textarea>
+                          <textarea rows="6" id="proposal_desc" class="form-control text-count" name="buyer_instruction" placeholder="I need...." required=""></textarea>
                           <label class="bottom-label text-right"><span class="descCount">0</span>/2500 Chars Max</label>
                           <span class="form-text text-danger" id="desc_error">you need to write description</span>
+                          <div class="d-flex flex-column">
+                            <label class="bottom-label">Answer Type:</label>
+                            <div class="d-flex flex-row mt-10 mb-10">
+                              <select class="form-control wide" name="answer_type">
+                                <option value="Free Text">Free Text</option>
+
+                                <option value="Attachment">Attachment</option>
+
+                              </select>
+                            </div>
+                            <div class="d-flex flex-row">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="answer_mandatory" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Answer is Mandatory</label>
+                              </div>
+                            </div>
+                          </div>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -500,7 +517,7 @@ $login_seller_language = $row_login_seller->seller_language;
                           </label>
                           <div class="deliver-time d-flex flex-wrap">
                             <?php
-                            $get_delivery_times = $db->select("delivery_times");
+                            $get_delivery_times = $db->select("delivery_times",array("type" => ''));
                             while($row_delivery_times = $get_delivery_times->fetch()){
                             $delivery_id = $row_delivery_times->delivery_id;
                             $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
@@ -520,7 +537,7 @@ $login_seller_language = $row_login_seller->seller_language;
                             </label>
                             <?php } ?>
                             <label class="deliver-time-item" for="days30">
-                              <input id="days30" type="radio" name="delivery_id" class="time_select" hidden  />
+                              <input id="days30" type="radio" name="custom_delivery" class="time_select" hidden  />
                               <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                                 <span class="color-icon">
                                   <span>-</span>
@@ -659,7 +676,10 @@ $login_seller_language = $row_login_seller->seller_language;
                      
                       <div class="d-flex flex-column">
                         <input type="hidden" name="email" value="<?= $user_email; ?>">
-                       
+                        <!-- <div class="form-group d-flex flex-column">
+                          <label class="control-label" for="fname">Name</label>
+                          <input class="form-control" id="fname" name="name" type="text" />
+                        </div> -->
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
                           <label class="control-label" for="lname">Create User Name</label>
@@ -694,11 +714,11 @@ $login_seller_language = $row_login_seller->seller_language;
   
 <?php 
 
-function insertPackages($proposal_id){
+function insertPackages($proposal_id, $price, $time){
   global $db;
-  $insertPackage1 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Basic',"price"=>5));
-  $insertPackage2 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Standard',"price"=>10));
-  $insertPackage3 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance',"price"=>15));
+  $insertPackage1 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Basic',"price"=>$price,"delivery_time"=>$time,"revisions"=>1));
+  $insertPackage2 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Standard',"price"=>10,"delivery_time"=>1,"revisions"=>1));
+  $insertPackage3 = $db->insert("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance',"price"=>15,"delivery_time"=>1,"revisions"=>1));
   if($insertPackage3){return true;}
 }
 
@@ -718,10 +738,10 @@ if(isset($_POST['publish'])){
     echo "<script>window.open('post-gig#publish_section','_self')</script>";
   }else{
     $error_array = array();
-    // $name = strip_tags($input->post('name'));
-    // $name = strip_tags($name);
-    // $name = ucfirst(strtolower($name));
-    // $_SESSION['name']= $name;
+    $name = strip_tags($input->post('name'));
+    $name = strip_tags($name);
+    $name = ucfirst(strtolower($name));
+    $_SESSION['name']= $name;
     $u_name = strip_tags($input->post('u_name'));
     $u_name = strip_tags($u_name);
     $_SESSION['u_name']= $u_name;
@@ -853,40 +873,58 @@ if(isset($_POST['publish'])){
 
                 $data = array();
 
-
-
                 // var_dump($data);die;
                 // unset($data['submit']);
                 $data['proposal_title'] = $input->post('proposal_title');
-                $data['proposal_desc'] = $input->post('proposal_desc');
+                $data['buyer_instruction'] = $input->post('buyer_instruction');
+                $data['answer_type'] = $input->post('answer_type');
+                $data['answer_mandatory'] = $input->post('answer_mandatory');
                 $data['proposal_cat_id'] = $input->post('proposal_cat_id');
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
                 // $data['proposal_tags'] = $input->post('proposal_tags');
                 $data['proposal_price'] = $input->post('proposal_price');
+
+                $custom_delivery = $input->post('custom_delivery');
+                if($custom_delivery != ''){
+                  $get_deliver_time = $db->select("delivery_times",array("delivery_title" => $custom_delivery));
+                  $count_time = $get_deliver_time->rowCount();
+                  $row_deliver_time = $get_deliver_time->fetch();
+                  $delivery_id = $row_deliver_time->delivery_id;
+                  
+                  if($count_time > 0 ){
+                    $data['delivery_id'] = $delivery_id;
+                  }else{
+                    $insert_time = $db->insert('delivery_times',array('delivery_proposal_title'=>$custom_delivery, 'delivery_title'=>$custom_delivery, 'type'=>'custom'));
+                    if($insert_time){
+                      $insert_delivery_id = $db->lastInsertId();
+                      $data['delivery_id'] = $insert_delivery_id;
+                    }
+                  }
+                }else{
                 $data['delivery_id'] = $input->post('delivery_id');
-                
+                }
                 $data['proposal_url'] = $sanitize_url;
                 $data['proposal_seller_id'] = $regsiter_seller_id;
                 $data['proposal_featured'] = "no";
                 if($enable_referrals == "no"){ 
                 $data['proposal_enable_referrals'] = "no"; 
                 }
-                $graphic_img = array("Graphic-Designing.jpg", "Graphic-Designing-1.png", "Graphic-Designing-2.jpg", "Graphic-Designing-3.jpg");
+                $graphic_img = array("Graphic.png", "Graphic-1.png", "Graphic-2.png", "Graphic-3.png", "Graphic-4.png", "Graphic-5.png");
                 $random_graphic=array_rand($graphic_img);
 
-                $digital_img = array("digital-marketing.jpg", "digital_marketing-1.jpg", "digital-marketing-2.png", "digital-marketing-3.jpg");
+                $digital_img = array("digital.png", "digital-1.png", "digital-2.png", "digital-3.png");
                 $random_digital=array_rand($digital_img);
 
-                $writing_img = array("writing-and-translation.jpg", "writing-and-translation-1.jpg", "writing-and-translation-2.jpg", "writing-and-translation-3.jpg");
+                $writing_img = array("writing.png", "writing-1.png", "writing-2.png", "writing-3.png");
                 $writing_digital=array_rand($writing_img);
 
-                $video_img = array("video-sound.jpg", "video-sound-1.jpg", "video-sound-2.jpg", "video-sound-3.jpg");
+                $video_img = array("video.png", "video-1.png", "video-2.png", "video-3.png", "video-4.png");
                 $video_digital=array_rand($video_img);
 
-                $tech_img = array("programing-tech.png", "programming-tech-1.jpeg", "programming-tech-2.jpg", "programming-tech-3.jpg");
+                $tech_img = array("programing.png", "programming-1.png", "programming-2.png", "programming-3.png", "programming-4.png");
                 $tech_digital=array_rand($tech_img);
 
-                $business_img = array("business.jpeg", "business-1.jpg", "Business-2.jpg", "business-3.jpg");
+                $business_img = array("business.png", "business-1.png", "business-2.png", "business-3.png", "business-4.png");
                 $business_digital=array_rand($business_img);
 
                 if($data['proposal_cat_id'] == 1){
@@ -906,7 +944,8 @@ if(isset($_POST['publish'])){
                 }
                 $data['level_id'] = '1';
                 $data['language_id'] = '1';
-                $data['proposal_status'] = "pending";
+                $data['proposal_status'] = "active";
+                $data['proposal_date'] = date("F d, Y");
 // var_dump($data);die;
                 $insert_proposal = $db->insert("proposals",$data);
 
@@ -919,9 +958,15 @@ if(isset($_POST['publish'])){
                   }else{
                     $redirect = "pricing";
                   }
-
-                  insertPackages($proposal_id);
-
+                  $get_price = $db->select("proposals", array('proposal_id'=>$proposal_id));
+                  $row_price = $get_price->fetch();
+                  $proposal_price = $row_price->proposal_price; 
+                  $delivery_id = $row_price->delivery_id;
+                  $get_time = $db->select("delivery_times",array("delivery_id"=>$delivery_id));
+                  $row_time = $get_time->fetch();
+                  $delivery_proposal_title = $row_time->delivery_proposal_title;
+                  insertPackages($proposal_id,$proposal_price,$delivery_proposal_title);
+                  
                   echo "<script>
                   swal({
                   type: 'success',
@@ -1053,7 +1098,7 @@ if(isset($_POST['publish'])){
         data:{category_id:category_id},
 
         success:function(data){
-          console.log(data);
+          // console.log(data);
         $("#sub-category").html(data);
         }
         });

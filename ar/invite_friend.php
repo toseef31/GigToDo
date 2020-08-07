@@ -90,8 +90,8 @@ $referral_money = $row_general_settings->referral_money;
 								</div>
 								<div class="col-12 col-md-7">
 									<div class="d-flex flex-column align-items-center">
-										<h1 class="text-center">قم بدعوة اصدقائك واحصل على   <?php if ($to == 'EGP'){ echo $to.' '; echo "80";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * 80);}else{  echo $s_currency.' '; echo "80"; } ?></h1>
-										<p class="text-center">احصل على خصم 20 جنيه مصرى على عملية شرائك القادمة</p>
+										<h1 class="text-center">قم بدعوة اصدقائك واحصل على   <?php if ($to == 'EGP'){ echo $to.' '; echo $referral_money;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $referral_money,2);}else{  echo $s_currency.' '; echo $referral_money; } ?></h1>
+										<!-- <p class="text-center">احصل على خصم 20 جنيه مصرى على عملية شرائك القادمة</p> -->
 										<form method="POST" action="">
 											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>/ar/register?referral=<?php echo $login_seller_referral; ?>">
 											<div class="input-group flex-nowrap flex-row">
@@ -105,7 +105,7 @@ $referral_money = $row_general_settings->referral_money;
 													<button type="submit" name="send_email">البحث</button>
 												</div>
 											</div>
-											<label class="text-center control-label">افصل رسائل البريد الالكترونى بفواصل</label>
+											<!-- <label class="text-center control-label">افصل رسائل البريد الالكترونى بفواصل</label> -->
 										</form>
 										<p class="text-center">شارك مع العديد من الاصدقاء واكسب المزيد من المال</p>
 										<ul class="list-inline d-flex flex-row align-items-center justify-content-center">
@@ -119,23 +119,23 @@ $referral_money = $row_general_settings->referral_money;
 													<i class="fab fa-twitter"></i>
 												</a>
 											</li>
-											<li class="list-inline-item">
+											<!-- <li class="list-inline-item">
 												<a class="list-inline-link youtube" href="javascript:void(0)">
 													<i class="fab fa-youtube"></i>
 												</a>
-											</li>
+											</li> -->
 											<li class="list-inline-item">
 												<a class="list-inline-link linkedin" href="javascript:void(0)" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $site_url; ?>/ar/register?referral=<?php echo $login_seller_referral; ?>')" target="_blank">
 													<i class="fab fa-linkedin-in"></i>
 												</a>
 											</li>
-											<li class="list-inline-item">
+											<!-- <li class="list-inline-item">
 												<a class="list-inline-link instagram" href="http://instagram.com/sharer.php?u=<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>" target="_blank">
 													<i class="fab fa-instagram"></i>
 												</a>
-											</li>
+											</li> -->
 										</ul>
-										<h6 class="text-center">برنامج الإحالة <a href="javascript:void(0);">الشروط والأحكام</a></h6>
+										<h6 class="text-center">برنامج الإحالة <a href="terms_and_conditions">الشروط والأحكام</a></h6>
 									</div>
 								</div>
 							</div>

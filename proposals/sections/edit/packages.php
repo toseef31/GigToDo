@@ -14,11 +14,16 @@ $row_2 = $get_p_2->fetch();
 $get_p_3 = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"package_name"=>'Advance'));
 $row_3 = $get_p_3->fetch();
 
-$prices = array(80,160,240,320,400,800,950,1100,1300,1450,1600);
-$revisions = array(0,1,2,3,4,5,6,7,8,9,10);
-// print_r($cur_amount);
-?>
+$prices = range(100,10000,50);
 
+$revisions = array(1,2,3,4,5,6,7,8,9,10);
+// print_r($cur_amount);
+$times = range(1,30,1);
+?>
+<style>
+	.package-item-single select{display: block !important;}
+	.package-item-single .nice-select{display: none !important;}
+</style>
 <!-- Packages -->
 		<section class="container-fluid packages" style="display: block;">
 			<div class="row">
@@ -76,20 +81,20 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
-										<span class="package-title">Basic</span>
-										<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control description1" placeholder="Description"><?= $row_1->description; ?></textarea>
+										<!-- <span class="package-title">Basic</span> -->
+										<textarea name="proposal_packages[1][description]" class="form-control description1" rows="6" cols="5" placeholder="Description"><?= $row_1->description; ?></textarea>
 										<span class="desc1">description is required</span>
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
-										<span class="package-title">Standard</span>
-										<textarea maxlength="35" name="proposal_packages[2][description]" class="form-control packg-desc" placeholder="Description"><?= $row_2->description; ?></textarea>
+										<!-- <span class="package-title">Standard</span> -->
+										<textarea name="proposal_packages[2][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_2->description; ?></textarea>
 										<span class="desc2">description is required</span>
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
-										<span class="package-title">Premium</span>
-										<textarea maxlength="35" name="proposal_packages[3][description]" class="form-control packg-desc" placeholder="Description"><?= $row_3->description; ?></textarea>
+										<!-- <span class="package-title">Premium</span> -->
+										<textarea name="proposal_packages[3][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_3->description; ?></textarea>
 										<span class="desc3">description is required</span>
 									</div>
 									<!-- Each item -->
@@ -103,11 +108,15 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<select name="proposal_packages[1][delivery_time]" class="form-control wide">
 										<?php
-										$get_delivery_times = $db->select("delivery_times");
-										while($row_delivery_times = $get_delivery_times->fetch()){
-										$delivery_time = $row_delivery_times->delivery_proposal_title;
-										echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_1->delivery_time ? "selected" : "").">$delivery_time</option>";
-										}
+										// $get_delivery_times = $db->select("delivery_times");
+										// while($row_delivery_times = $get_delivery_times->fetch()){
+										// $delivery_time = $row_delivery_times->delivery_proposal_title;
+										// echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_1->delivery_time ? "selected" : "").">$delivery_time</option>";
+										// }
+										foreach ($times as $time) {
+										
+										echo "<option value='$time' ".(intval($time) == $row_1->delivery_time ? "selected" : "").">$time</option>";
+										 }
 										?>
 										</select>
 									</div>
@@ -115,11 +124,15 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<select name="proposal_packages[2][delivery_time]" form="pricing-form" class="form-control wide">
 										<?php
-										$get_delivery_times = $db->select("delivery_times");
-										while($row_delivery_times = $get_delivery_times->fetch()){
-										$delivery_time = $row_delivery_times->delivery_proposal_title;
-										echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_2->delivery_time ? "selected" : "").">$delivery_time</option>";
-										}
+										// $get_delivery_times = $db->select("delivery_times");
+										// while($row_delivery_times = $get_delivery_times->fetch()){
+										// $delivery_time = $row_delivery_times->delivery_proposal_title;
+										// echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_2->delivery_time ? "selected" : "").">$delivery_time</option>";
+										// }
+										foreach ($times as $time) {
+								
+										echo "<option value='$time' ".(intval($time) == $row_2->delivery_time ? "selected" : "").">$time</option>";
+										 }
 										?>
 										</select>
 									</div>
@@ -127,11 +140,15 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<select name="proposal_packages[3][delivery_time]" form="pricing-form" class="form-control wide">
 										<?php
-										$get_delivery_times = $db->select("delivery_times");
-										while($row_delivery_times = $get_delivery_times->fetch()){
-										$delivery_time = $row_delivery_times->delivery_proposal_title;
-										echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_3->delivery_time ? "selected" : "").">$delivery_time</option>";
-										}
+										// $get_delivery_times = $db->select("delivery_times");
+										// while($row_delivery_times = $get_delivery_times->fetch()){
+										// $delivery_time = $row_delivery_times->delivery_proposal_title;
+										// echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_3->delivery_time ? "selected" : "").">$delivery_time</option>";
+										// }
+										foreach ($times as $time) {
+										
+										echo "<option value='$time' ".(intval($time) == $row_3->delivery_time ? "selected" : "").">$time</option>";
+										 }
 										?>
 										</select>
 									</div>
@@ -150,6 +167,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 											echo "<option value='$rev'".($rev == $row_1->revisions ? "selected" : "").">$rev</option>";
 										}
 										?>
+										<option>Unlimited</option>
 										</select>
 									</div>
 									<!-- Each item -->
@@ -160,6 +178,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 											echo "<option value='$rev'".($rev == $row_2->revisions ? "selected" : "").">$rev</option>";
 										}
 										?>
+										<option>Unlimited</option>
 										</select>
 									</div>
 									<!-- Each item -->
@@ -170,6 +189,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 											echo "<option value='$rev'".($rev == $row_3->revisions ? "selected" : "").">$rev</option>";
 										}
 										?>
+										<option>Unlimited</option>
 										</select>
 									</div>
 									<!-- Each item -->
@@ -233,9 +253,12 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<!-- <input type="number" min='5' required name="proposal_packages[1][price]" form="pricing-form" value="<?= $row_1->price; ?>" class="form-control"> -->
 										<select class="form-control wide" name="proposal_packages[1][price]" form="pricing-form">
-											<option value="">Select</option>
-											<?php 
+											<option value="<?= $row_1->price; ?>" selected><?php if ($to == 'EGP'){ echo $to.' '; echo $row_1->price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $row_1->price);}else{  echo $s_currency; echo $row_1->price; } ?></option>
+												<?php 
 												foreach ($prices as $price) {
+													if($intial < $max){
+														$intial +=50;
+													}
 													if($to == 'USD'){
 														$packg_price = round($cur_amount * $price);
 													}else{
@@ -245,7 +268,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 														$to = $s_currency;
 													}
 													$pkg_price = round($cur_amount * $row_1->price);
-													echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
+													echo "<option value='$price'>$to $packg_price</option>";
 												}
 											?>
 										</select>
@@ -253,7 +276,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<!-- Each item -->
 									<div class="package-item-single">
 										<select class="form-control wide" name="proposal_packages[2][price]" form="pricing-form">
-											<option value="">Select</option>
+											<option value="<?= $row_2->price; ?>" selected><?php if ($to == 'EGP'){ echo $to.' '; echo $row_2->price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $row_2->price);}else{  echo $s_currency; echo $row_2->price; } ?></option>
 											<?php 
 												foreach ($prices as $price) {
 													if($to == 'USD'){
@@ -265,7 +288,7 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 														$to = $s_currency;
 													}
 													$pkg_price = round($cur_amount * $row_2->price);
-													echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
+													echo "<option value='$price'>$to $packg_price</option>";
 												}
 											?>
 										</select>
@@ -273,7 +296,8 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 									<!-- Each item -->
 									<div class="package-item-single">
 										<select class="form-control wide" name="proposal_packages[3][price]" form="pricing-form">
-											<option value="">Select</option>
+
+											<option value="<?= $row_3->price; ?>" selected><?php if ($to == 'EGP'){ echo $to.' '; echo $row_3->price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $row_3->price);}else{  echo $s_currency; echo $row_3->price; } ?></option>
 											<?php 
 												foreach ($prices as $price) {
 													if($to == 'USD'){
@@ -285,9 +309,10 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 														$to = $s_currency;
 													}
 													$pkg_price = round($cur_amount * $row_3->price);
-													echo "<option value='$price'".($packg_price == $pkg_price ? "selected" : "").">$to $packg_price</option>";
+													echo "<option value='$price'>$to $packg_price</option>";
 												}
 											?>
+											
 										</select>
 									</div>
 									<!-- Each item -->
@@ -296,12 +321,21 @@ $revisions = array(0,1,2,3,4,5,6,7,8,9,10);
 							</form>
 						</div>
 						<!-- Packages body -->
+						<?php if($row_2->description != '' or $row_3->description != ''){ ?>
+						<div class="tryit-overlay d-flex flex-column justify-content-center align-items-center packages-active" id="overly-check" style="background-image: url(../assets/img/post-a-gig/tryit-bg.png);">
+							<p>Increase your revenue by offering 2 additional packages</p>
+							<div class="d-flex flex-row justify-content-center">
+								<button class="tryit-overlay-button" type="button" role="button">try it now</button>
+							</div>
+						</div>
+						<?php }else{?>
 						<div class="tryit-overlay d-flex flex-column justify-content-center align-items-center" id="overly-check" style="background-image: url(../assets/img/post-a-gig/tryit-bg.png);">
 							<p>Increase your revenue by offering 2 additional packages</p>
 							<div class="d-flex flex-row justify-content-center">
 								<button class="tryit-overlay-button" type="button" role="button">try it now</button>
 							</div>
 						</div>
+						<?php } ?>
 						<!-- Try it overlay -->
 					</div>
 					<div class="form-group row add-attribute justify-content-center d-none">

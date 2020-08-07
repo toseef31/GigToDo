@@ -43,7 +43,7 @@
     <!--====== Responsive css ======-->
     <link href="assets/css/responsive.css" rel="stylesheet">
     <!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
-    <!-- <link href="styles/styles.css" rel="stylesheet"> -->
+    <link href="styles/styles.css" rel="stylesheet">
     <!-- <link href="styles/categories_nav_styles.css" rel="stylesheet"> -->
     <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet"> -->
     <!-- <link href="styles/owl.carousel.css" rel="stylesheet"> -->

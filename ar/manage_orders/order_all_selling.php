@@ -26,6 +26,13 @@
 		$proposal_title = $row_proposals->proposal_title;
 		$proposal_img1 = $row_proposals->proposal_img1;
 		$today_date = date("F d, Y");
+		$new_date_today = strtotime($today_date);
+		 
+		$date1 = date('Y-m-d',$new_date_today);
+
+		$new_date_order = strtotime($order_due);
+		 
+		$date2 = date('Y-m-d',$new_date_order);
 		?>
 		<tr role="row">
 			<td data-label="وصف" role="column">
@@ -53,28 +60,18 @@
 			</td>
 			<td data-label="الحالة" role="column">
 				<?php if ($order_status == "delivered"){ ?>
-<<<<<<< HEAD
 				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">جاري التنفيذ</a>
-=======
-				<a class="button button-red" href="javascript:void(0);"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
-					<a class="button button-limerick" href="javascript:void(0);">جاري التنفيذ</a>
->>>>>>> 4092f0cb33ec1d807b916c68370f5acc31eea217
 				<?php }elseif($order_status == "completed"){ ?>
 					<a class="button button-yellow" href="order_details?order_id=<?= $order_id; ?>">منجز</a>
 				<?php }elseif($order_status == "cancelled"){ ?>
 					<a class="button button-white" href="order_details?order_id=<?= $order_id; ?>">ملغية</a>
 				<?php }elseif($order_status == "pending"){ ?>
-<<<<<<< HEAD
 					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>">قيد الانتظار</a>
-=======
-					<a class="button button-darkgray" href="javascript:void(0);">قيد الانتظار</a>
 				<?php }elseif($order_status == "cancellation requested"){ ?>
-					<a class="button button-red" href="javascript:void(0);">إلغاء الطلب</a>
->>>>>>> 4092f0cb33ec1d807b916c68370f5acc31eea217
-				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>
+					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">إلغاء الطلب</a>
+				<?php }elseif($date1 > $date2 && $order_status == 'progress' or $order_status == 'pending'){ ?>
 					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">متأخرة</a>
 				<?php } ?>
 			</td>

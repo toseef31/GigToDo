@@ -317,15 +317,15 @@
                     </div>
                     <!-- Each item -->
                     <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center"><?= $p_delivery_time_1; ?> Day</p>
+                      <p class="text-center"><?= intval($p_delivery_time_1); ?> Day</p>
                     </div>
                     <!-- Each item -->
                     <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center"><?= $p_delivery_time_2; ?> Day</p>
+                      <p class="text-center"><?= intval($p_delivery_time_2); ?> Day</p>
                     </div>
                     <!-- Each item -->
                     <div class="package-item-single d-flex align-items-center justify-content-center">
-                      <p class="text-center"><?= $p_delivery_time_3; ?> Day</p>
+                      <p class="text-center"><?= intval($p_delivery_time_3); ?> Day</p>
                     </div>
                     <!-- Each item -->
                   </div>

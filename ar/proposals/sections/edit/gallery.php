@@ -130,13 +130,13 @@
                     </div>
                     <?php } ?>
                     </div><!--- col-md-3 Ends --->
-                    <div class="popup">
+                    <!-- <div class="popup">
                       <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
                       <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                       <p>
                         إستخدام صور إعلامية عالية الجودة سيساعد المشترين على تصور الخدمات التي تقدمها. الحد الأدنى لأبعاد الصورة هو 800 بكسل للعرض × 450 بكسل للطول
                       </p>
-                    </div>
+                    </div> -->
                   </div><!--- row gallery Ends --->
                   <div class="row gallery form-group">
                     <label class="custom-label d-flex flex-row align-items-center">
@@ -173,10 +173,10 @@
                           <i class="fa fa-trash fa-2x delete-video" title="<?= $lang['proposals']['remove_video']; ?>"></i>
                         </span>
                         <?php } ?>
-                        <input type='hidden' name='proposal_video' value='<?= $d_proposal_video; ?>' id='v_file'> 
                       </div>
+                      <input type="hidden" name="proposal_video" value="<?= $d_proposal_video; ?>" id="v_file">  
                     </div><!--- col-md-3 Ends --->
-                    <div class="popup">
+                    <!-- <div class="popup">
                       <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
                       <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
                       <p>
@@ -188,7 +188,7 @@
                           الحد الأقصى لحجم الملف هو 25 ميغابايت
                         </strong>
                       </p>
-                    </div>
+                    </div> -->
                   </div>
                   <!-- <div class="form-group">
                     <label class="custom-label d-flex flex-row align-items-center">
@@ -505,10 +505,14 @@ $(document).ready(function(){
       break;
     }
   };
-
+  var url = '<?php echo $site_url ?>';
+  function pageRedirect() {
+    window.location.replace(url+"/ar/proposals/view_proposals");
+  } 
   <?php if($d_proposal_status != "draft"){ ?>
   $("#gallery_form").on('submit', function(event){
     $('#previewProposal').removeClass("d-none");
+    setTimeout(pageRedirect(), 15000);
   });
   <?php } ?>
 

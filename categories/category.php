@@ -16,6 +16,7 @@
   $login_user_name = $row_login_seller->seller_user_name;
 
   $cat_page_url = $input->get('cat_url');
+
   
   if(isset($_GET['cat_url'])){
     unset($_SESSION['cat_child_id']);
@@ -976,11 +977,166 @@ $cur_amount = currencyConverter($to,1);
     prefix: "$",
     hide_min_max:false,
     onChange: function(data) {
-        // alert(data.from);
+        var sPath = ''; 
+        
+        // var aInputs = $('li').find('.get_online_sellers');
+        var aInputs = $('.get_online_sellers');
+
+        var aKeys   = Array();
+        
+        var aValues = Array();
+        
+        iKey = 0;
+        
+        $.each(aInputs,function(key,oInput){
+        
+        if(oInput.checked){
+          
+        aKeys[iKey] =  oInput.value
+        
+        };
+        
+        iKey++;
+        
+        });
+        
+        if(aKeys.length>0){
+          
+        var sPath = '';
+          
+        for(var i = 0; i < aKeys.length; i++){
+        
+        sPath = sPath + 'online_sellers[]=' + aKeys[i]+'&';
+        
+
+        }
+        
+        }
+        
+        
+        var cat_url = "<?php echo $input->get('cat_url'); ?>";
+        
+        sPath = sPath + 'cat_url=' + cat_url +'&';
+        
+        <?php if(isset($_REQUEST['cat_child_url'])){ ?>
+        
+        var cat_child_url = "<?php echo $input->get('cat_child_url'); ?>";
+        
+        sPath = sPath+ 'cat_child_url='+ cat_child_url +'&';
+        
+        var url_plus = "../";
+        
+        <?php }else{ ?>
+        
+        var url_plus = "";
+        
+        <?php } ?>
+        
+        
+        var aInputs = Array();
+        
+        var aInputs = $('li').find('.get_delivery_time');
+        
+        var aKeys   = Array();
+        
+        var aValues = Array();
+        
+        iKey = 0;
+        
+        $.each(aInputs,function(key,oInput){
+        
+        if(oInput.checked){
+          
+        aKeys[iKey] =  oInput.value
+        
+        };
+        
+        iKey++;
+        
+        });
+        
+        if(aKeys.length>0){
+        
+        for(var i = 0; i < aKeys.length; i++){
+          
+        sPath = sPath + 'delivery_time[]=' + aKeys[i]+'&';
+        
+        }
+        
+        }
+        
+        var aInputs = Array();
+        
+        var aInputs = $('li').find('.get_seller_level');
+        
+        var aKeys   = Array();
+        
+        var aValues = Array();
+        
+        iKey = 0;
+        
+        $.each(aInputs,function(key,oInput){
+        
+        if(oInput.checked){
+          
+        aKeys[iKey] =  oInput.value
+        
+        };
+        
+        iKey++;
+        
+        });
+        
+        if(aKeys.length>0){
+          
+        for(var i = 0; i < aKeys.length; i++){
+          
+        sPath = sPath + 'seller_level[]=' + aKeys[i]+'&';
+        
+        }
+        
+        }
+        
+        var aInputs = Array();
+        
+        var aInputs = $('li').find('.get_seller_language');
+        
+        var aKeys   = Array();
+        
+        var aValues = Array();
+        
+        iKey = 0;
+        
+        $.each(aInputs,function(key,oInput){
+        
+        if(oInput.checked){
+          
+        aKeys[iKey] =  oInput.value
+        
+        };
+        
+        iKey++;
+        
+        });
+        
+        if(aKeys.length>0){
+          
+        for(var i = 0; i < aKeys.length; i++){
+        
+        sPath = sPath + 'seller_language[]=' + aKeys[i]+'&';
+        
+        }
+        
+        }   
+
+
+        
+        $('#wait').addClass("loader"); 
         var base_url = '<?php echo $site_url; ?>';
         $('#price_range').val(data.from);
         
         var price = $('#price_range').val();
+        
         $.ajax({
           url:base_url + "../category_load?zAction=get_search_price_proposals",
           method:"POST",

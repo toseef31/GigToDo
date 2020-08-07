@@ -93,7 +93,7 @@ $login_seller_type = $row_login_seller->account_type;
 								<h2>مفيش خدمات موجودة متعلقة ببحثك</h2>
 								<p>جرب بحث جديد أو احصل على عرض أسعار مجاني لمشروعك من مجموعة أصحاب العمل الحر هنا</p>
 								<div class="d-flex flex-row justify-content-center">
-									<a class="empty-search-results-button d-flex flex-row align-items-center justify-content-center" href="javascript:void(0);">ابحث عن اصحاب العمل الحر</a>
+									<a class="empty-search-results-button d-flex flex-row align-items-center justify-content-center" href="search-freelancers">ابحث عن اصحاب العمل الحر</a>
 								</div>
 							</div>
 							<center class="pb-5 pt-5">

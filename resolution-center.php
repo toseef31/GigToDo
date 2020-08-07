@@ -259,28 +259,6 @@ if($seller_id == $login_seller_id){
                           <button id="continue_seller_issue"  class="button button-red">Continue</button>
                         </div>
                       </div>
-                      <?php 
-                        if(isset($_POST['submit_request_seller'])){
-                          $cancellation_message = $input->post('cancellation_message');
-                          $cancellation_reason = $input->post('cancellation_reason');
-                          $last_update_date = date("h:i: M d, Y");
-                          if($seller_id == $login_seller_id){
-                          $receiver_id = $buyer_id;
-                          }else{
-                          $receiver_id = $seller_id;
-                          }
-
-                          if(send_cancellation_request($order_id,$order_number,$login_seller_id,$row_orders->proposal_id,$row_orders->seller_id,$row_orders->buyer_id,$last_update_date)){
-                            $insert_order_conversation = $db->insert("order_conversations",array("order_id" => $order_id,"sender_id" => $login_seller_id,"message" => $cancellation_message,"date" => $last_update_date,"reason" => $cancellation_reason,"status" => "cancellation_request"));
-                        
-                            if($insert_order_conversation){
-                              $insert_notification = $db->insert("notifications",array("receiver_id" => $receiver_id,"sender_id" => $login_seller_id,"order_id" => $order_id,"reason" => "cancellation_request","date" => $n_date,"status" => "unread"));
-                              $update_order = $db->update("orders",array("order_status" => "cancellation requested"),array("order_id" => $order_id));
-                              echo "<script>window.open('order_details?order_id=$order_id','_self')</script>";
-                            }
-                          }
-                        }
-                      ?>
                     </div>
                   </div>
                   <!-- Row -->

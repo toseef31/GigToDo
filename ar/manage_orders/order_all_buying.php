@@ -27,6 +27,16 @@
 						$proposal_title = $row_proposals->proposal_title;
 		$proposal_img1 = $row_proposals->proposal_img1;
 		$today_date = date("F d, Y");
+		// if($order_due < $today_date){
+		// 	$update_order = $db->update("orders",array("order_status"=>'overdue'),array("buyer_id"=>$login_seller_id));
+		// }
+	  $new_date_today = strtotime($today_date);
+	   
+	  $date1 = date('Y-m-d',$new_date_today);
+
+	  $new_date_order = strtotime($order_due);
+	   
+	  $date2 = date('Y-m-d',$new_date_order);
 		
 		?>
 		<tr role="row">
@@ -68,7 +78,7 @@
 				<?php }elseif($order_status == "cancellation requested"){ ?>
 					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">إلغاء الطلب</a>
 
-				<?php }elseif($today_date > $order_due && $order_status != "delivered"){ ?>
+				<?php }elseif($date1 > $date2 && $order_status == 'progress' or $order_status == 'pending'){ ?>
 					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">متأخرة</a>
 				<?php } ?>
 			</td>

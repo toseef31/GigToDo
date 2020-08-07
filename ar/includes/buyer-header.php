@@ -122,7 +122,7 @@ $cur_amount = currencyConverter($to,1);
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="<?= $site_url; ?>/ar/dashboard">اتحلول لمقدم خدمة</a></li>
+                <li><a href="<?= $site_url; ?>/ar/freelancers">فريلانسر</a></li>
                 <li><a href="<?= $site_url; ?>/ar/buying_orders">الطلبات</a></li>
               </ul>
             </div>

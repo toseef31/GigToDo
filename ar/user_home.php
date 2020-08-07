@@ -24,7 +24,7 @@ $login_seller_about = $row_login_seller->seller_about;
         <div class="user-profile mt-40">
           <div class="user-image">
             <?php if(!empty($seller_image)){ ?>
-            <img src="user_images/<?= $seller_image; ?>" alt="">
+            <img src="<?= $site_url; ?>/user_images/<?= $seller_image; ?>" alt="">
             <?php }else{ ?>
             <img src="<?= $site_url; ?>/assets/img/user1.png"  class="img-fluid rounded-circle mb-3">
             <?php } ?>
