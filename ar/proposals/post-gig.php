@@ -486,6 +486,25 @@ $login_seller_language = $row_login_seller->seller_language;
                           <textarea rows="6" id="proposal_desc" class="form-control text-count" name="buyer_instruction" placeholder="I need...." required=""></textarea>
                           <label class="bottom-label text-right"><span class="descCount">0</span>/2500 حرف بحد اقصى</label>
                           <span class="form-text text-danger" id="desc_error">تحتاج إلى كتابة وصف</span>
+                          <div class="d-flex flex-column">
+                            <label class="bottom-label">
+                              نوع الإجابة :
+                            </label>
+                            <div class="d-flex flex-row mt-10 mb-10">
+                              <select class="form-control wide" name="answer_type">
+                                <option value="Free Text">كتابة حرة</option>
+                                <option value="Attachment">نص مركب</option>
+                              </select>
+                            </div>
+                            <div class="d-flex flex-row">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="answer_mandatory">
+                                <label class="custom-control-label" for="customCheck1">
+                                  إجابة أجبارية
+                                </label>
+                              </div>
+                            </div>
+                          </div>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -503,13 +522,13 @@ $login_seller_language = $row_login_seller->seller_language;
                           </label>
                           <div class="deliver-time d-flex flex-wrap">
                             <?php
-                            $get_delivery_times = $db->select("delivery_times");
+                            $get_delivery_times = $db->select("delivery_times",array("type" => ''));
                             while($row_delivery_times = $get_delivery_times->fetch()){
                             $delivery_id = $row_delivery_times->delivery_id;
                             $delivery_proposal_title_arabic = $row_delivery_times->delivery_proposal_title_arabic;
                             ?>
                             <label class="deliver-time-item" for="hours<?php echo $delivery_id; ?>">
-                              <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden required="" />
+                              <input id="hours<?php echo $delivery_id; ?>" type="radio" name="delivery_id" value="<?php echo $delivery_id; ?>" hidden />
                               <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                                 <span class="color-icon">
                                   <span>-</span>
@@ -874,21 +893,32 @@ if(isset($_POST['publish'])){
                 // unset($data['submit']);
                 $data['proposal_title'] = $input->post('proposal_title');
                 $data['buyer_instruction'] = $input->post('buyer_instruction');
+                $data['answer_type'] = $input->post('answer_type');
+                $data['answer_mandatory'] = $input->post('answer_mandatory');
                 $data['proposal_cat_id'] = $input->post('proposal_cat_id');
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
                 // $data['proposal_tags'] = $input->post('proposal_tags');
                 $data['proposal_price'] = $input->post('proposal_price');
                 $custom_delivery = $input->post('custom_delivery');
                 if($custom_delivery != ''){
-                  $insert_time = $db->insert('delivery_times',array('delivery_proposal_title'=>$custom_delivery.' Days', 'delivery_title'=>$custom_delivery.' Days', 'type'=>'custom'));
-                  if($insert_time){
-                    $insert_delivery_id = $db->lastInsertId();
-                    $data['delivery_id'] = $insert_delivery_id;
+                  $get_deliver_time = $db->select("delivery_times",array("delivery_title_arabic" => $custom_delivery));
+                  $count_time = $get_deliver_time->rowCount();
+                  $row_deliver_time = $get_deliver_time->fetch();
+                  $delivery_id = $row_deliver_time->delivery_id;
+                  
+                  if($count_time > 0 ){
+                    $data['delivery_id'] = $delivery_id;
+                  }else{
+                    $insert_time = $db->insert('delivery_times',array('delivery_proposal_title_arabic'=>$custom_delivery, 'delivery_title_arabic'=>$custom_delivery, 'type'=>'custom'));
+                    if($insert_time){
+                      $insert_delivery_id = $db->lastInsertId();
+                      
+                      $data['delivery_id'] = $insert_delivery_id;
+                    }
                   }
                 }else{
                 $data['delivery_id'] = $input->post('delivery_id');
                 }
-                
                 $data['proposal_url'] = $sanitize_url;
                 $data['proposal_seller_id'] = $regsiter_seller_id;
                 $data['proposal_featured'] = "no";
@@ -932,6 +962,7 @@ if(isset($_POST['publish'])){
                 $data['level_id'] = '1';
                 $data['language_id'] = '1';
                 $data['proposal_status'] = "active";
+                $data['proposal_date'] = date("F d, Y");
 // var_dump($data);die;
                 $insert_proposal = $db->insert("proposals",$data);
 

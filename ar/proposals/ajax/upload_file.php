@@ -24,7 +24,7 @@ echo "<script>window.open('../login','_self')</script>";
 			$file_extension = pathinfo($file, PATHINFO_EXTENSION);
 			$file = pathinfo($file, PATHINFO_FILENAME);
 			$file = $file."_".time().".$file_extension";
-			move_uploaded_file($file_tmp, "../proposal_files/$file");
+			move_uploaded_file($file_tmp, "../../../proposals/proposal_files/$file");
 			echo $file;
 		}
 	

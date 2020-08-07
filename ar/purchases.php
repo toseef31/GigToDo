@@ -75,7 +75,8 @@ $current_balance = $row_seller_accounts->current_balance;
                 <div class="purchases-item-box">
                   <div class="row">
                     <?php
-                      $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id),"DESC");
+                      // $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id),"DESC");
+                    $get_purchases = $db->query("select * from purchases where seller_id=$login_seller_id and method != 'order_cancellation'");
                       $count_purchases = $get_purchases->rowCount();
                       $total_purchase = array();
                       $active_order_price = 0;

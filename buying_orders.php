@@ -94,7 +94,8 @@ $login_seller_id = $row_login_seller->seller_id;
 							<div class="col-12">
 								<div class="orders-summary d-flex flex-wrap">
 									<?php
-									  $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id),"DESC");
+									  // $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id, ),"DESC");
+									  $get_purchases = $db->query("select * from purchases where seller_id=$login_seller_id and method != 'order_cancellation'");
 									  $count_purchases = $get_purchases->rowCount();
 									  $total_purchase = array();
 									  $active_order_price = 0;
@@ -129,28 +130,18 @@ $login_seller_id = $row_login_seller->seller_id;
 									</div>
 									<!-- Each item -->
 									<?php
-									  $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id),"DESC");
-									  $count_purchases = $get_purchases->rowCount();
-									  $total_purchase = array();
-									  $completed_order_price = 0;
-									  while($row_purchases = $get_purchases->fetch()){
-									    $order_id = $row_purchases->order_id;
-									    $amount = $row_purchases->amount;
-									    array_push($total_purchase,$amount);
-
-									    $get_order = $db->select("orders",array("order_id" => $order_id, "order_status" => "completed"));
-									    $order_amount_price = 0;
-									    $order_fee_price = 0;
-									    while($row_order = $get_order->fetch()){
-									      $order_price = $row_order->order_price;
-									      $order_fee = $row_order->order_fee;
-									      $order_amount_price += $order_price;
-									      $order_fee_price += $order_fee;
-									      
-									      $completed_order_price += $order_amount_price + $order_fee_price;
-									    }
-									  }
-									  $total_purchase_amount = array_sum($total_purchase);
+								    $get_order = $db->select("orders",array("buyer_id" => $login_seller_id, "order_status" => "completed"));
+								    $completed_order_price = 0;
+								    $order_amount_price = 0;
+								    $order_fee_price = 0;
+								    while($row_order = $get_order->fetch()){
+								      $order_price = $row_order->order_price;
+								      $order_fee = $row_order->order_fee;
+								      $order_amount_price += $order_price;
+								      $order_fee_price += $order_fee;
+								      
+								      $completed_order_price += $order_amount_price + $order_fee_price;
+								    }
 
 									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
@@ -163,39 +154,43 @@ $login_seller_id = $row_login_seller->seller_id;
 										</div>
 									</div>
 									<!-- Each item -->
+									<?php
+								    $get_order = $db->select("orders",array("buyer_id" => $login_seller_id, "order_status" => "delivered"));
+								    $delivered_order_price = 0;
+								    $order_amount_price = 0;
+								    $order_fee_price = 0;
+								    while($row_order = $get_order->fetch()){
+								      $order_price = $row_order->order_price;
+								      $order_fee = $row_order->order_fee;
+								      $order_amount_price += $order_price;
+								      $order_fee_price += $order_fee;
+								      
+								      $delivered_order_price += $order_amount_price + $order_fee_price;
+								    }
+									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
 										<span class="image-icon">
 											<img alt="" class="img-fluid d-block" src="assets/img/order/review-icon.png" />
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">awaiting review</span>
-											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo "0";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * "0",2);}else{  echo $s_currency.' '; echo "0"; } ?></span>
+											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $delivered_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $delivered_order_price,2);}else{  echo $s_currency.' '; echo $delivered_order_price; } ?></span>
 										</div>
 									</div>
 									<!-- Each item -->
 									<?php
-									  $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id),"DESC");
-									  $count_purchases = $get_purchases->rowCount();
-									  $total_purchase = array();
-									  $cancelled_order_price = 0;
-									  while($row_purchases = $get_purchases->fetch()){
-									    $order_id = $row_purchases->order_id;
-									    $amount = $row_purchases->amount;
-									    array_push($total_purchase,$amount);
-
-									    $get_order = $db->select("orders",array("order_id" => $order_id, "order_status" => "cancelled"));
-									    $order_amount_price = 0;
-									    $order_fee_price = 0;
-									    while($row_order = $get_order->fetch()){
-									      $order_price = $row_order->order_price;
-									      $order_fee = $row_order->order_fee;
-									      $order_amount_price += $order_price;
-									      $order_fee_price += $order_fee;
-									      
-									      $cancelled_order_price += $order_amount_price + $order_fee_price;
-									    }
-									  }
-									  $total_purchase_amount = array_sum($total_purchase);
+								    $get_order = $db->select("orders",array("buyer_id" => $login_seller_id, "order_status" => "cancelled"));
+								    $cancelled_order_price = 0;
+								    $order_amount_price = 0;
+								    $order_fee_price = 0;
+								    while($row_order = $get_order->fetch()){
+								      $order_price = $row_order->order_price;
+								      $order_fee = $row_order->order_fee;
+								      $order_amount_price += $order_price;
+								      $order_fee_price += $order_fee;
+								      
+								      $cancelled_order_price += $order_amount_price + $order_fee_price;
+								    }
 
 									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
@@ -209,46 +204,34 @@ $login_seller_id = $row_login_seller->seller_id;
 									</div>
 									<!-- Each item -->
 									<?php
-									  $get_purchases = $db->select("purchases",array("seller_id" => $login_seller_id),"DESC");
-									  $count_purchases = $get_purchases->rowCount();
-									  $total_purchase = array();
-									  $overdue_order_price = 0;
-									  while($row_purchases = $get_purchases->fetch()){
-									    $order_id = $row_purchases->order_id;
-									    $amount = $row_purchases->amount;
-									    array_push($total_purchase,$amount);
+								    // $get_order = $db->select("orders",array("order_id" => $order_id, "order_status" => "pending"));
+								    $get_order = $db->query("select * from orders where buyer_id=$login_seller_id and order_status='progress' or order_status='pending'");
+								    $overdue_order_price = 0;
+								    $order_amount_price = 0;
+								    $order_fee_price = 0;
+								    while($row_order = $get_order->fetch()){
+								    	$order_status = $row_orders->order_status;
+								      $order_price = $row_order->order_price;
+								      $order_fee = $row_order->order_fee;
+					            $order_duration = intval($row_orders->order_duration);
+					      			$order_date = $row_orders->order_date;
+					      			$order_due = date("F d, Y", strtotime($order_date . " + $order_duration days"));
+					            $today_date = date("F d, Y");
+					            $new_date_today = strtotime($today_date);
+					      
+					      		  $date1 = date('Y-m-d',$new_date_today);
 
-									    $get_order = $db->select("orders",array("order_id" => $order_id, "order_status" => "pending"));
-									    // $get_order = $db->query("select * from orders where order_id=$order_id and order_status='pending' or order_status='progress'");
-									    $order_amount_price = 0;
-									    $order_fee_price = 0;
-									    while($row_order = $get_order->fetch()){
-									    	$order_status = $row_orders->order_status;
-									      $order_price = $row_order->order_price;
-									      $order_fee = $row_order->order_fee;
-									      $order_amount_price += $order_price;
-									      $order_fee_price += $order_fee;
-									      $order_duration = intval($row_orders->order_duration);
-												$order_date = $row_orders->order_date;
-												$order_due = date("F d, Y", strtotime($order_date));
-									      $today_date = date("F d, Y");
-									      $new_date_today = strtotime($today_date);
-   
-											  $date1 = date('Y-m-d',$new_date_today);
-
-											  $new_date_order = strtotime($order_due);
-											   
-											  $date2 = date('Y-m-d',$new_date_order);
-									      
-									    }
-									    
-									  }
-									  if($date1 > $date2){
-									      $overdue_order_price += $order_amount_price + $order_fee_price;
-
-									    	}
-									  $total_purchase_amount = array_sum($total_purchase);
-
+					      		  $new_date_order = strtotime($order_due);
+					      		   
+					      		  $date2 = date('Y-m-d',$new_date_order);
+								      
+								      
+								      if($date1 < $date2){
+								      	$order_amount_price += $order_price;
+								      	$order_fee_price += $order_fee;
+								      	$overdue_order_price += $order_amount_price + $order_fee_price;
+								    	}
+								    }
 									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
 										<span class="image-icon">

@@ -157,8 +157,8 @@
                             <i class="fa fa-trash fa-2x delete-video" title="<?= $lang['proposals']['remove_video']; ?>"></i>
                           </span>
                           <?php } ?>
-                          <input type='hidden' name='proposal_video' value='<?= $d_proposal_video; ?>' id='v_file'> 
                         </div>
+                        <input type="hidden" name="proposal_video" value="<?= $d_proposal_video; ?>" id="v_file"> 
                       </div><!--- col-md-3 Ends --->
                       <!-- <div class="popup">
                         <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
@@ -545,6 +545,7 @@ $(document).ready(function(){
           cache:false,
           processData:false,
         }).done(function(data){
+          console.log(data);
           $("#v_file").val(data);
           span.removeClass('chose').html("<i class='fa fa-video-camera fa-2x mb-2'></i><br>"+data+"<i class='fa fa-trash fa-2x delete-video'></i>");
         });

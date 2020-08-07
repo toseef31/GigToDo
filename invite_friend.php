@@ -19,6 +19,7 @@ $login_seller_account_type = $row_login_seller->account_type;
 $login_seller_name = $row_login_seller->seller_name;
 $login_seller_referral = $row_login_seller->seller_referral;
 $referral_money = $row_general_settings->referral_money;
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
@@ -90,7 +91,8 @@ $referral_money = $row_general_settings->referral_money;
 								</div>
 								<div class="col-12 col-md-7">
 									<div class="d-flex flex-column align-items-center">
-										<h1 class="text-center">Invite Friends & Get <?php if ($to == 'EGP'){ echo $to.' '; echo "81";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * 81);}else{  echo $s_currency.' '; echo "81"; } ?></h1>
+										<h1 class="text-center">Invite Friends & Get <?php if ($to == 'EGP'){ echo $to.' '; echo $referral_money;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $referral_money,2);}else{  echo $s_currency.' '; echo $referral_money; } ?></h1>
+
 										<!-- <p class="text-center">Get <?php if ($to == 'EGP'){ echo "20".' ';echo $to;}elseif($to == 'USD'){ echo round($cur_amount * 20).' '; echo $to;}else{ echo "20".' '; echo $s_currency; } ?> off on your next purchase</p> -->
 										<form method="POST" action="">
 											<input type="hidden" name="referral_link" value="<?php echo $site_url; ?>/register?referral=<?php echo $login_seller_referral; ?>">

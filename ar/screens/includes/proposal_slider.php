@@ -15,8 +15,8 @@
   			</script>
   			<?php }else{ ?>
   			<video class="embed-responsive embed-responsive-16by9"  style="background-color:black;" controls>
-  				<source class="embed-responsive-item" src="<?php echo $show_video; ?>" type="video/mp4">
-  				<source src="<?php echo $show_video; ?>" type="video/ogg">
+  				<source class="embed-responsive-item" src="<?= $site_url; ?>/proposals/<?php echo $show_video; ?>" type="video/mp4">
+  				<source src="<?= $site_url; ?>/proposals/<?php echo $show_video; ?>" type="video/ogg">
   			</video>
   			<?php } ?>
   		<?php }elseif($proposal_video_type == "embedded"){ ?>

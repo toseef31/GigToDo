@@ -17,6 +17,8 @@
 		$order_id = $row_orders->order_id;
 		$proposal_id = $row_orders->proposal_id;
 		$order_price = $row_orders->order_price;
+		$order_fee = $row_orders->order_fee;
+		$total_amount = $order_price + $order_fee;
 		$order_status = $row_orders->order_status;
 		$order_number = $row_orders->order_number;
 		$order_duration = intval($row_orders->order_duration);
@@ -62,7 +64,7 @@
 				<div class="date"><?php echo $order_due; ?></div>
 			</td>
 			<td data-label="Total" role="column">
-				<div class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $order_price,2);}else{  echo $s_currency.' '; echo $order_price; } ?></div>
+				<div class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $total_amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $total_amount,2);}else{  echo $s_currency.' '; echo $total_amount; } ?></div>
 			</td>
 			<td data-label="Status" role="column">
 				<?php if ($order_status == "delivered"){ ?>

@@ -263,9 +263,9 @@ if(isset($_SESSION['seller_user_name'])){
 		
 			$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 			$check_seller_email = $db->count("sellers",array("seller_email" => $email));
-			if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-			  array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
-			}
+			// if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
+			//   array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
+			// }
 			if($check_seller_username > 0 ){
 			  array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");
 			}

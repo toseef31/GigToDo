@@ -15,9 +15,10 @@ $get_p_3 = $db->select("proposal_packages",array("proposal_id"=>$proposal_id,"pa
 $row_3 = $get_p_3->fetch();
 
 $prices = range(100,10000,50);
-// $prices = array(100,150,200,250,300,350,400,450,500,550,600,700);
+
 $revisions = array(1,2,3,4,5,6,7,8,9,10);
 // print_r($cur_amount);
+$times = range(1,30,1);
 ?>
 <style>
 	.package-item-single select{display: block !important;}
@@ -80,20 +81,20 @@ $revisions = array(1,2,3,4,5,6,7,8,9,10);
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
-										<span class="package-title">Basic</span>
-										<textarea maxlength="35" name="proposal_packages[1][description]" class="form-control description1" rows="6" cols="5" placeholder="Description"><?= $row_1->description; ?></textarea>
+										<!-- <span class="package-title">Basic</span> -->
+										<textarea name="proposal_packages[1][description]" class="form-control description1" rows="6" cols="5" placeholder="Description"><?= $row_1->description; ?></textarea>
 										<span class="desc1">description is required</span>
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
-										<span class="package-title">Standard</span>
-										<textarea maxlength="35" name="proposal_packages[2][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_2->description; ?></textarea>
+										<!-- <span class="package-title">Standard</span> -->
+										<textarea name="proposal_packages[2][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_2->description; ?></textarea>
 										<span class="desc2">description is required</span>
 									</div>
 									<!-- Each item -->
 									<div class="package-item-single">
-										<span class="package-title">Premium</span>
-										<textarea maxlength="35" name="proposal_packages[3][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_3->description; ?></textarea>
+										<!-- <span class="package-title">Premium</span> -->
+										<textarea name="proposal_packages[3][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_3->description; ?></textarea>
 										<span class="desc3">description is required</span>
 									</div>
 									<!-- Each item -->
@@ -107,11 +108,15 @@ $revisions = array(1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<select name="proposal_packages[1][delivery_time]" class="form-control wide">
 										<?php
-										$get_delivery_times = $db->select("delivery_times");
-										while($row_delivery_times = $get_delivery_times->fetch()){
-										$delivery_time = $row_delivery_times->delivery_proposal_title;
-										echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_1->delivery_time ? "selected" : "").">$delivery_time</option>";
-										}
+										// $get_delivery_times = $db->select("delivery_times");
+										// while($row_delivery_times = $get_delivery_times->fetch()){
+										// $delivery_time = $row_delivery_times->delivery_proposal_title;
+										// echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_1->delivery_time ? "selected" : "").">$delivery_time</option>";
+										// }
+										foreach ($times as $time) {
+										
+										echo "<option value='$time' ".(intval($time) == $row_1->delivery_time ? "selected" : "").">$time</option>";
+										 }
 										?>
 										</select>
 									</div>
@@ -119,11 +124,15 @@ $revisions = array(1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<select name="proposal_packages[2][delivery_time]" form="pricing-form" class="form-control wide">
 										<?php
-										$get_delivery_times = $db->select("delivery_times");
-										while($row_delivery_times = $get_delivery_times->fetch()){
-										$delivery_time = $row_delivery_times->delivery_proposal_title;
-										echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_2->delivery_time ? "selected" : "").">$delivery_time</option>";
-										}
+										// $get_delivery_times = $db->select("delivery_times");
+										// while($row_delivery_times = $get_delivery_times->fetch()){
+										// $delivery_time = $row_delivery_times->delivery_proposal_title;
+										// echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_2->delivery_time ? "selected" : "").">$delivery_time</option>";
+										// }
+										foreach ($times as $time) {
+								
+										echo "<option value='$time' ".(intval($time) == $row_2->delivery_time ? "selected" : "").">$time</option>";
+										 }
 										?>
 										</select>
 									</div>
@@ -131,11 +140,15 @@ $revisions = array(1,2,3,4,5,6,7,8,9,10);
 									<div class="package-item-single">
 										<select name="proposal_packages[3][delivery_time]" form="pricing-form" class="form-control wide">
 										<?php
-										$get_delivery_times = $db->select("delivery_times");
-										while($row_delivery_times = $get_delivery_times->fetch()){
-										$delivery_time = $row_delivery_times->delivery_proposal_title;
-										echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_3->delivery_time ? "selected" : "").">$delivery_time</option>";
-										}
+										// $get_delivery_times = $db->select("delivery_times");
+										// while($row_delivery_times = $get_delivery_times->fetch()){
+										// $delivery_time = $row_delivery_times->delivery_proposal_title;
+										// echo "<option value='".intval($delivery_time)."' ".(intval($delivery_time) == $row_3->delivery_time ? "selected" : "").">$delivery_time</option>";
+										// }
+										foreach ($times as $time) {
+										
+										echo "<option value='$time' ".(intval($time) == $row_3->delivery_time ? "selected" : "").">$time</option>";
+										 }
 										?>
 										</select>
 									</div>

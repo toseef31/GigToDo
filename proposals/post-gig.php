@@ -483,6 +483,23 @@ $login_seller_language = $row_login_seller->seller_language;
                           <textarea rows="6" id="proposal_desc" class="form-control text-count" name="buyer_instruction" placeholder="I need...." required=""></textarea>
                           <label class="bottom-label text-right"><span class="descCount">0</span>/2500 Chars Max</label>
                           <span class="form-text text-danger" id="desc_error">you need to write description</span>
+                          <div class="d-flex flex-column">
+                            <label class="bottom-label">Answer Type:</label>
+                            <div class="d-flex flex-row mt-10 mb-10">
+                              <select class="form-control wide" name="answer_type">
+                                <option value="Free Text">Free Text</option>
+
+                                <option value="Attachment">Attachment</option>
+
+                              </select>
+                            </div>
+                            <div class="d-flex flex-row">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="answer_mandatory" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Answer is Mandatory</label>
+                              </div>
+                            </div>
+                          </div>
                           <div class="popup">
                             <img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
                             <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
@@ -659,7 +676,10 @@ $login_seller_language = $row_login_seller->seller_language;
                      
                       <div class="d-flex flex-column">
                         <input type="hidden" name="email" value="<?= $user_email; ?>">
-                       
+                        <!-- <div class="form-group d-flex flex-column">
+                          <label class="control-label" for="fname">Name</label>
+                          <input class="form-control" id="fname" name="name" type="text" />
+                        </div> -->
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
                           <label class="control-label" for="lname">Create User Name</label>
@@ -718,10 +738,10 @@ if(isset($_POST['publish'])){
     echo "<script>window.open('post-gig#publish_section','_self')</script>";
   }else{
     $error_array = array();
-    // $name = strip_tags($input->post('name'));
-    // $name = strip_tags($name);
-    // $name = ucfirst(strtolower($name));
-    // $_SESSION['name']= $name;
+    $name = strip_tags($input->post('name'));
+    $name = strip_tags($name);
+    $name = ucfirst(strtolower($name));
+    $_SESSION['name']= $name;
     $u_name = strip_tags($input->post('u_name'));
     $u_name = strip_tags($u_name);
     $_SESSION['u_name']= $u_name;
@@ -857,6 +877,9 @@ if(isset($_POST['publish'])){
                 // unset($data['submit']);
                 $data['proposal_title'] = $input->post('proposal_title');
                 $data['buyer_instruction'] = $input->post('buyer_instruction');
+                $data['answer_type'] = $input->post('answer_type');
+                $data['answer_mandatory'] = $input->post('answer_mandatory');
+
                 $data['proposal_cat_id'] = $input->post('proposal_cat_id');
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
                 // $data['proposal_tags'] = $input->post('proposal_tags');
@@ -864,10 +887,20 @@ if(isset($_POST['publish'])){
 
                 $custom_delivery = $input->post('custom_delivery');
                 if($custom_delivery != ''){
-                  $insert_time = $db->insert('delivery_times',array('delivery_proposal_title'=>$custom_delivery.' Days', 'delivery_title'=>$custom_delivery.' Days', 'type'=>'custom'));
-                  if($insert_time){
-                    $insert_delivery_id = $db->lastInsertId();
-                    $data['delivery_id'] = $insert_delivery_id;
+                  $get_deliver_time = $db->select("delivery_times",array("delivery_title" => $custom_delivery));
+                  $count_time = $get_deliver_time->rowCount();
+                  $row_deliver_time = $get_deliver_time->fetch();
+                  $delivery_id = $row_deliver_time->delivery_id;
+                  
+                  if($count_time > 0 ){
+                    $data['delivery_id'] = $delivery_id;
+                  }else{
+                    $insert_time = $db->insert('delivery_times',array('delivery_proposal_title'=>$custom_delivery, 'delivery_title'=>$custom_delivery, 'type'=>'custom'));
+                    if($insert_time){
+                      $insert_delivery_id = $db->lastInsertId();
+                      $data['delivery_id'] = $insert_delivery_id;
+                    }
+
                   }
                 }else{
                 $data['delivery_id'] = $input->post('delivery_id');
@@ -914,6 +947,8 @@ if(isset($_POST['publish'])){
                 $data['level_id'] = '1';
                 $data['language_id'] = '1';
                 $data['proposal_status'] = "active";
+
+                $data['proposal_date'] = date("F d, Y");
 // var_dump($data);die;
                 $insert_proposal = $db->insert("proposals",$data);
 
@@ -1066,7 +1101,7 @@ if(isset($_POST['publish'])){
         data:{category_id:category_id},
 
         success:function(data){
-          console.log(data);
+          // console.log(data);
         $("#sub-category").html(data);
         }
         });

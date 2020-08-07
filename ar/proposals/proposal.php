@@ -249,7 +249,7 @@ $enableVideo = 0;
 		$show_img2 = "proposal_files/{$proposal_img2}";
 		$show_img3 = "proposal_files/$proposal_img3";
 		$show_img4 = "proposal_files/$proposal_img4";
-		$show_video = "../proposal_files/$proposal_video";
+		$show_video = "proposal_files/$proposal_video";
 		if($deviceType == "phone"){
 			// include("../screens/mobile_proposal.php");
 			include("../screens/desktop_proposal.php");
