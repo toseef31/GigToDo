@@ -879,6 +879,7 @@ if(isset($_POST['publish'])){
                 $data['buyer_instruction'] = $input->post('buyer_instruction');
                 $data['answer_type'] = $input->post('answer_type');
                 $data['answer_mandatory'] = $input->post('answer_mandatory');
+
                 $data['proposal_cat_id'] = $input->post('proposal_cat_id');
                 $data['proposal_child_id'] = $input->post('proposal_child_id');
                 // $data['proposal_tags'] = $input->post('proposal_tags');
@@ -899,6 +900,7 @@ if(isset($_POST['publish'])){
                       $insert_delivery_id = $db->lastInsertId();
                       $data['delivery_id'] = $insert_delivery_id;
                     }
+
                   }
                 }else{
                 $data['delivery_id'] = $input->post('delivery_id');
@@ -945,6 +947,7 @@ if(isset($_POST['publish'])){
                 $data['level_id'] = '1';
                 $data['language_id'] = '1';
                 $data['proposal_status'] = "active";
+
                 $data['proposal_date'] = date("F d, Y");
 // var_dump($data);die;
                 $insert_proposal = $db->insert("proposals",$data);

@@ -19,6 +19,7 @@ $prices = range(100,10000,50);
 $revisions = array(1,2,3,4,5,6,7,8,9,10);
 
 $times = range(1,30,1);
+
 ?>
 <style>
 	.package-item-single select{display: block !important;}
@@ -87,6 +88,7 @@ $times = range(1,30,1);
 									الأساسية
 								</span> -->
 								<textarea name="proposal_packages[1][description]" class="form-control description1" rows="6" cols="5" placeholder="Description"><?= $row_1->description; ?></textarea>
+
 								<span class="desc1">الوصف مطلوب</span>
 							</div>
 							<!-- Each item -->

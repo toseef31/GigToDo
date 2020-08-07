@@ -268,7 +268,7 @@
     </div>
   </div>
 
-<!-- <div class="card border-success mb-3">
+<div class="card border-success mb-3">
   <div class="card-header bg-success">
     <h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> h5 text-white"><?php echo $lang['sidebar']['categories']; ?></h3>
   </div>
@@ -427,4 +427,4 @@
       <?php }} ?>
     </ul>
   </div>
-</div> -->
+</div>
