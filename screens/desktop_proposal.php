@@ -87,7 +87,7 @@
                         </span>
                         <span>Basic</span>
                       </div>
-                      <p><?= $p_description_1; ?></p>
+                      <!-- <p><?= $p_description_1; ?></p> -->
                       <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
                       <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
                       <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
@@ -107,7 +107,7 @@
                       </span>
                       <span>Basic</span>
                     </div>
-                    <p><?= $p_description_1; ?></p>
+                    <!-- <p><?= $p_description_1; ?></p> -->
                     <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
                       <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
                       <input type="hidden" name="package_id" value="<?= $p_id_1; ?>">
@@ -123,7 +123,7 @@
                       </span>
                       <span>Standard</span>
                     </div>
-                    <p><?= $p_description_2; ?></p>
+                    <!-- <p><?= $p_description_2; ?></p> -->
                     <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
                       <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
                       <input type="hidden" name="package_id" value="<?= $p_id_2; ?>">
@@ -139,7 +139,7 @@
                       </span>
                       <span>Premium</span>
                     </div>
-                    <p><?= $p_description_3; ?></p>
+                    <!-- <p><?= $p_description_3; ?></p> -->
                     <form method="post" action="../../checkout" id="checkoutForm<?= $packagenum; ?>">
                       <input type="hidden" name="proposal_id" value="<?= $proposal_id; ?>">
                       <input type="hidden" name="package_id" value="<?= $p_id_3; ?>">

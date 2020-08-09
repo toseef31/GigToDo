@@ -69,6 +69,7 @@ $cur_amount = currencyConverter($to,1);
 ?>
 <style>
   @media(max-width: 768px){.total-user-count.count.c-notifications-header{right: 2px;top: -8px;}}
+  .total-user-count.count.c-notifications-header{right: 31%;}
 </style>
 <!-- Header -->
 <header>
@@ -160,6 +161,9 @@ $cur_amount = currencyConverter($to,1);
                 <span></span>
                 <span></span>
                 <span></span>
+              </div>
+              <div class="ml-3">
+                <a class="btn text-white" style="background-color: red"><?php echo $s_currency; ?><?php echo $current_balance; ?></a>
               </div>
             </div>
           </div>

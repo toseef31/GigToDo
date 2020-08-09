@@ -197,7 +197,7 @@
 	    -moz-transition: .4s;
 	    transition: .4s;
 	  }
-	  #weaccept-cash-form{
+	  #weaccept-cash-form,#weaccept-form,#weaccept-kiosk{
 	  	margin-top: -83px;
 	  	float: left;
 	  }
@@ -217,11 +217,11 @@
 	  		margin-bottom: 0;
 	  		width: 100%;
 	  	}
-	  	#edit_info{
+	  	#edit_info,#edit_wallet,#edit_local{
 	  		width: 100% !important;
 	  		float: none !important;
 	  	}
-	  	#weaccept-cash-form {
+	  	#weaccept-cash-form ,#weaccept-form,#weaccept-kiosk{
 	  	    margin-top: 0px;
 	  	    float: none !important;
 	  	}
@@ -522,20 +522,23 @@ if(isset($_POST['code'])){
 								<div class="gigs-payment pt-30">
 									<ul class="radio_titme radio_style2">
 										<li>
-											<form action="requests/weaccept.php" method="post" id="weaccept-form">
+											<form id="wallet_info_form">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Mobile Number</span>
-															<input type="text" name="mobile_number" value="<?= $mobile_number; ?>">
+															<input type="text" name="mobile_number" id="mobile_number_wallet" value="<?= $mobile_number; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox2">
 													<label for="checkbox2"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit" name="weaccept" class="button">Order</button>
+													<button type="submit" name="edit_wallet" id="edit_wallet" class="button">Edit Info</button>
 												</div>
+											</form>
+											<form action="requests/weaccept.php" method="post" id="weaccept-form" class="float-right">
+												<button type="submit" name="weaccept" class="order-button float-right">Order</button>
 											</form>
 										</li>
 									</ul>
@@ -662,26 +665,29 @@ if(isset($_POST['code'])){
 								<div class="gigs-payment pt-30">
 									<ul class="radio_titme radio_style2">
 										<li>
-											<form action="requests/weaccept_kiosk.php" method="post" id="weaccept-kiosk">
+											<form id="edit_local_form">
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Mobile Number</span>
-															<input type="text" name="local_mobile_number" value="<?= $local_mobile_number ?>">
+															<input type="text" name="local_mobile_number" id="local_mobile_number" value="<?= $local_mobile_number ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Email Address</span>
-															<input type="email" name="local_email" value="<?= $local_email; ?>">
+															<input type="email" name="local_email" id="local_email" value="<?= $local_email; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox4">
 													<label for="checkbox4"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit" name="weaccept_valu">Order</button>
+													<button type="submit" name="edit_local" id="edit_local">Edit Info</button>
 												</div>
+											</form>
+											<form action="requests/weaccept_kiosk.php" method="post" id="weaccept-kiosk" class="float-right">
+												<button type="submit" name="weaccept_valu" class="order-button float-right">Order</button>
 											</form>
 										</li>
 									</ul>
@@ -1324,6 +1330,51 @@ $('#cash_info').submit(function(e){
 	var myJSON = obj;
 	$.ajax({
 		url : 'edit_cash_info.php?data='+myJSON,
+		type : 'get',
+	
+ 	}).done(function(data){
+
+        $('#wait').removeClass("loader");
+        if(data == "error"){
+          swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
+
+        }else{
+          swal({type: 'success',text: 'Changes Saved.'});
+        }
+
+      });
+});
+$('#wallet_info_form').submit(function(e){
+
+	e.preventDefault();
+	var mobile_number =$('#mobile_number_wallet').val();
+		var obj = [mobile_number];
+	var myJSON = obj;
+	$.ajax({
+		url : 'edit_wallet_info.php?data='+myJSON,
+		type : 'get',
+	
+ 	}).done(function(data){
+
+        $('#wait').removeClass("loader");
+        if(data == "error"){
+          swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
+
+        }else{
+          swal({type: 'success',text: 'Changes Saved.'});
+        }
+
+      });
+});
+$('#edit_local_form').submit(function(e){
+
+	e.preventDefault();
+	var local_mobile_number =$('#local_mobile_number').val();
+	var local_email =$('#local_email').val();
+		var obj = [local_mobile_number,local_email];
+	var myJSON = obj;
+	$.ajax({
+		url : 'edit_local_info.php?data='+myJSON,
 		type : 'get',
 	
  	}).done(function(data){

@@ -13,6 +13,8 @@ $site_logo = $row_general_settings->site_logo;
 $site_name = $row_general_settings->site_name;
 $signup_email = $row_general_settings->signup_email;
 $referral_money = $row_general_settings->referral_money;
+$recaptcha_site_key = $row_general_settings->recaptcha_site_key;
+$recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
 
 if(isset($_POST['register'])){
 	
@@ -34,6 +36,11 @@ if(isset($_POST['register'])){
 		echo "<script>window.open('register','_self')</script>";
 	}else{
 		$error_array = array();
+		$secret_key = "$recaptcha_secret_key";
+    $response = $input->post('g-recaptcha-response');
+    $remote_ip = $_SERVER['REMOTE_ADDR'];
+    $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$response&remoteip=$remote_ip");
+    $result = json_decode($url, TRUE);
 		$name = strip_tags($input->post('name'));
 		$name = strip_tags($name);
 		$name = ucfirst(strtolower($name));
