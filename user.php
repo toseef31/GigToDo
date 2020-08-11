@@ -589,7 +589,7 @@ if(isset($_SESSION['seller_user_name'])){
               <a href="proposals/create_proposal" class="col-lg-4 col-md-6 col-sm-6 mb-3">
                <div class="single-gigs mt-30 all-gigs">
                 <div class="proposal-card-base mp-proposal-card add-new-proposal">
-                 Create A New Gig
+                 Create A New Service
                 </div>
                </div>
               </a>
