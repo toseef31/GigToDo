@@ -11,6 +11,8 @@ if(isset($_SESSION['seller_user_name'])){
 	echo "<script> window.open('home.php','_self'); </script>";
 	
 }
+$recaptcha_site_key = $row_general_settings->recaptcha_site_key;
+$recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
 ?>
 <!DOCTYPE html>
 
@@ -66,7 +68,40 @@ if(isset($_SESSION['seller_user_name'])){
 	<script src="js/ie.js"></script>
 	<script type="text/javascript" src="js/sweat_alert.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none;}</style>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<style>.swal2-popup .swal2-styled.swal2-confirm{background-color: #ff0707;}.swal2-popup .swal2-select{display: none;}
+	/* The message box is shown when the user clicks on the password field */
+	#message {
+	  display:none;
+	  /*background: #f1f1f1;*/
+	  color: #000;
+	  position: relative;
+	  padding: 20px;
+	  margin-top: 0px;
+	}
+	#message p {
+	  padding: 0px 35px;
+	  font-size: 14px;
+	}
+	/* Add a green text color and a checkmark when the requirements are right */
+	.valid {
+	  color: green;
+	}
+	.valid:before {
+	  position: relative;
+	  left: 35px;
+	  content: "✔";
+	}
+	/* Add a red text color and an "x" when the requirements are wrong */
+	.invalid {
+	  color: red;
+	}
+	.invalid:before {
+	  position: relative;
+	  left: 35px;
+	  content: "✖";
+	}
+	</style>
 </head>
 
 <body class="home-content">
@@ -154,14 +189,22 @@ if(isset($_SESSION['seller_user_name'])){
 								</div>
 								<div class="form-group">
 									<label class="control-label">الباسوورد</label>
-									<input class="form-control" type="password" name="pass" placeholder="أدخل كلمة المرور"/>
+									<input class="form-control" type="password" name="pass" id="psw" placeholder="أدخل كلمة المرور"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
+								</div>
+								<div id="message">
+								  <!-- <h3>Password must contain the following:</h3> -->
+								  <p id="letter" class="invalid"><b>حرف  </b> صغير </p>
+								  <p id="capital" class="invalid"><b>العاصمة (الأحرف الكبيرة) </b> غير  </p>
+								  <p id="number" class="invalid"><b>رقم</b></p>
+								  <p id="length" class="invalid">الحد الأدنى  <b>8 أحرف</b></p>
 								</div>
 								<div class="form-group">
 									<label class="control-label"> تؤكد  الباسوورد</label>
-									<input type="password" class="form-control" name="con_pass" placeholder="تأكيد كلمة المرور">
+									<input type="password" class="form-control" id="confirm_pass" name="con_pass" placeholder="تأكيد كلمة المرور">
 									<?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['con_pass']); ?></span>
+									<span id="match" class="pr-3"></span>
 								</div>
 								<?php if(isset($_GET['referral'])){ ?>
 								<input type="hidden" class="form-control" name="referral" value="<?= $input->get('referral'); ?>">
@@ -191,6 +234,10 @@ if(isset($_SESSION['seller_user_name'])){
 									</div>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['accountType']); ?></span>
 								</div>
+								<div class="form-group">
+                  <label>يرجى التحقق من أنك جزء من الإنسانية.</label>
+                  <div class="g-recaptcha" data-sitekey="<?php echo $recaptcha_site_key; ?>"></div>
+                </div>
 								<div class="form-group d-flex flex-row align-items-center justify-content-between mb-0">
 									<div class="custom-control custom-checkbox">
 										<input type="checkbox" class="custom-control-input" name="term" id="terms">
@@ -220,6 +267,69 @@ if(isset($_SESSION['seller_user_name'])){
 // 			$(':input[type="submit"]').prop('disabled', true);
 // 		}
 // 	});
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+$('#confirm_pass').on('keyup', function () {
+  if ($('#psw').val() == $('#confirm_pass').val()) {
+    $('#match').html('مطابقة كلمة المرور').css('color', 'green');
+  } else 
+    $('#match').html('كلمة المرور غير متطابقة').css('color', 'red');
+});
 </script>
 <?php 
 	if(isset($_POST['register'])){
@@ -241,6 +351,11 @@ if(isset($_SESSION['seller_user_name'])){
 			echo "<script>window.open('register','_self')</script>";
 		}else{
 			$error_array = array();
+			$secret_key = "$recaptcha_secret_key";
+	    $response = $input->post('g-recaptcha-response');
+	    $remote_ip = $_SERVER['REMOTE_ADDR'];
+	    $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$response&remoteip=$remote_ip");
+	    $result = json_decode($url, TRUE);
 			$name = strip_tags($input->post('name'));
 			$name = strip_tags($name);
 			$name = ucfirst(strtolower($name));
