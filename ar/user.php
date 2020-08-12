@@ -866,13 +866,14 @@ if(isset($_SESSION['seller_user_name'])){
               </div>
               <div class="deliver-time d-flex flex-wrap mb-15">
                 <?php
-                  $get_delivery_times = $db->select("delivery_times");
+                  $get_delivery_times = $db->select("delivery_times", array("type"=>''));
                   while($row_delivery_times = $get_delivery_times->fetch()){
+                  $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
                   $delivery_proposal_title_arabic = $row_delivery_times->delivery_proposal_title_arabic;
                   $delivery_id = $row_delivery_times->delivery_id;
                 ?>
                 <label class="deliver-time-item" for="hours<?= $delivery_id; ?>">
-                  <input id="hours<?= $delivery_id; ?>" value="<?= $delivery_proposal_title; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title_arabic){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
+                  <input id="hours<?= $delivery_id; ?>" value="<?= $delivery_proposal_title_arabic; ?>" <?php if($form_data['delivery_time'] == $delivery_proposal_title_arabic){ echo "checked"; } ?> type="radio" name="delivery_time" hidden />
                   <div class="deliver-time-item-content d-flex flex-column justify-content-center align-items-center">
                     <span class="color-icon">
                       <span>-</span>
@@ -976,7 +977,9 @@ if(isset($_SESSION['seller_user_name'])){
     if(isset($_POST['send_request'])){
       // $buyer_id = $login_seller_id;
       // $order_price = $input->post('order_price');
-
+      $message = '';
+      $file = '';
+      $offer_id = "0";
       
       $request_description = $input->post('request_description');
       $cat_id = $input->post('cat_id');
@@ -1001,21 +1004,82 @@ if(isset($_SESSION['seller_user_name'])){
         move_uploaded_file($request_file_tmp,"requests/request_files/$request_file");
       }
       
-      $insert_request = $db->insert("buyer_requests",array("seller_id"=>$login_seller_id,"user_id"=>$get_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"request_budget"=>$request_budget,"request_date"=>$request_date,"request_status"=>'active'));
+      $insert_request = $db->insert("messages_requests",array("sender_id"=>$login_seller_id,"receiver_id"=>$get_seller_id,"cat_id"=>$cat_id,"child_id"=>$child_id,"request_description"=>$request_description,"request_file"=>$request_file,"delivery_time"=>$delivery_time,"request_budget"=>$request_budget,"request_status"=>'active'));
+
+      $last_request_id = $db->lastInsertId();
       if($insert_request){
-        echo "<script>
-            swal({
-              type: 'success',
-              text: 'Your request has been submitted successfully!',
-              timer: 3000,
-              onOpen: function(){
-                swal.showLoading()
+        // print_r($insert_request);die();
+        $message_date = date("h:i: F d, Y");
+        $dateAgo = date("Y-m-d H:i:s");
+        $message_status = "unread";
+        $time = time();
+
+        $get_inbox_sellers = $db->query("select * from inbox_sellers where sender_id='$login_seller_id' and receiver_id=:r_id or sender_id=:s_id and receiver_id='$login_seller_id'",array("r_id"=>$get_seller_id,"s_id"=>$get_seller_id));
+        $row_inbox_sellers = $get_inbox_sellers->fetch();
+        $message_group_id = $row_inbox_sellers->message_group_id;
+
+        $count_inbox_sellers = $get_inbox_sellers->rowCount();
+
+        if($count_inbox_sellers == 0){
+
+          $message_status = "unread";
+
+          $new_message_group_id = mt_rand();
+          $insert_inbox_seller = $db->insert("inbox_sellers",array("message_group_id" => $new_message_group_id,"offer_id" => $offer_id,"sender_id" => $login_seller_id,"receiver_id" => $get_seller_id,"message_status" => $message_status));
+
+          if($insert_inbox_seller){
+              $insert_message = $db->insert("inbox_messages",array("message_sender" => $login_seller_id,"message_receiver" => $get_seller_id,"message_request_id" => $last_request_id,"message_group_id" => $new_message_group_id,"message_desc" => $message,"message_file" => $file,"message_date" => $message_date,"dateAgo" => $dateAgo,"bell" => 'active',"message_status" => $message_status));
+              $last_message_id = $db->lastInsertId();
+
+              $update_inbox_sellers = $db->update("inbox_sellers",array("sender_id" => $login_seller_id,"receiver_id" => $get_seller_id,"message_status" => $message_status,"time"=>$time,"message_id" => $last_message_id,'popup'=>'1'),array("message_group_id" => $message_group_id));
+
+            if($update_inbox_sellers){
+
+              $select_hide_seller_messages = $db->delete("hide_seller_messages",array("hider_id"=>$login_seller_id,"hide_seller_id"=>$get_seller_id)); 
+              $count_hide_seller_messages = $select_hide_seller_messages->rowCount();
+              if($count_hide_seller_messages == 1){
+                $delete_hide_seller_messages = $db->delete("hide_seller_messages",array("hider_id"=>$login_seller_id,"hide_seller_id"=>$get_seller_id)); 
               }
-            }).then(function(){
-                window.open('conversations/message?seller_id=<?= $get_seller_id ?>','_self');
-            });
-        </script>";
+
+
+              $site_email_address = $row_general_settings->site_email_address;
+              $site_logo = $row_general_settings->site_logo;
+              $get_seller = $db->select("sellers",array("seller_id" => $get_seller_id));
+              $row_seller = $get_seller->fetch();
+              $seller_user_name = $row_seller->seller_user_name;
+              $seller_email = $row_seller->seller_email;
+             
+              echo "<script>window.open('conversations/message?seller_id=$get_seller_id','_self')</script>";
+            // echo "<script>window.open('inbox?single_message_id=$new_message_group_id','_self')</script>";
+            }
+
+          }
+        }else{
+          $insert_message = $db->insert("inbox_messages",array("message_sender" => $login_seller_id,"message_receiver" => $get_seller_id,"message_request_id" => $last_request_id,"message_group_id" => $message_group_id,"message_desc" => $message,"message_file" => $file,"message_date" => $message_date,"dateAgo" => $dateAgo,"bell" => 'active',"message_status" => $message_status));
+          $last_message_id = $db->lastInsertId();
+
+          $update_inbox_sellers = $db->update("inbox_sellers",array("sender_id" => $login_seller_id,"receiver_id" => $get_seller_id,"message_status" => $message_status,"time"=>$time,"message_id" => $last_message_id,'popup'=>'1'),array("message_group_id" => $message_group_id));
+
+        if($update_inbox_sellers){
+
+          $select_hide_seller_messages = $db->delete("hide_seller_messages",array("hider_id"=>$login_seller_id,"hide_seller_id"=>$get_seller_id)); 
+          $count_hide_seller_messages = $select_hide_seller_messages->rowCount();
+          if($count_hide_seller_messages == 1){
+            $delete_hide_seller_messages = $db->delete("hide_seller_messages",array("hider_id"=>$login_seller_id,"hide_seller_id"=>$get_seller_id)); 
+          }
+
+
+          $site_email_address = $row_general_settings->site_email_address;
+          $site_logo = $row_general_settings->site_logo;
+          $get_seller = $db->select("sellers",array("seller_id" => $get_seller_id));
+          $row_seller = $get_seller->fetch();
+          $seller_user_name = $row_seller->seller_user_name;
+          $seller_email = $row_seller->seller_email;
+         
+          echo "<script>window.open('conversations/message?seller_id=$get_seller_id','_self')</script>";
+        }
       }
+    }
     }
   ?>
 <!-- <?php //require_once("includes/user_profile_header.php"); ?>

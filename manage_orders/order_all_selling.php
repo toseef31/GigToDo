@@ -64,7 +64,7 @@
 				<?php if ($order_status == "delivered"){ ?>
 
 				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
+				<?php }elseif($order_status == "active" or $order_status == "progress" && $date1 < $date2){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">In Progress</a>
 
 				<?php }elseif($order_status == "completed"){ ?>
@@ -76,7 +76,7 @@
 				<?php }elseif($order_status == "cancellation requested"){ ?>
 					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">Cancel Request</a>
 
-				<?php }elseif($order_status == "pending"){ ?>
+				<?php }elseif($order_status == "pending" && $date1 < $date2){ ?>
 					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($date1 > $date2 && $order_status == 'progress' or $order_status == 'pending'){ ?>
 					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">overdue</a>

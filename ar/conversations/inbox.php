@@ -50,7 +50,7 @@ require("includes/inboxFunctions.php");
   <!-- Custom css code from modified in admin panel - -->
   <link href="../styles/styles.css" rel="stylesheet">
   <!-- <link href="../styles/user_nav_styles.css" rel="stylesheet"> -->
-  <!-- <link href="../font_awesome/css/font-awesome.css" rel="stylesheet"> -->
+  <link href="../font_awesome/css/font-awesome.css" rel="stylesheet">
   <link href="../styles/sweat_alert.css" rel="stylesheet">
   <link href="../styles/emoji.css" rel="stylesheet">
   <script type="text/javascript" src="../js/sweat_alert.js"></script>

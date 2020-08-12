@@ -123,7 +123,7 @@ $receiver_image = $row_receiver_seller->seller_image;
 	          </div>
 	          <div class="deliver-time d-flex flex-wrap mb-15">
 	            <?php
-	              $get_delivery_times = $db->select("delivery_times");
+	              $get_delivery_times = $db->select("delivery_times", array("type"=>''));
 	              while($row_delivery_times = $get_delivery_times->fetch()){
 	              $delivery_proposal_title = $row_delivery_times->delivery_proposal_title;
 	              $delivery_id = $row_delivery_times->delivery_id;

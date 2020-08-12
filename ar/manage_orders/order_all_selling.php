@@ -61,13 +61,13 @@
 			<td data-label="الحالة" role="column">
 				<?php if ($order_status == "delivered"){ ?>
 				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
+				<?php }elseif($order_status == "active" or $order_status == "progress" && $date1 < $date2){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">جاري التنفيذ</a>
 				<?php }elseif($order_status == "completed"){ ?>
 					<a class="button button-yellow" href="order_details?order_id=<?= $order_id; ?>">منجز</a>
 				<?php }elseif($order_status == "cancelled"){ ?>
 					<a class="button button-white" href="order_details?order_id=<?= $order_id; ?>">ملغية</a>
-				<?php }elseif($order_status == "pending"){ ?>
+				<?php }elseif($order_status == "pending" && $date1 < $date2){ ?>
 					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>">قيد الانتظار</a>
 				<?php }elseif($order_status == "cancellation requested"){ ?>
 					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">إلغاء الطلب</a>

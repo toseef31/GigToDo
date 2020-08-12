@@ -23,7 +23,7 @@ if(isset($_GET['seller_id'])){
 	
 $get_receiver_id = $input->get('seller_id');
 
-print_r($get_receiver_id);
+
 	
 if(isset($_GET['offer_id'])){
 	
@@ -44,11 +44,11 @@ echo "<script>window.open('../index.php','_self')</script>";
 $get_inbox_sellers = $db->query("select * from inbox_sellers where sender_id='$login_seller_id' and receiver_id=:r_id or sender_id=:s_id and receiver_id='$login_seller_id'",array("r_id"=>$get_receiver_id,"s_id"=>$get_receiver_id));
 	
 $count_inbox_sellers = $get_inbox_sellers->rowCount();
-print_r($count_inbox_sellers);
+
 	
 if($count_inbox_sellers == 0){
 
-	print_r("empty");
+	
 	
 $message_status = "empty";
 
@@ -67,7 +67,7 @@ echo "<script>window.open('inbox?single_message_id=$new_message_group_id','_self
 }else{
 
 $old_message_group_id = $get_inbox_sellers->fetch()->message_group_id;
-print_r($old_message_group_id);	
+	
 
 echo "<script>window.open('inbox?single_message_id=$old_message_group_id','_self')</script>";
 	
