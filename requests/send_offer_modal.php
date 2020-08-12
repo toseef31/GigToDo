@@ -85,7 +85,7 @@ $request_seller_image = $row_request_seller->seller_image;
 								<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
 								<span>Total Budget</span>
 							</div>
-							<input class="form-control mb-30 bg-white" type="text" value="<?= $s_currency; ?> <?= $request_budget; ?>" placeholder="$ 5 Minimum" readonly="" />
+							<input class="form-control mb-30 bg-white" type="text" value="<?= $s_currency; ?> <?= $request_budget; ?>" placeholder=" " readonly="" />
 						</div>
 						<div class="customer-profile mb-30">
 							<div class="d-flex align-items-start align-items-md-center pt-15 pb-15">
@@ -134,7 +134,7 @@ $request_seller_image = $row_request_seller->seller_image;
 								<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
 								<span>Total Amount</span>
 							</div>
-							<input class="form-control mb-30" type="text" name="amount" placeholder="$ 5 Minimum" />
+							<input class="form-control mb-30" type="text" name="amount" placeholder=" " />
 						</div>
 						<div class="form-group d-flex flex-row align-items-center justify-content-between">
 							<button class="button" id="submit-proposal" type="submit">Send Offer</button>

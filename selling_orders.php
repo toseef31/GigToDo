@@ -114,7 +114,7 @@ if ($used_purchases == '') {
 								      $order_amount_price += $order_price;
 								      $order_fee_price += $order_fee;
 								      
-								      $completed_order_price += $order_amount_price;
+								      $completed_order_price += $order_amount_price + $order_fee_price;
 								    }
 									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
@@ -176,15 +176,14 @@ if ($used_purchases == '') {
 									</div>
 									<!-- Each item -->
 									<?php
-								    // $get_order = $db->select("orders",array("order_id" => $order_id, "order_status" => "pending"));
-								    $get_order = $db->query("select * from orders where seller_id=$login_seller_id and order_status='progress' or order_status='pending'");
+								    $get_order = $db->select("orders",array("seller_id" => $login_seller_id, "order_status"=>'pending'));
+								    // $get_order = $db->query("select * from orders where seller_id=$login_seller_id");
 								    $overdue_order_price = 0;
-								    $order_amount_price = 0;
-								    $order_fee_price = 0;
 								    while($row_order = $get_order->fetch()){
 								    	$order_status = $row_orders->order_status;
 								      $order_price = $row_order->order_price;
 								      $order_fee = $row_order->order_fee;
+								      $total_amount = $order_price + $order_fee;
 					            $order_duration = intval($row_orders->order_duration);
 					      			$order_date = $row_orders->order_date;
 					      			$order_due = date("F d, Y", strtotime($order_date . " + $order_duration days"));
@@ -196,14 +195,18 @@ if ($used_purchases == '') {
 					      		  $new_date_order = strtotime($order_due);
 					      		   
 					      		  $date2 = date('Y-m-d',$new_date_order);
+								      $order_amount_price += $order_price;
+							      	$order_fee_price += $order_fee;
 								      
 								      
-								      if($date1 < $date2){
-								      	$order_amount_price += $order_price;
-								      	$order_fee_price += $order_fee;
-								      	$overdue_order_price += $order_amount_price + $order_fee_price;
-								    	}
+								    	// 	echo "due is greater";
+								    	// 	$overdue_order_price += $order_amount_price + $order_fee_price;
+								    	// }
+								    	$overdue_order_price += $total_amount;
+								    	
+								    	// echo $overdue_order_price;
 								    }
+								    
 									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
 										<span class="image-icon">

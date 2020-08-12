@@ -12,6 +12,9 @@
 		<?php
 		$sel_orders = $db->select("orders",array("seller_id" => $login_seller_id),"DESC");
 		$count_orders = $sel_orders->rowCount();
+		$overdue_order_price = 0;
+    $order_amount_price = 0;
+    $order_fee_price = 0;
 		while($row_orders = $sel_orders->fetch()){
 		$order_id = $row_orders->order_id;
 		$proposal_id = $row_orders->proposal_id;
@@ -22,6 +25,8 @@
 		$order_number = $row_orders->order_number;
 		$order_duration = intval($row_orders->order_duration);
 		$order_date = $row_orders->order_date;
+    $order_amount_price += $order_price;
+  	$order_fee_price += $order_fee;
 		$order_due = date("F d, Y", strtotime($order_date . " + $order_duration days"));
 		$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
 		$row_proposals = $select_proposals->fetch();
@@ -64,7 +69,7 @@
 				<?php if ($order_status == "delivered"){ ?>
 
 				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active" or $order_status == "progress"){ ?>
+				<?php }elseif($order_status == "active" or $order_status == "progress" && $date1 <= $date2){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">In Progress</a>
 
 
@@ -77,10 +82,10 @@
 				<?php }elseif($order_status == "cancellation requested"){ ?>
 					<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>">Cancel Request</a>
 
-				<?php }elseif($order_status == "pending"){ ?>
+				<?php }elseif($order_status == "pending" && $date1 < $date2){ ?>
 					<a class="button button-darkgray" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
 				<?php }elseif($date1 > $date2 && $order_status == 'progress' or $order_status == 'pending'){ ?>
-					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">overdue</a>
+					<a class="button button-lochmara" href="order_details?order_id=<?= $order_id; ?>">overdue </a>
 				<?php } ?>
 			</td>
 		</tr>
