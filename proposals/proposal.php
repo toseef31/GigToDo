@@ -227,7 +227,11 @@ $enableVideo = 0;
 		<?php if(!empty($site_favicon)){ ?>
 		<link rel="shortcut icon" href="../../images/<?= $site_favicon; ?>" type="image/x-icon">
 		<?php } ?>
-		<style>.owl-nav{display: block !important;}.gigs-single .gigs-single-card .gigs-single-body .owl-carousel .owl-nav button{background-color: transparent;border: 0;}</style>
+		<style>.owl-nav{display: block !important;}.gigs-single .gigs-single-card .gigs-single-body .owl-carousel .owl-nav button{background-color: transparent;border: 0;}
+		.gigs-single .gig-packages .packages-item {
+		    padding: 56px 20px;
+		}
+		</style>
 	</head>
 	<body class="all-content">
 		<!-- Preloader Start -->

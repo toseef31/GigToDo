@@ -213,8 +213,9 @@ $login_seller_id = $row_login_seller->seller_id;
 								    	$order_status = $row_orders->order_status;
 								      $order_price = $row_order->order_price;
 								      $order_fee = $row_order->order_fee;
-					            $order_duration = intval($row_orders->order_duration);
-					      			$order_date = $row_orders->order_date;
+								      $total_amount = $order_price + $order_fee;
+					            $order_duration = intval($row_order->order_duration);
+					      			$order_date = $row_order->order_date;
 					      			$order_due = date("F d, Y", strtotime($order_date . " + $order_duration days"));
 					            $today_date = date("F d, Y");
 					            $new_date_today = strtotime($today_date);
@@ -225,11 +226,8 @@ $login_seller_id = $row_login_seller->seller_id;
 					      		   
 					      		  $date2 = date('Y-m-d',$new_date_order);
 								      
-								      
-								      if($date1 < $date2){
-								      	$order_amount_price += $order_price;
-								      	$order_fee_price += $order_fee;
-								      	$overdue_order_price += $order_amount_price + $order_fee_price;
+								      if($date1 > $date2){
+								      	$overdue_order_price += $total_amount;
 								    	}
 								    }
 									?>

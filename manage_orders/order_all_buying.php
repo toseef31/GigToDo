@@ -24,9 +24,9 @@
 		$order_duration = intval($row_orders->order_duration);
 		$order_date = $row_orders->order_date;
 		$order_due = date("F d, Y", strtotime($order_date . " + $order_duration days"));
-						$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
-						$row_proposals = $select_proposals->fetch();
-						$proposal_title = $row_proposals->proposal_title;
+		$select_proposals = $db->select("proposals",array("proposal_id" => $proposal_id));
+		$row_proposals = $select_proposals->fetch();
+		$proposal_title = $row_proposals->proposal_title;
 		$proposal_img1 = $row_proposals->proposal_img1;
 		$today_date = date("F d, Y");
 		// if($order_due < $today_date){

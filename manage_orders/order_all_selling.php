@@ -69,7 +69,8 @@
 				<?php if ($order_status == "delivered"){ ?>
 
 				<a class="button button-red" href="order_details?order_id=<?= $order_id; ?>"><?php echo ucwords($order_status); ?></a>
-				<?php }elseif($order_status == "active" or $order_status == "progress" && $date1 <= $date2){ ?>
+
+				<?php }elseif($order_status == "active" or $order_status == "progress" && $date1 < $date2){ ?>
 					<a class="button button-limerick" href="order_details?order_id=<?= $order_id; ?>">In Progress</a>
 
 

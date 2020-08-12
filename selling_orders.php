@@ -180,12 +180,13 @@ if ($used_purchases == '') {
 								    // $get_order = $db->query("select * from orders where seller_id=$login_seller_id");
 								    $overdue_order_price = 0;
 								    while($row_order = $get_order->fetch()){
-								    	$order_status = $row_orders->order_status;
+								    	$order_status = $row_order->order_status;
 								      $order_price = $row_order->order_price;
 								      $order_fee = $row_order->order_fee;
 								      $total_amount = $order_price + $order_fee;
-					            $order_duration = intval($row_orders->order_duration);
-					      			$order_date = $row_orders->order_date;
+
+					            $order_duration = intval($row_order->order_duration);
+					      			$order_date = $row_order->order_date;
 					      			$order_due = date("F d, Y", strtotime($order_date . " + $order_duration days"));
 					            $today_date = date("F d, Y");
 					            $new_date_today = strtotime($today_date);
@@ -198,13 +199,9 @@ if ($used_purchases == '') {
 								      $order_amount_price += $order_price;
 							      	$order_fee_price += $order_fee;
 								      
-								      
-								    	// 	echo "due is greater";
-								    	// 	$overdue_order_price += $order_amount_price + $order_fee_price;
-								    	// }
-								    	$overdue_order_price += $total_amount;
-								    	
-								    	// echo $overdue_order_price;
+							        if($date1 > $date2){
+							        	$overdue_order_price += $total_amount;
+							      	}
 								    }
 								    
 									?>
