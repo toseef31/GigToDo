@@ -728,6 +728,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 													<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 													<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 													<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+													<?php if(in_array("Username should not have space, Please try another one.", $error_array)) echo "<span style='color:red;'>Username should not have space, Please try another one.</span> <br>"; ?>
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 												</div>
 												<div class="form-group">
@@ -1096,6 +1097,12 @@ myInput.onkeyup = function() {
     length.classList.add("invalid");
   }
 }
+$("input[name='u_name']").keyup(function(e) {   
+   if (e.which === 32)  {
+     // alert('you entered space');
+     $("#space_error").html("Username should not have space, Please try another one.");
+   }
+});
 </script>
 <?php
 if(isset($_POST['submit'])){
@@ -1321,6 +1328,9 @@ if(isset($_POST['submit'])){
 					$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 					// if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
 					//   array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+					// }
+					// if ( preg_match('/\s/',$input->post('u_name')) ){
+					// 	array_push($error_array, "Username should not have space, Please try another one.");
 					// }
 					if($check_seller_username > 0 ){
 					  array_push($error_array, "Opps! This username has already been taken. Please try another one");

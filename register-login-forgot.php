@@ -65,6 +65,9 @@ if(isset($_POST['register'])){
 		$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 		$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 		
+		// if ( preg_match('/\s/',$input->post('u_name')) ){
+		// 	array_push($error_array, "Username should not have space, Please try another one.");
+		// }
 		if($check_seller_username > 0 ){
 		  array_push($error_array, "Opps! This username has already been taken. Please try another one");
 		}
