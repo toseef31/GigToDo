@@ -687,6 +687,7 @@ $login_seller_language = $row_login_seller->seller_language;
                           <?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
                           <?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
                           <?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+                          <?php if(in_array("Username should not have space, Please try another one.", $error_array)) echo "<span style='color:red;'>Username should not have space, Please try another one.</span> <br>"; ?>
                         </div>
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
@@ -757,8 +758,11 @@ if(isset($_POST['publish'])){
 
     $check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
     $check_seller_email = $db->count("sellers",array("seller_email" => $email));
-    if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-      array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+    // if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
+    //   array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
+    // }
+    if ( preg_match('/\s/',$input->post('u_name')) ){
+      array_push($error_array, "Username should not have space, Please try another one.");
     }
     if($check_seller_username > 0 ){
       array_push($error_array, "Opps! This username has already been taken. Please try another one");

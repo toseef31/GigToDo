@@ -179,6 +179,7 @@ $recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
 									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
+									<?php if(in_array("يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.", $error_array)) echo "<span style='color:red;'>يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.</span> <br>"; ?>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 								</div>
 								<div class="form-group">
@@ -330,6 +331,12 @@ $('#confirm_pass').on('keyup', function () {
   } else 
     $('#match').html('كلمة المرور غير متطابقة').css('color', 'red');
 });
+$("input[name='u_name']").keyup(function(e) {   
+   if (e.which === 32)  {
+     // alert('you entered space');
+     $("#space_error").html("يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.");
+   }
+});
 </script>
 <?php 
 	if(isset($_POST['register'])){
@@ -380,6 +387,9 @@ $('#confirm_pass').on('keyup', function () {
 			$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 			// if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
 			//   array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
+			// }
+			// if ( preg_match('/\s/',$input->post('u_name')) ){
+			// 	array_push($error_array, "يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.");
 			// }
 			if($check_seller_username > 0 ){
 			  array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");

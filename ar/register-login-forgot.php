@@ -32,14 +32,14 @@ if(isset($_POST['register'])){
 		$_SESSION['error_array'] = array();
 		Flash::add("register_errors",$val->get_all_errors());
 		Flash::add("form_data",$_POST);
-		echo "<script>window.open('index','_self')</script>";
+		echo "<script>window.open('register','_self')</script>";
 	}else{
 		$error_array = array();
 		$secret_key = "$recaptcha_secret_key";
-	    $response = $input->post('g-recaptcha-response');
-	    $remote_ip = $_SERVER['REMOTE_ADDR'];
-	    $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$response&remoteip=$remote_ip");
-	    $result = json_decode($url, TRUE);
+    $response = $input->post('g-recaptcha-response');
+    $remote_ip = $_SERVER['REMOTE_ADDR'];
+    $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$response&remoteip=$remote_ip");
+    $result = json_decode($url, TRUE);
 		$name = strip_tags($input->post('name'));
 		$name = strip_tags($name);
 		$name = ucfirst(strtolower($name));
@@ -66,6 +66,9 @@ if(isset($_POST['register'])){
 		// if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
 		//   array_push($error_array, "Foreign characters are not allowed in username, Please try another one.");
 		// }
+		if ( preg_match('/\s/',$input->post('u_name')) ){
+			array_push($error_array, "يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.");
+		}
 		if($check_seller_username > 0 ){
 		  array_push($error_array, "Opps! This username has already been taken. Please try another one");
 		}
