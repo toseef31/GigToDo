@@ -181,6 +181,7 @@ $recaptcha_secret_key = $row_general_settings->recaptcha_secret_key;
 									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
 									<?php if(in_array("يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.", $error_array)) echo "<span style='color:red;'>يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.</span> <br>"; ?>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
+									<span id="space_error" class="form-text text-danger"></span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">الإيميل</label>
