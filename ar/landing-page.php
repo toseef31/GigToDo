@@ -61,7 +61,7 @@
           <div class="logo">
 
             <a href="javascript:void(0);">
-              <img class="top-logo" src="assets/img/emongez_arabic_negative_landing.png" alt="logo">
+              <img class="En-top-logo" src="assets/img/emongez_arabic_negative_landing.png" alt="logo">
               <!-- <img class="En-top-logo" src="<?= $site_url; ?>/images/ar/<?= $arabic_sticky_logo; ?>" alt="logo"> -->
             </a>
           </div>

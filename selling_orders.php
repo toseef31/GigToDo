@@ -176,8 +176,8 @@ if ($used_purchases == '') {
 									</div>
 									<!-- Each item -->
 									<?php
-								    $get_order = $db->select("orders",array("seller_id" => $login_seller_id, "order_status"=>'pending'));
-								    // $get_order = $db->query("select * from orders where seller_id=$login_seller_id");
+								    // $get_order = $db->select("orders",array("seller_id" => $login_seller_id, "order_status"=>'pending'));
+								    $get_order = $db->query("select * from orders where seller_id=$login_seller_id and order_status='progress' or order_status='pending'");
 								    $overdue_order_price = 0;
 								    while($row_order = $get_order->fetch()){
 								    	$order_status = $row_order->order_status;
