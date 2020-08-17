@@ -103,7 +103,6 @@ if(isset($_SESSION['checkout_seller_id'])){
 	$proposal_qty = $_SESSION['proposal_qty'];
 	$payment_method = $_SESSION['method'];
 
-	
 	$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
 	$row_proposal = $select_proposal->fetch();
 	$proposal_title = $row_proposal->proposal_title;
@@ -127,7 +126,6 @@ if(isset($_SESSION['checkout_seller_id'])){
 	}
 
 	// $add_days = intval($delivery_proposal_title);
-
 	date_default_timezone_set("UTC");
 	$order_date = date("F d, Y");
 	$date_time = date("M d, Y H:i:s");
@@ -429,9 +427,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 	}
 	}).then(function(){
 	  // Read more about handling dismissals
-
 	  window.open('checkout2?order_id=$insert_order_id','_self')
-
 	});
 	</script>";
 		
@@ -930,9 +926,7 @@ if(isset($_SESSION['offer_id'])){
 	}).then(function(){
 	if (
 	// Read more about handling dismissals
-
 	window.open('offer-checkout2?order_id=$insert_order_id','_self')
-
 	) {
 	console.log('Order submitted!')
 	}
@@ -1298,9 +1292,7 @@ echo "
 
 alert('Your order has been placed successfully, thank you.');
 
-
 window.open('order-checkout2?order_id=$insert_order_id','_self');
-
 
 </script>";
 
