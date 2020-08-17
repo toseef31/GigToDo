@@ -277,7 +277,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="logo <?php if(isset($_SESSION["seller_user_name"])){echo"loggedInLogo";} ?>">
                 <a href="javascript:void(0);">
                   <?php if($site_logo_type == "image"){ ?>
-                  <img src="<?= $site_url; ?>/images/<?= $site_logo_image; ?>" alt="" width="150">
+                  <img src="<?= $site_url; ?>/images/<?= $site_arabic_logo; ?>" alt="" width="150">
                   <?php }else{ ?>
                   <?php echo $site_logo_text; ?>
                   <?php } ?>
