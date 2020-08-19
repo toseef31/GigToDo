@@ -675,7 +675,7 @@ $relevant_requests = $row_general_settings->relevant_requests;
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>الباسوورد</span></label>
-													<input class="form-control" type="password" name="pass" id="psw" placeholder="Enter Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
+													<input class="form-control" type="password" name="pass" id="psw" placeholder="Enter Password"  pattern="(?=.*\d).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 												</div>
 												<div id="message">
