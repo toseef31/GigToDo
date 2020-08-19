@@ -91,9 +91,6 @@ if(isset($_SESSION['seller_user_name'])){
 </script>
 <script>
 $(document).ready(function(){
-  $(document).bind("contextmenu",function(e) {
-   e.preventDefault();
-  });
   
   $("#languageSelect").change(function(){
     var url = $("#languageSelect option:selected").data("url");

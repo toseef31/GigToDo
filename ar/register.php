@@ -196,8 +196,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 								</div>
 								<div class="form-group">
-									<label class="control-label">كلمة المرور</label>
-									<input class="form-control" type="password" name="pass" id="psw" placeholder="أدخل كلمة المرور"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
+									<label class="control-label">الباسوورد</label>
+									<input class="form-control" type="password" name="pass" id="psw" placeholder="أدخل كلمة المرور"  pattern="(?=.*\d).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 								</div>
 								<div id="message">
