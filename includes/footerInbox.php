@@ -247,6 +247,10 @@
 </script>
 <script>
 $(document).ready(function(){
+  $(document).bind("contextmenu",function(e) {
+   e.preventDefault();
+  });
+  
   $("#languageSelect").change(function(){
     var url = $("#languageSelect option:selected").data("url");
     window.location.href = url;
