@@ -492,6 +492,7 @@ if(isset($_POST['code'])){
 												$stripe_total_amount = $total * 100;
 												?>
 												<form action="checkout_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
+												<?php $encrypted_key = base64_encode($stripe['publishable_key']); ?>
 												<input
 												type="submit"
 												class="stripe-submit"
@@ -589,7 +590,7 @@ if(isset($_POST['code'])){
 													<button type="submit" name="edit_wallet" id="edit_wallet" class="button">Edit Info</button>
 												</div>
 											</form>
-											<form action="weaccept.php" method="post" id="weaccept-form" class="float-right">
+											<form action="weaccept" method="post" id="weaccept-form" class="float-right">
 												<button type="submit" name="weaccept" class="order-button float-right">Order</button>
 											</form>
 										</li>
@@ -689,7 +690,7 @@ if(isset($_POST['code'])){
 												<?php 
 													
 												?>
-												<form action="weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+												<form action="weaccept_cash" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
 												<button type="submit" name="weaccept_cash" class="order-button">Order</button>
 												</form>
 											</li>
@@ -738,7 +739,7 @@ if(isset($_POST['code'])){
 													<button type="submit" name="edit_local" id="edit_local">Edit Info</button>
 												</div>
 											</form>
-											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk" class="float-right">
+											<form action="weaccept_kiosk" method="post" id="weaccept-kiosk" class="float-right">
 												<button type="submit" name="weaccept_valu" class="order-button float-right">Order</button>
 											</form>
 										</li>
