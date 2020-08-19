@@ -547,7 +547,7 @@ if(isset($_POST['code'])){
 													<button type="submit" name="edit_wallet" id="edit_wallet" class="button">تحرير المعلومات</button>
 												</div>
 											</form>
-											<form action="requests/weaccept.php" method="post" id="weaccept-form" class="float-right">
+											<form action="requests/weaccept" method="post" id="weaccept-form" class="float-right">
 												<button type="submit" name="weaccept" class="order-button float-right">الطلب</button>
 											</form>
 										</li>
@@ -650,7 +650,7 @@ if(isset($_POST['code'])){
 											<?php 
 												
 											?>
-											<form action="requests/weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+											<form action="requests/weaccept_cash" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
 											<button type="submit" name="weaccept_cash" class="order-button">الطلب</button>
 											</form>
 										</li>
@@ -701,7 +701,7 @@ if(isset($_POST['code'])){
 													<button type="submit" name="edit_local" id="edit_local">تحرير المعلومات</button>
 												</div>
 											</form>
-											<form action="requests/weaccept_kiosk.php" method="post" id="weaccept-kiosk" class="float-right">
+											<form action="requests/weaccept_kiosk" method="post" id="weaccept-kiosk" class="float-right">
 												<button type="submit" name="weaccept_valu" class="order-button float-right">الطلب</button>
 											</form>
 										</li>
