@@ -371,7 +371,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<span>
 														<img alt="" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/create-gig-icon.png" />
 													</span>
-													<span>عنوان طلبك</span>
+													<span>عنوان الوظيفة</span>
 												</label>
 												<input type="text" name="request_title" placeholder="طلب عنوان...." class="form-control input-lg" value="<?= $form_data['request_title']; ?>">
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_title']); ?></span>
@@ -388,7 +388,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<span>
 														<img alt="" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/create-gig-icon.png" />
 													</span>
-													<span>اوصف الخدمة اللي عايز تشتريها</span>
+													<span>اوصف المشروع و الخدمة اللي محتاجها</span>
 												</label>
 
 												<textarea class="form-control" name="request_description" id="textarea" placeholder="أنا بدور على...." rows="5"><?= $form_data['request_description']; ?></textarea>
@@ -657,7 +657,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<div class="post-register-form register-form" style="display: none;">
 												
 
-												<h4>الاشتراك كمشتري</h4>
+												<h4>الاشتراك كمشتري خدمة</h4>
 												<!-- <div class="form-group">
 													<label class="control-label"><span>الاسم الكامل</span></label>
 													<input class="form-control" type="text" name="name" placeholder="أدخل اسمك الكامل" value="" />
@@ -675,14 +675,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<span id="space_error" class="form-text text-danger"></span>
 												</div>
 												<div class="form-group">
-													<label class="control-label"><span>عنوان بريدك الإلكتروني</span></label>
-													<input class="form-control" type="email" name="email" placeholder="أدخل البريد الإلكتروني" value="">
+													<label class="control-label"><span>الإيميل</span></label>
+													<input class="form-control" type="email" name="email" placeholder="دخل لإيميل" value="">
 				            			<?php if(in_array("Email has already been taken. Try logging in instead.", $error_array)) echo "<span style='color:red;'>Email has already been taken. Try logging in instead.</span> <br>"; ?>
 				            			<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 												</div>
 												<div class="form-group">
-													<label class="control-label"><span>الباسوورد</span></label>
-													<input class="form-control" type="password" name="pass" id="psw" placeholder="Enter Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
+													<label class="control-label"><span>كلمة المرور</span></label>
+													<input class="form-control" type="password" name="pass" id="psw" placeholder="دخل كلمة المرور"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 												</div>
 												<div id="message">
@@ -692,22 +692,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												  <p id="number" class="invalid"><b>رقم</b></p>
 												  <p id="length" class="invalid">الحد الأدنى  <b>8 أحرف</b></p>
 												</div>
-												<p>عندك حساب أصلا ؟ <a href="javascript:void(0);" id="showLogin">الدخول</a></p>
+												<p>عندك حساب ؟ <a href="javascript:void(0);" id="showLogin">الدخول</a></p>
 											</div>
 											<!-- Login Form -->
 											<div class="post-register-form login-form">
-												<h4>تسجيل الدخول كمشتري</h4>
+												<h4>تسجيل الدخول كمشتري خدمة</h4>
 												<div class="form-group">
 													<label class="control-label"><span>الإيميل   أو   اسم المستخدم</span></label>
-													<input class="form-control" type="text" placeholder="ادخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
+													<input class="form-control" type="text" placeholder="دخل اسم المستخدم"  name="seller_user_name" value= "<?php if(isset($_SESSION['seller_user_name'])) echo $_SESSION['seller_user_name']; ?>"/>
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
 												</div>
 												<div class="form-group">
 													<label class="control-label"><span>الباسوورد</span></label>
-													<input class="form-control" type="password" name="seller_pass" placeholder="الباسوورد"/>
+													<input class="form-control" type="password" name="seller_pass" placeholder="كلمة المرور"/>
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
 												</div>
-												<p>ماعندكش حساب؟ <a href="javascript:void(0);" id="showRegister">سجل</a></p>
+												<p>ماعندكش حساب؟ <a href="javascript:void(0);" id="showRegister">انضم</a></p>
 											</div>
 											<!-- End Login Form -->
 											<?php } ?>
@@ -730,7 +730,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											</div>
 											<div class="howitwork-list-content">
 												<h3>1. استكشف</h3>
-												<p> شارك مشروعك دلوقتي على منصتنا عشان تقدر تتواصل مع المحترفين من الموظفين المستقلين اللي مستعدين يقدموا حاجات رائعة ليك.</p>
+												<p> شارك مشروعك دلوقتي على منصتنا عشان تقدر تتواصل مع المحترفين من الموظفين المستقلين اللي مستعدين يقدموا خدمات رائعة ليك.</p>
 											</div>
 										</div>
 										<!-- How it work each item -->

@@ -384,8 +384,8 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
             <div class="header-right d-flex align-items-center justify-content-end">
               <div class="menu-inner">
                 <ul>
-                  <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a></li>
-                  <li><a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a></li>
+                  <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">انشر مشروع</a></li>
+                  <li><a href="<?= $site_url; ?>/ar/how-it-works.php">ازاي بيشتغل</a></li>
                 </ul>
               </div>
               <?php if($language_switcher == 1){?>
@@ -405,8 +405,8 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
               </div>
               <?php } ?>
               <div class="Login-button">
-                <a href="<?= $site_url; ?>/ar/login.php">تسجيل الدخول</a>
-                <a href="<?= $site_url; ?>/ar/register.php">نضم الان</a>
+                <a href="<?= $site_url; ?>/ar/login.php">الدخول</a>
+                <a href="<?= $site_url; ?>/ar/register.php">انضم</a>
               </div>
               <div class="menubar">
                 <div class="d-flex flex-row align-items-center">
@@ -436,10 +436,10 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
     <div class="canvs-menu">
       <ul class="d-flex flex-column">
         <li>
-          <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
+          <a href="<?= $site_url; ?>/ar/requests/post-request.php">انشر مشروع</a>
         </li>
         <li>
-          <a href="<?= $site_url; ?>/ar/how-it-works.php">كيف تعمل</a>
+          <a href="<?= $site_url; ?>/ar/how-it-works.php">ازاي بيشتغل</a>
         </li>
         <li class="d-flex flex-row">
           <?php if($language_switcher == 1){ ?>

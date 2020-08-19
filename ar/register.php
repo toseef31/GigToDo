@@ -128,7 +128,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<div class="container">
 					<div class="login-signup-wrapper signup-wrapper">
 						<div class="login-signup-header">
-							<h3 class="text-center">التسجيل</h3>
+							<h3 class="text-center">انضم</h3>
 							<p class="text-center">عندك حساب ؟ <a href="login.php">الدخول</a></p>
 						</div>
 						<?php if($enable_social_login == "yes"){ ?>
@@ -228,7 +228,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<div class="form-group">
 											<label for="customRadio1" class="custom-control custom-radio">
 												<input type="radio" hidden id="customRadio1" name="accountType" class="custom-control-input" value="buyer">
-												<div class="custom-control-label">مشترى</div>
+												<div class="custom-control-label">مشترى خدمة</div>
 											</label>
 										</div>
 									</div>
@@ -236,7 +236,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<div class="form-group">
 											<label for="customRadio2" class="custom-control custom-radio">
 												<input type="radio" hidden id="customRadio2" name="accountType" class="custom-control-input" value="seller">
-												<div class="custom-control-label">بائع</div>
+												<div class="custom-control-label">بائع خدمة</div>
 											</label>
 										</div>
 									</div>
