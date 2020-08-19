@@ -129,7 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					<div class="login-signup-wrapper signup-wrapper">
 						<div class="login-signup-header">
 							<h3 class="text-center">التسجيل</h3>
-							<p class="text-center">عندك حساب أصلا ؟ <a href="login.php">الدخول</a></p>
+							<p class="text-center">عندك حساب ؟ <a href="login.php">الدخول</a></p>
 						</div>
 						<?php if($enable_social_login == "yes"){ ?>
 						<div class="login-by-social d-flex flex-column flex-lg-row align-items-center justify-content-center">
@@ -137,7 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								<span>
 									<i class="fab fa-facebook-f"></i>
 								</span>
-								<span>التسجيل عن طريق Facebook</span>
+								<span>التسجيل عن طريق فيسبوك</span>
 							</a>
 							<!-- <a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);">
 								<span>
@@ -149,7 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								<span>
 									<i class="fab fa-google"></i>
 								</span>
-								<span>التسجيل عن طريقGoogle</span>
+								<span>التسجيل عن طريق جوجل</span>
 							</a>
 						</div>
 						<?php } ?>
@@ -179,7 +179,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<input class="form-control" type="text" name="" />
 								</div> -->
 								<div class="form-group">
-									<label class="control-label">الاسم الأخير</label>
+									<label class="control-label">اسم المستخدم</label>
 									<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" />
 									<small class="form-text text-muted">ملاحظة: لن تتمكن من تغيير اسم المستخدم بمجرد إنشاء حسابك</small>
 									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
@@ -196,7 +196,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['email']); ?></span>
 								</div>
 								<div class="form-group">
-									<label class="control-label">الباسوورد</label>
+									<label class="control-label">كلمة المرور</label>
 									<input class="form-control" type="password" name="pass" id="psw" placeholder="أدخل كلمة المرور"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 								</div>
@@ -208,7 +208,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								  <p id="length" class="invalid">الحد الأدنى  <b>8 أحرف</b></p>
 								</div>
 								<div class="form-group">
-									<label class="control-label"> تؤكد  الباسوورد</label>
+									<label class="control-label"> تاكيد كلمة المرور</label>
 									<input type="password" class="form-control" id="confirm_pass" name="con_pass" placeholder="تأكيد كلمة المرور">
 									<?php if(in_array("Passwords don't match. Please try again.", $error_array)) echo "<span style='color:red;'>Passwords don't match. Please try again.</span> <br>"; ?>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['con_pass']); ?></span>
@@ -254,7 +254,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div>
 								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['term']); ?></span>
 								<div class="form-group">
-									<button class="login-button" role="button" type="submit" name="register" >التسجيل</button>
+									<button class="login-button" role="button" type="submit" name="register" >انضم</button>
 								</div>
 							</form>
 						</div>
@@ -440,7 +440,7 @@ $("input[name='u_name']").keyup(function(e) {
 							$seller_id = $row_seller->seller_id;	
 							$seller_ip = $row_seller->seller_ip;
 							if($seller_ip == $ip){
-								echo "<script>alert('You Cannot Referral Yourself To Make Money.');</script>";
+								echo "<script>alert('You Cannot Refer Yourself.');</script>";
 							}else{
 								$count_referrals = $db->count("referrals",array("ip" => $ip));	
 								if($count_referrals == 1){

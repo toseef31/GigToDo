@@ -249,7 +249,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     				<div class="login-signup-wrapper login-wrapper">
     					<div class="login-signup-header">
     						<h3 class="text-center">
-								أهلا بيك من تاني، سجل الدخوللحسابك
+								أهلا بيك من تاني، سجل الدخولحسابك
 								</h3>
     						<p class="text-center">ماعندكش حساب؟ <a href="register.php">سجل</a></p>
     					</div>
@@ -259,7 +259,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     							<span>
     								<i class="fab fa-facebook-f"></i>
     							</span>
-    							<span>  الدخول عن طريق  Facebook</span>
+    							<span>  الدخول عن طريق  فيسبوك</span>
     						</a>
     						<!-- <a class="social-button linkedin d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = '<?php echo $linkLoginURL; ?>'">
     							<span>
@@ -271,7 +271,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     							<span>
     								<i class="fab fa-google"></i>
     							</span>
-    							<span>تسجيل الدخول ب Google</span>
+    							<span>الدخول عن طريق جوجل</span>
     						</a>
     					</div>
     				<?php } ?>
@@ -302,7 +302,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
     							</div>
     							<div class="form-group">
-    								<label class="control-label">الباسوورد</label>
+    								<label class="control-label">كلمة المرور</label>
     								<input class="form-control" type="password" name="seller_pass" placeholder="أدخل كلمة المرور" value="<?php if(isset($_SESSION["user_password"])) { echo $_SESSION["user_password"]; } ?>" />
     								<!-- <?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?> -->
     								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_pass']); ?></span>
@@ -313,13 +313,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     									<!-- <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?> -->
     									<label class="custom-control-label" for="customCheck1">افتكرني</label>
     								</div>
-    								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">نسيت الباسوورد ؟</a>
+    								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">نسيت كلمة المرور ؟</a>
     							</div>
     							<div class="form-group">
-    								<button class="login-button" role="button" type="submit" name="login">تسجيل الدخول</button>
+    								<button class="login-button" role="button" type="submit" name="login">الدخول</button>
     							</div>
     							<div class="form-group">
-    								<p class="text-center">لما تضغط على تسجيل الدخول ، Facebook أو Linkedinأو Google<br />معناه إنك موافق على <a href="javascript:void(0);">شروطنا وأحكامنا الجديدة</a></p>
+    								<p class="text-center">لما تضغط على تسجيل الدخول ، فيسبوك أو جوجل<br />معناه إنك موافق على <a href="javascript:void(0);">شروطنا وأحكامنا الجديدة</a></p>
     							</div>
     						</form>
     					</div>

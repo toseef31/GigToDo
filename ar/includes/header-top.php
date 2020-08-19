@@ -57,7 +57,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];    
 $full_url = $_SERVER['REQUEST_URI'];
 
-$page_url = substr("$full_url", 4);
+$page_url = substr("$full_url", 18);
 
 $cur_amount = currencyConverter($to,1);
 ?>
@@ -77,8 +77,8 @@ $cur_amount = currencyConverter($to,1);
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a></li>
-                <li><a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a></li>
+                <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">انشر مشروع</a></li>
+                <li><a href="<?= $site_url ?>/ar/how-it-works.php">ازاي بيشتغل</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -98,8 +98,8 @@ $cur_amount = currencyConverter($to,1);
             </div>
             <?php } ?>
             <div class="Login-button d-none d-lg-flex">
-              <a href="login.php">تسجيل الدخول</a>
-              <a href="register.php">نضم الان</a>
+              <a href="login.php">الدخول</a>
+              <a href="register.php">انضم</a>
             </div>
             <div class="menubar d-lg-none">
               <div class="d-flex flex-row align-items-center">
@@ -131,7 +131,7 @@ $cur_amount = currencyConverter($to,1);
         <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
       </li>
       <li>
-        <a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a>
+        <a href="<?= $site_url ?>/ar/how-it-works.php">ازاي بيشتغل</a>
       </li>
       <li class="d-flex flex-row">
         <?php if($language_switcher == 1){ ?>

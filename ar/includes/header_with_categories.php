@@ -111,8 +111,8 @@ $cur_amount = currencyConverter($to,1);
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a></li>
-                <li><a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a></li>
+                <li><a href="<?= $site_url; ?>/ar/requests/post-request.php">انشر مشروع</a></li>
+                <li><a href="<?= $site_url ?>/ar/how-it-works.php">ازاي بيشتغل</a></li>
               </ul>
             </div>
             <?php if($language_switcher == 1){ ?>
@@ -136,7 +136,7 @@ $cur_amount = currencyConverter($to,1);
                 الدخول
               </a>
               <a href="<?= $site_url; ?>/ar/register.php">
-                انضم دلوقتي
+                انضم
               </a>
             </div>
           </div>
@@ -177,10 +177,10 @@ $cur_amount = currencyConverter($to,1);
   <div class="canvs-menu">
     <ul class="d-flex flex-column">
       <li>
-        <a href="<?= $site_url; ?>/ar/requests/post-request.php">نشر طلب</a>
+        <a href="<?= $site_url; ?>/ar/requests/post-request.php">انشر مشروع</a>
       </li>
       <li>
-        <a href="<?= $site_url ?>/ar/how-it-works.php">كيف تعمل</a>
+        <a href="<?= $site_url ?>/ar/how-it-works.php">ازاي بيشتغل</a>
       </li>
       <li class="d-flex flex-row">
         <?php if($language_switcher == 1){ ?>

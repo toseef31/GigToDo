@@ -105,7 +105,7 @@
       </div>
       <div class="col-lg-4 col-md-4">
         <div class="widget-item">
-          <h4>دعم</h4>
+          <h4>الدعم</h4>
           <?php
           $get_footer_links = $db->select("footer_links",array("link_section" => "about","language_id" => '2'));
           while($row_footer_links = $get_footer_links->fetch()){

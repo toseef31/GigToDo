@@ -32,7 +32,7 @@ $slide_image = $row_slides->slide_image;
       <h2 class="title">
           دور على أفضل خدمات الأعمال الحرة على منصة مصر 1#  الأمنة
       </h2>
-      <p>عين فريلانسرز بجودة عالية و ادى دفعة البداية لمشروعك </p>
+      <p>عين فريلانسرز محترفين و ادى دفعة البداية لمشروعك </p>
     </div>
     <form class="join-form" id="gnav-search" method="POST">
       <input type="search" id="search-query" name="search_query" value="<?php echo @$_SESSION["search_query"]; ?>" placeholder="ما نوع العمل هل تحتاج إلى القيام به؟">
@@ -266,7 +266,7 @@ $slide_image = $row_slides->slide_image;
             </div>
           </div>
         </div>
-        <div class="payment-label">السيولة النقدية</div>
+        <div class="payment-label">كاش</div>
       </div>
       <div class="payment-item">
         <div class="payment-flip-container">
