@@ -542,13 +542,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																<label class="control-label">
 																	كلمة المرور الجديدة
 																</label>
-																<input type="password" class="form-control" id="psw" name="new_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
+																<input type="password" class="form-control" id="psw" name="new_pass" pattern="(?=.*\d).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 															</div>
 														</div>
 														<div id="message">
 														  <!-- <h3>Password must contain the following:</h3> -->
-														  <p id="letter" class="invalid"><b>حرف  </b> صغير </p>
-														  <p id="capital" class="invalid"><b>العاصمة (الأحرف الكبيرة) </b> غير  </p>
+														  <!-- <p id="letter" class="invalid"><b>حرف  </b> صغير </p>
+														  <p id="capital" class="invalid"><b>العاصمة (الأحرف الكبيرة) </b> غير  </p> -->
 														  <p id="number" class="invalid"><b>رقم</b></p>
 														  <p id="length" class="invalid">الحد الأدنى  <b>8 أحرف</b></p>
 														</div>
@@ -1628,24 +1628,24 @@ myInput.onblur = function() {
 // When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate lowercase letters
-  var lowerCaseLetters = /[a-z]/g;
-  if(myInput.value.match(lowerCaseLetters)) {  
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-  }
+  // var lowerCaseLetters = /[a-z]/g;
+  // if(myInput.value.match(lowerCaseLetters)) {  
+  //   letter.classList.remove("invalid");
+  //   letter.classList.add("valid");
+  // } else {
+  //   letter.classList.remove("valid");
+  //   letter.classList.add("invalid");
+  // }
   
   // Validate capital letters
-  var upperCaseLetters = /[A-Z]/g;
-  if(myInput.value.match(upperCaseLetters)) {  
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
+  // var upperCaseLetters = /[A-Z]/g;
+  // if(myInput.value.match(upperCaseLetters)) {  
+  //   capital.classList.remove("invalid");
+  //   capital.classList.add("valid");
+  // } else {
+  //   capital.classList.remove("valid");
+  //   capital.classList.add("invalid");
+  // }
 
   // Validate numbers
   var numbers = /[0-9]/g;
