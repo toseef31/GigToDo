@@ -176,8 +176,8 @@ if ($used_purchases == '') {
 									</div>
 									<!-- Each item -->
 									<?php
-								    // $get_order = $db->select("orders",array("order_id" => $order_id, "order_status" => "pending"));
-								    $get_order = $db->query("select * from orders where seller_id=$login_seller_id and order_status='progress' or order_status='pending'");
+								    $get_order = $db->select("orders",array("seller_id" => $login_seller_id));
+								    // $get_order = $db->query("select * from orders where seller_id=$login_seller_id and order_status='progress' or order_status='pending'");
 								    $overdue_order_price = 0;
 								    $order_amount_price = 0;
 								    $order_fee_price = 0;
@@ -198,9 +198,11 @@ if ($used_purchases == '') {
 					      		   
 					      		  $date2 = date('Y-m-d',$new_date_order);
 								      
-							        if($date1 > $date2){
-							        	$overdue_order_price += $total_amount;
-							      	}
+			        	      if($order_status == 'progress' or $order_status == 'pending'){
+			        	        if($date1 > $date2){
+			        	        	$overdue_order_price += $total_amount;
+			        	      	}
+			              	}
 								    }
 									?>
 									<div class="orders-summary-item d-flex flex-column align-items-center justify-content-between">
