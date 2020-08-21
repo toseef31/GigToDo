@@ -212,7 +212,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="profile-card text-center">
             <div class="profile">
               <?php if(check_status($get_seller_id) == "Online"){ ?>
-              <div class="profile-status online">عبر الانترنت</div>
+              <div class="profile-status online">موجود حاليا</div>
               <?php } ?>
               <div class="profile-image">
                 <?php if(!empty($get_seller_image)){ ?>
@@ -232,7 +232,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       echo "<li><i class='fa fa-star-o'></i></li> ";
                     }
                     ?>
-                  <li><span>(<?= $count_reviews; ?>) Reviews)</span></li>
+                  <li><span>(<?= $count_reviews; ?>) التقييم</span></li>
                 </ul>
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
                   <?php if($_SESSION['seller_user_name'] != $get_seller_user_name){ ?>
@@ -242,7 +242,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </ul>
                   <?php } }else{ ?>
                     <ul class="profile-btn pt-20">
-                      <li><a class="p-btn-1" href="<?= $site_url; ?>/ar/register">Contact me</a></li>
+                      <li><a class="p-btn-1" href="<?= $site_url; ?>/ar/register">اتواصل معايا</a></li>
                       <li><a class="p-btn-2" href="<?= $site_url; ?>/ar/register">حدد الطلب</a></li>
                     </ul>
                   <?php }  ?>
@@ -275,9 +275,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
             <div class="profile-stats-content pt-20">
               <ul>
-                <li><a href="javascript:void(0);"><img src="assets/img/seller-profile/icon-3.png" alt=""> المشروع اتصل <span><?= $count_orders; ?></span></a></li>
+                <li><a href="javascript:void(0);"><img src="assets/img/seller-profile/icon-3.png" alt=""> عدد المشروعات <span><?= $count_orders; ?></span></a></li>
                 <li><a href="javascript:void(0);"><img src="assets/img/seller-profile/icon-4.png" alt=""> الخدمات اللي اتسلمت <span><?= $delivered; ?></span></a></li>
-                <li><a href="javascript:void(0);"><img src="assets/img/seller-profile/icon-5.png" alt=""> المشتري اشتغل مع <span><?= $total_buyer; ?></span></a></li>
+                <li><a href="javascript:void(0);"><img src="assets/img/seller-profile/icon-5.png" alt=""> عدد العملاء <span><?= $total_buyer; ?></span></a></li>
               </ul>
             </div>
           </div>
@@ -291,15 +291,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="profile-verifi-content profile-verifi-2 pt-20">
               <ul>
                 <?php if($fb_verification == 0){ ?>
-                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> اتصال</span></li>
+                <li><i class="fab fa-facebook-f"></i> فيسبوك <span class="facebook"  onclick="window.location='<?php echo $fLoginURL ?>';"><i class="fab fa-facebook-f"></i> ربط</span></li>
                 <?php }else{ ?>
-                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="check"><i class="fa fa-check"></i></span></li>
+                <li><i class="fab fa-facebook-f"></i> فيسبوك <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
-                <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> اتصال</span></li> -->
+                <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> ربط</span></li> -->
                 <?php if($gmail_verification == 0){ ?>
-                <li><i class="fab fa-google"></i> Google Connected <span class="google"><i class="fab fa-google"></i> اتصال</span></li>
+                <li><i class="fab fa-google"></i> جوجل <span class="google"><i class="fab fa-google"></i> ربط</span></li>
                 <?php }else{ ?>
-                <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
+                <li><i class="fab fa-google"></i> جوجل Connected <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
                 <?php if($seller_verification != 'ok'){ ?>
                 <li><i class="fa fa-envelope"></i> الإيميل <span class="verify">تأكيد</span></li>
@@ -318,9 +318,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="profile-verifi-content profile-verifi-2 pt-20">
               <ul>
                 <?php if($fb_verification != 0){ ?>
-                <li><i class="fab fa-facebook-f"></i> فيس بوك <span class="check"><i class="fa fa-check"></i></span></li>
+                <li><i class="fab fa-facebook-f"></i> فيسبوك <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
-                <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> اتصال</span></li> -->
+                <!-- <li><i class="fab fa-linkedin-in"></i> LinkedIn Joined <span class="linkdin"><i class="fab fa-linkedin-in"></i> ربط</span></li> -->
                 <?php if($gmail_verification != 0){ ?>
                 <li><i class="fab fa-google"></i> Google Connected <span class="check"><i class="fa fa-check"></i></span></li>
                 <?php } ?>
@@ -586,7 +586,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           <div class="profile-portfolio mt-30">
             <div class="profile-title-2">
-              <h3 class="title">المحفظة</h3>
+              <h3 class="title">محفظة الملافات</h3>
             </div>
             <div class="row">
               <?php 
@@ -609,7 +609,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="profile-review mt-30">
             <div class="review-seller d-sm-flex justify-content-between align-items-center">
               <div class="review-text mt-10">
-                <h5 class="review-title">التقييمات باعتبار إنك مقدم خدمة 
+                <h5 class="review-title">التقييمات 
                   <?php 
                     $select_buyer_reviews = $db->select("buyer_reviews",array("review_seller_id"=>$get_seller_id)); 
                     $count_reviews = $select_buyer_reviews->rowCount();

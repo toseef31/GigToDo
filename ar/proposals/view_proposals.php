@@ -91,12 +91,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						<div class="row align-items-start">
 							<div class="col-12 col-sm-6">
 								<h1 class="list-page-title">
-									قائمة إعلانات الخدمات
+									 الخدمات
 								</h1>
 							</div>
 							<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
 								<a class="button button-red" href="create_proposal">
-									إعمل إعلان جديد لخدمة
+									انشر خدمة
 								</a>
 							</div>
 						</div>
@@ -140,11 +140,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<?php
 										    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'draft'));
 											?>
-											<a class="nav-item nav-link deep-sky-blue" id="draft-tab" data-toggle="tab" href="#nav-draft" role="tab" aria-controls="nav-draft" aria-selected="false">مسودة <span class="badge"><?php echo $count_proposals; ?></span></a>
+											<a class="nav-item nav-link deep-sky-blue" id="draft-tab" data-toggle="tab" href="#nav-draft" role="tab" aria-controls="nav-draft" aria-selected="false">غير مكتمل <span class="badge"><?php echo $count_proposals; ?></span></a>
 			                <?php
 												$count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'pending'));
 			                ?>
-											<a class="nav-item nav-link selective-yellow" id="pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="false">قيد الانتظار <span class="badge"><?php echo $count_proposals; ?></span></a>
+											<a class="nav-item nav-link selective-yellow" id="pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="false">الموافقة مطلوبة <span class="badge"><?php echo $count_proposals; ?></span></a>
 											<?php
 									    $count_proposals = $db->count("proposals",array("proposal_seller_id" => $login_seller_id, "proposal_status" => 'modification'));
 										?>

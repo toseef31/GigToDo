@@ -157,7 +157,7 @@
         <label class="control-label">كلمنا شوية عن نفسك</label>
         <textarea rows="5" class="form-control"name="seller_about" id="textarea-about" maxlength="300"><?php echo $login_seller_about; ?></textarea>
         <span class="float-right mt-1">
-          <span class="count-about"> 0 </span> / 300 MAX
+          <span class="count-about"> 0 </span> / 300 
         </span>
       </div>
     </div>

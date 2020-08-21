@@ -106,7 +106,7 @@
           <div class="row align-items-start">
             <div class="col-12 col-sm-6">
               <h1 class="list-page-title">
-                طلب المشتري
+                المشريع
               </h1>
             </div>
             <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
@@ -120,7 +120,7 @@
             <div class="row flex-md-row-reverse">
               <div class="col-12 col-md-6">
                 <select id="sub-category" class="form-control float-left sort-by">
-                  <option value="all"> All Categories </option>
+                  <option value="all"> جميع الفئات </option>
                   <?php
                     if(count($where_cat_id) > 0){
                     $get_c_cats = $db->query("select * from categories where ".$child_cats_query);
@@ -160,7 +160,7 @@
               <div class="col-12 col-md-6">
                 <nav class="list-page-nav">
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">نشيط <span class="badge">
+                    <a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true"> جديد<span class="badge">
                       <?php 
                         $i_requests = 0;
                         $i_send_offers = 0;
@@ -180,7 +180,7 @@
                       <?php echo $i_requests-$i_send_offers; ?>
                     </span></a>
                     <?php $count_offers = $db->count("send_offers",array("sender_id" => $login_seller_id)); ?>
-                    <a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">ابعت عرض <span class="badge"><?php echo $count_offers; ?></span></a>
+                    <a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">بعت عرض <span class="badge"><?php echo $count_offers; ?></span></a>
                   </div>
                 </nav>
               </div>

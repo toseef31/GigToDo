@@ -355,12 +355,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <?php } ?>
               </div>
               <div class="userprofile-text d-flex flex-column">
-                <span>مرحبا بك مرة اخري</span>
+                <span></span>
                 <span class="username"><?= ucfirst(strtolower($login_seller_user_name)); ?></span>
               </div>
             </div>
             <div class="userprofile-progress d-flex flex-column">
-              <span>أنشئ حسابك</span>
+              <span>كامل حسابك</span>
               <div class="userprofile-progressbar">
                 <?php if ($login_seller_cover != '' && $login_seller_state == '' && $login_seller_country == '' && $login_seller_image == '' && $login_seller_about == '' && $login_seller_language == '0') { ?>
                   <div class="userprofile-progressbar-inner" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
@@ -462,7 +462,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </div> -->
             </div>
             <div class="userprofile-footer d-flex flex-column">
-              <a class="userprofile-button d-flex flex-row align-items-center justify-content-center" href="<?= $site_url; ?>/ar/proposals/create_proposal">أضف خدمة</a>
+              <a class="userprofile-button d-flex flex-row align-items-center justify-content-center" href="<?= $site_url; ?>/ar/proposals/create_proposal">انشر خدمة</a>
             </div>
           </div>
         </div>
@@ -520,12 +520,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="row align-items-start">
           <div class="col-12 col-sm-6">
             <h1 class="list-page-title">
-              طلب المشتري
+              المشاريع
             </h1>
           </div>
           <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
-            <a class="button button-red" href="../proposals/create_proposal">
-              انشر خدمة
             </a>
           </div>
         </div>
@@ -534,7 +532,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="row flex-md-row-reverse">
             <div class="col-12 col-md-6">
               <select id="sub-category" class="form-control float-left sort-by">
-                <option value="all"> All Categories </option>
+                <option value="all"> جميع الفئات </option>
                 <?php
                   if(count($where_cat_id) > 0){
                   $get_c_cats = $db->query("select * from categories where ".$child_cats_query);
@@ -574,7 +572,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="col-12 col-md-6">
               <nav class="list-page-nav">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">نشيط <span class="badge">
+                  <a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">جديد <span class="badge">
                     <?php 
                       $i_requests = 0;
                       $i_send_offers = 0;
@@ -594,7 +592,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <?php echo $i_requests-$i_send_offers; ?>
                   </span></a>
                   <?php $count_offers = $db->count("send_offers",array("sender_id" => $login_seller_id)); ?>
-                  <a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">ابعت عرض <span class="badge"><?php echo $count_offers; ?></span></a>
+                  <a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">بعت عرض <span class="badge"><?php echo $count_offers; ?></span></a>
                 </div>
               </nav>
             </div>
@@ -612,7 +610,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         المشترى
                       </th>
                       <th role="column">
-                        الطلب
+                        المشروع
                       </th>
                       <th role="column">العروض</th>
                       <th role="column">

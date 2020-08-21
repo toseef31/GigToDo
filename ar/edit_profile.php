@@ -377,7 +377,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <label class="control-label">كلمنا شوية عن نفسك</label>
                                 <textarea rows="5" class="form-control" name="seller_about" id="textarea-about" maxlength="300"><?php echo $login_seller_about; ?></textarea>
                                 <span class="float-left mt-1">
-                                  <span class="count-about"> 0 </span> / 300 MAX
+                                  <span class="count-about"> 0 </span> / 300 
                                 </span>
                               </div>
                             </div>
@@ -403,20 +403,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                               <div class="col-12">
                                 <div class="form-group d-flex flex-column">
                                   <label class="control-label">وظيفتك</label>
-                                  <input type="text" name="occuption" class="form-control" placeholder="Write your Occupation" value="<?= $login_seller_occuption; ?>">
+                                  <input type="text" name="occuption" class="form-control" placeholder="اكتب وظيفتك" value="<?= $login_seller_occuption; ?>">
                                 </div>
                               </div>
                               <div class="col-12">
                                 <div class="form-group d-flex flex-row justify-content-end">
-                                  <button class="button button-white" type="button" data-toggle="collapse" data-target="#add_occupation">Cancel</button>
-                                  <button class="button button-red" type="submit" name="insert_occupation">Save</button>
+                                  <button class="button button-white" type="button" data-toggle="collapse" data-target="#add_occupation">إلغاء</button>
+                                  <button class="button button-red" type="submit" name="insert_occupation">حفظ</button>
                                 </div>
                               </div>
                               <!-- <div class="col-12">
                                 <div class="form-group d-flex flex-row justify-content-end">
                                   <button class="add-new" type="button" role="button">
                                     <span><i class="fas fa-plus-circle"></i></span>
-                                    <span>إضافة جديد</span>
+                                    <span>إضافة جديدة</span>
                                   </button>
                                 </div>
                               </div> -->
@@ -524,9 +524,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                       <label class="control-label">مستوى الخبرة </label>
                                       <select class="wide form-control" name="skill_level">
                                         <!-- <option disabled selected hidden>مستوى الخبرة </option> -->
-                                        <option>Beginner</option>
-                                        <option>Intermediate</option>
-                                        <option>Expert</option>
+                                        <option>مبتدئ</option>
+                                        <option>متوسط</option>
+                                        <option>خبير</option>
                                       </select>
                                     </div>
                                   </div>
@@ -620,7 +620,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                   </div>
                                   <div class="col-12 col-md-6">
                                     <div class="form-group d-flex flex-column">
-                                      <input class="form-control" type="text" name="institute" placeholder="اسم المعهد" required="" />
+                                      <input class="form-control" type="text" name="institute" placeholder="اسم الجمعة" required="" />
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-6">
@@ -705,13 +705,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-facebook-f"></i></span>
                             <span>
-                              بالفيس بوك
+                             فيسبوك
                             </span>
                             <?php if($fb_verification == 0){ ?>
                             <span class="mr-auto d-flex flex-row align-items-center facebook" onclick="window.location='<?php echo $fLoginURL ?>';">
                               <span><i class="fab fa-facebook-f"></i></span>
                               <span>
-                                متصل
+                                ربط
                               </span>
                             </span>
                             <?php }else{ ?>
@@ -729,18 +729,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="mr-auto d-flex flex-row align-items-center linkedin">
                               <span><i class="fab fa-linkedin-in"></i></span>
                               <span>
-                                متصل
+                                ربط
                               </span>
                             </span>
                           </div> -->
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fab fa-google"></i></span>
-                            <span>Google</span>
+                            <span>جوجل</span>
                             <?php if($gmail_verification == 0){ ?>
                             <span class="mr-auto d-flex flex-row align-items-center google" onclick="window.location = '<?php echo $gLoginURL ?>';">
                               <span><i class="fab fa-google"></i></span>
                               <span>
-                                متصل
+                                ربط
                               </span>
                             </span>
                             <?php }else{ ?>
@@ -755,7 +755,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           <div class="profile-verification-item d-flex flex-row">
                             <span><i class="fas fa-envelope"></i></span>
                             <span>
-                              اتحققنا
+                             الايميل
                             </span>
                             <?php if($seller_verification != 'ok'){ ?>
                             <span class="mr-auto d-flex flex-row align-items-center email">
@@ -838,7 +838,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <div class="howitwork-list-content">
                       <h3>3. الثقةوالتحقق</h3>
                         <p>
-                            اعمل ظهور قوى وفيه ثقة على eMongez عن طريق التحقق من بروفايل البايع بتاعك. ببساطة اربطه بحسابات السوشيال ميديا بتاعتك المختلفة علشان تستمتع بعروض أكتر وأحسن تفاعل ممكن يعرضه eMongez.
+                            اعمل ظهور قوى وفيه ثقة على منجز عن طريق التحقق من بروفايل البايع بتاعك. ببساطة اربطه بحسابات السوشيال ميديا بتاعتك المختلفة علشان تستمتع بعروض أكتر وأحسن تفاعل ممكن يعرضه منجز.
                         </p>
                     </div>
                   </div>

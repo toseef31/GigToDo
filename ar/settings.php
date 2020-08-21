@@ -460,7 +460,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						<div class="row">
 							<div class="col-12">
 								<h1 class="heading-title">
-									الأمان
+									الإعدادات
 								</h1>
 							</div>
 						</div>
@@ -474,7 +474,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<img class="img-fluid after-icon" src="assets/img/setting/security-icon-after.png" />
 										</span>
 										<span class="text">
-											الأمان
+											اعدادات الامان
 										</span>
 									</a>
 									<!-- Each item -->
@@ -484,7 +484,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<img class="img-fluid after-icon" src="assets/img/setting/notifications-icon-after.png" />
 										</span>
 										<span class="text">
-											الإشعارات
+											الرسائل
 										</span>
 									</a>
 									<!-- Each item -->
@@ -510,11 +510,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<img src="assets/img/setting/password-icon.png" />
 													</span>
 													<span>
-														الباسوورد
+													كلمة المرور
 													</span>
 												</div>
 												<div class="title">
-													حدث الباسوورد
+													غيركلمة المرور
 												</div>
 												<div class="icon d-flex flex-row">
 													<!-- <button type="button" role="button">
@@ -532,7 +532,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<div class="col-12">
 															<div class="form-group d-flex flex-column">
 																<label class="control-label">
-																	الباسوورد الحالية
+																	كلمة المرور الحالية
 																</label>
 																<input type="password" class="form-control" name="old_pass" />
 															</div>
@@ -540,7 +540,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<div class="col-12">
 															<div class="form-group d-flex flex-column">
 																<label class="control-label">
-																	باسوورد جديدة
+																	كلمة المرور الجديدة
 																</label>
 																<input type="password" class="form-control" id="psw" name="new_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 															</div>
@@ -555,7 +555,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<div class="col-12">
 															<div class="form-group d-flex flex-column">
 																<label class="control-label">
-																	اكتب الباسوورد مرة كمان
+																	اكتب كلمة المرور مرة كمان
 																</label>
 																<input type="password" class="form-control" id="confirm_pass" name="new_pass_again" />
 															</div>
@@ -564,7 +564,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<div class="col-12">
 															<div class="form-group d-flex flex-column">
 																<p class="mb-0">
-																	لازم الباسوورد تتكون من 8 حروف على الأقل، و تضم على الأٌقل رقم واحد و حرف كابيتال
+																	
 																</p>
 															</div>
 														</div>
@@ -645,11 +645,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<img src="assets/img/setting/notification-icon.png" />
 													</span>
 													<span>
-														الإشعارات
+														الرسائل
 													</span>
 												</div>
 												<div class="title">
-													تعديل الإشعارات
+													تعديل الرسائل
 												</div>
 												<div class="icon d-flex flex-row">
 													<!-- <button type="button" role="button">
@@ -686,7 +686,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<!-- Each item -->
 														<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 															<span>
-																تحديثات الطلبات
+																 الطلبات
 															</span>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" name="order_update" class="custom-control-input" id="customCheck3" <?php if($login_seller_order_update == 'on'){ echo "checked";} ?>>
@@ -696,7 +696,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<!-- Each item -->
 														<div class="notification-item d-flex flex-row align-items-center justify-content-between">
 															<span>
-																طلبات المشتري
+																المشرايع
 															</span>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" name="buyer_request" class="custom-control-input" id="customCheck4" <?php if($login_seller_buyer_request == 'on'){ echo "checked";} ?>>
@@ -759,7 +759,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 															echo "<script>
 															swal({
 															type: 'success',
-															text: 'تم تحديث الإشعارات بنجاح',
+															text: 'تم تحديث الرسائل بنجاح',
 															timer: 3000,
 															onOpen: function(){
 															swal.showLoading()
@@ -769,7 +769,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 															    // Read more about handling dismissals
 															    window.open('settings?account_settings','_self')
 															  ) {
-															    console.log('تم تحديث الإشعارات بنجاح')
+															    console.log('تم تحديث الرسائل بنجاح')
 															  }
 															});</script>";
 														}

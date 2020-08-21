@@ -77,7 +77,7 @@
                 <ul>
                   <li><a href="<?= $site_url; ?>/ar/dashboard">لوحة التحكم</a></li>
                   <li><a href="<?= $site_url; ?>/ar/proposals/view_proposals">الخدمات</a></li>
-                  <li><a href="<?= $site_url; ?>/ar/requests/buyer_requests">طلبات المشترين</a></li>
+                  <li><a href="<?= $site_url; ?>/ar/requests/buyer_requests">المشرايع</a></li>
                 </ul>
               </div>
               <?php if($language_switcher == 1){ ?>
@@ -185,7 +185,7 @@
       <ul>
         <li>
           <a href="<?php echo $site_url; ?>/ar/<?php echo $_SESSION['seller_user_name']; ?>"> <img src="assets/img/icon/1.png" alt="">
-            الملفالشخصي
+            الملف الشخصي
           </a>
         </li>
         <li>
@@ -210,7 +210,7 @@
         </li>
         <li>
           <a href="<?= $site_url; ?>/ar/requests/buyer_requests"> <img src="assets/img/icon/14.png" alt="">
-            طلبات المشترين
+            المشرايع
           </a>
         </li>
         <li>
@@ -220,12 +220,12 @@
         </li>
         <li>
           <a href="<?= $site_url; ?>/ar/revenue"> <img src="assets/img/icon/15.png" alt="">
-            العوائد
+            الرصيد
           </a>
         </li>
         <li>
           <a href="<?= $site_url; ?>/ar/portfolio"> <img src="assets/img/icon/16.png" alt="">
-            المحفظة
+            محفظة ملفّاتك
           </a>
         </li>
         <!-- <li><a href="javascript:void(0);"> <img src="assets/img/icon/6.png" alt=""> Purchases</a></li> -->
@@ -236,7 +236,7 @@
         </li>
         <li>
           <a href="<?= $site_url; ?>/ar/conversations/inbox"> <img src="assets/img/icon/indox.png" alt="">
-            صندوق الوارد
+           الرسائل
           </a>
         </li>
         <li>

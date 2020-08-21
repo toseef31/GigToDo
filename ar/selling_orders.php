@@ -97,7 +97,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										</span>
 										<div class="d-flex flex-column">
 											<span class="description">
-												إجمالي المكتسبة
+												إجمالي 
 											</span>
 											<span class="amount"><?php if ($to == 'EGP'){ echo $to.' '; echo $used_purchases;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $used_purchases,2);}else{  echo $s_currency.' '; echo $used_purchases; } ?></span>
 										</div>
