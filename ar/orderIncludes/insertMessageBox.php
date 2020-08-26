@@ -22,7 +22,7 @@
         </div>
         <?php } ?>
         <form id="insert-message-form">
-          <textarea name="message" class="message-text" placeholder="Type your message here..." onkeyup="matchWords(this)"></textarea>
+          <textarea name="message" class="message-text" placeholder="دخل رسالتك هنا..." onkeyup="matchWords(this)"></textarea>
           <div class="float-left b-2">
             <p id="spamWords" class="mt-1 text-danger d-none"><i class="fa fa-warning"></i> You seem to have typed word(s) that are in violation of our policy. No direct payments or emails allowed.</p>
           </div>
@@ -37,7 +37,7 @@
                 <input type="file" hidden name="file" id="attach-file" />
                 <div class="d-flex flex-row align-items-center">
                   <i class="fal fa-paperclip"></i>
-                  أرفق الملف
+                  أرفع ملف
                 </div>
               </label>
               <div class="file-size">اقصى حجم 30 ميجا بايت</div>

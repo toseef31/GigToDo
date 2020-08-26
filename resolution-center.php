@@ -237,23 +237,23 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Buyer is not responding">
-                          <label class="custom-control-label" for="customRadio1">Buyer is not responding</label>
+                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Clienr is not responding">
+                          <label class="custom-control-label" for="customRadio1">Client is not responding</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="Buyer is extremely rude">
-                          <label class="custom-control-label" for="customRadio2">Buyer is extremely rude.</label>
+                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="Disagreement with Client">
+                          <label class="custom-control-label" for="customRadio2">Client is extremely rude.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="Buyer requested that I cancel this order.">
-                          <label class="custom-control-label" for="customRadio3">Buyer requested that I cancel this order.</label>
+                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="Client requested that I cancel this order.">
+                          <label class="custom-control-label" for="customRadio3">Client requested that I cancel this order.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="Buyer expects more than what this proposal can offer.">
-                          <label class="custom-control-label" for="customRadio4">Buyer expects more than what this proposal can offer.</label>
+                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="Client expects more than what this service can offer.">
+                          <label class="custom-control-label" for="customRadio4">Client expects more than what this service can offer.</label>
                         </div>
                         <!-- Each item -->
                         <!-- <div class="custom-control custom-radio">
@@ -316,11 +316,11 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <h4>Explain why you would like to cancel the order</h4>
                         <div class="form-group d-flex flex-column">
-                          <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
+                          <textarea class="form-control" placeholder="Provide explanation..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <!-- <div class="form-group">
-                          <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
+                          <p class="mb-0"></p>
                         </div> -->
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
@@ -432,7 +432,7 @@ if($seller_id == $login_seller_id){
             <div class="row">
               <div class="col-12">
                 <h1 class="page-heading">Resolution Center</h1>
-                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Seller With Regards To Your Order.</p>
+                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Freelancer With Regards To Your Order.</p>
               </div>
             </div>
             <!-- Row -->
@@ -464,28 +464,28 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Seller is not responding">
-                          <label class="custom-control-label" for="customRadio1">Seller is not responding.</label>
+                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Freelancer is not responding">
+                          <label class="custom-control-label" for="customRadio1">Freelancer is not responding.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="Seller is extremely rude">
-                          <label class="custom-control-label" for="customRadio2">Seller is extremely rude</label>
+                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="Disagreement with Freelnacer">
+                          <label class="custom-control-label" for="customRadio2">Freelancer is extremely rude</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="Order does meet requirements">
-                          <label class="custom-control-label" for="customRadio3">Order does meet requirements</label>
+                          <label class="custom-control-label" for="customRadio3">Freelancer does meet requirements</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="Seller asked me to cancel">
-                          <label class="custom-control-label" for="customRadio4">Seller asked me to cancel</label>
+                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="Freelancer asked me to cancel">
+                          <label class="custom-control-label" for="customRadio4">Freelancer asked me to cancel</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="Seller cannot do required task">
-                          <label class="custom-control-label" for="customRadio5">Seller cannot do required task</label>
+                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="Freelancer cannot do required task">
+                          <label class="custom-control-label" for="customRadio5">Freelancer cannot do required task</label>
                         </div>
                         <!-- Each item -->
                         </div>
@@ -544,11 +544,11 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <h4>Explain why you would like to cancel the order</h4>
                         <div class="form-group d-flex flex-column">
-                          <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
+                          <textarea class="form-control" placeholder="Provide explanation..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <div class="form-group">
-                          <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
+                          <p class="mb-0"></p>
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">

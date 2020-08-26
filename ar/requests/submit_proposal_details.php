@@ -60,7 +60,7 @@ $proposal_title = $row_proposals->proposal_title;
 
 <div class="modal-header"><!--- modal-header Starts --->
 
-<h5 class="modal-title h5"> حدد تفاصيل اقتراحك </h5>
+<h5 class="modal-title h5"> حدد تفاصيل العرض  </h5>
 
 <a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
 	<img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
@@ -151,7 +151,7 @@ $proposal_title = $row_proposals->proposal_title;
 		</div>
 		<div class="profile-content media-body">
 			<div class="form-group p-0 m-0">
-				<textarea rows="4" class="form-control" name="description" placeholder="Enter Text Here..." required=""></textarea>
+				<textarea rows="4" class="form-control" name="description" placeholder="دخل الوصف هنا ..." required=""></textarea>
 			</div>
 		</div>
 	</div>
@@ -235,7 +235,7 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 <div class="form-group">
 	<div class="control-label d-flex align-items-start">
 		<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
-		<span>مالتكلفة الكلية</span>
+		<span>التكلفة الكلية</span>
 	</div>
 	<input class="form-control mb-30"  name="amount" type="text" min="5" placeholder="اقل مبلغ  <?php if ($to == 'EGP'){ echo $to.' '; echo "80";}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * 80);}else{  echo $s_currency.' '; echo "80"; } ?>"  required=""/>
 </div>
@@ -248,7 +248,7 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 		</span>
 	</div>
 	<select class="form-control wide mb-30" name="revision_time">
-		<option>Select Items</option>
+		<option>اختار</option>
 		<option value="0">0</option>
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -266,7 +266,7 @@ echo "<option value='$delivery_proposal_title'> $delivery_proposal_title </optio
 </div><!--- selected-proposal p-3 Ends --->
 
 <div class="form-group d-flex flex-row align-items-center justify-content-between border-top pt-30"><!--- modal-footer Starts --->
-<button type="submit" class="button">ارسال العرض</button>
+<button type="submit" class="button">ابعت العرض</button>
 
 <button type="button" class="button-close" data-dismiss="modal" data-toggle="modal" data-target="#send-offer-modal">عودة</button>
 

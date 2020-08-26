@@ -50,7 +50,7 @@ if($approve_proposals == "yes"){
 									<span>3</span>
 								</div>
 								<div class="title">
-									الاستوديو
+									الصور
 								</div>
 							</div>
 							<!-- Each item -->

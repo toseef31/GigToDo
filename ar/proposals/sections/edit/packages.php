@@ -87,7 +87,7 @@ $times = range(1,30,1);
 								<!-- <span class="package-title">
 									الأساسية
 								</span> -->
-								<textarea name="proposal_packages[1][description]" class="form-control description1" rows="6" cols="5" placeholder="Description"><?= $row_1->description; ?></textarea>
+								<textarea name="proposal_packages[1][description]" class="form-control description1" rows="6" cols="5" placeholder="دخل وصف الخدمة"><?= $row_1->description; ?></textarea>
 
 								<span class="desc1">الوصف مطلوب</span>
 							</div>
@@ -96,7 +96,7 @@ $times = range(1,30,1);
 								<!-- <span class="package-title">
 									قياسية
 								</span> -->
-								<textarea name="proposal_packages[2][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_2->description; ?></textarea>
+								<textarea name="proposal_packages[2][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="دخل وصف الخدمة"><?= $row_2->description; ?></textarea>
 								<span class="desc2">الوصف مطلوب</span>
 							</div>
 							<!-- Each item -->
@@ -104,7 +104,7 @@ $times = range(1,30,1);
 								<!-- <span class="package-title">
 									بريميوم
 								</span> -->
-								<textarea name="proposal_packages[3][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="Description"><?= $row_3->description; ?></textarea>
+								<textarea name="proposal_packages[3][description]" class="form-control packg-desc" rows="6" cols="5" placeholder="دخل وصف الخدمة"><?= $row_3->description; ?></textarea>
 								<span class="desc3">الوصف مطلوب</span>
 							</div>
 							<!-- Each item -->
@@ -113,7 +113,7 @@ $times = range(1,30,1);
 						<div class="package-item d-flex flex-row">
 							<div class="package-item-single">
 								<span class="title">
-									وقت التسليم
+								   وقت التسليم (ايام)
 								</span>
 							</div>
 							<!-- Each item -->

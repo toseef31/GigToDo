@@ -121,7 +121,7 @@ if (empty($form_data)) {
       <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
       <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
       <p>
-        لو اخترت الفئة و الفئة الفرعية ليهم صلة بالخدمات اللي بتقدمها، هيبقا عندك  أفضل فرصة ممكنة إنك تأمن المشترين. إذا قدمت خدمات توصل لفئات مختلفة هتقدر تنوع خدماتك و يبقا عندك مجموعات كتيرة.
+        لو اخترت الفئة و الفئة الفرعية ليهم صلة بالخدمات اللي بتقدمها، هيبقا عندك  أفضل فرصة ممكنة إنك توصل لعملاء. .
       </p>
     </div>
   </div>
@@ -131,7 +131,7 @@ if (empty($form_data)) {
         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/document-icon.png" />
       </span>
       <span>
-        قول للمشتري كل حاجة محتاجها عشان تبدأ
+        قول للعميل كل حاجة محتاجها عشان تبدأ
       </span>
     </label>
     <div class="d-flex flex-column">
@@ -152,7 +152,7 @@ if (empty($form_data)) {
           <textarea rows="6" class="form-control" name="buyer_instruction" placeholder="I need...."></textarea>
         </div>
         <div class="tab-pane fade show active" id="arabic" role="tabpanel" aria-labelledby="arabic-tab">
-          <textarea dir="rtl" rows="6" class="form-control" name="buyer_instruction" placeholder="أدخل متطلبات الخدمة"></textarea>
+          <textarea dir="rtl" rows="6" class="form-control" name="buyer_instruction" placeholder=""></textarea>
         </div>
       </div>
       <span class="form-text text-danger"><?php echo ucfirst(@$form_errors['buyer_instruction']); ?></span>
@@ -166,8 +166,8 @@ if (empty($form_data)) {
       </label>
       <div class="d-flex flex-row mt-10 mb-10">
         <select class="form-control wide" name="answer_type">
-          <option value="Free Text">كتابة حرة</option>
-          <option value="Attachment">نص مركب</option>
+          <option value="Free Text">كتابة </option>
+          <option value="Attachment">ملفات</option>
         </select>
       </div>
       <div class="d-flex flex-row">
@@ -183,7 +183,7 @@ if (empty($form_data)) {
       <img alt="" class="lamp-icon" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/lamp-icon.png" />
       <img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url; ?>/ar/assets/img/post-a-gig/ask-our-community.png" width="100%" />
       <p>
-        حط شوية طلبات خاصة بالخدمة للمشترين قبل ما يحصلوا عليها عشان تضمن إن معاك المعلومات الضرورية قبل ما تبدأ تشتغل على مشروعك. اختار من بين مجالات الكتابة الحرة و كمان مجالات الملفات المرفقة عشات تكمل الخدمة للمشترين.
+        حط شوية طلبات خاصة بالخدمة للعميل عشان تضمن إن معاك المعلومات الضرورية قبل ما تبدأ تشتغل على مشروعك. اختار من بين مجالات الكتابة الحرة و كمان مجالات الملفات المرفقة عشات تكمل الخدمة للمعميل.
       </p>
     </div>
   </div>
@@ -358,7 +358,7 @@ if(isset($_POST['submit'])){
   "proposal_cat_id" => "required",
   "proposal_child_id" => "required");
 
-  $messages = array("proposal_title" => "يرجى إدخال عنوان الخدمة","proposal_cat_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_desc" => "الرجاء إدخال متطلبات الخدمة","proposal_child_id" => "يرجى تحديد الفئة والفئة الفرعية","proposal_img1"=>"صورة الاقتراح 1 مطلوبة.", "delivery_id" => "الرجاء تحديد وقت التسليم");
+  $messages = array("proposal_title" => " عنوان الخدمة مطلوب","proposal_cat_id" => "الفئة والفئة الفرعية مطلوبة","proposal_desc" => "متطلبات الخدمة مطلوبة","proposal_child_id" => "الفئة والفئة الفرعية مطلوبة","proposal_img1"=>"صورة الخدمة مطلوبة.", "delivery_id" => "وقت التسليم مطلوب");
   $val = new Validator($_POST,$rules,$messages);
 
   if($val->run() == false){

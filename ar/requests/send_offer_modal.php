@@ -160,7 +160,7 @@ $request_seller_image = $row_request_seller->seller_image;
 	<div class="modal-dialog modal-dialog-centered customer-order" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">حدد عرض / خدمة لعرضها</h5>
+				<h5 class="modal-title">حدد خدمة لعرضها</h5>
 				<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
 					<img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png" />
 				</a>
@@ -300,7 +300,7 @@ $(document).ready(function(){
 
 // swal({
 // type: 'warning',
-// text: 'You Must Need To Fill Out All Fields Before Submitting Offer.'
+// text: 'You Need To Fill Out All Fields Before Submitting Offer.'
 // });
 
 // }else{

@@ -68,7 +68,7 @@ if($approve_proposals == "yes"){
                   </div>
                   <div class="d-flex flex-row align-items-center justify-content-center backbuton  back-to-gallery">
                     <span><i class="fal fa-long-arrow-left"></i></span>
-                    <span>عد</span>
+                    <span>الرجوع</span>
                   </div>
                 </div>
                 <!-- <div class="form-group mb-0 mt-3"> -->

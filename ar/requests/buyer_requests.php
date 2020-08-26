@@ -281,10 +281,10 @@
                             <span><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></span>
                             <?php }else{ ?> ----- <?php } ?>
                             <?php if($login_seller_offers == "0"){ ?>
-                              <a class="send-offer send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">إرسال العرض   </a>
+                              <a class="send-offer send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">ابعت عرض   </a>
                             <!-- <button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>" data-toggle="modal" data-target="#quota-finish">Send Offer</button> -->
                             <?php }else{ ?>
-                              <a class="send-offer send_button_<?php echo $request_id; ?>">إرسال العرض   </a>
+                              <a class="send-offer send_button_<?php echo $request_id; ?>">ابعت عرض   </a>
                             <!-- <button class="btn btn-success btn-sm mt-4 send_button_<?php echo $request_id; ?>">Send Offer</button> -->
                             <?php } ?>
                           </div>

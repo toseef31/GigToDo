@@ -104,7 +104,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div>
 							</div>
 							<center class="pb-5 pt-5">
-							  <a href="search-freelancers">Search Results username for "<?php echo @$_SESSION["search_query"]; ?>" </a>
 							</center>
 						</div>
 					</div>

@@ -766,7 +766,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                     <!-- Each item -->
                   </div>
-                  <p>Your order is completed! We hope you got everything you needed.</p>
+                  <p></p>
                 </div>
                 <!-- Order process card -->
                 <?php if($order_status == "pending" or $order_status == "progress" or $order_status == "delivered" or $order_status == "revision requested"){ ?>

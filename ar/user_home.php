@@ -129,7 +129,7 @@ $login_seller_about = $row_login_seller->seller_about;
               <!-- <div class="progress-bar" role="progressbar" style="width: 19%;" aria-valuenow="19" aria-valuemin="0" aria-valuemax="100">19%</div> -->
             </div>
           </div>
-          <a href="requests/post-request.php" class="request-btn">انشر أي طلب</a>
+          <a href="requests/post-request.php" class="request-btn">انشر مشروع</a>
         </div>
       </div>
       <div class="col-12 col-lg-8">

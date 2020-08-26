@@ -232,21 +232,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/project-icon.png" /></span>
                     <span>
-                      المشروع المنشور
+                       عدد المشرايع المنشورة
                     </span>
                     <span class="mr-auto"><?= $posted_projects; ?></span>
                   </div>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/purchased-icon.png" /></span>
                     <span>
-                      الخدمات اللي اتباعت
+                      الخدمات اللي اشترت
                     </span>
                     <span class="mr-auto"><?= $purchased_services; ?></span>
                   </div>
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><img alt="" class="img-fluid d-block" src="assets/img/buyer/sellers-icon.png" /></span>
                     <span>
-                      مقدمين الخدمة اشتغلوا مع
+                      عدد الفريلانسر الي اشتغلت معاهم
                     </span>
                     <span class="mr-auto"><?= $total_sellers; ?></span>
                   </div>
@@ -259,7 +259,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <img alt="" class="img-fluid d-block" src="assets/img/buyer/verification-icon.png" />
                   </span>
                   <span>
-                    التحقق
+                   التحقق
                   </span>
                 </div>
                 <?php if(isset($_SESSION['seller_user_name'])){ ?>
@@ -289,18 +289,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <span class="mr-auto d-flex flex-row align-items-center linkedin">
                       <span><i class="fab fa-linkedin-in"></i></span>
                       <span>
-                        متصل
+                        اربط
                       </span>
                     </span>
                   </div> -->
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><i class="fab fa-google"></i></span>
-                    <span>Google</span>
+                    <span>جوجل</span>
                     <?php if($gmail_verification == 0){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center google" onclick="window.location = '<?php echo $gLoginURL ?>';">
                       <span><i class="fab fa-google"></i></span>
                       <span>
-                        متصل
+                        اربط
                       </span>
                     </span>
                     <?php }else{ ?>
@@ -312,12 +312,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   <div class="buyer-sidebar-body-item d-flex flex-row">
                     <span><i class="fas fa-envelope"></i></span>
                     <span>
-                      اتحققنا
+                      الايميل
                     </span>
                     <?php if($seller_verification != 'ok'){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center email">
                       <span>
-                        اتحقق
+                        اربط
                       </span>
                     </span>
                     <?php }else{ ?>
@@ -338,7 +338,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <?php }elseif($count_account == 0 and $login_seller_paypal_email == ''){ ?>
                     <span class="mr-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings')">
                       <span>
-                        اتحقق
+                        اربط
                       </span>
                     </span>
                     <?php } ?>

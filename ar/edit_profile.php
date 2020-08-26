@@ -1176,7 +1176,7 @@ function getEducation(educationId){
     "seller_country" => "required",
     "seller_language" => "required");
 
-    $messages = array("seller_name" => "Full Name Is required.","seller_email" => "Email Is Required.","seller_country"=>"Country Is Required.","seller_language"=>"Main Conversational Language Is Required.");
+    $messages = array("seller_name" => "دخل الاسم","seller_email" => "دخل الاسم","seller_country"=>"دخل البلد","seller_language"=>"دخل اللغة");
     $val = new Validator($_POST,$rules,$messages);
     if($val->run() == false){
       Flash::add("form_errors",$val->get_all_errors());
@@ -1236,7 +1236,7 @@ function getEducation(educationId){
             echo "<script>
             swal({
             type: 'success',
-            text: 'Profile settings updated successfully!',
+            text: '',
             timer: 3000,
             onOpen: function(){
               swal.showLoading()
@@ -1264,7 +1264,7 @@ function getEducation(educationId){
     "seller_country" => "required",
     "seller_language" => "required");
 
-    $messages = array("seller_name" => "Full Name Is required.","seller_email" => "Email Is Required.","seller_country"=>"Country Is Required.","seller_language"=>"Main Conversational Language Is Required.");
+    $messages = array("seller_name" => "دخل الاسم الكامل","seller_email" => "دخل البريد الإلكتروني","seller_country"=>"دخل البلد","seller_language"=>"اللغة");
     $val = new Validator($_POST,$rules,$messages);
     if($val->run() == false){
       Flash::add("form_errors",$val->get_all_errors());
@@ -1324,7 +1324,7 @@ function getEducation(educationId){
             echo "<script>
             swal({
             type: 'success',
-            text: 'Profile settings updated successfully!',
+            text: '',
             timer: 3000,
             onOpen: function(){
               swal.showLoading()

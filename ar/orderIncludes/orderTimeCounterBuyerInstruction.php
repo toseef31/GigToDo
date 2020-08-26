@@ -1,11 +1,11 @@
             <?php if($order_status == "progress" or $order_status == "revision requested"){ ?>
             <?php if($seller_id == $login_seller_id){ ?>
             <h2 class="text-center mt-4" id="countdown-heading">
-              يجب تسليم هذا الطلب قبل هذا اليوم / الوقت:
+              ميعاد تسليم الخدمة
             </h2>
             <?php }elseif($buyer_id == $login_seller_id){ ?>
             <h2 class="text-center mt-4" id="countdown-heading">
-              يجب أن يكون طلبك جاهزًا في أو قبل هذا اليوم / الوقت:
+              ميعاد تسليم الخدمة 
             </h2>
             <?php } ?>
             <div class="countdown"></div>

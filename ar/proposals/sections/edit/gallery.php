@@ -21,7 +21,7 @@
                     <div class="col-md-3 file-input-label"><!--- col-md-3 Starts --->
                     <?php if(empty($d_proposal_img1)){ ?>
                     <div class="pic add-pic">
-                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                               ارفع صورة</span>
                     <div class="d-flex flex-column align-items-center img-btns">
                       <!-- <div class="icon">
                         <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
@@ -29,7 +29,7 @@
                       <!-- <div class="text">drag a photo or</div> -->
                       <div class="drag-drop-button">
                         <div class="button button-red ml-1">
-                           تصفح
+                           ارفع
                         </div>
                         <div class="button button-white">
                            اختار
@@ -49,7 +49,7 @@
                     <div class="col-md-3"><!--- col-md-3 Starts --->
                     <?php if(empty($d_proposal_img2)){ ?>
                     <div class="pic">
-                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او </span>
+                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              ارفع صورة </span>
                     <div class="d-flex flex-column align-items-center img-btns">
                       <!-- <div class="icon">
                         <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
@@ -57,7 +57,7 @@
                       <!-- <div class="text">drag a photo or</div> -->
                       <div class="drag-drop-button">
                         <div class="button button-red ml-1">
-                           تصفح
+                           ارفع
                         </div>
                         <div class="button button-white">
                            اختار
@@ -77,7 +77,7 @@
                     <div class="col-md-3"><!--- col-md-3 Starts --->
                     <?php if(empty($d_proposal_img3)){ ?>
                     <div class="pic">
-                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              ارفع صورة</span>
                     <div class="d-flex flex-column align-items-center img-btns">
                       <!-- <div class="icon">
                         <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
@@ -85,7 +85,7 @@
                       <!-- <div class="text">drag a photo or</div> -->
                       <div class="drag-drop-button">
                         <div class="button button-red ml-1">
-                           تصفح
+                           ارفع
                         </div>
                         <div class="button button-white">
                            اختار
@@ -105,7 +105,7 @@
                     <div class="col-md-3"><!--- col-md-3 Starts --->
                     <?php if(empty($d_proposal_img4)){ ?>
                     <div class="pic">
-                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              إدراج صورة او</span>
+                    <i class="fa fa-picture-o fa-2x mb-2"></i><br> <span>                              ارفع صورة</span>
                     <div class="d-flex flex-column align-items-center img-btns">
                       <!-- <div class="icon">
                         <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/drag-photo-icon.png" />
@@ -113,7 +113,7 @@
                       <!-- <div class="text">drag a photo or</div> -->
                       <div class="drag-drop-button">
                         <div class="button button-red ml-1">
-                          تصفح
+                          ارفع
                         </div>
                         <div class="button button-white">
                           اختار
@@ -143,7 +143,7 @@
                       <span>
                         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/post-a-gig/video-icon.png" />
                       </span>
-                      <span>لفيديو ( تقدر تضيف لحد ملفين فيديو)</span>
+                      <span>فيديو </span>
                       <span class="ml-auto item-count"><small class="text-muted" style="font-size: 78%;"><?= $lang['proposals']['add_video_description']; ?></small></span>
                       
                     </label>
@@ -158,7 +158,7 @@
                           <!-- <div class="text">drag a photo or</div> -->
                           <!-- <div class="drag-drop-button">
                             <div class="button button-red ml-1">
-                               تصفح
+                               ارفع
                             </div>
                             <div class="button button-white">
                                اختار
@@ -209,11 +209,11 @@
                               <img class="img-fluid d-block" src="assets/img/post-a-gig/drag-photo-icon.png" />
                             </div>
                             <div class="text">
-                              إدراج صورة او
+                              ارفع صورة
                             </div>
                             <div class="drag-drop-button">
                               <div class="button button-red">
-                                تصفح
+                                ارفع
                               </div>
                               <div class="button button-white">
                                 اختار
@@ -242,7 +242,7 @@
                         <img alt="" class="img-fluid d-block" src="assets/img/post-a-gig/video-icon.png" />
                       </span>
                       <span>
-                        الفيديو ( تقدر تضيف لحد ملفين فيديو)
+                        الفيديو 
                       </span>
                       <span class="mr-auto item-count">(0/3)</span>
                     </label>
@@ -255,11 +255,11 @@
                               <img class="img-fluid d-block" src="assets/img/post-a-gig/drag-video-icon.png" />
                             </div>
                             <div class="text">
-                              إدراج فيديو أو
+                              ارفع فيديو 
                             </div>
                             <div class="drag-drop-button">
                               <div class="button button-red">
-                                تصفح
+                                ارفع
                               </div>
                               <div class="button button-white">
                                 اختار
@@ -280,7 +280,7 @@
                       <p>
                         تساعد مقاطع الفيديو الخاصة بالخدمة المشتري على رؤية وسماع ما ستفعله بالضبط. يستغرق بعض الوقت لإنشاء فيديو متميز. لكنها سوف تزيد بشكل كبير من فرصك للحصول على المشتري<br />
                         <strong>
-                          الإمتدادات الصالحة هي mp4 و avi و m4v
+			الإمتدادات الصالحة هي mp4 و avi و m4v
                         </strong><br />
                         <strong>
                           الحد الأقصى لحجم الملف هو 25 ميغابايت
@@ -336,7 +336,7 @@
                   </div> -->
                   <div class="form-group mb-0">
                     <div class="d-flex flex-row justify-content-center">
-                      <input class="package-save" type="submit" form="gallery_form" value="                        حفظ واستمرار">
+                      <input class="package-save" type="submit" form="gallery_form" value="حفظ واستمرار">
                     </div>
                     <div class="d-flex flex-row justify-content-center">
                       <a href="<?php echo $_SESSION["seller_user_name"]; ?>/<?php echo $d_proposal_url; ?>" id="previewProposal" class="package-save  d-none">اقتراح المعاينة</a>

@@ -234,12 +234,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								<label class="lead pull-left withdraw-btn"> اسحب   إلى: </label>
 								<?php if($enable_paypal == "yes"){ ?>
 								<button class="btn btn-success ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#paypal_withdraw_modal">
-									<i class="fa fa-paypal"></i> Paypal Account
+									<i class="fa fa-paypal"></i> حساب باي بال 
 								</button>
 								<?php } ?>
 								<?php if($wish_do_manual_payouts == 1 & $enable_payoneer == 1) { ?>
 								<button class="btn btn-success ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#payoneer_withdraw_modal">
-									<i class="fa fa-paper-plane-o"></i> Payoneer Account
+									<i class="fa fa-paper-plane-o"></i>حساب بايونير
 								</button>
 								<?php } ?>
 								<?php if($wish_do_manual_payouts == 1 & $enable_bank_transfer == "yes"){ ?>
@@ -265,15 +265,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 								<?php }else{ ?>
 
-								<label class="lead pull-left withdraw-btn"> اسحب   إلى: </label>
+								<label class="lead pull-left withdraw-btn"> اسحب  : </label>
 								<?php if($enable_paypal == "yes"){ ?>
 								<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#paypal_withdraw_modal">
-									<i class="fa fa-paypal"></i> Paypal Account
+									<i class="fa fa-paypal"></i> حساب باي بال 
 								</button>
 								<?php } ?>
 								<?php if($wish_do_manual_payouts == 1 & $enable_payoneer == 1) { ?>
 								<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" data-toggle="modal" data-target="#payoneer_withdraw_modal">
-									<i class="fa fa-paper-plane-o"></i> Payoneer Account
+									<i class="fa fa-paper-plane-o"></i> حساب بايونير
 								</button>
 								<?php } ?>
 								<?php if($wish_do_manual_payouts == 1 & $enable_bank_transfer == "yes"){ ?>
@@ -300,12 +300,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								<!-- <label class="lead pull-left withdraw-btn"> اسحب   إلى: </label>
 								<?php if($enable_paypal == "yes"){ ?>
 								<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" <?= $withdrawLimitText; ?>>
-								<i class="fa fa-paypal"></i> Paypal Account
+								<i class="fa fa-paypal"></i> حساب باي بال 
 								</button>
 								<?php } ?>
 								<?php if($wish_do_manual_payouts == 1 & $enable_payoneer == 1) { ?>
 								<button class="btn btn-default ml-2 py-2" style="color: #ff0707;" <?= $withdrawLimitText; ?>>
-								<i class="fa fa-paypal"></i> Payoneer Account
+								<i class="fa fa-paypal"></i> حساب بايونير
 								</button>
 								<?php } ?>
 								
@@ -356,9 +356,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<table class="table">
 										<thead>
 											<tr>
-												<th scope="col">Date</th>
-												<th scope="col">Title</th>
-												<th scope="col" style="text-align: left;">Amount</th>
+												<th scope="col">تاريخ</th>
+												<th scope="col">وصف</th>
+												<th scope="col" style="text-align: left;">مبلغ</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -375,9 +375,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												<th scope="row"><?= $date; ?></th>
 												<td>
 													<?php if($status == "pending"){ ?>
-													Order Revenue Pending Clearance (<a href="order_details?order_id=<?= $order_id; ?>" target="blank" style="color: #FF0000;"> View Order </a>)
+													إيرادات الخدمات في انتظار الموافقة (<a href="order_details?order_id=<?= $order_id; ?>" target="blank" style="color: #FF0000;"> الطلب </a>)
 													<?php }else{ ?>                             
-													Order Revenue (<a href="order_details?order_id=<?= $order_id; ?>" target="blank" style="color: #FF0000;"> مشاهدة الطلب </a>)
+													إيرادات الخدمات (<a href="order_details?order_id=<?= $order_id; ?>" target="blank" style="color: #FF0000;"> الطلب </a>)
 													<?php } ?>
 												</td>
 												<td style="text-align: left; color: #FF0000;">+<?php if ($to == 'EGP'){ echo $to.' '; echo $amount;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $amount,2);}else{  echo $s_currency.' '; echo $amount; } ?>.00</td>
@@ -444,12 +444,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					<label class="lead pull-left mt-1"> Withdraw To: </label>
 					<?php if($enable_paypal == "yes"){ ?>
 					<button class="btn btn-success ml-2" data-toggle="modal" data-target="#paypal_withdraw_modal">
-					<i class="fa fa-paypal"></i> Paypal Account
+					<i class="fa fa-paypal"></i> حساب بايونير
 					</button>
 					<?php } ?>
 					<?php if($wish_do_manual_payouts == 1 & $enable_payoneer == 1) { ?>
 					<button class="btn btn-success ml-2" data-toggle="modal" data-target="#payoneer_withdraw_modal">
-					<i class="fa fa-paper-plane-o"></i> Payoneer Account
+					<i class="fa fa-paper-plane-o"></i> حساب بايونير
 					</button>
 					<?php } ?>
 					<?php if($wish_do_manual_payouts == 1 & $enable_bank_transfer == "yes"){ ?>
@@ -548,7 +548,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			<div class="modal-dialog modal-dialog-centered customer-order">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title"> سحب / تحويل الأموال إلى PayPal </h5>
+						<h5 class="modal-title">  سحب عن طريق PayPal </h5>
 						<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
               <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png">
             </a>
@@ -565,7 +565,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					</p>
 					<?php }else{ ?>
 					<p class="lead">
-						سيتم تحويل أموال الإيرادات الخاصة بك إلى:
+						التحويل هيتم علي
 						<br> <strong> <?= $login_seller_paypal_email; ?> </strong>
 					</p>
 					<form action="<?= ($wish_do_manual_payouts == 1)?"withdraw_manual":"paypal_adaptive"; ?>" method="post">
@@ -573,12 +573,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						<div class="form-group">
 							<div class="control-label d-flex align-items-start">
 								<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
-								<span class="d-flex">كمية</span>
+								<span class="d-flex">المبلغ</span>
 							</div>
-							<input type="number" name="amount" class="form-control input-lg mb-30" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> Minimum" required >
+							<input type="number" name="amount" class="form-control input-lg mb-30" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> الحد الأدنى" required >
 						</div>
 						<div class="form-group">
-							<input type="submit" name="withdraw" value="نقل" class="button">
+							<input type="submit" name="withdraw" value="سحب" class="button">
 						</div>
 					</form>
 					<?php } ?>
@@ -594,7 +594,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		<div class="modal-dialog modal-dialog-centered customer-order">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"> سحب / تحويل الأموال إلى Payoneer </h5>
+					<h5 class="modal-title"> سحب عن طريق Payoneer </h5>
 					<a href="javascript:void(0);" class="closed" data-dismiss="modal" aria-label="Close">
             <img src="<?= $site_url; ?>/assets/img/seller-profile/popup-close-icon.png">
           </a>
@@ -608,19 +608,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				</p>
 				<?php }else{ ?>
 				<p class="lead">
-					سيتم تحويل أموال الإيرادات الخاصة بك إلى: <br> <strong><?= $login_seller_payoneer_email; ?></strong>
+					سحب عن طريق: <br> <strong><?= $login_seller_payoneer_email; ?></strong>
 				</p>
 				<form action="withdraw_manual" method="post">
 					<input type="hidden" name="method" value="payoneer">
 					<div class="form-group">
 						<div class="control-label d-flex align-items-start">
 							<span><img src="<?= $site_url; ?>/assets/img/post-request/icon-6.png" alt="Icon"></span>
-							<span class="d-flex">كمية</span>
+							<span class="d-flex">المبلغ</span>
 						</div>
-						<input type="number" name="amount" class="form-control input-lg mb-30" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> Minimum" required >
+						<input type="number" name="amount" class="form-control input-lg mb-30" min="<?= $withdrawal_limit; ?>" max="<?= $current_balance; ?>" placeholder="<?= $withdrawal_limit; ?> الحد الأدنى" required >
 					</div>
 					<div class="form-group">
-						<input type="submit" name="withdraw" value="نقل" class="button">
+						<input type="submit" name="withdraw" value="سحب" class="button">
 					</div>
 				</form>
 				<?php } ?>

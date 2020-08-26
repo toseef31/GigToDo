@@ -43,12 +43,11 @@
       <a class="backtomain" href="javascript:void(0);">
         <i class="fal fa-angle-left"></i>
       </a>
-      <span>تحديد النتائج</span>
       <a class="clearfilter" href="javascript:void(0);">امسح الكل</a>
     </h2>
     <div class="gigs-sidebar-filter">
       <div class="gigs-sidebar-title">
-        <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/filter.png" alt="">التصنيف على أساس</h4>
+        <h4 class="title"><img src="<?= $site_url;?>/assets/img/gigs/filter.png" alt="">الفئة</h4>
       </div>
       <div class="gigs-filter-content ">
         <div class="single-filter clearfix">
@@ -117,7 +116,7 @@
       </div>
       <div class="gigs-status-content d-flex justify-content-between align-items-center">
         <div class="status-text pt-20">
-          <p class="text">أونلاين</p>
+          <p class="text">متواجد حاليا</p>
         </div>
         <div class="status-switch pt-20">
           <div class="md_switch">

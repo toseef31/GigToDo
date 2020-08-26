@@ -51,13 +51,6 @@ $get_seller_status = $row_seller->seller_status;
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" class="ui-toolkit">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TF82RTH');</script>
-<!-- End Google Tag Manager -->
   <title><?php echo $site_name; ?> - <?php echo ucfirst($get_seller_user_name) . "'s Profile"; ?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -166,9 +159,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <div class="upload-icon">
                       <img class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/portfolio/upload-icon.png" />
                     </div>
-                    <h5 class="text-center">اسحب صورة أو</h5>
+                    <h5 class="text-center">ارفع صورة</h5>
                     <div class="d-flex flex-row justify-content-center">
-                      <div class="browse-button">تصفح</div>
+                      <div class="browse-button">ارفع</div>
                     </div>
                     <p class="text-center"><strong>لاحظ:</strong> اسم الصورة هيتعرض على انه عنوان عمل فني</p>
                   </label>
@@ -240,7 +233,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="modal-footer">
         <input type="hidden" name="img_type" value="">
         <button class="btn btn-success crop_image">قص الصوره</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">قريب</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
       </div>
       </div>
     </div>
@@ -252,7 +245,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     $delete_portfolio_id = $input->get('delete_portfolio');
     $delete_portfolio = $db->delete("seller_portfolio",array("portfolio_id"=>$delete_portfolio_id));
     if($delete_portfolio->rowCount() == 1){
-      echo "<script>alert('تم حذف عنصر محفظة واحد.')</script>";
+      echo "<script>alert('')</script>";
       echo "<script> window.open('portfolio','_self') </script>";
     }else{
       echo "<script> window.open('portfolio','_self') </script>";
@@ -315,7 +308,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             main = $('input[type=hidden][name='+ name +']').parent();
             swal({
             type: 'success',
-            text: 'تم تحديث المحفظة بنجاح!',
+            text: '',
             timer: 3000,
             onOpen: function(){
               swal.showLoading()
@@ -345,9 +338,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   });
 </script>
 <?php require_once("includes/footer.php"); ?>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 </body>
 </html>

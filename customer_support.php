@@ -216,7 +216,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
             <div class="col-12 col-md-7 col-lg-4">
               <div class="contact-location">
-                <h2>We Are Always here to help you!</h2>
+                <h2>We are always here to help you!</h2>
                 <div class="address-item d-flex flex-row">
                   <div class="icon">
                     <img alt="Address" class="img-fluid d-block" src="assets/img/contact/map-marker.png" />

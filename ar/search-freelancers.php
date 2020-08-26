@@ -82,10 +82,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="search-results-header">
               <h3>نتيجة <span>"<?php echo @$_SESSION["search_query"]; ?>"</span></h3>
               <div class="contains d-flex flex-row align-items-center">
-                <div class="icon">
-                  <img alt="" class="img-fluid d-block" src="assets/img/search/search-results-icon.png" />
-                </div>
-                <div class="text">ابحث عن العربات <span>"<?php echo @$_SESSION["search_query"]; ?>"</span></div>
               </div>
               <h4>صفحات مقدمي الخدمة</h4>
             </div>

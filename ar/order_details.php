@@ -262,8 +262,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/order/order-require-icon.png" />
                       </div>
                       <div class="text">
-                        <span>متطلبات الطلب</span>
-                        <span>انت كملت المتطلبات</span>
+                        <span>متطلبات المشروع </span>
+                        <span></span>
                       </div>
                       <div class="show-hide active" data-toggle="collapse" data-target="#showHide" aria-expanded="true" aria-controls="showHide">
                         <span class="before">+ إظهار المتطلبات</span>
@@ -378,9 +378,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           <div class="col-md-10 offset-md-1"> 
                             <?php if($seller_id == $login_seller_id){ ?>
                             <h5 class="float-left mt-2 text-white">
-                              <i class="fa fa-lg fa-check-circle"></i> Order Delivered. You Earned <?= $s_currency; ?><?= $seller_price; ?>
+                              <i class="fa fa-lg fa-check-circle"></i> الخدمة اتسلمت كسبت <?= $s_currency; ?><?= $seller_price; ?>
                             </h5>
-                            <h5 class="float-right mt-2">Status: Completed</h5>
+                            <h5 class="float-right mt-2">الحالة: خلصت</h5>
                           <?php }elseif($buyer_id == $login_seller_id){ ?>
                             <h5 class="float-left mt-2 text-white">
                               <i class="fa fa-lg fa-check-circle"></i> Delivery Submitted
@@ -396,7 +396,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   <?php require_once("orderIncludes/insertMessageBox.php"); ?>
                   <!-- <div class="message-sender-area">
                     <form method="post" action="">
-                      <textarea class="message-text" placeholder="Type your message here..."></textarea>
+                      <textarea class="message-text" placeholder="دخل رسالتك هنا..."></textarea>
                       <div class="d-flex flex-column flex-sm-row justify-content-between">
                         <div class="attachment d-flex flex-row align-items-center">
                           <label for="attach-file">
@@ -475,7 +475,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       <img alt="" class="img-fluid d-block" src="<?= $site_url; ?>/assets/img/order/order-require-icon.png" />
                     </div>
                     <div class="text">
-                      <span>متطلبات الطلب</span>
+                      <span>متطلبات المشروع</span>
                       <span></span>
                     </div>
                     <div class="show-hide active" data-toggle="collapse" data-target="#showHide" aria-expanded="true" aria-controls="showHide">
@@ -512,7 +512,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                   <!-- <span>1st order?</span> -->
                                   <?php if ($answer_type == 'Free Text') { ?>
                                   <!-- <p>Please let us know your first name and a few words about you if you want! (optional)</p> -->
-                                  <textarea name="order_description" id="#" cols="30" rows="10" placeholder="Type your message here..." class="form-control"></textarea>
+                                  <textarea name="order_description" id="#" cols="30" rows="10" placeholder="دخل الرسالة هنا..." class="form-control"></textarea>
                                   <?php } ?>
                                   <?php if ($answer_type == 'Attachment') { ?>
                                   <div class="pusrchase-form d-flex justify-content-between align-items-center">
@@ -604,8 +604,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           <span>(602kb)</span>
                         </div>
                         <div class="d-flex flex-wrap justify-content-start">
-                          <a class="d-flex flex-row align-items-center justify-content-center button button-white" href="javascript:void(0);">Request Revision</a>
-                          <a class="d-flex flex-row align-items-center justify-content-center button button-red" href="javascript:void(0);">Accept & Review Order</a>
+                          <a class="d-flex flex-row align-items-center justify-content-center button button-white" href="javascript:void(0);">طلب مراجعة</a>
+                          <a class="d-flex flex-row align-items-center justify-content-center button button-red" href="javascript:void(0);">قبول ومراجعة الطلب</a>
                         </div>
                       </div>
                     </div>                    
@@ -621,7 +621,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           <span>snazzydegreat</span>
                           <span class="timestamp">1 month ago</span>
                         </div>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p></p>
                       </div>
                     </div>
                   </div> -->
@@ -662,7 +662,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <?php require_once("orderIncludes/insertMessageBox.php"); ?>
                 <!-- <div class="message-sender-area">
                   <form method="post" action="">
-                    <textarea class="message-text" placeholder="Type your message here..."></textarea>
+                    <textarea class="message-text" placeholder="دخل رسالتك هنا..."></textarea>
                     <div class="d-flex flex-column flex-sm-row justify-content-between">
                       <div class="attachment d-flex flex-row align-items-center">
                         <label for="attach-file">
@@ -674,7 +674,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </label>
                         <div class="file-size">Max Size 30MB</div>
                       </div>
-                      <button class="send-message" type="submit" role="button">SEND</button>
+                      <button class="send-message" type="submit" role="button">ابعت</button>
                     </div>
                   </form>
                 </div> -->

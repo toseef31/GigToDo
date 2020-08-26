@@ -79,7 +79,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div class="col-md-12 mt-5"><!-- col-md-12 mt-5 Starts -->
 
-<h1 class="mb-4"> Withdrawal Requests </h1>
+<h1 class="mb-4"> طلبات السحب</h1>
 
 <div class="table-responsive box-table"><!-- table-responsive box-table Starts -->
 
@@ -89,17 +89,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <tr>
 
-<th>No</th>
+<th>رقم</th>
 
-<th>Ref No</th>
+<th>رقم السحب</th>
 
-<th>Date</th>
+<th>تاريخ</th>
 
-<th>Amount</th>
+<th>مبلغ</th>
 
-<th>Method</th>
+<th>عن طريق</th>
 
-<th>Status</th>
+<th>الحالة</th>
 
 </tr>
 

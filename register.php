@@ -230,7 +230,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<div class="form-group">
 											<label for="customRadio1" class="custom-control custom-radio">
 												<input type="radio" hidden id="customRadio1" name="accountType" class="custom-control-input" value="buyer">
-												<div class="custom-control-label">Buyer</div>
+												<div class="custom-control-label">Client</div>
 											</label>
 										</div>
 									</div>
@@ -238,7 +238,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<div class="form-group">
 											<label for="customRadio2" class="custom-control custom-radio">
 												<input type="radio" hidden id="customRadio2" name="accountType" class="custom-control-input" value="seller">
-												<div class="custom-control-label">Seller</div>
+												<div class="custom-control-label">Freelancer</div>
 											</label>
 										</div>
 									</div>

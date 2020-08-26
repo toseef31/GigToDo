@@ -451,7 +451,7 @@
     // "seller_country" => "required",
     "seller_language" => "required");
 
-    $messages = array("seller_name" => "Full Name Is required.","seller_email" => "Email Is Required.","seller_country"=>"Country Is Required.","seller_language"=>"Main Conversational Language Is Required.");
+    $messages = array("seller_name" => "دخل الاسم","seller_email" => "دخل البريد الإلكتروني","seller_country"=>"دخل البلد","seller_language"=>"دخل اللغة");
     $val = new Validator($_POST,$rules,$messages);
     if($val->run() == false){
       Flash::add("form_errors",$val->get_all_errors());
@@ -511,7 +511,7 @@
             echo "<script>
             swal({
             type: 'success',
-            text: 'Profile settings updated successfully!',
+            text: '',
             timer: 3000,
             onOpen: function(){
               swal.showLoading()

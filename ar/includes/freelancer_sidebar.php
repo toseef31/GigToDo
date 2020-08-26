@@ -30,7 +30,7 @@ if(isset($_GET['seller_language'])){
 ?>
 
 <div class="search-results-categories">
-	<div class="search-categories-header">تصفية حسب الفئة</div>
+	<div class="search-categories-header">الفئة</div>
 	<div class="search-categories-body">
 		<?php
 		$select_categories = $db->select("categories");
@@ -64,7 +64,7 @@ if(isset($_GET['seller_language'])){
 
 <div class="card border-success mb-3" style="border-color: #ff0707 !important;">
 	<div class="card-header bg-success" style="background-color: #ff0707 !important;">
-		<h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> text-white h5">Seller Location</h3>
+		<h3 class="<?=($lang_dir == "left" ? 'float-right':'float-left')?> text-white h5">البلد</h3>
 		<button class="btn btn-secondary btn-sm <?=($lang_dir == "right" ? 'float-left':'float-right')?> clear_seller_country clearlink" onclick="clearCountry()">
 			<?php echo $lang['sidebar']['clear_filter']; ?>
 		</button>
@@ -120,8 +120,6 @@ if(isset($_GET['seller_language'])){
 	<div class="card-header bg-success">
 		<h3 class="<?=($lang_dir == "right" ? 'float-right':'float-left')?> text-white h5"><?php echo $lang['sidebar']['seller_lang']; ?></h3>
 		<button class="btn btn-secondary btn-sm <?=($lang_dir == "right" ? 'float-left':'float-right')?> clear_seller_language clearlink" onclick="clearLanguage()">
-			<?php echo $lang['sidebar']['clear_filter']; ?>			
-		</button>
 	</div>
 	<div class="card-body">
 		<ul class="nav flex-column">

@@ -136,8 +136,8 @@
                         <ul>
                           <li>eMongez has a diversified range of expert freelancers ready to take on your project. Find everyone from programmers, designers, writers, to customer support reps, and much more.</li>
                           <li>Whichever professional freelance services you are looking for, it can be found on eMongez.</li>
-                          <li>In today’s world, finding qualified, expert service providers can be a hassle. eMongez makes it easy to find and reach out to the perfect seller for your project. No longer will you have to settle for inadequate agencies that over promise and under deliver.</li>
-                          <li>With eMongez, you can verify the credentials, previous work, and client testimonies of each seller using the eMongez platform.</li>
+                          <li>In today’s world, finding qualified, expert service providers can be a hassle. eMongez makes it easy to find and reach out to the perfect Freelancer for your project. No longer will you have to settle for inadequate agencies that over promise and under deliver.</li>
+                          <li>With eMongez, you can verify the credentials, previous work, and client testimonies of each Freelancer using the eMongez platform.</li>
                         </ul>
                       </div>
                     </div>
@@ -154,7 +154,7 @@
                         <ul>
                           <li>With eMongez, you have the tools necessary to review your favorite candidates, see their previous reviews, work portfolios, and much more.</li>
                           <li>Search through proposals and select the best freelancers for your project. Hiring on eMongez gives you the power to leverage an endless supply of freelancers competing for your project.</li>
-                          <li>As they say, competition brings out the best. Taking the time to carefully browse through our variety of sellers will allow you to see the very best that the freelancing community has to offer.</li>
+                          <li>As they say, competition brings out the best. Taking the time to carefully browse through our variety of Freelancers will allow you to see the very best that the freelancing community has to offer.</li>
                           <li>With eMongez, your dream creation is only a click away.</li>
                         </ul>
                       </div>
@@ -171,9 +171,9 @@
                         <h3 class="how-it-title">Work efficiently, effectively</h3>
                         <ul>
                           <li>eMongez gives you the power to run your business efficiently. Enjoy an easy to use platform that allows you to send and receive files, share feedback, request revisions, and communicate with ease.</li>
-                          <li>Our incredible platform guarantees that sellers only promote the services that they are competent in.</li>
-                          <li>If you are not satisfied with the quality of your work, simply request a revision. Buyers are in complete control and only have to accept work that represents their requirements exactly.</li>
-                          <li>eMongez prides itself on maintaining a high level of standards that ensure buyers only receive a high level of professional-grade work.</li>
+                          <li>Our incredible platform guarantees that Freelancers only promote the services that they are competent in.</li>
+                          <li>If you are not satisfied with the quality of your work, simply request a revision. Clients are in complete control and only have to accept work that represents their requirements exactly.</li>
+                          <li>eMongez prides itself on maintaining a high level of standards that ensure Clients only receive a high level of professional-grade work.</li>
                         </ul>
                       </div>
                     </div>
@@ -191,8 +191,8 @@
                           <ul>
                             <li>Enjoy peace of mind with a 100% secure payment portal that protects your personal information at all times.</li>
                             <li>Enjoy flexible payment options with your freelancer. Pay by the hour or at a fixed price for the entire project. The choice is yours. Never feel as if your private information is compromised at any moment.</li>
-                            <li>Your payment details will never be shared with any seller, and they only receive the payment once you have reviewed and approved your order.</li>
-                            <li>The best part is that eMongez manages the transfer of funds from buyer to seller. This ensures that freelancers are motivated to go above and beyond for buyers.</li>
+                            <li>Your payment details will never be shared with any Freelancer, and they only receive the payment once you have reviewed and approved your order.</li>
+                            <li>The best part is that eMongez manages the transfer of funds from buyer to Freelancer. This ensures that freelancers are motivated to go above and beyond for Clients.</li>
                           </ul>
                         </div>
                       </div>
@@ -235,10 +235,10 @@
                         <div class="how-it-content mt-50">
                           <h3 class="how-it-title">Find jobs that are geared towards you</h3>
                           <ul>
-                            <li>Discover meaningful projects that bring you joy and income at the same time. Our platform is full of buyers searching for everything under the sun.</li>
+                            <li>Discover meaningful projects that bring you joy and income at the same time. Our platform is full of Clients searching for everything under the sun.</li>
                             <li>Don’t miss out on your opportunity to win your ideal projects. We know that you have a set of skills that are in demand.</li>
                             <li>Are you a graphic designer, writer, programmer, or something more? Find jobs that are geared towards your exact set of skills on eMongez.</li>
-                            <li>We want to provide a safe place where buyers and sellers can come together and create projects that change the world.</li>
+                            <li>We want to provide a safe place where Clients and Freelancers can come together and create projects that change the world.</li>
                           </ul>
                         </div>
                       </div>
@@ -253,9 +253,9 @@
                         <div class="how-it-content mt-50">
                           <h3 class="how-it-title">Get Hired</h3>
                           <ul>
-                            <li>eMongez makes it incredibly simple to find quality clients that need your services. Our platform is dedicated to making sure that the best sellers are matched with the appropriate buyer.</li>
+                            <li>eMongez makes it incredibly simple to find quality clients that need your services. Our platform is dedicated to making sure that the best Freelancers are matched with the appropriate buyer.</li>
                             <li>Deliver quality work for your clients to guarantee that you receive repeat business coming back again and again. The faster you deliver, the more jobs you will receive.</li>
-                            <li>As you complete more projects, clients will be able to see the previous ratings from your past jobs. Sellers with the highest number of positive reviews are in the highest demand.</li>
+                            <li>As you complete more projects, clients will be able to see the previous ratings from your past jobs. Freelancers with the highest number of positive reviews are in the highest demand.</li>
                             <li>So, deliver your best quality work to ensure your clients leave you great feedback.</li>
                           </ul>
                         </div>
@@ -289,7 +289,7 @@
                         <div class="how-it-content mt-50">
                           <h3 class="how-it-title">Get paid from client</h3>
                           <ul>
-                            <li>As the seller, eMongez guarantees that your clients will pay you in a secure and timely manner. Never feel worried about receiving your payment.</li>
+                            <li>As the Freelancer, eMongez guarantees that your clients will pay you in a secure and timely manner. Never feel worried about receiving your payment.</li>
                             <li>Maintain complete track of your upcoming and past invoices all through the intuitive application.</li>
                             <li>eMongez will always provide you with all the reporting tools and data you need to keep track of your earnings, and future payouts. We want you to take your freelancing career to the next level.</li>
                             <li>With eMongez, you will be able to hone in on your talents and truly excel. Sign up today to get started earning real cash fast.</li>

@@ -20,7 +20,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TF82RTH');</script>
 <!-- End Google Tag Manager -->
-	<title><?php echo $site_name; ?> - View My Proposals.</title>
+	<title><?php echo $site_name; ?> - View My Proposals</title>
 	<!--====== Required meta tags ======-->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -1099,7 +1099,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<div class="title-info">
 															<h4><?= $proposal_title; ?></h4>
 															<ul class="list-inline">
-																<li class="list-inline-item">Created On: <?= $proposal_date; ?></li>
+																<li class="list-inline-item"><?= $proposal_date; ?></li>
 																<li class="list-inline-item">المراجعات (<?= $proposal_rating; ?>)</li>
 															</ul>
 														</div>

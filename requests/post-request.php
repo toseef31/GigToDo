@@ -425,7 +425,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
 													<p>
-														Describe everything you need in detail. The more specific you are, the more accurate of a job your freelancer can do for you.
+														Describe everything you need done in detail. It can be something like I need a logo designed in 24 hours. 
 													</p>
 												</div>
 											</div>

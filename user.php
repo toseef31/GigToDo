@@ -694,7 +694,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="row no-gutters">
                 <div class="col-md-4">
                   <div class="single-communication mt-15">
-                    <h5 class="title">Seller communication leval</h5>
+                    <h5 class="title">Seller communication level</h5>
                     <span><i class="fa fa-star"></i> <?= $average_rating_communi ?></span>
                   </div>
                 </div>

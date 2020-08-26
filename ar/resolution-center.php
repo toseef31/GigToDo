@@ -198,7 +198,7 @@ if($seller_id == $login_seller_id){
             <div class="row">
               <div class="col-12">
                 <h1 class="page-heading">مركز الحلول</h1>
-                <p class="page-paragraph">أهلا بيك ، تقدر تحل مشكلتكالمتعلقة بطلبك مع المشتري.</p>
+                <p class="page-paragraph"> أهلا بيك ، تقدر تحل مشكلتك المتعلقة بطلبك مع العميل .</p>
               </div>
             </div>
             <!-- Row -->
