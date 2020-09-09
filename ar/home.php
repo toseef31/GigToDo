@@ -35,7 +35,7 @@ $slide_image = $row_slides->slide_image;
       <p>عين فريلانسرز محترفين و ادى دفعة البداية لمشروعك </p>
     </div>
     <form class="join-form" id="gnav-search" method="POST">
-      <input type="search" id="search-query" name="search_query" value="<?php echo @$_SESSION["search_query"]; ?>" placeholder="ما نوع العمل هل تحتاج إلى القيام به؟">
+      <input type="search" id="search-query" name="search_query" value="<?php echo @$_SESSION["search_query"]; ?>" placeholder="ايه نوع الخدمة اللي محتاجها؟">
       <input name="search" type="submit" value="البحث">
       <ul class="search-bar-panel d-none"></ul>
     </form>

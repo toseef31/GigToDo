@@ -20,6 +20,16 @@ $relevant_requests = $row_general_settings->relevant_requests;
 <!DOCTYPE html>
 <html lang="en" class="ui-toolkit">
 	<head>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  dataLayer = [{
+		    'event': 'Pageview',
+		    'pagePath': 'https://www.emongez.com/requests/post-request',
+		    'pageTitle': 'eMongez - Post A New Request',
+		    'pageCategory': 'post-request',
+		    'visitorType': 'high-value'
+		  }];
+		</script>
 		<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -708,7 +718,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												</div>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_budget']); ?></span>
 												<div class="popup">
-													<img alt="" class="lamp-icon" src="assets/img/post-a-gig/lamp-icon.png" />
+													<img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
 													<p>
 														Setting the appropriate budget for your project will allow freelancers to see how much you are willing to spend on your project.
@@ -797,7 +807,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<!-- End Registration Process -->
 
 											<div class="form-group mb-0">
-												<button class="button" role="button" type="submit" name="submit">Post</button>
+												<button class="button" role="button" type="submit" name="submit"
+                  			onclick="dataLayer.push({
+                    		'event': 'Pageview'});">Post</button>
 											</div>
 										</form>
 									</div>

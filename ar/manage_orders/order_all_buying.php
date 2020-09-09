@@ -1,10 +1,10 @@
 <table class="table orders-table" border="0" cellpadding="0" cellspacing="0" width="100%">
 	<thead>
 		<tr role="row">
-			<th role="column">وصف الطلبات</th>
-			<th role="column">ميعاد الطلبات</th>
-			<th role="column">المستحقة</th>
-			<th role="column">الكلية</th>
+			<th role="column">وصف الجدمة </th>
+			<th role="column">ميعاد البدء</th>
+			<th role="column">ميعاد التسليم</th>
+			<th role="column">المبلغ</th>
 			<th role="column">الحالة</th>
 		</tr>
 	</thead>

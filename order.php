@@ -2,23 +2,23 @@
 
 session_start();
 
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
-require_once("includes/db.php");
-require_once("functions/functions.php");
+require_once "includes/db.php";
+require_once "functions/functions.php";
 
-if(
-	!isset($_SESSION['checkout_seller_id']) 
-	and 
-	!isset($_SESSION['cart_seller_id']) 
-	and 
-	!isset($_SESSION['message_offer_id']) 
-	and 
-	!isset($_SESSION['offer_id'])
-){
-	echo "<script>window.open('index','_self');</script>";
+if (
+    !isset($_SESSION['checkout_seller_id'])
+    and
+    !isset($_SESSION['cart_seller_id'])
+    and
+    !isset($_SESSION['message_offer_id'])
+    and
+    !isset($_SESSION['offer_id'])
+) {
+    echo "<script>window.open('index','_self');</script>";
 }
 
 ?>
@@ -29,29 +29,29 @@ if(
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="<?php echo $site_author; ?>">
-	<?php if(!empty($site_favicon)){ ?>
-	<link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
-	<?php } ?>
+	<?php if (!empty($site_favicon)) {?>
+	<link rel="shortcut icon" href="images/<?=$site_favicon;?>" type="image/x-icon">
+	<?php }?>
 	<!--====== Bootstrap css ======-->
-  <link href="<?= $site_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/bootstrap.min.css" rel="stylesheet">
   <!--====== PreLoader css ======-->
-  <link href="<?= $site_url; ?>/assets/css/preloader.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/preloader.css" rel="stylesheet">
   <!--====== Animate css ======-->
-  <link href="<?= $site_url; ?>/assets/css/animate.min.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/animate.min.css" rel="stylesheet">
   <!--====== Fontawesome css ======-->
-  <link href="<?= $site_url; ?>/assets/css/fontawesome.min.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/fontawesome.min.css" rel="stylesheet">
   <!--====== Owl carousel css ======-->
-  <link href="<?= $site_url; ?>/assets/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/owl.carousel.min.css" rel="stylesheet">
   <!--====== Nice select css ======-->
-  <link href="<?= $site_url; ?>/assets/css/nice-select.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/nice-select.css" rel="stylesheet">
   <!--====== Range Slider css ======-->
-  <link href="<?= $site_url; ?>/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/ion.rangeSlider.min.css" rel="stylesheet">
   <!--====== Default css ======-->
-  <link href="<?= $site_url; ?>/assets/css/default.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/default.css" rel="stylesheet">
   <!--====== Style css ======-->
-  <link href="<?= $site_url; ?>/assets/css/style.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/style.css" rel="stylesheet">
   <!--====== Responsive css ======-->
-  <link href="<?= $site_url; ?>/assets/css/responsive.css" rel="stylesheet">
+  <link href="<?=$site_url;?>/assets/css/responsive.css" rel="stylesheet">
 	<!-- <link href="styles/bootstrap.css" rel="stylesheet"> -->
 	<!-- <link href="styles/styles.css" rel="stylesheet"> -->
 	<link href="styles/categories_nav_styles.css" rel="stylesheet">
@@ -67,7 +67,7 @@ if(
 <body class="is-responsive">
 	<div class="proloader">
 		<div class="loader">
-			<img src="<?= $site_url; ?>/assets/img/emongez_cube.png" />
+			<img src="<?=$site_url;?>/assets/img/emongez_cube.png" />
 		</div>
 	</div>
 <img src="images/bg4.jpeg" alt="logout-pic">
@@ -76,191 +76,190 @@ if(
 
 <?php
 
-require_once("includes/db.php");
+require_once "includes/db.php";
 
-if(!isset($_SESSION['seller_user_name'])){
-	
-echo "<script>window.open('login','_self');</script>";
-	
+if (!isset($_SESSION['seller_user_name'])) {
+
+    echo "<script>window.open('login','_self');</script>";
+
 }
 
-if(isset($_SESSION['seller_user_name'])){
+if (isset($_SESSION['seller_user_name'])) {
 
-$login_seller_user_name = $_SESSION['seller_user_name'];
-$select_login_seller = $db->select("sellers",array("seller_user_name" => $login_seller_user_name));
-$row_login_seller = $select_login_seller->fetch();
-$login_seller_id = $row_login_seller->seller_id;
-
-
+    $login_seller_user_name = $_SESSION['seller_user_name'];
+    $select_login_seller    = $db->select("sellers", array("seller_user_name" => $login_seller_user_name));
+    $row_login_seller       = $select_login_seller->fetch();
+    $login_seller_id        = $row_login_seller->seller_id;
 
 /// Single Proposal Checkout Order Code Starts ///
 
-if(isset($_SESSION['checkout_seller_id'])){
-	$buyer_id = $_SESSION['checkout_seller_id'];
-	$proposal_id = $_SESSION['proposal_id'];
-	$order_price = $_SESSION['proposal_price'];
-	$processing_fee = processing_fee($order_price);
-	$proposal_qty = $_SESSION['proposal_qty'];
-	$payment_method = $_SESSION['method'];
+    if (isset($_SESSION['checkout_seller_id'])) {
+        $buyer_id       = $_SESSION['checkout_seller_id'];
+        $proposal_id    = $_SESSION['proposal_id'];
+        $order_price    = $_SESSION['proposal_price'];
+        $processing_fee = processing_fee($order_price);
+        $proposal_qty   = $_SESSION['proposal_qty'];
+        $payment_method = $_SESSION['method'];
 
-	$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
-	$row_proposal = $select_proposal->fetch();
-	$proposal_title = $row_proposal->proposal_title;
-	$proposal_enable_referrals = $row_proposal->proposal_enable_referrals;
-	$proposal_referral_money = $row_proposal->proposal_referral_money;
-	$proposal_referral_code = $row_proposal->proposal_referral_code;
-	$buyer_instruction = $row_proposal->buyer_instruction;
-	$proposal_seller_id = $row_proposal->proposal_seller_id;
-	$delivery_id = $row_proposal->delivery_id;
-	
-	if($delivery_id == ''){
-		$get_p = $db->select("proposal_packages",array("proposal_id"=>$proposal_id));
-		$row_p = $get_p->fetch();
-		$delivery_time = $row_p->delivery_time;
-		$add_days = intval($delivery_time);
-	}else{
-		$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
-		$row_delivery_time = $select_delivery_time->fetch();
-		$delivery_time = $row_delivery_time->delivery_proposal_title;
-		$add_days = intval($delivery_time);
-	}
+        $select_proposal           = $db->select("proposals", array("proposal_id" => $proposal_id));
+        $row_proposal              = $select_proposal->fetch();
+        $proposal_title            = $row_proposal->proposal_title;
+        $proposal_enable_referrals = $row_proposal->proposal_enable_referrals;
+        $proposal_referral_money   = $row_proposal->proposal_referral_money;
+        $proposal_referral_code    = $row_proposal->proposal_referral_code;
+        $buyer_instruction         = $row_proposal->buyer_instruction;
+        $proposal_seller_id        = $row_proposal->proposal_seller_id;
+        $delivery_id               = $row_proposal->delivery_id;
 
-	// $add_days = intval($delivery_proposal_title);
-	date_default_timezone_set("UTC");
-	$order_date = date("F d, Y");
-	$date_time = date("M d, Y H:i:s");
-	$order_time = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
-	$order_number = mt_rand();
-	if(!empty($buyer_instruction)){
-	$order_status = "pending";
-	}else{
-	$order_status = "progress";
-	}
+        if ($delivery_id == '') {
+            $get_p         = $db->select("proposal_packages", array("proposal_id" => $proposal_id));
+            $row_p         = $get_p->fetch();
+            $delivery_time = $row_p->delivery_time;
+            $add_days      = intval($delivery_time);
+        } else {
+            $select_delivery_time = $db->select("delivery_times", array('delivery_id' => $delivery_id));
+            $row_delivery_time    = $select_delivery_time->fetch();
+            $delivery_time        = $row_delivery_time->delivery_proposal_title;
+            $add_days             = intval($delivery_time);
+        }
 
-	$order_values = array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_active" => 'yes',"order_status" => $order_status);
+        // $add_days = intval($delivery_proposal_title);
+        date_default_timezone_set("UTC");
+        $order_date   = date("F d, Y");
+        $date_time    = date("M d, Y H:i:s");
+        $order_time   = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
+        $order_number = mt_rand();
+        if (!empty($buyer_instruction)) {
+            $order_status = "pending";
+        } else {
+            $order_status = "progress";
+        }
 
-	if($videoPlugin == 1){
-		if(isset($_SESSION['proposal_minutes'])){
-			$order_values['order_minutes'] = $_SESSION['proposal_minutes'].":00";
-		}
-	}
+        $order_values = array("order_number" => $order_number, "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "seller_id" => $proposal_seller_id, "buyer_id" => $buyer_id, "proposal_id" => $proposal_id, "order_price" => $order_price, "order_qty" => $proposal_qty, "order_active" => 'yes', "order_status" => $order_status);
 
-	if($payment_method == "shopping_balance"){
+        if ($videoPlugin == 1) {
+            if (isset($_SESSION['proposal_minutes'])) {
+                $order_values['order_minutes'] = $_SESSION['proposal_minutes'] . ":00";
+            }
+        }
 
-		$saleProcessingFee = 0;
-		$order_values['order_fee'] = 0;
-		$insert_order = $db->insert("orders",$order_values);
+        if ($payment_method == "shopping_balance") {
 
-	}else{
+            $saleProcessingFee         = 0;
+            $order_values['order_fee'] = 0;
+            $insert_order              = $db->insert("orders", $order_values);
 
-		$saleProcessingFee = $processing_fee;
-		$order_values['order_fee'] = $processing_fee;
-		$insert_order = $db->insert("orders",$order_values);
+        } else {
 
-	}
+            $saleProcessingFee         = $processing_fee;
+            $order_values['order_fee'] = $processing_fee;
+            $insert_order              = $db->insert("orders", $order_values);
 
-	$insert_order_id = $db->lastInsertId();
+        }
 
-	if(isset($_SESSION['proposal_extras'])){
-		foreach($_SESSION['proposal_extras'] as $value){
-		$get_extras = $db->select("proposals_extras",array("id" => $value));
-		$row_extras = $get_extras->fetch();
-		$name = $row_extras->name;
-		$price = $row_extras->price;
-		$insert_extra = $db->insert("order_extras",array("order_id" => $insert_order_id,"name" => $name,"price"=>$price));
-		}
-	}
+        $insert_order_id = $db->lastInsertId();
 
-	if($insert_order){
+        if (isset($_SESSION['proposal_extras'])) {
+            foreach ($_SESSION['proposal_extras'] as $value) {
+                $get_extras   = $db->select("proposals_extras", array("id" => $value));
+                $row_extras   = $get_extras->fetch();
+                $name         = $row_extras->name;
+                $price        = $row_extras->price;
+                $insert_extra = $db->insert("order_extras", array("order_id" => $insert_order_id, "name" => $name, "price" => $price));
+            }
+        }
 
-	// Insert Sale Here
-	// $adminProfit = "0.0";
-	// $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"checkout","date"=>date("Y-m-d"));
-	// insertSale($sale);
+        if ($insert_order) {
 
-	if($proposal_enable_referrals == "yes"){
-		
-	if(isset($_SESSION['r_proposal_id'])){
-		
-	if($_SESSION['r_referrer_id'] == $login_seller_id){
-		
-	}else{
-		
-	if($proposal_id == $_SESSION['r_proposal_id'] & $proposal_referral_code == $_SESSION['r_referral_code']){
-		
-	$ip = $_SERVER['REMOTE_ADDR'];
+            // Insert Sale Here
+            // $adminProfit = "0.0";
+            // $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"checkout","date"=>date("Y-m-d"));
+            // insertSale($sale);
 
-	$r_proposal_id = $_SESSION['r_proposal_id'];
+            if($payment_method == "weaccept"){
+                $db->update("weaccept_payments",["order_id"=>$insert_order_id],["id" => $_SESSION["payment_id"]]);
+            }
 
-	$r_seller_id = $proposal_seller_id;
+            if ($proposal_enable_referrals == "yes") {
 
-	$r_referrer_id = $_SESSION['r_referrer_id'];
+                if (isset($_SESSION['r_proposal_id'])) {
 
-	$r_comission = $proposal_referral_money;
+                    if ($_SESSION['r_referrer_id'] == $login_seller_id) {
 
-	$r_o_comission = ($order_price*$r_comission)/100;
+                    } else {
 
-	$comission = round($r_o_comission,1);
+                        if ($proposal_id == $_SESSION['r_proposal_id'] & $proposal_referral_code == $_SESSION['r_referral_code']) {
 
-	$r_date = date("F d, Y");
+                            $ip = $_SERVER['REMOTE_ADDR'];
 
-	$insert_referral = $db->insert("proposal_referrals",array("proposal_id"=>$r_proposal_id,"order_id"=>$insert_order_id,"seller_id"=>$r_seller_id,"referrer_id"=>$r_referrer_id,"buyer_id"=>$login_seller_id,"comission"=>$comission,"date"=>$r_date,"ip"=>$ip,"status"=>'pending'));
+                            $r_proposal_id = $_SESSION['r_proposal_id'];
 
-	unset($_SESSION['r_proposal_id']);
+                            $r_seller_id = $proposal_seller_id;
 
-	unset($_SESSION['r_referral_code']);
+                            $r_referrer_id = $_SESSION['r_referrer_id'];
 
-	unset($_SESSION['r_referrer_id']);
+                            $r_comission = $proposal_referral_money;
 
-	}
-		
-	}
+                            $r_o_comission = ($order_price * $r_comission) / 100;
 
-	}
+                            $comission = round($r_o_comission, 1);
 
-	}
+                            $r_date = date("F d, Y");
 
+                            $insert_referral = $db->insert("proposal_referrals", array("proposal_id" => $r_proposal_id, "order_id" => $insert_order_id, "seller_id" => $r_seller_id, "referrer_id" => $r_referrer_id, "buyer_id" => $login_seller_id, "comission" => $comission, "date" => $r_date, "ip" => $ip, "status" => 'pending'));
 
-	$select_proposal_seller = $db->select("sellers",array("seller_id"=>$proposal_seller_id));
+                            unset($_SESSION['r_proposal_id']);
 
-	$row_proposal_seller = $select_proposal_seller->fetch();
+                            unset($_SESSION['r_referral_code']);
 
-	$proposal_seller_user_name = $row_proposal_seller->seller_user_name;
+                            unset($_SESSION['r_referrer_id']);
 
-	$proposal_seller_email = $row_proposal_seller->seller_email;
+                        }
 
-		
-	$site_email_address = $row_general_settings->site_email_address;
+                    }
 
-	$site_logo = $row_general_settings->site_logo;
+                }
 
-	require 'vendor/autoload.php';
+            }
 
-	$mail = new PHPMailer(true);
-	try{
+            $select_proposal_seller = $db->select("sellers", array("seller_id" => $proposal_seller_id));
 
-	if($enable_smtp == "yes"){
-	$mail->isSMTP();
-	$mail->Host = $s_host;
-	$mail->Port = $s_port;
-	$mail->SMTPAuth = true;
-	$mail->SMTPSecure = $s_secure;
-	$mail->Username = $s_username;
-	$mail->Password = $s_password;
-	}
+            $row_proposal_seller = $select_proposal_seller->fetch();
 
-	$mail->setFrom($site_email_address,$site_name);
+            $proposal_seller_user_name = $row_proposal_seller->seller_user_name;
 
-	$mail->addAddress($proposal_seller_email);
+            $proposal_seller_email = $row_proposal_seller->seller_email;
 
-	$mail->addReplyTo($site_email_address,$site_name);
+            $site_email_address = $row_general_settings->site_email_address;
 
-	$mail->isHTML(true);
-		
+            $site_logo = $row_general_settings->site_logo;
 
-	$mail->Subject = "Congrats! You just received an order from $login_seller_user_name";
-		
-	$mail->Body = "
+            require 'vendor/autoload.php';
+
+            $mail = new PHPMailer(true);
+            try {
+
+                if ($enable_smtp == "yes") {
+                    $mail->isSMTP();
+                    $mail->Host       = $s_host;
+                    $mail->Port       = $s_port;
+                    $mail->SMTPAuth   = true;
+                    $mail->SMTPSecure = $s_secure;
+                    $mail->Username   = $s_username;
+                    $mail->Password   = $s_password;
+                }
+
+                $mail->setFrom($site_email_address, $site_name);
+
+                $mail->addAddress($proposal_seller_email);
+
+                $mail->addReplyTo($site_email_address, $site_name);
+
+                $mail->isHTML(true);
+
+                $mail->Subject = "Congrats! You just received an order from $login_seller_user_name";
+
+                $mail->Body = "
 	<html>
 	<head>
 	<style>
@@ -280,7 +279,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 		margin: 0px 0px 30px;
 		padding: 8px 20px 20px 20px;
 		border:1px solid #e6e6e6;
-		box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
+		box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);
 	}
 	.lead {
 		font-size:16px;
@@ -300,7 +299,7 @@ if(isset($_SESSION['checkout_seller_id'])){
 		border:1px solid #eee;
 	}
 	.table {
-	width:100%;	
+	width:100%;
 	background-color:#fff;
 	margin-bottom:20px;
 	}
@@ -355,68 +354,65 @@ if(isset($_SESSION['checkout_seller_id'])){
 	</body>
 	</html>";
 
-	$mail->send();
+                $mail->send();
 
-	}catch(Exception $e){
-	}
+            } catch (Exception $e) {
+            }
 
-	$select_my_buyer = $db->select("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id));
+            $select_my_buyer = $db->select("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id));
 
-	$count_my_buyer = $select_my_buyer->rowCount();
+            $count_my_buyer = $select_my_buyer->rowCount();
 
-	if($count_my_buyer == 1){
-			
-		$update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
+            if ($count_my_buyer == 1) {
 
-	}else{
-		
-		$insert_my_buyer = $db->insert("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
+                $update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
 
-	}
+            } else {
 
+                $insert_my_buyer = $db->insert("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
 
-	$select_my_seller = $db->select("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
+            }
 
-	$count_my_seller = $select_my_seller->rowCount();
+            $select_my_seller = $db->select("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id));
 
-	if($count_my_seller == 1){
-		
-		// $insert_seller = $db->update("my_sellers",array("completed_orders"=>'completed_orders+1',"amount_spent"=>'amount_spent+$order_price',"last_order_date"=>$order_date),array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
+            $count_my_seller = $select_my_seller->rowCount();
 
-		$update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
+            if ($count_my_seller == 1) {
 
-	}else{
-		
-		$insert_seller = $db->insert("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
+                // $insert_seller = $db->update("my_sellers",array("completed_orders"=>'completed_orders+1',"amount_spent"=>'amount_spent+$order_price',"last_order_date"=>$order_date),array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
 
-	}
+                $update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
 
+            } else {
 
-	$total_amount = $order_price + $processing_fee;
+                $insert_seller = $db->insert("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
 
-	if($payment_method == "shopping_balance"){
-		
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$order_price,"date"=>$order_date,"method"=>$payment_method));
+            }
 
-	}else{
-			
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
+            $total_amount = $order_price + $processing_fee;
 
-	}
+            if ($payment_method == "shopping_balance") {
 
+                $insert_purchase = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $order_price, "date" => $order_date, "method" => $payment_method));
 
-	$insert_notification = $db->insert("notifications",array("receiver_id"=>$proposal_seller_id,"sender_id"=>$login_seller_id,"order_id"=>$insert_order_id,"reason"=>"order","date"=>$order_date,"status"=>"unread"));
+            } else {
 
-	unset($_SESSION['checkout_seller_id']);
-	unset($_SESSION['proposal_id']);
-	unset($_SESSION['proposal_qty']);
-	unset($_SESSION['proposal_price']);
-	unset($_SESSION['proposal_minutes']);
-	unset($_SESSION['method']);
+                $insert_purchase = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $total_amount, "processing_fee" => $processing_fee, "date" => $order_date, "method" => $payment_method));
 
-	$_SESSION['order_id'] = $insert_order_id;
+            }
 
-	echo "
+            $insert_notification = $db->insert("notifications", array("receiver_id" => $proposal_seller_id, "sender_id" => $login_seller_id, "order_id" => $insert_order_id, "reason" => "order", "date" => $order_date, "status" => "unread"));
+
+            unset($_SESSION['checkout_seller_id']);
+            unset($_SESSION['proposal_id']);
+            unset($_SESSION['proposal_qty']);
+            unset($_SESSION['proposal_price']);
+            unset($_SESSION['proposal_minutes']);
+            unset($_SESSION['method']);
+
+            $_SESSION['order_id'] = $insert_order_id;
+
+            echo "
 	<script>
 	swal({
 	type: 'success',
@@ -430,152 +426,151 @@ if(isset($_SESSION['checkout_seller_id'])){
 	  window.open('checkout2?order_id=$insert_order_id','_self')
 	});
 	</script>";
-		
-	}
 
-}
+        }
+
+    }
 
 /// Single Proposal Checkout Order Code Ends ///
 
-
 /// Cart Proposals Order Code Starts ///
 
-if(isset($_SESSION['cart_seller_id'])){
+    if (isset($_SESSION['cart_seller_id'])) {
 
-	$buyer_id = $_SESSION['cart_seller_id'];
-	$payment_method = $_SESSION['method'];
-	require 'vendor/autoload.php';
-	
-	$sel_cart = $db->select("cart",array("seller_id" => $buyer_id));
-	while($row_cart = $sel_cart->fetch()){
-	
-	$proposal_id = $row_cart->proposal_id;
-	$proposal_price = $row_cart->proposal_price;
-	$proposal_qty = $row_cart->proposal_qty;
-	if($videoPlugin == 1){
-		$video = $row_cart->video;
-	}
+        $buyer_id       = $_SESSION['cart_seller_id'];
+        $payment_method = $_SESSION['method'];
+        require 'vendor/autoload.php';
 
-	$cart_extras = $db->select("cart_extras",array("seller_id"=>$login_seller_id,"proposal_id"=>$proposal_id));
-	while($extra = $cart_extras->fetch()){
-    $price = $extra->price;
-    $proposal_price += $price;
-	}
+        $sel_cart = $db->select("cart", array("seller_id" => $buyer_id));
+        while ($row_cart = $sel_cart->fetch()) {
 
-	$sub_total = $proposal_price*$proposal_qty;
-	$order_price = $sub_total;
-	$processing_fee = processing_fee($order_price);
+            $proposal_id    = $row_cart->proposal_id;
+            $proposal_price = $row_cart->proposal_price;
+            $proposal_qty   = $row_cart->proposal_qty;
+            if ($videoPlugin == 1) {
+                $video = $row_cart->video;
+            }
 
-	$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
-	$row_proposal = $select_proposal->fetch();
-	$proposal_title = $row_proposal->proposal_title;
-	$proposal_enable_referrals = $row_proposal->proposal_enable_referrals;
-	$proposal_referral_money = $row_proposal->proposal_referral_money;
-	$proposal_referral_code = $row_proposal->proposal_referral_code;
-	$buyer_instruction = $row_proposal->buyer_instruction;
-	$proposal_seller_id = $row_proposal->proposal_seller_id;
-	$delivery_id = $row_proposal->delivery_id;
+            $cart_extras = $db->select("cart_extras", array("seller_id" => $login_seller_id, "proposal_id" => $proposal_id));
+            while ($extra = $cart_extras->fetch()) {
+                $price = $extra->price;
+                $proposal_price += $price;
+            }
 
-	$select_delivery_time = $db->select("delivery_times",array('delivery_id' => $delivery_id));
-	$row_delivery_time = $select_delivery_time->fetch();
-	$delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
-	$add_days = intval($delivery_proposal_title);
+            $sub_total      = $proposal_price * $proposal_qty;
+            $order_price    = $sub_total;
+            $processing_fee = processing_fee($order_price);
 
-	date_default_timezone_set("UTC");
-	$order_date = date("F d, Y");
-	$date_time = date("M d, Y H:i:s");
-	$order_time = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
-	$order_number = mt_rand();
-	if(!empty($buyer_instruction)){
-		$order_status = "pending";
-	}else{
-		$order_status = "progress";
-	}
+            $select_proposal           = $db->select("proposals", array("proposal_id" => $proposal_id));
+            $row_proposal              = $select_proposal->fetch();
+            $proposal_title            = $row_proposal->proposal_title;
+            $proposal_enable_referrals = $row_proposal->proposal_enable_referrals;
+            $proposal_referral_money   = $row_proposal->proposal_referral_money;
+            $proposal_referral_code    = $row_proposal->proposal_referral_code;
+            $buyer_instruction         = $row_proposal->buyer_instruction;
+            $proposal_seller_id        = $row_proposal->proposal_seller_id;
+            $delivery_id               = $row_proposal->delivery_id;
 
-	$order_values = array("order_number" => $order_number,"order_duration" => $delivery_proposal_title,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_fee" => 0,"order_active" => 'yes',"order_status" => $order_status);
+            $select_delivery_time    = $db->select("delivery_times", array('delivery_id' => $delivery_id));
+            $row_delivery_time       = $select_delivery_time->fetch();
+            $delivery_proposal_title = $row_delivery_time->delivery_proposal_title;
+            $add_days                = intval($delivery_proposal_title);
 
-	if($videoPlugin == 1){
-		if($video == 1){
-			$order_values['order_minutes'] = $row_cart->proposal_qty.":00";
-			$order_values['order_qty'] = 1;
-		}
-	}
+            date_default_timezone_set("UTC");
+            $order_date   = date("F d, Y");
+            $date_time    = date("M d, Y H:i:s");
+            $order_time   = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
+            $order_number = mt_rand();
+            if (!empty($buyer_instruction)) {
+                $order_status = "pending";
+            } else {
+                $order_status = "progress";
+            }
 
-	$insert_order = $db->insert("orders",$order_values);
+            $order_values = array("order_number" => $order_number, "order_duration" => $delivery_proposal_title, "order_time" => $order_time, "order_date" => $order_date, "seller_id" => $proposal_seller_id, "buyer_id" => $buyer_id, "proposal_id" => $proposal_id, "order_price" => $order_price, "order_qty" => $proposal_qty, "order_fee" => 0, "order_active" => 'yes', "order_status" => $order_status);
 
-	$insert_order_id = $db->lastInsertId();
+            if ($videoPlugin == 1) {
+                if ($video == 1) {
+                    $order_values['order_minutes'] = $row_cart->proposal_qty . ":00";
+                    $order_values['order_qty']     = 1;
+                }
+            }
 
-	if($insert_order){
+            $insert_order = $db->insert("orders", $order_values);
 
-	$cart_extras = $db->select("cart_extras",array("seller_id"=>$login_seller_id,"proposal_id"=>$proposal_id));
-	while($extra = $cart_extras->fetch()){
-    $name = $extra->name;
-    $price = $extra->price;
-		$insert_extra = $db->insert("order_extras",array("order_id"=>$insert_order_id,"name"=>$name,"price"=>$price));
-	}
+            $insert_order_id = $db->lastInsertId();
 
-	// Insert Sale Here
-	// $adminProfit = "0.0";
-	// $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>0,"action"=>"cart","date"=>date("Y-m-d"));
-	// insertSale($sale);
+            if ($insert_order) {
 
-	if($proposal_enable_referrals == "yes"){
+                $cart_extras = $db->select("cart_extras", array("seller_id" => $login_seller_id, "proposal_id" => $proposal_id));
+                while ($extra = $cart_extras->fetch()) {
+                    $name         = $extra->name;
+                    $price        = $extra->price;
+                    $insert_extra = $db->insert("order_extras", array("order_id" => $insert_order_id, "name" => $name, "price" => $price));
+                }
 
-		if(isset($_SESSION['r_proposal_id'])){
+                // Insert Sale Here
+                // $adminProfit = "0.0";
+                // $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>0,"action"=>"cart","date"=>date("Y-m-d"));
+                // insertSale($sale);
 
-			if($_SESSION['r_referrer_id'] == $login_seller_id){
+                if ($proposal_enable_referrals == "yes") {
 
-			}else{
+                    if (isset($_SESSION['r_proposal_id'])) {
 
-				if($proposal_id == $_SESSION['r_proposal_id'] & $proposal_referral_code == $_SESSION['r_referral_code']){
-					
-					$ip = $_SERVER['REMOTE_ADDR'];
-					$r_proposal_id = $_SESSION['r_proposal_id'];
-					$r_seller_id = $proposal_seller_id;
-					$r_referrer_id = $_SESSION['r_referrer_id'];
-					$r_comission = $proposal_referral_money;
-					$r_date = date("F d, Y");
-					$r_o_comission = ($order_price*$r_comission)/100;
-					$comission = round($r_o_comission,1);
-					
-					$insert_referral = $db->insert("proposal_referrals",array("proposal_id"=>$r_proposal_id,"order_id"=>$insert_order_id,"seller_id"=>$r_seller_id,"referrer_id"=>$r_referrer_id,"buyer_id"=>$login_seller_id,"comission"=>$comission,"date"=>$r_date,"ip"=>$ip,"status"=>'pending'));
-					unset($_SESSION['r_proposal_id']);
-					unset($_SESSION['r_referral_code']);
-					unset($_SESSION['r_referrer_id']);
-				
-				}
+                        if ($_SESSION['r_referrer_id'] == $login_seller_id) {
 
-			}
+                        } else {
 
-		}
+                            if ($proposal_id == $_SESSION['r_proposal_id'] & $proposal_referral_code == $_SESSION['r_referral_code']) {
 
-	}
+                                $ip            = $_SERVER['REMOTE_ADDR'];
+                                $r_proposal_id = $_SESSION['r_proposal_id'];
+                                $r_seller_id   = $proposal_seller_id;
+                                $r_referrer_id = $_SESSION['r_referrer_id'];
+                                $r_comission   = $proposal_referral_money;
+                                $r_date        = date("F d, Y");
+                                $r_o_comission = ($order_price * $r_comission) / 100;
+                                $comission     = round($r_o_comission, 1);
 
-	$select_proposal_seller = $db->select("sellers",array("seller_id"=>$proposal_seller_id));
-	$row_proposal_seller = $select_proposal_seller->fetch();
-	$proposal_seller_user_name = $row_proposal_seller->seller_user_name;
-	$proposal_seller_email = $row_proposal_seller->seller_email;
-	$site_email_address = $row_general_settings->site_email_address;
-	$site_logo = $row_general_settings->site_logo;
+                                $insert_referral = $db->insert("proposal_referrals", array("proposal_id" => $r_proposal_id, "order_id" => $insert_order_id, "seller_id" => $r_seller_id, "referrer_id" => $r_referrer_id, "buyer_id" => $login_seller_id, "comission" => $comission, "date" => $r_date, "ip" => $ip, "status" => 'pending'));
+                                unset($_SESSION['r_proposal_id']);
+                                unset($_SESSION['r_referral_code']);
+                                unset($_SESSION['r_referrer_id']);
 
-	require 'vendor/autoload.php';
-	$mail = new PHPMailer(true);
-	try{
-	if($enable_smtp == "yes"){
-	$mail->isSMTP();
-	$mail->Host = $s_host;
-	$mail->Port = $s_port;
-	$mail->SMTPAuth = true;
-	$mail->SMTPSecure = $s_secure;
-	$mail->Username = $s_username;
-	$mail->Password = $s_password;
-	}
-	$mail->setFrom($site_email_address,$site_name);
-	$mail->addAddress($proposal_seller_email);
-	$mail->addReplyTo($site_email_address,$site_name);
-	$mail->isHTML(true);
-	$mail->Subject = "Congrats! You just received an order from $login_seller_user_name";
-	$mail->Body = "
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                $select_proposal_seller    = $db->select("sellers", array("seller_id" => $proposal_seller_id));
+                $row_proposal_seller       = $select_proposal_seller->fetch();
+                $proposal_seller_user_name = $row_proposal_seller->seller_user_name;
+                $proposal_seller_email     = $row_proposal_seller->seller_email;
+                $site_email_address        = $row_general_settings->site_email_address;
+                $site_logo                 = $row_general_settings->site_logo;
+
+                require 'vendor/autoload.php';
+                $mail = new PHPMailer(true);
+                try {
+                    if ($enable_smtp == "yes") {
+                        $mail->isSMTP();
+                        $mail->Host       = $s_host;
+                        $mail->Port       = $s_port;
+                        $mail->SMTPAuth   = true;
+                        $mail->SMTPSecure = $s_secure;
+                        $mail->Username   = $s_username;
+                        $mail->Password   = $s_password;
+                    }
+                    $mail->setFrom($site_email_address, $site_name);
+                    $mail->addAddress($proposal_seller_email);
+                    $mail->addReplyTo($site_email_address, $site_name);
+                    $mail->isHTML(true);
+                    $mail->Subject = "Congrats! You just received an order from $login_seller_user_name";
+                    $mail->Body    = "
 	<html>
 	<head>
 	<style>
@@ -595,7 +590,7 @@ if(isset($_SESSION['cart_seller_id'])){
 		margin: 0px 0px 30px;
 		padding: 8px 20px 20px 20px;
 		border:1px solid #e6e6e6;
-		box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
+		box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);
 	}
 	.lead {
 		font-size:16px;
@@ -615,7 +610,7 @@ if(isset($_SESSION['cart_seller_id'])){
 		border:1px solid #eee;
 	}
 	.table {
-	width:100%;	
+	width:100%;
 	background-color:#fff;
 	margin-bottom:20px;
 	}
@@ -670,122 +665,120 @@ if(isset($_SESSION['cart_seller_id'])){
 	</body>
 	</html>
 	";
-	$mail->send();
-	}catch(Exception $e){
-	}
+                    $mail->send();
+                } catch (Exception $e) {
+                }
 
-	$select_my_buyer = $db->select("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id));
-	$count_my_buyer = $select_my_buyer->rowCount();
-	if($count_my_buyer == 1){
-		$update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
-	}else{
-		$insert_my_buyer = $db->insert("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
-	}
+                $select_my_buyer = $db->select("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id));
+                $count_my_buyer  = $select_my_buyer->rowCount();
+                if ($count_my_buyer == 1) {
+                    $update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
+                } else {
+                    $insert_my_buyer = $db->insert("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
+                }
 
-	$select_my_seller = $db->select("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
-	$count_my_seller = $select_my_seller->rowCount();
-	if($count_my_seller == 1){
-		$update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
-	}else{
-		$insert_my_seller = $db->insert("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
-	}
+                $select_my_seller = $db->select("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id));
+                $count_my_seller  = $select_my_seller->rowCount();
+                if ($count_my_seller == 1) {
+                    $update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
+                } else {
+                    $insert_my_seller = $db->insert("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
+                }
 
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$order_price,"date"=>$order_date,"method"=>$payment_method));
-	$insert_notification = $db->insert("notifications",array("receiver_id"=>$proposal_seller_id,"sender_id"=>$login_seller_id,"order_id"=>$insert_order_id,"reason"=>"order","date"=>$order_date,"status"=>"unread"));
+                $insert_purchase     = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $order_price, "date" => $order_date, "method" => $payment_method));
+                $insert_notification = $db->insert("notifications", array("receiver_id" => $proposal_seller_id, "sender_id" => $login_seller_id, "order_id" => $insert_order_id, "reason" => "order", "date" => $order_date, "status" => "unread"));
 
-	} // insert order query { bracket
+            } // insert order query { bracket
 
-	} // cart while loo { bracket
+        } // cart while loo { bracket
 
-	$delete_cart = $db->delete("cart",array("seller_id" => $buyer_id));
-	$delete_cart_extras = $db->delete("cart_extras",array("seller_id" => $buyer_id));
-	unset($_SESSION['cart_seller_id']);
-	unset($_SESSION['method']);
-	echo "<script>alert('Your order has been placed, Thank you.');</script>";
-	echo "<script>window.open('buying_orders','_self')</script>";
-}
+        $delete_cart        = $db->delete("cart", array("seller_id" => $buyer_id));
+        $delete_cart_extras = $db->delete("cart_extras", array("seller_id" => $buyer_id));
+        unset($_SESSION['cart_seller_id']);
+        unset($_SESSION['method']);
+        echo "<script>alert('Your order has been placed, Thank you.');</script>";
+        echo "<script>window.open('buying_orders','_self')</script>";
+    }
 
 /// Cart Proposals Order Code Ends ///
 
-
 /// Single Offer Order Code Starts ///
 
+    if (isset($_SESSION['offer_id'])) {
+        $buyer_id       = $_SESSION['offer_buyer_id'];
+        $offer_id       = $_SESSION['offer_id'];
+        $payment_method = $_SESSION['method'];
 
-if(isset($_SESSION['offer_id'])){
-	$buyer_id = $_SESSION['offer_buyer_id'];
-	$offer_id = $_SESSION['offer_id'];
-	$payment_method = $_SESSION['method'];
+        $select_offers  = $db->select("send_offers", array("offer_id" => $offer_id));
+        $row_offers     = $select_offers->fetch();
+        $proposal_id    = $row_offers->proposal_id;
+        $description    = $row_offers->description;
+        $delivery_time  = $row_offers->delivery_time;
+        $order_price    = $row_offers->amount;
+        $processing_fee = processing_fee($order_price);
+        $proposal_qty   = "1";
 
-	$select_offers = $db->select("send_offers",array("offer_id" => $offer_id));
-	$row_offers = $select_offers->fetch();
-	$proposal_id = $row_offers->proposal_id;
-	$description = $row_offers->description;
-	$delivery_time = $row_offers->delivery_time;
-	$order_price = $row_offers->amount;
-	$processing_fee = processing_fee($order_price);
-	$proposal_qty = "1";
+        $select_proposal    = $db->select("proposals", array("proposal_id" => $proposal_id));
+        $row_proposal       = $select_proposal->fetch();
+        $proposal_title     = $row_proposal->proposal_title;
+        $buyer_instruction  = $row_proposal->buyer_instruction;
+        $proposal_seller_id = $row_proposal->proposal_seller_id;
 
-	$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
-	$row_proposal = $select_proposal->fetch();
-	$proposal_title = $row_proposal->proposal_title;
-	$buyer_instruction = $row_proposal->buyer_instruction;
-	$proposal_seller_id = $row_proposal->proposal_seller_id;
+        $add_days = intval($delivery_time);
+        date_default_timezone_set("UTC");
+        $order_date   = date("F d, Y");
+        $date_time    = date("M d, Y H:i:s");
+        $order_time   = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
+        $order_number = mt_rand();
 
-	$add_days = intval($delivery_time);
-	date_default_timezone_set("UTC");
-	$order_date = date("F d, Y");
-	$date_time = date("M d, Y H:i:s");
-	$order_time = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
-	$order_number = mt_rand();
+        if (!empty($buyer_instruction)) {
+            $order_status = "pending";
+        } else {
+            $order_status = "progress";
+        }
 
-	if(!empty($buyer_instruction)){
-	$order_status = "pending";
-	}else{
-	$order_status = "progress";
-	}
+        if ($payment_method == "shopping_balance") {
+            $saleProcessingFee = 0;
+            $insert_order      = $db->insert("orders", array("order_number" => $order_number, "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "seller_id" => $proposal_seller_id, "buyer_id" => $buyer_id, "proposal_id" => $proposal_id, "order_price" => $order_price, "order_qty" => $proposal_qty, "order_fee" => 0, "order_active" => 'yes', "order_status" => $order_status));
+        } else {
+            $saleProcessingFee = $processing_fee;
+            $insert_order      = $db->insert("orders", array("order_number" => $order_number, "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "seller_id" => $proposal_seller_id, "buyer_id" => $buyer_id, "proposal_id" => $proposal_id, "order_price" => $order_price, "order_qty" => $proposal_qty, "order_fee" => $processing_fee, "order_active" => 'yes', "order_status" => $order_status));
+        }
 
-	if($payment_method == "shopping_balance"){
-	$saleProcessingFee = 0;
-	$insert_order = $db->insert("orders",array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_fee" => 0,"order_active" => 'yes',"order_status" => $order_status));
-	}else{
-	$saleProcessingFee = $processing_fee;
-	$insert_order = $db->insert("orders",array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_fee" => $processing_fee,"order_active" => 'yes',"order_status" => $order_status));
-	}
+        $insert_order_id = $db->lastInsertId();
+        if ($insert_order) {
+            // Insert Sale Here
+            // $adminProfit = "0.0";
+            // $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"requestOffer","date"=>date("Y-m-d"));
+            // insertSale($sale);
+            $update_order              = $db->update("send_offers", array("status" => 'send'), array("offer_id" => $offer_id));
+            $select_proposal_seller    = $db->select("sellers", array("seller_id" => $proposal_seller_id));
+            $row_proposal_seller       = $select_proposal_seller->fetch();
+            $proposal_seller_user_name = $row_proposal_seller->seller_user_name;
+            $proposal_seller_email     = $row_proposal_seller->seller_email;
+            $site_email_address        = $row_general_settings->site_email_address;
+            $site_logo                 = $row_general_settings->site_logo;
 
-	$insert_order_id = $db->lastInsertId();
-	if($insert_order){
-	// Insert Sale Here
-	// $adminProfit = "0.0";
-	// $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"requestOffer","date"=>date("Y-m-d"));
-	// insertSale($sale);
-	$update_order = $db->update("send_offers",array("status"=>'send'),array("offer_id"=>$offer_id));
-	$select_proposal_seller = $db->select("sellers",array("seller_id"=>$proposal_seller_id));
-	$row_proposal_seller = $select_proposal_seller->fetch();
-	$proposal_seller_user_name = $row_proposal_seller->seller_user_name;
-	$proposal_seller_email = $row_proposal_seller->seller_email;
-	$site_email_address = $row_general_settings->site_email_address;
-	$site_logo = $row_general_settings->site_logo;
+            require 'vendor/autoload.php';
+            $mail = new PHPMailer(true);
+            try {
 
-	require 'vendor/autoload.php';
-	$mail = new PHPMailer(true);
-	try{
+                if ($enable_smtp == "yes") {
+                    $mail->isSMTP();
+                    $mail->Host       = $s_host;
+                    $mail->Port       = $s_port;
+                    $mail->SMTPAuth   = true;
+                    $mail->SMTPSecure = $s_secure;
+                    $mail->Username   = $s_username;
+                    $mail->Password   = $s_password;
+                }
 
-	if($enable_smtp == "yes"){
-	$mail->isSMTP();
-	$mail->Host = $s_host;
-	$mail->Port = $s_port;
-	$mail->SMTPAuth = true;
-	$mail->SMTPSecure = $s_secure;
-	$mail->Username = $s_username;
-	$mail->Password = $s_password;
-	}
-
-	$mail->setFrom($site_email_address,$site_name);
-	$mail->addAddress($proposal_seller_email);
-	$mail->addReplyTo($site_email_address,$site_name);
-	$mail->isHTML(true);
-	$mail->Subject = "Congrats! You just received an order from $login_seller_user_name";
-	$mail->Body = "
+                $mail->setFrom($site_email_address, $site_name);
+                $mail->addAddress($proposal_seller_email);
+                $mail->addReplyTo($site_email_address, $site_name);
+                $mail->isHTML(true);
+                $mail->Subject = "Congrats! You just received an order from $login_seller_user_name";
+                $mail->Body    = "
 	<html>
 	<head>
 	<style>
@@ -805,7 +798,7 @@ if(isset($_SESSION['offer_id'])){
 		margin: 0px 0px 30px;
 		padding: 8px 20px 20px 20px;
 		border:1px solid #e6e6e6;
-		box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
+		box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);
 	}
 	.lead {
 		font-size:16px;
@@ -825,7 +818,7 @@ if(isset($_SESSION['offer_id'])){
 		border:1px solid #eee;
 	}
 	.table {
-	width:100%;	
+	width:100%;
 	background-color:#fff;
 	margin-bottom:20px;
 	}
@@ -879,42 +872,42 @@ if(isset($_SESSION['offer_id'])){
 	</div>
 	</body>
 	</html>";
-	$mail->send();
-	}catch(Exception $e){
-	}
-	
-	$select_my_buyer = $db->select("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id));
-	$count_my_buyer = $select_my_buyer->rowCount();
+                $mail->send();
+            } catch (Exception $e) {
+            }
 
-	if($count_my_buyer == 1){
-		$update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
-	}else{
-		$insert_my_buyer = $db->insert("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
-	}
+            $select_my_buyer = $db->select("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id));
+            $count_my_buyer  = $select_my_buyer->rowCount();
 
-	$select_my_seller = $db->select("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
-	$count_my_seller = $select_my_seller->rowCount();
-	if($count_my_seller == 1){
-		// $insert_seller = $db->update("my_sellers",array("completed_orders"=>'completed_orders+1',"amount_spent"=>'amount_spent+$order_price',"last_order_date"=>$order_date),array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
-		$update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
-	}else{
-		$insert_my_seller = $db->insert("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
-	}
+            if ($count_my_buyer == 1) {
+                $update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
+            } else {
+                $insert_my_buyer = $db->insert("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
+            }
 
-	$total_amount = $order_price + $processing_fee;
-	if($payment_method == "shopping_balance"){
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$order_price,"date"=>$order_date,"method"=>$payment_method));
-	}else{
-	$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
-	}
+            $select_my_seller = $db->select("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id));
+            $count_my_seller  = $select_my_seller->rowCount();
+            if ($count_my_seller == 1) {
+                // $insert_seller = $db->update("my_sellers",array("completed_orders"=>'completed_orders+1',"amount_spent"=>'amount_spent+$order_price',"last_order_date"=>$order_date),array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
+                $update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
+            } else {
+                $insert_my_seller = $db->insert("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
+            }
 
-	$insert_notification = $db->insert("notifications",array("receiver_id"=>$proposal_seller_id,"sender_id"=>$login_seller_id,"order_id"=>$insert_order_id,"reason"=>"order","date"=>$order_date,"status"=>"unread"));
+            $total_amount = $order_price + $processing_fee;
+            if ($payment_method == "shopping_balance") {
+                $insert_purchase = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $order_price, "date" => $order_date, "method" => $payment_method));
+            } else {
+                $insert_purchase = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $total_amount, "processing_fee" => $processing_fee, "date" => $order_date, "method" => $payment_method));
+            }
 
-	unset($_SESSION['offer_id']);
-	unset($_SESSION['offer_buyer_id']);
-	unset($_SESSION['method']);
+            $insert_notification = $db->insert("notifications", array("receiver_id" => $proposal_seller_id, "sender_id" => $login_seller_id, "order_id" => $insert_order_id, "reason" => "order", "date" => $order_date, "status" => "unread"));
 
-	echo "
+            unset($_SESSION['offer_id']);
+            unset($_SESSION['offer_buyer_id']);
+            unset($_SESSION['method']);
+
+            echo "
 	<script>
 	swal({
 	type: 'success',
@@ -932,139 +925,128 @@ if(isset($_SESSION['offer_id'])){
 	}
 	})
 	</script>";
-	}	
-}
+        }
+    }
 
 /// Single Offer Order Code Ends ///
 
-
 /// Message Offer Code Starts ///
 
-if(isset($_SESSION['message_offer_id'])){
-	
-$message_offer_id = $_SESSION['message_offer_id'];
+    if (isset($_SESSION['message_offer_id'])) {
 
-$buyer_id = $_SESSION['message_offer_buyer_id'];
+        $message_offer_id = $_SESSION['message_offer_id'];
 
-$payment_method = $_SESSION['method'];
-	
+        $buyer_id = $_SESSION['message_offer_buyer_id'];
 
-$select_offers = $db->select("messages_offers",array("offer_id" => $message_offer_id));
+        $payment_method = $_SESSION['method'];
 
-$row_offers = $select_offers->fetch();
+        $select_offers = $db->select("messages_offers", array("offer_id" => $message_offer_id));
 
-$proposal_id = $row_offers->proposal_id;
+        $row_offers = $select_offers->fetch();
 
-$description = $row_offers->description;
+        $proposal_id = $row_offers->proposal_id;
 
-$delivery_time = $row_offers->delivery_time;
+        $description = $row_offers->description;
 
-$order_price = $row_offers->amount;
+        $delivery_time = $row_offers->delivery_time;
 
-$processing_fee = processing_fee($order_price);
+        $order_price = $row_offers->amount;
 
-$proposal_qty = "1";
-	
+        $processing_fee = processing_fee($order_price);
 
-$select_proposal = $db->select("proposals",array("proposal_id" => $proposal_id));
+        $proposal_qty = "1";
 
-$row_proposal = $select_proposal->fetch();
+        $select_proposal = $db->select("proposals", array("proposal_id" => $proposal_id));
 
-$proposal_title = $row_proposal->proposal_title;
+        $row_proposal = $select_proposal->fetch();
 
-$buyer_instruction = $row_proposal->buyer_instruction;
+        $proposal_title = $row_proposal->proposal_title;
 
-$proposal_seller_id = $row_proposal->proposal_seller_id;
+        $buyer_instruction = $row_proposal->buyer_instruction;
 
+        $proposal_seller_id = $row_proposal->proposal_seller_id;
 
+        $add_days = intval($delivery_time);
 
-$add_days = intval($delivery_time);
+        date_default_timezone_set("UTC");
 
-date_default_timezone_set("UTC");
+        $order_date = date("F d, Y");
 
-$order_date = date("F d, Y");
+        $date_time = date("M d, Y H:i:s");
 
-$date_time = date("M d, Y H:i:s");
+        $order_time = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
 
-$order_time = date("M d, Y H:i:s", strtotime($date_time . " + $add_days days"));
+        $order_number = mt_rand();
 
-$order_number = mt_rand();
+        if (!empty($buyer_instruction)) {
 
-if(!empty($buyer_instruction)){
+            $order_status = "pending";
 
-$order_status = "pending";
+        } else {
 
-}else{
-	
-$order_status = "progress";
+            $order_status = "progress";
 
-}
+        }
 
-if($payment_method == "shopping_balance"){
+        if ($payment_method == "shopping_balance") {
 
-$saleProcessingFee = 0;
+            $saleProcessingFee = 0;
 
-$insert_order = $db->insert("orders",array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_fee" => 0,"order_active" => 'yes',"order_status" => $order_status));
+            $insert_order = $db->insert("orders", array("order_number" => $order_number, "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "seller_id" => $proposal_seller_id, "buyer_id" => $buyer_id, "proposal_id" => $proposal_id, "order_price" => $order_price, "order_qty" => $proposal_qty, "order_fee" => 0, "order_active" => 'yes', "order_status" => $order_status));
 
-	
-}else{
+        } else {
 
-$saleProcessingFee = $processing_fee;
-		
-$insert_order = $db->insert("orders",array("order_number" => $order_number,"order_duration" => $delivery_time,"order_time" => $order_time,"order_date" => $order_date,"seller_id" => $proposal_seller_id,"buyer_id" => $buyer_id,"proposal_id" => $proposal_id,"order_price" => $order_price,"order_qty" => $proposal_qty,"order_fee" => $processing_fee,"order_active" => 'yes',"order_status" => $order_status));
+            $saleProcessingFee = $processing_fee;
 
-}
+            $insert_order = $db->insert("orders", array("order_number" => $order_number, "order_duration" => $delivery_time, "order_time" => $order_time, "order_date" => $order_date, "seller_id" => $proposal_seller_id, "buyer_id" => $buyer_id, "proposal_id" => $proposal_id, "order_price" => $order_price, "order_qty" => $proposal_qty, "order_fee" => $processing_fee, "order_active" => 'yes', "order_status" => $order_status));
 
-$insert_order_id = $db->lastInsertId();
+        }
 
-if($insert_order){
+        $insert_order_id = $db->lastInsertId();
 
+        if ($insert_order) {
 
 // Insert Sale Here
-// $adminProfit = "0.0";
-// $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"messageOffer","date"=>date("Y-m-d"));
-// insertSale($sale);
-	
-$update_order = $db->update("messages_offers",array("order_id"=>$insert_order_id,"status"=>'accepted'),array("offer_id"=>$message_offer_id));
+            // $adminProfit = "0.0";
+            // $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"messageOffer","date"=>date("Y-m-d"));
+            // insertSale($sale);
 
+            $update_order = $db->update("messages_offers", array("order_id" => $insert_order_id, "status" => 'accepted'), array("offer_id" => $message_offer_id));
 
-$select_proposal_seller = $db->select("sellers",array("seller_id"=>$proposal_seller_id));
-$row_proposal_seller = $select_proposal_seller->fetch();
-$proposal_seller_user_name = $row_proposal_seller->seller_user_name;
-$proposal_seller_email = $row_proposal_seller->seller_email;
+            $select_proposal_seller    = $db->select("sellers", array("seller_id" => $proposal_seller_id));
+            $row_proposal_seller       = $select_proposal_seller->fetch();
+            $proposal_seller_user_name = $row_proposal_seller->seller_user_name;
+            $proposal_seller_email     = $row_proposal_seller->seller_email;
 
-	
-$site_email_address = $row_general_settings->site_email_address;
-$site_logo = $row_general_settings->site_logo;
+            $site_email_address = $row_general_settings->site_email_address;
+            $site_logo          = $row_general_settings->site_logo;
 
+            require 'vendor/autoload.php';
 
-require 'vendor/autoload.php';
+            $mail = new PHPMailer(true);
+            try {
 
-$mail = new PHPMailer(true);
-try{
+                if ($enable_smtp == "yes") {
+                    $mail->isSMTP();
+                    $mail->Host       = $s_host;
+                    $mail->Port       = $s_port;
+                    $mail->SMTPAuth   = true;
+                    $mail->SMTPSecure = $s_secure;
+                    $mail->Username   = $s_username;
+                    $mail->Password   = $s_password;
+                }
 
-if($enable_smtp == "yes"){
-$mail->isSMTP();
-$mail->Host = $s_host;
-$mail->Port = $s_port;
-$mail->SMTPAuth = true;
-$mail->SMTPSecure = $s_secure;
-$mail->Username = $s_username;
-$mail->Password = $s_password;
-}
+                $mail->setFrom($site_email_address, $site_name);
 
-$mail->setFrom($site_email_address,$site_name);
+                $mail->addAddress($proposal_seller_email);
 
-$mail->addAddress($proposal_seller_email);
+                $mail->addReplyTo($site_email_address, $site_name);
 
-$mail->addReplyTo($site_email_address,$site_name);
+                $mail->isHTML(true);
 
-$mail->isHTML(true);
-	
+                $mail->Subject = "Congrats! You just received a new order from $login_seller_user_name";
 
-$mail->Subject = "Congrats! You just received a new order from $login_seller_user_name";
-	
-$mail->Body = "
+                $mail->Body = "
 
 <html>
 
@@ -1075,7 +1057,7 @@ $mail->Body = "
 .container {
 	background: rgb(238, 238, 238);
 	padding: 80px;
-	
+
 }
 
 @media only screen and (max-device-width: 690px) {
@@ -1084,7 +1066,7 @@ $mail->Body = "
 	background: rgb(238, 238, 238);
 width:100%;
 padding:1px;
-	
+
 }
 
 }
@@ -1094,13 +1076,13 @@ padding:1px;
 	margin: 0px 0px 30px;
 	padding: 8px 20px 20px 20px;
 	border:1px solid #e6e6e6;
-	box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);			
-	
+	box-shadow:0px 1px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 .lead {
 	font-size:16px;
-	
+
 }
 
 .btn{
@@ -1111,42 +1093,42 @@ padding:1px;
 	padding:10px 16px;
 	font-size:18px;
 	border-radius:3px;
-	
+
 }
 
 hr{
 	margin-top:20px;
 	margin-bottom:20px;
 	border:1px solid #eee;
-	
+
 }
 
 .table {
-	
-width:100%;	
-	
+
+width:100%;
+
 background-color:#fff;
 
 margin-bottom:20px;
-	
+
 }
 
 .table thead tr th {
-	
+
 	border:1px solid #ddd;
-	
+
 	font-weight:bolder;
-	
+
 	padding:10px;
-	
+
 }
 
 .table tbody tr td {
-	
+
 	border:1px solid #ddd;
-	
+
 	padding:10px;
-	
+
 }
 
 
@@ -1232,61 +1214,60 @@ View Your Order
 
 ";
 
-$mail->send();
+                $mail->send();
 
-}catch(Exception $e){
-}
+            } catch (Exception $e) {
+            }
 
-$select_my_buyer = $db->select("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id));
+            $select_my_buyer = $db->select("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id));
 
-$count_my_buyer = $select_my_buyer->rowCount();
+            $count_my_buyer = $select_my_buyer->rowCount();
 
-if($count_my_buyer == 1){
-		
-	$update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
+            if ($count_my_buyer == 1) {
 
-}else{
-	
-	$insert_my_buyer = $db->insert("my_buyers",array("seller_id"=>$proposal_seller_id,"buyer_id"=>$login_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
+                $update_my_buyer = $db->query("update my_buyers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where seller_id='$proposal_seller_id' AND buyer_id='$login_seller_id'");
 
-}
+            } else {
 
+                $insert_my_buyer = $db->insert("my_buyers", array("seller_id" => $proposal_seller_id, "buyer_id" => $login_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
 
-$select_my_seller = $db->select("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id));
+            }
 
-$count_my_seller = $select_my_seller->rowCount();
+            $select_my_seller = $db->select("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id));
 
-if($count_my_seller == 1){
-	
-	$update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
+            $count_my_seller = $select_my_seller->rowCount();
 
-}else{
-	
-	$insert_my_seller = $db->insert("my_sellers",array("buyer_id"=>$login_seller_id,"seller_id"=>$proposal_seller_id,"completed_orders"=>1,"amount_spent"=>$order_price,"last_order_date"=>$order_date));
+            if ($count_my_seller == 1) {
 
-}
+                $update_my_seller = $db->query("update my_sellers set completed_orders=completed_orders+1,amount_spent=amount_spent+$order_price,last_order_date='$order_date' where buyer_id='$login_seller_id' AND seller_id='$proposal_seller_id'");
 
-$total_amount = $order_price + $processing_fee;
+            } else {
 
-if($payment_method == "shopping_balance"){
-	
-$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$order_price,"date"=>$order_date,"method"=>$payment_method));
+                $insert_my_seller = $db->insert("my_sellers", array("buyer_id" => $login_seller_id, "seller_id" => $proposal_seller_id, "completed_orders" => 1, "amount_spent" => $order_price, "last_order_date" => $order_date));
 
-}else{
-		
-$insert_purchase = $db->insert("purchases",array("seller_id"=>$login_seller_id,"order_id"=>$insert_order_id,"amount"=>$total_amount,"processing_fee" => $processing_fee,"date"=>$order_date,"method"=>$payment_method));
+            }
 
-}
+            $total_amount = $order_price + $processing_fee;
 
-$insert_notification = $db->insert("notifications",array("receiver_id"=>$proposal_seller_id,"sender_id"=>$login_seller_id,"order_id"=>$insert_order_id,"reason"=>"order","date"=>$order_date,"status"=>"unread"));
+            if ($payment_method == "shopping_balance") {
 
-unset($_SESSION['message_offer_id']);
+                $insert_purchase = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $order_price, "date" => $order_date, "method" => $payment_method));
 
-unset($_SESSION['message_offer_buyer_id']);
+            } else {
 
-unset($_SESSION['method']);
+                $insert_purchase = $db->insert("purchases", array("seller_id" => $login_seller_id, "order_id" => $insert_order_id, "amount" => $total_amount, "processing_fee" => $processing_fee, "date" => $order_date, "method" => $payment_method));
 
-echo "
+            }
+
+            $insert_notification = $db->insert("notifications", array("receiver_id" => $proposal_seller_id, "sender_id" => $login_seller_id, "order_id" => $insert_order_id, "reason" => "order", "date" => $order_date, "status" => "unread"));
+
+            unset($_SESSION['message_offer_id']);
+
+            unset($_SESSION['message_offer_buyer_id']);
+
+            unset($_SESSION['method']);
+
+            echo "
 
 <script>
 
@@ -1296,21 +1277,12 @@ window.open('order-checkout2?order_id=$insert_order_id','_self');
 
 </script>";
 
+        }
 
-}
-
-	
-	
-}
-
+    }
 
 /// Message Offer Code Ends ///
 
-
-
-
-	
 }
-
 
 ?>

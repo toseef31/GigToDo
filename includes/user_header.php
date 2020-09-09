@@ -216,7 +216,9 @@
       <li><a href="<?= $site_url ?>/settings?account_settings"> <img src="<?= $site_url; ?>/assets/img/icon/2.png" alt=""> Setting </a></li>
       <li><a href="<?= $site_url; ?>/dashboard"> <img src="<?= $site_url; ?>/assets/img/icon/12.png" alt=""> Dashboard </a></li>
       <li><a href="<?= $site_url; ?>/proposals/view_proposals"> <img src="<?= $site_url; ?>/assets/img/icon/3.png" alt=""> Services</a></li>
-      <li><a href="<?= $site_url; ?>/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a service</a></li>
+      <li><a href="<?= $site_url; ?>/proposals/create_proposal"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt=""> Post a service</a></li>
       <li><a href="<?= $site_url; ?>/requests/buyer_requests"> <img src="<?= $site_url; ?>/assets/img/icon/14.png" alt=""> Jobs</a></li>
       <li><a href="<?= $site_url ?>/selling_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="<?= $site_url ?>/revenue"> <img src="<?= $site_url; ?>/assets/img/icon/15.png" alt=""> Revenue</a></li>

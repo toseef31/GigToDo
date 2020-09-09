@@ -37,6 +37,23 @@ $count_offers = $get_offers->rowCount();
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" class="ui-toolkit">
 <head>
+	  <script>
+	    window.dataLayer = window.dataLayer || [];
+	    dataLayer = [{
+	      'event': 'Pageview',
+	      'pagePath': 'https://www.emongez.com/ar/requests/view_offers',
+	      'pageTitle': 'eMongez - Offers',
+	      'pageCategory': 'view_offers',
+	      'visitorType': 'high-value'
+	    }];
+	  </script>
+	  <!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-TF82RTH');</script>
+	<!-- End Google Tag Manager -->
 	<title><?php echo $site_name; ?> - Offers</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -386,7 +403,9 @@ $count_offers = $get_offers->rowCount();
 															</div>
 															<div class="offer-item-user-content d-flex flex-column justify-content-start">
 																<span class="user-name"><?php echo $sender_user_name; ?></span>
-																<a href="../conversations/message?seller_id=<?php echo $sender_id; ?>&offer_id=<?php echo $offer_id; ?>" class="d-flex flex-row align-items-center">
+																<a href="../conversations/message?seller_id=<?php echo $sender_id; ?>&offer_id=<?php echo $offer_id; ?>" class="d-flex flex-row align-items-center"
+                  							onclick="dataLayer.push({
+                    						'event': 'Pageview'});">
 																	<span>
 																		<img src="<?= $site_url; ?>/assets/img/offer/mail-icon.png">
 																	</span>
@@ -414,7 +433,9 @@ $count_offers = $get_offers->rowCount();
 														<input type="hidden" name="request_id" value="<?= $request_id; ?>">
 														<input type="hidden" name="offer_id" value="<?= $offer_id; ?>">
 														<input type="hidden" name="proposal_qty" value="1">
-														<button class="button button-red"  name="add_order">اطلب دلوقتي</button>
+														<button class="button button-red"  name="add_order"
+                  					onclick="dataLayer.push({
+                    				'event': 'Pageview'});">اطلب دلوقتي</button>
 													</form>
 												</div>
 												<div class="small-gigs-pricing d-flex flex-row">
@@ -495,7 +516,9 @@ $count_offers = $get_offers->rowCount();
 													</div>
 													<div class="offer-item-user-content d-flex flex-column justify-content-start">
 														<span class="user-name"><?php echo $sender_user_name; ?></span>
-														<a href="../conversations/message?seller_id=<?php echo $sender_id; ?>&offer_id=<?php echo $offer_id; ?>" class="d-flex flex-row align-items-center">
+														<a href="../conversations/message?seller_id=<?php echo $sender_id; ?>&offer_id=<?php echo $offer_id; ?>" class="d-flex flex-row align-items-center"
+                  						onclick="dataLayer.push({
+                							'event': 'Pageview'});">
 															<span>
 																<img src="<?= $site_url; ?>/assets/img/offer/mail-icon.png">
 															</span>
@@ -529,7 +552,9 @@ $count_offers = $get_offers->rowCount();
 															<input type="hidden" name="request_id" value="<?= $request_id; ?>">
 															<input type="hidden" name="offer_id" value="<?= $offer_id; ?>">
 															<input type="hidden" name="proposal_qty" value="1">
-															<button class="button button-red" name="add_order">اطلب دلوقتي</button>
+															<button class="button button-red" name="add_order"
+                  							onclick="dataLayer.push({
+                    						'event': 'Pageview'});">اطلب دلوقتي</button>
 														</form>
 													</div>
 												</div>

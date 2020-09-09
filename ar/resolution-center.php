@@ -311,12 +311,11 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <h4>اشرح سبب رغبتك في إلغاء الطلب</h4>
                         <div class="form-group d-flex flex-column">
-                          <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
+                          <textarea class="form-control" placeholder="الغاء..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <div class="form-group">
-                          <p class="mb-0">Iإذا وجدت نفسك تستخدم هذه الأداة لمعظم طلباتك 
-، ففكر في تغيير الوقت الأصلي للطلب</p>
+                          <p class="mb-0">I</p>
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
@@ -373,7 +372,7 @@ if($seller_id == $login_seller_id){
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
-                      <h4>كل الخدمات المتضمنة في الطلب</h4>
+                      <h4></h4>
                       <ul class="list-inline d-flex flex-wrap">
                         <li class="list-inline-item d-flex flex-row align-items-start">
                           <span>
@@ -400,11 +399,11 @@ if($seller_id == $login_seller_id){
                     <!-- Each item -->
                     <div class="summary-card d-flex flex-column">
                       <div class="totoal-fee d-flex flex-row justify-content-between">
-                        <span>كلي</span>
+                        <span>اجمالي</span>
                         <span><?= $s_currency; ?> <?= $total ?></span>
                       </div>
                       <div class="delivery-time d-flex flex-row justify-content-between">
-                        <span>الوقت الكامل للتوصيل</span>
+                        <span>الوقت الكامل للتسليم</span>
                         <span><?= $delivery_time; ?></span>
                       </div>
                     </div>
@@ -428,7 +427,7 @@ if($seller_id == $login_seller_id){
             <div class="row">
               <div class="col-12">
                 <h1 class="page-heading">مركز الحلول</h1>
-                <p class="page-paragraph">أهلا بيك ، تقدر تحل مشكلتكالمتعلقة بطلبك مع المشتري.</p>
+                <p class="page-paragraph"> أهلا بيك ، تقدر تحل مشكلتك المتعلقة بطلبك مع الفريلانسر.</p>
               </div>
             </div>
             <!-- Row -->
@@ -540,12 +539,11 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <h4>اشرح سبب رغبتك في إلغاء الطلب</h4>
                         <div class="form-group d-flex flex-column">
-                          <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
+                          <textarea class="form-control" placeholder="الغاء..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <div class="form-group">
-                          <p class="mb-0">إذا وجدت نفسك تستخدم هذه الأداة لمعظم طلباتك 
-، ففكر في تغيير الوقت الأصلي للطلب</p>
+                          <p class="mb-0"></p>
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
@@ -602,7 +600,7 @@ if($seller_id == $login_seller_id){
                     </div>
                     <!-- Each item -->
                     <div class="summary-card">
-                      <h4>كل الخدمات المتضمنة في الطلب</h4>
+                      <h4></h4>
                       <ul class="list-inline d-flex flex-wrap">
                         <li class="list-inline-item d-flex flex-row align-items-start">
                           <span>
@@ -622,18 +620,18 @@ if($seller_id == $login_seller_id){
                     <!-- Each item -->
                     <div class="summary-card">
                       <div class="processing-fee d-flex flex-row justify-content-between">
-                        <span>لا يوجد ضريبة للسلع والخدمات</span>
+                        <span>ضريبة</span>
                         <span>&nbsp;</span>
                       </div>
                     </div>
                     <!-- Each item -->
                     <div class="summary-card d-flex flex-column">
                       <div class="totoal-fee d-flex flex-row justify-content-between">
-                        <span>كلي</span>
+                        <span>اجمالي</span>
                         <span><?= $s_currency; ?> <?= $total ?></span>
                       </div>
                       <div class="delivery-time d-flex flex-row justify-content-between">
-                        <span>الوقت الكامل للتوصيل</span>
+                        <span>الوقت الكامل للتسليم</span>
                         <span><?= $delivery_time ?></span>
                       </div>
                     </div>

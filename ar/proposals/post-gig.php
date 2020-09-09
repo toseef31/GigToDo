@@ -15,6 +15,16 @@ $login_seller_language = $row_login_seller->seller_language;
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer = [{
+      'event': 'Pageview',
+      'pagePath': 'https://www.emongez.com/ar/proposals/post-gig',
+      'pageTitle': 'eMongez - Post A Service',
+      'pageCategory': 'post-gig',
+      'visitorType': 'high-value'
+    }];
+  </script>
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -27,7 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--====== Title ======-->
-  <title><?php echo $site_name; ?> - Post a Gigs</title>
+  <title><?php echo $site_name; ?> - Post a Service</title>
   <!--====== Favicon Icon ======-->
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="../images/<?php echo $site_favicon; ?>" type="image/x-icon">
@@ -619,7 +629,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </div> -->
                         <!--- form-group row Ends --->
                         <div class="form-group mb-0">
-                          <a class="button btn" id="next">التالي</a>
+                          <a class="button btn" id="next"
+                          onclick="dataLayer.push({
+                          'event': 'Pageview'});">التالي</a>
                         </div>
                       </div>
                     </div>
@@ -717,7 +729,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </div>
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
-                          <button class="publish-gig-button" name="publish" type="submit">انشر دلوقتي</button>
+                          <button class="publish-gig-button" name="publish" type="submit"
+                            onclick="dataLayer.push({
+                            'event': 'Pageview'});">انشر دلوقتي</button>
                         </div>
                         <!-- Each item -->
                       </div>

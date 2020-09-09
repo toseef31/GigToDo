@@ -317,7 +317,7 @@ if(isset($_SESSION['seller_user_name'])){
 								<button class="login-button" role="button" type="submit" name="login">Sign in</button>
 							</div>
 							<div class="form-group">
-								<p class="text-center">By clicking Log In, Facebook or LinkedIn<br />you agree to our new <a href="javascript:void(0);">T&C's</a></p>
+								<p class="text-center">By clicking Log In, Facebook or Google<br />you agree to our new <a href="javascript:void(0);">T&C's</a></p>
 							</div>
 						</form>
 					</div>

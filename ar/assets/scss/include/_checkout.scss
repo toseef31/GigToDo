@@ -344,6 +344,7 @@
 			}
 			.input-check-area {
 				margin-top: 26px;
+				position: relative;
 				label {
 					color: #333;
 					font-size: 18px;
@@ -352,7 +353,11 @@
 					font-weight: 400;
 				}
 				input[type="checkbox"] {
-					display: none;
+					z-index: -1;
+					position: absolute;
+					width: 20px;
+					height: 20px;
+					right: 0;
 					& + label {
 						font-size: 14px;
 						color: #3a3a3a;
@@ -435,6 +440,22 @@
 					&:hover {
 						opacity: .8;
 					}
+				}
+			}
+			.edit-info-btn {
+				border: 1px solid #ff0707;
+				background: #ff0707;
+				color: #fff;
+				text-transform: uppercase;
+				padding: 0 50px;
+				line-height: 50px;
+				border-radius: 6px;
+				font-weight: 600;
+				margin-bottom: 30px;
+				cursor: pointer;
+				transition: .4s;
+				&:hover {
+					opacity: .8;
 				}
 			}
 		}

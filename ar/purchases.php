@@ -126,7 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <img src="assets/img/img/icon2.png" alt="">
                           </div>
                           <div class="purchases-text">
-                            <h4>الطلبات المفعلة اللي اتباعت <span><?php if ($to == 'EGP'){ echo $to.' '; echo $active_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $active_order_price,2);}else{  echo $s_currency.' '; echo $active_order_price; } ?></span></h4>
+                            <h4> المشاريع الفعالة<span><?php if ($to == 'EGP'){ echo $to.' '; echo $active_order_price;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $active_order_price,2);}else{  echo $s_currency.' '; echo $active_order_price; } ?></span></h4>
                           </div>
                         </div>
                       </div>
@@ -227,9 +227,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Title</th>
-                        <th scope="col" style="text-align: left;">Amount</th>
+                        <th scope="col">التاريخ</th>
+                        <th scope="col">الوصف</th>
+                        <th scope="col" style="text-align: left;">المبلغ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -328,7 +328,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Date</th>
+                  <th>التاريخ</th>
                   <th>For</th>
                   <th>Amount</th>
                 </tr>

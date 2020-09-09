@@ -94,11 +94,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col-12 col-sm-6">
-							<h1 class="list-page-title"> إدارة الوظائف </h1>
+							<h1 class="list-page-title"> المشاريع المنشورة </h1>
 						</div>
 						<div class="col-12 col-sm-6 d-flex flex-column flex-sm-row justify-content-end">
 							<a class="button button-red" href="post-request">
-								انشر طلب
+								انشر مشروع
 							</a>
 						</div>
 					</div>
@@ -134,19 +134,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<?php
 										$count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'active'));
 										?>
-										<a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">نشيط <span class="badge"><?php echo $count_requests; ?></span></a>
+										<a class="nav-item nav-link limerick active" id="active-tab" data-toggle="tab" href="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">فعاله <span class="badge"><?php echo $count_requests; ?></span></a>
 										<?php
 										  $count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'pause'));
 										?>
-										<a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">متوقف <span class="badge"><?php echo $count_requests; ?></span></a>
+										<a class="nav-item nav-link selective-yellow" id="paused-tab" data-toggle="tab" href="#nav-paused" role="tab" aria-controls="nav-paused" aria-selected="false">متوقفه <span class="badge"><?php echo $count_requests; ?></span></a>
 										<?php
                     	$count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'pending'));
                 		?>
-										<a class="nav-item nav-link selective-blue" id="pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="false">ما زال يحتاج بتصدير  <span class="badge"><?php echo $count_requests; ?></span></a>
+										<a class="nav-item nav-link selective-blue" id="pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="false">الموافقة مطلوبة  <span class="badge"><?php echo $count_requests; ?></span></a>
 										<?php
 										  $count_requests = $db->count("buyer_requests",array("seller_id" => $login_seller_id, "request_status" => 'unapproved'))
 										?>
-										<a class="nav-item nav-link selective-red" id="unapproved-tab" data-toggle="tab" href="#nav-unapproved" role="tab" aria-controls="nav-unapproved" aria-selected="false">غير معتمد <span class="badge"><?php echo $count_requests; ?></span></a>
+										<a class="nav-item nav-link selective-red" id="unapproved-tab" data-toggle="tab" href="#nav-unapproved" role="tab" aria-controls="nav-unapproved" aria-selected="false">تعديل <span class="badge"><?php echo $count_requests; ?></span></a>
 									</div>
 								</nav>
 							</div>
@@ -209,7 +209,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button"
+                  				onclick="dataLayer.push({
+                    			'event': 'Pageview'});">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>
@@ -225,7 +227,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 															<i class="far fa-cog"></i>
 														</a>
 														<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
-															<a class="dropdown-item" href="view_offers?request_id=<?php echo $request_id; ?>">
+															<a class="dropdown-item" href="view_offers?request_id=<?php echo $request_id; ?>"
+                  							onclick="dataLayer.push({
+                    						'event': 'Pageview'});">
 																عرض العروض
 															</a>
 															<a class="dropdown-item" href="pause_request?request_id=<?php echo $request_id; ?>">
@@ -301,7 +305,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button"
+                 	 				onclick="dataLayer.push({
+                    			'event': 'Pageview'});">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>
@@ -390,7 +396,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button"
+                  				onclick="dataLayer.push({
+                    			'event': 'Pageview'});">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>
@@ -476,7 +484,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="العروض">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button">
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" class="offers-button"
+                  				onclick="dataLayer.push({
+                    			'event': 'Pageview'});">
 														<?php echo $count_offers; ?> عروض
 													</a>
 												</td>

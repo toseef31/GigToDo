@@ -503,7 +503,6 @@ if(isset($_POST['code'])){
 												$stripe_total_amount = $total * 100;
 												?>
 												<form action="checkout_charge" method="post" id="credit-card-form" style="margin-top: -15px;"><!--- credit-card-form Starts --->
-												<?php $encrypted_key = base64_encode($stripe['publishable_key']); ?>
 												<input
 												type="submit"
 												class="stripe-submit"
@@ -543,7 +542,7 @@ if(isset($_POST['code'])){
 												<?php if($enable_paypal == "yes"){ ?>
 												<div class="input-check-area float-right mt-0">
 													<form action="paypal_charge" method="post" id="paypal-form" class="float-right" style="margin-top: -17px;"><!--- paypal-form Starts --->
-													 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
+													 <button type="submit" name="paypal" class="btn btn-lg stripe-submit btn-block">Pay With Paypal</button>
 													</form>
 												</div>
 												<?php } ?>
@@ -591,17 +590,17 @@ if(isset($_POST['code'])){
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Mobile Number</span>
-															<input type="text" name="mobile_number" id="mobile_number_wallet" value="<?= $mobile_number; ?>">
+															<input type="text" name="mobile_number" required id="mobile_number_wallet" value="<?= $mobile_number; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
-													<input type="checkbox" name="checkbox5" id="checkbox2">
+													<input type="checkbox" required name="checkbox5" id="checkbox2">
 													<label for="checkbox2"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit" name="edit_wallet" id="edit_wallet" class="button">Edit Info</button>
 												</div>
+												<button type="submit" name="edit_wallet" id="edit_wallet" class="button edit-info-btn">Edit Info</button>
 											</form>
-											<form action="weaccept" method="post" id="weaccept-form" class="float-right">
+											<form action="weaccept.php" method="post" id="weaccept-form" class="float-right">
 												<button type="submit" name="weaccept" class="order-button float-right">Order</button>
 											</form>
 										</li>
@@ -633,31 +632,31 @@ if(isset($_POST['code'])){
 														<div class="col-lg-12">
 															<div class="input-box mt-30">
 																<span>Mobile Number</span>
-																<input type="text" name="mobile_number" id="mobile_number" value="<?= $mobile_number; ?>">
+																<input type="text" name="mobile_number" required id="mobile_number" value="<?= $mobile_number; ?>">
 															</div>
 														</div>
 														<div class="col-lg-12">
 															<div class="input-box mt-30">
 																<span>Address</span>
-																<input type="text" name="address" id="address" value="<?= $address; ?>">
+																<input type="text" name="address" id="address" required value="<?= $address; ?>">
 															</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="input-box mt-30">
 																<span>Apartment Number</span>
-																<input type="text" name="apartment_number" id="apartment_number" value="<?= $apartment_number; ?>">
+																<input type="text" name="apartment_number" required id="apartment_number" value="<?= $apartment_number; ?>">
 															</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="input-box mt-30">
 																<span>Floor Number</span>
-																<input type="text" name="floor_number" id="floor_number" value="<?= $floor_number; ?>">
+																<input type="text" name="floor_number" required id="floor_number" value="<?= $floor_number; ?>">
 															</div>
 														</div>
 														<div class="col-lg-12">
 															<div class="input-box mt-30 state_box">
 																<span>Country</span>
-							 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
+							 									<select class="form-control wide" name="country" required onChange="getState(this.value);" id="country">
 							 										<option>Select Country</option>
 							 										<?php
                                     $get_countries = $db->select("countries", array('name'=> 'Egypt'));
@@ -673,7 +672,7 @@ if(isset($_POST['code'])){
 														<div class="col-lg-6">
 															<div class="input-box mt-30 state_box">
 																<span>state</span>
-																<select class="form-control wide" name="state" onChange="getCity(this.value);" id="state-list">
+																<select class="form-control wide" name="state" required onChange="getCity(this.value);" id="state-list">
 																	<?php if(!empty($state)){ ?>
 																		<option selected><?= $state; ?></option>
 																	<?php } ?>
@@ -683,7 +682,7 @@ if(isset($_POST['code'])){
 														<div class="col-lg-6">
 															<div class="input-box mt-30 state_box">
 																<span>city</span>
-																<select class="form-control wide" name="city" required="" id="city-list">
+																<select class="form-control wide" name="city" required id="city-list">
 																	<?php if(!empty($city)){ ?>
 																		<option selected><?= $city; ?></option>
 																	<?php } ?>
@@ -692,17 +691,17 @@ if(isset($_POST['code'])){
 														</div>
 													</div>
 													<div class="input-check-area">
-														<input type="checkbox" name="checkbox5" id="terms">
+														<input type="checkbox" required name="checkbox5" id="terms">
 														<label for="terms"><span></span>I accept the <p>terms and conditions</p>&nbsp;<small>(Please accept the terms and condition to proceed)</small></label><br>
 														<!-- <button type="submit">Order</button> -->
-														<button type="submit" name="submit_cash_info" id="edit_info" class="float-right" disabled>Edit Cash Info</button>
 													</div>
+													<button type="submit" name="submit_cash_info" id="edit_info" class="float-right edit-info-btn" disabled>Edit Cash Info</button>
 												</form>
 												<?php 
 													
 												?>
-												<form action="weaccept_cash" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
-												<button type="submit" name="weaccept_cash" class="order-button">Order</button>
+												<form action="weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+													<button type="submit" name="weaccept_cash" class="order-button">Order</button>
 												</form>
 											</li>
 											
@@ -734,23 +733,23 @@ if(isset($_POST['code'])){
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Mobile Number</span>
-															<input type="text" name="local_mobile_number" id="local_mobile_number" value="<?= $local_mobile_number ?>">
+															<input type="text" name="local_mobile_number" required id="local_mobile_number" value="<?= $local_mobile_number ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>Email Address</span>
-															<input type="email" name="local_email" id="local_email" value="<?= $local_email; ?>">
+															<input type="email" name="local_email" id="local_email" required value="<?= $local_email; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
-													<input type="checkbox" name="checkbox5" id="checkbox4">
+													<input type="checkbox" required name="checkbox5" id="checkbox4">
 													<label for="checkbox4"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit" name="edit_local" id="edit_local">Edit Info</button>
 												</div>
+												<button type="submit" name="edit_local" id="edit_local" class="edit-info-btn">Edit Info</button>
 											</form>
-											<form action="weaccept_kiosk" method="post" id="weaccept-kiosk" class="float-right">
+											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk" class="float-right">
 												<button type="submit" name="weaccept_valu" class="order-button float-right">Order</button>
 											</form>
 										</li>
@@ -1448,16 +1447,18 @@ $('#edit_local_form').submit(function(e){
         $('#wait').removeClass("loader");
         if(data == "error"){
           swal({type: 'warning',text: 'You Must Need To Fill Out All Fields Before Updating The Details.'});
-
         }else{
           swal({type: 'success',text: 'Changes Saved.'});
         }
-
       });
 });
+
+
+
 </script>
 <?php } ?>
 <?php require_once("includes/footer.php"); ?>
+<script src="<?php $site_url ?>/js/checkout.js"></script>
 </body>
 </html>
 <?php

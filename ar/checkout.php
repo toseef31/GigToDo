@@ -257,7 +257,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	  }
 	  #weaccept-cash-form,#weaccept-form,#weaccept-kiosk{
 	  	margin-top: -83px;
-	  	float: right;
+	  	float: left;
 	  }
 	  @media(max-width: 767px){
 	  	.input-check-area{
@@ -590,17 +590,17 @@ if(isset($_POST['code'])){
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>رقم الموبايل</span>
-															<input type="text" name="mobile_number" id="mobile_number_wallet" value="<?= $mobile_number; ?>">
+															<input type="text" name="mobile_number" required id="mobile_number_wallet" value="<?= $mobile_number; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
-													<input type="checkbox" name="checkbox5" id="checkbox2">
+													<input type="checkbox" required name="checkbox5" id="checkbox2">
 													<label for="checkbox2"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a></label><br>
-													<button type="submit" name="edit_wallet" id="edit_wallet" class="button">تحرير المعلومات</button>
 												</div>
+												<button type="submit" class="button edit-info-btn" name="edit_wallet" id="edit_wallet" class="button">تحرير المعلومات</button>
 											</form>
-											<form action="weaccept" method="post" id="weaccept-form" class="float-left">
+											<form action="weaccept.php" method="post" id="weaccept-form" class="float-left">
 												<button type="submit" name="weaccept" class="order-button float-left">الطلب</button>
 											</form>
 										</li>
@@ -635,31 +635,31 @@ if(isset($_POST['code'])){
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>رقم الموبايل</span>
-															<input type="text" name="mobile_number" id="mobile_number" value="<?= $mobile_number; ?>">
+															<input type="text" name="mobile_number" required id="mobile_number" value="<?= $mobile_number; ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>العنوان</span>
-															<input type="text" name="address" id="address" value="<?= $address; ?>">
+															<input type="text" name="address" required id="address" value="<?= $address; ?>">
 														</div>
 													</div>
 													<div class="col-lg-6">
 														<div class="input-box mt-30">
 															<span>رقم المنزل</span>
-															<input type="text" name="apartment_number" id="apartment_number" value="<?= $apartment_number; ?>">
+															<input type="text" name="apartment_number" required id="apartment_number" value="<?= $apartment_number; ?>">
 														</div>
 													</div>
 													<div class="col-lg-6">
 														<div class="input-box mt-30">
 															<span>رقم الدور</span>
-															<input type="text" name="floor_number" id="floor_number" value="<?= $floor_number; ?>">
+															<input type="text" name="floor_number" required id="floor_number" value="<?= $floor_number; ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30 state_box">
 															<span>البلد</span>
-						 									<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
+						 									<select class="form-control wide" required name="country" onChange="getState(this.value);" id="country">
 						 										<option>Select Country</option>
 						 										<?php
                                   $get_countries = $db->select("countries", array('name'=> 'Egypt'));
@@ -675,7 +675,7 @@ if(isset($_POST['code'])){
 													<div class="col-lg-6">
 														<div class="input-box mt-30 state_box">
 															<span>المدينة</span>
-															<select class="form-control wide" name="state" onChange="getCity(this.value);" id="state-list">
+															<select class="form-control wide" required name="state" onChange="getCity(this.value);" id="state-list">
 																<?php if(!empty($state)){ ?>
 																	<option selected><?= $state; ?></option>
 																<?php } ?>
@@ -685,7 +685,7 @@ if(isset($_POST['code'])){
 													<div class="col-lg-6">
 														<div class="input-box mt-30 state_box">
 															<span>مدينة</span>
-															<select class="form-control wide" name="city" required="" id="city-list">
+															<select class="form-control wide" required name="city" required="" id="city-list">
 																<?php if(!empty($city)){ ?>
 																	<option selected><?= $city; ?></option>
 																<?php } ?>
@@ -694,16 +694,16 @@ if(isset($_POST['code'])){
 													</div>
 												</div>
 												<div class="input-check-area">
-													<input type="checkbox" name="checkbox5" id="terms">
+													<input required type="checkbox" name="checkbox5" id="terms">
 													<label for="terms"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a>&nbsp;<small>(يرجى قبول الشروط والأحكام للمتابعة)</small></label><br>
 													<!-- <button type="submit">الطلب</button> -->
-													<button type="submit" name="submit_cash_info" id="edit_info" class="float-left" disabled>تحرير معلومات النقدية</button>
 												</div>
+												<button type="submit"  name="submit_cash_info" id="edit_info" class="edit-info-btn" disabled>تحرير معلومات النقدية</button>
 											</form>
 											<?php 
 												
 											?>
-											<form action="weaccept_cash" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
+											<form action="weaccept_cash.php" method="post" id="weaccept-cash-form"><!--- paypal-form Starts --->
 											<button type="submit" name="weaccept_cash" class="order-button">الطلب</button>
 											</form>
 										</li>
@@ -738,23 +738,23 @@ if(isset($_POST['code'])){
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>رقم الموبايل</span>
-															<input type="text" name="local_mobile_number" id="local_mobile_number" value="<?= $local_mobile_number ?>">
+															<input type="text" name="local_mobile_number" required id="local_mobile_number" value="<?= $local_mobile_number ?>">
 														</div>
 													</div>
 													<div class="col-lg-12">
 														<div class="input-box mt-30">
 															<span>الإيميل</span>
-															<input type="email" name="local_email" id="local_email" value="<?= $local_email; ?>">
+															<input type="email" name="local_email" required id="local_email" value="<?= $local_email; ?>">
 														</div>
 													</div>
 												</div>
 												<div class="input-check-area">
-													<input type="checkbox" name="checkbox5" id="checkbox4">
+													<input type="checkbox" name="checkbox5" required id="checkbox4">
 													<label for="checkbox4"><span></span>موافق على <a href="javascript:void(0);">الشروط والأحكام</a></label><br>
-													<button type="submit" name="edit_local" id="edit_local">تحرير المعلومات</button>
 												</div>
+												<button type="submit" class="edit-info-btn" name="edit_local" id="edit_local">تحرير المعلومات</button>
 											</form>
-											<form action="weaccept_kiosk" method="post" id="weaccept-kiosk" class="float-right">
+											<form action="weaccept_kiosk.php" method="post" id="weaccept-kiosk">
 												<button type="submit" name="weaccept_valu" class="order-button float-right">الطلب</button>
 											</form>
 										</li>
@@ -1483,6 +1483,7 @@ $('#edit_local_form').submit(function(e){
 </script>
 <?php } ?>
 <?php require_once("includes/footer.php"); ?>
+<script src="<?php $site_url ?>/ar/js/checkout.js"></script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

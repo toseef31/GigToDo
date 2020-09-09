@@ -108,7 +108,9 @@ $cur_amount = currencyConverter($to,1);
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
               <ul>
-                <li><a href="<?= $site_url ?>/requests/post-request.php">Post A Job</a></li>
+                <li><a href="<?= $site_url ?>/requests/post-request.php"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});">Post A Job</a></li>
                 <li><a href="<?= $site_url ?>/how-it-works.php">How it Works</a></li>
               </ul>
             </div>
@@ -170,7 +172,9 @@ $cur_amount = currencyConverter($to,1);
   <div class="canvs-menu">
     <ul class="d-flex flex-column">
       <li>
-        <a href="<?= $site_url; ?>/requests/post-request.php">Post A Job</a>
+        <a href="<?= $site_url; ?>/requests/post-request.php"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});">Post A Job</a>
       </li>
       <li>
         <a href="<?= $site_url ?>/how-it-works.php">How it Works</a>

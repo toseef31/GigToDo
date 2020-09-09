@@ -15,6 +15,16 @@ $login_seller_language = $row_login_seller->seller_language;
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer = [{
+      'event': 'Pageview',
+      'pagePath': 'https://www.emongez.com/proposals/post-gig',
+      'pageTitle': 'eMongez - Post A Service',
+      'pageCategory': 'post-gig',
+      'visitorType': 'high-value'
+    }];
+  </script>
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -612,7 +622,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </div> -->
                         <!--- form-group row Ends --->
                         <div class="form-group mb-0">
-                          <a class="button btn" id="next">Next</a>
+                          <a class="button btn" id="next"
+                            onclick="dataLayer.push({
+                            'event': 'Pageview'});">Next</a>
                         </div>
                       </div>
                     </div>
@@ -703,7 +715,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </div>
                         <!-- Each item -->
                         <div class="form-group d-flex flex-column">
-                          <button class="publish-gig-button" name="publish" type="submit">Publish Now</button>
+                          <button class="publish-gig-button" name="publish" type="submit"
+                            onclick="dataLayer.push({
+                            'event': 'Pageview'});">Publish Now</button>
                         </div>
                         <!-- Each item -->
                       </div>

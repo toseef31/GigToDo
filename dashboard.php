@@ -221,48 +221,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link href="assets/css/responsive.css" rel="stylesheet">
   <!-- Custom css code from modified in admin panel --->
   <link href="styles/styles.css" rel="stylesheet">
-  <!-- <link href="font_awesome/css/font-awesome.css" rel="stylesheet">
-  <link href="styles/owl.carousel.css" rel="stylesheet">
-  <link href="styles/owl.theme.default.css" rel="stylesheet"> -->
   <link href="styles/user_nav_styles.css" rel="stylesheet">
   <link href="styles/sweat_alert.css" rel="stylesheet">
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/chartjs.min.js"></script>
-  <script type="text/javascript" src="assets/js/chart.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/chartjs.min.js"></script>
+  <script type="text/javascript" src="assets/js/chart.js"></script> -->
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
-   <script>
-   window.onload = function() {
-    
-   var chart = new CanvasJS.Chart("chartContainer", {
-    theme: "light2",
-    animationEnabled: true,
-    title: {
-      // text: "Average Composition of Magma"
-    },
-    data: [{
-      type: "doughnut",
-      indexLabel: "{symbol} - {y}",
-      yValueFormatString: "#,##0\"\"",
-      showInLegend: true,
-      legendText: "{label} : {y}",
-      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-    }]
-   });
-   chart.render();
-    
-   }
-  </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-      demo.initChartsPages();
-    });
-  </script>
   <style>
     .canvasjs-chart-credit{
       display: none;
@@ -484,7 +453,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <img src="assets/img/img/clip.png" alt="">
                             </div>
                             <div class="profile-cart-text">
-                                <h4><?= $total_gigs_view; ?> <span>Gig Views</span></h4>
+                                <h4><?= $total_gigs_view; ?> <span>Services Views</span></h4>
                             </div>
                         </div>
                     </div>
@@ -506,7 +475,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <img src="assets/img/img/cal.png" alt="">
                             </div>
                             <div class="profile-cart-text">
-                                <h4><?php if ($to == 'EGP'){ echo round($average,2);}elseif($to == 'USD'){ echo round($cur_amount * $average,2);}else{ echo round($average,2); } ?> <span>Average Cost of Gigs </span></h4>
+                                <h4><?php if ($to == 'EGP'){ echo round($average,2);}elseif($to == 'USD'){ echo round($cur_amount * $average,2);}else{ echo round($average,2); } ?> <span>Average Cost of Services </span></h4>
                             </div>
                         </div>
                     </div>
@@ -1148,7 +1117,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   });
   });
 </script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <?php require_once("includes/footer.php"); ?>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"

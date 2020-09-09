@@ -180,12 +180,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div> -->
 								<div class="form-group">
 									<label class="control-label">اسم المستخدم</label>
-									<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" />
-									<small class="form-text text-muted">ملاحظة: لن تتمكن من تغيير اسم المستخدم بمجرد إنشاء حسابك</small>
-									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
-									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
-									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
-									<?php if(in_array("يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.", $error_array)) echo "<span style='color:red;'>يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.</span> <br>"; ?>
+									<input class="form-control" type="text" name="u_name" placeholder="اختار اسم المُستخدم لحسابك" value="<?php if(isset($_SESSION['u_name'])) echo $_SESSION['u_name']; ?>" />
+									<small class="form-text text-muted">ملحوظة: اسم المُستخدم اللي اختارته هيبقى دائم، مبيتغيرش بعد كده</small>
+									<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>اسم المُستخدم ده مُسجّل بالفعل. من فضلك جرب اسم تاني</span> <br>"; ?>
+									<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>اسم المُستخدم لازم ميقلّش عن 4 حروف وميزيدش عن 25 حرف</span> <br>"; ?>
+									<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>بنعتذرلك! غير مسموح باستخدام حروف غير انجليزية في اسم المُستخدم</span> <br>"; ?>
+									<?php if(in_array("يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.", $error_array)) echo "<span style='color:red;'>بنعتذرلك! غير مسموح باستخدام مساحة في اسم المُستخدم</span> <br>"; ?>
 									<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['u_name']); ?></span>
 									<span id="space_error" class="form-text text-danger"></span>
 								</div>
@@ -355,7 +355,7 @@ $("input[name='u_name']").keyup(function(e) {
 		"accountType" => "required",
 		"term" => "required");
 
-		$messages = array("name" => "الإسم الكامل ضروري.","u_name" => "اسم المستخدم مطلوب.","pass" => "كلمة المرور مطلوبة.","con_pass" => "تأكيد كلمة المرور مطلوب.", "accountType" => "نوع الحساب مطلوب.", 'email' => 'البريد الالكتروني مطلوب' , "term" => "يرجى التحقق من الشروط والأحكام");
+		$messages = array("name" => "الإسم الكامل ضروري","u_name" => "اسم المستخدم مطلوب","pass" => "دخل كلمة المرور","con_pass" => "تأكيد كلمة المرور", "accountType" => "اختيار نوع الحساب", 'email' => 'دخل البريد الإلكتروني ' , "term" => "من فضلك راجع شروط وأحكام المنصّة");
 		$val = new Validator($_POST,$rules,$messages);
 
 		if($val->run() == false){
@@ -393,19 +393,19 @@ $("input[name='u_name']").keyup(function(e) {
 			$check_seller_username = $db->count("sellers",array("seller_user_name" => $u_name));
 			$check_seller_email = $db->count("sellers",array("seller_email" => $email));
 			// if(preg_match('/[اأإء-ي]/ui', $input->post('u_name'))){
-			//   array_push($error_array, "الأحرف الأجنبية غير مسموح بها في اسم المستخدم ، يرجى تجربة حرف آخر.");
+			//   array_push($error_array, "بنعتذرلك! غير مسموح باستخدام حروف غير انجليزية في اسم المُستخدم.");
 			// }
 			// if ( preg_match('/\s/',$input->post('u_name')) ){
-			// 	array_push($error_array, "يجب ألا يحتوي اسم المستخدم على مساحة ، يرجى تجربة اسم آخر.");
+			// 	array_push($error_array, "بنعتذرلك! غير مسموح باستخدام مساحة في اسم المُستخدم.");
 			// }
 			if($check_seller_username > 0 ){
-			  array_push($error_array, "عذراً! وقد تم بالفعل اتخاذ هذا المستخدم. يرجى تجربة واحدة أخرى");
+			  array_push($error_array, "سم المُستخدم ده مُسجّل بالفعل. من فضلك جرب اسم تاني");
 			}
 			if($check_seller_email > 0){
-			  array_push($error_array, "لقد اخذ الايميل من قبل. حاول تسجيل الدخول بدلاً من ذلك.");
+			  array_push($error_array, "لبريد الإلكتروني ده مُسجل بالفعل. تقدر تسجل دخولك لحسابك عن طريقه.");
 			}
 			if($pass != $con_pass){
-	     	  array_push($error_array, "كلمتا المرور غير متطابقتين. حاول مرة اخرى.");
+	     	  array_push($error_array, "خطأ في تطابق كلمة المرور. تقدر تحاول مرة كمان.");
 			}
 	    
 			if(empty($error_array)){
@@ -464,7 +464,7 @@ $("input[name='u_name']").keyup(function(e) {
 			          <script>
 			          swal({
 			          type: 'success',
-			          text: 'سجلت بنجاح! مرحبًا بكم على متن   $name. ',
+			          text: 'بنهنيك على تسجيل حسابك بنجاح! أهلاً بيك في منصتنا   $name. ',
 			          timer: 6000,
 			          onOpen: function(){
 			          swal.showLoading()
@@ -489,7 +489,7 @@ $("input[name='u_name']").keyup(function(e) {
 							<script>
 							swal({
 							type: 'success',
-							text: 'سجلت بنجاح! مرحبًا بكم على متن   $name. ',
+							text: 'بنهنيك على تسجيل حسابك بنجاح! أهلاً بيك في منصتنا   $name. ',
 							timer: 6000,
 							onOpen: function(){
 							swal.showLoading()
@@ -518,7 +518,7 @@ $("input[name='u_name']").keyup(function(e) {
 				<script>
 				swal({
 					type: 'warning',
-					html: $('<div>').text('عذراً! هناك بعض الأخطاء في النموذج. حاول مرة اخرى.'),
+					html: $('<div>').text('بنعتذرلك! في أخطاء في نموذج تسجيل حسابك. تقدر تحاول تاني.'),
 					animation: false,
 					customClass: 'animated tada'
 				}).then(function(){

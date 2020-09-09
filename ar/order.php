@@ -182,6 +182,11 @@ if(isset($_SESSION['checkout_seller_id'])){
 	// $sale = array("buyer_id" => $buyer_id,"work_id" => $insert_order_id,"payment_method" => $payment_method,"amount" => $order_price,"profit"=> $adminProfit,"processing_fee"=>$saleProcessingFee,"action"=>"checkout","date"=>date("Y-m-d"));
 	// insertSale($sale);
 
+
+	if($payment_method == "weaccept"){
+		$db->update("weaccept_payments",["order_id"=>$insert_order_id],["id" => $_SESSION["payment_id"]]);
+	}
+
 	if($proposal_enable_referrals == "yes"){
 		
 	if(isset($_SESSION['r_proposal_id'])){
@@ -1228,8 +1233,8 @@ View Your Order
 
 </div>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH'
+height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 </body>
 

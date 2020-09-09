@@ -233,7 +233,9 @@
         </a>
       </li>
       <li>
-        <a href="<?= $site_url; ?>/ar/proposals/create_proposal"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
+        <a href="<?= $site_url; ?>/ar/proposals/create_proposal"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});"> <img src="<?= $site_url; ?>/assets/img/icon/13.png" alt="">
           انشر خدمة
         </a>
       </li>

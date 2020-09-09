@@ -1,0 +1,39 @@
+.payments-table{
+    .payment-status{
+        span{
+            text-transform: capitalize;
+            &.success{
+                color:var(--success);
+            }
+            &.pending{
+                color: var(--info);
+            }
+            &.void{
+                color: var(--secondary);
+            }
+        }
+        .check-payment-status{
+            cursor: pointer;
+            font-size: 1.3em;
+            &.loading{
+                animation: spin 1s infinite;
+            }
+        }
+        .fa-check{
+            font-size: 1.3em;
+        }
+    }
+    .payment-type{
+        text-transform: capitalize;
+    }
+}
+@keyframes spin{
+    0%{
+        transform: rotate(0);
+        color: var(--info);
+    }
+    100%{
+        transform: rotate(360deg);
+        color: var(--success);
+    }
+}

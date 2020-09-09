@@ -297,7 +297,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     						<form action="" method="POST">
     							<div class="form-group">
     								<label class="control-label">الإيميل   أو   اسم المستخدم</label>
-    								<input class="form-control" type="text" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني"  name="seller_user_name" value= "<?php if(isset($_SESSION["user_email"])) { echo $_SESSION["user_email"]; } ?>"/>
+    								<input class="form-control" type="text" placeholder="دخل اسم المستخدم أو البريد الإلكتروني"  name="seller_user_name" value= "<?php if(isset($_SESSION["user_email"])) { echo $_SESSION["user_email"]; } ?>"/>
     								<!-- <?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?> -->
     								<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['seller_user_name']); ?></span>
     							</div>
@@ -313,7 +313,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     									<!-- <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?> -->
     									<label class="custom-control-label" for="customCheck1">افتكرني</label>
     								</div>
-    								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">نسيت كلمة المرور ؟</a>
+    								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">بتواجه مشكلة في كلمة المرور ؟</a>
     							</div>
     							<div class="form-group">
     								<button class="login-button" role="button" type="submit" name="login">الدخول</button>
@@ -339,7 +339,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		"seller_user_name" => "required",
 		"seller_pass" => "required"
 		);
-		$messages = array("seller_user_name" => "أدخل اسم المستخدم أو البريد الإلكتروني","seller_pass" => "كلمة المرور مطلوبة.");
+		$messages = array("seller_user_name" => "دخل اسم المستخدم أو البريد الإلكتروني","seller_pass" => "كلمة المرور مطلوبة.");
 
 		$val = new Validator($_POST,$rules,$messages);
 
@@ -365,7 +365,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	        swal({
 	          type: 'warning',
 	          html: $('<div>')
-	            .text('عذراً! كلمة المرور أو اسم المستخدم غير صحيح. حاول مرة اخرى.'),
+	            .text('بنعتذرلك! في خطأ في إدخال اسم المُستخدم أو كلمة المرور الخاصة بيك. حاول مرّة تانية.'),
 	          animation: false,
 	          customClass: 'animated tada'
 	        })
@@ -378,7 +378,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             swal({
               type: 'warning',
               html: $('<div>')
-                .text('لقد تم حظرك من قبل المشرف. يرجى الاتصال بدعم العملاء.'),
+                .text('بنعتذرلك! تم حظر حسابك من خلالنا. تقدر تتواصل معانا عن طريق خدمة العُملاء'),
               animation: false,
               customClass: 'animated tada'
             })
@@ -388,7 +388,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					<script>
 					swal({
 					  type: 'warning',
-					  html: $('<div>').text('لقد قمت بتعطيل حسابك ، يرجى الاتصال بنا للحصول على مزيد من التفاصيل.'),
+					  html: $('<div>').text('تم وقف حسابك مؤقتاً، تقدر تتواصل معانا لمعرفة تفاصيل أكتر.'),
 					  animation: false,
 					  customClass: 'animated tada'
 					})
@@ -424,7 +424,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			          <script>
 			                swal({
 			                type: 'success',
-			                text: 'رحبًا   $seller_user_name ، مرحبًا بك مرة أخرى!',
+			                text: 'رحبًا   $seller_user_name ، أهلاً بيك مرّة تانية!',
 			                timer: 2000,
 			                onOpen: function(){
 			                  swal.showLoading()
@@ -439,7 +439,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			          <script>
 			                swal({
 			                type: 'success',
-			                text: 'رحبًا   $seller_user_name ، مرحبًا بك مرة أخرى!',
+			                text: 'رحبًا   $seller_user_name ، أهلاً بيك مرّة تانية!',
 			                timer: 2000,
 			                onOpen: function(){
 			                  swal.showLoading()

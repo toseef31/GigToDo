@@ -190,7 +190,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button" onclick="dataLayer.push({
+                					'event': 'Pageview'});"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
@@ -200,7 +201,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 															<i class="far fa-cog"></i>
 														</a>
 														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-															<a class="dropdown-item" href="view_offers?request_id=<?php echo $request_id; ?>" target="blank">View Offers</a>
+															<a class="dropdown-item" href="view_offers?request_id=<?php echo $request_id; ?>" target="blank"
+                  							onclick="dataLayer.push({
+                    						'event': 'Pageview'});">View Offers</a>
 															<a class="dropdown-item" href="pause_request?request_id=<?php echo $request_id; ?>">Pause</a>
 															<a class="dropdown-item" href="delete_request?request_id=<?php echo $request_id; ?>">Delete</a>
 														</div>
@@ -256,7 +259,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"
+                  				onclick="dataLayer.push({
+                    			'event': 'Pageview'});"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
@@ -321,7 +326,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"
+                  				onclick="dataLayer.push({
+                    			'event': 'Pageview'});"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>
@@ -385,7 +392,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</div>
 												</td>
 												<td data-label="Offers">
-													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"><?php echo $count_offers; ?> offers</a>
+													<a href="view_offers?request_id=<?php echo $request_id; ?>" target="blank" class="offers-button"
+                  				onclick="dataLayer.push({
+                    			'event': 'Pageview'});"><?php echo $count_offers; ?> offers</a>
 												</td>
 												<td data-label="Delivery"><?php echo $request_delivery; ?></td>
 												<td data-label="Budget"><?php if ($to == 'EGP'){ echo $to.' '; echo $request_budget;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $request_budget,2);}else{  echo $s_currency.' '; echo $request_budget; } ?></td>

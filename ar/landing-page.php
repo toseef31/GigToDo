@@ -78,8 +78,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <p>هتلاقي عملاء جدد بدوسة زرار</p>
         </div>
         <form class="join-form" method="post">
-          <input type="text" name="email" placeholder="دخلالإيميل الخاص بيك ">
-          <input type="submit" name="join_now" value="انضم دلوقتي">
+          <input type="text" name="email" placeholder="دخل الإيميل الخاص بيك ">
+          <input type="submit" name="join_now"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});" value="انضم دلوقتي">
         </form>
       </div>
     </div>
@@ -283,7 +285,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   </div>
                 </div>
               </div>
-              <div class="payment-label">السيولة النقدية</div>
+              <div class="payment-label">كاش</div>
             </div>
             <div class="payment-item">
               <div class="payment-flip-container">
@@ -395,8 +397,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       <p>اعمل بروفايلك وابدأ شغل!</p>
           </div>
           <form class="join-form" method="post">
-            <input type="text" name="email" placeholder="دخلالإيميل الخاص بيك ">
-            <input type="submit" name="join_now" value="انضم دلوقتي">
+            <input type="text" name="email" placeholder="دخل الإيميل الخاص بيك ">
+            <input type="submit" name="join_now"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});" value="انضم دلوقتي">
           </form>
           <div class="d-flex flex-row align-items-center justify-content-center copy-right">
             <span><?= $db->select("general_settings")->fetch()->site_copyright; ?></span>

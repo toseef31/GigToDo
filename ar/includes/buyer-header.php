@@ -271,6 +271,7 @@ $cur_amount = currencyConverter($to,1);
       <li><a href="<?= $site_url; ?>/ar/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> إدارة الوظائف </a></li>
       <li><a href="<?= $site_url; ?>/ar/buying_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> أوامر</a></li>
       <li><a href="<?= $site_url; ?>/ar/purchases"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المشتريات</a></li>
+      <li><a href="<?= $site_url; ?>/ar/payments"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> المدفوعات</a></li>
       <li><a href="<?= $site_url; ?>/ar/invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> أدع صديقا</a></li>
       <li><a href="<?= $site_url; ?>/ar/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> صندوق الوارد</a></li>
       <li><a href="<?= $site_url ?>/ar/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> كيف تعمل</a></li>

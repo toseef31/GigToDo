@@ -80,7 +80,9 @@ require_once("social-config.php");
         </div>
         <form class="join-form" method="post">
           <input type="email" name="email" placeholder="Enter Your Email Adress">
-          <input type="submit" value="Join Now" name="join_now">
+          <input type="submit" value="Join Now" name="join_now"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});">
         </form>
       </div>
     </div>
@@ -278,7 +280,9 @@ require_once("social-config.php");
         <?php } ?>
         <form class="join-form" method="post">
           <input type="email" name="email" placeholder="Enter Your Email Adress">
-          <input type="submit" value="Join Now" name="join_now">
+          <input type="submit" value="Join Now" name="join_now"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});">
         </form>
         <div class="d-flex flex-row align-items-center justify-content-center copy-right">
           <span><?= $db->select("general_settings")->fetch()->site_copyright; ?></span>

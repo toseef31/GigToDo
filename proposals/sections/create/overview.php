@@ -333,7 +333,9 @@ if (empty($form_data)) {
           </button>
         </div> -->
         <div class="d-flex flex-row">
-          <button class="button" name="submit" type="submit" form="proposal-form">Next</button>
+          <button class="button" name="submit" type="submit" form="proposal-form"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});">Next</button>
         </div>
       </div>
     </div>

@@ -232,39 +232,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script src="js/ie.js"></script>
   <script type="text/javascript" src="js/sweat_alert.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/chartjs.min.js"></script>
-  <script type="text/javascript" src="assets/js/chart.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/chartjs.min.js"></script> -->
+  <!-- <script type="text/javascript" src="assets/js/chart.js"></script> -->
   <?php if(!empty($site_favicon)){ ?>
   <link rel="shortcut icon" href="images/<?= $site_favicon; ?>" type="image/x-icon">
   <?php } ?>
-   <script>
-   window.onload = function() {
-    
-   var chart = new CanvasJS.Chart("chartContainer", {
-    theme: "light2",
-    animationEnabled: true,
-    title: {
-      // text: "Average Composition of Magma"
-    },
-    data: [{
-      type: "doughnut",
-      indexLabel: "{symbol} - {y}",
-      yValueFormatString: "#,##0\"\"",
-      showInLegend: true,
-      legendText: "{label} : {y}",
-      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-    }]
-   });
-   chart.render();
-    
-   }
-  </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-      demo.initChartsPages();
-    });
-  </script>
   <style>
     .canvasjs-chart-credit{
       display: none;
@@ -1174,7 +1146,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   });
   });
 </script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 <?php require_once("includes/footer.php"); ?>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"

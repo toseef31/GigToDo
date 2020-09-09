@@ -142,7 +142,7 @@ require_once("includes/buyer-header.php");?>
           <div class="checkout-bar-area text-center">
               <img src="assets/img/checkout/bar-icon-1.png" alt=""><br>
               <span>1</span>
-              <p>تفاصيل الطلب</p>
+              <p>تفاصيل</p>
           </div>
     		</div>
       	<div class="col-lg-4 col-4">
@@ -156,7 +156,7 @@ require_once("includes/buyer-header.php");?>
           <div class="checkout-bar-area text-center">
               <img src="assets/img/checkout/bar-icon-3.2.png" alt=""><br>
               <span>3</span>
-              <p>قدم متطلباتك وابدأ اطلب</p>
+              <p>وابدأ </p>
           </div>
       	</div>
 			</div>
@@ -172,7 +172,7 @@ require_once("includes/buyer-header.php");?>
           <div class="checkout-requirement-area bg-white mt-30">
             <form method="post" enctype="multipart/form-data">
             	<div class="checkout-requirement-title">
-            	    <h4 class="title">قدم متطلباتك وابدأ اطلب</h4>
+            	    <h4 class="title">الفريلانسر محتاج</h4>
             	</div>
 
             	
@@ -209,7 +209,7 @@ require_once("includes/buyer-header.php");?>
             	<div class="checkout-requirement-content-3">
             	   <!--  <span>3- التعليمات</span>
             	    <p><?= $buyer_instruction ?></p> -->
-            	    <button type="submit" name="submit_requirement">التقديم</button>
+            	    <button type="submit" name="submit_requirement">ابدء</button>
             	</div>
             </form>
             <?php 
@@ -264,7 +264,7 @@ require_once("includes/buyer-header.php");?>
 							</div>
 							<!-- Each item -->
 							<div class="summary-card">
-								<h4>كل العناصر اللي بتحتويها الباقة</h4>
+								<h4></h4>
 								<ul class="list-inline d-flex flex-wrap">
 									<!-- <li class="list-inline-item d-flex flex-row align-items-start">
 										<span>
@@ -308,7 +308,7 @@ require_once("includes/buyer-header.php");?>
 							<!-- Each item -->
 							<div class="summary-card">
 								<div class="processing-fee d-flex flex-row justify-content-between">
-									<span>ضريبة البضائع والخدمات</span>
+									<span>ضريبة </span>
 									<span><?php if ($to == 'EGP'){ echo $to.' '; echo $gst;}elseif($to == 'USD'){  echo $to.' '; echo round($cur_amount * $gst,2);}else{  echo $s_currency.' '; echo $gst; } ?></span>
 								</div>
 							</div>

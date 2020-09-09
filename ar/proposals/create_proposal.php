@@ -15,6 +15,16 @@ $login_seller_language = $row_login_seller->seller_language;
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" class="ui-toolkit">
 <head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer = [{
+      'event': 'Pageview',
+      'pagePath': 'https://www.emongez.com/ar/proposals/create_proposal',
+      'pageTitle': 'eMongez - Post A Service',
+      'pageCategory': 'create_proposal',
+      'visitorType': 'high-value'
+    }];
+  </script>
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -22,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TF82RTH');</script>
 <!-- End Google Tag Manager -->
-<title><?php echo $site_name; ?> - Create A New Proposal</title>
+<title><?php echo $site_name; ?> - Post A Service</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="<?php echo $site_desc; ?>">

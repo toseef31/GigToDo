@@ -486,7 +486,7 @@ if(isset($_POST['code'])){
 												<?php if($enable_paypal == "yes"){ ?>
 												<div class="input-check-area float-right mt-0">
 													<form action="requests/paypal_charge" method="post" id="paypal-form" class="float-right" style="margin-top: -17px;"><!--- paypal-form Starts --->
-													 <button type="submit" name="paypal" class="btn btn-lg btn-success btn-block">Pay With Paypal</button>
+													 <button type="submit" name="paypal" class="btn btn-lg stripe-submit btn-block">Pay With Paypal</button>
 													</form>
 												</div>
 												<?php } ?>
@@ -541,8 +541,8 @@ if(isset($_POST['code'])){
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox2">
 													<label for="checkbox2"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit" name="edit_wallet" id="edit_wallet" class="button">Edit Info</button>
 												</div>
+													<button type="submit" name="edit_wallet" id="edit_wallet" class="button  edit-info-btn">Edit Info</button>
 											</form>
 											<form action="requests/weaccept" method="post" id="weaccept-form" class="float-right">
 												<button type="submit" name="weaccept" class="order-button float-right">Order</button>
@@ -638,8 +638,8 @@ if(isset($_POST['code'])){
 														<input type="checkbox" name="checkbox5" id="terms">
 														<label for="terms"><span></span>I accept the <p>terms and conditions</p>&nbsp;<small>(Please accept the terms and condition to proceed)</small></label><br>
 														<!-- <button type="submit">Order</button> -->
-														<button type="submit" name="submit_cash_info" id="edit_info" class="float-right" disabled>Edit Cash Info</button>
 													</div>
+													<button type="submit" name="submit_cash_info" id="edit_info" class="float-right  edit-info-btn" disabled>Edit Cash Info</button>
 												</form>
 												<?php 
 													
@@ -690,8 +690,8 @@ if(isset($_POST['code'])){
 												<div class="input-check-area">
 													<input type="checkbox" name="checkbox5" id="checkbox4">
 													<label for="checkbox4"><span></span>I accept the <p>terms and conditions</p></label><br>
-													<button type="submit" name="edit_local" id="edit_local">Edit Info</button>
 												</div>
+												<button type="submit" name="edit_local" id="edit_local" class=" edit-info-btn">Edit Info</button>
 											</form>
 											<form action="requests/weaccept_kiosk" method="post" id="weaccept-kiosk" class="float-right">
 												<button type="submit" name="weaccept_valu" class="order-button float-right">Order</button>
@@ -1403,6 +1403,7 @@ $('#edit_local_form').submit(function(e){
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<script src="<?php $site_url ?>/js/checkout.js"></script>
 </body>
 </html>
 <?php

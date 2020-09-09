@@ -72,7 +72,9 @@
         </div>
         <form class="join-form" method="post">
           <input type="text" name="email" placeholder="دخلالإيميل الخاص بيك ">
-          <input type="submit" name="join_now" value="انضم دلوقتي">
+          <input type="submit"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});" name="join_now" value="انضم دلوقتي">
         </form>
       </div>
     </div>
@@ -283,7 +285,9 @@
           </div>
           <form class="join-form" method="post">
             <input type="text" value="email" placeholder="دخلالإيميل الخاص بيك ">
-            <input type="submit" name="join_now" value="انضم دلوقتي">
+            <input type="submit"
+                  onclick="dataLayer.push({
+                    'event': 'Pageview'});" name="join_now" value="انضم دلوقتي">
           </form>
           <div class="d-flex flex-row align-items-center justify-content-center copy-right">
             <span><?= $db->select("general_settings")->fetch()->site_copyright; ?></span>

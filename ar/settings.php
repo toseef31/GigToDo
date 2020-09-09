@@ -281,7 +281,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<div class="profile-edit-step-item" id="verification_tab">
 												<span class="step">2</span>
 												<span class="text">
-													التأكيد & التحقق
+													التأكيد و التحقق
 												</span>
 											</div>
 										</div>
@@ -311,7 +311,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													  <span class="mr-auto d-flex flex-row align-items-center facebook" onclick="window.location='<?php echo $fLoginURL ?>';">
 													    <span><i class="fab fa-facebook-f"></i></span>
 													    <span>
-													      متصل
+													      اربط
 													    </span>
 													  </span>
 													  <?php }else{ ?>
@@ -329,18 +329,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<span class="mr-auto d-flex flex-row align-items-center linkedin">
 															<span><i class="fab fa-linkedin-in"></i></span>
 															<span>
-																متصل
+																 اربط
 															</span>
 														</span>
 													</div> -->
 													<div class="profile-verification-item d-flex flex-row">
 				                    <span><i class="fab fa-google"></i></span>
-				                    <span>Google</span>
+				                    <span>جوجل</span>
 				                    <?php if($gmail_verification == 0){ ?>
 				                    <span class="mr-auto d-flex flex-row align-items-center google" onclick="window.location = '<?php echo $gLoginURL ?>';">
 				                      <span><i class="fab fa-google"></i></span>
 				                      <span>
-				                        متصل
+				                         اربط
 				                      </span>
 				                    </span>
 				                    <?php }else{ ?>
@@ -355,12 +355,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<div class="profile-verification-item d-flex flex-row">
 													  <span><i class="fas fa-envelope"></i></span>
 													  <span>
-													    اتحققنا
+													   الايميل
 													  </span>
 													  <?php if($seller_verification != 'ok'){ ?>
 													  <span class="mr-auto d-flex flex-row align-items-center email">
 													    <span>
-													      اتحقق
+													       اربط
 													    </span>
 													  </span>
 													  <?php }else{ ?>
@@ -387,7 +387,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 														<?php }elseif($count_account == 0 and $login_seller_paypal_email == ''){ ?>
 														<span class="mr-auto d-flex flex-row align-items-center email" onclick="window.open('settings?account_settings')">
 														  <span>
-													      اتحقق
+													      اربط
 													    </span>
 														</span>
 														<?php } ?>
@@ -437,7 +437,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<div class="howitwork-list-content">
 											<h3>3. اتحقق من حسابك</h3>
                       <p>
-                          ابني ثقة لبروفايلك عن طريق ربطه بحسابات السوشيال ميديا بتاعتك المختلفة. دة هيزود بنسبة كبيرة فرص استقبالك لعروض أكتر وعروض جودتها أحسن من المواهب الأفضل على eMongez.
+                          ابني ثقة لبروفايلك عن طريق ربطه بحسابات السوشيال ميديا بتاعتك المختلفة. دة هيزود بنسبة كبيرة فرص استقبالك لعروض أكتر وعروض جودتها أحسن من المواهب الأفضل على منجز.
                       </p>
 										</div>
 									</div>
@@ -839,7 +839,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																				تعديل
 																			</button>
 																			<button class="button button-red" type="submit"  name="submit_paypal_email">
-																				تقديم
+																				حفظ
 																			</button>
 																		</div>
 																	</div>
@@ -923,7 +923,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	<div class="col-12">
 																		<div class="form-group d-flex flex-row mb-0">
 																			<button class="button button-white" type="button" role="button">
-																				تعديل
+																				حفظ
 																			</button>
 																			<!-- <button class="button button-red" type="submit" name="submit_bank_info">
 																				تقديم
@@ -1057,7 +1057,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																			<img class="img-fluid after-icon" src="assets/img/setting/cradit-card-after.png" />
 																		</span>
 																		<span>
-																			بطاقة ائتمان ولا خصم
+																			بطاقة ائتمان 
 																		</span>
 																	</label>
 																	<div class="collapse mt-30" id="credit-card">
@@ -1102,7 +1102,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																							تعديل
 																						</button>
 																						<button class="button button-red" type="submit" name="submit_card_info">
-																							تقديم
+																							حفظ
 																						</button>
 																					</div>
 																				</div>
@@ -1166,7 +1166,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																							تعديل
 																						</button>
 																						<button class="button button-red" type="submit" name="submit_paypal_email">
-																							تقديم
+																							حفظ
 																						</button>
 																					</div>
 																				</div>
@@ -1235,8 +1235,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	</div>
 																	<div class="col-12">
 																		<div class="form-group d-flex flex-row mb-0">
-																			<button class="button button-white" type="button" role="button">Edit</button>
-																			<button class="button button-red" type="submit" name="update_mobile_money">Submit</button>
+																			<button class="button button-white" type="button" role="button">تعديل</button>
+																			<button class="button button-red" type="submit" name="update_mobile_money">حفظ</button>
 																		</div>
 																	</div>
 																</div>
@@ -1286,7 +1286,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	<div class="col-12 col-md-6">
 																		<div class="form-group">
 																			<label class="control-label">
-																				رقم المنزل
+																				رقم الشقة 
 																			</label>
 																			<input type="text" name="apartment_number" value="<?= $apartment_number; ?>" class="form-control" />
 																		</div>
@@ -1294,16 +1294,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	<div class="col-12 col-md-6">
 																		<div class="form-group">
 																			<label class="control-label">
-																				رقم الدور
+																				 الدور
 																			</label>
 																			<input type="text" name="floor_number" value="<?= $floor_number; ?>" class="form-control" />
 																		</div>
 																	</div>
 																	<div class="col-12 col-md-6">
 																		<div class="form-group d-flex flex-column state_box">
-																			<label class="control-label">بلد </label>
+																			<label class="control-label">البلد </label>
 																			<select class="form-control wide" name="country" onChange="getState(this.value);" id="country">
-																				<option>حدد الدولة </option>
+																				<option>اختار البلد </option>
 																				<?php
 			                                    $get_countries = $db->select("countries", array('name'=> 'Egypt'));
 			                                    while($row_countries = $get_countries->fetch()){
@@ -1318,11 +1318,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	<div class="col-12 col-md-6">
 																		<div class="form-group d-flex flex-column state_box">
 																			<label class="control-label">
-																				البلد
+																				المحافظة
 																			</label>
 																			<select class="form-control wide" name="state" onChange="getCity(this.value);" id="state-list">
 																				<option>
-																					اختار البلد
+																					اختار المحافظة
 																				</option>
 																				<?php if(!empty($state)){ ?>
 										 											<option selected><?= $state; ?></option>
@@ -1351,7 +1351,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																				تعديل
 																			</button>
 																			<button class="button button-red" type="submit" name="submit_cash_info">
-																				تقديم
+																				حفظ
 																			</button>
 																		</div>
 																	</div>
@@ -1418,7 +1418,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																				تعديل
 																			</button>
 																			<button class="button button-red" type="submit" name="local_payment_info">
-																				تقديم
+																				حفظ
 																			</button>
 																		</div>
 																	</div>

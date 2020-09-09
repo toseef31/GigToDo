@@ -102,13 +102,6 @@ if($seller_id == $login_seller_id){
 <html lang="en" class="ui-toolkit">
 
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TF82RTH');</script>
-  <!-- End Google Tag Manager -->
   <title><?= $site_name; ?> - Resolution Select Issue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -237,23 +230,23 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Clienr is not responding">
-                          <label class="custom-control-label" for="customRadio1">Client is not responding</label>
+                          <input type="radio" id="customRadio1" name="customRadio_seller" class="custom-control-input" value="Buyer is not responding">
+                          <label class="custom-control-label" for="customRadio1">Buyer is not responding</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="Disagreement with Client">
-                          <label class="custom-control-label" for="customRadio2">Client is extremely rude.</label>
+                          <input type="radio" id="customRadio2" name="customRadio_seller" class="custom-control-input" value="Buyer is extremely rude">
+                          <label class="custom-control-label" for="customRadio2">Buyer is extremely rude.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="Client requested that I cancel this order.">
-                          <label class="custom-control-label" for="customRadio3">Client requested that I cancel this order.</label>
+                          <input type="radio" id="customRadio3" name="customRadio_seller" class="custom-control-input" value="Buyer requested that I cancel this order.">
+                          <label class="custom-control-label" for="customRadio3">Buyer requested that I cancel this order.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="Client expects more than what this service can offer.">
-                          <label class="custom-control-label" for="customRadio4">Client expects more than what this service can offer.</label>
+                          <input type="radio" id="customRadio4" name="customRadio_seller" class="custom-control-input" value="Buyer expects more than what this proposal can offer.">
+                          <label class="custom-control-label" for="customRadio4">Buyer expects more than what this proposal can offer.</label>
                         </div>
                         <!-- Each item -->
                         <!-- <div class="custom-control custom-radio">
@@ -316,11 +309,11 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <h4>Explain why you would like to cancel the order</h4>
                         <div class="form-group d-flex flex-column">
-                          <textarea class="form-control" placeholder="Provide explanation..." rows="5" name="cancellation_message"></textarea>
+                          <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <!-- <div class="form-group">
-                          <p class="mb-0"></p>
+                          <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
                         </div> -->
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
@@ -432,7 +425,7 @@ if($seller_id == $login_seller_id){
             <div class="row">
               <div class="col-12">
                 <h1 class="page-heading">Resolution Center</h1>
-                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Freelancer With Regards To Your Order.</p>
+                <p class="page-paragraph">Welcome Here, You can Resolve Issues With Your Seller With Regards To Your Order.</p>
               </div>
             </div>
             <!-- Row -->
@@ -464,28 +457,28 @@ if($seller_id == $login_seller_id){
                       <div>
                         <div class="form-group d-flex flex-column">
                           <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Freelancer is not responding">
-                          <label class="custom-control-label" for="customRadio1">Freelancer is not responding.</label>
+                          <input type="radio" id="customRadio1" name="customRadio_buyer" class="custom-control-input" value="Seller is not responding">
+                          <label class="custom-control-label" for="customRadio1">Seller is not responding.</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="Disagreement with Freelnacer">
-                          <label class="custom-control-label" for="customRadio2">Freelancer is extremely rude</label>
+                          <input type="radio" id="customRadio2" name="customRadio_buyer" class="custom-control-input" value="Seller is extremely rude">
+                          <label class="custom-control-label" for="customRadio2">Seller is extremely rude</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
                           <input type="radio" id="customRadio3" name="customRadio_buyer" class="custom-control-input" value="Order does meet requirements">
-                          <label class="custom-control-label" for="customRadio3">Freelancer does meet requirements</label>
+                          <label class="custom-control-label" for="customRadio3">Order does meet requirements</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="Freelancer asked me to cancel">
-                          <label class="custom-control-label" for="customRadio4">Freelancer asked me to cancel</label>
+                          <input type="radio" id="customRadio4" name="customRadio_buyer" class="custom-control-input" value="Seller asked me to cancel">
+                          <label class="custom-control-label" for="customRadio4">Seller asked me to cancel</label>
                         </div>
                         <!-- Each item -->
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="Freelancer cannot do required task">
-                          <label class="custom-control-label" for="customRadio5">Freelancer cannot do required task</label>
+                          <input type="radio" id="customRadio5" name="customRadio_buyer" class="custom-control-input" value="Seller cannot do required task">
+                          <label class="custom-control-label" for="customRadio5">Seller cannot do required task</label>
                         </div>
                         <!-- Each item -->
                         </div>
@@ -544,11 +537,11 @@ if($seller_id == $login_seller_id){
                         </div> -->
                         <h4>Explain why you would like to cancel the order</h4>
                         <div class="form-group d-flex flex-column">
-                          <textarea class="form-control" placeholder="Provide explanation..." rows="5" name="cancellation_message"></textarea>
+                          <textarea class="form-control" placeholder="Sir Please..." rows="5" name="cancellation_message"></textarea>
                           <label class="bottom-label text-right">0/2500 Chars Max</label>
                         </div>
                         <div class="form-group">
-                          <p class="mb-0"></p>
+                          <p class="mb-0">If you find yourself using this tool for most of your orders, Consider changing your original order deliver time.</p>
                         </div>
                         <div class="form-group d-flex flex-row mb-0">
                           <button class="button goback" type="submit" role="button">
@@ -672,9 +665,6 @@ if($seller_id == $login_seller_id){
   });
 </script>
 <?php require_once("includes/footer.php"); ?>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF82RTH"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
 </body>
 </html>

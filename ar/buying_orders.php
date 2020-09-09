@@ -93,7 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						<div class="row">
 							<div class="col-12">
 								<h1 class="title">
-								الطلبات
+								المشاريع
 								</h1>
 							</div>
 						</div>

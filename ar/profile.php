@@ -274,7 +274,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <span class="mr-auto d-flex flex-row align-items-center facebook" onclick="window.location='<?php echo $fLoginURL ?>';">
                       <span><i class="fab fa-facebook-f"></i></span>
                       <span>
-                        متصل
+                         اربط
                       </span>
                     </span>
                     <?php }else{ ?>
@@ -471,7 +471,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <?php if($_SESSION['seller_user_name'] == $seller_user_name){ ?>
               <div class="managerequest">
                 <h3>
-                  إدارة الطلب
+                  إدارة المشريع
                 </h3>
                 <div class="managerequest-header d-flex flex-column flex-md-row justify-content-between">
                   <!-- <div class="managerequest-status d-flex flex-row align-items-center">
@@ -646,7 +646,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   </table>
                   <?php
                     if($count_requests == 0){
-                        echo "<center><h4 class='pb-2 pt-2'>لا يزال لديك أي طلبات عمل  <a class='edit-profile-button btn' href='/ar/requests/post-request.php'>انشر أي طلب</a></h4></center>";
+                        echo "<center><h4 class='pb-2 pt-2'>لا يزال لديك أي طلبات عمل  <a class='edit-profile-button btn' href='/ar/requests/post-request.php'>انشر مشروع</a></h4></center>";
                     } else {
                   ?>
                     <!-- <center>

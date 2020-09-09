@@ -461,7 +461,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </h3>
                 <?php }else{ ?>
                 <h3 class="text-center mb-5 p-2">
-                <i class="fa fa-smile-o"></i> <?php echo ucfirst($get_seller_user_name); ?> does not have any proposals/services to display at the moment.
+                <i class="fa fa-smile-o"></i> <?php echo ucfirst($get_seller_user_name); ?> does not have any services to display at the moment.
                 </h3>
                 <?php } ?>
                 </div>
@@ -534,7 +534,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </h3>
               <?php }else{ ?>
               <h3 class="text-center mb-5 p-2">
-              <i class="fa fa-smile-o"></i> <?php echo ucfirst($get_seller_user_name); ?> does not have any proposals/services to display at the moment.
+              <i class="fa fa-smile-o"></i> <?php echo ucfirst($get_seller_user_name); ?> does not have any services to display at the moment.
               </h3>
               <?php } ?>
               </div>

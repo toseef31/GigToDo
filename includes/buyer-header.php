@@ -275,6 +275,7 @@ $cur_amount = currencyConverter($to,1);
       <li><a href="<?= $site_url; ?>/requests/manage_requests"> <img src="<?= $site_url; ?>/assets/img/icon/4.png" alt=""> Manage Jobs</a></li>
       <li><a href="<?= $site_url; ?>/buying_orders"> <img src="<?= $site_url; ?>/assets/img/icon/5.png" alt=""> Orders</a></li>
       <li><a href="<?= $site_url; ?>/purchases"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Purchases</a></li>
+      <li><a href="<?= $site_url; ?>/payments"> <img src="<?= $site_url; ?>/assets/img/icon/6.png" alt=""> Payments</a></li>
       <li><a href="<?= $site_url; ?>/invite_friend"> <img src="<?= $site_url; ?>/assets/img/icon/7.png" alt=""> Invite a Friend</a></li>
       <li><a href="<?= $site_url; ?>/conversations/inbox"> <img src="<?= $site_url; ?>/assets/img/icon/indox.png" alt=""> Inbox</a></li>
       <li><a href="<?= $site_url ?>/how-it-works-buyer.php"> <img src="<?= $site_url; ?>/assets/img/icon/how-it-work.png" alt=""> How it works</a></li>

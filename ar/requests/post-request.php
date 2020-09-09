@@ -20,6 +20,16 @@ $relevant_requests = $row_general_settings->relevant_requests;
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" class="ui-toolkit">
 	<head>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  dataLayer = [{
+		    'event': 'Pageview',
+		    'pagePath': 'https://www.emongez.com/ar/requests/post-request',
+		    'pageTitle': 'eMongez - Post A New Request',
+		    'pageCategory': 'post-request',
+		    'visitorType': 'high-value'
+		  }];
+		</script>
 		<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -373,13 +383,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													</span>
 													<span>عنوان الوظيفة</span>
 												</label>
-												<input type="text" name="request_title" placeholder="طلب عنوان...." class="form-control input-lg" value="<?= $form_data['request_title']; ?>">
+												<input type="text" name="request_title" placeholder="مُصمم شِعار...." class="form-control input-lg" value="<?= $form_data['request_title']; ?>">
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_title']); ?></span>
 												<div class="popup">
 													<img alt="" class="lamp-icon" src="<?= $site_url;?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
 													<p>
-														اكتب عنوان عملك. كلما كنت أكثر تحديدًا ، كلما كان العمل الذي يمكن أن يقوم به صاحب العمل المستقل لك أكثر دقة.
+														حدد عنوان عملك. تحديدك لتفاصيل العمل هيساعد مُقدمين الخدمات يكونو أكثر دقّة في تنفيذه.
 													</p>
 												</div>
 											</div>
@@ -391,7 +401,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<span>اوصف المشروع و الخدمة اللي محتاجها</span>
 												</label>
 
-												<textarea class="form-control" name="request_description" id="textarea" placeholder="أنا بدور على...." rows="5"><?= $form_data['request_description']; ?></textarea>
+												<textarea class="form-control" name="request_description" id="textarea" placeholder="مِحتاج مُصمم مُحترف لتصميم شعار في 24 ساعة، بمُقابل 500 جنية مصري...." rows="5"><?= $form_data['request_description']; ?></textarea>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_description']); ?></span>
 												<div id="file_name"></div>
 												<div class="bottom-label d-flex flex-row align-items-center justify-content-between mt-15">
@@ -631,7 +641,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<span>
 														<img alt="" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/price-icon.png" />
 													</span>
-													<span>ايه هي ميزانيتك ؟</span>&nbsp; <small>(الرجاء إدخال المبلغ EGP)</small>
+													<span>ايه هي ميزانيتك ؟</span>&nbsp; <small>(من فضلك دخل المبلغ EGP)</small>
 												</label>
 												<div class="input-group">
 													<div class="input-group-prepend">
@@ -644,7 +654,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												</div>
 												<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['request_budget']); ?></span>
 												<div class="popup">
-													<img alt="" class="lamp-icon" src="assets/img/post-a-gig/lamp-icon.png" />
+													<img alt="" class="lamp-icon" src="<?= $site_url; ?>/assets/img/post-a-gig/lamp-icon.png" />
 													<img alt="Ask our Community" class="img-fluid d-block" src="<?= $site_url;?>/assets/img/post-a-gig/ask-our-community.png" width="100%" />
 													<p>
 														تحديد ميزانية كويسة للمشروع بتاعك هيسمح للفريلانسرز يشوفوا انت ناوي تصرف قد ايه عالمشروع و دة بيدعم الخبرة سواء للمشتري أو مقدم الخدمة
@@ -665,8 +675,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												</div> -->
 												<div class="form-group">
 													<label class="control-label"><span>اسم المستخدم</span></label>
-													<input class="form-control" type="text" name="u_name" placeholder="أدخل اسم المستخدم الخاص بك" value="" />
-													<small class="form-text text-muted">ملاحظة: لن تتمكن من تغيير اسم المستخدم بمجرد إنشاء حسابك.</small>
+													<input class="form-control" type="text" name="u_name" placeholder="دخل اسم المُستخدم الخاص بحسابك" value="" />
+													<small class="form-text text-muted">ملحوظة: اسم المُستخدم مبيتغيرش بمُجرد تسجيله لأول مرّة.</small>
 													<?php if(in_array("Opps! This username has already been taken. Please try another one", $error_array)) echo "<span style='color:red;'>This username has already been taken. Please try another one.</span> <br>"; ?>
 													<?php if(in_array("Username must be greater that 4 characters long or less than 25 characters.", $error_array)) echo "<span style='color:red;'>Username must be greater that 4 characters or less than 25.</span> <br>"; ?>
 													<?php if(in_array("Foreign characters are not allowed in username, Please try another one.", $error_array)) echo "<span style='color:red;'>Foreign characters are not allowed in username, Please try another one.</span> <br>"; ?>
@@ -686,7 +696,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<input class="form-control" type="password" name="pass" id="psw" placeholder="دخل كلمة المرور"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 
 													<label class="control-label"><span>الباسوورد</span></label>
-													<input class="form-control" type="password" name="pass" id="psw" placeholder="Enter Password"  pattern="(?=.*\d).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
+													<input class="form-control" type="password" name="pass" id="psw" placeholder="دخل كلمة المرور"  pattern="(?=.*\d).{8,}" title="يجب أن يحتوي على رقم واحد على الأقل وحرف واحد كبير وحرف صغير ، وعلى الأقل 8 أحرف أو أكثر" />
 
 													<span class="form-text text-danger"><?php echo ucfirst(@$form_errors['pass']); ?></span>
 												</div>
@@ -718,7 +728,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<?php } ?>
 											<!-- End Registration Process -->
 											<div class="form-group mb-0">
-												<button class="button" role="button" type="submit" name="submit">انشر</button>
+												<button class="button" role="button" type="submit" name="submit"
+                  			onclick="dataLayer.push({
+                    		'event': 'Pageview'});">انشر</button>
 											</div>
 										</form>
 									</div>
@@ -755,7 +767,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											</div>
 											<div class="howitwork-list-content">
 												<h3>3. الشغل</h3>
-												<p>اتواصل و حدد الأساس عشان تحقق التعاون الناجح، شارك أفكارك، طور الخطوط العريضة، ابعت ملفات، و كمان تقدر تدير المشروع بالكامل من خلال منصتنا سهلة الاستخدام</p>
+												<p>تواصل مع مُقدمي الخدمة وحط الأساسيات للتعاون الناجح بينكم، شارك أفكارك وحدد تفاصيل الشغل، وابعتلهم الملفّات، ودير المشروع بالكامل من خلال نظام منصتنا السهل في الاستخدام</p>
 											</div>
 										</div>
 										<!-- How it work each item -->
@@ -1048,7 +1060,7 @@ if(isset($_POST['submit'])){
 				"seller_user_name" => "required",
 				"seller_pass" => "required"
 				);
-				$messages = array("seller_user_name" => "اسم المستخدم مطلوب.","seller_pass" => "كلمة المرور مطلوبة.");
+				$messages = array("seller_user_name" => "دخل اسم المُستخدم أو البريد الإلكتروني","seller_pass" => "دخل كلمة المرور");
 
 				$val = new Validator($_POST,$rules,$messages);
 
